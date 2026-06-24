@@ -1,0 +1,12 @@
+#!/bin/sh
+# Minimal pinentry stub. The app uses GPGME loopback pinentry, so this is never
+# actually used to prompt — it only needs to exist and speak minimal Assuan so
+# gpgconf/gpg-agent consider pinentry "installed".
+echo "OK Pleased to meet you"
+while read line; do
+  case "$line" in
+    BYE*) echo "OK closing connection"; exit 0 ;;
+    GETPIN*) echo "ERR 83886179 Operation cancelled <GPG Agent>" ;;
+    *) echo "OK" ;;
+  esac
+done
