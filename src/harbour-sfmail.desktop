@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=harbour-sfmail
+Exec=harbour-sfmail
+Name=SF-Mail
+Comment=E-mail client with built-in OpenPGP
+
+[X-Sailjail]
+Permissions=Email;Internet;Accounts;Privileged;UserDirs;AppLaunch;Contacts
+OrganizationName=sfmail
+ApplicationName=harbour-sfmail
