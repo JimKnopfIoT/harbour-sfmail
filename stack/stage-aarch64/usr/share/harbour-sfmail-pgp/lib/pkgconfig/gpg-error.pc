@@ -1,0 +1,15 @@
+prefix=/usr/share/harbour-sfmail-pgp
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${exec_prefix}/lib
+host=aarch64-unknown-linux-gnu
+mtcflags=
+mtlibs=-pthread
+
+Name: gpg-error
+Description: GPG Runtime
+Version: 1.47
+Cflags: -I${includedir}
+Libs: -L${libdir} -lgpg-error
+Libs.private: 
+URL: https://www.gnupg.org/software/libgpg-error/index.html

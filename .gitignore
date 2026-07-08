@@ -1,0 +1,33 @@
+# Qt / qmake build artifacts
+*.o
+*.so
+moc_*.cpp
+moc_*.h
+*.moc
+qrc_*.cpp
+ui_*.h
+Makefile
+Makefile.*
+.qmake.stash
+.tmp/
+*~
+
+# Generated at build time from the spec version
+mailcrypto/sfmail_version.h
+
+# Built app binaries
+src/harbour-sfmail
+src/src/harbour-sfmail
+
+# Build output
+RPMS/
+*.rpm
+
+# SDK / tooling
+.mb2
+
+# GnuPG stack: extracted build trees (regenerated from stack/src/ tarballs by
+# stack/build-stack.sh). The prebuilt binaries in stack/stage-* ARE tracked.
+stack/build*/
+stack/stage/
+stack/*.log
