@@ -31,3 +31,12 @@ RPMS/
 stack/build*/
 stack/stage/
 stack/*.log
+
+# ...and that includes the plain .so entries in there, which the "*.so" rule
+# above would otherwise swallow along with the build artefacts it is meant for:
+#   * the unversioned symlinks (libgpg-error.so -> libgpg-error.so.0.34.0, …)
+#     are what the linker resolves -lgpg-error & co. against — without them the
+#     build dies with "ld: cannot find -lgpg-error"
+#   * ossl-modules/legacy.so is the OpenSSL legacy provider, needed to read
+#     older .p12 files (RC2/3DES) on the S/MIME import path
+!stack/stage-*/**/*.so
