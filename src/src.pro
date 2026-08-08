@@ -1,6 +1,8 @@
 TARGET = harbour-sfmail
 
-QT += quick qml gui
+# dbus: we serve com.jolla.email.ui so that a tap on a new-mail notification
+# opens SF-Mail instead of the stock client (see src/emailui.h).
+QT += quick qml gui dbus
 CONFIG += sailfishapp sailfishapp_i18n
 
 # Bilingual: English is the source (all qsTr). German is shipped as a .qm and
@@ -19,8 +21,8 @@ QMAKE_CXXFLAGS += -ffile-prefix-map=$$absolute_path($$PWD/..)=.
 # own function names (not just raw addresses). backtrace() also needs this.
 QMAKE_LFLAGS += -rdynamic
 
-SOURCES += src/main.cpp
-HEADERS += src/logcontrol.h
+SOURCES += src/main.cpp src/emailui.cpp
+HEADERS += src/logcontrol.h src/emailui.h
 
 QML_FILES = \
     qml/harbour-sfmail.qml \

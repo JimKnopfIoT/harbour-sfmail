@@ -16,6 +16,11 @@ Page {
 
     property string replyTo: ""
     property string subjectPrefill: ""
+    // Filled in by a mailto: link / "share via email" arriving over
+    // com.jolla.email.ui (see MailAccountsPage) — those carry more than a To:.
+    property string bodyPrefill: ""
+    property string ccPrefill: ""
+    property string bccPrefill: ""
     // Reply context: pre-arm encryption and match the incoming format.
     property bool encryptReply: false
     property string replyFormat: "mime"     // "mime" | "inline"
@@ -119,6 +124,8 @@ Page {
         var idx = acct > 0 ? accountsModel.indexFromAccountId(acct) : -1
         if (idx >= 0) accountCombo.currentIndex = idx
         if (("" + replyTo) !== "") recipModel.setProperty(0, "addr", "" + replyTo)
+        if (("" + ccPrefill) !== "") recipModel.append({ kind: "cc", addr: "" + ccPrefill })
+        if (("" + bccPrefill) !== "") recipModel.append({ kind: "bcc", addr: "" + bccPrefill })
         if (encryptReply) {
             encryptSwitch.checked = true
             formatCombo.currentIndex = (replyFormat === "inline") ? 1 : 0
@@ -712,6 +719,7 @@ Page {
                 width: parent.width
                 label: qsTr("Message")
                 placeholderText: qsTr("Write your message…")
+                text: page.bodyPrefill
             }
 
             // --- Anhänge ---------------------------------------------------

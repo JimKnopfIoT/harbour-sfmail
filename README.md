@@ -20,6 +20,37 @@ accounts.
 Since I'm not a developer, I let Claude Code write the whole thing
 (even the icons are made by Claude Code).
 
+## Opening mail from notifications (new in 0.5.1 — changes a system file)
+
+**Up to and including 0.5.0**, tapping a "new mail" notification opened the **stock
+Jolla mail client**, never SF-Mail — no matter which client you actually use. There
+was no setting for it: the QMF notification plugin has its target compiled in as
+`com.jolla.email.ui` → `openMessage`, and whichever program *owns* that D-Bus name
+receives the tap.
+
+**From 0.5.1** SF-Mail claims that name, so a notification tap opens the message in
+SF-Mail. Because the same name also carries `mailto:` links and "share via e-mail",
+those now come to SF-Mail as well — the app implements the full stock interface, so
+nothing is silently dropped.
+
+This is a **system-wide change, not a per-app preference.** Installing the package:
+
+- adds `/etc/sailjail/permissions/EmailUi.permission`, which is what allows the
+  sandboxed app to own the name (the sandbox itself stays fully in place);
+- rewrites `/usr/share/dbus-1/services/com.jolla.email.ui.service` so a tap also
+  starts SF-Mail when it isn't running. **The original is kept** next to it as
+  `com.jolla.email.ui.service.sfmail-orig`, and a package trigger re-applies the
+  change after a `jolla-email` update.
+
+**Undoing it** — `rpm -e harbour-sfmail` restores the original file, and mail
+notifications go back to the stock client. The stock client itself is never
+modified, removed or disabled; it just no longer receives the tap while SF-Mail is
+installed. (If both are running, whichever claimed the name first keeps it.)
+
+**If you would rather not have this**, install **0.5.0** instead — it is unchanged
+and remains available under [Releases](../../releases). It has the same features
+otherwise; only the notification hand-off is missing.
+
 ## Features
 
 - Accounts + per-account folder list (swipe left in a mailbox), combined inbox

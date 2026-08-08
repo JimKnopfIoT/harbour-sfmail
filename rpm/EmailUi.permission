@@ -1,0 +1,9 @@
+# -*- mode: sh -*-
+
+# x-sailjail-description = Open mail from notifications
+# x-sailjail-long-description = Lets SF-Mail serve com.jolla.email.ui — the
+#   D-Bus interface the system's mail notifications, mailto: links and "share
+#   via email" call into. Without this the sandbox only permits the app's own
+#   name, so a tap on a new-mail banner opens the stock client instead.
+
+dbus-user.own com.jolla.email.ui

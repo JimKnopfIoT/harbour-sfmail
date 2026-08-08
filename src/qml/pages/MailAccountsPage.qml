@@ -41,6 +41,44 @@ Page {
         }
     }
 
+    // Requests coming in over com.jolla.email.ui — a tap on a new-mail
+    // notification, a mailto: link, "share via email". They are handled on this
+    // page because everything they need (emailAgent, accountsModel, openInbox)
+    // already lives here, and as the initial page it is guaranteed to exist.
+    //
+    // These only ever PUSH, never unwind the stack: a notification arriving while
+    // a message is being written must not discard that message. The detour is one
+    // back-swipe away from wherever the user was.
+    Connections {
+        target: EmailUi
+        onOpenMessageRequested: {
+            var id = messageId
+            pageStack.push(Qt.resolvedUrl("MessagePage.qml"), { messageId: id })
+        }
+        onOpenCombinedInboxRequested: {
+            pageStack.push(Qt.resolvedUrl("MessageListPage.qml"),
+                           { folderAccessor: emailAgent.combinedInboxAccessor(),
+                             title: qsTr("Combined inbox") })
+        }
+        onOpenInboxRequested: {
+            var acct = accountId
+            var idx = accountsModel.indexFromAccountId(acct)
+            var name = idx >= 0 ? accountsModel.displayName(idx) : ""
+            if (name === "" && idx >= 0) name = accountsModel.emailAddress(idx)
+            page.openInbox(acct, name !== "" ? name : qsTr("Inbox"))
+        }
+        onComposeRequested: {
+            pageStack.push(Qt.resolvedUrl("ComposerPage.qml"),
+                           { replyTo: to, subjectPrefill: subject, ccPrefill: cc,
+                             bccPrefill: bcc, bodyPrefill: body })
+        }
+    }
+
+    // Tells EmailUi that QML can take requests now. When D-Bus ACTIVATED the app
+    // (cold start from a notification tap), the call already arrived before this
+    // point and was parked — this is what replays it.
+    Component.onCompleted: EmailUi.setReady()
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: col.height
