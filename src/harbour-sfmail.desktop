@@ -7,6 +7,6 @@ Name=SF-Mail
 Comment=E-mail client with built-in OpenPGP
 
 [X-Sailjail]
-Permissions=Email;Internet;Accounts;Privileged;UserDirs;AppLaunch;Contacts
+Permissions=Email;Internet;Accounts;Privileged;UserDirs;AppLaunch;Contacts;EmailUi
 OrganizationName=sfmail
 ApplicationName=harbour-sfmail

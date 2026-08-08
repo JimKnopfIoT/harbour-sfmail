@@ -13,6 +13,7 @@
 #include <atomic>
 #include <sailfishapp.h>
 #include "logcontrol.h"
+#include "emailui.h"
 
 #include <signal.h>
 #include <unistd.h>
@@ -179,7 +180,16 @@ int main(int argc, char *argv[])
     // Expose the debug-log switch to QML (About page).
     LogControl *logControl = new LogControl(view.data());
     view->rootContext()->setContextProperty(QStringLiteral("DebugLog"), logControl);
+
+    // Serve com.jolla.email.ui, so a tap on a new-mail notification lands here
+    // and not in the stock client. The context property has to exist before the
+    // QML is loaded (the root window binds to it); the bus name is claimed right
+    // after, because from that moment calls can arrive and QML must be there to
+    // take them — anything still too early is queued inside EmailUi.
+    EmailUi *emailUi = new EmailUi(view.data(), view.data());
+    view->rootContext()->setContextProperty(QStringLiteral("EmailUi"), emailUi);
     view->setSource(SailfishApp::pathTo(QStringLiteral("qml/harbour-sfmail.qml")));
+    emailUi->registerService();
     view->showFullScreen();
     return app->exec();
 }

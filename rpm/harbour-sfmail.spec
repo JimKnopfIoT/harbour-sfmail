@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.5.0
+Version:    0.5.1
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -40,6 +40,13 @@ make %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 %qmake5_install
+
+# Sailjail only lets a sandboxed app own <OrganizationName>.<ApplicationName>.
+# Serving com.jolla.email.ui (what the notification plugin calls) therefore needs
+# an explicit permission profile; the app's .desktop lists it as "EmailUi".
+mkdir -p %{buildroot}%{_sysconfdir}/sailjail/permissions
+install -m 644 rpm/EmailUi.permission \
+    %{buildroot}%{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 # Bundle the modern GnuPG 2.2 stack under our OWN app prefix, so the sandbox
 # (which hides other apps' /usr/share/<app>) can reach it. The bundled gpg's
@@ -92,6 +99,53 @@ for size in 86x86 108x108 128x128 172x172; do
     fi
 done
 
+# --- Notification hand-off ---------------------------------------------------
+# The QMF notification plugin has the target of a "new mail" tap compiled in
+# (com.jolla.email.ui → openMessage); the only way to receive it is to own that
+# bus name. Owning it at runtime is not enough on a cold start, so the D-Bus
+# activation entry has to point here too — and that file belongs to jolla-email,
+# which is why it is rewritten in a scriptlet instead of shipped in %%files (an
+# RPM file conflict would block installation outright).
+#
+# The original is kept next to it and put back on uninstall, so removing this
+# package hands mail notifications straight back to the stock client.
+%define emailsvc %{_datadir}/dbus-1/services/com.jolla.email.ui.service
+%define emailsvcbak %{emailsvc}.sfmail-orig
+
+%post
+if [ -f %{emailsvc} ] && [ ! -f %{emailsvcbak} ]; then
+    cp -a %{emailsvc} %{emailsvcbak}
+fi
+cat > %{emailsvc} <<'SFMAIL_EOF'
+[D-BUS Service]
+Interface=/com/jolla/email/ui
+Name=com.jolla.email.ui
+Exec=/usr/bin/sailjail -p %{name}.desktop %{_bindir}/%{name}
+SFMAIL_EOF
+
+# A jolla-email update reinstalls its own copy of the service file and would
+# silently take the notifications back. Re-claim it whenever that package is
+# touched, so the setting survives OS updates.
+%triggerin -- jolla-email
+if [ -f %{emailsvc} ] && [ ! -f %{emailsvcbak} ]; then
+    cp -a %{emailsvc} %{emailsvcbak}
+fi
+cat > %{emailsvc} <<'SFMAIL_EOF'
+[D-BUS Service]
+Interface=/com/jolla/email/ui
+Name=com.jolla.email.ui
+Exec=/usr/bin/sailjail -p %{name}.desktop %{_bindir}/%{name}
+SFMAIL_EOF
+
+%postun
+# $1 == 0 is a real uninstall; on an upgrade the old package's %%postun runs
+# AFTER the new one's %%post, so restoring there would undo the fresh claim.
+if [ "$1" -eq 0 ]; then
+    if [ -f %{emailsvcbak} ]; then
+        mv -f %{emailsvcbak} %{emailsvc}
+    fi
+fi
+
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
@@ -99,3 +153,4 @@ done
 %{_libdir}/qt5/qml/SFMail/Gpg
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
+%{_sysconfdir}/sailjail/permissions/EmailUi.permission
