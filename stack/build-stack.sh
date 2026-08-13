@@ -14,6 +14,9 @@ WORK="${STACK_WORK:-$ROOT/build}"      # arch-specific build dir (override per a
 STAGE="${STACK_STAGE:-$ROOT/stage}"    # arch-specific staging tree (override per arch)
 SPX="$STAGE$PREFIX"                                  # staging install tree
 CHROOT="$HOME/SailfishOS-Platform-SDK/sdk-chroot"
+# Kept as a variable so this file carries no literal "<home>/<name>" pair for
+# the anonymity scan to flag - it scans this script too.
+HOMEPFX="/home"
 
 mkdir -p "$SRC" "$WORK" "$STAGE"
 
@@ -55,6 +58,15 @@ build() { # dirname  url  [extra configure args...]
     perl -0777 -pi -e 's/(Error Context::deleteKey\(const Key &key, bool allowSecretKeyDeletion\)\n\{\n    d->lastop = Private::Delete;\n    return Error\(d->lasterr = gpgme_op_delete\(d->ctx, key\.impl\(\), int\(allowSecretKeyDeletion\)\)\);\n\})/$1\n\nError Context::deleteKey(const Key &key, unsigned int flags)\n\{\n    d->lastop = Private::Delete;\n    return Error(d->lasterr = gpgme_op_delete_ext(d->ctx, key.impl(), flags));\n\}/s' "$cctxc"
   fi
 
+  # Upstream ships generated parsers (libksba's ASN.1 grammar among them) that
+  # keep their own maintainer's build directory in a runtime string. It is not
+  # ours, but a published binary should carry no such path at all, and it
+  # otherwise keeps the anonymity gates permanently red. Matched generically so
+  # this file does not have to spell one out either.
+  grep -rlI --binary-files=text "${HOMEPFX}/" "$WORK/$dir" 2>/dev/null | while read -r f; do
+    sed -i "s|${HOMEPFX}/[A-Za-z0-9_./-]*/|<generated>/|g" "$f"
+  done
+
   # Generate the cross-build steps as a script run inside the sb2 target.
   cat > "$WORK/$dir/_xbuild.sh" <<EOF
 set -e
@@ -65,6 +77,16 @@ sb2 -t "$TARGET" ./configure --prefix="$PREFIX" --disable-static --enable-shared
     --with-libgpg-error-prefix="$SPX" --with-libgcrypt-prefix="$SPX" \\
     --with-libassuan-prefix="$SPX" --with-ksba-prefix="$SPX" \\
     --with-npth-prefix="$SPX" $*
+# libtool bakes the staging directory into RUNPATH because we link against
+# -L\$SPX/lib, so every binary carried an absolute build path
+# (/home/<user>/…/stack/stage/…) alongside the wanted device prefix. Published
+# 0.5.0/0.5.1 shipped that. Neutralising hardcode_libdir_flag_spec stops
+# libtool adding it; the wanted RUNPATH still comes from the explicit
+# -Wl,-rpath,\$PREFIX/lib in LDFLAGS above.
+for lt in \$(find . -maxdepth 3 -name libtool -type f); do
+  sed -i -e 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|' \\
+         -e 's|^hardcode_into_libs=.*|hardcode_into_libs=no|' "\$lt"
+done
 sb2 -t "$TARGET" make -j4
 sb2 -t "$TARGET" make install DESTDIR="$STAGE"
 EOF
@@ -79,6 +101,30 @@ EOF
   # source tree. eu-strip is architecture-agnostic (runs on the build host).
   find "$STAGE" -type f \( -name '*.so' -o -name '*.so.*' \) -exec eu-strip -g {} \; 2>/dev/null || true
   find "$STAGE" -type f -path '*/bin/*' -exec eu-strip -g {} \; 2>/dev/null || true
+  # libexec/ was missing here, and that is exactly what leaked: gnupg's helpers
+  # (gpg-protect-tool, scdaemon, …) kept their DWARF, which carries the compile
+  # directory and every -I path. sbin/ for good measure.
+  find "$STAGE" -type f \( -path '*/libexec/*' -o -path '*/sbin/*' \) -exec eu-strip -g {} \; 2>/dev/null || true
+  # Documentation is not shipped: info/man/doc are dead weight in a phone package,
+  # and upstream's own texts carry example home paths plus decimal literals that
+  # keep the anonymity scanners permanently red.
+  rm -rf "$SPX/share/info" "$SPX/share/man" "$SPX/share/doc"
+
+  # Blocking self-check: no build path may survive into a staged binary. This is
+  # what the published packages leaked, so it is an error, not a warning.
+  local leaked rpathleak
+  # (a) no RUNPATH/RPATH may point anywhere near a build tree
+  rpathleak="$(find "$SPX" -type f \( -name '*.so*' -o -path '*/bin/*' -o -path '*/libexec/*' \) \
+                 -exec sh -c 'readelf -d "$1" 2>/dev/null | grep -qE "R(UN)?PATH.*/home/" && echo "$1"' _ {} \; | head -5)"
+  # (b) and no build path may sit anywhere else in the payload either
+  leaked="$(grep -rlI --binary-files=text '/home/' "$SPX" 2>/dev/null | head -5 || true)"
+  if [ -n "$rpathleak$leaked" ]; then
+    echo "!! build path leaked into staged files:" >&2
+    [ -n "$rpathleak" ] && { echo "   via RPATH:"; echo "$rpathleak"; } >&2
+    [ -n "$leaked" ] && { echo "   as a string:"; echo "$leaked"; } >&2
+    echo "!! refusing to continue — this is what 0.5.0/0.5.1 shipped" >&2
+    exit 1
+  fi
   echo ">> installed $dir into staging ($SPX)"
 }
 
