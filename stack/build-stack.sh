@@ -17,6 +17,8 @@ CHROOT="$HOME/SailfishOS-Platform-SDK/sdk-chroot"
 # Kept as a variable so this file carries no literal "<home>/<name>" pair for
 # the anonymity scan to flag - it scans this script too.
 HOMEPFX="/home"
+ARCH="${TARGET##*-}"                                 # aarch64 | armv7hl
+EXTRAS="$ROOT/extras/$ARCH"                          # prebuilt files we do not build
 
 mkdir -p "$SRC" "$WORK" "$STAGE"
 
@@ -139,6 +141,39 @@ b_gnupg()       { build gnupg-2.2.43       https://www.gnupg.org/ftp/gcrypt/gnup
 b_gpgme()       { build gpgme-1.18.0       https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.18.0.tar.bz2 \
     --disable-gpg-test --enable-languages=cpp,qt; }
 
+# Files that are NOT built here but belong to a complete stack (openssl and its
+# legacy provider for S/MIME, pinentry). A full rebuild replaces the staging tree,
+# and on 2026-08-13 that silently dropped them: gpgsm was still there, but
+# SmimeEngine also requires a runnable openssl, so S/MIME failed with "gpgsm not
+# available" and the cause was three missing files. They live in extras/ now.
+install_extras() {
+  [ -d "$EXTRAS" ] || { echo ">> no extras for $ARCH (expected for armv7hl: no S/MIME there)"; return 0; }
+  echo ">> installing prebuilt extras for $ARCH"
+  ( cd "$EXTRAS" && find . -type f -print0 | while IFS= read -r -d "" f; do
+      install -D -m 755 "$f" "$SPX/${f#./}"
+    done )
+}
+
+# Blocking completeness check after a full build. A stack that is missing one of
+# these looks fine until a feature quietly stops working at runtime.
+check_manifest() {
+  local missing=""
+  local required="bin/gpg bin/gpgsm bin/gpgconf bin/gpg-agent bin/dirmngr
+                  lib/libgpg-error.so.0 lib/libgcrypt.so.20 lib/libassuan.so.0
+                  lib/libksba.so.8 lib/libnpth.so.0 lib/libgpgme.so.11"
+  # S/MIME is aarch64-only by design; armv7hl never carried openssl.
+  [ "$ARCH" = "aarch64" ] && required="$required bin/openssl bin/pinentry lib/ossl-modules/legacy.so"
+  for r in $required; do
+    [ -e "$SPX/$r" ] || missing="$missing $r"
+  done
+  if [ -n "$missing" ]; then
+    echo "!! incomplete stack for $ARCH — missing:$missing" >&2
+    echo "!! a stack missing one of these looks fine and fails only at runtime" >&2
+    exit 1
+  fi
+  echo ">> manifest ok for $ARCH ($(find "$SPX" -type f | wc -l) files)"
+}
+
 case "${1:-all}" in
   libgpg-error) b_libgpgerror ;;
   libgcrypt)    b_libgcrypt ;;
@@ -147,7 +182,10 @@ case "${1:-all}" in
   npth)         b_npth ;;
   gnupg)        b_gnupg ;;
   gpgme)        b_gpgme ;;
+  extras)       install_extras ;;
+  check)        check_manifest ;;
   all)          b_libgpgerror; b_libgcrypt; b_libassuan; b_libksba; b_npth; b_gnupg; b_gpgme
+                install_extras; check_manifest
                 echo "=== full stack staged under $SPX ===" ;;
   *) echo "unknown component: $1"; exit 1 ;;
 esac

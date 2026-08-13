@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.5.4
+Version:    0.5.5
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -156,6 +156,15 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Thu Aug 13 2026 harbour-sfmail contributors 0.5.5-1
+- S/MIME works again on aarch64. Rebuilding the GnuPG stack in 0.5.4 replaced the
+  staged tree wholesale and dropped three files it does not build itself: the
+  bundled openssl, its legacy provider and pinentry. gpgsm was still present, but
+  S/MIME also needs a runnable openssl, so it reported itself unavailable. The
+  three now live in stack/extras/ as versioned inputs, build-stack.sh installs
+  them, and a manifest check fails the build if any required file is missing.
+  PGP was never affected, and armv7hl carries no openssl by design.
+
 * Thu Aug 13 2026 harbour-sfmail contributors 0.5.4-1
 - The bundled GnuPG stack was rebuilt so it no longer carries build paths. Its
   binaries had an absolute staging directory in RUNPATH and compile paths in
