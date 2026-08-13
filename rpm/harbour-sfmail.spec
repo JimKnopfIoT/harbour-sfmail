@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.5.3
+Version:    0.5.4
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -156,6 +156,14 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Thu Aug 13 2026 harbour-sfmail contributors 0.5.4-1
+- The bundled GnuPG stack was rebuilt so it no longer carries build paths. Its
+  binaries had an absolute staging directory in RUNPATH and compile paths in
+  their debug info, which 0.5.0 and 0.5.1 shipped. build-stack.sh now stops
+  libtool from hardcoding the staging path, strips libexec/ as well as bin/ and
+  the libraries, drops the bundled info/man/doc, and refuses to continue if a
+  build path survives into a staged file.
+
 * Thu Aug 13 2026 harbour-sfmail contributors 0.5.3-1
 - Minimising the app now aborts a running delete countdown outright. 0.5.2 only
   suppressed the delete if the countdown expired while the app was away, so
