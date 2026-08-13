@@ -1,6 +1,7 @@
 #include "SmimeEngine.h"
 
 #include <QProcess>
+#include <QUuid>
 #include <QProcessEnvironment>
 #include <QStandardPaths>
 #include <QDir>
@@ -18,6 +19,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QDateTime>
+#include <QSettings>
 #include <QTextCodec>
 #include <qmailmessage.h>
 #include <qmailaccount.h>
@@ -398,7 +400,8 @@ static QByteArray buildInnerMime(const QString &bodyText, const QVariantList &at
         if (!m.endsWith(CRLF)) m += CRLF;
         return m;
     }
-    const QByteArray bnd = "sfmail-inner-" + QByteArray::number(stamp);
+    // Random and neutral, like the PGP path — see mimeBoundary() in GpgEngine.cpp.
+    const QByteArray bnd = "=_" + QUuid::createUuid().toRfc4122().toHex();
     QByteArray m;
     m += "Content-Type: multipart/mixed; boundary=\"" + bnd + "\"" + CRLF;
     m += "MIME-Version: 1.0" + CRLF + CRLF;
@@ -1116,6 +1119,10 @@ QVariantList SmimeEngine::listCerts()
             if (!cur.isEmpty()) { res.append(cur); cur.clear(); }
             const QString usage = f.value(11);               // sS=sign eE=encrypt cC=CA
             cur[QStringLiteral("validity")] = f.value(1);
+            // Colon format: 6 = creation, 7 = expiry (seconds since epoch or ISO).
+            // Needed to prefer the NEWEST certificate when several match.
+            cur[QStringLiteral("created")] = f.value(5);
+            cur[QStringLiteral("expires")] = f.value(6);
             cur[QStringLiteral("keyUsage")] = usage;
             cur[QStringLiteral("isCA")] = usage.contains('c', Qt::CaseInsensitive);
             cur[QStringLiteral("hasSecret")] = false;
@@ -1361,6 +1368,100 @@ QString SmimeEngine::extKeyUsage(const QString &fingerprint)
     return QString();   // no extKeyUsage extension ⇒ unrestricted
 }
 
+// Where the "use THIS certificate" choice lives. Explicit INI path under the
+// app's own data directory — the same pattern the signed-memory store uses, and
+// the only one that survives the sandbox (a default-constructed QSettings writes
+// one level above the app's directory, where Sailjail refuses silently).
+QString SmimeEngine::prefStorePath() const
+{
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+           + QStringLiteral("/smime-preferred.ini");
+}
+
+// Remember which certificate to use for an address. Empty fingerprint clears it
+// and returns to the automatic rule.
+void SmimeEngine::setPreferredCert(const QString &email, const QString &fingerprint)
+{
+    if (email.isEmpty()) return;
+    QSettings s(prefStorePath(), QSettings::IniFormat);
+    const QString key = QStringLiteral("encrypt/") + email.toLower();
+    if (fingerprint.isEmpty()) s.remove(key);
+    else                       s.setValue(key, fingerprint);
+    s.sync();
+    if (s.status() != QSettings::NoError)
+        qWarning() << "[smime] could not store the preferred certificate:" << s.status();
+    emit preferredCertChanged(email, fingerprint);
+}
+
+QString SmimeEngine::preferredCert(const QString &email)
+{
+    if (email.isEmpty()) return QString();
+    QSettings s(prefStorePath(), QSettings::IniFormat);
+    return s.value(QStringLiteral("encrypt/") + email.toLower()).toString();
+}
+
+// gpgsm's colon output gives the creation date either as seconds since the epoch
+// or as an ISO timestamp; normalise so certificates can be ordered by age.
+static qint64 certCreated(const QVariantMap &m)
+{
+    const QString s = m.value(QStringLiteral("created")).toString();
+    if (s.isEmpty()) return 0;
+    bool ok = false;
+    const qint64 secs = s.toLongLong(&ok);
+    if (ok) return secs;
+    const QDateTime dt = QDateTime::fromString(s.left(15), QStringLiteral("yyyyMMddTHHmmss"));
+    return dt.isValid() ? dt.toMSecsSinceEpoch() / 1000 : 0;   // Qt 5.6: kein toSecsSinceEpoch
+}
+
+// Pick ONE certificate for an address instead of handing gpgsm the address and
+// letting it choose. With several certificates on the same address gpgsm refuses
+// outright ("can't encrypt to '…': Ambiguous name"), and where it does choose it
+// may take one that cannot encrypt at all ("certificate is not usable for
+// encryption") — both reproduced on the device with four certificates on the
+// sender's own address. Rule: right key usage, not a CA, still valid, and of
+// those the NEWEST. The newest is what a user who just created a certificate
+// expects to be used; the old ones stay in the store for decrypting old mail.
+QString SmimeEngine::pickCertFpr(const QString &email, char usage, bool needSecret)
+{
+    const QString want = (usage == 'e') ? QStringLiteral("e") : QStringLiteral("s");
+    const qint64 now = QDateTime::currentMSecsSinceEpoch() / 1000;   // Qt 5.6
+
+    // An explicit choice wins over any heuristic — but only while it still fits:
+    // a certificate the user picked and then let expire must not silently break
+    // sending, so it falls back to the automatic rule.
+    const QString chosen = preferredCert(email);
+    if (!chosen.isEmpty()) {
+        for (const QVariant &v : listCerts()) {
+            const QVariantMap m = v.toMap();
+            if (m.value(QStringLiteral("fpr")).toString() != chosen) continue;
+            if (!m.value(QStringLiteral("keyUsage")).toString().toLower().contains(want)) break;
+            if (needSecret && !m.value(QStringLiteral("hasSecret")).toBool()) break;
+            bool okExp = false;
+            const qint64 exp = m.value(QStringLiteral("expires")).toString().toLongLong(&okExp);
+            if (okExp && exp > 0 && exp < now) break;
+            return chosen;
+        }
+        qWarning() << "[smime] preferred certificate no longer usable, falling back";
+    }
+
+    QString best;
+    qint64 bestAge = -1;
+    for (const QVariant &v : listCerts()) {
+        const QVariantMap m = v.toMap();
+        if (m.value(QStringLiteral("isCA")).toBool()) continue;
+        if (needSecret && !m.value(QStringLiteral("hasSecret")).toBool()) continue;
+        if (!m.value(QStringLiteral("keyUsage")).toString().toLower().contains(want)) continue;
+        if (!email.isEmpty()
+            && !m.value(QStringLiteral("uid")).toString().contains(email, Qt::CaseInsensitive)) continue;
+        bool ok = false;
+        const qint64 exp = m.value(QStringLiteral("expires")).toString().toLongLong(&ok);
+        if (ok && exp > 0 && exp < now) continue;          // expired
+        const qint64 age = certCreated(m);
+        if (age >= bestAge) { bestAge = age; best = m.value(QStringLiteral("fpr")).toString(); }
+    }
+    return best;
+}
+
 QString SmimeEngine::ownCertFpr(const QString &email, char usage)
 {
     const QString want = (usage == 'e') ? QStringLiteral("e") : QStringLiteral("s");
@@ -1547,7 +1648,15 @@ void SmimeEngine::sendSmime(int accountId, const QString &subject,
         QStringList recips = to; recips += cc; recips += bcc;
         if (!fromAddr.isEmpty()) recips << fromAddr;   // encrypt-to-self for a readable Sent copy
         QStringList args;
-        for (const QString &r : recips) if (!r.trimmed().isEmpty()) args << QStringLiteral("-r") << r.trimmed();
+        for (const QString &r : recips) {
+            const QString addr = r.trimmed();
+            if (addr.isEmpty()) continue;
+            // Address me the certificate, not the address: gpgsm refuses to choose
+            // when several certificates carry the same address. Fall back to the
+            // address only when nothing matches, so the error stays gpgsm's.
+            const QString fpr = pickCertFpr(addr, 'e', false);
+            args << QStringLiteral("-r") << (fpr.isEmpty() ? addr : fpr);
+        }
         args << QStringLiteral("--encrypt") << QStringLiteral("--output") << QStringLiteral("-");
         QByteArray env, eerr;
         if (!runGpgsm(args, content, &env, &eerr, 90000) || env.isEmpty()) {
@@ -1571,7 +1680,7 @@ void SmimeEngine::sendSmime(int accountId, const QString &subject,
     QString dom = fromAddr.section('@', 1).trimmed(); if (dom.isEmpty()) dom = QStringLiteral("localhost");
     rfc += "Message-ID: <" + QByteArray::number(QDateTime::currentMSecsSinceEpoch())
          + ".sm@" + dom.toUtf8() + ">\r\n";
-    rfc += "User-Agent: harbour-sfmail\r\n";
+    // No User-Agent — see the encrypted send path in GpgEngine.cpp.
     rfc += "MIME-Version: 1.0\r\n";
     rfc += outerBody;
 

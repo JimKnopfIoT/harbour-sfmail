@@ -86,6 +86,8 @@
 // enough. This is library configuration, not a crypto operation.
 #include <gpgme.h>
 #include <locale.h>
+#include <QRegularExpression>
+#include <QUuid>
 #include <cstdlib>
 #include <cstring>
 #include <memory>
@@ -220,6 +222,17 @@ GpgEngine::GpgEngine(QObject *parent) : QObject(parent)
 // temp files; the passphrase reaches gpg-agent through the loopback
 // PassphraseProvider — no hand-built stdin piping; results and errors are
 // typed — no stderr parsing.
+
+// A MIME boundary must merely be unique and must not occur in the body. Ours used
+// to be built from the app's name plus the payload size ("sfmail2479x8"), which is
+// both deterministic — two mails of equal size to equally many recipients got the
+// SAME boundary — and a fingerprint that identifies this client in every message
+// it ever sent. Random and neutral is what every other client does.
+static QByteArray mimeBoundary()
+{
+    return "=_" + QUuid::createUuid().toRfc4122().toHex();
+}
+
 // ---------------------------------------------------------------------------
 
 // Passphrase for one operation, handed to GPGME's loopback machinery through
@@ -1665,7 +1678,7 @@ static QByteArray buildInnerMime(const QString &bodyText, const QVariantList &at
         return m;
     }
 
-    const QByteArray bnd = "sfmail-inner-" + QByteArray::number(stamp);
+    const QByteArray bnd = mimeBoundary();
     QByteArray m;
     m += "Content-Type: multipart/mixed; boundary=\"" + bnd + "\"" + CRLF;
     m += "MIME-Version: 1.0" + CRLF;
@@ -1768,8 +1781,7 @@ void GpgEngine::finishPgpMimeSend(int accountId, const QString &subject,
     // forever on this device (confirmed: the first such call, setMessageType,
     // never returns → Wayland freeze → app killed). fromRfc2822 parses content
     // through a different code path; afterwards we only touch metadata.
-    const QByteArray boundary = "sfmail" + QByteArray::number(cipher.size())
-                              + "x" + QByteArray::number(to.size() + cc.size() + 7);
+    const QByteArray boundary = mimeBoundary();
     QByteArray rfc;
     rfc += "From: " + fromAddr.toUtf8() + "\r\n";
     rfc += "To: " + to.join(QStringLiteral(", ")).toUtf8() + "\r\n";
@@ -1777,14 +1789,17 @@ void GpgEngine::finishPgpMimeSend(int accountId, const QString &subject,
     if (!bcc.isEmpty()) rfc += "Bcc: " + bcc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
     rfc += "Subject: " + subject.toUtf8() + "\r\n";
     rfc += "Date: " + QMailTimeStamp::currentDateTime().toString().toUtf8() + "\r\n";
-    // Message-ID + User-Agent: a bare, header-sparse mail scores higher with spam
-    // filters. Give it the standard headers a normal client emits. Domain from the
-    // sender; uniqueness from the timestamp + ciphertext size (no RNG needed).
+    // Message-ID: a bare, header-sparse mail scores higher with spam filters, so
+    // give it the standard headers a normal client emits. Domain from the sender;
+    // uniqueness from the timestamp + ciphertext size (no RNG needed).
     QString fromDomain = fromAddr.section('@', 1).trimmed();
     if (fromDomain.isEmpty()) fromDomain = QStringLiteral("localhost");
     rfc += "Message-ID: <" + QByteArray::number(QDateTime::currentMSecsSinceEpoch())
          + "." + QByteArray::number(cipher.size()) + "@" + fromDomain.toUtf8() + ">\r\n";
-    rfc += "User-Agent: harbour-sfmail\r\n";
+    // No User-Agent: it is optional, and "harbour-sfmail" is a token no filter has
+    // ever seen, which makes every message from this app individually identifiable
+    // to content scoring. Dropped while chasing a provider-side 554 that hit only
+    // this client while other clients on the same account went through.
     rfc += "MIME-Version: 1.0\r\n";
     rfc += "Content-Type: multipart/encrypted; protocol=\"application/pgp-encrypted\";\r\n";
     rfc += " boundary=\"" + boundary + "\"\r\n";
@@ -1795,9 +1810,21 @@ void GpgEngine::finishPgpMimeSend(int accountId, const QString &subject,
     rfc += "Content-Description: PGP/MIME version identification\r\n\r\n";
     rfc += "Version: 1\r\n\r\n";
     rfc += "--" + boundary + "\r\n";
-    rfc += "Content-Type: application/octet-stream; name=\"encrypted.asc\"\r\n";
+    // No name/filename on the ciphertext part. QMF re-derives a part's Content-Type
+    // when fromRfc2822() parses our bytes, and it does so from the FILE EXTENSION:
+    // ".asc" became application/pgp-signature on SFOS 4.6 (libqmfclient git144) and
+    // text/plain; charset=utf-8 on 5.1 (git185) — same package, two devices, measured.
+    // The text/plain variant makes a multipart/encrypted whose ciphertext claims to
+    // be text, which content filters score as an obfuscated payload: the provider
+    // answered 554 for the 5.1 device while the identical mail from 4.6 arrived with
+    // a negative spam score. Without a name there is no extension to sniff, and the
+    // declared application/octet-stream (RFC 3156) has a chance to survive. Correcting
+    // it afterwards through QMF's own API is NOT an option — partAt() detaches the
+    // private impl and crashes in the ABI shim (tried, reproducible, see
+    // qmf_abi_compat.cpp). Neither name nor filename is required by RFC 3156.
+    rfc += "Content-Type: application/octet-stream\r\n";
     rfc += "Content-Description: OpenPGP encrypted message\r\n";
-    rfc += "Content-Disposition: inline; filename=\"encrypted.asc\"\r\n\r\n";
+    rfc += "Content-Disposition: inline\r\n\r\n";
     // gpg --armor emits LF-only line endings. Embedding it verbatim leaves bare
     // <LF> bytes in the part body; strict SMTP servers (Postfix >=3.9 rejects
     // bare LF by default since 2024, anti-SMTP-smuggling) reject the whole message
@@ -1832,6 +1859,7 @@ void GpgEngine::storeAndTransmit(const QMailAccountId &accId, const QByteArray &
     // one small QMailMessage per send is the safe trade-off (no destructor → no
     // UAF). C++17 guaranteed elision means no temporary is created/destroyed here.
     QMailMessage *msg = new QMailMessage(QMailMessage::fromRfc2822(rfc));
+
     msg->setParentAccountId(accId);
     // The sending account may have NO standard Outbox folder (e.g. an account that
     // only has Junk/Drafts/Sent/Trash/Inbox). QMF then rejects addMessage with
@@ -1873,12 +1901,128 @@ void GpgEngine::storeAndTransmit(const QMailAccountId &accId, const QByteArray &
                 [this](QMailServiceAction::Activity a) {
             if (a == QMailServiceAction::Successful)
                 qWarning() << "[send] transmit Successful";
-            else if (a == QMailServiceAction::Failed)
+            else if (a == QMailServiceAction::Failed) {
                 qWarning() << "[send] transmit Failed:" << m_tx->status().text;
+                onTransmitFailed(m_tx->status().text);
+            } else if (a == QMailServiceAction::Successful) {
+                // Delivered: stop any running schedule.
+                m_retryTimer.stop();
+                m_retryStep = -1;
+            }
         });
     }
+    m_retryAccount = accId.toULongLong();
     m_tx->transmitMessages(accId);
     qWarning() << "[send] transmit call returned";
+}
+
+// --- Re-sending a stuck outbox ---------------------------------------------
+//
+// QMF has no per-message send: QMailTransmitAction::transmitMessages(account)
+// pushes that account's whole outbox. There was no way to retry at all before —
+// the app's "Sync" only ever RETRIEVES (retrieveMessageList / synchronizeInbox),
+// so a message that failed once sat there until the next new mail happened to
+// flush the outbox along with it.
+
+// Minutes between automatic attempts. Deliberately finite: a server that refuses
+// a message for good (5xx) will refuse it forever, and hammering it only damages
+// the sender's reputation.
+static const int kRetryMinutes[] = { 1, 2, 5, 10, 15, 30, 45, 60 };
+static const int kRetryCount = int(sizeof(kRetryMinutes) / sizeof(kRetryMinutes[0]));
+
+// A permanent refusal (SMTP 5xx) is not worth repeating. QMF hands us the server
+// text verbatim, so look for the code the server actually sent.
+static bool isPermanentFailure(const QString &err)
+{
+    static const QRegularExpression re(QStringLiteral("\\b5[0-9][0-9]\\b"));
+    return re.match(err).hasMatch();
+}
+
+int GpgEngine::outboxCount(int accountId)
+{
+    QMailAccountId accId(static_cast<quint64>(accountId));
+    if (!accId.isValid()) return 0;
+    QMailMessageKey key(QMailMessageKey::parentAccountId(accId));
+    key &= QMailMessageKey::status(QMailMessage::Outbox, QMailDataComparator::Includes);
+    return QMailStore::instance()->countMessages(key);
+}
+
+bool GpgEngine::retryOutbox(int accountId)
+{
+    QMailAccountId accId(static_cast<quint64>(accountId));
+    if (!accId.isValid()) return false;
+
+    if (!m_tx) {
+        m_tx = new QMailTransmitAction(this);
+        connect(m_tx, &QMailTransmitAction::activityChanged, this,
+                [this](QMailServiceAction::Activity a) {
+            if (a == QMailServiceAction::Successful) {
+                qWarning() << "[send] transmit Successful";
+                m_retryTimer.stop();
+                m_retryStep = -1;
+            } else if (a == QMailServiceAction::Failed) {
+                qWarning() << "[send] transmit Failed:" << m_tx->status().text;
+                onTransmitFailed(m_tx->status().text);
+            }
+        });
+    }
+    qWarning() << "[send] manual retry for account" << accountId
+               << "outbox holds" << outboxCount(accountId);
+    m_tx->transmitMessages(accId);
+    return true;
+}
+
+void GpgEngine::cancelRetries()
+{
+    if (m_retryStep >= 0) {
+        m_retryTimer.stop();
+        m_retryStep = -1;
+        emit retryStopped(QStringLiteral("cancelled"));
+    }
+}
+
+int GpgEngine::minutesToNextRetry()
+{
+    if (m_retryStep < 0 || !m_retryTimer.isActive()) return -1;
+    return (m_retryTimer.remainingTime() + 59999) / 60000;
+}
+
+void GpgEngine::onTransmitFailed(const QString &error)
+{
+    if (isPermanentFailure(error)) {
+        // The server said no, for good. Retrying cannot help and would only keep
+        // re-offering a message it already judged.
+        m_retryTimer.stop();
+        m_retryStep = -1;
+        emit retryStopped(error);
+        qWarning() << "[send] permanent refusal — no automatic retry:" << error;
+        return;
+    }
+    scheduleRetry(QMailAccountId(m_retryAccount ? m_retryAccount : 0));
+}
+
+void GpgEngine::scheduleRetry(const QMailAccountId &accId)
+{
+    if (accId.isValid()) m_retryAccount = accId.toULongLong();
+    if (!m_retryAccount) return;
+
+    if (++m_retryStep >= kRetryCount) {
+        m_retryStep = -1;
+        emit retryStopped(QStringLiteral("giving up after the last attempt"));
+        qWarning() << "[send] retry schedule exhausted";
+        return;
+    }
+
+    const int minutes = kRetryMinutes[m_retryStep];
+    m_retryTimer.setSingleShot(true);
+    m_retryTimer.disconnect();
+    connect(&m_retryTimer, &QTimer::timeout, this, [this]() {
+        qWarning() << "[send] automatic retry" << (m_retryStep + 1) << "of" << kRetryCount;
+        retryOutbox(int(m_retryAccount));
+    });
+    m_retryTimer.start(minutes * 60 * 1000);
+    emit retryScheduled(m_retryStep + 1, kRetryCount, minutes);
+    qWarning() << "[send] next automatic retry in" << minutes << "minutes";
 }
 
 // --- PGP/MIME signing (multipart/signed, RFC 3156) -------------------------
@@ -1927,8 +2071,7 @@ void GpgEngine::finishSignedMimeSend(int accountId, const QString &subject,
     const QString fromAddr = account.fromAddress().toString();
     qWarning() << "[sign] building msg, account" << accountId << "from" << fromAddr;
 
-    const QByteArray boundary = "sfmail-signed-" + QByteArray::number(signedInner.size())
-                              + "x" + QByteArray::number(to.size() + cc.size() + 11);
+    const QByteArray boundary = mimeBoundary();
     QByteArray rfc;
     rfc += "From: " + fromAddr.toUtf8() + "\r\n";
     rfc += "To: " + to.join(QStringLiteral(", ")).toUtf8() + "\r\n";
@@ -1940,7 +2083,7 @@ void GpgEngine::finishSignedMimeSend(int accountId, const QString &subject,
     if (fromDomain.isEmpty()) fromDomain = QStringLiteral("localhost");
     rfc += "Message-ID: <" + QByteArray::number(QDateTime::currentMSecsSinceEpoch())
          + "." + QByteArray::number(signedInner.size()) + "s@" + fromDomain.toUtf8() + ">\r\n";
-    rfc += "User-Agent: harbour-sfmail\r\n";
+    // No User-Agent — see the encrypted send path above.
     rfc += "MIME-Version: 1.0\r\n";
     // micalg mirrors the hash the signing engine ACTUALLY used (from the sign
     // result) — required by RFC 3156 for verifiers that pre-select the digest.

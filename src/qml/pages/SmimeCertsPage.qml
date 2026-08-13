@@ -8,6 +8,25 @@ import SFMail.Gpg 1.0
 // once the plugin is proven here it gets wired into harbour-sfmail proper.
 Page {
     id: page
+
+    // Re-evaluated when a preference changes, so the menu label and the marker
+    // follow immediately.
+    property int _prefTick: 0
+
+    function _mailOf(entry) {
+        var uid = "" + (entry.c.uid || "")
+        var at = uid.indexOf("@")
+        if (at < 0) return ""
+        var start = uid.lastIndexOf("<", at)
+        var end = uid.indexOf(">", at)
+        if (start >= 0 && end > start) return uid.substring(start + 1, end)
+        return uid.replace(/^.*?([^\s<>,;]+@[^\s<>,;]+).*$/, "$1")
+    }
+
+    function _preferredFor(entry) {
+        var mail = _mailOf(entry)
+        return (_prefTick, mail === "" ? "" : Smime.preferredCert(mail))
+    }
     allowedOrientations: defaultAllowedOrientations
 
     property string _log: ""
@@ -235,6 +254,26 @@ Page {
                               + "\n\n" + Smime.exportCert(modelData.c.fpr || "")
                     })
                     menu: ContextMenu {
+                        // Which certificate encrypts, when several on the same
+                        // address could. Without a choice the newest valid one is
+                        // used, which is rarely what someone means once they have
+                        // deliberately created a new certificate alongside old ones
+                        // they still need for reading old mail.
+                        MenuItem {
+                            visible: modelData.c.keyUsage !== undefined
+                                     && ("" + modelData.c.keyUsage).toLowerCase().indexOf("e") >= 0
+                                     && modelData.c.isCA !== true
+                            text: page._preferredFor(modelData) === (modelData.c.fpr || "")
+                                  ? qsTr("Do not prefer for encryption any more")
+                                  : qsTr("Prefer for encryption")
+                            onClicked: {
+                                var mail = page._mailOf(modelData)
+                                if (mail === "") return
+                                var isSet = page._preferredFor(modelData) === (modelData.c.fpr || "")
+                                Smime.setPreferredCert(mail, isSet ? "" : (modelData.c.fpr || ""))
+                                page._prefTick++
+                            }
+                        }
                         MenuItem {
                             text: qsTr("Show / export certificate")
                             onClicked: pageStack.push(Qt.resolvedUrl("KeyTextPage.qml"), {

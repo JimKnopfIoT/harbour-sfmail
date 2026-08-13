@@ -20,6 +20,7 @@ Page {
     // view offers "Empty Trash".
     property bool isDrafts: folderType === EmailFolder.DraftsFolder
     property bool isTrash: folderType === EmailFolder.TrashFolder
+    property bool isOutbox: folderType === EmailFolder.OutboxFolder
     property string title: qsTr("Inbox")
     property bool _folderRetrieved: false
 
@@ -54,6 +55,20 @@ Page {
     // otherwise silently drop the first. Cancel drops the whole batch, which is
     // what the bar says ("Deleting 3").
     property var _pendingDeletes: []
+
+    // What the automatic retry schedule is doing, shown in the header of the
+    // outbox. Empty when nothing is pending.
+    property string _retryNotice: ""
+
+    Connections {
+        target: Gpg
+        onRetryScheduled: {
+            page._retryNotice = minutes === 1
+                    ? qsTr("Failed — trying again in a minute (%1/%2)").arg(attempt).arg(total)
+                    : qsTr("Failed — trying again in %1 minutes (%2/%3)").arg(minutes).arg(attempt).arg(total)
+        }
+        onRetryStopped: page._retryNotice = qsTr("Not sent. The server refused it — use Send again after fixing the cause.")
+    }
 
     // Leaving the foreground aborts a running countdown at once, instead of only
     // suppressing it when it expires. Suppressing at expiry was not enough:
@@ -190,6 +205,7 @@ Page {
             title: page._selectMode ? qsTr("Selected: %1").arg(messageModel.selectedMessageCount)
                                     : page.title
             description: page._selectMode ? qsTr("Tap messages to select")
+                       : page._retryNotice !== "" ? page._retryNotice
                        : emailAgent.synchronizing ? qsTr("Syncing…") : ""
         }
 
@@ -218,6 +234,19 @@ Page {
                     page._exitSelect()
                 }
             }
+            // Nothing could re-send a message that stayed in the outbox: "Sync" only
+            // ever retrieves. QMF has no per-message send, so this pushes the whole
+            // outbox of the account, exactly as sending a new mail would.
+            MenuItem {
+                visible: !page._selectMode && page.isOutbox && page.accountId > 0
+                         && messageModel.count > 0
+                text: qsTr("Send again")
+                onClicked: {
+                    page._retryNotice = qsTr("Sending again…")
+                    Gpg.retryOutbox(page.accountId)
+                }
+            }
+
             MenuItem {
                 visible: page._selectMode && page.accountId > 0
                 enabled: messageModel.selectedMessageCount > 0

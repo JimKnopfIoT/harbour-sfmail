@@ -2,6 +2,7 @@
 #define GPGENGINE_H
 
 #include <QObject>
+#include <QTimer>
 #include <QVariantList>
 #include <QVariantMap>
 #include <QStringList>
@@ -61,6 +62,17 @@ public:
     // it: Downloads, Documents, /sdcard, …). Used to remove an import source file the
     // user no longer needs on the device. Overwrites then unlinks. Returns true if
     // the file was removed.
+    // Re-send whatever is stuck in an account's outbox. QMF transmits the WHOLE
+    // outbox of the account, there is no per-message send. Returns false when the
+    // account id is not usable.
+    Q_INVOKABLE bool retryOutbox(int accountId);
+    // How many messages currently sit in that account's outbox (0 = nothing stuck).
+    Q_INVOKABLE int outboxCount(int accountId);
+    // Cancel a running automatic retry schedule.
+    Q_INVOKABLE void cancelRetries();
+    // Minutes until the next automatic attempt, -1 when nothing is scheduled.
+    Q_INVOKABLE int minutesToNextRetry();
+
     Q_INVOKABLE bool shredFile(const QString &path);
 
     // Copy a decrypted attachment out of the private cache into the user's Documents
@@ -278,6 +290,11 @@ public:
     void setSmimeEnabled(bool on);
 
 signals:
+    // Progress of the automatic retry schedule, for the UI: attempt number (1-based),
+    // total attempts, minutes until the next one (-1 = no further attempt).
+    void retryScheduled(int attempt, int total, int minutes);
+    void retryStopped(const QString &reason);
+
     void keysChanged();
     void importFinished(bool ok, int imported, const QString &error);
     void keyDeleted(bool ok, const QString &error);
@@ -354,6 +371,17 @@ private:
                           bool hasAttachments);
     bool m_available;
     QMailTransmitAction *m_tx = nullptr;
+
+    // Automatic re-send for a stuck outbox. The steps are minutes; the schedule
+    // stops after the last one so a permanently refused message is not delivered
+    // over and over — repeated attempts at a mail the server rejects for good only
+    // harm the sender's reputation.
+    QTimer m_retryTimer;
+    int m_retryStep = -1;                 // index into kRetryMinutes, -1 = idle
+    quint64 m_retryAccount = 0;
+    void scheduleRetry(const QMailAccountId &accId);
+    void onTransmitFailed(const QString &error);
+
     QNetworkAccessManager *m_nam = nullptr;
     int m_blPending = 0;
     QByteArray m_pendingKeyArmored;   // a "different" key awaiting user import

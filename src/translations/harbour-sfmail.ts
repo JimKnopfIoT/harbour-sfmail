@@ -1181,127 +1181,127 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="65"/>
+        <location filename="../qml/pages/KeysPage.qml" line="79"/>
         <source>Import PGP key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="81"/>
+        <location filename="../qml/pages/KeysPage.qml" line="95"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="84"/>
+        <location filename="../qml/pages/KeysPage.qml" line="98"/>
         <source>Paste public key block</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="105"/>
+        <location filename="../qml/pages/KeysPage.qml" line="119"/>
         <source>Creates a new RSA-4096 OpenPGP key (signing + encryption) in your keyring. Highest security; the passphrase is mandatory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="100"/>
+        <location filename="../qml/pages/KeysPage.qml" line="114"/>
         <source>Generate new key…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="104"/>
+        <location filename="../qml/pages/KeysPage.qml" line="118"/>
         <source>Generate PGP key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="118"/>
+        <location filename="../qml/pages/KeysPage.qml" line="132"/>
         <source>Import from file…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="122"/>
+        <location filename="../qml/pages/KeysPage.qml" line="136"/>
         <source>Paste key…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="129"/>
+        <location filename="../qml/pages/KeysPage.qml" line="143"/>
         <source>PGP Keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="136"/>
+        <location filename="../qml/pages/KeysPage.qml" line="150"/>
         <source>Keyring: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="155"/>
+        <location filename="../qml/pages/KeysPage.qml" line="169"/>
         <source>Show / export public key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="160"/>
+        <location filename="../qml/pages/KeysPage.qml" line="174"/>
         <source>Delete key (incl. secret)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="160"/>
+        <location filename="../qml/pages/KeysPage.qml" line="174"/>
         <source>Delete key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="164"/>
+        <location filename="../qml/pages/KeysPage.qml" line="178"/>
         <source>Really delete this key?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="165"/>
+        <location filename="../qml/pages/KeysPage.qml" line="179"/>
         <source>This includes your PRIVATE key. Without a backup it cannot be recovered.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="166"/>
+        <location filename="../qml/pages/KeysPage.qml" line="180"/>
         <source>The public key will be removed from your keyring.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="167"/>
+        <location filename="../qml/pages/KeysPage.qml" line="181"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="170"/>
+        <location filename="../qml/pages/KeysPage.qml" line="184"/>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="203"/>
+        <location filename="../qml/pages/KeysPage.qml" line="217"/>
         <source>private</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="204"/>
+        <location filename="../qml/pages/KeysPage.qml" line="218"/>
         <source>revoked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="204"/>
+        <location filename="../qml/pages/KeysPage.qml" line="218"/>
         <source>expired</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="211"/>
+        <location filename="../qml/pages/KeysPage.qml" line="225"/>
         <source>created </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="212"/>
+        <location filename="../qml/pages/KeysPage.qml" line="226"/>
         <source>expires </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="219"/>
+        <location filename="../qml/pages/KeysPage.qml" line="233"/>
         <source>No keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeysPage.qml" line="220"/>
+        <location filename="../qml/pages/KeysPage.qml" line="234"/>
         <source>Import a key with the pull-down menu</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1389,168 +1389,193 @@ Importing adds a SECOND key for this address — make sure this new key is genui
 <context>
     <name>MessageListPage</name>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="23"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="24"/>
         <source>Inbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="173"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="209"/>
         <source>Syncing…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="305"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="354"/>
         <source>New message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="242"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="291"/>
         <source>Folders</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="170"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="205"/>
         <source>Selected: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="172"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="207"/>
         <source>Tap messages to select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="180"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="216"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="186"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="222"/>
         <source>Select all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="186"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="222"/>
         <source>Deselect all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="193"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="229"/>
         <source>Mark selected as read</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="194"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="230"/>
         <source>Mark selected as unread</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="210"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="259"/>
         <source>Delete selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="99"/>
-        <location filename="../qml/pages/MessageListPage.qml" line="213"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="128"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="262"/>
         <source>Deleting %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="250"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="299"/>
         <source>Templates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="259"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="308"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="277"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="326"/>
         <source>Select messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="284"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="333"/>
         <source>Mark all as read</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="290"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="339"/>
         <source>Empty Trash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="294"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="343"/>
         <source>Empty Trash?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="295"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="344"/>
         <source>All messages in Trash will be permanently deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="296"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="345"/>
         <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="100"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="129"/>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="367"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="67"/>
+        <source>Failed — trying again in a minute (%1/%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessageListPage.qml" line="68"/>
+        <source>Failed — trying again in %1 minutes (%2/%3)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessageListPage.qml" line="70"/>
+        <source>Not sent. The server refused it — use Send again after fixing the cause.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessageListPage.qml" line="243"/>
+        <source>Send again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessageListPage.qml" line="245"/>
+        <source>Sending again…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessageListPage.qml" line="416"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="374"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="423"/>
         <source>Mark as unread</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="374"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="423"/>
         <source>Mark as read</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="383"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="432"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="437"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="486"/>
         <source>(no subject)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="463"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="512"/>
         <source>(header only)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="493"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="542"/>
         <source>Loading inbox…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="493"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="542"/>
         <source>No messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="494"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="543"/>
         <source>Pull down to sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="379"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="428"/>
         <source>Move to folder…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessageListPage.qml" line="204"/>
+        <location filename="../qml/pages/MessageListPage.qml" line="253"/>
         <source>Move selected…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1558,336 +1583,336 @@ Importing adds a SECOND key for this address — make sure this new key is genui
 <context>
     <name>MessagePage</name>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="105"/>
-        <location filename="../qml/pages/MessagePage.qml" line="120"/>
-        <location filename="../qml/pages/MessagePage.qml" line="313"/>
+        <location filename="../qml/pages/MessagePage.qml" line="119"/>
+        <location filename="../qml/pages/MessagePage.qml" line="134"/>
+        <location filename="../qml/pages/MessagePage.qml" line="327"/>
         <source>Decrypted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="114"/>
+        <location filename="../qml/pages/MessagePage.qml" line="128"/>
         <source>(no text — see attachments below)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="119"/>
+        <location filename="../qml/pages/MessagePage.qml" line="133"/>
         <source>Decrypted — %1 attachment(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="127"/>
+        <location filename="../qml/pages/MessagePage.qml" line="141"/>
         <source>Imported %1 key(s) into your keyring.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="128"/>
+        <location filename="../qml/pages/MessagePage.qml" line="142"/>
         <source>Key import failed: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="147"/>
+        <location filename="../qml/pages/MessagePage.qml" line="161"/>
         <source>Could not open the attachment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="212"/>
+        <location filename="../qml/pages/MessagePage.qml" line="226"/>
         <source>Save to folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="245"/>
-        <location filename="../qml/pages/MessagePage.qml" line="249"/>
-        <location filename="../qml/pages/MessagePage.qml" line="671"/>
+        <location filename="../qml/pages/MessagePage.qml" line="259"/>
+        <location filename="../qml/pages/MessagePage.qml" line="263"/>
+        <location filename="../qml/pages/MessagePage.qml" line="685"/>
         <source>Downloading the full message…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="246"/>
+        <location filename="../qml/pages/MessagePage.qml" line="260"/>
         <source>The message is already fully downloaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="251"/>
+        <location filename="../qml/pages/MessagePage.qml" line="265"/>
         <source>Message downloaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="317"/>
+        <location filename="../qml/pages/MessagePage.qml" line="331"/>
         <source>Your certificate isn&apos;t installed yet — open “S/MIME certificates” in the menu to import your .p12</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="318"/>
+        <location filename="../qml/pages/MessagePage.qml" line="332"/>
         <source>Decrypt failed: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="323"/>
+        <location filename="../qml/pages/MessagePage.qml" line="337"/>
         <source>Sender certificate imported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="324"/>
+        <location filename="../qml/pages/MessagePage.qml" line="338"/>
         <source>Import: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="371"/>
-        <location filename="../qml/pages/MessagePage.qml" line="384"/>
+        <location filename="../qml/pages/MessagePage.qml" line="385"/>
+        <location filename="../qml/pages/MessagePage.qml" line="398"/>
         <source>Encrypted part not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="375"/>
-        <location filename="../qml/pages/MessagePage.qml" line="392"/>
-        <location filename="../qml/pages/MessagePage.qml" line="417"/>
+        <location filename="../qml/pages/MessagePage.qml" line="389"/>
+        <location filename="../qml/pages/MessagePage.qml" line="406"/>
+        <location filename="../qml/pages/MessagePage.qml" line="431"/>
         <source>Downloading encrypted part…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="473"/>
+        <location filename="../qml/pages/MessagePage.qml" line="487"/>
         <source>Downloading key…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="475"/>
+        <location filename="../qml/pages/MessagePage.qml" line="489"/>
         <source>No PGP key found in this message — the sender did not include their public key. Get it from a keyserver or import the .asc file via the Keys page.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="553"/>
+        <location filename="../qml/pages/MessagePage.qml" line="567"/>
         <source>Signature: decrypt first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="557"/>
+        <location filename="../qml/pages/MessagePage.qml" line="571"/>
         <source>Valid signature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="558"/>
+        <location filename="../qml/pages/MessagePage.qml" line="572"/>
         <source>INVALID signature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="559"/>
+        <location filename="../qml/pages/MessagePage.qml" line="573"/>
         <source>Signature from expired key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="560"/>
+        <location filename="../qml/pages/MessagePage.qml" line="574"/>
         <source>Public key missing — cannot verify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="583"/>
+        <location filename="../qml/pages/MessagePage.qml" line="597"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="588"/>
+        <location filename="../qml/pages/MessagePage.qml" line="602"/>
         <source>Deleting message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="622"/>
+        <location filename="../qml/pages/MessagePage.qml" line="636"/>
         <source>Show header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="627"/>
+        <location filename="../qml/pages/MessagePage.qml" line="641"/>
         <source>Encryption info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="655"/>
+        <location filename="../qml/pages/MessagePage.qml" line="669"/>
         <source>Import sender&apos;s key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="665"/>
+        <location filename="../qml/pages/MessagePage.qml" line="679"/>
         <source>S/MIME certificates…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="669"/>
+        <location filename="../qml/pages/MessagePage.qml" line="683"/>
         <source>Download full message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="677"/>
+        <location filename="../qml/pages/MessagePage.qml" line="691"/>
         <source>Reply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="705"/>
+        <location filename="../qml/pages/MessagePage.qml" line="719"/>
         <source>(no subject)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="733"/>
+        <location filename="../qml/pages/MessagePage.qml" line="747"/>
         <source>to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="764"/>
+        <location filename="../qml/pages/MessagePage.qml" line="778"/>
         <source>Encrypted message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="765"/>
+        <location filename="../qml/pages/MessagePage.qml" line="779"/>
         <source>Decrypting…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="766"/>
+        <location filename="../qml/pages/MessagePage.qml" line="780"/>
         <source>Decryption failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="767"/>
+        <location filename="../qml/pages/MessagePage.qml" line="781"/>
         <source>Encrypted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="775"/>
+        <location filename="../qml/pages/MessagePage.qml" line="789"/>
         <source>Format: PGP/MIME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="789"/>
-        <location filename="../qml/pages/MessagePage.qml" line="827"/>
-        <location filename="../qml/pages/MessagePage.qml" line="870"/>
+        <location filename="../qml/pages/MessagePage.qml" line="803"/>
+        <location filename="../qml/pages/MessagePage.qml" line="841"/>
+        <location filename="../qml/pages/MessagePage.qml" line="884"/>
         <source>Decrypt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="903"/>
+        <location filename="../qml/pages/MessagePage.qml" line="917"/>
         <source>Show plain text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="904"/>
+        <location filename="../qml/pages/MessagePage.qml" line="918"/>
         <source>Show simple HTML (no external content loaded)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="1061"/>
+        <location filename="../qml/pages/MessagePage.qml" line="1075"/>
         <source>Could not load the attachment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="1065"/>
+        <location filename="../qml/pages/MessagePage.qml" line="1079"/>
         <source>Downloading attachment…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="1131"/>
+        <location filename="../qml/pages/MessagePage.qml" line="1145"/>
         <source>Pull down “Download full message” to load the attachment(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="226"/>
-        <location filename="../qml/pages/MessagePage.qml" line="831"/>
+        <location filename="../qml/pages/MessagePage.qml" line="240"/>
+        <location filename="../qml/pages/MessagePage.qml" line="845"/>
         <source>To decrypt this message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="815"/>
+        <location filename="../qml/pages/MessagePage.qml" line="829"/>
         <source>Inline PGP message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="816"/>
+        <location filename="../qml/pages/MessagePage.qml" line="830"/>
         <source>Inline PGP signature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="823"/>
+        <location filename="../qml/pages/MessagePage.qml" line="837"/>
         <source>Format: Inline PGP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="827"/>
+        <location filename="../qml/pages/MessagePage.qml" line="841"/>
         <source>Verify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="859"/>
+        <location filename="../qml/pages/MessagePage.qml" line="873"/>
         <source>Encrypted S/MIME message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="860"/>
+        <location filename="../qml/pages/MessagePage.qml" line="874"/>
         <source>Signed S/MIME message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="865"/>
+        <location filename="../qml/pages/MessagePage.qml" line="879"/>
         <source>Format: S/MIME (PKI)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="873"/>
+        <location filename="../qml/pages/MessagePage.qml" line="887"/>
         <source>To decrypt this S/MIME message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="881"/>
+        <location filename="../qml/pages/MessagePage.qml" line="895"/>
         <source>Import sender&apos;s certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="922"/>
+        <location filename="../qml/pages/MessagePage.qml" line="936"/>
         <source>(empty — pull down to download)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="950"/>
+        <location filename="../qml/pages/MessagePage.qml" line="964"/>
         <source>Unusually large attachment detected. Expecting a larger e-mail? You can load it once without the size limit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="953"/>
+        <location filename="../qml/pages/MessagePage.qml" line="967"/>
         <source>Load without limit (15 min)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="972"/>
+        <location filename="../qml/pages/MessagePage.qml" line="986"/>
         <source>Decrypted attachments (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="217"/>
+        <location filename="../qml/pages/MessagePage.qml" line="231"/>
         <source>Saved to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="217"/>
+        <location filename="../qml/pages/MessagePage.qml" line="231"/>
         <source>Could not save the attachment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="1000"/>
-        <location filename="../qml/pages/MessagePage.qml" line="1081"/>
+        <location filename="../qml/pages/MessagePage.qml" line="1014"/>
+        <location filename="../qml/pages/MessagePage.qml" line="1095"/>
         <source>Open with…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="1004"/>
-        <location filename="../qml/pages/MessagePage.qml" line="1088"/>
+        <location filename="../qml/pages/MessagePage.qml" line="1018"/>
+        <location filename="../qml/pages/MessagePage.qml" line="1102"/>
         <source>Save as…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="973"/>
-        <location filename="../qml/pages/MessagePage.qml" line="1040"/>
-        <location filename="../qml/pages/MessagePage.qml" line="1125"/>
+        <location filename="../qml/pages/MessagePage.qml" line="987"/>
+        <location filename="../qml/pages/MessagePage.qml" line="1054"/>
+        <location filename="../qml/pages/MessagePage.qml" line="1139"/>
         <source>Attachments (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MessagePage.qml" line="603"/>
+        <location filename="../qml/pages/MessagePage.qml" line="617"/>
         <source>Move to folder…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1926,195 +1951,567 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
 </context>
 <context>
+    <name>PgpDecryptPage</name>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="14"/>
+        <source>Signed by: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="20"/>
+        <source>Decrypted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="21"/>
+        <source>Decryption failed: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="26"/>
+        <source>Valid signature (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="27"/>
+        <source>INVALID signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="28"/>
+        <source>Verify failed: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="35"/>
+        <source>Open encrypted file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="51"/>
+        <source>Open file…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="55"/>
+        <source>Paste from clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="66"/>
+        <source>Decrypt / verify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="71"/>
+        <source>PGP message or signed text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="72"/>
+        <source>Paste a -----BEGIN PGP …----- block, or open a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="79"/>
+        <source>Decrypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpDecryptPage.qml" line="84"/>
+        <source>Verify</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PgpEncryptPage</name>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="56"/>
+        <source>Enter at least one recipient address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="62"/>
+        <source>No key for: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="72"/>
+        <source>No recipients resolved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="78"/>
+        <source>Multiple keys for %1 — using the first</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="103"/>
+        <source>Encrypted message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="105"/>
+        <source>Encryption failed: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="118"/>
+        <source>Encrypt…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="123"/>
+        <source>Pick keys manually…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="134"/>
+        <source>Encrypt text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="139"/>
+        <source>Recipients (e-mail)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="140"/>
+        <source>name@example.com, …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="149"/>
+        <source>Plain text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="150"/>
+        <source>Type or paste the text to encrypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="155"/>
+        <source>Also encrypt to myself</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="156"/>
+        <source>Keep the message readable for you</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="163"/>
+        <source>Sign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="164"/>
+        <source>Sign with your key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpEncryptPage.qml" line="165"/>
+        <source>No secret key available</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PgpHomePage</name>
+    <message>
+        <location filename="../qml/pages/PgpHomePage.qml" line="18"/>
+        <source>OpenPGP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpHomePage.qml" line="28"/>
+        <source>Decrypt / verify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpHomePage.qml" line="29"/>
+        <source>Paste a PGP block or open a .asc / .gpg file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpHomePage.qml" line="43"/>
+        <source>Encrypt / sign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpHomePage.qml" line="44"/>
+        <source>Write text and produce a PGP block to share</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpHomePage.qml" line="58"/>
+        <source>Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpHomePage.qml" line="59"/>
+        <source>Import, list, export, delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpHomePage.qml" line="73"/>
+        <source>Backend: GnuPG/GPGME %1
+Keyring: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpHomePage.qml" line="74"/>
+        <source>PGP backend not available</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PgpKeysPage</name>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="31"/>
+        <source>Imported %1 key(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="32"/>
+        <source>Import failed: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="34"/>
+        <source>Key deleted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="34"/>
+        <source>Delete failed: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="64"/>
+        <source>Import PGP key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="77"/>
+        <source>PGP Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="84"/>
+        <source>Private keyring: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="99"/>
+        <source>Import key…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="110"/>
+        <source>Show / export public key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="114"/>
+        <source>Public key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="118"/>
+        <source>Delete key (incl. secret)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="118"/>
+        <source>Delete key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="122"/>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="152"/>
+        <source>private</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="153"/>
+        <source>expired</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="160"/>
+        <source>No keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpKeysPage.qml" line="161"/>
+        <source>Import a key with the pull-down menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PgpPassphraseDialog</name>
+    <message>
+        <location filename="../qml/pages/PgpPassphraseDialog.qml" line="25"/>
+        <source>PGP passphrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpPassphraseDialog.qml" line="33"/>
+        <source>Wrong passphrase, try again:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpPassphraseDialog.qml" line="34"/>
+        <source>Enter the passphrase for:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PgpRecipientPage</name>
+    <message>
+        <location filename="../qml/pages/PgpRecipientPage.qml" line="42"/>
+        <source>Encrypt to…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpRecipientPage.qml" line="47"/>
+        <source>Sign as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpRecipientPage.qml" line="61"/>
+        <source>Also sign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpRecipientPage.qml" line="64"/>
+        <source>Recipients</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpRecipientPage.qml" line="81"/>
+        <source>No public keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PgpRecipientPage.qml" line="82"/>
+        <source>Import recipient keys first</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PgpTextPage</name>
+    <message>
+        <location filename="../qml/pages/PgpTextPage.qml" line="19"/>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SmimeCertsPage</name>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="70"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="103"/>
         <source>Root CA</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="71"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="104"/>
         <source>Intermediate CA</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="73"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="106"/>
         <source>Your encryption certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="74"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="107"/>
         <source>Your signing certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="75"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="108"/>
         <source>Certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="89"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="122"/>
         <source>Import file deleted from the device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="90"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="123"/>
         <source>Could not delete the import file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="132"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="165"/>
         <source>Certificate backed up to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="133"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="166"/>
         <source>It is passphrase-protected but lies outside the app sandbox — copy it off-device and then delete it from the phone.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="134"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="167"/>
         <source>Backup failed — wrong passphrase?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="144"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="177"/>
         <source>Wipe store</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="145"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="178"/>
         <source>Round-trip self-test</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="147"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="180"/>
         <source>Passphrase of your key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="153"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="186"/>
         <source>Import certificate from file…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="157"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="190"/>
         <source>Generate new certificate…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="161"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="194"/>
         <source>Generate S/MIME certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="162"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="195"/>
         <source>Creates a new self-signed RSA-4096 S/MIME certificate (signing + encryption) in your store. The recipient must trust it once, like a first key exchange. Highest security; the passphrase is mandatory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="178"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="211"/>
         <source>Generating a 4096-bit certificate — this can take a minute…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="190"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="223"/>
         <source>S/MIME certificates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="194"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="227"/>
         <source>gpgsm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="194"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="227"/>
         <source>ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="194"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="227"/>
         <source>NOT FOUND</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="201"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="234"/>
         <source>store: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="204"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="237"/>
         <source>Certificates (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="217"/>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="278"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="250"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="331"/>
         <source>(no subject)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="225"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="267"/>
+        <source>Do not prefer for encryption any more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="268"/>
+        <source>Prefer for encryption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="278"/>
         <source>Show / export certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="233"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="286"/>
         <source>Back up as .p12 to Documents…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="235"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="288"/>
         <source>Passphrase of this certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="238"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="291"/>
         <source>Delete certificate + private key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="239"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="292"/>
         <source>Delete certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="243"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="296"/>
         <source>Really delete this certificate?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="244"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="297"/>
         <source>This includes the PRIVATE key. Without a .p12 backup it cannot be recovered.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="245"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="298"/>
         <source>The certificate will be removed from your store.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="246"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="299"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="249"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="302"/>
         <source>Deleting certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="292"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="345"/>
         <source>Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="309"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="362"/>
         <source>Select certificate (.p12 / .pfx / .pem / .crt / .p7b)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SmimeCertsPage.qml" line="316"/>
+        <location filename="../qml/pages/SmimeCertsPage.qml" line="369"/>
         <source>Passphrase of the .p12 file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2206,52 +2603,52 @@ Importing adds a SECOND key for this address — make sure this new key is genui
 <context>
     <name>TemplatesPage</name>
     <message>
-        <location filename="../qml/pages/TemplatesPage.qml" line="56"/>
+        <location filename="../qml/pages/TemplatesPage.qml" line="70"/>
         <source>Templates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TemplatesPage.qml" line="79"/>
+        <location filename="../qml/pages/TemplatesPage.qml" line="93"/>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TemplatesPage.qml" line="91"/>
+        <location filename="../qml/pages/TemplatesPage.qml" line="105"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TemplatesPage.qml" line="104"/>
+        <location filename="../qml/pages/TemplatesPage.qml" line="118"/>
         <source>(no subject)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TemplatesPage.qml" line="113"/>
+        <location filename="../qml/pages/TemplatesPage.qml" line="127"/>
         <source>Encrypted + signed (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TemplatesPage.qml" line="114"/>
+        <location filename="../qml/pages/TemplatesPage.qml" line="128"/>
         <source>Encrypted (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TemplatesPage.qml" line="115"/>
+        <location filename="../qml/pages/TemplatesPage.qml" line="129"/>
         <source>Signed (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TemplatesPage.qml" line="116"/>
+        <location filename="../qml/pages/TemplatesPage.qml" line="130"/>
         <source>Not encrypted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TemplatesPage.qml" line="123"/>
+        <location filename="../qml/pages/TemplatesPage.qml" line="137"/>
         <source>No templates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TemplatesPage.qml" line="124"/>
+        <location filename="../qml/pages/TemplatesPage.qml" line="138"/>
         <source>Save a message as a template from the composer</source>
         <translation type="unfinished"></translation>
     </message>

@@ -32,6 +32,11 @@ public:
     QString gnupgHome() const { return m_home; }
 
     // --- Stufe 1, milestone 1: certificate import -------------------------
+    // Pin ONE certificate for an address, for when several can encrypt. Empty
+    // fingerprint clears the choice and returns to the automatic rule.
+    Q_INVOKABLE void setPreferredCert(const QString &email, const QString &fingerprint);
+    Q_INVOKABLE QString preferredCert(const QString &email);
+
     // Import an S/MIME .p12/.pfx (with private key[s]) plus its CA chain. gpgsm
     // cannot parse a Windows/Volksverschlüsselung .p12 directly, so we repack it
     // with OpenSSL: dump everything, split the (up to 3) key pairs, build one
@@ -141,6 +146,7 @@ public:
     Q_INVOKABLE void roundTripTest(const QString &passphrase);
 
 signals:
+    void preferredCertChanged(const QString &email, const QString &fingerprint);
     void certsChanged();
     void importFinished(bool ok, int imported, const QString &error);
     void decryptFinished(bool ok, const QString &text, const QString &signer, const QString &error);
@@ -182,6 +188,9 @@ private:
     // The account's own signing/encryption cert fingerprint for an address ("" if
     // none). usage 's' = signing cert, 'e' = encryption cert.
     QString ownCertFpr(const QString &email, char usage);
+    // One certificate for an address, chosen by usage/validity/age — see the .cpp.
+    QString pickCertFpr(const QString &email, char usage, bool needSecret);
+    QString prefStorePath() const;
     // The decoded "ext key usage:" line of the cert with this fingerprint (e.g.
     // "emailProtection (suggested)" or "clientAuth"); empty if the cert carries no
     // extKeyUsage extension (= valid for any purpose). Used to reject the

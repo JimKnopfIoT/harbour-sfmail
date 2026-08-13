@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.5.5
+Version:    0.6.1
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -156,6 +156,24 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Thu Aug 13 2026 harbour-sfmail contributors 0.6.1-1
+- Encrypted mail is sent as encrypted mail again. QMF re-derives a MIME part's
+  Content-Type from the file extension while parsing, and ".asc" is ambiguous in
+  the shared MIME database - text/plain outranks the PGP types. The ciphertext
+  part therefore left the device declared as text, which content filters score as
+  an obfuscated payload; one provider answered 554. The part no longer carries a
+  filename, so nothing can be re-guessed and application/octet-stream stands.
+- Messages stuck in the outbox can be sent again, by hand from the outbox menu and
+  automatically after 1, 2, 5, 10, 15, 30, 45 and 60 minutes. A permanent refusal
+  (SMTP 5xx) schedules no retry - it would not help and only burdens the server.
+- S/MIME picks its own certificate instead of handing gpgsm an address. With
+  several certificates on one address gpgsm refused to choose at all; now the app
+  chooses - an explicit preference first, otherwise the newest valid one that can
+  encrypt - and passes the fingerprint. The preference is set per address in the
+  certificate page.
+- MIME boundaries are random instead of derived from message size and recipient
+  count, and the User-Agent header is gone.
+
 * Thu Aug 13 2026 harbour-sfmail contributors 0.5.5-1
 - S/MIME works again on aarch64. Rebuilding the GnuPG stack in 0.5.4 replaced the
   staged tree wholesale and dropped three files it does not build itself: the
