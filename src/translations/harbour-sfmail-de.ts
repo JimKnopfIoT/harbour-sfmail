@@ -60,7 +60,7 @@
         <translation>Debug-Protokoll</translation>
     </message>
     <message>
-        <source>Write a debug.log in the app&apos;s data folder to help diagnose problems. Turn it off for normal use; it has no effect on your mail or keys.</source>
+        <source>Write a debug.log in the app's data folder to help diagnose problems. Turn it off for normal use; it has no effect on your mail or keys.</source>
         <translation>Schreibt eine debug.log im Datenordner der App zur Fehlersuche. Für den normalen Gebrauch ausschalten; hat keinen Einfluss auf deine Mails oder Schlüssel.</translation>
     </message>
 </context>
@@ -191,11 +191,11 @@
         <translation>Signieren</translation>
     </message>
     <message>
-        <source>Encrypted to the recipients&apos; keys and signed with your key.</source>
+        <source>Encrypted to the recipients' keys and signed with your key.</source>
         <translation>An die Schlüssel der Empfänger verschlüsselt und mit deinem Schlüssel signiert.</translation>
     </message>
     <message>
-        <source>Encrypted to the recipients&apos; keys.</source>
+        <source>Encrypted to the recipients' keys.</source>
         <translation>An die Schlüssel der Empfänger verschlüsselt.</translation>
     </message>
     <message>
@@ -339,7 +339,7 @@
         <translation>Suche auf keys.openpgp.org…</translation>
     </message>
     <message>
-        <source>keys.openpgp.org has the sender&apos;s key:
+        <source>keys.openpgp.org has the sender's key:
 %1%2
 The key this message used (0x%3) belongs to it (encryption subkey). Verify the fingerprint, then import.</source>
         <translation>keys.openpgp.org hat den Schlüssel des Absenders:
@@ -647,7 +647,7 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
         <translation>Link-Domains (%1)</translation>
     </message>
     <message>
-        <source>Pull down to check the sender&apos;s IP/domain — and any link domains — against blacklists. Only those values are sent to the blacklist DNS, nothing of yours.</source>
+        <source>Pull down to check the sender's IP/domain — and any link domains — against blacklists. Only those values are sent to the blacklist DNS, nothing of yours.</source>
         <translation>Herunterziehen, um IP/Domain des Absenders – und etwaige Link-Domains – gegen Blacklists zu prüfen. Nur diese Werte gehen ans Blacklist-DNS, nichts von dir.</translation>
     </message>
     <message>
@@ -802,7 +802,7 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     <name>KeyImportDialog</name>
     <message>
         <source>Re-import</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Import anyway</source>
@@ -818,11 +818,11 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>Import public key?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>(no user id)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Key ID</source>
@@ -830,7 +830,7 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>Fingerprint</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Algorithm</source>
@@ -846,37 +846,37 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>⚠ This key has been REVOKED by its owner. It should not be used to encrypt — import only to read old messages or to verify old signatures.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>This key is EXPIRED. You cannot encrypt to it until the owner extends it.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>You already have a DIFFERENT key for %1:
 0x%2  (%3)
 Importing adds a SECOND key for this address — make sure this new key is genuine before you trust it.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>This exact key is already in your keyring. Re-importing just refreshes it (e.g. new signatures or a longer expiry).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>This key is new and valid. Verify the fingerprint with the owner through a separate channel before you rely on it.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
-        <source>⚠ This key is NOT issued for the sender&apos;s address (%1). Its addresses are: %2. Only import it if you are sure it really is this sender&apos;s key.</source>
-        <translation type="unfinished"></translation>
+        <source>⚠ This key is NOT issued for the sender's address (%1). Its addresses are: %2. Only import it if you are sure it really is this sender's key.</source>
+        <translation type="unfinished" />
     </message>
     <message>
-        <source>✓ This key belongs to the sender&apos;s address (%1).</source>
-        <translation type="unfinished"></translation>
+        <source>✓ This key belongs to the sender's address (%1).</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -1235,7 +1235,7 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
     <message>
         <source>(header only)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Move to folder…</source>
@@ -1244,6 +1244,26 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Move selected…</source>
         <translation>Ausgewählte verschieben…</translation>
+    </message>
+    <message>
+        <source>Failed — trying again in a minute (%1/%2)</source>
+        <translation>Fehlgeschlagen — neuer Versuch in einer Minute (%1/%2)</translation>
+    </message>
+    <message>
+        <source>Failed — trying again in %1 minutes (%2/%3)</source>
+        <translation>Fehlgeschlagen — neuer Versuch in %1 Minuten (%2/%3)</translation>
+    </message>
+    <message>
+        <source>Not sent. The server refused it — use Send again after fixing the cause.</source>
+        <translation>Nicht gesendet. Der Server hat sie abgelehnt — nach Behebung der Ursache „Erneut senden“ benutzen.</translation>
+    </message>
+    <message>
+        <source>Send again</source>
+        <translation>Erneut senden</translation>
+    </message>
+    <message>
+        <source>Sending again…</source>
+        <translation>Sende erneut…</translation>
     </message>
 </context>
 <context>
@@ -1269,7 +1289,7 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <translation>Schlüssel-Import fehlgeschlagen: %1</translation>
     </message>
     <message>
-        <source>Your certificate isn&apos;t installed yet — open “S/MIME certificates” in the menu to import your .p12</source>
+        <source>Your certificate isn't installed yet — open “S/MIME certificates” in the menu to import your .p12</source>
         <translation>Dein Zertifikat ist noch nicht installiert – öffne „S/MIME-Zertifikate“ im Menü, um deine .p12 zu importieren</translation>
     </message>
     <message>
@@ -1417,7 +1437,7 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <translation>Zum Entschlüsseln dieser S/MIME-Nachricht</translation>
     </message>
     <message>
-        <source>Import sender&apos;s certificate</source>
+        <source>Import sender's certificate</source>
         <translation>Absender-Zertifikat importieren</translation>
     </message>
     <message>
@@ -1433,8 +1453,8 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <translation>Anhänge (%1)</translation>
     </message>
     <message>
-        <source>Import sender&apos;s key</source>
-        <translation type="unfinished"></translation>
+        <source>Import sender's key</source>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Unusually large attachment detected. Expecting a larger e-mail? You can load it once without the size limit.</source>
@@ -1478,15 +1498,15 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
     <message>
         <source>Pull down “Download full message” to load the attachment(s).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Downloading attachment…</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Could not load the attachment</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Could not open the attachment</source>
@@ -1520,7 +1540,7 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <translation>Passphrase des geheimen Schlüssels</translation>
     </message>
     <message>
-        <source>After import, the key lives safely in the app&apos;s encrypted keyring. The file you imported stays where you picked it (e.g. Downloads), outside the app sandbox, where other apps could read it — so it is no longer needed on the device. If you have a backup elsewhere, delete it here.</source>
+        <source>After import, the key lives safely in the app's encrypted keyring. The file you imported stays where you picked it (e.g. Downloads), outside the app sandbox, where other apps could read it — so it is no longer needed on the device. If you have a backup elsewhere, delete it here.</source>
         <translation>Nach dem Import liegt der Schlüssel sicher im verschlüsselten Schlüsselbund der App. Die importierte Datei bleibt dort, wo du sie ausgewählt hast (z. B. Downloads) — außerhalb der App-Sandbox, wo andere Apps sie lesen könnten — und wird auf dem Gerät nicht mehr gebraucht. Wenn du anderswo ein Backup hast, lösche sie hier.</translation>
     </message>
     <message>
@@ -1530,6 +1550,301 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Nur wenn du ein anderes Backup hast. Dies kann nicht rückgängig gemacht werden.</translation>
+    </message>
+</context>
+<context>
+    <name>PgpDecryptPage</name>
+    <message>
+        <source>Signed by: %1</source>
+        <translation>Signiert von: %1</translation>
+    </message>
+    <message>
+        <source>Decrypted</source>
+        <translation>Entschlüsselt</translation>
+    </message>
+    <message>
+        <source>Decryption failed: %1</source>
+        <translation>Entschlüsseln fehlgeschlagen: %1</translation>
+    </message>
+    <message>
+        <source>Valid signature (%1)</source>
+        <translation>Gültige Signatur (%1)</translation>
+    </message>
+    <message>
+        <source>INVALID signature</source>
+        <translation>UNGÜLTIGE Signatur</translation>
+    </message>
+    <message>
+        <source>Verify failed: %1</source>
+        <translation>Prüfen fehlgeschlagen: %1</translation>
+    </message>
+    <message>
+        <source>Open encrypted file</source>
+        <translation>Verschlüsselte Datei öffnen</translation>
+    </message>
+    <message>
+        <source>Open file…</source>
+        <translation>Datei öffnen…</translation>
+    </message>
+    <message>
+        <source>Paste from clipboard</source>
+        <translation>Aus Zwischenablage einfügen</translation>
+    </message>
+    <message>
+        <source>Decrypt / verify</source>
+        <translation>Entschlüsseln / Prüfen</translation>
+    </message>
+    <message>
+        <source>PGP message or signed text</source>
+        <translation>PGP-Nachricht oder signierter Text</translation>
+    </message>
+    <message>
+        <source>Paste a -----BEGIN PGP …----- block, or open a file</source>
+        <translation>Füge einen -----BEGIN PGP …------Block ein oder öffne eine Datei</translation>
+    </message>
+    <message>
+        <source>Decrypt</source>
+        <translation>Entschlüsseln</translation>
+    </message>
+    <message>
+        <source>Verify</source>
+        <translation>Prüfen</translation>
+    </message>
+</context>
+<context>
+    <name>PgpEncryptPage</name>
+    <message>
+        <source>Enter at least one recipient address</source>
+        <translation>Mindestens eine Empfängeradresse eingeben</translation>
+    </message>
+    <message>
+        <source>No key for: %1</source>
+        <translation>Kein Schlüssel für: %1</translation>
+    </message>
+    <message>
+        <source>No recipients resolved</source>
+        <translation>Keine Empfänger aufgelöst</translation>
+    </message>
+    <message>
+        <source>Multiple keys for %1 — using the first</source>
+        <translation>Mehrere Schlüssel für %1 – nehme den ersten</translation>
+    </message>
+    <message>
+        <source>Encrypted message</source>
+        <translation>Verschlüsselte Nachricht</translation>
+    </message>
+    <message>
+        <source>Encryption failed: %1</source>
+        <translation>Verschlüsseln fehlgeschlagen: %1</translation>
+    </message>
+    <message>
+        <source>Encrypt…</source>
+        <translation>Verschlüsseln…</translation>
+    </message>
+    <message>
+        <source>Pick keys manually…</source>
+        <translation>Schlüssel manuell wählen…</translation>
+    </message>
+    <message>
+        <source>Encrypt text</source>
+        <translation>Text verschlüsseln</translation>
+    </message>
+    <message>
+        <source>Recipients (e-mail)</source>
+        <translation>Empfänger (E-Mail)</translation>
+    </message>
+    <message>
+        <source>name@example.com, …</source>
+        <translation>name@beispiel.de, …</translation>
+    </message>
+    <message>
+        <source>Plain text</source>
+        <translation>Klartext</translation>
+    </message>
+    <message>
+        <source>Type or paste the text to encrypt</source>
+        <translation>Tippe oder füge den zu verschlüsselnden Text ein</translation>
+    </message>
+    <message>
+        <source>Also encrypt to myself</source>
+        <translation>Auch an mich selbst verschlüsseln</translation>
+    </message>
+    <message>
+        <source>Keep the message readable for you</source>
+        <translation>Die Nachricht für dich lesbar halten</translation>
+    </message>
+    <message>
+        <source>Sign</source>
+        <translation>Signieren</translation>
+    </message>
+    <message>
+        <source>Sign with your key</source>
+        <translation>Mit deinem Schlüssel signieren</translation>
+    </message>
+    <message>
+        <source>No secret key available</source>
+        <translation>Kein geheimer Schlüssel verfügbar</translation>
+    </message>
+</context>
+<context>
+    <name>PgpHomePage</name>
+    <message>
+        <source>OpenPGP</source>
+        <translation>OpenPGP</translation>
+    </message>
+    <message>
+        <source>Decrypt / verify</source>
+        <translation>Entschlüsseln / Prüfen</translation>
+    </message>
+    <message>
+        <source>Paste a PGP block or open a .asc / .gpg file</source>
+        <translation>Füge einen PGP-Block ein oder öffne eine .asc-/.gpg-Datei</translation>
+    </message>
+    <message>
+        <source>Encrypt / sign</source>
+        <translation>Verschlüsseln / Signieren</translation>
+    </message>
+    <message>
+        <source>Write text and produce a PGP block to share</source>
+        <translation>Text schreiben und einen PGP-Block zum Teilen erzeugen</translation>
+    </message>
+    <message>
+        <source>Keys</source>
+        <translation>Schlüssel</translation>
+    </message>
+    <message>
+        <source>Import, list, export, delete</source>
+        <translation>Importieren, auflisten, exportieren, löschen</translation>
+    </message>
+    <message>
+        <source>Backend: GnuPG/GPGME %1
+Keyring: %2</source>
+        <translation>Backend: GnuPG/GPGME %1
+Schlüsselbund: %2</translation>
+    </message>
+    <message>
+        <source>PGP backend not available</source>
+        <translation>PGP-Backend nicht verfügbar</translation>
+    </message>
+</context>
+<context>
+    <name>PgpKeysPage</name>
+    <message>
+        <source>Imported %1 key(s)</source>
+        <translation>%1 Schlüssel importiert</translation>
+    </message>
+    <message>
+        <source>Import failed: %1</source>
+        <translation>Import fehlgeschlagen: %1</translation>
+    </message>
+    <message>
+        <source>Key deleted</source>
+        <translation>Schlüssel gelöscht</translation>
+    </message>
+    <message>
+        <source>Delete failed: %1</source>
+        <translation>Löschen fehlgeschlagen: %1</translation>
+    </message>
+    <message>
+        <source>Import PGP key</source>
+        <translation>PGP-Schlüssel importieren</translation>
+    </message>
+    <message>
+        <source>PGP Keys</source>
+        <translation>PGP-Schlüssel</translation>
+    </message>
+    <message>
+        <source>Private keyring: %1</source>
+        <translation>Privater Schlüsselbund: %1</translation>
+    </message>
+    <message>
+        <source>Import key…</source>
+        <translation>Schlüssel importieren…</translation>
+    </message>
+    <message>
+        <source>Show / export public key</source>
+        <translation>Öffentlichen Schlüssel anzeigen / exportieren</translation>
+    </message>
+    <message>
+        <source>Public key</source>
+        <translation>Öffentlicher Schlüssel</translation>
+    </message>
+    <message>
+        <source>Delete key (incl. secret)</source>
+        <translation>Schlüssel löschen (inkl. geheimem)</translation>
+    </message>
+    <message>
+        <source>Delete key</source>
+        <translation>Schlüssel löschen</translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation>Lösche</translation>
+    </message>
+    <message>
+        <source>private</source>
+        <translation>privat</translation>
+    </message>
+    <message>
+        <source>expired</source>
+        <translation>abgelaufen</translation>
+    </message>
+    <message>
+        <source>No keys</source>
+        <translation>Keine Schlüssel</translation>
+    </message>
+    <message>
+        <source>Import a key with the pull-down menu</source>
+        <translation>Schlüssel über das Pulley-Menü importieren</translation>
+    </message>
+</context>
+<context>
+    <name>PgpPassphraseDialog</name>
+    <message>
+        <source>PGP passphrase</source>
+        <translation>PGP-Passphrase</translation>
+    </message>
+    <message>
+        <source>Wrong passphrase, try again:</source>
+        <translation>Falsche Passphrase, nochmal:</translation>
+    </message>
+    <message>
+        <source>Enter the passphrase for:</source>
+        <translation>Passphrase eingeben für:</translation>
+    </message>
+</context>
+<context>
+    <name>PgpRecipientPage</name>
+    <message>
+        <source>Encrypt to…</source>
+        <translation>Verschlüsseln an…</translation>
+    </message>
+    <message>
+        <source>Sign as</source>
+        <translation>Signieren als</translation>
+    </message>
+    <message>
+        <source>Also sign</source>
+        <translation>Auch signieren</translation>
+    </message>
+    <message>
+        <source>Recipients</source>
+        <translation>Empfänger</translation>
+    </message>
+    <message>
+        <source>No public keys</source>
+        <translation>Keine öffentlichen Schlüssel</translation>
+    </message>
+    <message>
+        <source>Import recipient keys first</source>
+        <translation>Erst Empfänger-Schlüssel importieren</translation>
+    </message>
+</context>
+<context>
+    <name>PgpTextPage</name>
+    <message>
+        <source>Copy to clipboard</source>
+        <translation>In Zwischenablage kopieren</translation>
     </message>
 </context>
 <context>
@@ -1616,11 +1931,11 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
     <message>
         <source>Delete certificate + private key</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Delete certificate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Deleting certificate</source>
@@ -1686,6 +2001,14 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>It is passphrase-protected but lies outside the app sandbox — copy it off-device and then delete it from the phone.</source>
         <translation>Sie ist passphrase-geschützt, liegt aber außerhalb der App-Sandbox — kopiere sie vom Gerät weg und lösche sie dann vom Telefon.</translation>
     </message>
+    <message>
+        <source>Do not prefer for encryption any more</source>
+        <translation>Nicht mehr zum Verschlüsseln bevorzugen</translation>
+    </message>
+    <message>
+        <source>Prefer for encryption</source>
+        <translation>Zum Verschlüsseln bevorzugen</translation>
+    </message>
 </context>
 <context>
     <name>SmimeInfoPage</name>
@@ -1695,19 +2018,19 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
     <message>
         <source>You (your certificate — decryptable)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Recipient (cert not in your store)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Other recipient</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Copy all to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Format</source>
@@ -1715,15 +2038,15 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
     <message>
         <source>No encryption</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>This message is not encrypted.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Encrypted to %1 certificate(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>(no subject)</source>
@@ -1731,27 +2054,27 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
     <message>
         <source>Key usage: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Signature certificate(s): %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>issued by: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Debug</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Hide debug info</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>Show debug info</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
