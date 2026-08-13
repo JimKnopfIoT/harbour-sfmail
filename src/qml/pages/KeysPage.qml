@@ -50,6 +50,14 @@ Page {
 
     ListModel { id: keyModel }
 
+    // Page-level, so it outlives the row it was started from: a RemorseItem
+    // lives inside its delegate and Silica executes it when that delegate is
+    // destroyed (RemorseItem.qml, Component.onDestruction). Deleting one entry
+    // rebuilds the list under its neighbours, whose still-running countdowns
+    // then fire — including ones the user had tapped to cancel.
+    RemorsePopup { id: remorse }
+
+
     Component {
         id: keyPicker
         FilePickerPage {
@@ -159,8 +167,14 @@ Page {
                             acceptText: qsTr("Delete")
                         })
                         dlg.accepted.connect(function() {
-                            item.remorseAction(qsTr("Deleting"),
-                                               function() { Gpg.deleteKey(fpr, sec) })
+                            remorse.execute(qsTr("Deleting"), function() {
+                                if (page.status !== PageStatus.Active || !Qt.application.active) {
+                                    // Leaving the page aborts the countdown; Silica would
+                                    // otherwise run the action on PageStatus.Deactivating.
+                                    return
+                                }
+                                Gpg.deleteKey(fpr, sec)
+                            })
                         })
                     }
                 }

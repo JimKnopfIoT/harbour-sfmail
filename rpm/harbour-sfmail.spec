@@ -4,11 +4,11 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.5.1
+Version:    0.5.2
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
-URL:        https://github.com/
+URL:        https://github.com/JimKnopfIoT/harbour-sfmail
 Source0:    %{name}-%{version}.tar.bz2
 
 BuildRequires:  pkgconfig(Qt5Core)
@@ -154,3 +154,14 @@ fi
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
+
+%changelog
+* Thu Aug 13 2026 harbour-sfmail contributors 0.5.2-1
+- Cancelling a delete now cancels it. The countdown lived inside the message
+  row, and Silica runs such a timer when its row is destroyed - deleting one
+  message rebuilt the list and fired the neighbour's still-running countdown,
+  including one the user had tapped to cancel. Deleting runs off a page-level
+  timer now, and leaving the page aborts instead of deleting.
+- Messages can be moved between folders, in every folder rather than only in
+  Trash: from a message's context menu, from the reader, and for a whole
+  selection at once. Until now a message could be deleted but not put back.

@@ -40,6 +40,84 @@ Page {
     function _enterSelect() { messageModel.deselectAllMessages(); page._selectMode = true }
     function _exitSelect()  { messageModel.deselectAllMessages(); page._selectMode = false }
 
+    // Deleting a single row runs through the page's RemorsePopup, never through
+    // a RemorseItem inside the delegate. A RemorseItem is a child of its row,
+    // and Silica executes a running one when that child is destroyed
+    // (RemorseItem.qml, Component.onDestruction). Deleting one message rebuilds
+    // the list, so the neighbour's countdown was torn down together with its row
+    // and fired on the way out — that is how a delete the user had tapped to
+    // cancel went through anyway. Reproduced on the Gemini: both touched mails
+    // ended up in Trash, one of them against an explicit cancel.
+    //
+    // A page-level popup has only one slot, so the ids are collected instead of
+    // overwriting each other: a second delete during a running countdown would
+    // otherwise silently drop the first. Cancel drops the whole batch, which is
+    // what the bar says ("Deleting 3").
+    property var _pendingDeletes: []
+
+    // Moving, offered in every folder rather than only in Trash. Until now the
+    // app could delete a message but not put it back, so an accidental delete
+    // was final as far as this app was concerned.
+    //
+    // No remorse on a move: it is reversible by moving back, and the row action
+    // already sits behind a context menu.
+    //
+    // The account comes from the message, not from the page: in the combined
+    // inbox page.accountId is 0, and the folder list needs a real account.
+    function _moveMessage(mid) {
+        var acc = emailAgent.accountIdForMessage(mid)
+        var picker = pageStack.push(
+                    Qt.resolvedUrl("FolderPickerPage.qml"),
+                    { accountId: acc > 0 ? acc : page.accountId,
+                      excludeFolderId: emailAgent.folderIdForMessage(mid) })
+        picker.folderPicked.connect(function(folderId) {
+            emailAgent.moveMessage(mid, folderId)
+        })
+    }
+
+    // The batch move needs one account for the folder list, so it is only
+    // offered where the page knows one.
+    function _moveSelected() {
+        var picker = pageStack.push(
+                    Qt.resolvedUrl("FolderPickerPage.qml"),
+                    { accountId: page.accountId,
+                      excludeFolderId: page.folderId,
+                      messageCount: messageModel.selectedMessageCount })
+        picker.folderPicked.connect(function(folderId) {
+            messageModel.moveSelectedMessages(folderId)
+            // Same reasoning as the batch delete: do not call _exitSelect(),
+            // whose extra deselectAllMessages() touches the selection model
+            // right after the native call reorganised it.
+            page._selectMode = false
+        })
+    }
+
+    function _queueDelete(mid) {
+        var ids = page._pendingDeletes.slice()
+        ids.push(mid)
+        page._pendingDeletes = ids
+        remorse.execute(ids.length > 1 ? qsTr("Deleting %1").arg(ids.length)
+                                       : qsTr("Deleting"),
+                        function() {
+                            var pending = page._pendingDeletes
+                            page._pendingDeletes = []
+                            // Two ways out, both of which must abort rather
+                            // than commit. Leaving the page: Silica runs a
+                            // remorse on PageStatus.Deactivating. Leaving the
+                            // app: the page is destroyed without ever going
+                            // through Deactivating, and minimising does not
+                            // change the page at all - the countdown would just
+                            // run out behind the user's back. Both were
+                            // reproduced on the Gemini.
+                            if (page.status !== PageStatus.Active || !Qt.application.active) {
+                                return
+                            }
+                            for (var i = 0; i < pending.length; ++i) {
+                                emailAgent.deleteMessage(pending[i])
+                            }
+                        })
+    }
+
     onStatusChanged: {
         if (status === PageStatus.Active && attachFolders && !_foldersAttached) {
             var acc = accountId > 0 ? accountId : pendingAccountId
@@ -127,12 +205,32 @@ Page {
                 }
             }
             MenuItem {
+                visible: page._selectMode && page.accountId > 0
+                enabled: messageModel.selectedMessageCount > 0
+                text: qsTr("Move selected…")
+                onClicked: page._moveSelected()
+            }
+            MenuItem {
                 visible: page._selectMode
                 enabled: messageModel.selectedMessageCount > 0
                 text: qsTr("Delete selected")
                 onClicked: {
                     var n = messageModel.selectedMessageCount
                     remorse.execute(qsTr("Deleting %1").arg(n), function() {
+                        // This execute() replaced whatever single-row deletes
+                        // were queued on the same popup; drop them rather than
+                        // letting them ride along with a later delete.
+                        page._pendingDeletes = []
+                        // Leaving the page aborts the countdown. Silica does
+                        // the opposite by design — RemorsePopup.qml executes
+                        // the action on PageStatus.Deactivating ("if the page
+                        // is changed then execute immediately") — so going
+                        // back to the account overview mid-countdown used to
+                        // delete the mails instead of sparing them. Only the
+                        // swipe on the remorse bar is meant to commit early.
+                        if (page.status !== PageStatus.Active || !Qt.application.active) {
+                            return
+                        }
                         messageModel.deleteSelectedMessages()
                         // deleteSelectedMessages() already clears the selection.
                         // Do NOT call _exitSelect() here: its extra
@@ -218,8 +316,14 @@ Page {
             }
         }
 
-        // Remorse for batch delete (a RemorsePopup covers the whole view).
-        RemorsePopup { id: remorse }
+        // Remorse for batch delete and for single-row deletes (a RemorsePopup
+        // covers the whole view and, unlike a per-row RemorseItem, outlives the
+        // rows — see _queueDelete above). Tapping it cancels, so the queued ids
+        // have to go with it.
+        RemorsePopup {
+            id: remorse
+            onCanceled: page._pendingDeletes = []
+        }
 
         onAtYEndChanged: if (atYEnd && messageModel.canFetchMore) messageModel.limit += 50
 
@@ -258,8 +362,7 @@ Page {
             function deleteMessage() {
                 // Just the remorse timer (with undo) — the extra confirm dialog
                 // was one tap too many.
-                var mid = model.messageId
-                item.remorseAction(qsTr("Deleting"), function() { emailAgent.deleteMessage(mid) })
+                page._queueDelete(model.messageId)
             }
 
             menu: ContextMenu {
@@ -277,6 +380,10 @@ Page {
                     text: model.readStatus ? qsTr("Mark as unread") : qsTr("Mark as read")
                     onClicked: model.readStatus ? emailAgent.markMessageAsUnread(model.messageId)
                                                 : emailAgent.markMessageAsRead(model.messageId)
+                }
+                MenuItem {
+                    text: qsTr("Move to folder…")
+                    onClicked: page._moveMessage(model.messageId)
                 }
                 MenuItem {
                     text: qsTr("Delete")

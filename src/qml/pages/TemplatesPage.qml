@@ -41,6 +41,10 @@ Page {
 
     ListModel { id: templateModel }
 
+    // Page-level, so it outlives the row it was started from — see
+    // removeTemplate() below.
+    RemorsePopup { id: remorse }
+
     onStatusChanged: if (status === PageStatus.Active) _reload()
 
     SilicaListView {
@@ -65,7 +69,19 @@ Page {
 
             function removeTemplate() {
                 var mid = model.id
-                item.remorseAction(qsTr("Deleting"), function() {
+                // Page-level, not per-row: a RemorseItem lives inside its
+                // delegate and Silica executes it when that delegate is
+                // destroyed (RemorseItem.qml, Component.onDestruction). One
+                // delete rebuilds the list, the neighbour's still-running
+                // countdown is torn down with its row and fires — which is
+                // how a "cancelled" delete went through anyway. A
+                // RemorsePopup hangs on the page and outlives the rows.
+                remorse.execute(qsTr("Deleting"), function() {
+                    if (page.status !== PageStatus.Active || !Qt.application.active) {
+                        // Leaving the page aborts the countdown; Silica would
+                        // otherwise run the action on PageStatus.Deactivating.
+                        return
+                    }
                     page._deleteTemplate(mid)
                 })
             }

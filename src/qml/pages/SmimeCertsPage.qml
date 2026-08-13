@@ -15,6 +15,14 @@ Page {
 
     property var _certTree: []
 
+    // Page-level, so it outlives the row it was started from: a RemorseItem
+    // lives inside its delegate and Silica executes it when that delegate is
+    // destroyed (RemorseItem.qml, Component.onDestruction). Deleting one entry
+    // rebuilds the list under its neighbours, whose still-running countdowns
+    // then fire — including ones the user had tapped to cancel.
+    RemorsePopup { id: remorse }
+
+
     // Deferred certificate generation: set the params, show the notice, then run on
     // a short timer so the "Generating…" line paints before the (blocking) openssl
     // key-gen + gpgsm import. (generateCert reuses the synchronous importP12 path.)
@@ -238,8 +246,14 @@ Page {
                                     acceptText: qsTr("Delete")
                                 })
                                 dlg.accepted.connect(function() {
-                                    certItem.remorseAction(qsTr("Deleting certificate"),
-                                                           function() { Smime.deleteCert(fpr) })
+                                    remorse.execute(qsTr("Deleting certificate"), function() {
+                                        if (page.status !== PageStatus.Active || !Qt.application.active) {
+                                            // Leaving the page aborts the countdown; Silica would
+                                            // otherwise run the action on PageStatus.Deactivating.
+                                            return
+                                        }
+                                        Smime.deleteCert(fpr)
+                                    })
                                 })
                             }
                         }
