@@ -40,3 +40,7 @@ stack/*.log
 #   * ossl-modules/legacy.so is the OpenSSL legacy provider, needed to read
 #     older .p12 files (RC2/3DES) on the S/MIME import path
 !stack/stage-*/**/*.so
+
+# Build artefacts (never ship)
+documentation.list
+*.qm

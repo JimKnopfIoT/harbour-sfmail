@@ -420,6 +420,57 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
 </context>
 <context>
+    <name>FolderPickerPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Posteingang</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Postausgang</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Gesendet</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Entwürfe</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Papierkorb</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Spam</translation>
+    </message>
+    <message>
+        <source>Templates</source>
+        <translation>Vorlagen</translation>
+    </message>
+    <message>
+        <source>(unnamed)</source>
+        <translation>(ohne Namen)</translation>
+    </message>
+    <message>
+        <source>Move to</source>
+        <translation>Verschieben nach</translation>
+    </message>
+    <message>
+        <source>%1 messages</source>
+        <translation>%1 Nachrichten</translation>
+    </message>
+    <message>
+        <source>No folders</source>
+        <translation>Keine Ordner</translation>
+    </message>
+    <message>
+        <source>Sync the account first, then the folders show up here.</source>
+        <translation>Synchronisiere zuerst das Konto, dann erscheinen hier die Ordner.</translation>
+    </message>
+</context>
+<context>
     <name>FoldersPage</name>
     <message>
         <source>Folders</source>
@@ -1055,6 +1106,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Add an account in the system settings first</source>
         <translation>Erst ein Konto in den Systemeinstellungen anlegen</translation>
     </message>
+    <message>
+        <source>Inbox</source>
+        <translation type="unfinished">Posteingang</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1181,6 +1236,14 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>(header only)</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move to folder…</source>
+        <translation>In Ordner verschieben…</translation>
+    </message>
+    <message>
+        <source>Move selected…</source>
+        <translation>Ausgewählte verschieben…</translation>
     </message>
 </context>
 <context>
@@ -1437,6 +1500,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Show simple HTML (no external content loaded)</source>
         <translation>Einfaches HTML anzeigen (keine externen Inhalte)</translation>
     </message>
+    <message>
+        <source>Move to folder…</source>
+        <translation>In Ordner verschieben…</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1557,7 +1624,7 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
     <message>
         <source>Deleting certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösche Zertifikat</translation>
     </message>
     <message>
         <source>Generate new certificate…</source>

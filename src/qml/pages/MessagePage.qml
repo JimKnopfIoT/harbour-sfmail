@@ -585,8 +585,37 @@ Page {
                     // Just the remorse timer (with undo) — the extra confirm dialog
                     // was one tap too many.
                     var mid = page.messageId
-                    remorsePopup.execute(qsTr("Deleting message"),
-                                         function() { emailAgent.deleteMessage(mid); pageStack.pop() })
+                    remorsePopup.execute(qsTr("Deleting message"), function() {
+                        if (page.status !== PageStatus.Active || !Qt.application.active) {
+                            // Leaving the page aborts the countdown; Silica would
+                            // otherwise run the action on PageStatus.Deactivating.
+                            return
+                        }
+                        emailAgent.deleteMessage(mid)
+                        pageStack.pop()
+                    })
+                }
+            }
+            MenuItem {
+                // No remorse: a move is undone by moving back, unlike a delete.
+                // The account comes from the message so this also works when the
+                // reader was opened from the combined inbox.
+                text: qsTr("Move to folder…")
+                onClicked: {
+                    var mid = page.messageId
+                    var acc = emailAgent.accountIdForMessage(mid)
+                    var picker = pageStack.push(
+                                Qt.resolvedUrl("FolderPickerPage.qml"),
+                                { accountId: acc,
+                                  excludeFolderId: emailAgent.folderIdForMessage(mid) })
+                    picker.folderPicked.connect(function(folderId) {
+                        emailAgent.moveMessage(mid, folderId)
+                        if (pageStack.currentPage === page) {
+                            // The message is no longer in the folder behind this
+                            // page, so do not leave the reader sitting on it.
+                            pageStack.pop()
+                        }
+                    })
                 }
             }
             MenuItem {
