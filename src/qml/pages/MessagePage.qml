@@ -12,6 +12,20 @@ Page {
     allowedOrientations: defaultAllowedOrientations
 
     property int messageId: 0
+
+    // Leaving the foreground aborts a running countdown at once, instead of only
+    // suppressing it when it expires. Suppressing at expiry was not enough:
+    // minimising the app and coming back inside the four seconds left the
+    // countdown running, and it fired in the user's face on return (measured on
+    // the Gemini). Cancelling here makes the bar disappear the moment the app
+    // goes away, so nothing is counting when the user comes back.
+    readonly property bool appForeground: Qt.application.active
+    onAppForegroundChanged: {
+        if (!appForeground && remorsePopup.pending) {
+            remorsePopup.cancel()
+        }
+    }
+
     // Inline-PGP (nicht PGP/MIME) wird vom nativen Pfad nicht erkannt — wir
     // entschlüsseln/prüfen den Body dann selbst über das gpg2-Plugin.
     property string _inlinePlain: ""

@@ -55,6 +55,20 @@ Page {
     // what the bar says ("Deleting 3").
     property var _pendingDeletes: []
 
+    // Leaving the foreground aborts a running countdown at once, instead of only
+    // suppressing it when it expires. Suppressing at expiry was not enough:
+    // minimising the app and coming back inside the four seconds left the
+    // countdown running, and it fired in the user's face on return (measured on
+    // the Gemini). Cancelling here makes the bar disappear the moment the app
+    // goes away, so nothing is counting when the user comes back.
+    readonly property bool appForeground: Qt.application.active
+    onAppForegroundChanged: {
+        if (!appForeground && remorse.pending) {
+            remorse.cancel()
+        }
+    }
+
+
     // Moving, offered in every folder rather than only in Trash. Until now the
     // app could delete a message but not put it back, so an accidental delete
     // was final as far as this app was concerned.

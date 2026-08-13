@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.5.2
+Version:    0.5.3
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -156,6 +156,11 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Thu Aug 13 2026 harbour-sfmail contributors 0.5.3-1
+- Minimising the app now aborts a running delete countdown outright. 0.5.2 only
+  suppressed the delete if the countdown expired while the app was away, so
+  going out and coming back inside the four seconds still deleted.
+
 * Thu Aug 13 2026 harbour-sfmail contributors 0.5.2-1
 - Cancelling a delete now cancels it. The countdown lived inside the message
   row, and Silica runs such a timer when its row is destroyed - deleting one
