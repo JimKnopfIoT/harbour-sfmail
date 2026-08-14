@@ -1,0 +1,13 @@
+prefix=/usr/share/harbour-sfmail-pgp
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+api_version=1
+host=armv7l-unknown-linux-gnueabihf
+
+Name: npth
+Description: New GNU Portable Threads Library
+Version: 1.8
+Libs: -L${libdir} -lnpth  -lpthread 
+Cflags: -I${includedir} 
+URL: https://www.gnupg.org/software/npth/index.html

@@ -2,13 +2,7 @@
 
 ![harbour-sfmail](icon/preview-256.png)
 
-> ⚠️ **PROOF OF CONCEPT / WORK IN PROGRESS — USE AT YOUR OWN RISK.**
-> Provided **AS IS**, **without any warranty** of any kind, express or implied.
-> No guarantee of correctness, security, fitness for any purpose or data safety.
-> It handles cryptographic keys and e-mail — you alone are responsible for any
-> use. See [`LICENSE`](LICENSE) for the full no-warranty terms (GPL-3.0).
-
-**SF-Mail** is a **security-friendly e-mail client** for **Sailfish OS** with **built-in OpenPGP and
+**SF-Mail** is an unofficial, **security-friendly e-mail client** for **Sailfish OS** with **built-in OpenPGP and
 S/MIME** — its goal is to make encrypted e-mail genuinely easy: encrypt, decrypt and sign mail
 (PGP/MIME, inline PGP *and* S/MIME), including encrypted attachments. Accounts, folders and messages
 come from the system mail database (QMF), so the app sits next to the stock mail app and shares its

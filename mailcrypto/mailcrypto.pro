@@ -10,9 +10,9 @@ QT -= gui
 # finds their inter-dependencies via our rpath — keep --disable-new-dtags so we
 # emit DT_RPATH, not DT_RUNPATH).
 equals(QT_ARCH, arm) {
-    STACK_STAGE = $$PWD/../stack/stage-armv7hl
+    STACK_STAGE = $$PWD/../stack/stage-modern-armv7hl
 } else {
-    STACK_STAGE = $$PWD/../stack/stage-aarch64
+    STACK_STAGE = $$PWD/../stack/stage-modern-aarch64
 }
 INCLUDEPATH += $$STACK_STAGE/usr/share/harbour-sfmail-pgp/include
 # GPGME was cross-built with large-file support; on 32-bit ARM its header
@@ -41,8 +41,19 @@ QMAKE_CXXFLAGS += -ffile-prefix-map=$$absolute_path($$PWD/..)=.
 SOURCES += \
     GpgEngine.cpp \
     SmimeEngine.cpp \
-    plugin.cpp \
-    qmf_abi_compat.cpp
+    plugin.cpp
+
+# The QMF ABI shim exists for builds against the 5.0/4.6 SDKs, whose libQmfClient
+# headers still carry the QPrivatelyImplemented<> templates (the 5.1 device lib
+# stopped exporting their weak destructors — see qmf_abi_compat.cpp). The 5.1 SDK
+# removed those templates entirely, so there the shim neither compiles nor is it
+# needed. pkg-config reports "5.0.0" in BOTH SDKs, so detect by header content.
+HAVE_QMF_PIMPL = $$system(grep -sl QPrivatelyImplemented /usr/include/qt5/QmfClient/qmailmessage.h)
+!isEmpty(HAVE_QMF_PIMPL) {
+    SOURCES += qmf_abi_compat.cpp
+} else {
+    message("QMF without QPrivatelyImplemented — building WITHOUT qmf_abi_compat.cpp")
+}
 
 HEADERS += \
     GpgEngine.h \

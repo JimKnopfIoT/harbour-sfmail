@@ -1,7 +1,11 @@
 #include "emailui.h"
 
 #include <QDBusConnection>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
 #include <QQuickView>
+#include <QStandardPaths>
 #include <QUrl>
 #include <QUrlQuery>
 
@@ -14,12 +18,62 @@ EmailUi::EmailUi(QQuickView *view, QObject *parent)
     : QObject(parent)
     , m_view(view)
     , m_ready(false)
+    , m_owned(false)
 {
     new EmailUiAdaptor(this);
 }
 
+QString EmailUi::statePath()
+{
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+           + QStringLiteral("/notification-takeover");
+}
+
+bool EmailUi::takeoverEnabled() const
+{
+    QFile f(statePath());
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
+        return true;    // absent = ON: taking the notifications over is this app's
+                        // long-standing default (0.5.1); the switch is the opt-out
+    return f.readAll().trimmed() != QByteArray("0");
+}
+
+void EmailUi::setTakeoverEnabled(bool on)
+{
+    const QString path = statePath();
+    QDir().mkpath(QFileInfo(path).absolutePath());
+    QFile f(path);
+    if (f.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)) {
+        f.write(on ? "1\n" : "0\n");
+        f.close();
+    } else {
+        qWarning("[sfmail][dbus] cannot write %s — the switch will not survive a "
+                 "restart and the dispatcher keeps handing back", qPrintable(path));
+    }
+
+    // Act on it immediately, so the switch means something without a restart.
+    if (on) {
+        registerService();          // may fail: the other client still holds it
+    } else if (m_owned) {
+        QDBusConnection bus = QDBusConnection::sessionBus();
+        bus.unregisterService(ServiceName);
+        bus.unregisterObject(ObjectPath);
+        m_owned = false;
+        qDebug("[sfmail][dbus] released %s", qPrintable(ServiceName));
+    }
+    emit takeoverChanged();
+}
+
 bool EmailUi::registerService()
 {
+    if (!takeoverEnabled()) {
+        // The user opted out (About → System): hand the notifications back to
+        // whichever client owned them before this package was installed.
+        qDebug("[sfmail][dbus] notification hand-off is off — not claiming %s",
+               qPrintable(ServiceName));
+        return false;
+    }
+
     QDBusConnection bus = QDBusConnection::sessionBus();
     if (!bus.isConnected()) {
         qWarning("[sfmail][dbus] no session bus — notification hand-off disabled");
@@ -33,14 +87,18 @@ bool EmailUi::registerService()
         return false;
     }
     if (!bus.registerService(ServiceName)) {
-        // Someone else has it — in practice the stock client is running. Nothing
-        // is broken, notifications just keep going there.
+        // Someone else has it — in practice the stock client or the productive
+        // harbour-sfmail is running. Nothing is broken, notifications just keep
+        // going there; the About page reports the difference between "switched
+        // on" and "actually holding it".
         qWarning("[sfmail][dbus] %s already owned — notifications stay with the "
-                 "stock client", qPrintable(ServiceName));
+                 "other client", qPrintable(ServiceName));
         bus.unregisterObject(ObjectPath);
+        m_owned = false;
         return false;
     }
     qDebug("[sfmail][dbus] owning %s", qPrintable(ServiceName));
+    m_owned = true;
     return true;
 }
 

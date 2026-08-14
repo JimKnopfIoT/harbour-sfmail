@@ -1,0 +1,42 @@
+#!/bin/sh
+# Switchboard for com.jolla.email.ui — runs on every D-Bus activation of the mail
+# UI (a tapped "new mail" banner with nobody holding the name, a mailto: link,
+# "share via email") and decides on the spot who gets it.
+#
+# Why a script instead of just pointing the service file at us: the hand-off has
+# two levels. Owning the bus name at runtime is something the app can take and
+# give back by itself, but WHICH PROGRAM GETS STARTED when neither is running is
+# decided by /usr/share/dbus-1/services/com.jolla.email.ui.service — a root-owned
+# file the Sailjail sandbox cannot write. The obvious alternative, a per-user
+# service file under ~/.local/share/dbus-1/services (which outranks /usr/share),
+# is out as well: no sailjail permission whitelists that directory, so it does
+# not even exist inside our sandbox. Hence this indirection — the service file
+# points here once, and the decision moves into a marker file the app CAN write,
+# inside its own data directory.
+#
+# Marker: <data>/sfmail/harbour-sfmail/notification-takeover
+#   "0" → whoever had it before us,  anything else or ABSENT → SF-Mail.
+# Absent means "ours" ON PURPOSE — the opposite of the experimental sibling:
+# taking the notifications over has been this package's behaviour since 0.5.1,
+# and an update must not silently change where a notification tap goes. The
+# switch (About → System) is the opt-out.
+
+[ -n "$HOME" ] || HOME=$(awk -F: -v u="$(id -u)" '$3==u{print $6; exit}' /etc/passwd)
+
+STATE="${XDG_DATA_HOME:-$HOME/.local/share}/sfmail/harbour-sfmail/notification-takeover"
+# The state of the world as it was when this package was installed — normally the
+# stock client. We hand back to whatever it was, rather than assuming jolla-email.
+PREVIOUS=/usr/share/dbus-1/services/com.jolla.email.ui.service.sfmail-orig
+
+if [ "$(cat "$STATE" 2>/dev/null)" = "0" ] && [ -r "$PREVIOUS" ]; then
+    # Start the previous owner exactly the way its own service file says —
+    # invoker/booster arguments included, which is why the line is copied rather
+    # than reinvented.
+    EXEC=$(sed -n 's/^[Ee]xec=//p' "$PREVIOUS" | head -n 1)
+    if [ -n "$EXEC" ]; then
+        exec /bin/sh -c "$EXEC"
+    fi
+fi
+
+# Marker absent, says "1", or the backup is unusable: SF-Mail it is.
+exec /usr/bin/sailjail -p harbour-sfmail.desktop /usr/bin/harbour-sfmail

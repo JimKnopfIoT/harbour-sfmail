@@ -98,6 +98,7 @@
 // sandbox (which hides other apps' /usr/share/<app>) can see it.
 static const char *kStackBin = "/usr/share/harbour-sfmail/gpg/bin";
 static const char *kGpg = "/usr/share/harbour-sfmail/gpg/bin/gpg";
+static const char *kGpgsm = "/usr/share/harbour-sfmail/gpg/bin/gpgsm";
 static const char *kLibDir = "/usr/share/harbour-sfmail/gpg/lib";
 static const char *kAgent = "/usr/share/harbour-sfmail/gpg/bin/gpg-agent";
 
@@ -164,6 +165,16 @@ GpgEngine::GpgEngine(QObject *parent) : QObject(parent)
     GpgME::setDefaultLocale(LC_CTYPE, setlocale(LC_CTYPE, nullptr));
     const QByteArray homeUtf8 = home.toUtf8();
     gpgme_set_engine_info(GPGME_PROTOCOL_OpenPGP, kGpg, homeUtf8.constData());
+    // Same pin for the CMS branch — the counterpart was forgotten when OpenPGP
+    // got fixed (0.5.0): without it gpgme keeps the compiled-in -pgp prefix for
+    // gpgsm (absent on the device) and every touch of GPGME_PROTOCOL_CMS logs
+    // "gpgsm version 1.0.0 installed, but at least version 2.0.4 required".
+    // SmimeEngine itself is unaffected (runs gpgsm via QProcess) — this fixes
+    // gpgme's view. Homedir = the S/MIME keystore, NOT the gnupg dir.
+    const QByteArray smimeHomeUtf8 =
+        (QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+         + QStringLiteral("/smime")).toUtf8();
+    gpgme_set_engine_info(GPGME_PROTOCOL_CMS, kGpgsm, smimeHomeUtf8.constData());
     m_available = QFileInfo::exists(QString::fromUtf8(kGpg))
                   && !GpgME::checkEngine(GpgME::OpenPGP);
     qWarning() << "[gpg] gpgme++" << GPGMEPP_VERSION_STRING << "engine" << kGpg
@@ -450,8 +461,10 @@ QString GpgEngine::exportSecretKey(const QString &fingerprint, const QString &pa
     if (!ctx) return QString();
     GpgME::Data out;
     QString result;
-    const GpgME::Error err = ctx->exportPublicKeys(fingerprint.toUtf8().constData(),
-                                                   out, GpgME::Context::ExportSecret);
+    // exportPublicKeys() REJECTS ExportSecret with GPG_ERR_INV_FLAG (gpgme 1.18
+    // context.cpp:635) — secret export has its own entry point. Broken since the
+    // 0.5.0 GPGME port, found 2026-08-14 in the experimental tree.
+    const GpgME::Error err = ctx->exportSecretKeys(fingerprint.toUtf8().constData(), out);
     if (!err) result = QString::fromUtf8(dataToBytes(out));
     else qWarning() << "[gpg] export-secret failed:" << gpgErrString(err);
     return result;
