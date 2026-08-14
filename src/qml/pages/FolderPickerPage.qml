@@ -1,6 +1,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import Nemo.Email 0.1
+import "../agent"
 
 // Pick the target folder for a move. Read-only towards the server, exactly like
 // FoldersPage: this lists folders and reports the chosen one, it never creates,
@@ -39,7 +40,11 @@ Page {
         }
     }
 
-    EmailAgent { id: emailAgent }
+    // One shared, process-wide agent (see qml/agent/MailAgent.qml). Declaring an
+    // EmailAgent per page hijacks the plugin's internal singleton pointer and
+    // leaves it dangling when the page is destroyed — that is the delete crash.
+    // The property keeps the old name so every emailAgent.* call below is unchanged.
+    property var emailAgent: MailAgent
 
     FolderListModel {
         id: folderModel

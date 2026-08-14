@@ -4,6 +4,7 @@ import Sailfish.Pickers 1.0
 import Nemo.Email 0.1
 import SFMail.Gpg 1.0
 import "RecipientRoles.js" as Roles
+import "../agent"
 
 // Einzelne Nachricht lesen. PGP/MIME wird vom nativen QMF-Krypto-Backend
 // erkannt: Signaturstatus + Verschlüsselung werden angezeigt, mit Buttons zum
@@ -57,16 +58,37 @@ Page {
     property int _pendingKeyIndex: -1   // attachment index to import once downloaded
     property string _topNotice: ""      // transient info line at the top
     property bool _oversized: false     // decrypt hit the size cap (offer lift)
+    // Cached copies of the body getters — reading them is NOT free.
+    // EmailMessage::body() / htmlBody() are non-const getters: when the plain-text
+    // container is not fully local they start a server fetch themselves
+    // (emailmessage.cpp → requestMessageDownload()). For a PGP/MIME mail that is
+    // ALWAYS the case, because the readable text sits inside the encrypted part —
+    // so every binding that touched message.body produced one pointless
+    // "retrieve messages" round trip. Those failed with "Unable to retrieve
+    // messages for unconfigured account" and, worse, queued up behind the agent's
+    // serial action queue (that is the error that showed up ~10 s after sending).
+    // Read once, hand the value to every binding, and never touch it for encrypted
+    // mail — there the plain text comes from our own decryption anyway.
+    property string _body: ""
+    property string _html: ""
+    function _syncBody() {
+        if (message.encryptionStatus === EmailMessage.Encrypted) {
+            page._body = ""; page._html = ""; return
+        }
+        page._body = message.body
+        page._html = message.htmlBody
+    }
+
     // "Simple HTML" view (by request): render the HTML body WITHOUT loading any
     // external content (remote images/scripts are tracking vectors). Off by default;
     // only offered for plain (unencrypted) HTML mails.
     property bool _showHtml: false
-    readonly property bool _hasHtml: !_isEncrypted && message.htmlBody !== ""
-                                     && ("" + message.htmlBody).indexOf("<") >= 0
+    readonly property bool _hasHtml: !_isEncrypted && page._html !== ""
+                                     && ("" + page._html).indexOf("<") >= 0
     // Signature result from OUR decryption ("Good signature from…", "Signed, but…").
     property string _sigResult: ""
-    readonly property bool _bodyHasPgp: message.body.indexOf("-----BEGIN PGP MESSAGE-----") >= 0
-    readonly property bool _bodyHasSignedBlock: message.body.indexOf("-----BEGIN PGP SIGNED MESSAGE-----") >= 0
+    readonly property bool _bodyHasPgp: page._body.indexOf("-----BEGIN PGP MESSAGE-----") >= 0
+    readonly property bool _bodyHasSignedBlock: page._body.indexOf("-----BEGIN PGP SIGNED MESSAGE-----") >= 0
     // "encrypted in any way" = native PGP/MIME OR an inline ciphertext block.
     readonly property bool _isEncrypted: message.encryptionStatus === EmailMessage.Encrypted || _bodyHasPgp
     // We have decrypted content available.
@@ -78,7 +100,7 @@ Page {
     readonly property bool _hasImportableKey: {
         var KEYHDR = "-----BEGIN PGP PUBLIC KEY BLOCK-----"
         if (page._inlinePlain && page._inlinePlain.indexOf(KEYHDR) >= 0) return true
-        if (message.body && message.body.indexOf(KEYHDR) >= 0) return true
+        if (page._body && page._body.indexOf(KEYHDR) >= 0) return true
         for (var a = 0; a < page._mimeAttachments.length; ++a) {
             var nm = ("" + page._mimeAttachments[a].name).toLowerCase()
             var mt = ("" + page._mimeAttachments[a].mimeType).toLowerCase()
@@ -95,8 +117,13 @@ Page {
                                           || message.signatureStatus === EmailMessage.SignedExpired
                                           || message.signatureStatus === EmailMessage.SignedMissing
 
-    EmailAgent {
-        id: emailAgent
+    // One shared, process-wide agent (see qml/agent/MailAgent.qml). Declaring an
+    // EmailAgent per page hijacks the plugin's internal singleton pointer and
+    // leaves it dangling when the page is destroyed — that is the delete crash.
+    // The property keeps the old name so every emailAgent.* call below is unchanged.
+    property var emailAgent: MailAgent
+    Connections {
+        target: MailAgent
         // SFOS 4.6 has no EmailMessage.attachmentModel — we download the encrypted
         // part via EmailAgent.downloadAttachment() and get its file path here.
         onAttachmentPathChanged: {
@@ -247,9 +274,9 @@ Page {
         id: message
         messageId: page.messageId
         autoVerifySignature: true
-        onMessageDownloaded: { message.read = true; page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments() }
-        onStoredMessageChanged: { page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments() }
-        onInlinePartsDownloaded: { page._noteLoaded(); page._retryPending(); page._retryPendingKey(); page._loadPlainAttachments() }
+        onMessageDownloaded: { message.read = true; page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments() }
+        onStoredMessageChanged: { page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments() }
+        onInlinePartsDownloaded: { page._syncBody(); page._noteLoaded(); page._retryPending(); page._retryPendingKey(); page._loadPlainAttachments() }
     }
 
     // Feedback for "Download full message": if the download actually produced new
@@ -305,11 +332,12 @@ Page {
         // deleted from the server (a field data-loss report). contentAvailable() is a
         // metadata-only check → no GUI freeze. Safe for IMAP: a half-fetched message
         // (body but not attachments) is only PartialContentAvailable → still downloads.
+        page._syncBody()   // fill the cache before anything reads it
         var _ready = Gpg.contentAvailable(page.messageId)
-        var _needDl = !_ready && (message.body === "" || message.encryptionStatus === EmailMessage.Encrypted
+        var _needDl = !_ready && (page._body === "" || message.encryptionStatus === EmailMessage.Encrypted
                 || message.numberOfAttachments > 0)
         console.log("[diag] open mid=" + page.messageId + " atts=" + message.numberOfAttachments
-                + " bodyEmpty=" + (message.body === "") + " enc=" + message.encryptionStatus
+                + " bodyEmpty=" + (page._body === "") + " enc=" + message.encryptionStatus
                 + " hasModel=" + (!!message.attachmentModel) + " contentAvail=" + _ready
                 + " -> downloadMessage=" + _needDl)
         if (_needDl)
@@ -462,7 +490,7 @@ Page {
         // actual import happens only after the user confirms in KeyImportDialog.
         // 1) inline key block in the decrypted text or the outer body
         var fromAddr = "" + message.fromAddress
-        var texts = [page._inlinePlain, message.body]
+        var texts = [page._inlinePlain, page._body]
         for (var t = 0; t < texts.length; ++t) {
             if (texts[t] && texts[t].indexOf(KEYHDR) >= 0) {
                 Gpg.inspectKeyForImport(texts[t], fromAddr); return ""
@@ -721,7 +749,7 @@ Page {
                         page._ensureEncPart("inspect", "")        // PGP/MIME (lädt Teil ggf. nach)
                     } else if (page._bodyHasPgp) {
                         pageStack.push(Qt.resolvedUrl("CryptoInfoPage.qml"),
-                                       { info: Gpg.encryptionInfo(message.body),
+                                       { info: Gpg.encryptionInfo(page._body),
                                          senderEmail: ("" + message.fromAddress),
                                          visibleAddresses: page._infoRecipients(),
                                          importKey: function() { return page._importKeyFromMessage() } })  // inline PGP
@@ -926,9 +954,9 @@ Page {
                             if (page._bodyHasPgp) {
                                 var dlg = pageStack.push(Qt.resolvedUrl("PassphraseDialog.qml"),
                                                          { info: qsTr("To decrypt this message") })
-                                dlg.accepted.connect(function() { Gpg.decryptText(message.body, dlg.passphrase) })
+                                dlg.accepted.connect(function() { Gpg.decryptText(page._body, dlg.passphrase) })
                             } else {
-                                Gpg.decryptText(message.body, "")  // signature only — no passphrase
+                                Gpg.decryptText(page._body, "")  // signature only — no passphrase
                             }
                         }
                     }
@@ -1011,11 +1039,11 @@ Page {
                 wrapMode: Text.Wrap
                 textFormat: (page._showHtml && page._hasHtml) ? Text.RichText : Text.PlainText
                 text: (page._showHtml && page._hasHtml)
-                      ? page._simpleHtml(message.htmlBody)
+                      ? page._simpleHtml(page._html)
                       : page._smimePlain !== "" ? page._smimePlain
                         : page._inlinePlain !== "" ? page._inlinePlain
-                        : message.body !== "" ? message.body
-                        : page._hasHtml ? page._htmlToText(message.htmlBody)
+                        : page._body !== "" ? page._body
+                        : page._hasHtml ? page._htmlToText(page._html)
                         : qsTr("(empty — pull down to download)")
                 color: Theme.primaryColor
                 // HTML uses our readable base size (the mail's own tiny sizes were

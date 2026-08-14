@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.6.9
+Version:    0.7.1
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -156,6 +156,24 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Fri Aug 14 2026 harbour-sfmail contributors 0.7.1-1
+- Fixed the crash that could take the app down after reading a message. Deleting
+  several messages right after opening one killed the app at the end of the
+  countdown, and the messages were still there afterwards - it never got as far
+  as deleting them. The cause was ours: EmailAgent looks like an ordinary QML
+  element, but the mail plugin keeps a single internal pointer to it that every
+  constructor overwrites and no destructor clears. The app created one per page,
+  so closing a page left that pointer aimed at freed memory, and the next
+  operation that used it walked a dead queue. There is now exactly one agent for
+  the whole app, created once and never destroyed. The same fault is the likely
+  cause of the occasional crashes after sending or when marking all as read.
+- Opening a message no longer asks the server for something it already has. The
+  body getters fetch on their own when the plain-text part is not fully local,
+  which for encrypted mail is always - the readable text sits inside the
+  encrypted part. Every binding that read the body produced one pointless
+  request, which then queued up behind sending. The body is read once now, and
+  not at all for encrypted mail.
+
 * Fri Aug 14 2026 harbour-sfmail contributors 0.6.9-1
 - Blind copies stay blind. One encrypted message names every recipient key in the
   clear (one packet per key in OpenPGP, one RecipientInfo per certificate in
