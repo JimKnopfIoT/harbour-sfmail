@@ -142,12 +142,13 @@ EOF
 }
 
 # --- Version pins -----------------------------------------------------------
-# EXPERIMENT (2026-08-14): the shipped stack sits on gnupg 2.2.43, upstream EOL
-# since 2024-12-31, and misses CVE-2025-68973 (out-of-bounds write in the ARMOR
-# parser — our most exposed code path, every inline block and encrypted.asc from
-# a stranger goes through it). This tree moves gpg and the crypto libraries to
-# the maintained branch and deliberately LEAVES GPGME AT 1.18, so the Qt 5.6
-# patch set below (and with it the 0.5.0 QGpgME port) stays untouched.
+# Since 0.8.0 (2026-08-14) this builds the maintained branch: the previous stack
+# sat on gnupg 2.2.43, upstream EOL since 2024-12-31, and missed CVE-2025-68973
+# (out-of-bounds write in the ARMOR parser — our most exposed code path, every
+# inline block and encrypted.asc from a stranger goes through it). gpg and the
+# crypto libraries move to the maintained line while GPGME deliberately STAYS AT
+# 1.18, so the Qt 5.6 patch set below (the 0.5.0 QGpgME port) stays untouched.
+# The 2.2 stack lives on in the legacy-gnupg2.2 branch.
 #
 # The one hard conflict, read out of both configure.ac files rather than guessed:
 #   gnupg 2.5.21 : NEED_LIBASSUAN_API=3, >= 3.0.0
