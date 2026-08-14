@@ -47,9 +47,13 @@ notifications go back to the stock client. The stock client itself is never
 modified, removed or disabled; it just no longer receives the tap while SF-Mail is
 installed. (If both are running, whichever claimed the name first keeps it.)
 
-**If you would rather not have this**, install **0.5.0** instead — it is unchanged
-and remains available under [Releases](../../releases). It has the same features
-otherwise; only the notification hand-off is missing.
+**If you would rather not have this**, **0.5.0** remains available under
+[Releases](../../releases) — it is the last version that leaves the notification
+target alone. Be aware of what you give up: it predates everything released since,
+including the fix that makes blind copies work at all (before 0.6.3 a blind
+recipient received a message encrypted to everyone but them, and could not open
+it), moving messages between folders, retrying a stuck outbox, and the S/MIME
+certificate selection.
 
 ## Blind copies and encrypted subjects (new in 0.6.9 — visible to your recipients)
 
