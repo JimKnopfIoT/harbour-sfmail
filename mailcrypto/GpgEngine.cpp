@@ -1575,6 +1575,27 @@ void GpgEngine::decryptMimeFile(const QString &pathOrUrl, const QString &passphr
     QList<MimeAttachment> atts;
     MimeBudget budget;
     budget.unlimited = sizeLimitLifted();
+
+    // Protected headers of the ENCRYPTED entity, if it carries any (see
+    // buildInnerMime). These are the recipients the sender put under the
+    // encryption — for a blind copy the only place the open recipients appear.
+    // Read from the top-level entity only, and only when it is marked as such.
+    m_lastProtectedHeaders.clear();
+    {
+        int sep = out.indexOf("\r\n\r\n"); int seplen = 4;
+        if (sep < 0) { sep = out.indexOf("\n\n"); seplen = 2; }
+        Q_UNUSED(seplen)
+        const QString h = unfoldHeaders(sep >= 0 ? out.left(sep) : out);
+        if (headerValue(h, QStringLiteral("content-type")).contains(QLatin1String("protected-headers"),
+                                                                   Qt::CaseInsensitive)) {
+            static const char *kKeys[] = { "from", "to", "cc", "subject", "date" };
+            for (const char *k : kKeys) {
+                const QString v = headerValue(h, QString::fromLatin1(k)).trimmed();
+                if (!v.isEmpty()) m_lastProtectedHeaders[QString::fromLatin1(k)] = v;
+            }
+        }
+    }
+
     walkMime(out, &text, &atts, 0, &budget);
     if (budget.truncated) {
         text.append(QStringLiteral("\n\n[Some content was skipped because it exceeded the size limit.]"));
@@ -1665,12 +1686,22 @@ static QByteArray toCrlf(const QByteArray &in)
 // Assemble the inner MIME entity that will be encrypted as a whole: the body
 // text plus every attachment. With no attachments it's a single text/plain
 // entity; otherwise multipart/mixed.
-static QByteArray buildInnerMime(const QString &bodyText, const QVariantList &attachments, qint64 stamp)
+// `protectedHeaders` are header lines placed INSIDE the entity that gets
+// encrypted (draft-autocrypt-lamps-protected-headers, "memory hole"): From, To,
+// Cc, Subject, Date. They travel under the encryption, so a blind copy can carry
+// the open recipients without the outer headers — from which QMF derives the SMTP
+// envelope — naming anyone. Recipients that implement the draft display them;
+// the parameter protected-headers="v1" is what marks the entity, and clients
+// that don't know it ignore the extra fields.
+static QByteArray buildInnerMime(const QString &bodyText, const QVariantList &attachments, qint64 stamp,
+                                 const QByteArray &protectedHeaders = QByteArray())
 {
     const QByteArray CRLF = "\r\n";
+    const QByteArray prot = protectedHeaders.isEmpty() ? QByteArray() : QByteArray("; protected-headers=\"v1\"");
     if (attachments.isEmpty()) {
         QByteArray m;
-        m += "Content-Type: text/plain; charset=utf-8" + CRLF;
+        m += "Content-Type: text/plain; charset=utf-8" + prot + CRLF;
+        m += protectedHeaders;
         m += "Content-Transfer-Encoding: 8bit" + CRLF;
         m += CRLF;
         m += toCrlf(bodyText.toUtf8());
@@ -1680,7 +1711,8 @@ static QByteArray buildInnerMime(const QString &bodyText, const QVariantList &at
 
     const QByteArray bnd = mimeBoundary();
     QByteArray m;
-    m += "Content-Type: multipart/mixed; boundary=\"" + bnd + "\"" + CRLF;
+    m += "Content-Type: multipart/mixed; boundary=\"" + bnd + "\"" + prot + CRLF;
+    m += protectedHeaders;
     m += "MIME-Version: 1.0" + CRLF;
     m += CRLF;
 
@@ -1724,24 +1756,85 @@ static QByteArray buildInnerMime(const QString &bodyText, const QVariantList &at
 
 void GpgEngine::sendPgpMime(int accountId, const QString &subject,
                             const QStringList &to, const QStringList &cc,
-                            const QStringList &bcc, const QString &bodyText,
+                            const QVariantList &blindCopies, const QString &bodyText,
                             const QVariantList &attachments,
                             const QStringList &recipientFingerprints,
                             const QString &signFingerprint, const QString &passphrase)
 {
-    if (recipientFingerprints.isEmpty()) {
+    const bool hasOpen = !to.isEmpty() || !cc.isEmpty();
+    if (hasOpen && recipientFingerprints.isEmpty()) {
         emit sendFinished(false, QStringLiteral("No recipient key — cannot encrypt."));
         return;
     }
-
-    // 1. Inner MIME entity → 2. encrypt it as a whole.
-    const qint64 stamp = QDateTime::currentMSecsSinceEpoch();
-    const QByteArray inner = buildInnerMime(bodyText, attachments, stamp);
-    QByteArray cipher;
-    QString err;
-    if (!encryptRaw(recipientFingerprints, inner, signFingerprint, passphrase, &cipher, &err)) {
-        emit sendFinished(false, err);
+    if (!hasOpen && blindCopies.isEmpty()) {
+        emit sendFinished(false, QStringLiteral("No recipient — nothing to send."));
         return;
+    }
+
+    // 1. Inner MIME entity, built ONCE — every copy carries the same content.
+    //    Its protected headers name the OPEN audience (To/Cc) in every copy, so a
+    //    blind recipient still learns whom the message went to, the way they would
+    //    with a classic single-message Bcc — while the open recipients' copies say
+    //    nothing they don't already know. Only the sender's own address and the
+    //    open recipients ever appear here; a blind address never does.
+    const QMailAccountId accIdForHdrs(static_cast<quint64>(accountId));
+    const QString fromAddr = QMailAccount(accIdForHdrs).fromAddress().toString();
+    QByteArray prot;
+    if (!fromAddr.isEmpty()) prot += "From: " + fromAddr.toUtf8() + "\r\n";
+    if (!to.isEmpty())       prot += "To: " + to.join(QStringLiteral(", ")).toUtf8() + "\r\n";
+    if (!cc.isEmpty())       prot += "Cc: " + cc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
+    if (!subject.isEmpty())  prot += "Subject: " + subject.toUtf8() + "\r\n";
+    prot += "Date: " + QMailTimeStamp::currentDateTime().toString().toUtf8() + "\r\n";
+
+    const qint64 stamp = QDateTime::currentMSecsSinceEpoch();
+    const QByteArray inner = buildInnerMime(bodyText, attachments, stamp, prot);
+
+    // 2. Encrypt it once per audience. Everyone named in one ciphertext can be
+    //    read off it (one PKESK packet per recipient key, key id in the clear),
+    //    so a blind copy only stays blind in a message of its own.
+    QVariantList copies;
+    QString err;
+    if (hasOpen) {
+        QByteArray cipher;
+        if (!encryptRaw(recipientFingerprints, inner, signFingerprint, passphrase, &cipher, &err)) {
+            emit sendFinished(false, err);
+            return;
+        }
+        QVariantMap c;
+        c[QStringLiteral("to")] = to;
+        c[QStringLiteral("cc")] = cc;
+        c[QStringLiteral("bcc")] = QStringList();   // never a Bcc header here
+        c[QStringLiteral("cipher")] = cipher;
+        copies.append(c);
+    }
+    for (const QVariant &bv : blindCopies) {
+        const QVariantMap b = bv.toMap();
+        const QString addr = b.value(QStringLiteral("address")).toString().trimmed();
+        const QStringList fprs = b.value(QStringLiteral("fprs")).toStringList();
+        if (addr.isEmpty() || fprs.isEmpty()) {
+            emit sendFinished(false, QStringLiteral("No key for blind copy recipient %1.").arg(addr));
+            return;
+        }
+        QByteArray cipher;
+        if (!encryptRaw(fprs, inner, signFingerprint, passphrase, &cipher, &err)) {
+            emit sendFinished(false, err);
+            return;
+        }
+        QVariantMap c;
+        // The blind copy is addressed TO its own recipient, and carries neither the
+        // open recipients (QMF builds the SMTP envelope from these headers — a real
+        // To: would deliver this copy to them a second time) nor a Bcc header.
+        // MEASURED, do not "fix" back: the conventional placeholder
+        // "To: undisclosed-recipients:;" got the message refused outright by the
+        // sending provider — 554 5.7.1 Spam message rejected, while the open copy
+        // of the very same send was accepted (14.08.2026, msg 12899). An opaque
+        // encrypted body plus a recipient-less To is a spam signature; addressing
+        // the recipient by name is what every other client does anyway.
+        c[QStringLiteral("to")] = QStringList(addr);
+        c[QStringLiteral("cc")] = QStringList();
+        c[QStringLiteral("bcc")] = QStringList();
+        c[QStringLiteral("cipher")] = cipher;
+        copies.append(c);
     }
 
     // 3. Build + store + transmit the message — but DEFERRED off the current
@@ -1755,9 +1848,10 @@ void GpgEngine::sendPgpMime(int accountId, const QString &subject,
     //    Posting it via a 0-timer lets the QML call return, the page transition
     //    finish and the engine render one clean frame; THEN the QMF work runs on
     //    an idle GUI-thread turn. Capture everything by value.
-    qWarning() << "[send] encrypted ok (" << cipher.size() << "bytes); deferring QMF build, accountId=" << accountId;
-    QTimer::singleShot(0, this, [this, accountId, subject, to, cc, bcc, cipher, attachments]() {
-        finishPgpMimeSend(accountId, subject, to, cc, bcc, cipher, !attachments.isEmpty());
+    qWarning() << "[send] encrypted ok (" << copies.size() << "message(s), "
+               << blindCopies.size() << "blind); deferring QMF build, accountId=" << accountId;
+    QTimer::singleShot(0, this, [this, accountId, subject, copies, attachments]() {
+        finishPgpMimeSend(accountId, subject, copies, !attachments.isEmpty());
     });
 }
 
@@ -1765,77 +1859,112 @@ void GpgEngine::sendPgpMime(int accountId, const QString &subject,
 // outer multipart/encrypted (RFC 3156) message, stores it in the outbox and
 // kicks off transmission. Must NOT run inline during a page transition.
 void GpgEngine::finishPgpMimeSend(int accountId, const QString &subject,
-                                  const QStringList &to, const QStringList &cc,
-                                  const QStringList &bcc, const QByteArray &cipher,
-                                  bool hasAttachments)
+                                  const QVariantList &copies, bool hasAttachments)
 {
     const QMailAccountId accId(static_cast<quint64>(accountId));
     QMailAccount account(accId);
     const QString fromAddr = account.fromAddress().toString();
-    qWarning() << "[send] building msg, account" << accountId << "from" << fromAddr;
+    qWarning() << "[send] building" << copies.size() << "message(s), account"
+               << accountId << "from" << fromAddr;
 
-    // Build the ENTIRE outer multipart/encrypted (RFC 3156) message as raw
-    // RFC 2822 bytes and parse it in ONE shot via fromRfc2822(). This avoids the
-    // incremental content-mutating QMF calls (setMessageType/setMultipartType/
-    // QMailMessagePart::fromData/appendPart) — one of which blocks the GUI thread
-    // forever on this device (confirmed: the first such call, setMessageType,
-    // never returns → Wayland freeze → app killed). fromRfc2822 parses content
-    // through a different code path; afterwards we only touch metadata.
-    const QByteArray boundary = mimeBoundary();
-    QByteArray rfc;
-    rfc += "From: " + fromAddr.toUtf8() + "\r\n";
-    rfc += "To: " + to.join(QStringLiteral(", ")).toUtf8() + "\r\n";
-    if (!cc.isEmpty())  rfc += "Cc: " + cc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
-    if (!bcc.isEmpty()) rfc += "Bcc: " + bcc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
-    rfc += "Subject: " + subject.toUtf8() + "\r\n";
-    rfc += "Date: " + QMailTimeStamp::currentDateTime().toString().toUtf8() + "\r\n";
-    // Message-ID: a bare, header-sparse mail scores higher with spam filters, so
-    // give it the standard headers a normal client emits. Domain from the sender;
-    // uniqueness from the timestamp + ciphertext size (no RNG needed).
-    QString fromDomain = fromAddr.section('@', 1).trimmed();
-    if (fromDomain.isEmpty()) fromDomain = QStringLiteral("localhost");
-    rfc += "Message-ID: <" + QByteArray::number(QDateTime::currentMSecsSinceEpoch())
-         + "." + QByteArray::number(cipher.size()) + "@" + fromDomain.toUtf8() + ">\r\n";
-    // No User-Agent: it is optional, and "harbour-sfmail" is a token no filter has
-    // ever seen, which makes every message from this app individually identifiable
-    // to content scoring. Dropped while chasing a provider-side 554 that hit only
-    // this client while other clients on the same account went through.
-    rfc += "MIME-Version: 1.0\r\n";
-    rfc += "Content-Type: multipart/encrypted; protocol=\"application/pgp-encrypted\";\r\n";
-    rfc += " boundary=\"" + boundary + "\"\r\n";
-    rfc += "\r\n";
-    rfc += "This is an OpenPGP/MIME encrypted message (RFC 3156).\r\n\r\n";
-    rfc += "--" + boundary + "\r\n";
-    rfc += "Content-Type: application/pgp-encrypted\r\n";
-    rfc += "Content-Description: PGP/MIME version identification\r\n\r\n";
-    rfc += "Version: 1\r\n\r\n";
-    rfc += "--" + boundary + "\r\n";
-    // No name/filename on the ciphertext part. QMF re-derives a part's Content-Type
-    // when fromRfc2822() parses our bytes, and it does so from the FILE EXTENSION:
-    // ".asc" became application/pgp-signature on SFOS 4.6 (libqmfclient git144) and
-    // text/plain; charset=utf-8 on 5.1 (git185) — same package, two devices, measured.
-    // The text/plain variant makes a multipart/encrypted whose ciphertext claims to
-    // be text, which content filters score as an obfuscated payload: the provider
-    // answered 554 for the 5.1 device while the identical mail from 4.6 arrived with
-    // a negative spam score. Without a name there is no extension to sniff, and the
-    // declared application/octet-stream (RFC 3156) has a chance to survive. Correcting
-    // it afterwards through QMF's own API is NOT an option — partAt() detaches the
-    // private impl and crashes in the ABI shim (tried, reproducible, see
-    // qmf_abi_compat.cpp). Neither name nor filename is required by RFC 3156.
-    rfc += "Content-Type: application/octet-stream\r\n";
-    rfc += "Content-Description: OpenPGP encrypted message\r\n";
-    rfc += "Content-Disposition: inline\r\n\r\n";
-    // gpg --armor emits LF-only line endings. Embedding it verbatim leaves bare
-    // <LF> bytes in the part body; strict SMTP servers (Postfix >=3.9 rejects
-    // bare LF by default since 2024, anti-SMTP-smuggling) reject the whole message
-    // with "521 5.5.2 … bare <LF> received" — and the bad bytes are stored, so
-    // even the native client can't send it. Normalize the ciphertext to CRLF.
-    const QByteArray cipherCrlf = toCrlf(cipher);
-    rfc += cipherCrlf;
-    if (!cipherCrlf.endsWith("\r\n")) rfc += "\r\n";
-    rfc += "--" + boundary + "--\r\n";
+    // One message per audience (see sendPgpMime). Each is stored on its own;
+    // the transmit at the end pushes the whole outbox in one go.
+    for (int ci = 0; ci < copies.size(); ++ci) {
+        const QVariantMap copy = copies.at(ci).toMap();
+        const QStringList to    = copy.value(QStringLiteral("to")).toStringList();
+        const QStringList cc    = copy.value(QStringLiteral("cc")).toStringList();
+        const QStringList bcc   = copy.value(QStringLiteral("bcc")).toStringList();
+        const QByteArray cipher = copy.value(QStringLiteral("cipher")).toByteArray();
 
-    storeAndTransmit(accId, rfc, hasAttachments);
+        // Build the ENTIRE outer multipart/encrypted (RFC 3156) message as raw
+        // RFC 2822 bytes and parse it in ONE shot via fromRfc2822(). This avoids the
+        // incremental content-mutating QMF calls (setMessageType/setMultipartType/
+        // QMailMessagePart::fromData/appendPart) — one of which blocks the GUI thread
+        // forever on this device (confirmed: the first such call, setMessageType,
+        // never returns → Wayland freeze → app killed). fromRfc2822 parses content
+        // through a different code path; afterwards we only touch metadata.
+        const QByteArray boundary = mimeBoundary();
+        QByteArray rfc;
+        rfc += "From: " + fromAddr.toUtf8() + "\r\n";
+        // Defensive: a message with no To at all scores with spam filters. Blind
+        // copies are addressed to their own recipient (see sendPgpMime), so this
+        // placeholder is not normally reached.
+        if (to.isEmpty() && cc.isEmpty())
+            rfc += "To: undisclosed-recipients:;\r\n";
+        else
+            rfc += "To: " + to.join(QStringLiteral(", ")).toUtf8() + "\r\n";
+        if (!cc.isEmpty())  rfc += "Cc: " + cc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
+        if (!bcc.isEmpty()) rfc += "Bcc: " + bcc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
+        // The real subject travels INSIDE the encryption (protected headers, see
+        // buildInnerMime); outside stands the placeholder Thunderbird uses too.
+        // Otherwise the one header that often says more than the body would ride
+        // in the clear past every server on the way. Only the encrypted path does
+        // this — a signed-only message hides nothing from someone who can read the
+        // body anyway. Clients without protected-header support show "..."; that is
+        // the price, and the reason this is worth a second look before release.
+        rfc += "Subject: ...\r\n";
+        rfc += "Date: " + QMailTimeStamp::currentDateTime().toString().toUtf8() + "\r\n";
+        // Message-ID: a bare, header-sparse mail scores higher with spam filters, so
+        // give it the standard headers a normal client emits. Domain from the sender;
+        // uniqueness from the timestamp + ciphertext size (no RNG needed).
+        QString fromDomain = fromAddr.section('@', 1).trimmed();
+        if (fromDomain.isEmpty()) fromDomain = QStringLiteral("localhost");
+        // The copy index keeps the copies of ONE send apart: they are built in the
+        // same millisecond, and two audiences can produce equally sized ciphertext.
+        // Duplicate Message-IDs invite servers to treat the copies as one mail.
+        rfc += "Message-ID: <" + QByteArray::number(QDateTime::currentMSecsSinceEpoch())
+             + "." + QByteArray::number(cipher.size()) + "." + QByteArray::number(ci)
+             + "@" + fromDomain.toUtf8() + ">\r\n";
+        // No User-Agent: it is optional, and "harbour-sfmail" is a token no filter has
+        // ever seen, which makes every message from this app individually identifiable
+        // to content scoring. Dropped while chasing a provider-side 554 that hit only
+        // this client while other clients on the same account went through.
+        rfc += "MIME-Version: 1.0\r\n";
+        rfc += "Content-Type: multipart/encrypted; protocol=\"application/pgp-encrypted\";\r\n";
+        rfc += " boundary=\"" + boundary + "\"\r\n";
+        rfc += "\r\n";
+        rfc += "This is an OpenPGP/MIME encrypted message (RFC 3156).\r\n\r\n";
+        rfc += "--" + boundary + "\r\n";
+        rfc += "Content-Type: application/pgp-encrypted\r\n";
+        rfc += "Content-Description: PGP/MIME version identification\r\n\r\n";
+        rfc += "Version: 1\r\n\r\n";
+        rfc += "--" + boundary + "\r\n";
+        // No name/filename on the ciphertext part. QMF re-derives a part's Content-Type
+        // when fromRfc2822() parses our bytes, and it does so from the FILE EXTENSION:
+        // ".asc" became application/pgp-signature on SFOS 4.6 (libqmfclient git144) and
+        // text/plain; charset=utf-8 on 5.1 (git185) — same package, two devices, measured.
+        // The text/plain variant makes a multipart/encrypted whose ciphertext claims to
+        // be text, which content filters score as an obfuscated payload: the provider
+        // answered 554 for the 5.1 device while the identical mail from 4.6 arrived with
+        // a negative spam score. Without a name there is no extension to sniff, and the
+        // declared application/octet-stream (RFC 3156) has a chance to survive. Correcting
+        // it afterwards through QMF's own API is NOT an option — partAt() detaches the
+        // private impl and crashes in the ABI shim (tried, reproducible, see
+        // qmf_abi_compat.cpp). Neither name nor filename is required by RFC 3156.
+        rfc += "Content-Type: application/octet-stream\r\n";
+        rfc += "Content-Description: OpenPGP encrypted message\r\n";
+        rfc += "Content-Disposition: inline\r\n\r\n";
+        // gpg --armor emits LF-only line endings. Embedding it verbatim leaves bare
+        // <LF> bytes in the part body; strict SMTP servers (Postfix >=3.9 rejects
+        // bare LF by default since 2024, anti-SMTP-smuggling) reject the whole message
+        // with "521 5.5.2 … bare <LF> received" — and the bad bytes are stored, so
+        // even the native client can't send it. Normalize the ciphertext to CRLF.
+        const QByteArray cipherCrlf = toCrlf(cipher);
+        rfc += cipherCrlf;
+        if (!cipherCrlf.endsWith("\r\n")) rfc += "\r\n";
+        rfc += "--" + boundary + "--\r\n";
+
+
+        if (!storeInOutbox(accId, rfc, hasAttachments)) {
+            emit sendFinished(false, QStringLiteral("Could not store the message in the outbox."));
+            return;
+        }
+    }
+
+    // Safely queued. Report success now, do NOT wait for the transmit callback
+    // (it fires unreliably in this sandbox — see storeAndTransmit).
+    emit sendFinished(true, QString());
+    transmitOutbox(accId);
 }
 
 // Shared tail for both PGP/MIME paths (encrypted + signed). Parse the fully-built
@@ -1892,7 +2021,40 @@ void GpgEngine::storeAndTransmit(const QMailAccountId &accId, const QByteArray &
     // though the messageserver delivers the outbox message just fine (confirmed
     // via SMTP). Fire-and-forget outbox semantics, like a normal mail client.
     emit sendFinished(true, QString());
+    transmitOutbox(accId);
+}
 
+// The store half on its own, so a send with blind copies can queue several
+// messages before transmitting (one message per audience — see sendPgpMime).
+// Returns false if the store rejected it; the caller reports the failure.
+bool GpgEngine::storeInOutbox(const QMailAccountId &accId, const QByteArray &rfc,
+                              bool hasAttachments)
+{
+    QMailAccount account(accId);
+    // Heap-allocated and never deleted, exactly as in storeAndTransmit above —
+    // destroying a fromRfc2822-built QMailMessage crashes in the QMF ABI shim.
+    QMailMessage *msg = new QMailMessage(QMailMessage::fromRfc2822(rfc));
+    msg->setParentAccountId(accId);
+    QMailFolderId outbox = account.standardFolder(QMailFolder::OutboxFolder);
+    if (!outbox.isValid()) outbox = QMailFolderId(static_cast<quint64>(1));
+    msg->setParentFolderId(outbox);
+    msg->setStatus(QMailMessage::Outgoing, true);
+    msg->setStatus(QMailMessage::ContentAvailable, true);
+    msg->setStatus(QMailMessage::Read, true);
+    msg->setStatus(QMailMessage::Outbox, true);
+    msg->setStatus(QMailMessage::HasAttachments, hasAttachments);
+    if (!QMailStore::instance()->addMessage(msg)) {
+        qWarning() << "[send] addMessage FAILED";
+        return false;
+    }
+    qWarning() << "[send] stored msg" << msg->id().toULongLong() << "in outbox — queued";
+    return true;
+}
+
+// The transmit half. QMF has no per-message send: this pushes the account's
+// whole outbox, which is why several stored copies need only ONE call.
+void GpgEngine::transmitOutbox(const QMailAccountId &accId)
+{
     // Trigger transmission of the account's outbox (messageserver does the actual
     // SMTP). activityChanged is kept for logging only.
     if (!m_tx) {

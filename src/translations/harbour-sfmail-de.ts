@@ -67,6 +67,10 @@
 <context>
     <name>ComposerPage</name>
     <message>
+        <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
+        <translation>Inline-PGP kann Blindkopien nicht verbergen — PGP/MIME verwenden.</translation>
+    </message>
+    <message>
         <source>Choose an account</source>
         <translation>Konto wählen</translation>
     </message>
@@ -322,6 +326,42 @@
 </context>
 <context>
     <name>CryptoInfoPage</name>
+    <message>
+        <source>Blind copy — named in no header of this message:</source>
+        <translation>Blindkopie — in keiner Kopfzeile dieser Nachricht genannt:</translation>
+    </message>
+    <message>
+        <source>Further recipient keys above cannot be named — they are not in your keyring. Look them up on keys.openpgp.org from the menu.</source>
+        <translation>Weitere Empfängerschlüssel oben sind nicht zuzuordnen — sie liegen nicht in deinem Schlüsselbund. Über das Menü auf keys.openpgp.org nachschlagen.</translation>
+    </message>
+    <message>
+        <source>Addressed to, but not a recipient of this copy: %1</source>
+        <translation>In der Adressierung genannt, aber nicht Empfänger dieser Kopie: %1</translation>
+    </message>
+    <message>
+        <source>Listed in To/Cc</source>
+        <translation>Steht in An/Kopie</translation>
+    </message>
+    <message>
+        <source>The sender (copy to self)</source>
+        <translation>Der Absender (Kopie an sich selbst)</translation>
+    </message>
+    <message>
+        <source>⚠ Blind copy — this is you</source>
+        <translation>⚠ Blindkopie — das bist du</translation>
+    </message>
+    <message>
+        <source>⚠ Blind copy — in no header</source>
+        <translation>⚠ Blindkopie — steht in keiner Kopfzeile</translation>
+    </message>
+    <message>
+        <source>Cannot be named — key not in your keyring</source>
+        <translation>Nicht zuzuordnen — Schlüssel nicht in deinem Schlüsselbund</translation>
+    </message>
+    <message>
+        <source>A blind copy is hidden from the headers only. Every recipient key is named in the encrypted data itself, so anyone who receives this message can read this list too.</source>
+        <translation>Eine Blindkopie ist nur vor den Kopfzeilen verborgen. Jeder Empfängerschlüssel wird in den verschlüsselten Daten selbst genannt — wer diese Nachricht bekommt, kann diese Liste ebenfalls lesen.</translation>
+    </message>
     <message>
         <source>Encryption info</source>
         <translation>Verschlüsselungs-Info</translation>
@@ -1269,6 +1309,14 @@ Importing adds a SECOND key for this address — make sure this new key is genui
 <context>
     <name>MessagePage</name>
     <message>
+        <source>bcc</source>
+        <translation>Bcc</translation>
+    </message>
+    <message>
+        <source>hidden from the other recipients</source>
+        <translation>für die anderen Empfänger unsichtbar</translation>
+    </message>
+    <message>
         <source>Decrypted</source>
         <translation>Entschlüsselt</translation>
     </message>
@@ -2012,6 +2060,22 @@ Schlüsselbund: %2</translation>
 </context>
 <context>
     <name>SmimeInfoPage</name>
+    <message>
+        <source>The sender (copy to self)</source>
+        <translation>Der Absender (Kopie an sich selbst)</translation>
+    </message>
+    <message>
+        <source>⚠ Blind copy — this is you</source>
+        <translation>⚠ Blindkopie — das bist du</translation>
+    </message>
+    <message>
+        <source>⚠ Blind copy — in no header</source>
+        <translation>⚠ Blindkopie — steht in keiner Kopfzeile</translation>
+    </message>
+    <message>
+        <source>A blind copy is hidden from the headers only. Every recipient certificate is named in the encrypted data itself, so anyone who receives this message can read this list too.</source>
+        <translation>Eine Blindkopie ist nur vor den Kopfzeilen verborgen. Jedes Empfängerzertifikat wird in den verschlüsselten Daten selbst genannt — wer diese Nachricht bekommt, kann diese Liste ebenfalls lesen.</translation>
+    </message>
     <message>
         <source>Encryption info</source>
         <translation type="unfinished">Verschlüsselungs-Info</translation>

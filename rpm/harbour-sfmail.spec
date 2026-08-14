@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.6.1
+Version:    0.6.9
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -156,6 +156,30 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Fri Aug 14 2026 harbour-sfmail contributors 0.6.9-1
+- Blind copies stay blind. One encrypted message names every recipient key in the
+  clear (one packet per key in OpenPGP, one RecipientInfo per certificate in
+  S/MIME), so anyone receiving it could read the whole list - a blind copy was
+  blind in the headers only. Encrypted mail is now sent as one message per
+  audience: the open recipients get theirs, every blind copy gets its own,
+  encrypted only to the keys that belong in it.
+- Blind copies were not encrypted to at all before this. The composer resolved
+  keys for To and Cc only, so a blind recipient received a message encrypted to
+  everyone but them and could not open it. S/MIME was never affected.
+- The subject is no longer sent in the clear. Encrypted mail carries the real
+  subject inside the encrypted part as a protected header and shows "..."
+  outside, as Thunderbird does. Clients without support for protected headers
+  show "..." and reply with "Re: ...", and server-side search sees only the
+  placeholder.
+- The recipients travel inside the encryption as well, so a blind copy can still
+  see whom the message was addressed to. The reader prefers those values over the
+  visible headers - showing the outer To of a blind copy would claim its own
+  recipient had been addressed.
+- The encryption info now says which recipient key is listed in To/Cc, which is
+  the sender's own, and which stands in no header at all.
+- Inline PGP refuses a blind copy instead of pretending it can hide one: one
+  armoured block in one message cannot serve separate audiences.
+
 * Thu Aug 13 2026 harbour-sfmail contributors 0.6.1-1
 - Encrypted mail is sent as encrypted mail again. QMF re-derives a MIME part's
   Content-Type from the file extension while parsing, and ".asc" is ambiguous in

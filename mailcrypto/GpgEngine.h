@@ -103,6 +103,13 @@ public:
     // it does NOT freeze the GUI thread.
     Q_INVOKABLE bool contentAvailable(int messageId);
 
+    // Header fields the sender put INSIDE the encrypted part of the message that
+    // was decrypted last (draft-autocrypt-lamps-protected-headers): from/to/cc/
+    // subject/date, empty when the message carries none. For a blind copy this is
+    // the only place the other recipients appear — the outer headers cannot name
+    // them without delivering the copy to them.
+    Q_INVOKABLE QVariantMap protectedHeaders() const { return m_lastProtectedHeaders; }
+
     // MIME size-limit override: when a decrypt hits the anti-DoS size cap, the UI can
     // offer "load this once without limit". liftSizeLimit() ignores the caps for the
     // next 15 minutes (auto-resets); sizeLimitLifted() reports the current state.
@@ -191,9 +198,15 @@ public:
     // optionally signed) as a whole, wrapped as multipart/encrypted, stored in
     // the account's outbox and transmitted. attachments = list of maps with
     // keys name, path (or url), mimeType. Result via sendFinished().
+    // blindCopies carries the blind recipients, each as a map {address, fprs}: one
+    // SEPARATE message is built per entry, encrypted ONLY to that entry's keys, so
+    // no recipient learns of any other. A single message encrypted to everyone
+    // would name every recipient key in the clear (one PKESK packet each), which
+    // is exactly what a blind copy must not do. The open recipients (To/Cc) get
+    // their own message without any Bcc header at all.
     Q_INVOKABLE void sendPgpMime(int accountId, const QString &subject,
                                  const QStringList &to, const QStringList &cc,
-                                 const QStringList &bcc, const QString &bodyText,
+                                 const QVariantList &blindCopies, const QString &bodyText,
                                  const QVariantList &attachments,
                                  const QStringList &recipientFingerprints,
                                  const QString &signFingerprint, const QString &passphrase);
@@ -356,10 +369,12 @@ private:
                  QString *micalgOut, QString *errMsg);
     // Deferred QMF build+store+transmit, posted from sendPgpMime via a 0-timer so
     // it never runs inline during a QML page transition (render-freeze otherwise).
+    // `copies` = one entry per message to send, each a map with the keys
+    // to/cc/bcc (QStringList) and cipher (QByteArray). Several entries only occur
+    // when the message has blind copies; they are stored one after another and
+    // transmitted together (QMF sends the whole outbox in one go anyway).
     void finishPgpMimeSend(int accountId, const QString &subject,
-                           const QStringList &to, const QStringList &cc,
-                           const QStringList &bcc, const QByteArray &cipher,
-                           bool hasAttachments);
+                           const QVariantList &copies, bool hasAttachments);
     void finishSignedMimeSend(int accountId, const QString &subject,
                               const QStringList &to, const QStringList &cc,
                               const QStringList &bcc, const QByteArray &signedInner,
@@ -369,6 +384,11 @@ private:
     // store in the account's outbox (with local-folder fallback) and transmit.
     void storeAndTransmit(const QMailAccountId &accId, const QByteArray &rfc,
                           bool hasAttachments);
+    // The two halves of storeAndTransmit, so several messages can be queued and
+    // then sent with ONE transmit (blind copies).
+    bool storeInOutbox(const QMailAccountId &accId, const QByteArray &rfc,
+                       bool hasAttachments);
+    void transmitOutbox(const QMailAccountId &accId);
     bool m_available;
     QMailTransmitAction *m_tx = nullptr;
 
@@ -387,6 +407,7 @@ private:
     QByteArray m_pendingKeyArmored;   // a "different" key awaiting user import
     QString m_pendingKeyId;
     QDateTime m_sizeLimitUntil;       // MIME size caps ignored until this time
+    QVariantMap m_lastProtectedHeaders;   // protected headers of the last decrypt
 
     // SPF evaluator state (one check in flight at a time).
     void spfFetchRecord(const QString &domain, bool topLevel);

@@ -1642,53 +1642,119 @@ void SmimeEngine::sendSmime(int accountId, const QString &subject,
         content = pkcs7MimeEntity(sd, "signed-data");
     }
 
-    // 2) Optional encrypt → enveloped-data CMS to every recipient + self.
-    QByteArray outerBody;
-    if (encrypt) {
-        QStringList recips = to; recips += cc; recips += bcc;
-        if (!fromAddr.isEmpty()) recips << fromAddr;   // encrypt-to-self for a readable Sent copy
-        QStringList args;
-        for (const QString &r : recips) {
-            const QString addr = r.trimmed();
-            if (addr.isEmpty()) continue;
-            // Address me the certificate, not the address: gpgsm refuses to choose
-            // when several certificates carry the same address. Fall back to the
-            // address only when nothing matches, so the error stays gpgsm's.
-            const QString fpr = pickCertFpr(addr, 'e', false);
-            args << QStringLiteral("-r") << (fpr.isEmpty() ? addr : fpr);
+    // 2) Optional encrypt → enveloped-data CMS.
+    //
+    // ONE MESSAGE PER AUDIENCE when there are blind copies. CMS puts a
+    // RecipientInfo (issuer + serial of the certificate) into the envelope for
+    // every recipient, so a single message encrypted to everyone hands each
+    // recipient the list of all others — exactly what a blind copy must not do.
+    // The signed content is built once above and reused; only the envelope
+    // differs per audience. Without blind copies this is one message as before.
+    struct Copy { QStringList to, cc, bcc; QByteArray body; };
+    QList<Copy> copies;
+
+    if (!encrypt) {
+        // Sign-only: the pkcs7-mime signed-data IS the body. Nothing names the
+        // recipients here, so blind copies can ride along in one message (QMF
+        // strips the Bcc header on transmission and uses it for the envelope).
+        Copy c; c.to = to; c.cc = cc; c.bcc = bcc; c.body = content;
+        copies << c;
+    } else {
+        // Encrypting to an address list, once per audience.
+        auto envelopeFor = [&](const QStringList &addresses, QByteArray *out) -> bool {
+            QStringList args;
+            for (const QString &r : addresses) {
+                const QString addr = r.trimmed();
+                if (addr.isEmpty()) continue;
+                // Address me the certificate, not the address: gpgsm refuses to choose
+                // when several certificates carry the same address. Fall back to the
+                // address only when nothing matches, so the error stays gpgsm's.
+                const QString fpr = pickCertFpr(addr, 'e', false);
+                args << QStringLiteral("-r") << (fpr.isEmpty() ? addr : fpr);
+            }
+            if (args.isEmpty()) return false;
+            args << QStringLiteral("--encrypt") << QStringLiteral("--output") << QStringLiteral("-");
+            QByteArray env, eerr;
+            if (!runGpgsm(args, content, &env, &eerr, 90000) || env.isEmpty()) {
+                emit sendFinished(false, QStringLiteral("Encryption failed (recipient certificate missing or untrusted?): %1")
+                                  .arg(QString::fromUtf8(eerr).trimmed()));
+                return false;
+            }
+            *out = pkcs7MimeEntity(env, "enveloped-data");
+            return true;
+        };
+
+        if (!to.isEmpty() || !cc.isEmpty()) {
+            QStringList open = to; open += cc;
+            if (!fromAddr.isEmpty()) open << fromAddr;   // encrypt-to-self for a readable Sent copy
+            Copy c; c.to = to; c.cc = cc;                // no Bcc header on the open copy
+            if (!envelopeFor(open, &c.body)) return;
+            copies << c;
         }
-        args << QStringLiteral("--encrypt") << QStringLiteral("--output") << QStringLiteral("-");
-        QByteArray env, eerr;
-        if (!runGpgsm(args, content, &env, &eerr, 90000) || env.isEmpty()) {
-            emit sendFinished(false, QStringLiteral("Encryption failed (recipient certificate missing or untrusted?): %1")
-                              .arg(QString::fromUtf8(eerr).trimmed()));
+        for (const QString &b : bcc) {
+            const QString addr = b.trimmed();
+            if (addr.isEmpty()) continue;
+            QStringList one; one << addr;
+            if (!fromAddr.isEmpty()) one << fromAddr;
+            // Addressed to its own recipient, no Bcc header and no open recipients
+            // (QMF derives the envelope from these headers). MEASURED: the
+            // placeholder "To: undisclosed-recipients:;" got such a copy refused
+            // with 554 5.7.1 Spam message rejected — see GpgEngine::sendPgpMime.
+            Copy c; c.to = QStringList(addr);
+            if (!envelopeFor(one, &c.body)) return;
+            copies << c;
+        }
+        if (copies.isEmpty()) {
+            emit sendFinished(false, QStringLiteral("No recipient — nothing to send."));
             return;
         }
-        outerBody = pkcs7MimeEntity(env, "enveloped-data");
-    } else {
-        outerBody = content;   // sign-only: the pkcs7-mime signed-data IS the body
     }
 
-    qWarning() << "[smime] send: built CMS (" << outerBody.size() << "bytes), deferring QMF";
-    QByteArray rfc;
-    rfc += "From: " + account.fromAddress().toString().toUtf8() + "\r\n";
-    rfc += "To: " + to.join(QStringLiteral(", ")).toUtf8() + "\r\n";
-    if (!cc.isEmpty())  rfc += "Cc: " + cc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
-    if (!bcc.isEmpty()) rfc += "Bcc: " + bcc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
-    rfc += "Subject: " + subject.toUtf8() + "\r\n";
-    rfc += "Date: " + QMailTimeStamp::currentDateTime().toString().toUtf8() + "\r\n";
-    QString dom = fromAddr.section('@', 1).trimmed(); if (dom.isEmpty()) dom = QStringLiteral("localhost");
-    rfc += "Message-ID: <" + QByteArray::number(QDateTime::currentMSecsSinceEpoch())
-         + ".sm@" + dom.toUtf8() + ">\r\n";
-    // No User-Agent — see the encrypted send path in GpgEngine.cpp.
-    rfc += "MIME-Version: 1.0\r\n";
-    rfc += outerBody;
-
+    qWarning() << "[smime] send: built" << copies.size() << "CMS message(s), deferring QMF";
     const bool hasAtt = !attachments.isEmpty();
-    QTimer::singleShot(0, this, [this, accId, rfc, hasAtt]() { smimeStoreAndTransmit(accId, rfc, hasAtt); });
+    QString dom = fromAddr.section('@', 1).trimmed(); if (dom.isEmpty()) dom = QStringLiteral("localhost");
+    QList<QByteArray> messages;
+    for (int ci = 0; ci < copies.size(); ++ci) {
+        const Copy &c = copies.at(ci);
+        QByteArray rfc;
+        rfc += "From: " + account.fromAddress().toString().toUtf8() + "\r\n";
+        // A blind copy carries no To/Cc: QMF builds the SMTP envelope FROM these
+        // headers, so naming the open recipients would deliver this copy to them
+        // twice. The group placeholder is not an e-mail address, so QMF's
+        // isEmailAddress() filter keeps it out of the envelope.
+        if (c.to.isEmpty() && c.cc.isEmpty())
+            rfc += "To: undisclosed-recipients:;\r\n";
+        else
+            rfc += "To: " + c.to.join(QStringLiteral(", ")).toUtf8() + "\r\n";
+        if (!c.cc.isEmpty())  rfc += "Cc: " + c.cc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
+        if (!c.bcc.isEmpty()) rfc += "Bcc: " + c.bcc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
+        rfc += "Subject: " + subject.toUtf8() + "\r\n";
+        rfc += "Date: " + QMailTimeStamp::currentDateTime().toString().toUtf8() + "\r\n";
+        // Copy index: the copies of one send are built in the same millisecond,
+        // and duplicate Message-IDs invite servers to treat them as one mail.
+        rfc += "Message-ID: <" + QByteArray::number(QDateTime::currentMSecsSinceEpoch())
+             + "." + QByteArray::number(ci) + ".sm@" + dom.toUtf8() + ">\r\n";
+        // No User-Agent — see the encrypted send path in GpgEngine.cpp.
+        rfc += "MIME-Version: 1.0\r\n";
+        rfc += c.body;
+        messages << rfc;
+    }
+
+    QTimer::singleShot(0, this, [this, accId, messages, hasAtt]() {
+        for (const QByteArray &rfc : messages)
+            if (!smimeStoreInOutbox(accId, rfc, hasAtt)) {
+                emit sendFinished(false, QStringLiteral("Could not store the message in the outbox."));
+                return;
+            }
+        emit sendFinished(true, QString());
+        smimeTransmit(accId);
+    });
 }
 
-void SmimeEngine::smimeStoreAndTransmit(const QMailAccountId &accId, const QByteArray &rfc, bool hasAttachments)
+// Store one built message in the outbox. Split from the transmit half so a
+// send with blind copies can queue several messages (one per audience) and
+// then push them with a single transmit — QMF has no per-message send.
+bool SmimeEngine::smimeStoreInOutbox(const QMailAccountId &accId, const QByteArray &rfc, bool hasAttachments)
 {
     QMailAccount account(accId);
     // Heap-allocate and INTENTIONALLY never delete — same QMF ABI-shim destructor
@@ -1706,11 +1772,16 @@ void SmimeEngine::smimeStoreAndTransmit(const QMailAccountId &accId, const QByte
     msg->setStatus(QMailMessage::Outbox, true);
     msg->setStatus(QMailMessage::HasAttachments, hasAttachments);
     if (!QMailStore::instance()->addMessage(msg)) {
-        emit sendFinished(false, QStringLiteral("Could not store the message in the outbox."));
-        return;
+        qWarning() << "[smime] send: addMessage FAILED";
+        return false;
     }
     qWarning() << "[smime] send: stored msg" << msg->id().toULongLong() << "in outbox — queued";
-    emit sendFinished(true, QString());
+    return true;
+}
+
+// Push the account's whole outbox (messageserver does the actual SMTP).
+void SmimeEngine::smimeTransmit(const QMailAccountId &accId)
+{
     if (!m_tx) {
         m_tx = new QMailTransmitAction(this);
         connect(m_tx, &QMailTransmitAction::activityChanged, this,

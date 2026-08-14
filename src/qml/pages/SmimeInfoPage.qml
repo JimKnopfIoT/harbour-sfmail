@@ -1,5 +1,6 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
+import "RecipientRoles.js" as Roles
 
 // S/MIME encryption/certificate info for one message. Shows the recipient
 // (encryption) certificates the mail is encrypted to — yours AND the other
@@ -18,12 +19,38 @@ Page {
     readonly property var _recips: (info && info.encRecipients) ? info.encRecipients : []
     readonly property var _signs:  (info && info.signCerts) ? info.signCerts : []
 
-    function _roleOf(r) {
+    // Addresses from To:/Cc: and From: of the message (set by MessagePage). A
+    // recipient certificate whose subject matches neither received the mail as
+    // a blind copy — S/MIME names every recipient in the RecipientInfos, just
+    // as OpenPGP does in its PKESK packets. See RecipientRoles.js.
+    property var visibleAddresses: []
+    property string senderEmail: ""
+    readonly property var _roles: Roles.rolesFor(_recips,
+                                                 function(r) { return r.subject || "" },
+                                                 function(r) { return r.inStore === true },
+                                                 page.visibleAddresses, page.senderEmail)
+    readonly property int _blindCount: Roles.countRole(_roles, "blind")
+    readonly property string _blindWho: {
+        var who = []
+        for (var i = 0; i < _roles.length; ++i)
+            if (_roles[i] === "blind") who.push("" + (_recips[i].subject || _recips[i].fpr))
+        return who.join("\n")
+    }
+
+    // `i` is the row index — the delegate's modelData is a copy of the variant
+    // map, so the role must be looked up by position, not by object identity.
+    function _roleOf(r, i) {
+        var role = (i >= 0 && i < _roles.length) ? _roles[i] : "unknown"
+        if (role === "blind")
+            return r.hasSecret ? qsTr("⚠ Blind copy — this is you")
+                               : qsTr("⚠ Blind copy — in no header")
         if (r.hasSecret) return qsTr("You (your certificate — decryptable)")
         if (!r.inStore)  return qsTr("Recipient (cert not in your store)")
+        if (role === "sender") return qsTr("The sender (copy to self)")
         return qsTr("Other recipient")
     }
-    function _color(r) {
+    function _color(r, i) {
+        if (i >= 0 && i < _roles.length && _roles[i] === "blind") return "#ffa726"
         if (r.hasSecret) return "#4caf50"
         if (!r.inStore)  return Theme.secondaryColor
         return Theme.primaryColor
@@ -32,7 +59,7 @@ Page {
         var t = "Format: " + (info.format || "?") + "\n\n== Encryption recipients ==\n"
         for (var i = 0; i < _recips.length; ++i) {
             var r = _recips[i]
-            t += "\n" + _roleOf(r) + "\n  " + (r.subject || "") + "\n  " + (r.algo || "") + "  " + (r.fpr || "") + "\n"
+            t += "\n" + _roleOf(r, i) + "\n  " + (r.subject || "") + "\n  " + (r.algo || "") + "  " + (r.fpr || "") + "\n"
             var ch = r.chain || []
             for (var j = 0; j < ch.length; ++j) t += "    ↳ " + ch[j].role + ": " + ch[j].subject + "  (" + ch[j].fpr + ")\n"
         }
@@ -85,6 +112,30 @@ Page {
                 text: qsTr("This message is not encrypted.")
             }
 
+            // Blind copies — the one thing the headers deliberately hide and
+            // the encrypted data does not (same as the OpenPGP page).
+            Rectangle {
+                visible: page._blindCount > 0
+                x: Theme.horizontalPageMargin
+                width: page.width - 2 * Theme.horizontalPageMargin
+                height: blind.height + 2 * Theme.paddingMedium
+                radius: Theme.paddingSmall
+                color: Theme.rgba("#ffa726", 0.15)
+
+                Label {
+                    id: blind
+                    x: Theme.paddingMedium
+                    y: Theme.paddingMedium
+                    width: parent.width - 2 * Theme.paddingMedium
+                    wrapMode: Text.WordWrap
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: "#ffa726"
+                    text: qsTr("Blind copy — named in no header of this message:")
+                          + "\n" + page._blindWho
+                          + "\n\n" + qsTr("A blind copy is hidden from the headers only. Every recipient certificate is named in the encrypted data itself, so anyone who receives this message can read this list too.")
+                }
+            }
+
             // ---- Encryption recipients ----
             SectionHeader {
                 visible: page._recips.length > 0
@@ -99,8 +150,9 @@ Page {
                     Label {
                         width: parent.width; wrapMode: Text.WordWrap
                         font.pixelSize: Theme.fontSizeMedium
-                        color: page._color(modelData)
-                        text: page._roleOf(modelData)
+                        color: page._color(modelData, index)
+                        text: page._roleOf(modelData, index)
+                        font.bold: page._roles[index] === "blind"
                     }
                     Label {
                         width: parent.width; wrapMode: Text.WordWrap

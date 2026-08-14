@@ -210,7 +210,8 @@ private:
                              const QString &fromAddr, const QString &passphrase,
                              QByteArray *errOut);
     // Shared QMF tail: parse RFC2822 → outbox → transmit (S/MIME copy of GpgEngine).
-    void smimeStoreAndTransmit(const QMailAccountId &accId, const QByteArray &rfc, bool hasAttachments);
+    bool smimeStoreInOutbox(const QMailAccountId &accId, const QByteArray &rfc, bool hasAttachments);
+    void smimeTransmit(const QMailAccountId &accId);
 
     void log(const QString &s);
 

@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
 import Nemo.Email 0.1
 import SFMail.Gpg 1.0
+import "RecipientRoles.js" as Roles
 
 // Einzelne Nachricht lesen. PGP/MIME wird vom nativen QMF-Krypto-Backend
 // erkannt: Signaturstatus + Verschlüsselung werden angezeigt, mit Buttons zum
@@ -133,6 +134,7 @@ Page {
                                       ? qsTr("Decrypted — %1 attachment(s)").arg(attachments.length)
                                       : qsTr("Decrypted"))
                 if (signedBy.length > 0) Gpg.rememberSigned(page.messageId, signedBy)
+                page._readProtectedHeaders()
             } else {
                 page._inlineInfo = error
             }
@@ -415,6 +417,7 @@ Page {
             pageStack.push(Qt.resolvedUrl("CryptoInfoPage.qml"),
                            { info: Gpg.encryptionInfo(url),
                              senderEmail: ("" + message.fromAddress),
+                             visibleAddresses: page._infoRecipients(),
                              importKey: function() { return page._importKeyFromMessage() } })
         }
     }
@@ -524,15 +527,80 @@ Page {
         default: return "" + s
         }
     }
+    // Recipients the sender put UNDER the encryption (protected headers). For a
+    // blind copy this is the only place the other recipients appear: the outer
+    // To: of such a copy names only its own recipient, because the mail server
+    // delivers by exactly those headers. Empty for mail without protected headers.
+    property string _protectedTo: ""
+    // True when the outer headers name nobody the protected ones name: this copy
+    // was addressed elsewhere and reached us as a blind copy.
+    property bool _isBlindCopy: false
+    // The real subject when the sender protected it: encrypted mail from this app
+    // (and from Thunderbird) carries "..." in the visible header and the true
+    // subject inside. Everything that shows a subject uses this when it is set.
+    property string _protectedSubject: ""
+    readonly property string _shownSubject: _protectedSubject !== "" ? _protectedSubject
+                                            : (message.subject !== "" ? message.subject : "")
+    // Whom the message was addressed to. The protected value wins over the visible
+    // header, as the specification requires ("the MUA SHOULD render the protected
+    // value, and ignore any unprotected counterparts") — and it is the truthful
+    // one: the visible To: of a blind copy names only its own recipient, because
+    // the mail server delivers by exactly that header. Showing it would claim we
+    // were the addressee when we were not.
+    readonly property string _shownTo: _protectedTo !== "" ? _protectedTo
+                                       : (message.to ? message.to.join(", ") : "")
+    function _readProtectedHeaders() {
+        page._protectedTo = ""
+        page._isBlindCopy = false
+        var h = Gpg.protectedHeaders()
+        if (!h) return
+        if (h["subject"]) page._protectedSubject = "" + h["subject"]
+        var shown = []
+        if (h["to"]) shown.push("" + h["to"])
+        if (h["cc"]) shown.push("" + h["cc"])
+        if (shown.length === 0) return
+        page._protectedTo = shown.join(", ")
+        // Open copy: the outer recipients appear among the protected ones, so the
+        // two agree. Blind copy: no overlap — we are named nowhere in this message.
+        var prot = Roles.addressList(shown)
+        var outer = Roles.addressList(_visibleRecipients())
+        for (var i = 0; i < outer.length; ++i)
+            if (prot.indexOf(outer[i]) >= 0) return
+        page._isBlindCopy = true
+    }
+
+    // Recipients this message admits to in its headers. The encryption info
+    // pages compare the actual recipient keys against this: whatever is
+    // encrypted to somebody who is in neither list arrived as a blind copy.
+    // Bcc is deliberately NOT included — for a received message it is empty
+    // anyway (the sending MTA strips it), and for our own Sent copy the blind
+    // recipients should stay flagged as blind.
+    // What the encryption-info pages compare the recipient keys against. Once the
+    // message is decrypted the PROTECTED recipients are the truthful audience —
+    // against the outer headers a blind copy would classify ITS OWN recipient as
+    // "listed in To/Cc", which is exactly backwards. Before decryption the outer
+    // headers are all we have.
+    function _infoRecipients() {
+        return page._protectedTo !== "" ? [page._protectedTo] : _visibleRecipients()
+    }
+
+    function _visibleRecipients() {
+        var out = []
+        if (message.to) out = out.concat(message.to)
+        if (message.cc) out = out.concat(message.cc)
+        return out
+    }
+
     function _headerText() {
         var L = []
         L.push("From: " + (message.fromDisplayName !== "" ? message.fromDisplayName + " " : "")
                + "<" + message.fromAddress + ">")
-        if (message.to && message.to.length > 0) L.push("To: " + message.to.join(", "))
-        if (message.cc && message.cc.length > 0) L.push("Cc: " + message.cc.join(", "))
+        if (page._shownTo !== "") L.push("To: " + page._shownTo)
+        if (page._protectedTo === "" && message.cc && message.cc.length > 0)
+            L.push("Cc: " + message.cc.join(", "))
         if (message.bcc && message.bcc.length > 0) L.push("Bcc: " + message.bcc.join(", "))
         if (message.replyTo && ("" + message.replyTo) !== "") L.push("Reply-To: " + message.replyTo)
-        L.push("Subject: " + message.subject)
+        L.push("Subject: " + page._shownSubject)
         L.push("Date: " + Format.formatDate(message.date, Formatter.Timepoint))
         if (message.inReplyTo && ("" + message.inReplyTo) !== "") L.push("In-Reply-To: " + message.inReplyTo)
         L.push("Attachments: " + message.numberOfAttachments)
@@ -646,13 +714,16 @@ Page {
                         // certs are taken from an earlier decrypt of this message
                         // (like PGP, where decrypting once is enough).
                         pageStack.push(Qt.resolvedUrl("SmimeInfoPage.qml"),
-                                       { info: Smime.messageCertInfo(page.messageId, "") })
+                                       { info: Smime.messageCertInfo(page.messageId, ""),
+                                         senderEmail: ("" + message.fromAddress),
+                                         visibleAddresses: page._infoRecipients() })
                     } else if (message.encryptionStatus === EmailMessage.Encrypted) {
                         page._ensureEncPart("inspect", "")        // PGP/MIME (lädt Teil ggf. nach)
                     } else if (page._bodyHasPgp) {
                         pageStack.push(Qt.resolvedUrl("CryptoInfoPage.qml"),
                                        { info: Gpg.encryptionInfo(message.body),
                                          senderEmail: ("" + message.fromAddress),
+                                         visibleAddresses: page._infoRecipients(),
                                          importKey: function() { return page._importKeyFromMessage() } })  // inline PGP
                     } else {
                         // Not encrypted at all.
@@ -699,7 +770,7 @@ Page {
                               : (page._bodyHasPgp ? "inline" : "mime")
                     pageStack.push(Qt.resolvedUrl("ComposerPage.qml"),
                                    { replyTo: message.fromAddress,
-                                     subjectPrefill: "Re: " + message.subject,
+                                     subjectPrefill: "Re: " + page._shownSubject,
                                      encryptReply: enc, replyFormat: fmt,
                                      replyAccountId: message.accountId,
                                      cryptoKind: smime ? "smime" : "pgp",
@@ -716,7 +787,7 @@ Page {
             spacing: Theme.paddingMedium
 
             PageHeader {
-                title: message.subject !== "" ? message.subject : qsTr("(no subject)")
+                title: page._shownSubject !== "" ? page._shownSubject : qsTr("(no subject)")
             }
 
             // Transient info line (key import / download status).
@@ -744,7 +815,19 @@ Page {
                     truncationMode: TruncationMode.Fade
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
-                    text: qsTr("to") + " " + (message.to ? message.to.join(", ") : "")
+                    text: qsTr("to") + " " + page._shownTo
+                }
+                // We are the blind copy: the address the mail server delivered to
+                // is ours, and it appears in no header the other recipients see.
+                // Saying so completes the picture the protected "to" line starts.
+                Label {
+                    visible: page._isBlindCopy
+                    width: parent.width
+                    truncationMode: TruncationMode.Fade
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    color: "#ffa726"
+                    text: qsTr("bcc") + " " + (message.to ? message.to.join(", ") : "")
+                          + " — " + qsTr("hidden from the other recipients")
                 }
                 Label {
                     font.pixelSize: Theme.fontSizeExtraSmall
