@@ -546,12 +546,18 @@ bool SmimeEngine::runGpgsm(const QStringList &args, const QByteArray &stdinData,
 }
 
 bool SmimeEngine::runOpenssl(const QStringList &args, const QByteArray &stdinData,
-                             QByteArray *out, QByteArray *err, int timeoutMs)
+                             QByteArray *out, QByteArray *err, int timeoutMs,
+                             const QString &passEnv)
 {
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     // Our bundled openssl finds its legacy provider here (still links the SYSTEM
     // libssl/libcrypto). Do NOT add our gpg lib dir — openssl must use system libs.
     env.insert(QStringLiteral("OPENSSL_MODULES"), m_stack + QStringLiteral("/lib/ossl-modules"));
+    // Passphrase via the child's environment (env:SFMAIL_PASS), never via argv:
+    // /proc/<pid>/cmdline is readable by EVERY process, /proc/<pid>/environ only
+    // by the same user and root.
+    if (!passEnv.isEmpty())
+        env.insert(QStringLiteral("SFMAIL_PASS"), passEnv);
     QProcess p;
     p.setProcessEnvironment(env);
     p.start(m_openssl, args);
@@ -691,7 +697,6 @@ void SmimeEngine::generateCert(const QString &name, const QString &email,
     QTemporaryDir tmp(m_home + QStringLiteral("/gen-XXXXXX"));
     if (!tmp.isValid()) { emit importFinished(false, 0, QStringLiteral("cannot create temp dir")); return; }
     const QString wd = tmp.path();
-    const QString keyFile  = wd + QStringLiteral("/key.pem");
     const QString certFile = wd + QStringLiteral("/cert.pem");
     const QString p12File  = wd + QStringLiteral("/new.p12");
 
@@ -715,18 +720,23 @@ void SmimeEngine::generateCert(const QString &name, const QString &email,
     QStringList req;
     req << QStringLiteral("req") << QStringLiteral("-x509")
         << QStringLiteral("-newkey") << QStringLiteral("rsa:4096")
-        << QStringLiteral("-keyout") << keyFile
+        // The fresh private key goes to STDOUT (captured in memory below) and is
+        // then piped straight into the pkcs12 -export — it never touches disk
+        // unencrypted. The cert goes to a file (public, harmless).
+        << QStringLiteral("-keyout") << QStringLiteral("/proc/self/fd/1")
         << QStringLiteral("-out")    << certFile
         << QStringLiteral("-days")   << QString::number(days)
-        << QStringLiteral("-nodes")          // key unencrypted in PEM; the p12 protects it
+        << QStringLiteral("-nodes")          // unencrypted PEM (in memory); the p12 protects it
         << QStringLiteral("-sha256")
         << QStringLiteral("-subj")   << subj
         << QStringLiteral("-addext") << QStringLiteral("basicConstraints=critical,CA:FALSE")
         << QStringLiteral("-addext") << QStringLiteral("keyUsage=critical,digitalSignature,keyEncipherment")
         << QStringLiteral("-addext") << QStringLiteral("extendedKeyUsage=emailProtection")
         << QStringLiteral("-addext") << (QStringLiteral("subjectAltName=email:") + mail);
-    QByteArray ro, re;
-    if (!runOpenssl(req, QByteArray(), &ro, &re, 180000)) {
+    QByteArray keyPem, re;
+    if (!runOpenssl(req, QByteArray(), &keyPem, &re, 180000)
+            || !keyPem.contains("PRIVATE KEY")) {
+        keyPem.fill(0);
         emit importFinished(false, 0, QStringLiteral("openssl could not create the key/cert: %1")
                             .arg(QString::fromUtf8(re).trimmed()));
         return;
@@ -734,14 +744,17 @@ void SmimeEngine::generateCert(const QString &name, const QString &email,
 
     // Pack key+cert into a p12 protected by the user's passphrase, then reuse the
     // proven importP12() path (repack → gpgsm import → trust the self-signed root).
+    // Key via stdin, passphrase via the environment — neither on disk nor on argv.
     QStringList exp;
     exp << QStringLiteral("pkcs12") << QStringLiteral("-export")
-        << QStringLiteral("-inkey") << keyFile
+        << QStringLiteral("-inkey") << QStringLiteral("/proc/self/fd/0")
         << QStringLiteral("-in")    << certFile
-        << QStringLiteral("-passout") << (QStringLiteral("pass:") + passphrase)
+        << QStringLiteral("-passout") << QStringLiteral("env:SFMAIL_PASS")
         << QStringLiteral("-out")   << p12File;
     QByteArray eo, ee;
-    if (!runOpenssl(exp, QByteArray(), &eo, &ee, 60000)) {
+    const bool packed = runOpenssl(exp, keyPem, &eo, &ee, 60000, passphrase);
+    keyPem.fill(0);
+    if (!packed) {
         emit importFinished(false, 0, QStringLiteral("openssl could not package the certificate: %1")
                             .arg(QString::fromUtf8(ee).trimmed()));
         return;
@@ -764,31 +777,27 @@ void SmimeEngine::importP12(const QString &p12Path, const QString &passphrase,
     const QString wd = tmp.path();
     const bool legacy = opensslHasLegacy();
 
-    // 1) Dump EVERYTHING (all certs + all private keys, unencrypted) from the .p12.
-    //    Volksverschlüsselung/Windows .p12 uses legacy algorithms → -legacy on
-    //    OpenSSL 3.x; without it on 1.1.x.
-    const QString allPem = wd + QStringLiteral("/all.pem");
+    // 1) Dump EVERYTHING (all certs + all private keys, unencrypted) from the .p12
+    //    — to STDOUT, captured in memory. The unencrypted keys never touch the
+    //    filesystem, and the passphrase travels via the environment, not argv
+    //    (/proc/<pid>/cmdline is world-readable). Volksverschlüsselung/Windows
+    //    .p12 uses legacy algorithms → -legacy on OpenSSL 3.x; without it on 1.1.x.
     QStringList dump;
     dump << QStringLiteral("pkcs12") << QStringLiteral("-in") << path
          << QStringLiteral("-nodes")
-         << QStringLiteral("-passin") << (QStringLiteral("pass:") + passphrase)
-         << QStringLiteral("-out") << allPem;
+         << QStringLiteral("-passin") << QStringLiteral("env:SFMAIL_PASS");
     if (legacy) dump << QStringLiteral("-legacy");
-    QByteArray oout, oerr;
-    if (!runOpenssl(dump, QByteArray(), &oout, &oerr)) {
+    QByteArray all, oerr;
+    if (!runOpenssl(dump, QByteArray(), &all, &oerr, 60000, passphrase)) {
         // Retry once with the opposite -legacy choice (covers version surprises).
         QStringList dump2 = dump;
         if (legacy) dump2.removeAll(QStringLiteral("-legacy")); else dump2 << QStringLiteral("-legacy");
-        if (!runOpenssl(dump2, QByteArray(), &oout, &oerr)) {
+        if (!runOpenssl(dump2, QByteArray(), &all, &oerr, 60000, passphrase)) {
             emit importFinished(false, 0, QStringLiteral("openssl could not read the .p12: %1")
                                 .arg(QString::fromUtf8(oerr).trimmed()));
             return;
         }
     }
-    QFile af(allPem);
-    if (!af.open(QIODevice::ReadOnly)) { emit importFinished(false, 0, QStringLiteral("cannot read dump")); return; }
-    const QByteArray all = af.readAll();
-    af.close();
 
     const QList<QByteArray> certs = pemBlocks(all, "CERTIFICATE");
     const QList<QByteArray> keys  = allPrivateKeys(all);
@@ -844,21 +853,21 @@ void SmimeEngine::importP12(const QString &p12Path, const QString &passphrase,
     for (int ki = 0; ki < keys.size(); ++ki) {
         const int ci = leafForKey[ki];
         if (ci < 0) { log(QStringLiteral("key %1: no matching cert, skipped").arg(ki)); continue; }
-        const QString keyFile  = wd + QStringLiteral("/key%1.pem").arg(ki);
         const QString certFile = wd + QStringLiteral("/cert%1.pem").arg(ki);
         const QString p12File  = wd + QStringLiteral("/key%1.p12").arg(ki);
-        { QFile f(keyFile);  if (f.open(QIODevice::WriteOnly)) { f.write(keys[ki]);  f.close(); } }
         { QFile f(certFile); if (f.open(QIODevice::WriteOnly)) { f.write(certs[ci]); f.close(); } }
 
+        // The unencrypted key goes to openssl via stdin (-inkey /proc/self/fd/0),
+        // never as a file; the new p12's passphrase via the environment, not argv.
         QStringList exp;
         exp << QStringLiteral("pkcs12") << QStringLiteral("-export")
-            << QStringLiteral("-inkey") << keyFile
+            << QStringLiteral("-inkey") << QStringLiteral("/proc/self/fd/0")
             << QStringLiteral("-in") << certFile;
         if (!chainPem.isEmpty()) exp << QStringLiteral("-certfile") << chainFile;
-        exp << QStringLiteral("-passout") << (QStringLiteral("pass:") + passphrase)
+        exp << QStringLiteral("-passout") << QStringLiteral("env:SFMAIL_PASS")
             << QStringLiteral("-out") << p12File;
         QByteArray eo, ee;
-        if (!runOpenssl(exp, QByteArray(), &eo, &ee)) {
+        if (!runOpenssl(exp, keys[ki], &eo, &ee, 60000, passphrase)) {
             log(QStringLiteral("key %1: repack failed: %2").arg(ki).arg(QString::fromUtf8(ee).trimmed()));
             continue;
         }
@@ -1517,11 +1526,11 @@ QByteArray SmimeEngine::signWithChain(const QByteArray &inner, const QString &si
     QByteArray dummy; QByteArray &err = errOut ? *errOut : dummy;
     QTemporaryDir td(m_home + QStringLiteral("/sign-XXXXXX"));
     if (!td.isValid()) { err = "no temp dir"; return QByteArray(); }
-    const QString p12f  = td.path() + QStringLiteral("/sign.p12");
-    const QString pemf  = td.path() + QStringLiteral("/sign.pem");
-    const QString certf = td.path() + QStringLiteral("/extra.pem");
-    const QString cf    = td.path() + QStringLiteral("/content");
-    const QString sigf  = td.path() + QStringLiteral("/sig.der");
+    const QString p12f    = td.path() + QStringLiteral("/sign.p12");
+    const QString signerf = td.path() + QStringLiteral("/signer.pem");
+    const QString certf   = td.path() + QStringLiteral("/extra.pem");
+    const QString cf      = td.path() + QStringLiteral("/content");
+    const QString sigf    = td.path() + QStringLiteral("/sig.der");
 
     // 1) Export the signing key+cert out of gpgsm as a (binary) PKCS#12. gpgsm
     //    protects the export with the SAME passphrase it reads from fd 0 to unlock.
@@ -1534,16 +1543,30 @@ QByteArray SmimeEngine::signWithChain(const QByteArray &inner, const QString &si
     }
     { QFile f(p12f); if (!f.open(QIODevice::WriteOnly)) { err = "write p12"; return QByteArray(); } f.write(p12); }
 
-    // 2) PKCS#12 → PEM (key + signer cert). gpgsm exports with legacy RC2, so OpenSSL
-    //    3.x needs -legacy to read it.
-    QStringList o; o << QStringLiteral("pkcs12") << QStringLiteral("-in") << p12f
-                     << QStringLiteral("-nodes");
-    if (opensslHasLegacy()) o << QStringLiteral("-legacy");
-    o << QStringLiteral("-passin") << (QStringLiteral("pass:") + passphrase)
-      << QStringLiteral("-out") << pemf;
-    QByteArray oo, oe;
-    if (!runOpenssl(o, QByteArray(), &oo, &oe, 30000) || !QFileInfo::exists(pemf)) {
-        err = (QStringLiteral("p12→pem failed: ") + QString::fromUtf8(oe).trimmed()).toUtf8(); return QByteArray();
+    // 2) PKCS#12 → key IN MEMORY (stdout capture) + signer cert on disk. The
+    //    unencrypted private key never touches the filesystem: -nocerts sends it
+    //    to stdout, and step 4 feeds it to cms via stdin. Only the (public)
+    //    signer cert is written out. The p12 on disk stays passphrase-protected.
+    //    gpgsm exports with legacy RC2, so OpenSSL 3.x needs -legacy to read it.
+    //    The passphrase travels via the environment, never on the command line.
+    QStringList ok_; ok_ << QStringLiteral("pkcs12") << QStringLiteral("-in") << p12f
+                         << QStringLiteral("-nocerts") << QStringLiteral("-nodes");
+    if (opensslHasLegacy()) ok_ << QStringLiteral("-legacy");
+    ok_ << QStringLiteral("-passin") << QStringLiteral("env:SFMAIL_PASS");
+    QByteArray keyPem, oe;
+    if (!runOpenssl(ok_, QByteArray(), &keyPem, &oe, 30000, passphrase)
+            || !keyPem.contains("PRIVATE KEY")) {
+        err = (QStringLiteral("p12→key failed: ") + QString::fromUtf8(oe).trimmed()).toUtf8(); return QByteArray();
+    }
+    QStringList oc; oc << QStringLiteral("pkcs12") << QStringLiteral("-in") << p12f
+                       << QStringLiteral("-nokeys");
+    if (opensslHasLegacy()) oc << QStringLiteral("-legacy");
+    oc << QStringLiteral("-passin") << QStringLiteral("env:SFMAIL_PASS")
+       << QStringLiteral("-out") << signerf;
+    QByteArray oo;
+    if (!runOpenssl(oc, QByteArray(), &oo, &oe, 30000, passphrase) || !QFileInfo::exists(signerf)) {
+        keyPem.fill(0);
+        err = (QStringLiteral("p12→cert failed: ") + QString::fromUtf8(oe).trimmed()).toUtf8(); return QByteArray();
     }
 
     // 3) Extra certs to embed: the sender's ENCRYPTION cert + ITS OWN issuer chain
@@ -1571,20 +1594,25 @@ QByteArray SmimeEngine::signWithChain(const QByteArray &inner, const QString &si
         }
     }
     for (const QString &fpr : want) extra += exportCert(fpr).toUtf8();
-    if (extra.isEmpty()) { err = "no encryption cert / chain to embed"; return QByteArray(); }
+    if (extra.isEmpty()) { keyPem.fill(0); err = "no encryption cert / chain to embed"; return QByteArray(); }
     { QFile f(certf); if (f.open(QIODevice::WriteOnly)) f.write(extra); }
     { QFile f(cf);    if (f.open(QIODevice::WriteOnly)) f.write(inner); }
 
     // 4) Opaque CMS signature with openssl, embedding -certfile. -binary keeps the
-    //    content byte-exact (no CRLF canonicalisation).
+    //    content byte-exact (no CRLF canonicalisation). The private key arrives on
+    //    stdin (-inkey /proc/self/fd/0) straight from memory — verified to work
+    //    with the bundled OpenSSL 3.5.6 on-device.
     QStringList s; s << QStringLiteral("cms") << QStringLiteral("-sign")
-                     << QStringLiteral("-signer") << pemf << QStringLiteral("-inkey") << pemf
+                     << QStringLiteral("-signer") << signerf
+                     << QStringLiteral("-inkey") << QStringLiteral("/proc/self/fd/0")
                      << QStringLiteral("-certfile") << certf
                      << QStringLiteral("-nodetach") << QStringLiteral("-binary")
                      << QStringLiteral("-outform") << QStringLiteral("DER")
                      << QStringLiteral("-in") << cf << QStringLiteral("-out") << sigf;
     QByteArray so, se;
-    if (!runOpenssl(s, QByteArray(), &so, &se, 60000) || !QFileInfo::exists(sigf)) {
+    const bool signedOk = runOpenssl(s, keyPem, &so, &se, 60000);
+    keyPem.fill(0);   // the only unencrypted copy of the key — wipe it
+    if (!signedOk || !QFileInfo::exists(sigf)) {
         err = (QStringLiteral("cms sign failed: ") + QString::fromUtf8(se).trimmed()).toUtf8(); return QByteArray();
     }
     QFile f(sigf);

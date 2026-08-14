@@ -160,9 +160,12 @@ private:
     // disable-crl-checks, batch). Returns true on exit 0; out/err filled.
     bool runGpgsm(const QStringList &args, const QByteArray &stdinData,
                   QByteArray *out, QByteArray *err, int timeoutMs = 60000);
-    // Run the system openssl. ok = exit 0.
+    // Run the system openssl. ok = exit 0. A non-empty passEnv is exported as
+    // SFMAIL_PASS for -passin/-passout env:SFMAIL_PASS — NEVER pass a passphrase
+    // as "pass:<x>" on the command line, /proc/<pid>/cmdline is world-readable.
     bool runOpenssl(const QStringList &args, const QByteArray &stdinData,
-                    QByteArray *out, QByteArray *err, int timeoutMs = 60000);
+                    QByteArray *out, QByteArray *err, int timeoutMs = 60000,
+                    const QString &passEnv = QString());
     // Does this openssl understand the -legacy flag (OpenSSL 3.x)?
     bool opensslHasLegacy();
 
