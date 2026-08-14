@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.8.0
+Version:    0.8.1
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -161,6 +161,16 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Fri Aug 14 2026 harbour-sfmail contributors 0.8.1-1
+- S/MIME hardening, prompted by an external review. Signing exported the private
+  key into a temporary unencrypted PEM file and passed passphrases to openssl as
+  "-passin pass:..." on the command line - and a process command line is readable
+  by every other process on the system. Passphrases now travel through the child
+  process environment only, and private key material no longer touches the disk
+  at all: it is piped between gpgsm and openssl in memory, in every path
+  (signing, .p12 import, certificate generation), and wiped after use. What
+  remains on disk is public certificates and the passphrase-protected .p12.
+
 * Fri Aug 14 2026 harbour-sfmail contributors 0.8.0-1
 - The bundled GnuPG stack moves from the end-of-life 2.2 line (2.2.43, no fixes
   since the end of 2024) to the maintained stable line: GnuPG 2.5.21 with
