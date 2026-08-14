@@ -73,6 +73,17 @@ build() { # dirname  url  [extra configure args...]
   cat > "$WORK/$dir/_xbuild.sh" <<EOF
 set -e
 export PKG_CONFIG_PATH="$SPX/lib/pkgconfig"
+# npth 1.8 no longer ships npth-config — only npth.pc. gnupg 2.5's configure
+# handles that, but only if it can reach gpgrt-config (libgpg-error's universal
+# replacement for the old per-library *-config scripts); without this variable it
+# falls back to the missing npth-config and aborts with "Required libraries not
+# found", pointing at nPth even though nPth is installed and fine.
+export GPGRT_CONFIG="$SPX/bin/gpgrt-config"
+# The anonymity sed above rewrites paths inside gpgme.texi, which makes the
+# shipped gpgme.info look outdated, so make wants to regenerate it — and the SDK
+# host has no makeinfo. We do not ship info pages anyway (they are deleted right
+# after install), so stub the generator out instead of adding a build dependency.
+export MAKEINFO=true
 export LDFLAGS="-Wl,-rpath,$PREFIX/lib -Wl,-rpath-link,$SPX/lib -L$SPX/lib"
 export CPPFLAGS="-I$SPX/include"
 sb2 -t "$TARGET" ./configure --prefix="$PREFIX" --disable-static --enable-shared \\
@@ -130,15 +141,47 @@ EOF
   echo ">> installed $dir into staging ($SPX)"
 }
 
-b_libgpgerror() { build libgpg-error-1.47 https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.47.tar.bz2 \
+# --- Version pins -----------------------------------------------------------
+# EXPERIMENT (2026-08-14): the shipped stack sits on gnupg 2.2.43, upstream EOL
+# since 2024-12-31, and misses CVE-2025-68973 (out-of-bounds write in the ARMOR
+# parser — our most exposed code path, every inline block and encrypted.asc from
+# a stranger goes through it). This tree moves gpg and the crypto libraries to
+# the maintained branch and deliberately LEAVES GPGME AT 1.18, so the Qt 5.6
+# patch set below (and with it the 0.5.0 QGpgME port) stays untouched.
+#
+# The one hard conflict, read out of both configure.ac files rather than guessed:
+#   gnupg 2.5.21 : NEED_LIBASSUAN_API=3, >= 3.0.0
+#   gpgme  1.18.0: NEED_LIBASSUAN_API=2, >= 2.4.2
+# They cannot share a header, but they CAN share a directory: the SONAMEs differ
+# (current-age = 9-0 → libassuan.so.9 vs 8-8 → libassuan.so.0). So libassuan 3 is
+# built first, gnupg links against it, and libassuan 2 is then installed OVER it
+# — that replaces assuan.h / libassuan.pc / libassuan-config (which only the
+# build needs) while both shared objects stay side by side for the device.
+# Hence the order in "all" below is load-bearing; do not sort it alphabetically.
+V_GPGERROR=1.61       # was 1.47   (gnupg 2.5 needs gpgrt >= 1.56)
+V_GCRYPT=1.12.2       # was 1.10.3 (gnupg 2.5 needs >= 1.11.0)
+V_ASSUAN3=3.0.2       # new, for gnupg
+V_ASSUAN2=2.5.7       # kept, for gpgme 1.18
+V_KSBA=1.8.0          # was 1.6.6
+V_NPTH=1.8            # was 1.6
+V_GNUPG=2.5.21        # was 2.2.43
+V_GPGME=1.18.0        # UNCHANGED on purpose — see above
+
+b_libgpgerror() { build libgpg-error-$V_GPGERROR https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-$V_GPGERROR.tar.bz2 \
     --enable-install-gpg-error-config; }
-b_libgcrypt()   { build libgcrypt-1.10.3   https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.10.3.tar.bz2; }
-b_libassuan()   { build libassuan-2.5.7    https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-2.5.7.tar.bz2; }
-b_libksba()     { build libksba-1.6.6      https://www.gnupg.org/ftp/gcrypt/libksba/libksba-1.6.6.tar.bz2; }
-b_npth()        { build npth-1.6           https://www.gnupg.org/ftp/gcrypt/npth/npth-1.6.tar.bz2; }
-b_gnupg()       { build gnupg-2.2.43       https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-2.2.43.tar.bz2 \
-    --disable-doc --disable-gpgtar --disable-wks-tools --disable-ldap --disable-ntbtls; }
-b_gpgme()       { build gpgme-1.18.0       https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.18.0.tar.bz2 \
+b_libgcrypt()   { build libgcrypt-$V_GCRYPT   https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-$V_GCRYPT.tar.bz2; }
+b_libassuan3()  { build libassuan-$V_ASSUAN3  https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-$V_ASSUAN3.tar.bz2; }
+b_libassuan2()  { build libassuan-$V_ASSUAN2  https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-$V_ASSUAN2.tar.bz2; }
+b_libksba()     { build libksba-$V_KSBA       https://www.gnupg.org/ftp/gcrypt/libksba/libksba-$V_KSBA.tar.bz2; }
+b_npth()        { build npth-$V_NPTH          https://www.gnupg.org/ftp/gcrypt/npth/npth-$V_NPTH.tar.bz2; }
+# Extra --disable flags over the 2.2 line: features 2.5 grew that a phone mail
+# client has no use for. keyboxd is switched off on purpose — it would move the
+# keyring behind a daemon, and existing pubring.kbx files must keep working.
+b_gnupg()       { build gnupg-$V_GNUPG        https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-$V_GNUPG.tar.bz2 \
+    --disable-doc --disable-gpgtar --disable-wks-tools --disable-ldap --disable-ntbtls \
+    --disable-tofu --disable-sqlite --disable-card-support --disable-scdaemon \
+    --disable-tpm2d --disable-keyboxd --disable-photo-viewers; }
+b_gpgme()       { build gpgme-$V_GPGME        https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-$V_GPGME.tar.bz2 \
     --disable-gpg-test --enable-languages=cpp,qt; }
 
 # Files that are NOT built here but belong to a complete stack (openssl and its
@@ -158,8 +201,18 @@ install_extras() {
 # these looks fine until a feature quietly stops working at runtime.
 check_manifest() {
   local missing=""
-  local required="bin/gpg bin/gpgsm bin/gpgconf bin/gpg-agent bin/dirmngr
-                  lib/libgpg-error.so.0 lib/libgcrypt.so.20 lib/libassuan.so.0
+  # Both libassuan runtimes have to be here: .so.9 is what gpg/gpgsm/gpg-agent
+  # link against, .so.0 is what gpgme 1.18 links against. Losing either one
+  # breaks a different half of the app, and only at runtime.
+  # dirmngr is NOT in this list any more: gnupg 2.5 only builds it when a TLS
+  # backend (ntbtls or gnutls) is present, and we build with neither. Nothing in
+  # the app needs it — keyserver lookups go through the app's own HTTPS code
+  # (QNetworkAccessManager → keys.openpgp.org), and gpgsm runs with
+  # --disable-crl-checks. Watch for it during the S/MIME device test: if gpgsm
+  # starts complaining about a missing dirmngr, build ntbtls and put it back.
+  local required="bin/gpg bin/gpgsm bin/gpgconf bin/gpg-agent
+                  lib/libgpg-error.so.0 lib/libgcrypt.so.20
+                  lib/libassuan.so.0 lib/libassuan.so.9
                   lib/libksba.so.8 lib/libnpth.so.0 lib/libgpgme.so.11"
   # S/MIME is aarch64-only by design; armv7hl never carried openssl.
   [ "$ARCH" = "aarch64" ] && required="$required bin/openssl bin/pinentry lib/ossl-modules/legacy.so"
@@ -177,14 +230,20 @@ check_manifest() {
 case "${1:-all}" in
   libgpg-error) b_libgpgerror ;;
   libgcrypt)    b_libgcrypt ;;
-  libassuan)    b_libassuan ;;
+  libassuan3)   b_libassuan3 ;;
+  libassuan2)   b_libassuan2 ;;
   libksba)      b_libksba ;;
   npth)         b_npth ;;
   gnupg)        b_gnupg ;;
   gpgme)        b_gpgme ;;
   extras)       install_extras ;;
   check)        check_manifest ;;
-  all)          b_libgpgerror; b_libgcrypt; b_libassuan; b_libksba; b_npth; b_gnupg; b_gpgme
+  # Order matters: libassuan 3 → gnupg → libassuan 2 → gpgme. See the note at
+  # the version pins; building gpgme before libassuan 2 is installed picks up the
+  # API-3 header and fails, and rebuilding gnupg after it does the same.
+  all)          b_libgpgerror; b_libgcrypt; b_libksba; b_npth
+                b_libassuan3; b_gnupg
+                b_libassuan2; b_gpgme
                 install_extras; check_manifest
                 echo "=== full stack staged under $SPX ===" ;;
   *) echo "unknown component: $1"; exit 1 ;;

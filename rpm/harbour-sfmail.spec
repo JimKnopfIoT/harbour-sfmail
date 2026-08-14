@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.7.1
+Version:    0.8.0
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -54,10 +54,15 @@ install -m 644 rpm/EmailUi.permission \
 # back to LD_LIBRARY_PATH (set by the plugin) → our own gpg/lib.
 # The stack is architecture-specific (cross-built per target).
 %ifarch armv7hl armv7l
-%define stackstage stack/stage-armv7hl
+%define stackstage stack/stage-modern-armv7hl
 %else
-%define stackstage stack/stage-aarch64
+%define stackstage stack/stage-modern-aarch64
 %endif
+# The switchboard the D-Bus activation entry points at; the About -> System
+# switch writes the marker file it reads (absent = ON, see rpm/mailui-dispatch).
+install -D -m 755 rpm/mailui-dispatch \
+    %{buildroot}%{_datadir}/%{name}/bin/mailui-dispatch
+
 mkdir -p %{buildroot}%{_datadir}/%{name}/gpg
 cp -a %{stackstage}/usr/share/harbour-sfmail-pgp/bin \
       %{stackstage}/usr/share/harbour-sfmail-pgp/lib \
@@ -120,7 +125,7 @@ cat > %{emailsvc} <<'SFMAIL_EOF'
 [D-BUS Service]
 Interface=/com/jolla/email/ui
 Name=com.jolla.email.ui
-Exec=/usr/bin/sailjail -p %{name}.desktop %{_bindir}/%{name}
+Exec=%{_datadir}/%{name}/bin/mailui-dispatch
 SFMAIL_EOF
 
 # A jolla-email update reinstalls its own copy of the service file and would
@@ -134,7 +139,7 @@ cat > %{emailsvc} <<'SFMAIL_EOF'
 [D-BUS Service]
 Interface=/com/jolla/email/ui
 Name=com.jolla.email.ui
-Exec=/usr/bin/sailjail -p %{name}.desktop %{_bindir}/%{name}
+Exec=%{_datadir}/%{name}/bin/mailui-dispatch
 SFMAIL_EOF
 
 %postun
@@ -156,6 +161,22 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Fri Aug 14 2026 harbour-sfmail contributors 0.8.0-1
+- The bundled GnuPG stack moves from the end-of-life 2.2 line (2.2.43, no fixes
+  since the end of 2024) to the maintained stable line: GnuPG 2.5.21 with
+  current libgcrypt, libksba, libgpg-error, npth and libassuan. This closes
+  CVE-2025-68973, an out-of-bounds write in the armor parser - the code path
+  every incoming encrypted or signed message walks through. Keyrings are
+  untouched; existing keys keep working.
+- Backing up a secret key to Documents works again. It had been broken since the
+  0.5.0 engine port (the export called an API that refuses secret material) and
+  the error was misreported as a wrong passphrase.
+- The notification hand-off is now a switch (About -> System), default on.
+  Switching it off hands "new mail" taps, mailto: links and "share via email"
+  back to the client that owned them before this package was installed.
+- Completed the German translation (43 missing strings) and silenced a bogus
+  gpgsm version complaint in the journal.
+
 * Fri Aug 14 2026 harbour-sfmail contributors 0.7.1-1
 - Fixed the crash that could take the app down after reading a message. Deleting
   several messages right after opening one killed the app at the end of the

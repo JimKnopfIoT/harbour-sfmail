@@ -88,6 +88,21 @@ Page {
                 value: Gpg.gnupgHome
             }
 
+            SectionHeader { text: qsTr("System") }
+            // ON by default — taking over the mail notifications has been this
+            // package's behaviour since 0.5.1, so an update must not change it.
+            // Switching it off hands notifications, mailto: and "share via email"
+            // back to whoever owned them before this package was installed.
+            TextSwitch {
+                text: qsTr("Open mail notifications in this app")
+                description: EmailUi.takeoverEnabled && !EmailUi.takeoverActive
+                    ? qsTr("Switched on, but the other mail client is holding the connection right now — this takes effect once it is closed.")
+                    : qsTr("Takes over mail notifications, mailto: links and \"share via email\". Off means the client you used before keeps them.")
+                automaticCheck: false
+                checked: EmailUi.takeoverEnabled
+                onClicked: EmailUi.takeoverEnabled = !EmailUi.takeoverEnabled
+            }
+
             SectionHeader { text: qsTr("Diagnostics") }
             TextSwitch {
                 text: qsTr("Debug logging")

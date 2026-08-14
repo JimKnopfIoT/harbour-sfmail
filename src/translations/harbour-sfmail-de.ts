@@ -63,7 +63,7 @@
         <source>Write a debug.log in the app's data folder to help diagnose problems. Turn it off for normal use; it has no effect on your mail or keys.</source>
         <translation>Schreibt eine debug.log im Datenordner der App zur Fehlersuche. Für den normalen Gebrauch ausschalten; hat keinen Einfluss auf deine Mails oder Schlüssel.</translation>
     </message>
-</context>
+<message><source>System</source><translation>System</translation></message><message><source>Open mail notifications in this app</source><translation>Mail-Benachrichtigungen in dieser App öffnen</translation></message><message><source>Switched on, but the other mail client is holding the connection right now — this takes effect once it is closed.</source><translation>Eingeschaltet, aber das andere Mail-Programm hält die Verbindung gerade noch — wirksam, sobald es geschlossen wird.</translation></message><message><source>Takes over mail notifications, mailto: links and "share via email". Off means the client you used before keeps them.</source><translation>Übernimmt Mail-Benachrichtigungen, mailto:-Links und „Per E-Mail teilen“. Aus bedeutet: das zuvor genutzte Programm behält sie.</translation></message></context>
 <context>
     <name>ComposerPage</name>
     <message>
@@ -842,15 +842,15 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     <name>KeyImportDialog</name>
     <message>
         <source>Re-import</source>
-        <translation type="unfinished" />
+        <translation>Erneut importieren</translation>
     </message>
     <message>
         <source>Import anyway</source>
-        <translation type="unfinished">Trotzdem importieren</translation>
+        <translation>Trotzdem importieren</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished">Importieren</translation>
+        <translation>Importieren</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -858,65 +858,67 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>Import public key?</source>
-        <translation type="unfinished" />
+        <translation>Öffentlichen Schlüssel importieren?</translation>
     </message>
     <message>
         <source>(no user id)</source>
-        <translation type="unfinished" />
+        <translation>(keine Benutzerkennung)</translation>
     </message>
     <message>
         <source>Key ID</source>
-        <translation type="unfinished">Schlüssel-ID</translation>
+        <translation>Schlüssel-ID</translation>
     </message>
     <message>
         <source>Fingerprint</source>
-        <translation type="unfinished" />
+        <translation>Fingerabdruck</translation>
     </message>
     <message>
         <source>Algorithm</source>
-        <translation type="unfinished">Algorithmus</translation>
+        <translation>Algorithmus</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation type="unfinished">Erstellt</translation>
+        <translation>Erstellt</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation type="unfinished">Läuft ab</translation>
+        <translation>Läuft ab</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished" />
+        <translation>nie</translation>
     </message>
     <message>
         <source>⚠ This key has been REVOKED by its owner. It should not be used to encrypt — import only to read old messages or to verify old signatures.</source>
-        <translation type="unfinished" />
+        <translation>⚠ Dieser Schlüssel wurde vom Besitzer WIDERRUFEN. Zum Verschlüsseln sollte er nicht mehr benutzt werden — nur importieren, um alte Nachrichten zu lesen oder alte Signaturen zu prüfen.</translation>
     </message>
     <message>
         <source>This key is EXPIRED. You cannot encrypt to it until the owner extends it.</source>
-        <translation type="unfinished" />
+        <translation>Dieser Schlüssel ist ABGELAUFEN. An ihn kann erst wieder verschlüsselt werden, wenn der Besitzer ihn verlängert.</translation>
     </message>
     <message>
         <source>You already have a DIFFERENT key for %1:
 0x%2  (%3)
 Importing adds a SECOND key for this address — make sure this new key is genuine before you trust it.</source>
-        <translation type="unfinished" />
+        <translation>Du hast bereits einen ANDEREN Schlüssel für %1:
+0x%2  (%3)
+Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewissere dich, dass der neue echt ist, bevor du ihm vertraust.</translation>
     </message>
     <message>
         <source>This exact key is already in your keyring. Re-importing just refreshes it (e.g. new signatures or a longer expiry).</source>
-        <translation type="unfinished" />
+        <translation>Genau dieser Schlüssel ist bereits in deinem Schlüsselbund. Ein erneuter Import frischt ihn nur auf (z. B. neue Signaturen oder eine längere Gültigkeit).</translation>
     </message>
     <message>
         <source>This key is new and valid. Verify the fingerprint with the owner through a separate channel before you rely on it.</source>
-        <translation type="unfinished" />
+        <translation>Dieser Schlüssel ist neu und gültig. Prüfe den Fingerabdruck mit dem Besitzer über einen getrennten Kanal, bevor du dich darauf verlässt.</translation>
     </message>
     <message>
         <source>⚠ This key is NOT issued for the sender's address (%1). Its addresses are: %2. Only import it if you are sure it really is this sender's key.</source>
-        <translation type="unfinished" />
+        <translation>⚠ Dieser Schlüssel ist NICHT für die Absenderadresse (%1) ausgestellt. Seine Adressen sind: %2. Nur importieren, wenn du sicher bist, dass es wirklich der Schlüssel dieses Absenders ist.</translation>
     </message>
     <message>
         <source>✓ This key belongs to the sender's address (%1).</source>
-        <translation type="unfinished" />
+        <translation>✓ Dieser Schlüssel gehört zur Absenderadresse (%1).</translation>
     </message>
 </context>
 <context>
@@ -1148,7 +1150,7 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
     <message>
         <source>Inbox</source>
-        <translation type="unfinished">Posteingang</translation>
+        <translation>Posteingang</translation>
     </message>
 </context>
 <context>
@@ -1275,7 +1277,7 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
     <message>
         <source>(header only)</source>
-        <translation type="unfinished" />
+        <translation>(nur Header)</translation>
     </message>
     <message>
         <source>Move to folder…</source>
@@ -1502,7 +1504,7 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
     <message>
         <source>Import sender's key</source>
-        <translation type="unfinished" />
+        <translation>Absender-Schlüssel importieren</translation>
     </message>
     <message>
         <source>Unusually large attachment detected. Expecting a larger e-mail? You can load it once without the size limit.</source>
@@ -1546,15 +1548,15 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     </message>
     <message>
         <source>Pull down “Download full message” to load the attachment(s).</source>
-        <translation type="unfinished" />
+        <translation>Zum Laden der Anhänge oben „Ganze Nachricht laden“ ziehen.</translation>
     </message>
     <message>
         <source>Downloading attachment…</source>
-        <translation type="unfinished" />
+        <translation>Anhang wird heruntergeladen…</translation>
     </message>
     <message>
         <source>Could not load the attachment</source>
-        <translation type="unfinished" />
+        <translation>Anhang konnte nicht geladen werden</translation>
     </message>
     <message>
         <source>Could not open the attachment</source>
@@ -1979,11 +1981,11 @@ Schlüsselbund: %2</translation>
     </message>
     <message>
         <source>Delete certificate + private key</source>
-        <translation type="unfinished" />
+        <translation>Zertifikat + privaten Schlüssel löschen</translation>
     </message>
     <message>
         <source>Delete certificate</source>
-        <translation type="unfinished" />
+        <translation>Zertifikat löschen</translation>
     </message>
     <message>
         <source>Deleting certificate</source>
@@ -2078,69 +2080,69 @@ Schlüsselbund: %2</translation>
     </message>
     <message>
         <source>Encryption info</source>
-        <translation type="unfinished">Verschlüsselungs-Info</translation>
+        <translation>Verschlüsselungs-Info</translation>
     </message>
     <message>
         <source>You (your certificate — decryptable)</source>
-        <translation type="unfinished" />
+        <translation>Du (dein Zertifikat — entschlüsselbar)</translation>
     </message>
     <message>
         <source>Recipient (cert not in your store)</source>
-        <translation type="unfinished" />
+        <translation>Empfänger (Zertifikat nicht in deinem Bestand)</translation>
     </message>
     <message>
         <source>Other recipient</source>
-        <translation type="unfinished" />
+        <translation>Weiterer Empfänger</translation>
     </message>
     <message>
         <source>Copy all to clipboard</source>
-        <translation type="unfinished" />
+        <translation>Alles in die Zwischenablage kopieren</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished">Format</translation>
+        <translation>Format</translation>
     </message>
     <message>
         <source>No encryption</source>
-        <translation type="unfinished" />
+        <translation>Keine Verschlüsselung</translation>
     </message>
     <message>
         <source>This message is not encrypted.</source>
-        <translation type="unfinished" />
+        <translation>Diese Nachricht ist nicht verschlüsselt.</translation>
     </message>
     <message>
         <source>Encrypted to %1 certificate(s)</source>
-        <translation type="unfinished" />
+        <translation>Verschlüsselt an %1 Zertifikat(e)</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation type="unfinished">(kein Betreff)</translation>
+        <translation>(kein Betreff)</translation>
     </message>
     <message>
         <source>Key usage: </source>
-        <translation type="unfinished" />
+        <translation>Schlüsselverwendung: </translation>
     </message>
     <message>
         <source>Signature certificate(s): %1</source>
-        <translation type="unfinished" />
+        <translation>Signatur-Zertifikat(e): %1</translation>
     </message>
     <message>
         <source>issued by: </source>
-        <translation type="unfinished" />
+        <translation>ausgestellt von: </translation>
     </message>
     <message>
         <source>Debug</source>
-        <translation type="unfinished" />
+        <translation>Debug</translation>
     </message>
     <message>
         <source>Hide debug info</source>
-        <translation type="unfinished" />
+        <translation>Debug-Infos ausblenden</translation>
     </message>
     <message>
         <source>Show debug info</source>
-        <translation type="unfinished" />
+        <translation>Debug-Infos anzeigen</translation>
     </message>
-</context>
+<message><source>Blind copy — named in no header of this message:</source><translation>Blindkopie — in keiner Kopfzeile dieser Nachricht genannt:</translation></message></context>
 <context>
     <name>TemplatesPage</name>
     <message>

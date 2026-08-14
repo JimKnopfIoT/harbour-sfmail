@@ -1,0 +1,346 @@
+#!/bin/sh
+# gpg-authcode-sign.sh - Wrapper for osslsigncode
+# Copyright (C) 2024 g10 Code GmbH
+#
+# This file is free software; as a special exception the author gives
+# unlimited permission to copy and/or distribute it, with or without
+# modifications, as long as this notice is preserved.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+VERSION=2026-06-11
+PGM=gpg-authcode-sign.sh
+
+set -e
+
+usage()
+{
+    cat <<EOF
+Usage: $PGM [OPTIONS]  FILE_TO_SIGN  SIGNED_FILE
+       $PGM [OPTIONS] --in-place FILE_TO_SIGN
+Options:
+        --desc=STRING   Include STRING as description (default=$desc)
+        --url=STRING    Include STRING as URL (default=$url)
+        --stamp         Use a stamp file to avoid double signing
+                        This also keeps the signing log on success.
+        --in-place,-i   Sign in-place
+        --dry-run,-n    Do not actually run osslsigncode
+                        (same as GPG_AUTHCODE_SIGN_MODE=disable)
+        --template      Print a template for ~/.gnupg-autogenrc
+        --version       Print version and exit
+EOF
+    exit $1
+}
+
+
+# The information required to sign the tarballs and binaries
+# are expected in the developer specific file ~/.gnupg-autogen.rc".
+# Here is an example:
+print_autogenrc_template()
+{
+cat <<EOF
+# Location of the released tarball archives.  Note that this is an
+# internal archive and before uploading this to the public server,
+# manual tests should be run and the git release tagged and pushed.
+# This is greped by the Makefile.
+RELEASE_ARCHIVE=foo@somehost:tarball-archive
+
+# The key used to sign the GnuPG sources.
+# This is greped by the Makefile.
+RELEASE_SIGNKEY=6DAA6E64A76D2840571B4902528897B826403ADA
+
+# The key used to sign the VERSION files of some MSI installers.
+VERSION_SIGNKEY=02F38DFF731FF97CB039A1DA549E695E905BA208
+
+# For signing Windows binaries we need to employ a Windows machine.
+# We connect to this machine via ssh and take the connection
+# parameters via .ssh/config. For example a VM could be specified
+# like this:
+#
+#   Host authenticode-signhost
+#        HostName localhost
+#        Port 27042
+#        User gpgsign
+#
+# Depending on the used token it might be necessary to allow single
+# signon and unlock the token before running the make.  The following
+# variable references this entry.  This is greped by the Makefile.
+# To enable this use authenticode-signhost as value.
+AUTHENTICODE_SIGNHOST=
+
+# The name of the signtool as used on Windows.
+# This is greped by the Makefile.
+AUTHENTICODE_TOOL="C:\Program Files (x86)\Windows Kits\10\bin\signtool.exe"
+
+# The URL for the timestamping service
+AUTHENTICODE_TSURL=http://rfc3161timestamp.globalsign.com/advanced
+
+# To use osslsigncode the following entries are required and
+# an empty string must be given for AUTHENTICODE_SIGNHOST.
+# They are greped by the Makefile.  For example:
+#AUTHENTICODE_KEY=<generated>/my-authenticode-key.p12
+#AUTHENTICODE_CERTS=<generated>/my-authenticode-certs.pem
+
+# If a smartcard is used for the Authenticode signature these
+# entries are required instead (remove comment).
+#AUTHENTICODE_KEY=card
+AUTHENTICODE_CERTS=<generated>/my_authenticode_cert.pem
+OSSLSIGNCODE=/usr/bin/osslsigncode
+OSSLPKCS11ENGINE=/usr/lib/x86_64-linux-gnu/engines-1.1/pkcs11.so
+SCUTEMODULE=/usr/local/lib/scute.so
+
+# Signing can also be disabled:
+AUTHENTICODE_KEY=none
+
+#
+EOF
+}
+
+
+autogenrc="$HOME/.gnupg-autogen.rc"
+dryrun=
+inplace=
+stamp=
+buildtype=
+# Set defaults according to our build system.
+if [ -n "$abs_top_srcdir" ] && [ -f "$abs_top_srcdir/packages/BUILDTYPE" ]; then
+    buildtype=$(cat "$abs_top_srcdir/packages/BUILDTYPE")
+elif [ -f "../packages/BUILDTYPE" ]; then
+    buildtype=$(cat "../packages/BUILDTYPE")
+elif [ -f "packages/BUILDTYPE" ]; then
+    buildtype=$(cat "packages/BUILDTYPE")
+fi
+case "$buildtype" in
+    vsd)
+      desc="GnuPG VS-Desktop"
+      url="https://gnupg.com"
+      ;;
+    gpd)
+      desc="GnuPG Desktop"
+      url="https://gnupg.com"
+      ;;
+    default|gpg4win)
+      desc="Gpg4win"
+      url="https://gpg4win.org"
+      ;;
+    *)
+      desc="GnuPG"
+      url="https://gnupg.org"
+      ;;
+esac
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+	--*=*)
+	    optarg=`echo "$1" | sed 's/[-_a-zA-Z0-9]*=//'`
+	    ;;
+	*)
+	    optarg=""
+	    ;;
+    esac
+
+    case $1 in
+	--desc=*)
+	    desc="$optarg"
+	    ;;
+	--url=*)
+	    url="$optarg"
+	    ;;
+	--dry-run|-n)
+	    dryrun=yes
+	    ;;
+	--in-place|-i)
+	    inplace=yes
+	    ;;
+	--stamp)
+	    stamp=yes
+	    ;;
+	--help|-h)
+	    usage 0
+	    ;;
+        --version)
+            echo $VERSION
+            exit 0
+            ;;
+        --template)
+            print_autogenrc_template
+            exit 0
+            ;;
+	--*)
+	    usage 1 1>&2
+	    ;;
+	*)
+	    break
+	    ;;
+    esac
+    shift
+done
+
+if [ "$inplace" = yes ]; then
+  if [ $# -ne 1 ]; then
+      usage 1 1>&2
+  fi
+  inname="$1"
+  outname="$1"
+else
+  if [ $# -ne 2 ]; then
+      usage 1 1>&2
+  fi
+  inname="$1"
+  outname="$2"
+fi
+
+
+if [ ! -f $autogenrc ]; then
+    echo >&2 "$PGM: error: '$autogenrc' missing"
+    echo >&2 "$PGM: hint: use option --template"
+    exit 1
+fi
+
+[ "$GPG_AUTHCODE_SIGN_MODE" = "disable" ] && dryrun=yes
+[ "$GPG_AUTHCODE_SIGN_MODE" = "stamp" ] && stamp=yes
+
+
+# Define the cleanup routine for osslsigncode
+cleanup()
+{
+    if [ -n "$outname" ] && [ -f "${outname}.tmp" ]; then
+        echo >&2 "Cleaning up: Removing ${outname}.tmp"
+        rm -f "${outname}.tmp"
+    fi
+    if [ -n "$outname" ] && [ -f "${outname}.tmp.log" ]; then
+        echo >&2 "Cleaning up: Removing ${outname}.tmp.log"
+        rm -f "${outname}.tmp.log"
+    fi
+}
+
+# Trap common signals and exit to run the cleanup
+trap cleanup 0 INT TERM
+
+for v in AUTHENTICODE_SIGNHOST AUTHENTICODE_TOOL AUTHENTICODE_TSURL \
+         AUTHENTICODE_KEY AUTHENTICODE_CERTS VERSION_SIGNKEY \
+         OSSLSIGNCODE OSSLPKCS11ENGINE SCUTEMODULE ; do
+    eval $v=$(grep '^[[:blank:]]*'$v'[[:blank:]]*=' "$autogenrc"|cut -d= -f2\
+                  |sed -e 's,\\,\\\\,g'| sed -e 's,^",'\', -e 's,"$,'\',)
+done
+
+if [ ! -f "$inname" ]; then
+    echo >&2 "$PGM: error: '$inname' does not exist"
+    exit 1
+fi
+
+# Check whether it has already been signed
+if [ "$stamp" = yes ]; then
+    if [ "$outname.asig-done" -nt "$outname" ]; then
+        echo >&2 "$PGM: file is '$outname' is already signed"
+        exit 0
+    fi
+fi
+
+# Initial wait time for the next try (needs to be larger than 2).
+waittime=2
+
+# Delete a stale log file.
+[ -f "$outname.tmp.log" ] && rm "$outname.tmp.log"
+
+if [ -n "$dryrun" ]; then
+
+    echo >&2 "$PGM: would sign: '$inname' to '$outname'"
+
+elif [ $(wc -c < "$inname" ) -lt 256 ]; then
+
+    echo >&2 "$PGM: skipping '$inname' which is too short"
+
+elif [ -n "$AUTHENTICODE_SIGNHOST" ]; then
+
+    echo >&2 "$PGM: Signing via host $AUTHENTICODE_SIGNHOST"
+
+    scp "$inname" "$AUTHENTICODE_SIGNHOST:a.exe"
+    # Invoke command on Windows via ssh
+    ssh "$AUTHENTICODE_SIGNHOST" \""$AUTHENTICODE_TOOL"\" sign \
+        /v /sm \
+        /a /n '"g10 Code GmbH"' \
+        /tr \""$AUTHENTICODE_TSURL"\" /td sha256 \
+        /d \""$desc"\" \
+        /fd sha256 /du https://gnupg.com a.exe
+     scp "$AUTHENTICODE_SIGNHOST:a.exe" "$outname"
+
+elif [ "$AUTHENTICODE_KEY" = card ]; then
+
+    echo >&2 "$PGM: Signing using a card: '$inname'"
+
+    if echo "$inname" | egrep 'dll-e?x$' >/dev/null ; then
+        # osslsignecode does not like *.dll-x and *.dll-ex
+        cp "$inname" "$inname.tmp.dll"
+        inname="$inname.tmp.dll"
+    fi
+
+    while ! "$OSSLSIGNCODE" sign \
+       -pkcs11engine "$OSSLPKCS11ENGINE" \
+       -pkcs11module "$SCUTEMODULE" \
+       -certs "$AUTHENTICODE_CERTS" \
+       -h sha256 -n "$desc" -i "$url" \
+       -ts "$AUTHENTICODE_TSURL" \
+       -in "$inname" -out "$outname.tmp" 2> $outname.tmp.log ; do
+      cat >&2 $outname.tmp.log
+      if ! grep 'HTTP status 500' $outname.tmp.log >/dev/null ; then
+        echo >&2 "$PGM: signing failed - see above"
+        exit 2
+      fi
+      if [ $waittime -ge 32 ]; then
+        echo >&2 "$PGM: signing failed - giving up"
+        exit 2
+      fi
+      echo >&2 "$PGM: signing failed - waiting ${waittime}s before next try"
+      sleep $waittime
+      waittime=$(( $waittime * 2 ))
+    done
+    [ -f "$inname.tmp.dll" ] && rm "$inname.tmp.dll"
+    cp "$outname.tmp" "$outname"
+    rm "$outname.tmp"
+
+elif [ "$AUTHENTICODE_KEY" = none ]; then
+
+    echo >&2 "$PGM: Signing disabled; would sign: '$inname'"
+    [ "$inname" != "$outname" ] && cp "$inname" "$outname"
+
+elif [ -n $(echo "$AUTHENTICODE_KEY" | egrep "\.(pfx|p12)$") ]; then
+
+    echo >&2 "$PGM: Signing using PKCS#12 container $AUTHENTICODE_KEY"
+    osslsigncode sign -certs "$AUTHENTICODE_CERTS" \
+       -pkcs12 "$AUTHENTICODE_KEY" -askpass \
+       -ts "$AUTHENTICODE_TSURL" \
+       -h sha256 -n "$desc" -i "$url" \
+       -in "$inname" -out "$outname.tmp"
+       cp "$outname.tmp" "$outname"
+       rm "$outname.tmp"
+
+else
+
+    echo >&2 "$PGM: Signing using unprotected key $AUTHENTICODE_KEY"
+    osslsigncode sign -certs "$AUTHENTICODE_CERTS" \
+       -key "$AUTHENTICODE_KEY" \
+       -ts "$AUTHENTICODE_TSURL" \
+       -h sha256 -n "$desc" -i "$url" \
+       -in "$inname" -out "$outname.tmp"
+       cp "$outname.tmp" "$outname"
+       rm "$outname.tmp"
+
+fi
+
+if [ -z "$dryrun" ]; then
+    if [ "$stamp" = yes ]; then
+        if [ -f "$outname.tmp.log" ]; then
+            echo >&2 "$PGM: using log as stamp file '$outname.asig-done'"
+            mv "$outname.tmp.log" "$outname.asig-done"
+        else
+            echo >&2 "$PGM: creating stamp file '$outname.asig-done'"
+            touch "$outname.asig-done"
+        fi
+    fi
+    echo >&2 "$PGM: signed file is '$outname'"
+fi
+
+# eof

@@ -22,13 +22,29 @@ class QQuickView;
 class EmailUi : public QObject
 {
     Q_OBJECT
+    // About → System. "enabled" is what the user asked for and is persisted;
+    // "owned" is what we actually got. They differ while the other client still
+    // holds the name — the UI says so instead of pretending the switch failed.
+    Q_PROPERTY(bool takeoverEnabled READ takeoverEnabled WRITE setTakeoverEnabled NOTIFY takeoverChanged)
+    Q_PROPERTY(bool takeoverActive READ takeoverActive NOTIFY takeoverChanged)
 public:
     explicit EmailUi(QQuickView *view, QObject *parent = nullptr);
 
-    // Claims the bus name. Returns false if someone else already owns it (the
-    // stock client is running); the app then just behaves as it did before —
-    // losing the notification hand-off is not a reason to fail startup.
+    // Claims the bus name IF the user has switched the hand-off on. Returns
+    // false if it is off, or if someone else already owns it (the other client
+    // is running); the app then just behaves as it did before — losing the
+    // notification hand-off is not a reason to fail startup.
     bool registerService();
+
+    bool takeoverEnabled() const;
+    void setTakeoverEnabled(bool on);
+    bool takeoverActive() const { return m_owned; }
+
+    // Where the marker lives that the app and the D-Bus dispatcher script share.
+    // A plain file rather than a key in signed.ini: the dispatcher is /bin/sh and
+    // has to read this on every activation, and "1" is harder to misparse than an
+    // INI section. Absent = off, which is what a fresh install ships.
+    static QString statePath();
 
     // A notification tap usually ACTIVATES us via D-Bus, so the method call beats
     // the QML engine to the finish line. Everything that arrives before QML says
@@ -48,6 +64,7 @@ public slots:
     void activateWindow(const QStringList &dummy);
 
 signals:
+    void takeoverChanged();
     void openMessageRequested(int messageId);
     void openCombinedInboxRequested();
     void openInboxRequested(int accountId);
@@ -61,6 +78,7 @@ private:
 
     QQuickView *m_view;
     bool m_ready;
+    bool m_owned;               // do we currently hold com.jolla.email.ui?
     QVector<QPair<QString, QVariantList> > m_pending;
 };
 
