@@ -51,6 +51,45 @@ installed. (If both are running, whichever claimed the name first keeps it.)
 and remains available under [Releases](../../releases). It has the same features
 otherwise; only the notification hand-off is missing.
 
+## Blind copies and encrypted subjects (new in 0.6.9 — visible to your recipients)
+
+Encryption protects the body, not the envelope. Two consequences used to leak, and
+0.6.9 changes both — in ways your correspondents will notice.
+
+**Blind copies.** A single encrypted message names **every** recipient key in the
+clear: OpenPGP writes one key packet per recipient, S/MIME one `RecipientInfo` per
+certificate. Anyone who receives such a message can read that list — so a blind copy
+was only blind in the headers. SF-Mail therefore sends **one message per audience**:
+the open recipients get theirs, every blind copy gets its own, each encrypted only to
+the keys that belong in it. No recipient learns of any other, not even how many there
+were.
+
+What you will notice:
+
+- Sending to blind copies produces **one message per blind recipient** in *Sent*.
+- A blind copy needs the recipient's key or certificate, like any other. Without it
+  the message is **not sent** — SF-Mail never falls back to plain text silently.
+- **Inline PGP cannot do this** (one armoured block, one message) and refuses a blind
+  copy; use PGP/MIME.
+
+**Encrypted subject.** The subject travelled in the clear past every server on the
+way, which often says more than the body. Encrypted mail now carries the real subject
+**inside** the encryption ([protected
+headers](https://datatracker.ietf.org/doc/html/draft-ietf-lamps-header-protection),
+as Thunderbird does) and shows `...` on the outside. The same mechanism carries the
+recipients, so a blind copy still sees whom the message was addressed to.
+
+The price is real and worth knowing before you use it:
+
+- Clients that do not implement protected headers (Outlook, for example) show `...`
+  as the subject, and their replies come back as `Re: ...`.
+- Server-side search and threading only ever see the placeholder.
+- In the message list SF-Mail also shows `...` until the message is decrypted; the
+  real subject appears when you open it.
+
+Signed-only mail is unaffected — there is nothing to hide from someone who can read
+the body anyway.
+
 ## Features
 
 - Accounts + per-account folder list (swipe left in a mailbox), combined inbox
@@ -59,6 +98,8 @@ otherwise; only the notification hand-off is missing.
   only the sender's IP/domain are ever looked up, nothing of yours)
 - Attachments (plain, PGP and S/MIME) with their size — **open with…** or
   **save as…** to a folder you pick; large attachments download on demand
+- **Blind copies stay blind** — one message per audience, so no recipient can read
+  the others off the encryption; encrypted subjects via protected headers (see above)
 - **OpenPGP** — encrypt (+ optional sign), decrypt by tap (PGP/MIME with a
   passphrase dialog, and inline PGP), signature status, PGP/MIME sending
   (RFC 3156, `multipart/encrypted`) with attachments

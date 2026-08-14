@@ -1,6 +1,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import SFMail.Gpg 1.0
+import "RecipientRoles.js" as Roles
 
 // Zeigt die Verschlüsselungs-Infos einer Mail strukturiert an: an welche
 // Schlüssel sie verschlüsselt ist, mit voller Zertifikatsprüfung. Revoked/
@@ -24,6 +25,61 @@ Page {
     property bool _verified: false
 
     readonly property var _recips: (info && info.recipients) ? info.recipients : []
+
+    // Addresses from To: and Cc: of the message being inspected (set by
+    // MessagePage). Everything the ciphertext is encrypted to but that appears
+    // in NEITHER of them is a blind copy — see RecipientRoles.js.
+    property var visibleAddresses: []
+    readonly property var _roles: Roles.rolesFor(_recips,
+                                                 function(r) { return r.uids || [] },
+                                                 function(r) { return r.inKeyring === true },
+                                                 page.visibleAddresses, page.senderEmail)
+    readonly property int _blindCount: Roles.countRole(_roles, "blind")
+    readonly property int _unknownCount: Roles.countRole(_roles, "unknown")
+    // Named blind recipients, for the summary at the top.
+    readonly property string _blindWho: {
+        var who = []
+        for (var i = 0; i < _roles.length; ++i) {
+            if (_roles[i] !== "blind") continue
+            var uids = _recips[i].uids || []
+            who.push(uids.length > 0 ? ("" + uids[0]) : ("0x" + _recips[i].keyId))
+        }
+        return who.join("\n")
+    }
+
+    // Addresses the message is ADDRESSED to but whose keys are not among the
+    // recipients of THIS ciphertext. With one message per audience that is the
+    // normal case — the others hold their own copy — and it is the first question
+    // anyone asks when the key count is smaller than the recipient list. Stated
+    // neutrally: we know they are not a recipient here, not why.
+    readonly property string _addressedElsewhere: {
+        var known = []
+        for (var i = 0; i < _recips.length; ++i)
+            known = known.concat(Roles.addressList(_recips[i].uids || []))
+        var out = []
+        var addressed = Roles.addressList(page.visibleAddresses)
+        for (var j = 0; j < addressed.length; ++j)
+            if (known.indexOf(addressed[j]) < 0 && out.indexOf(addressed[j]) < 0)
+                out.push(addressed[j])
+        return out.join(", ")
+    }
+
+    function _roleText(i) {
+        switch (_roles[i]) {
+        case "visible": return qsTr("Listed in To/Cc")
+        case "sender":  return qsTr("The sender (copy to self)")
+        case "blind":   return _recips[i].hasSecret ? qsTr("⚠ Blind copy — this is you")
+                                                    : qsTr("⚠ Blind copy — in no header")
+        default:        return qsTr("Cannot be named — key not in your keyring")
+        }
+    }
+    function _roleColor(i) {
+        switch (_roles[i]) {
+        case "blind":   return "#ffa726"
+        case "unknown": return Theme.secondaryColor
+        default:        return Theme.primaryColor
+        }
+    }
     // True if at least one key shown here is NOT in the keyring → offer import.
     readonly property bool _anyMissing: {
         for (var i = 0; i < _recips.length; ++i)
@@ -79,9 +135,10 @@ Page {
 
     function _asText() {
         var t = "Format: " + (info.format || "?") + "\n"
+        if (_blindCount > 0) t += "Blind copy recipients: " + _blindCount + "\n" + _blindWho + "\n"
         for (var i = 0; i < _recips.length; ++i) {
             var r = _recips[i]
-            t += "\nKey 0x" + r.keyId + "  [" + r.status + "]\n"
+            t += "\nKey 0x" + r.keyId + "  [" + r.status + "]  " + _roles[i] + "\n"
             var uids = r.uids || []
             for (var j = 0; j < uids.length; ++j) t += "  " + uids[j] + "\n"
             if (r.created) t += "  created " + r.created + "\n"
@@ -147,6 +204,40 @@ Page {
                 value: info.format ? info.format : "—"
             }
 
+            // Blind copies. Worth its own box: this is the one thing the message
+            // headers deliberately do NOT show, and the ciphertext does.
+            Rectangle {
+                visible: page._blindCount > 0
+                x: Theme.horizontalPageMargin
+                width: page.width - 2 * Theme.horizontalPageMargin
+                height: blind.height + 2 * Theme.paddingMedium
+                radius: Theme.paddingSmall
+                color: Theme.rgba("#ffa726", 0.15)
+
+                Label {
+                    id: blind
+                    x: Theme.paddingMedium
+                    y: Theme.paddingMedium
+                    width: parent.width - 2 * Theme.paddingMedium
+                    wrapMode: Text.WordWrap
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: "#ffa726"
+                    text: qsTr("Blind copy — named in no header of this message:")
+                          + "\n" + page._blindWho
+                          + "\n\n" + qsTr("A blind copy is hidden from the headers only. Every recipient key is named in the encrypted data itself, so anyone who receives this message can read this list too.")
+                }
+            }
+
+            Label {
+                visible: page._unknownCount > 0
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                text: qsTr("Further recipient keys above cannot be named — they are not in your keyring. Look them up on keys.openpgp.org from the menu.")
+            }
+
             Label {
                 visible: info.error && info.error.length > 0
                 x: Theme.horizontalPageMargin
@@ -162,12 +253,33 @@ Page {
                 text: qsTr("Encrypted to %1 key(s)").arg(page._recips.length)
             }
 
+            Label {
+                visible: page._addressedElsewhere !== ""
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                text: qsTr("Addressed to, but not a recipient of this copy: %1").arg(page._addressedElsewhere)
+            }
+
             Repeater {
                 model: page._recips
                 delegate: Column {
                     x: Theme.horizontalPageMargin
                     width: page.width - 2 * Theme.horizontalPageMargin
                     spacing: 2
+
+                    // Where this recipient stands in the headers — or that it
+                    // stands nowhere in them (blind copy).
+                    Label {
+                        width: parent.width
+                        wrapMode: Text.WordWrap
+                        font.pixelSize: Theme.fontSizeSmall
+                        font.bold: page._roles[index] === "blind"
+                        text: page._roleText(index)
+                        color: page._roleColor(index)
+                    }
 
                     // Status (rot bei revoked/fehlend, orange bei abgelaufen)
                     Label {

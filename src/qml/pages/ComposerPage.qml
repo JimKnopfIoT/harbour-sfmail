@@ -96,7 +96,13 @@ Page {
             if ((page.status === PageStatus.Active || ticks > 20) && _keySelChoice) {
                 stop()
                 var c = _keySelChoice; _keySelChoice = null
-                page._continueSend(c.addrs, [], c.fprs)
+                // The dialog was given open recipients first, blind ones last, so
+                // the tail of its answer belongs to the blind copies.
+                var split = c.fprs.length - c.blindCount
+                var blind = []
+                for (var i = split; i < c.fprs.length; ++i)
+                    blind.push({ address: c.addrs[i], fprs: [c.fprs[i]] })
+                page._continueSend(c.addrs.slice(0, split), [], c.fprs.slice(0, split), blind)
             }
         }
     }
@@ -264,7 +270,9 @@ Page {
     // signing, then hand off to the engine (CMS → pkcs7-mime → outbox).
     function _sendSmime(to, cc) {
         if (encryptSwitch.checked) {
-            var all = to.concat(cc)
+            // Blind copies included: they get their own encrypted message, which
+            // needs their certificate just like an open recipient's.
+            var all = to.concat(cc).concat(_bccList())
             for (var i = 0; i < all.length; ++i) {
                 if (!Smime.hasCertFor(all[i])) {
                     status.text = qsTr("No S/MIME certificate for %1 — open a signed mail from them and import it.").arg(all[i])
@@ -348,23 +356,33 @@ Page {
         return false
     }
 
+    // Blind copies need their own keys: they get a message of their own, encrypted
+    // only to them (a shared ciphertext would name every recipient key in the
+    // clear). Before this they were left out of the key resolution entirely — the
+    // blind recipient received a mail encrypted to To/Cc that they could not read.
     function _sendEncrypted(to, cc) {
-        var all = to.concat(cc)
-        var recips = _resolveRecipients(all)
-        if (_needsReview(recips)) {
+        var openRecips = _resolveRecipients(to.concat(cc))
+        var blindRecips = _resolveRecipients(_bccList())
+        if (_needsReview(openRecips.concat(blindRecips))) {
             // Let the user pick the right key (and fix the address) per recipient.
-            var dlg = pageStack.push(Qt.resolvedUrl("KeySelectDialog.qml"), { recipients: recips })
+            // Order matters: open recipients first, blind ones last (see the timer).
+            var dlg = pageStack.push(Qt.resolvedUrl("KeySelectDialog.qml"),
+                                     { recipients: openRecips.concat(blindRecips) })
             dlg.accepted.connect(function() {
                 // Defer: wait for this dialog to finish popping before pushing the
                 // passphrase dialog (see keySelDeferTimer).
-                page._keySelChoice = { addrs: dlg.chosenAddresses, fprs: dlg.chosenFingerprints }
+                page._keySelChoice = { addrs: dlg.chosenAddresses, fprs: dlg.chosenFingerprints,
+                                       blindCount: blindRecips.length }
                 keySelDeferTimer.restart()
             })
             return
         }
         // Each recipient has exactly one usable key here (else we'd be reviewing).
-        var fprs = recips.map(function(r){ return r.usable[0].fingerprint })
-        page._continueSend(to, cc, fprs)
+        var fprs = openRecips.map(function(r){ return r.usable[0].fingerprint })
+        var blind = blindRecips.map(function(r){
+            return { address: r.address, fprs: [r.usable[0].fingerprint] }
+        })
+        page._continueSend(to, cc, fprs, blind)
     }
 
     // The sending account's own usable signing key (filtered by from-address, never
@@ -411,9 +429,17 @@ Page {
         }
     }
 
-    function _continueSend(to, cc, fprs) {
-        if (fprs.length === 0 || fprs.indexOf("") >= 0) {
+    function _continueSend(to, cc, fprs, blind) {
+        blind = blind || []
+        // A mail addressed ONLY to blind copies has no open recipients and thus no
+        // open key list — that is not a missing key.
+        if ((fprs.length === 0 && blind.length === 0) || fprs.indexOf("") >= 0) {
             status.text = qsTr("Missing a key for one or more recipients."); status.error = true; return
+        }
+        for (var b = 0; b < blind.length; ++b) {
+            if (!blind[b].fprs || blind[b].fprs.length === 0 || blind[b].fprs[0] === "") {
+                status.text = qsTr("Missing a key for one or more recipients."); status.error = true; return
+            }
         }
         var signFpr = ""
         if (signSwitch.checked) {
@@ -423,9 +449,9 @@ Page {
         if (signFpr !== "") {
             var dlg = pageStack.push(Qt.resolvedUrl("PassphraseDialog.qml"),
                                      { info: qsTr("To sign the message") })
-            dlg.accepted.connect(function() { page._dispatch(to, cc, fprs, signFpr, dlg.passphrase) })
+            dlg.accepted.connect(function() { page._dispatch(to, cc, fprs, blind, signFpr, dlg.passphrase) })
         } else {
-            page._dispatch(to, cc, fprs, "", "")
+            page._dispatch(to, cc, fprs, blind, "", "")
         }
     }
 
@@ -445,13 +471,27 @@ Page {
         return out
     }
 
-    function _dispatch(to, cc, fprs, signFpr, passphrase) {
+    function _dispatch(to, cc, fprs, blind, signFpr, passphrase) {
+        blind = blind || []
         fprs = _withSelfKey(fprs)
+        // Every blind copy is also encrypted to the sender's own key, so the copy
+        // in Sent stays readable — same reason as _withSelfKey for the open copy.
+        var blindCopies = blind.map(function(b){
+            return { address: b.address, fprs: _withSelfKey(b.fprs) }
+        })
         var bcc = _bccList()
         if (formatCombo.currentIndex === 1) {
             // Inline PGP — cannot encrypt attachments.
             if (attModel.count > 0) {
                 status.text = qsTr("Inline PGP cannot encrypt attachments — use PGP/MIME.")
+                status.error = true; return
+            }
+            // Inline PGP puts ONE armored block in the body and goes out as one
+            // message, so a blind copy could only be served by encrypting it to
+            // everyone at once — which would name every recipient key in the clear
+            // and give the blind copy away. PGP/MIME sends a message per audience.
+            if (bcc.length > 0) {
+                status.text = qsTr("Inline PGP cannot hide blind copies — use PGP/MIME.")
                 status.error = true; return
             }
             page._inlineTo = to; page._inlineCc = cc; page._inlineBcc = bcc
@@ -462,7 +502,7 @@ Page {
             busy.running = true
             status.error = false; status.text = qsTr("Encrypting & sending…")
             Gpg.sendPgpMime(accountsModel.accountId(accountCombo.currentIndex),
-                            subjectField.text, to, cc, bcc,
+                            subjectField.text, to, cc, blindCopies,
                             bodyField.text, _attachmentArray(),
                             fprs, signFpr, passphrase)
         }
