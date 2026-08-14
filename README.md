@@ -14,18 +14,21 @@ accounts.
 Since I'm not a developer, I let Claude Code write the whole thing
 (even the icons are made by Claude Code).
 
-## Opening mail from notifications (new in 0.5.1 — changes a system file)
+## Opening mail from notifications (changes a system file; a switch since 0.8.0)
 
-**Up to and including 0.5.0**, tapping a "new mail" notification opened the **stock
-Jolla mail client**, never SF-Mail — no matter which client you actually use. There
-was no setting for it: the QMF notification plugin has its target compiled in as
-`com.jolla.email.ui` → `openMessage`, and whichever program *owns* that D-Bus name
-receives the tap.
+Tapping a "new mail" notification is delivered to whichever program **owns** the
+D-Bus name `com.jolla.email.ui` — the QMF notification plugin has that target
+compiled in, and the same name also carries `mailto:` links and "share via
+e-mail". Out of the box that is the stock Jolla mail client, with no setting to
+change it.
 
-**From 0.5.1** SF-Mail claims that name, so a notification tap opens the message in
-SF-Mail. Because the same name also carries `mailto:` links and "share via e-mail",
-those now come to SF-Mail as well — the app implements the full stock interface, so
-nothing is silently dropped.
+SF-Mail takes that name over (since 0.5.1), so taps, `mailto:` and sharing open
+in SF-Mail — the app implements the full stock interface, so nothing is silently
+dropped. **Since 0.8.0 this is a switch**: *About → System → "Open mail
+notifications in this app"*, on by default. Switching it off hands everything
+back to the client that owned it before SF-Mail was installed — the D-Bus
+activation entry points at a small dispatcher that reads this setting on every
+activation.
 
 This is a **system-wide change, not a per-app preference.** Installing the package:
 
@@ -36,18 +39,13 @@ This is a **system-wide change, not a per-app preference.** Installing the packa
   `com.jolla.email.ui.service.sfmail-orig`, and a package trigger re-applies the
   change after a `jolla-email` update.
 
-**Undoing it** — `rpm -e harbour-sfmail` restores the original file, and mail
-notifications go back to the stock client. The stock client itself is never
+**Undoing it** — turn the switch off, or `rpm -e harbour-sfmail`, which restores
+the original file; either way mail notifications go back to the previous client. The stock client itself is never
 modified, removed or disabled; it just no longer receives the tap while SF-Mail is
 installed. (If both are running, whichever claimed the name first keeps it.)
 
-**If you would rather not have this**, **0.5.0** remains available under
-[Releases](../../releases) — it is the last version that leaves the notification
-target alone. Be aware of what you give up: it predates everything released since,
-including the fix that makes blind copies work at all (before 0.6.3 a blind
-recipient received a message encrypted to everyone but them, and could not open
-it), moving messages between folders, retrying a stuck outbox, and the S/MIME
-certificate selection.
+**If you would rather not have this**, simply leave the switch off — no need to
+run an old version for it.
 
 ## Blind copies and encrypted subjects (new in 0.6.9 — visible to your recipients)
 
@@ -132,9 +130,11 @@ the body anyway.
 ## Why a bundled GnuPG
 
 The system `gpg` on the target devices is too old to read modern keyrings
-(`pubring.kbx` + `private-keys-v1.d`), so the app bundles a **modern GnuPG 2.2**
-stack under its own prefix (`/usr/share/harbour-sfmail/gpg/…`) and talks to it
-through a small QProcess wrapper plugin (`SFMail.Gpg`, QML singleton `Gpg`). The
+(`pubring.kbx` + `private-keys-v1.d`), so the app bundles a **maintained GnuPG
+2.5** stack (2.5.21, with current libgcrypt/libksba/libassuan) under its own
+prefix (`/usr/share/harbour-sfmail/gpg/…`). OpenPGP is driven through the
+GpgME++/QGpgME C++ bindings (gpgme 1.18) in the app's plugin (`SFMail.Gpg`, QML
+singleton `Gpg`); only S/MIME shells out to `gpgsm`/OpenSSL. The
 app uses its **own keyring** at `~/.local/share/sfmail/harbour-sfmail/gnupg`,
 entirely separate from the system keystore. S/MIME uses `gpgsm` from the same
 bundled stack (plus an OpenSSL helper for `.p12` handling) with its own store
