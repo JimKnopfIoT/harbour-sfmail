@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.8.2
+Version:    0.8.3
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -161,6 +161,18 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Sat Aug 15 2026 harbour-sfmail contributors 0.8.3-1
+- Key selection tightened, prompted by an external review. The recipient key
+  dialog shows each key's full fingerprint (the identity an out-of-band check
+  compares), no longer pre-selects a key when the choice is ambiguous, and
+  revoked/expired/signing-only keys cannot be chosen at all. Recipient checks
+  count only keys that can actually encrypt, so a signing-only key fails at
+  selection time instead of inside the encrypt job. Encrypt-to-self prefers
+  the account's own secret key, so the Sent copy is always readable. An
+  unused engine entry point that auto-imported keyserver results was removed;
+  the one remaining lookup path never imports without confirmation. The
+  README documents the trust model.
+
 * Sat Aug 15 2026 harbour-sfmail contributors 0.8.2-1
 - Passphrase hardening in the app process itself. The process is no longer
   ptrace-able or dumpable by other processes of the same user (it holds

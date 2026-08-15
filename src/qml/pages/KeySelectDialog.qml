@@ -19,13 +19,28 @@ Dialog {
     property var _sel: []                 // selected fingerprint per recipient
     property int _tick: 0
 
+    // Only a key that could actually be encrypted to may be selected at all —
+    // same rule as the composer's _usableKeys().
+    function _selectable(k) {
+        return !k.revoked && !k.expired && k.canEncrypt
+    }
+
+    // Pre-select ONLY when the choice is unambiguous (exactly one usable key —
+    // that recipient is not why this dialog is up). An ambiguous recipient
+    // starts unselected: picking the key must be a conscious act, not a
+    // confirmation of whatever happened to be first.
+    function _preselect(keys) {
+        var u = keys.filter(_selectable)
+        return u.length === 1 ? ("" + u[0].fingerprint) : ""
+    }
+
     Component.onCompleted: {
         var a = [], c = [], s = []
         for (var i = 0; i < recipients.length; ++i) {
             var keys = recipients[i].keys || []
             a.push("" + recipients[i].address)
             c.push(keys)
-            s.push(keys.length > 0 ? ("" + keys[0].fingerprint) : "")
+            s.push(_preselect(keys))
         }
         _addr = a; _cand = c; _sel = s; _tick++
     }
@@ -34,12 +49,12 @@ Dialog {
         var keys = Gpg.publicKeys(addr)
         _addr[i] = addr
         _cand[i] = keys
-        _sel[i] = keys.length > 0 ? ("" + keys[0].fingerprint) : ""
+        _sel[i] = _preselect(keys)
         _tick++
     }
 
     function _statusColor(k) {
-        return (k.revoked || k.expired) ? "#ff4d4d" : "#4caf50"
+        return _selectable(k) ? "#4caf50" : "#ff4d4d"
     }
 
     canAccept: {
@@ -113,6 +128,9 @@ Dialog {
                             width: recCol.width
                             height: kc.height + Theme.paddingMedium
                             highlighted: dialog._tick >= 0 && dialog._sel[recCol.ridx] === modelData.fingerprint
+                            // Revoked/expired/signing-only keys are shown (so the
+                            // situation is visible) but cannot be chosen.
+                            enabled: dialog._selectable(modelData)
                             onClicked: { dialog._sel[recCol.ridx] = ("" + modelData.fingerprint); dialog._tick++ }
                             Column {
                                 id: kc
@@ -134,8 +152,20 @@ Dialog {
                                     font.pixelSize: Theme.fontSizeExtraSmall
                                     color: Theme.secondaryColor
                                     text: "0x" + modelData.keyId
-                                          + (modelData.revoked ? "  · REVOKED" : modelData.expired ? "  · expired" : "")
+                                          + (modelData.revoked ? "  · REVOKED" : modelData.expired ? "  · expired"
+                                             : !modelData.canEncrypt ? "  · cannot encrypt" : "")
                                           + (modelData.email !== "" ? "  · " + modelData.email : "")
+                                }
+                                // The full fingerprint IS the identity — it is what
+                                // an out-of-band check compares, so it must be
+                                // visible right where the choice is made.
+                                Label {
+                                    width: parent.width
+                                    wrapMode: Text.WrapAnywhere
+                                    font.family: "monospace"
+                                    font.pixelSize: Theme.fontSizeExtraSmall
+                                    color: Theme.secondaryColor
+                                    text: ("" + modelData.fingerprint).replace(/(.{4})/g, "$1 ").trim()
                                 }
                             }
                         }

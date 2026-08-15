@@ -158,17 +158,11 @@ public:
     Q_INVOKABLE void inspectKeyForImport(const QString &armored, const QString &senderEmail = QString());
     Q_INVOKABLE void inspectKeyFileForImport(const QString &path, const QString &senderEmail = QString());
 
-    // Look up a public key on keys.openpgp.org by e-mail, key-id or fingerprint
-    // and import it. query with '@' → by-email; else hex → by-fingerprint/keyid.
-    // Sends ONLY the given query to keys.openpgp.org. Result via keyFetchFinished;
-    // on success the key is imported (importFinished + keysChanged also fire).
-    Q_INVOKABLE void fetchKey(const QString &query);
-
-    // Resolve a MISSING recipient key: first look up the exact wantedKeyId on the
-    // keyservers (import if found); if not found, look up the sender's email — if
-    // that yields a DIFFERENT key, do NOT import it but report via keyMismatch()
-    // so the user can decide (importPendingKey()). Result/no-result via
-    // keyFetchFinished(); progress via keyFetchStarted().
+    // Resolve a MISSING key: look up the exact wantedKeyId on keys.openpgp.org,
+    // falling back to the sender's email. NEVER imports on its own — whatever is
+    // found is stashed and reported via keyCandidate() (key-id, UIDs, fingerprint,
+    // match yes/no) so the user can verify and decide (importPendingKey()).
+    // Result/no-result via keyFetchFinished(); progress via keyFetchStarted().
     Q_INVOKABLE void resolveMissingKey(const QString &wantedKeyId, const QString &email);
     // Import the key stashed by resolveMissingKey() after a keyMismatch().
     Q_INVOKABLE void importPendingKey();
@@ -352,7 +346,6 @@ signals:
 
 private:
     QVariantList listKeys(bool secret, const QString &pattern);
-    void fetchKeyTry(const QStringList &urls, int idx, const QString &query);
     // Fetch the first URL that returns a public-key block; cb gets the armored
     // bytes (empty if none of the URLs yielded a key).
     void httpGetFirst(const QStringList &urls, int idx, std::function<void(QByteArray)> cb);
