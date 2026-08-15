@@ -72,12 +72,12 @@ What you will notice:
 way, which often says more than the body. Encrypted mail now carries the real subject
 **inside** the encryption ([protected
 headers](https://datatracker.ietf.org/doc/html/draft-ietf-lamps-header-protection),
-as Thunderbird does) and shows `...` on the outside. The same mechanism carries the
+as other clients do) and shows `...` on the outside. The same mechanism carries the
 recipients, so a blind copy still sees whom the message was addressed to.
 
 The price is real and worth knowing before you use it:
 
-- Clients that do not implement protected headers (Outlook, for example) show `...`
+- Clients that do not implement protected headers show `...`
   as the subject, and their replies come back as `Re: ...`.
 - Server-side search and threading only ever see the placeholder.
 - In the message list SF-Mail also shows `...` until the message is decrypted; the

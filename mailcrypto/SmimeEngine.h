@@ -16,7 +16,7 @@ class QMailAccountId;
 // NOT bundle its own GnuPG). Operates on its OWN gpgsm home dir so the OpenPGP
 // keyring of harbour-sfmail stays untouched. Passphrases via loopback.
 //
-// Stufe-0 (manually) proven: import a Volksverschlüsselung .p12 (3 key pairs) +
+// Stufe-0 (manually) proven: import a real-world CA-issued .p12 (3 key pairs) +
 // chain, encrypt to the keyEncipherment cert, decrypt back to plaintext. This
 // class turns that proof into code (see SmimeEngine.cpp for the gotchas).
 class SmimeEngine : public QObject
@@ -38,7 +38,7 @@ public:
     Q_INVOKABLE QString preferredCert(const QString &email);
 
     // Import an S/MIME .p12/.pfx (with private key[s]) plus its CA chain. gpgsm
-    // cannot parse a Windows/Volksverschlüsselung .p12 directly, so we repack it
+    // cannot parse many real-world .p12 files directly, so we repack them
     // with OpenSSL: dump everything, split the (up to 3) key pairs, build one
     // clean p12 per key, import each via gpgsm, import the chain, and trust the
     // root CA via trustlist.txt. Result via importFinished().
@@ -46,10 +46,10 @@ public:
                                const QString &chainPemPath = QString());
 
     // Generate a brand-new SELF-SIGNED S/MIME certificate (RSA-4096) for this
-    // identity and import it — for users without an external CA (e.g. now that
-    // Volksverschlüsselung is gone). The cert carries the MANDATORY e-mail
-    // attributes so Outlook/Thunderbird accept it for signing AND encryption:
-    // extendedKeyUsage=emailProtection [[smime-signer-emailprotection-eku]] and
+    // identity and import it — for users without access to an external CA. The
+    // cert carries the MANDATORY e-mail
+    // attributes so common desktop clients accept it for signing AND encryption:
+    // extendedKeyUsage=emailProtection and
     // keyUsage=digitalSignature,keyEncipherment, with the address in
     // subjectAltName. Protected by the given passphrase (mandatory; UI enforces
     // strength). Being self-signed it is its own root → trusted via trustlist (the
@@ -91,7 +91,7 @@ public:
     Q_INVOKABLE QString exportCert(const QString &fingerprint);
     // Export a stored certificate INCLUDING its private key as a PKCS#12 (.p12) and
     // save it to the user's Documents folder as sfmail-smime-<short>.p12 — a portable
-    // backup importable into Outlook/Thunderbird/another device. Needs the key's
+    // backup importable into other clients or another device. Needs the key's
     // passphrase; the .p12 is protected with that same passphrase. Returns the saved
     // path ("" on failure). Only certs that have a private key can be exported.
     Q_INVOKABLE QString saveP12ToDocuments(const QString &fingerprint, const QString &passphrase);
@@ -204,9 +204,9 @@ private:
     // `all` is the cached listCerts() result (avoids re-listing per cert).
     QVariantMap certEntry(const QString &fpr, const QVariantList &all);
     // Produce an opaque signed-data CMS (DER) of `inner`, signed with signFpr, that
-    // ALSO embeds the sender's encryption certificate + CA chain — so the recipient
-    // (Outlook/Thunderbird) can harvest the encryption cert and reply encrypted, the
-    // way other clients do. gpgsm --sign embeds only the signer cert, so we export
+    // ALSO embeds the sender's encryption certificate + CA chain — so the
+    // recipient's client can harvest the encryption cert and reply encrypted, the
+    // way desktop clients expect. gpgsm --sign embeds only the signer cert, so we export
     // the signing key from gpgsm and re-sign with openssl's -certfile. Returns empty
     // on failure (caller falls back to a plain gpgsm sign). errOut gets the reason.
     QByteArray signWithChain(const QByteArray &inner, const QString &signFpr,

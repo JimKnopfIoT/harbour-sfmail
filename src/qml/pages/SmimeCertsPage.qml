@@ -38,7 +38,7 @@ Page {
     // suppressing it when it expires. Suppressing at expiry was not enough:
     // minimising the app and coming back inside the four seconds left the
     // countdown running, and it fired in the user's face on return (measured on
-    // the Gemini). Cancelling here makes the bar disappear the moment the app
+    // an armv7 device). Cancelling here makes the bar disappear the moment the app
     // goes away, so nothing is counting when the user comes back.
     readonly property bool appForeground: Qt.application.active
     onAppForegroundChanged: {
@@ -65,7 +65,12 @@ Page {
     Timer {
         id: _genTimer
         interval: 60
-        onTriggered: Smime.generateCert(page._genName, page._genEmail, page._genPass)
+        // The parked passphrase is only needed for this one call — do not let
+        // it sit in a page property afterwards.
+        onTriggered: {
+            Smime.generateCert(page._genName, page._genEmail, page._genPass)
+            page._genPass = ""
+        }
     }
 
     function _appendLog(s) { page._log = s + "\n" + page._log }

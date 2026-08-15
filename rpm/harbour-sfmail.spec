@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.8.1
+Version:    0.8.2
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -161,6 +161,15 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Sat Aug 15 2026 harbour-sfmail contributors 0.8.2-1
+- Passphrase hardening in the app process itself. The process is no longer
+  ptrace-able or dumpable by other processes of the same user (it holds
+  passphrases and, briefly, decrypted key material); a crash therefore leaves
+  no core dump - the in-app log keeps its crash marker. All passphrase fields
+  are marked as sensitive input so the keyboard never learns them, and they
+  clear themselves when the dialog leaves the screen or the app loses the
+  foreground. In-memory passphrase copies are wiped once handed over.
+
 * Fri Aug 14 2026 harbour-sfmail contributors 0.8.1-1
 - S/MIME hardening, prompted by an external review. Signing exported the private
   key into a temporary unencrypted PEM file and passed passphrases to openssl as
@@ -217,7 +226,7 @@ fi
   everyone but them and could not open it. S/MIME was never affected.
 - The subject is no longer sent in the clear. Encrypted mail carries the real
   subject inside the encrypted part as a protected header and shows "..."
-  outside, as Thunderbird does. Clients without support for protected headers
+  outside, as other clients do. Clients without support for protected headers
   show "..." and reply with "Re: ...", and server-side search sees only the
   placeholder.
 - The recipients travel inside the encryption as well, so a blind copy can still

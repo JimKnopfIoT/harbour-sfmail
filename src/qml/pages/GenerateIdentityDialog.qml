@@ -38,6 +38,27 @@ Dialog {
 
     canAccept: _mailOk && _pwOk && _pwMatch
 
+    // Hygiene: whatever pushes THIS dialog aside — accept/cancel (the pop), a
+    // page on top, the task switcher — must not leave the passphrase armed in
+    // the fields. Safe for the callers: `accepted` fires synchronously inside
+    // pageStack.navigateForward(), BEFORE the pop changes our status, so their
+    // handlers have already read genPass when this clears it.
+    onStatusChanged: {
+        if (status !== PageStatus.Active) {
+            passField.text = ""
+            pass2Field.text = ""
+        }
+    }
+    Connections {
+        target: Qt.application
+        onActiveChanged: {
+            if (!Qt.application.active) {
+                passField.text = ""
+                pass2Field.text = ""
+            }
+        }
+    }
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: col.height + Theme.paddingLarge
@@ -82,6 +103,10 @@ Dialog {
                 width: parent.width
                 label: qsTr("Passphrase")
                 echoMode: TextInput.Password
+                // Plain TextField: without these the keyboard may still learn
+                // and predict the passphrase (ImhSensitiveData is the one that
+                // keeps it out of the prediction database).
+                inputMethodHints: Qt.ImhSensitiveData | Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
                 placeholderText: qsTr("At least 12 characters")
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
                 EnterKey.onClicked: pass2Field.focus = true
@@ -91,6 +116,7 @@ Dialog {
                 width: parent.width
                 label: qsTr("Repeat passphrase")
                 echoMode: TextInput.Password
+                inputMethodHints: Qt.ImhSensitiveData | Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
                 EnterKey.iconSource: "image://theme/icon-m-enter-accept"
                 EnterKey.onClicked: if (gd.canAccept) gd.accept()
                 color: gd._pwMatch || text.length === 0 ? Theme.primaryColor : "#ff6b6b"

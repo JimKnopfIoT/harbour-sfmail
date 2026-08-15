@@ -18,6 +18,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/prctl.h>
 #include <cstring>
 #include <cstdint>
 
@@ -29,9 +30,11 @@
 // the stack here: glibc backtrace() re-faults inside the unwinder on a corrupt
 // stack, which destroys the original context. Instead, with SA_RESETHAND we just
 // RETURN — the faulting instruction re-executes, faults again against the now
-// default handler, and the kernel writes a core with the REAL original stack
-// (core_pattern must point somewhere real). The marker's timestamp lets us line
-// the crash up with the surrounding [send]/[diag] log lines.
+// default handler, and the process dies with the REAL original signal. Since the
+// PR_SET_DUMPABLE(0) hardening in main() there is no core anymore — the marker's
+// timestamp lines the crash up with the surrounding [send]/[diag] log lines, and
+// the journal shows the signal; for a core-level dig, temporarily comment the
+// prctl out.
 static int g_crashFd = -1;
 
 static void writeAll(int fd, const char *s)
@@ -66,7 +69,7 @@ static void crashHandler(int sig, siginfo_t *info, void *)
     const char *hdr = "\n=== [CRASH] fatal ";
     writeAll(g_crashFd, hdr);     writeAll(g_crashFd, name);
     writeAll(g_crashFd, " at ");  writeAll(g_crashFd, addr);
-    writeAll(g_crashFd, " (core dumped; see gdb) ===\n");
+    writeAll(g_crashFd, " ===\n");
     if (g_crashFd >= 0) fsync(g_crashFd);
     writeAll(STDERR_FILENO, hdr); writeAll(STDERR_FILENO, name); writeAll(STDERR_FILENO, "\n");
 
@@ -142,6 +145,14 @@ static void fileMessageHandler(QtMsgType type, const QMessageLogContext &ctx,
 int main(int argc, char *argv[])
 {
     qInstallMessageHandler(fileMessageHandler);
+
+    // The process holds PGP/S-MIME passphrases and decrypted private key
+    // material (gpgme, in-memory S/MIME repack). Non-dumpable means no ptrace
+    // and no /proc/<pid>/mem for other processes of the same user; only root
+    // can still look inside. The price is that a crash leaves no core dump —
+    // debug.log (crash marker below) and the journal are the diagnostic tools
+    // on the device anyway.
+    prctl(PR_SET_DUMPABLE, 0);
 
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 

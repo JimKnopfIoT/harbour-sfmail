@@ -118,7 +118,7 @@ static QByteArray decodeQuotedPrintable(const QByteArray &in)
 }
 
 // Turn a text/plain part body into a QString, honouring its charset and
-// Content-Transfer-Encoding. Outlook commonly sends iso-8859-1/windows-1252 with
+// Content-Transfer-Encoding. Some clients commonly send iso-8859-1/windows-1252 with
 // 8bit or quoted-printable; decoding those as UTF-8 turns umlauts into U+FFFD.
 static QString decodeTextBody(const QByteArray &body, QByteArray charset, QByteArray cte)
 {
@@ -780,8 +780,8 @@ void SmimeEngine::importP12(const QString &p12Path, const QString &passphrase,
     // 1) Dump EVERYTHING (all certs + all private keys, unencrypted) from the .p12
     //    — to STDOUT, captured in memory. The unencrypted keys never touch the
     //    filesystem, and the passphrase travels via the environment, not argv
-    //    (/proc/<pid>/cmdline is world-readable). Volksverschlüsselung/Windows
-    //    .p12 uses legacy algorithms → -legacy on OpenSSL 3.x; without it on 1.1.x.
+    //    (/proc/<pid>/cmdline is world-readable). Real-world .p12 files often
+    //    use legacy algorithms → -legacy on OpenSSL 3.x; without it on 1.1.x.
     QStringList dump;
     dump << QStringLiteral("pkcs12") << QStringLiteral("-in") << path
          << QStringLiteral("-nodes")
@@ -1475,16 +1475,15 @@ QString SmimeEngine::ownCertFpr(const QString &email, char usage)
 {
     const QString want = (usage == 'e') ? QStringLiteral("e") : QStringLiteral("s");
     const QVariantList certs = listCerts();
-    // For SIGNING the cert must be valid for "emailProtection". The
-    // Volksverschlüsselung issues THREE certs for the same address: a signing cert
+    // For SIGNING the cert must be valid for "emailProtection". Some CAs issue
+    // THREE certs for the same address: a signing cert
     // (digitalSignature+nonRepudiation, EKU emailProtection), an encryption cert
     // (keyEncipherment, EKU emailProtection) and an AUTHENTICATION/login cert
     // (digitalSignature, EKU clientAuth ONLY). The auth cert also reports key usage
-    // 's', so "first cert that can sign" picks it — and Outlook/Windows then reject
+    // 's', so "first cert that can sign" picks it — and strict clients then reject
     // the signature ("certificate not valid for the selected purpose": EKU is
-    // clientAuth, not emailProtection). Thunderbird filters it out the same way and
-    // never offers it. So we additionally require the EKU to permit emailProtection.
-    // [[keys-immer-per-fingerprint]]
+    // clientAuth, not emailProtection). Careful clients filter it out the same way
+    // and never offer it. So we additionally require the EKU to permit emailProtection.
     const bool needEmail = (usage == 's');
     QString fallback;   // EKU-unrestricted match; used only if no emailProtection cert exists
     for (int pass = 0; pass < 2; ++pass) {   // pass 0: match the address; pass 1: any
@@ -1646,7 +1645,7 @@ void SmimeEngine::sendSmime(int accountId, const QString &subject,
     QByteArray content = inner;
     if (sign) {
         // Preferred: sign via openssl so we can ALSO embed the encryption cert + chain
-        // (so recipients/Outlook can reply encrypted, like Thunderbird does).
+        // (so recipients' clients can reply encrypted).
         QByteArray cerr;
         QByteArray sd = signWithChain(inner, signFpr, fromAddr, passphrase, &cerr);
         if (sd.isEmpty()) {
