@@ -14,7 +14,7 @@ accounts.
 Since I'm not a developer, I let Claude Code write the whole thing
 (even the icons are made by Claude Code).
 
-## Opening mail from notifications (changes a system file; a switch since 0.8.0)
+## Opening mail from notifications (changes a system file)
 
 Tapping a "new mail" notification is delivered to whichever program **owns** the
 D-Bus name `com.jolla.email.ui` — the QMF notification plugin has that target
@@ -22,9 +22,9 @@ compiled in, and the same name also carries `mailto:` links and "share via
 e-mail". Out of the box that is the stock Jolla mail client, with no setting to
 change it.
 
-SF-Mail takes that name over (since 0.5.1), so taps, `mailto:` and sharing open
+SF-Mail can take that name over, so taps, `mailto:` and sharing open
 in SF-Mail — the app implements the full stock interface, so nothing is silently
-dropped. **Since 0.8.0 this is a switch**: *About → System → "Open mail
+dropped. A switch controls this: *About → System → "Open mail
 notifications in this app"*, on by default. Switching it off hands everything
 back to the client that owned it before SF-Mail was installed — the D-Bus
 activation entry points at a small dispatcher that reads this setting on every
@@ -44,18 +44,17 @@ the original file; either way mail notifications go back to the previous client.
 modified, removed or disabled; it just no longer receives the tap while SF-Mail is
 installed. (If both are running, whichever claimed the name first keeps it.)
 
-**If you would rather not have this**, simply leave the switch off — no need to
-run an old version for it.
+**If you would rather not have this**, simply leave the switch off.
 
-## Blind copies and encrypted subjects (new in 0.6.9 — visible to your recipients)
+## Blind copies and encrypted subjects (visible to your recipients)
 
-Encryption protects the body, not the envelope. Two consequences used to leak, and
-0.6.9 changes both — in ways your correspondents will notice.
+Encryption protects the body, not the envelope. SF-Mail closes two leaks that
+follow from that — in ways your correspondents will notice.
 
 **Blind copies.** A single encrypted message names **every** recipient key in the
 clear: OpenPGP writes one key packet per recipient, S/MIME one `RecipientInfo` per
 certificate. Anyone who receives such a message can read that list — so a blind copy
-was only blind in the headers. SF-Mail therefore sends **one message per audience**:
+would only be blind in the headers. SF-Mail therefore sends **one message per audience**:
 the open recipients get theirs, every blind copy gets its own, each encrypted only to
 the keys that belong in it. No recipient learns of any other, not even how many there
 were.
@@ -68,8 +67,8 @@ What you will notice:
 - **Inline PGP cannot do this** (one armoured block, one message) and refuses a blind
   copy; use PGP/MIME.
 
-**Encrypted subject.** The subject travelled in the clear past every server on the
-way, which often says more than the body. Encrypted mail now carries the real subject
+**Encrypted subject.** A subject sent in the clear passes every server on the
+way and often says more than the body. Encrypted mail therefore carries the real subject
 **inside** the encryption ([protected
 headers](https://datatracker.ietf.org/doc/html/draft-ietf-lamps-header-protection),
 as other clients do) and shows `...` on the outside. The same mechanism carries the
@@ -154,8 +153,8 @@ mb2 -t SailfishOS-4.6.0.13-armv7hl.default build
 RPMs are written to `RPMS/`. Install on the device with
 `rpm -U --force <rpm>`.
 
-The bundled GnuPG binaries are checked in under `stack/stage-aarch64/` and
-`stack/stage-armv7hl/` so the RPM builds out of the box. To rebuild the GnuPG
+The bundled GnuPG binaries are checked in under `stack/stage-modern-aarch64/` and
+`stack/stage-modern-armv7hl/` so the RPM builds out of the box. To rebuild the GnuPG
 stack from the upstream tarballs in `stack/src/`, see `stack/build-stack.sh`.
 
 ## License
