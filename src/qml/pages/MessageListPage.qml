@@ -48,7 +48,7 @@ Page {
     // (RemorseItem.qml, Component.onDestruction). Deleting one message rebuilds
     // the list, so the neighbour's countdown was torn down together with its row
     // and fired on the way out — that is how a delete the user had tapped to
-    // cancel went through anyway. Reproduced on the Gemini: both touched mails
+    // cancel went through anyway. Reproduced on an armv7 device: both touched mails
     // ended up in Trash, one of them against an explicit cancel.
     //
     // A page-level popup has only one slot, so the ids are collected instead of
@@ -75,7 +75,7 @@ Page {
     // suppressing it when it expires. Suppressing at expiry was not enough:
     // minimising the app and coming back inside the four seconds left the
     // countdown running, and it fired in the user's face on return (measured on
-    // the Gemini). Cancelling here makes the bar disappear the moment the app
+    // an armv7 device). Cancelling here makes the bar disappear the moment the app
     // goes away, so nothing is counting when the user comes back.
     readonly property bool appForeground: Qt.application.active
     onAppForegroundChanged: {
@@ -138,7 +138,7 @@ Page {
                             // through Deactivating, and minimising does not
                             // change the page at all - the countdown would just
                             // run out behind the user's back. Both were
-                            // reproduced on the Gemini.
+                            // reproduced on an armv7 device.
                             if (page.status !== PageStatus.Active || !Qt.application.active) {
                                 return
                             }

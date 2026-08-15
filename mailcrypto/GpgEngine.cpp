@@ -254,6 +254,8 @@ class OnePassphraseProvider : public GpgME::PassphraseProvider
 {
 public:
     explicit OnePassphraseProvider(const QString &pass) : m_pass(pass.toUtf8()) {}
+    // m_pass is our own sole-owner copy — zero it before the memory is freed.
+    ~OnePassphraseProvider() override { m_pass.fill('\0'); }
     char *getPassphrase(const char * /*uidHint*/, const char * /*description*/,
                         bool previousWasBad, bool &canceled) override
     {
@@ -1909,7 +1911,7 @@ void GpgEngine::finishPgpMimeSend(int accountId, const QString &subject,
         if (!cc.isEmpty())  rfc += "Cc: " + cc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
         if (!bcc.isEmpty()) rfc += "Bcc: " + bcc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
         // The real subject travels INSIDE the encryption (protected headers, see
-        // buildInnerMime); outside stands the placeholder Thunderbird uses too.
+        // buildInnerMime); outside stands the placeholder other clients use too.
         // Otherwise the one header that often says more than the body would ride
         // in the clear past every server on the way. Only the encrypted path does
         // this — a signed-only message hides nothing from someone who can read the

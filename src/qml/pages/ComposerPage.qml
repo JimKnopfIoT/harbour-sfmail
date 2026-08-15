@@ -456,7 +456,7 @@ Page {
     }
 
     // "Encrypt to self": also encrypt to the sending account's own key so the
-    // sender can read their own copy (Sent folder) later — like Thunderbird does.
+    // sender can read their own copy (Sent folder) later — like other clients do.
     // Returns fprs plus the sender's first usable (not revoked/expired) key.
     function _withSelfKey(fprs) {
         var from = accountsModel.emailAddress(accountCombo.currentIndex)

@@ -17,6 +17,25 @@ Dialog {
 
     canAccept: field.text.length > 0
 
+    // Hygiene: whatever pushes THIS dialog aside — accept/cancel (the pop), a
+    // page on top, the task switcher — must not leave the passphrase armed in
+    // the field. Safe for the callers: `accepted` fires synchronously inside
+    // pageStack.navigateForward(), BEFORE the pop changes our status, so their
+    // handlers have already read `passphrase` when this clears it.
+    onStatusChanged: {
+        if (status !== PageStatus.Active) {
+            field.text = ""
+        }
+    }
+    Connections {
+        target: Qt.application
+        onActiveChanged: {
+            if (!Qt.application.active) {
+                field.text = ""
+            }
+        }
+    }
+
     Column {
         width: parent.width
         spacing: Theme.paddingMedium
@@ -37,6 +56,9 @@ Dialog {
             id: field
             width: parent.width
             label: qsTr("Secret key passphrase")
+            // PasswordField's own default lacks ImhSensitiveData — that flag is
+            // what keeps the input out of the keyboard's learning database.
+            inputMethodHints: Qt.ImhSensitiveData | Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
             focus: true
             EnterKey.iconSource: "image://theme/icon-m-enter-accept"
             EnterKey.onClicked: if (dialog.canAccept) dialog.accept()

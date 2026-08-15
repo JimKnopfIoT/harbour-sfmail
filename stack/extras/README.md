@@ -8,7 +8,7 @@ of how they were produced survives.
   `private-bin` hides the system one. `SmimeEngine` shells out to it for .p12
   repacking and `signWithChain`.
 * `lib/ossl-modules/legacy.so` — OpenSSL 3.x legacy provider, required to read
-  .p12 files written by Windows and Volksverschlüsselung.
+  .p12 files as written by other platforms and CA services.
 * `bin/pinentry` — gpg-agent's passphrase helper. The app sets
   `allow-loopback-pinentry`, so it is not on the critical path, but it belongs
   to a complete stack.
