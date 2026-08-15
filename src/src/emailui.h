@@ -42,8 +42,10 @@ public:
 
     // Where the marker lives that the app and the D-Bus dispatcher script share.
     // A plain file rather than a key in signed.ini: the dispatcher is /bin/sh and
-    // has to read this on every activation, and "1" is harder to misparse than an
-    // INI section. Absent = off, which is what a fresh install ships.
+    // has to read this on every activation, and "0" is harder to misparse than an
+    // INI section. Absent = ON ("0" = off): taking the notifications over has
+    // been this package's unconditional behaviour, so an update must not
+    // silently change it — only an explicit "0" written by the switch does.
     static QString statePath();
 
     // A notification tap usually ACTIVATES us via D-Bus, so the method call beats

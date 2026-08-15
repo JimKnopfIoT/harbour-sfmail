@@ -126,6 +126,16 @@ the body anyway.
   reminds you to move them off-device; a debug log can be turned on or off under
   *About → Diagnostics* (off for normal use)
 
+## Trust model
+
+Trust in SF-Mail is a decision made on the device, not one delegated to an
+authority. The app is built for encrypted mail across trust boundaries — with
+or without a CA on the other side — so it carries no PKI of its own:
+identities you create yourself and identities you import stand on the same
+footing, and each becomes trusted the moment you, having seen its
+fingerprint, say so. This holds for S/MIME exactly as for PGP. Revocation
+lists belong to the delegated-trust world and are consequently not consulted.
+
 ## Why a bundled GnuPG
 
 The system `gpg` on the target devices is too old to read modern keyrings

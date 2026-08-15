@@ -68,7 +68,9 @@ Page {
             var addrs = _recipsByKind("to").concat(_recipsByKind("cc")).concat(_bccList())
             if (addrs.length === 0) { pgp = false; sm = false }
             else for (var i = 0; i < addrs.length; ++i) {
-                if (pgp && Gpg.publicKeys(addrs[i]).length === 0) pgp = false
+                // Only a usable key counts — a revoked or signing-only key must
+                // not make PGP look possible here.
+                if (pgp && _usableKeys(Gpg.publicKeys(addrs[i])).length === 0) pgp = false
                 if (sm && !Smime.hasCertFor(addrs[i])) sm = false
             }
         }
@@ -330,10 +332,11 @@ Page {
         _closeComposer()
     }
 
-    // Usable = neither revoked nor expired. We NEVER encrypt to a revoked/expired
-    // key, so they don't count toward "ambiguous".
+    // Usable = neither revoked nor expired AND able to encrypt. We NEVER encrypt
+    // to a revoked/expired key, and a signing-only key would only fail later
+    // inside the encrypt job — neither counts toward "ambiguous".
     function _usableKeys(keys) {
-        return keys.filter(function(k){ return !k.revoked && !k.expired })
+        return keys.filter(function(k){ return !k.revoked && !k.expired && k.canEncrypt })
     }
 
     // Resolve candidate keys for each recipient. `keys` = all found (for the
@@ -457,14 +460,20 @@ Page {
 
     // "Encrypt to self": also encrypt to the sending account's own key so the
     // sender can read their own copy (Sent folder) later — like other clients do.
-    // Returns fprs plus the sender's first usable (not revoked/expired) key.
+    // Among the account's usable keys, one we hold the SECRET key for is
+    // preferred: only that one can actually decrypt the Sent copy (a public key
+    // imported for our own address must not win over our real identity).
     function _withSelfKey(fprs) {
         var from = accountsModel.emailAddress(accountCombo.currentIndex)
         if (("" + from) === "") return fprs
         var keys = Gpg.publicKeys(from)
         var selfFpr = ""
-        for (var i = 0; i < keys.length; ++i)
-            if (!keys[i].revoked && !keys[i].expired) { selfFpr = keys[i].fingerprint; break }
+        for (var i = 0; i < keys.length; ++i) {
+            var k = keys[i]
+            if (k.revoked || k.expired || !k.canEncrypt) continue
+            if (k.hasSecret) { selfFpr = k.fingerprint; break }
+            if (selfFpr === "") selfFpr = k.fingerprint
+        }
         if (selfFpr === "") return fprs
         var out = fprs.slice()
         if (out.indexOf(selfFpr) < 0) out.push(selfFpr)
@@ -612,7 +621,7 @@ Page {
                         if (a.indexOf("@") < 1 || a.lastIndexOf(".") < a.indexOf("@")) {
                             recipRow._hint = ""; recipRow._hintOk = false; return
                         }
-                        var pgp = Gpg.publicKeys(a).length > 0
+                        var pgp = page._usableKeys(Gpg.publicKeys(a)).length > 0
                         var sm  = Gpg.smimeEnabled && Smime.available && Smime.hasCertFor(a)
                         recipRow._hintOk = pgp || sm
                         recipRow._hint = pgp && sm ? qsTr("🔑 PGP key + 📜 S/MIME certificate")

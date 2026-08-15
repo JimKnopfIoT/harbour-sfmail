@@ -435,6 +435,9 @@ QVariantList GpgEngine::listKeys(bool secret, const QString &pattern)
             m["email"] = QString::fromUtf8(u.email() ? u.email() : "");
         }
         m["hasSecret"] = secret ? true : key.hasSecret();
+        // Whether the key can encrypt at all (a signing-only key must fall out
+        // of recipient selection up front, not fail later inside the encrypt job).
+        m["canEncrypt"] = key.canEncrypt();
         result.append(m);
     }
     return result;
@@ -817,62 +820,6 @@ void GpgEngine::importKeyText(const QString &armored)
     } else {
         emit importFinished(false, 0, friendlyGpgError(err));
     }
-}
-
-void GpgEngine::fetchKey(const QString &query)
-{
-    const QString q = query.trimmed();
-    if (q.isEmpty()) { emit keyFetchFinished(false, QStringLiteral("Nothing to look up.")); return; }
-
-    QStringList urls;
-    if (q.contains(QLatin1Char('@'))) {
-        const QString e = QString::fromUtf8(QUrl::toPercentEncoding(q));
-        urls << QStringLiteral("https://keys.openpgp.org/vks/v1/by-email/") + e
-             << QStringLiteral("https://keyserver.ubuntu.com/pks/lookup?op=get&options=mr&search=") + e;
-    } else {
-        QString hex = q;
-        hex.remove(QStringLiteral("0x"), Qt::CaseInsensitive);
-        hex.remove(QLatin1Char(' '));
-        hex = hex.toUpper();
-        urls << (hex.length() >= 40
-                     ? QStringLiteral("https://keys.openpgp.org/vks/v1/by-fingerprint/") + hex
-                     : QStringLiteral("https://keys.openpgp.org/vks/v1/by-keyid/") + hex)
-             << QStringLiteral("https://keyserver.ubuntu.com/pks/lookup?op=get&options=mr&search=0x") + hex;
-    }
-    emit keyFetchStarted();
-    fetchKeyTry(urls, 0, q);
-}
-
-// Try each keyserver URL in turn; import the first key found.
-void GpgEngine::fetchKeyTry(const QStringList &urls, int idx, const QString &query)
-{
-    if (idx >= urls.size()) {
-        emit keyFetchFinished(false,
-            QStringLiteral("No key found for \"%1\" on keys.openpgp.org or keyserver.ubuntu.com.").arg(query));
-        return;
-    }
-    qWarning() << "[ks] try" << idx << urls[idx];
-    if (!m_nam) m_nam = new QNetworkAccessManager(this);
-    QNetworkRequest req((QUrl(urls[idx])));
-    req.setRawHeader("User-Agent", "harbour-sfmail");
-    req.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-    QNetworkReply *reply = m_nam->get(req);
-    const QStringList u = urls; const QString qq = query; const int i = idx;
-    connect(reply, &QNetworkReply::finished, this, [this, reply, u, i, qq]() {
-        const QByteArray data = reply->readAll();
-        const int code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-        qWarning() << "[ks] reply" << i << "err=" << reply->error() << "http=" << code << "bytes=" << data.size();
-        reply->deleteLater();
-        if (reply->error() == QNetworkReply::NoError && data.contains("BEGIN PGP PUBLIC KEY BLOCK")) {
-            const QString src = i == 0 ? QStringLiteral("keys.openpgp.org")
-                                       : QStringLiteral("keyserver.ubuntu.com");
-            importKeyText(QString::fromUtf8(data));   // emits importFinished + keysChanged
-            emit keyFetchFinished(true,
-                QStringLiteral("Key for \"%1\" found on %2 and imported.").arg(qq, src));
-        } else {
-            fetchKeyTry(u, i + 1, qq);   // next keyserver
-        }
-    });
 }
 
 // keys.openpgp.org ONLY — it serves a key by-email only when that address is

@@ -519,6 +519,10 @@ bool SmimeEngine::runGpgsm(const QStringList &args, const QByteArray &stdinData,
                            QByteArray *out, QByteArray *err, int timeoutMs)
 {
     QStringList full;
+    // No revocation checks — a considered trade, not an oversight. Trust is
+    // anchored in the local store, not in a PKI (see updateTrustlist()), and
+    // gpgsm's CRL path is hard-fail through a directory daemon the bundled
+    // stack does not ship: mail has to stay readable offline.
     full << QStringLiteral("--homedir") << m_home
          << QStringLiteral("--batch")
          << QStringLiteral("--disable-crl-checks")
@@ -661,6 +665,13 @@ void SmimeEngine::completeChainViaAia()
 
 void SmimeEngine::updateTrustlist()
 {
+    // The trust model, in one sentence: the local store IS the anchor. This app
+    // exists to exchange encrypted mail with closed PKI worlds without carrying
+    // a PKI of its own — whoever creates a certificate for themselves must be
+    // able to trust themselves when using it. Certificates are therefore
+    // treated like PGP keys: shown to the user, imported on their say-so, and
+    // trusted from then on.
+    //
     // trustlist.txt holds the self-signed ROOTs we trust as anchors. Rewrite it
     // from the roots currently in the store (deduplicated). "S relax" = trusted
     // S/MIME root, lenient extension checks.
