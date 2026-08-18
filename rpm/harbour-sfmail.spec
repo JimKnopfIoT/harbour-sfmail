@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.8.3
+Version:    0.8.4
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3+
@@ -161,6 +161,11 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Tue Aug 18 2026 harbour-sfmail contributors 0.8.4-1
+- Release build from the repository tree, so the package header names the
+  project's repository (the 0.8.3 packages carried an incomplete URL). Also
+  the first version offered on OpenRepos. No change to the app itself.
+
 * Sat Aug 15 2026 harbour-sfmail contributors 0.8.3-1
 - Key selection tightened, prompted by an external review. The recipient key
   dialog shows each key's full fingerprint (the identity an out-of-band check
