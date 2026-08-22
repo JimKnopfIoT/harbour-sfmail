@@ -11,9 +11,6 @@ accounts.
 > **SF-Mail = Security Friendly mail.** The "SF" is *not* short for Sailfish — it stands for the goal
 > of making security (PGP and S/MIME) friendly and easy to use.
 
-Since I'm not a developer, I let Claude Code write the whole thing
-(even the icons are made by Claude Code).
-
 ## Opening mail from notifications (changes a system file)
 
 Tapping a "new mail" notification is delivered to whichever program **owns** the
