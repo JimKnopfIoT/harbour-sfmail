@@ -7,6 +7,7 @@
 #include <QTextStream>
 #include <QDateTime>
 #include <QMutex>
+#include <QSocketNotifier>
 #include <QTranslator>
 #include <QLocale>
 #include <QQmlContext>
@@ -16,6 +17,7 @@
 #include "emailui.h"
 
 #include <signal.h>
+#include <sys/socket.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/prctl.h>
@@ -36,6 +38,22 @@
 // the journal shows the signal; for a core-level dig, temporarily comment the
 // prctl out.
 static int g_crashFd = -1;
+// PIDs of the GnuPG daemons the crypto plugin spawned. A crash skips
+// aboutToQuit, so a surviving agent would keep the launch sandbox alive and the
+// app could not be started from its icon again (the reason those daemons are
+// shut down at all). Read only inside the signal handler — hence plain atomics
+// and kill(), both of which are safe there.
+//
+// The plugin reports them through the C function below, looked up at runtime.
+// Sharing the variable itself would tie the plugin's load to a symbol of the
+// executable, and a plugin that fails to load takes the whole UI with it.
+static std::atomic<int> g_agentPids[4];
+
+extern "C" void sfmail_note_agent_pid(int slot, int pid)
+{
+    if (slot >= 0 && slot < int(sizeof(g_agentPids) / sizeof(g_agentPids[0])))
+        g_agentPids[slot].store(pid);
+}
 
 static void writeAll(int fd, const char *s)
 {
@@ -45,6 +63,15 @@ static void writeAll(int fd, const char *s)
         ssize_t n = write(fd, s, len);
         if (n <= 0) break;
         s += n; len -= static_cast<size_t>(n);
+    }
+}
+
+// Async-signal-safe: kill() only, on pids the plugin reported.
+static void killAgents()
+{
+    for (unsigned i = 0; i < sizeof(g_agentPids) / sizeof(g_agentPids[0]); ++i) {
+        const int pid = g_agentPids[i].load();
+        if (pid > 0) kill(pid, SIGTERM);
     }
 }
 
@@ -73,7 +100,48 @@ static void crashHandler(int sig, siginfo_t *info, void *)
     if (g_crashFd >= 0) fsync(g_crashFd);
     writeAll(STDERR_FILENO, hdr); writeAll(STDERR_FILENO, name); writeAll(STDERR_FILENO, "\n");
 
+    killAgents();
+
     // SA_RESETHAND already reset us to SIG_DFL; returning re-faults into the core.
+}
+
+// Ending by signal (a kill from a script, the session going down) never reaches
+// Qt's aboutToQuit either, and a GnuPG agent that outlives the process keeps the
+// launch sandbox alive: the launcher then holds its single-instance lock and the
+// app cannot be started from its icon again until someone kills the agent by
+// hand.
+//
+// Killing recorded pids from the handler is not enough here — an agent started
+// moments ago may not be recorded yet. So the signal is turned back into an
+// ordinary quit: the handler writes one byte into a pipe (all it may do), the
+// event loop picks it up and asks the application to quit, and the normal
+// shutdown runs, which asks each agent to stop over its own protocol.
+static int g_termPipe[2] = {-1, -1};
+
+static void termHandler(int sig)
+{
+    const char b = char(sig);
+    if (g_termPipe[1] >= 0) {
+        ssize_t r = write(g_termPipe[1], &b, 1);
+        (void)r;
+    }
+}
+
+// Wire the pipe into the event loop. Runs in the main thread, so the handler
+// itself only writes a byte and everything real happens here.
+static void installTermHandler(QObject *owner)
+{
+    if (::socketpair(AF_UNIX, SOCK_STREAM, 0, g_termPipe) != 0) return;
+    QSocketNotifier *n = new QSocketNotifier(g_termPipe[0], QSocketNotifier::Read, owner);
+    QObject::connect(n, &QSocketNotifier::activated, owner, [n]() {
+        n->setEnabled(false);
+        char b; ssize_t r = ::read(g_termPipe[0], &b, 1); (void)r;
+        qWarning() << "[sfmail] termination signal — shutting down";
+        QCoreApplication::quit();
+    });
+    signal(SIGTERM, termHandler);
+    signal(SIGINT,  termHandler);
+    signal(SIGHUP,  termHandler);
 }
 
 static void installCrashHandler(const QString &logPath)
@@ -92,10 +160,10 @@ static void installCrashHandler(const QString &logPath)
     sigaction(SIGILL,  &sa, nullptr);
 }
 
-// Runtime switch for the debug.log file (About → "Debug logging"). Default ON;
-// the persisted choice is loaded at startup below. Only gates the on-device
-// logfile — stderr/journal output stays on.
-std::atomic<bool> g_fileLog{true};
+// Runtime switch for the debug.log file (About → "Debug logging"). Default OFF
+// (see logcontrol.h for why); the persisted choice is loaded at startup below.
+// Only gates the on-device logfile — stderr/journal output stays on.
+std::atomic<bool> g_fileLog{false};
 
 // Development logging: mirror every Qt/QML message into a logfile under the
 // app's data dir, so QML warnings ("Type X unavailable", ReferenceErrors, …)
@@ -132,8 +200,19 @@ static void fileMessageHandler(QtMsgType type, const QMessageLogContext &ctx,
     // (About → "Debug logging"). The stderr/journal line below is always emitted.
     if (g_fileLog.load()) {
         QMutexLocker lock(&mutex);
+        // Bounded: this file records a session's activity and must not grow
+        // without end on a phone. At the cap the previous log is kept as .1 and
+        // a fresh one starts — two files, never more.
+        static const qint64 kMaxBytes = 2 * 1024 * 1024;
+        if (QFileInfo(path).size() > kMaxBytes) {
+            QFile::remove(path + QStringLiteral(".1"));
+            QFile::rename(path, path + QStringLiteral(".1"));
+        }
         QFile f(path);
+        const bool fresh = !QFileInfo::exists(path);
         if (f.open(QIODevice::Append | QIODevice::Text)) {
+            if (fresh)
+                f.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
             QTextStream(&f) << line << '\n';
         }
     }
@@ -176,15 +255,21 @@ int main(int argc, char *argv[])
         const QString logDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
         QDir().mkpath(logDir);
         installCrashHandler(logDir + QStringLiteral("/debug.log"));
+        installTermHandler(app.data());
     }
 
-    // Bilingual: load the German strings ONLY when the system language is German;
-    // for every other language the app stays on its English source strings.
-    if (QLocale::system().language() == QLocale::German) {
-        QTranslator *de = new QTranslator(app.data());
-        if (de->load(QStringLiteral("harbour-sfmail-de"),
+    // Load the translation for the device's language. QTranslator's locale-aware
+    // load() does the narrowing itself (pt_BR → pt, de_AT → de) and simply finds
+    // nothing for a language we do not ship — the app then shows its English
+    // source strings, which is the intended fallback.
+    {
+        QTranslator *tr = new QTranslator(app.data());
+        if (tr->load(QLocale::system(), QStringLiteral("harbour-sfmail"),
+                     QStringLiteral("-"),
                      SailfishApp::pathTo(QStringLiteral("translations")).toLocalFile()))
-            app->installTranslator(de);
+            app->installTranslator(tr);
+        else
+            delete tr;
     }
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());

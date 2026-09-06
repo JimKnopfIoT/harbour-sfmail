@@ -291,7 +291,7 @@ Page {
         }
     }
     function _dispatchSmime(to, cc, enc, sign, passphrase) {
-        busy.running = true
+        busy.running = true; page._sending = true
         status.error = false; status.text = qsTr("S/MIME — sending…")
         Smime.sendSmime(accountsModel.accountId(accountCombo.currentIndex),
                         subjectField.text, to, cc, _bccList(),
@@ -413,7 +413,7 @@ Page {
 
     function _dispatchSign(to, cc, signFpr, passphrase) {
         var bcc = _bccList()
-        busy.running = true
+        busy.running = true; page._sending = true
         status.error = false; status.text = qsTr("Signing & sending…")
         if (formatCombo.currentIndex === 1) {
             // Inline clearsign — text only.
@@ -504,11 +504,11 @@ Page {
                 status.error = true; return
             }
             page._inlineTo = to; page._inlineCc = cc; page._inlineBcc = bcc
-            busy.running = true
+            busy.running = true; page._sending = true
             status.error = false; status.text = qsTr("Encrypting & sending…")
             Gpg.encrypt(fprs, bodyField.text, signFpr, passphrase)   // → onEncryptFinished
         } else {
-            busy.running = true
+            busy.running = true; page._sending = true
             status.error = false; status.text = qsTr("Encrypting & sending…")
             Gpg.sendPgpMime(accountsModel.accountId(accountCombo.currentIndex),
                             subjectField.text, to, cc, blindCopies,
@@ -517,10 +517,18 @@ Page {
         }
     }
 
+    // The engines are singletons: their send result reaches EVERY open composer.
+    // Only the one that actually started a send may act on it — otherwise a second
+    // composer (opened from a mailto: link or a share) would close the first and
+    // delete its draft along the way.
+    property bool _sending: false
+
     // S/MIME send result.
     Connections {
         target: Smime
         onSendFinished: {
+            if (!page._sending) return
+            page._sending = false
             busy.running = false
             if (ok) _closeComposer()
             else { status.text = qsTr("Send failed: %1").arg(error); status.error = true }
@@ -531,13 +539,17 @@ Page {
         target: Gpg
         // PGP/MIME path.
         onSendFinished: {
+            if (!page._sending) return
+            page._sending = false
             busy.running = false
             if (ok) _closeComposer()
             else { status.text = qsTr("Send failed: %1").arg(error); status.error = true }
         }
         // Inline path: encrypt produced the armored body → send it as plain text.
         onEncryptFinished: {
+            if (!page._sending) return
             if (!ok) {
+                page._sending = false
                 busy.running = false
                 status.text = qsTr("Encryption failed: %1").arg(error); status.error = true
                 return
@@ -549,6 +561,7 @@ Page {
             outgoing.subject = subjectField.text
             outgoing.body = armored
             outgoing.send()
+            page._sending = false
             busy.running = false
             _closeComposer()
         }

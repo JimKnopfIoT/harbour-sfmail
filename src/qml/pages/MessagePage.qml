@@ -38,13 +38,52 @@ Page {
     property string _smimeInfo: ""
     property string _smimePlain: ""
     property bool _smimeImportNeeded: false   // sender cert found AND not yet in store
+    // Verification result of an S/MIME signature (map from Smime.verifyMessage /
+    // Smime.decryptFinished). Empty until a signature was actually checked — the
+    // banner never claims "signed" on the strength of a Content-Type alone.
+    property var _smimeSig: ({})
+    readonly property string _smimeSigStatus: (page._smimeSig && page._smimeSig.status)
+                                              ? page._smimeSig.status : ""
     function _refreshSmime() {
-        if (!Gpg.smimeEnabled) { page._smimeKind = ""; page._smimeImportNeeded = false; return }
+        if (!Gpg.smimeEnabled) { page._smimeKind = ""; page._smimeImportNeeded = false; page._smimeSig = ({}); return }
         page._smimeKind = Smime.messageKind(page.messageId)
-        // For signed mails we can check the store right away; for encrypted ones the
-        // cert is inside, so the check happens after Decrypt.
-        page._smimeImportNeeded = (page._smimeKind === "signed") ? Smime.senderCertMissing(page.messageId)
-                                                                 : false
+        // For signed mails we can verify and check the store right away; for
+        // encrypted ones the signature is inside, so both happen after Decrypt.
+        if (page._smimeKind === "signed") {
+            page._smimeSig = Smime.verifyMessage(page.messageId)
+            page._smimeImportNeeded = Smime.senderCertMissing(page.messageId)
+        } else {
+            page._smimeImportNeeded = false
+        }
+    }
+    // Who signed, as verified — the address out of the certificate, not a name
+    // the message chose for itself.
+    function _smimeSigWho() {
+        var g = page._smimeSig
+        if (!g) return "?"
+        if (g.emails && g.emails.length > 0) return "" + g.emails[0]
+        return g.subject ? ("" + g.subject) : "?"
+    }
+    // Colour and wording of the S/MIME signature line follow the VERIFIED state.
+    function _smimeSigColor() {
+        switch (page._smimeSigStatus) {
+        case "good":           return "#4caf50"
+        case "good-untrusted": return "#ffa030"
+        case "bad":            return "#ff5050"
+        default:               return Theme.secondaryColor
+        }
+    }
+    // Show the confirmation dialog for certificates found in this message.
+    function _pushCertImport(source, arg) {
+        var info = Smime.inspectCertImport(source, arg, "" + message.fromAddress)
+        if (!info || !info.count) {
+            page._smimeInfo = qsTr("No certificate to import: %1").arg(info && info.error ? info.error : "?")
+            return
+        }
+        page._awaitingCertImport = true
+        pageStack.push(Qt.resolvedUrl("SmimeImportDialog.qml"),
+                       { info: info,
+                         intro: qsTr("These certificates came with this message. Nothing is stored until you confirm.") })
     }
     // Attachments recovered from a decrypted PGP/MIME message (list of maps with
     // keys name, mimeType, path, url, isImage, size).
@@ -71,12 +110,28 @@ Page {
     // mail — there the plain text comes from our own decryption anyway.
     property string _body: ""
     property string _html: ""
+    // Reading message.body is not free: for a message whose content is not on the
+    // device yet, the getter asks the server — so calling it on every store change
+    // queued a fresh retrieval each time, on top of the one downloadMessage()
+    // already started. On a freshly synced account that turned every tap into a
+    // burst of retrievals.
+    //
+    // It must still be read, though: the store flags do not always say that a
+    // message is complete when it is (an inline-PGP mail here reports otherwise),
+    // and refusing to read then leaves the reader empty. So: read until something
+    // arrives, and cap the attempts for a message that stays incomplete.
+    property bool _bodyRead: false
+    property int _bodyReadTries: 0
     function _syncBody() {
         if (message.encryptionStatus === EmailMessage.Encrypted) {
             page._body = ""; page._html = ""; return
         }
+        if (page._bodyRead) return                       // cached, never ask again
+        if (!Gpg.contentAvailable(page.messageId) && page._bodyReadTries >= 3) return
+        page._bodyReadTries++
         page._body = message.body
         page._html = message.htmlBody
+        if (page._body !== "" || page._html !== "") page._bodyRead = true
     }
 
     // "Simple HTML" view (by request): render the HTML body WITHOUT loading any
@@ -87,6 +142,32 @@ Page {
                                      && ("" + page._html).indexOf("<") >= 0
     // Signature result from OUR decryption ("Good signature from…", "Signed, but…").
     property string _sigResult: ""
+    // Typed PGP verification result (see Gpg.decryptFinished): status, fpr, uid,
+    // emails, validity. The banner is built from this, never from the text.
+    property var _sigInfo: ({})
+    readonly property string _sigStatus: (page._sigInfo && page._sigInfo.status) ? page._sigInfo.status : ""
+    // Does the signing key carry the address the mail claims to come from? A key
+    // can carry any name, so the address is the only cross-check that means
+    // something — and it is the one an attacker cannot satisfy without the key.
+    readonly property bool _sigFromMatches: {
+        if (page._sigStatus === "" || page._sigStatus === "nokey") return true
+        var em = page._sigInfo.emails
+        if (!em || em.length === 0) return true
+        var from = ("" + message.fromAddress).toLowerCase()
+        var lt = from.indexOf("<")
+        if (lt >= 0) { var gt = from.indexOf(">", lt + 1); if (gt > lt) from = from.substring(lt + 1, gt) }
+        from = from.trim()
+        if (from === "") return true
+        for (var i = 0; i < em.length; ++i) if (("" + em[i]).toLowerCase() === from) return true
+        return false
+    }
+    function _sigWho() {
+        var g = page._sigInfo
+        if (!g) return "?"
+        if (g.emails && g.emails.length > 0) return "" + g.emails[0]
+        if (g.uid) return "" + g.uid
+        return g.keyId ? ("0x" + g.keyId) : "?"
+    }
     readonly property bool _bodyHasPgp: page._body.indexOf("-----BEGIN PGP MESSAGE-----") >= 0
     readonly property bool _bodyHasSignedBlock: page._body.indexOf("-----BEGIN PGP SIGNED MESSAGE-----") >= 0
     // "encrypted in any way" = native PGP/MIME OR an inline ciphertext block.
@@ -140,43 +221,57 @@ Page {
     Connections {
         target: Gpg
         // Inline-PGP (decryptText): plain body only.
+        // The engine singleton talks to every live reader page; only the page the
+        // user is actually on may take a result (these signals carry no message
+        // id, so a second reader would otherwise show a foreign plaintext).
         onDecryptFinished: {
+            if (!page._awaitingCrypto) return
+            page._awaitingCrypto = false
             if (ok) {
                 page._inlinePlain = text
                 page._sigResult = signedBy
+                page._sigInfo = sig ? sig : ({})
                 page._inlineInfo = signedBy.length > 0 ? signedBy : qsTr("Decrypted")
-                if (signedBy.length > 0) Gpg.rememberSigned(page.messageId, signedBy)
+                // The list badge means "carries a signature we could verify" —
+                // a forged or unverifiable one must not earn it.
+                if (page._sigStatus === "good") Gpg.rememberSigned(page.messageId, signedBy)
             } else {
                 page._inlineInfo = error  // already human-friendly from the plugin
             }
         }
         // PGP/MIME (decryptMimeFile): body text + attachments/images.
         onDecryptMimeFinished: {
+            if (!page._awaitingCrypto) return
+            page._awaitingCrypto = false
             if (ok) {
                 page._inlinePlain = text !== "" ? text : qsTr("(no text — see attachments below)")
                 page._mimeAttachments = attachments
                 page._sigResult = signedBy
+                page._sigInfo = sig ? sig : ({})
                 page._inlineInfo = signedBy.length > 0 ? signedBy
                                    : (attachments.length > 0
                                       ? qsTr("Decrypted — %1 attachment(s)").arg(attachments.length)
                                       : qsTr("Decrypted"))
-                if (signedBy.length > 0) Gpg.rememberSigned(page.messageId, signedBy)
+                if (page._sigStatus === "good") Gpg.rememberSigned(page.messageId, signedBy)
                 page._readProtectedHeaders()
             } else {
                 page._inlineInfo = error
             }
         }
         onImportFinished: {
+            if (!page._awaitingKeyFlow) return
+            page._awaitingKeyFlow = false
             page._topNotice = ok ? qsTr("Imported %1 key(s) into your keyring.").arg(imported)
                                  : qsTr("Key import failed: %1").arg(error)
         }
         // A key was found in the message → let the user confirm (with revoked/
         // expired/conflict warnings) before it actually lands in the keyring.
         onKeyImportCandidate: {
+            if (!page._awaitingKeyFlow) return
             pageStack.push(Qt.resolvedUrl("KeyImportDialog.qml"), { info: info })
         }
         // A decrypt hit the anti-DoS size cap → offer a one-time "load without limit".
-        onOversizedContent: page._oversized = true
+        onOversizedContent: if (page._awaitingCrypto) page._oversized = true
     }
 
     // "Open with…": decrypted attachments live in the app's private data dir, which
@@ -203,9 +298,20 @@ Page {
         s = s.replace(/<link\b[^>]*>/gi, "")
         s = s.replace(/<meta\b[^>]*>/gi, "")
         s = s.replace(/<iframe\b[^>]*>[\s\S]*?<\/iframe>/gi, "")
-        // Drop every <img> unless its source is an inline data: URI.
+        // Drop every <img> unless its ONLY source is an inline data: URI.
+        // Testing "does a data: source appear somewhere in the tag" is not
+        // enough: Qt's rich-text parser takes the LAST src it sees and also
+        // accepts "source" as an alias, so <img src="data:…" src="http://…">
+        // would still fetch. Every source-ish attribute must be a data: URI.
         s = s.replace(/<img\b[^>]*>/gi, function(tag) {
-            return /src\s*=\s*["']?\s*data:/i.test(tag) ? tag : ""
+            var re = /\b(?:src|source|lowsrc|dynsrc|srcset)\s*=\s*("[^"]*"|'[^']*'|[^\s>]*)/gi
+            var m, seen = 0
+            while ((m = re.exec(tag)) !== null) {
+                ++seen
+                var v = ("" + m[1]).replace(/^["']|["']$/g, "").replace(/^\s+/, "")
+                if (!/^data:/i.test(v)) return ""
+            }
+            return seen > 0 ? tag : ""
         })
         s = s.replace(/background\s*=\s*("[^"]*"|'[^']*'|[^\s>]*)/gi, "")
         s = s.replace(/url\(([^)]*)\)/gi, "")               // CSS url() refs
@@ -277,6 +383,22 @@ Page {
         onMessageDownloaded: { message.read = true; page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments() }
         onStoredMessageChanged: { page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments() }
         onInlinePartsDownloaded: { page._syncBody(); page._noteLoaded(); page._retryPending(); page._retryPendingKey(); page._loadPlainAttachments() }
+        // Without this the page waits for ever when the connection drops: the
+        // "Downloading…" notice stays, a parked passphrase stays in memory, and
+        // the 8-second timer then claims the message was already complete.
+        onMessageDownloadFailed: page._downloadFailed(qsTr("The message could not be downloaded — no connection?"))
+    }
+
+    // Give up on a pending download: clear the parked action AND the passphrase,
+    // and say what happened instead of leaving a stale notice.
+    function _downloadFailed(reason) {
+        dlNoticeTimer.stop()
+        page._pendingAction = ""
+        page._pendingPassphrase = ""
+        page._pendingEncLoc = ""
+        page._waitingForPart = false
+        page._topNotice = reason
+        page._inlineInfo = ""
     }
 
     // Feedback for "Download full message": if the download actually produced new
@@ -285,8 +407,14 @@ Page {
     Timer {
         id: dlNoticeTimer
         interval: 8000
-        onTriggered: if (page._topNotice === qsTr("Downloading the full message…"))
-                         page._topNotice = qsTr("The message is already fully downloaded.")
+        onTriggered: {
+            if (page._topNotice !== qsTr("Downloading the full message…")) return
+            // Nothing arrived. Only claim completeness when the store agrees;
+            // otherwise the download simply did not get through.
+            page._topNotice = Gpg.contentAvailable(page.messageId)
+                              ? qsTr("The message is already fully downloaded.")
+                              : qsTr("Could not download the message — no connection?")
+        }
     }
     function _noteLoaded() {
         if (page._topNotice === qsTr("Downloading the full message…")) {
@@ -332,10 +460,9 @@ Page {
         // deleted from the server (a field data-loss report). contentAvailable() is a
         // metadata-only check → no GUI freeze. Safe for IMAP: a half-fetched message
         // (body but not attachments) is only PartialContentAvailable → still downloads.
-        page._syncBody()   // fill the cache before anything reads it
         var _ready = Gpg.contentAvailable(page.messageId)
-        var _needDl = !_ready && (page._body === "" || message.encryptionStatus === EmailMessage.Encrypted
-                || message.numberOfAttachments > 0)
+        page._syncBody()   // fills the cache only when the content is local
+        var _needDl = !_ready
         console.log("[diag] open mid=" + page.messageId + " atts=" + message.numberOfAttachments
                 + " bodyEmpty=" + (page._body === "") + " enc=" + message.encryptionStatus
                 + " hasModel=" + (!!message.attachmentModel) + " contentAvail=" + _ready
@@ -351,9 +478,13 @@ Page {
     Connections {
         target: Smime
         onDecryptFinished: {
+            // Singleton signal: a second reader page must ignore a result that
+            // belongs to another message (the engine echoes the id back).
+            if (messageId !== page.messageId) return
             if (ok) { page._smimePlain = text
                       page._mimeAttachments = Smime.takeLastAttachments()  // show/save like PGP
                       page._smimeImportNeeded = (signer === "cert-new")
+                      page._smimeSig = sig ? sig : ({})
                       page._smimeInfo = qsTr("Decrypted") }
             else {
                 var e = ("" + error).toLowerCase()
@@ -363,7 +494,14 @@ Page {
             }
         }
         onImportFinished: {
-            if (ok) page._smimeImportNeeded = false   // now in the store → hide button
+            // Same reasoning as the crypto results above: the import is confirmed
+            // in a dialog that sits on top of this page.
+            if (!page._awaitingCertImport) return
+            page._awaitingCertImport = false
+            if (ok) {
+                page._smimeImportNeeded = false      // now in the store → hide button
+                page._refreshSmime()                 // trust may have changed the result
+            }
             page._smimeInfo = ok ? qsTr("Sender certificate imported")
                                  : qsTr("Import: %1").arg(error)
         }
@@ -437,9 +575,20 @@ Page {
         emailAgent.downloadAttachment(page.messageId, loc)
     }
 
+    // The crypto engines are singletons: their results reach EVERY live reader
+    // page. Correlating on "am I the page on top" is wrong — decryption is
+    // started from a passphrase dialog that sits ABOVE this page, so the result
+    // arrives while this page is not the active one and would be discarded.
+    // What identifies the right recipient is who asked, so that is what is
+    // recorded here, immediately before each call into the engine.
+    property bool _awaitingCrypto: false      // decrypt / verify of this message
+    property bool _awaitingKeyFlow: false     // inspect + import of a key found here
+    property bool _awaitingCertImport: false  // S/MIME certificate import started here
+
     function _runEncAction(url, action, passphrase) {
         if (action === "decrypt") {
             page._oversized = false   // reset; re-set by onOversizedContent if it trips again
+            page._awaitingCrypto = true
             Gpg.decryptMimeFile(url, passphrase)
         } else if (action === "inspect") {
             pageStack.push(Qt.resolvedUrl("CryptoInfoPage.qml"),
@@ -493,6 +642,7 @@ Page {
         var texts = [page._inlinePlain, page._body]
         for (var t = 0; t < texts.length; ++t) {
             if (texts[t] && texts[t].indexOf(KEYHDR) >= 0) {
+                page._awaitingKeyFlow = true
                 Gpg.inspectKeyForImport(texts[t], fromAddr); return ""
             }
         }
@@ -657,8 +807,23 @@ Page {
     }
 
     function signatureText() {
-        // After our own decryption we know the real signature state.
-        if (page._isDecrypted) return page._sigResult   // "" when unsigned
+        // After our own decryption we know the real signature state — built from
+        // the typed result, so a revoked key cannot hide behind neutral wording.
+        if (page._isDecrypted) {
+            switch (page._sigStatus) {
+            case "":            return ""
+            case "good":        return page._sigFromMatches
+                                       ? qsTr("✓ Good signature from %1").arg(page._sigWho())
+                                       : qsTr("⚠ Good signature, but from %1 — NOT the sender's address (%2)")
+                                         .arg(page._sigWho()).arg("" + message.fromAddress)
+            case "bad":         return qsTr("⚠ BAD signature — this message was altered or forged.")
+            case "nokey":       return qsTr("Signed, but the signer's key is missing — cannot verify.")
+            case "revoked":     return qsTr("⚠ Signed with a REVOKED key (%1) — the owner withdrew it.").arg(page._sigWho())
+            case "key-expired": return qsTr("Signed with an EXPIRED key (%1).").arg(page._sigWho())
+            case "sig-expired": return qsTr("The signature has expired (%1).").arg(page._sigWho())
+            default:            return qsTr("The signature could not be checked.")
+            }
+        }
         // Encrypted but not yet decrypted: the signature is inside the ciphertext.
         if (page._isEncrypted) return qsTr("Signature: decrypt first")
         // Native signature — only the meaningful states (ignore QMF's bogus
@@ -672,9 +837,16 @@ Page {
         }
     }
     function signatureColor() {
-        if (page._isDecrypted)
-            return page._sigResult.indexOf("Good signature") >= 0 ? "#4caf50"
-                   : page._sigResult.indexOf("BAD") >= 0 ? "#ff6b6b" : Theme.secondaryColor
+        if (page._isDecrypted) {
+            switch (page._sigStatus) {
+            case "good":    return page._sigFromMatches ? "#4caf50" : "#ffa030"
+            case "bad":
+            case "revoked": return "#ff6b6b"
+            case "key-expired":
+            case "sig-expired": return "#ffa030"
+            default:        return Theme.secondaryColor
+            }
+        }
         switch (message.signatureStatus) {
         case EmailMessage.SignedValid:   return "#4caf50"
         case EmailMessage.SignedInvalid: return "#ff6b6b"
@@ -954,8 +1126,9 @@ Page {
                             if (page._bodyHasPgp) {
                                 var dlg = pageStack.push(Qt.resolvedUrl("PassphraseDialog.qml"),
                                                          { info: qsTr("To decrypt this message") })
-                                dlg.accepted.connect(function() { Gpg.decryptText(page._body, dlg.passphrase) })
+                                dlg.accepted.connect(function() { page._awaitingCrypto = true; Gpg.decryptText(page._body, dlg.passphrase) })
                             } else {
+                                page._awaitingCrypto = true
                                 Gpg.decryptText(page._body, "")  // signature only — no passphrase
                             }
                         }
@@ -982,7 +1155,36 @@ Page {
                         color: Theme.primaryColor
                         text: page._smimeInfo !== "" ? page._smimeInfo
                               : page._smimeKind === "encrypted" ? qsTr("Encrypted S/MIME message")
-                                                                : qsTr("Signed S/MIME message")
+                                                                : qsTr("S/MIME message with a signature")
+                    }
+                    // The verification result — never a claim derived from the
+                    // message's own headers.
+                    Label {
+                        visible: page._smimeSigStatus !== ""
+                        width: parent.width; wrapMode: Text.WordWrap
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: page._smimeSigColor()
+                        text: {
+                            switch (page._smimeSigStatus) {
+                            case "good":
+                                return qsTr("✓ Valid signature from %1").arg(page._smimeSigWho())
+                            case "good-untrusted":
+                                return qsTr("Signature is mathematically valid (%1), but you have not trusted the authority that issued the certificate.").arg(page._smimeSigWho())
+                            case "bad":
+                                return qsTr("⚠ INVALID signature — this message was altered after signing, or the signature is forged.")
+                            case "nocert":
+                                return qsTr("Signed, but the signer's certificate is missing — the signature cannot be checked.")
+                            default:
+                                return qsTr("The signature could not be checked.")
+                            }
+                        }
+                    }
+                    Label {
+                        visible: page._smimeKind === "signed" && page._smimeSigStatus === ""
+                        width: parent.width; wrapMode: Text.WordWrap
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.secondaryColor
+                        text: qsTr("Signature not checked yet.")
                     }
                     Label {
                         width: parent.width; font.pixelSize: Theme.fontSizeExtraSmall
@@ -1005,10 +1207,11 @@ Page {
                         visible: page._smimeImportNeeded
                         text: qsTr("Import sender's certificate")
                         onClicked: {
-                            // Encrypted mail → cert was stashed during Decrypt;
-                            // signed mail → extract from the message now.
-                            if (page._smimeKind === "encrypted") Smime.importPendingSenderCert()
-                            else Smime.importCertFromMessage(page.messageId)
+                            // Encrypted mail → certs were stashed during Decrypt;
+                            // signed mail → read them from the message now. Either
+                            // way the user sees them before anything is stored.
+                            if (page._smimeKind === "encrypted") page._pushCertImport("pending", "")
+                            else page._pushCertImport("message", "" + page.messageId)
                         }
                     }
                 }

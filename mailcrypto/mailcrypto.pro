@@ -19,7 +19,7 @@ INCLUDEPATH += $$STACK_STAGE/usr/share/harbour-sfmail-pgp/include
 # refuses to compile unless the consumer matches (off_t sizes must agree).
 # No-op on aarch64 (off_t is 64-bit there anyway).
 DEFINES += _FILE_OFFSET_BITS=64
-LIBS += -L$$STACK_STAGE/usr/share/harbour-sfmail-pgp/lib -lqgpgme -lgpgmepp -lgpgme -lassuan -lgpg-error
+LIBS += -L$$STACK_STAGE/usr/share/harbour-sfmail-pgp/lib -lqgpgme -lgpgmepp -lgpgme -lassuan -lgpg-error -ldl
 QMAKE_LFLAGS += -Wl,--disable-new-dtags \
                 -Wl,-rpath,/usr/share/harbour-sfmail/gpg/lib \
                 -Wl,-rpath-link,$$STACK_STAGE/usr/share/harbour-sfmail-pgp/lib

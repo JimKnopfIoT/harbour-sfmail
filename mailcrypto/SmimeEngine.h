@@ -5,20 +5,24 @@
 #include <QVariantList>
 #include <QStringList>
 #include <QByteArray>
+#include <QHash>
+#include <QVariantMap>
 
 class QNetworkAccessManager;
 class QMailTransmitAction;
 class QMailAccountId;
 
-// S/MIME (PKI/MIME) backend: a thin QProcess wrapper around the modern bundled
-// gpgsm (2.2.x) that harbour-sfmail already ships under
-// /usr/share/harbour-sfmail/gpg/. We reuse that stack (this is an add-on; it does
-// NOT bundle its own GnuPG). Operates on its OWN gpgsm home dir so the OpenPGP
-// keyring of harbour-sfmail stays untouched. Passphrases via loopback.
+// S/MIME (PKI/MIME) backend: a QProcess wrapper around the gpgsm of the bundled
+// GnuPG stack under /usr/share/harbour-sfmail/gpg/, plus the bundled openssl for
+// the PKCS#12 plumbing gpgsm cannot do itself. Operates on its OWN gpgsm home
+// dir so the OpenPGP keyring stays untouched. Passphrases via loopback / fd,
+// never on a command line.
 //
-// Stufe-0 (manually) proven: import a real-world CA-issued .p12 (3 key pairs) +
-// chain, encrypt to the keyEncipherment cert, decrypt back to plaintext. This
-// class turns that proof into code (see SmimeEngine.cpp for the gotchas).
+// Trust model (deliberate, see trustRoot()): the local store is the anchor.
+// Certificates are shown to the user and imported on their say-so; a root
+// becomes an anchor only when the user confirms it. Signatures are verified
+// with gpgsm against that store — a message is called "signed" only after
+// GOODSIG, never because of its Content-Type.
 class SmimeEngine : public QObject
 {
     Q_OBJECT
@@ -58,32 +62,50 @@ public:
     Q_INVOKABLE void generateCert(const QString &name, const QString &email,
                                   const QString &passphrase, int days = 730);
 
-    // Import X.509 certificate(s) WITHOUT a private key: a PEM/DER cert, a PKCS#7
-    // bundle (.p7b/.p7c), or a signed S/MIME message — the signer's certificate
-    // (and chain) travel inside it. This is the "import sender's key" use case:
-    // learn a correspondent's cert from their signed mail so you can later encrypt
-    // to them. Result via importFinished().
-    Q_INVOKABLE void importCertFromFile(const QString &pathOrData);
+    // --- importing OTHER people's certificates: inspect first, then confirm -----
+    // Read the certificate(s) from a source WITHOUT importing anything:
+    //   source "message" → the CMS of the signed message with id `arg`
+    //   source "pending" → the sender certs stashed by the last decryptMessage()
+    //   source "file"    → a PEM/DER cert, PKCS#7 bundle or signed .eml at path `arg`
+    // Returns what the confirmation dialog shows: every certificate with subject,
+    // e-mail addresses, issuer, SHA-1 fingerprint, validity, CA/self-signed flags,
+    // whether it is already in the store, and conflicts (a DIFFERENT certificate
+    // already stored for one of its addresses); plus whether any leaf certificate
+    // carries senderEmail. The batch is stashed for importInspected().
+    Q_INVOKABLE QVariantMap inspectCertImport(const QString &source, const QString &arg,
+                                              const QString &senderEmail);
+    // Import the batch stashed by inspectCertImport(). trustRoots: also make the
+    // self-signed root(s) IN THE BATCH trust anchors (trustlist). fetchAia: after
+    // the import, download missing issuer certificates from the URLs inside the
+    // certificates (https only, size-capped) — those are stored but NOT trusted.
+    // Result via importFinished() + certsChanged().
+    Q_INVOKABLE void importInspected(bool trustRoots, bool fetchAia);
 
     // --- working directly on a received QMF message (by id) ----------------
     // What kind of S/MIME a stored message is: "encrypted" (pkcs7-mime enveloped),
     // "signed" (multipart/signed pkcs7-signature) or "" (not S/MIME). Read from the
     // message's Content-Type without constructing a QMailMessage.
     Q_INVOKABLE QString messageKind(int messageId);
-    // Import the sender's certificate(s) carried inside a (signed) message. Result
-    // via importFinished(); roots auto-fetched via AIA like every import.
-    Q_INVOKABLE void importCertFromMessage(int messageId);
+    // Verify the signature of a SIGNED (not encrypted) stored message with gpgsm.
+    // Returns {status, trust, fpr, subject, emails, certInStore, note, error}:
+    //   status "good"           GOODSIG and the chain ends in a trusted root
+    //          "good-untrusted" GOODSIG, but the chain is not anchored in the store
+    //          "bad"            BADSIG — altered or forged
+    //          "nocert"         no signer certificate available — cannot verify
+    //          "error"          gpgsm failed (see error)
+    //          "none"           not a signed message
+    // Result is cached per message until the store changes.
+    Q_INVOKABLE QVariantMap verifyMessage(int messageId);
     // Is the sender's certificate of a SIGNED message NOT yet in the store? (Used to
     // show the import button only when needed.) Encrypted/none → false.
     Q_INVOKABLE bool senderCertMissing(int messageId);
-    // Decrypt an encrypted (pkcs7-mime) message. Handles a nested opaque signed-data
-    // layer (unwraps it to the real text) and stashes the sender's cert for an
-    // explicit import. Result via decryptFinished() (signer == "cert-available" when
-    // a sender certificate was found).
+    // Decrypt an encrypted (pkcs7-mime) message. A nested signed layer (opaque or
+    // multipart/signed) is verified with gpgsm and unwrapped to the real text; the
+    // sender's cert is stashed for an explicit, confirmed import. Result via
+    // decryptFinished(): signer = "cert-new" | "cert-present" | "", sig = the
+    // verification map (see verifyMessage), messageId echoes the argument so a
+    // page can ignore results that belong to another message.
     Q_INVOKABLE void decryptMessage(int messageId, const QString &passphrase);
-    // Import the sender certificate(s) stashed by the last decryptMessage(). Result
-    // via importFinished(); roots auto-fetched via AIA.
-    Q_INVOKABLE void importPendingSenderCert();
 
     // All certificates currently in the gpgsm store (secret ones flagged).
     Q_INVOKABLE QVariantList listCerts();
@@ -149,7 +171,8 @@ signals:
     void preferredCertChanged(const QString &email, const QString &fingerprint);
     void certsChanged();
     void importFinished(bool ok, int imported, const QString &error);
-    void decryptFinished(bool ok, const QString &text, const QString &signer, const QString &error);
+    void decryptFinished(bool ok, const QString &text, const QString &signer, const QString &error,
+                         const QVariantMap &sig, int messageId);
     void roundTripFinished(bool ok, const QString &text, const QString &error);
     void sendFinished(bool ok, const QString &error);
     // Verbose progress line for the test UI / debug.log.
@@ -169,20 +192,30 @@ private:
     // Does this openssl understand the -legacy flag (OpenSSL 3.x)?
     bool opensslHasLegacy();
 
-    // Auto-complete the trust chain. For every stored cert whose issuer is NOT yet
-    // present, read the issuer-cert location from the cert's OWN data (the X.509
-    // Authority Information Access "CA Issuers" URL) and download + import it, up to
-    // the self-signed root. NOTHING about the source is hard-coded — the URL always
-    // comes out of the certificate itself. Called after each import.
+    // Complete the issuer chain ON REQUEST: for every stored cert whose issuer is
+    // not present, read the "CA Issuers" URL from the cert's own Authority
+    // Information Access extension and download + import that issuer, up to the
+    // self-signed root. https only, size-capped; nothing fetched is trusted.
     void completeChainViaAia();
     // The AIA "CA Issuers" URL carried inside the cert with this fingerprint (""
     // if the cert has no such pointer).
     QString aiaCaIssuers(const QString &fingerprint);
-    // Blocking HTTP GET (Qt network, works inside the sandbox with the Internet
-    // permission). Empty on error/timeout.
-    QByteArray httpGet(const QString &url, int timeoutMs);
-    // (Re)write trustlist.txt with the self-signed ROOT certs currently in the store.
-    void updateTrustlist();
+    // Blocking HTTPS GET, capped at maxBytes. Empty on error/timeout/oversize.
+    QByteArray httpGet(const QString &url, int timeoutMs, int maxBytes);
+    // Trust anchors (trustlist.txt): add / remove one root, list them.
+    void trustRoot(const QString &fpr);
+    void untrustRoot(const QString &fpr);
+    QStringList trustedRoots() const;
+    // gpgsm --verify on a raw signed message (opaque signed-data or
+    // multipart/signed). contentOut receives the verified content (the opaque
+    // payload, or the raw signed part). See verifyMessage() for the map.
+    QVariantMap verifyRaw(const QByteArray &raw, QByteArray *contentOut);
+    // Describe PEM certificate(s) for the import dialog (see inspectCertImport).
+    QVariantMap describeCertsPem(const QByteArray &pem, const QString &senderEmail);
+    // Forget cached listCerts()/verify results after the store changed.
+    void invalidateCerts();
+    // Remove leftovers of interrupted operations (temp dirs, scratch files).
+    void cleanupTempFiles();
     // True if EVERY certificate in `pem` is already present in the store (by SHA-1
     // fingerprint). Used to hide "import" once nothing new is left to import.
     bool certsAllInStore(const QByteArray &pem);
@@ -223,12 +256,17 @@ private:
     QString m_openssl;   // /usr/bin/openssl
     QString m_lib;       // m_stack/lib  (LD_LIBRARY_PATH)
     QString m_agent;     // m_stack/bin/gpg-agent
-    QString m_dirmngr;   // m_stack/bin/dirmngr
     QString m_home;      // our private gpgsm home
     bool m_available = false;
     int m_legacy = -1;   // -1 unknown, 0 no, 1 yes
     QNetworkAccessManager *m_nam = nullptr;
     QMailTransmitAction *m_tx = nullptr;
+    bool m_aiaRunning = false;           // re-entrancy guard (httpGet spins an event loop)
+    QVariantList m_certCache;            // listCerts() result until the store changes
+    bool m_certCacheValid = false;
+    QHash<int, QVariantMap> m_verifyCache;   // verifyMessage() per message id
+    QByteArray m_inspectPem;             // batch stashed by inspectCertImport()
+    QVariantMap m_inspectInfo;
     QByteArray m_pendingSenderCertPem;   // sender certs from the last decrypt
     QVariantList m_lastDecAttachments;   // attachments from the last decryptMessage()
     // Cache the embedded signer certs of the most recently decrypted message, so

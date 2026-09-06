@@ -7,7 +7,42 @@ CONFIG += sailfishapp sailfishapp_i18n
 
 # Bilingual: English is the source (all qsTr). German is shipped as a .qm and
 # auto-loaded by SailfishApp when the system language is German; otherwise English.
-TRANSLATIONS += translations/harbour-sfmail-de.ts
+# English is the source language; these files carry the translations. The app
+# loads the one matching the device language and falls back to the source
+# strings where there is none (see main.cpp).
+TRANSLATIONS += \
+    translations/harbour-sfmail-ar.ts \
+    translations/harbour-sfmail-bg.ts \
+    translations/harbour-sfmail-cs.ts \
+    translations/harbour-sfmail-da.ts \
+    translations/harbour-sfmail-de.ts \
+    translations/harbour-sfmail-el.ts \
+    translations/harbour-sfmail-en.ts \
+    translations/harbour-sfmail-es.ts \
+    translations/harbour-sfmail-et.ts \
+    translations/harbour-sfmail-fa.ts \
+    translations/harbour-sfmail-fi.ts \
+    translations/harbour-sfmail-fr.ts \
+    translations/harbour-sfmail-ga.ts \
+    translations/harbour-sfmail-hi.ts \
+    translations/harbour-sfmail-hr.ts \
+    translations/harbour-sfmail-hu.ts \
+    translations/harbour-sfmail-is.ts \
+    translations/harbour-sfmail-it.ts \
+    translations/harbour-sfmail-ja.ts \
+    translations/harbour-sfmail-lt.ts \
+    translations/harbour-sfmail-lv.ts \
+    translations/harbour-sfmail-mt.ts \
+    translations/harbour-sfmail-nb.ts \
+    translations/harbour-sfmail-nl.ts \
+    translations/harbour-sfmail-pl.ts \
+    translations/harbour-sfmail-pt.ts \
+    translations/harbour-sfmail-ro.ts \
+    translations/harbour-sfmail-ru.ts \
+    translations/harbour-sfmail-sk.ts \
+    translations/harbour-sfmail-sl.ts \
+    translations/harbour-sfmail-sv.ts \
+    translations/harbour-sfmail-zh_CN.ts
 # lupdate must see ALL qml (the QML_FILES list below is only a partial subset; the
 # actual install uses qml/*). List every qml dir so no string is missed.
 lupdate_only {

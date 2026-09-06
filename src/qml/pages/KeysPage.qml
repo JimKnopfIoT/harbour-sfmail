@@ -231,7 +231,7 @@ Page {
         ViewPlaceholder {
             enabled: keyModel.count === 0
             text: qsTr("No keys")
-            hintText: qsTr("Import a key with the pull-down menu")
+            hintText: qsTr("Pull down to create your own key, or to import one")
         }
 
         VerticalScrollDecorator { }

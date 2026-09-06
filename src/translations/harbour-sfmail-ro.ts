@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de">
+<TS version="2.1" language="ro">
 <context>
     <name>AboutPage</name>
     <message>
         <source>About SF-Mail</source>
-        <translation>Über SF-Mail</translation>
+        <translation>Despre SF-Mail</translation>
     </message>
     <message>
         <source>SF-Mail</source>
@@ -17,166 +17,166 @@
     </message>
     <message>
         <source>Version %1</source>
-        <translation>Version %1</translation>
+        <translation>Versiunea %1</translation>
     </message>
     <message>
         <source>Making e-mail encryption easy and friendly on Sailfish OS. Reads, writes, encrypts, decrypts and signs mail with built-in OpenPGP (PGP/MIME and inline) — and, when enabled, S/MIME (PKI / X.509) — using a bundled modern GnuPG with its own keyring.</source>
-        <translation>Macht E-Mail-Verschlüsselung unter Sailfish OS einfach und zugänglich. Liest, schreibt, verschlüsselt, entschlüsselt und signiert Mails mit eingebautem OpenPGP (PGP/MIME und Inline) – und, wenn aktiviert, S/MIME (PKI / X.509) – über ein mitgeliefertes modernes GnuPG mit eigenem Schlüsselbund.</translation>
+        <translation>Face criptarea e-mailului simplă și prietenoasă pe Sailfish OS. Citește, scrie, criptează, decriptează și semnează mesaje cu OpenPGP încorporat (PGP/MIME și Inline PGP) — și, când este activat, cu S/MIME (PKI / X.509) — folosind un GnuPG modern livrat împreună cu aplicația, cu inel de chei propriu.</translation>
     </message>
     <message>
         <source>Features</source>
-        <translation>Funktionen</translation>
+        <translation>Funcții</translation>
     </message>
     <message>
         <source>Enable S/MIME (PKI / X.509)</source>
-        <translation>S/MIME aktivieren (PKI / X.509)</translation>
+        <translation>Activează S/MIME (PKI / X.509)</translation>
     </message>
     <message>
         <source>Adds certificate management and S/MIME decrypt / import in the mail view. Off keeps the app PGP-only and slim.</source>
-        <translation>Fügt Zertifikatsverwaltung und S/MIME-Entschlüsseln/-Import in der Mailansicht hinzu. Aus bleibt die App reine PGP-App und schlank.</translation>
+        <translation>Adaugă gestionarea certificatelor și decriptarea/importul S/MIME în vizualizarea mesajelor. Dezactivat, aplicația rămâne doar PGP și suplă.</translation>
     </message>
     <message>
         <source>OpenPGP backend</source>
-        <translation>OpenPGP-Backend</translation>
+        <translation>Motor OpenPGP</translation>
     </message>
     <message>
         <source>ready</source>
-        <translation>bereit</translation>
+        <translation>pregătit</translation>
     </message>
     <message>
         <source>unavailable</source>
-        <translation>nicht verfügbar</translation>
+        <translation>indisponibil</translation>
     </message>
     <message>
         <source>Keyring</source>
-        <translation>Schlüsselbund</translation>
+        <translation>Inel de chei</translation>
     </message>
     <message>
         <source>Diagnostics</source>
-        <translation>Diagnose</translation>
+        <translation>Diagnosticare</translation>
     </message>
     <message>
         <source>Debug logging</source>
-        <translation>Debug-Protokoll</translation>
+        <translation>Jurnal de depanare</translation>
     </message>
     <message>
         <source>System</source>
-        <translation>System</translation>
+        <translation>Sistem</translation>
     </message>
     <message>
         <source>Open mail notifications in this app</source>
-        <translation>Mail-Benachrichtigungen in dieser App öffnen</translation>
+        <translation>Deschide notificările de e-mail în această aplicație</translation>
     </message>
     <message>
         <source>Switched on, but the other mail client is holding the connection right now — this takes effect once it is closed.</source>
-        <translation>Eingeschaltet, aber das andere Mail-Programm hält die Verbindung gerade noch — wirksam, sobald es geschlossen wird.</translation>
+        <translation>Activat, dar celălalt client de e-mail deține acum conexiunea — intră în vigoare după ce acesta este închis.</translation>
     </message>
     <message>
         <source>Takes over mail notifications, mailto: links and &quot;share via email&quot;. Off means the client you used before keeps them.</source>
-        <translation>Übernimmt Mail-Benachrichtigungen, mailto:-Links und „Per E-Mail teilen“. Aus bedeutet: das zuvor genutzte Programm behält sie.</translation>
+        <translation>Preia notificările de e-mail, legăturile mailto: și „partajarea prin e-mail”. Dezactivat, programul folosit anterior le păstrează.</translation>
     </message>
     <message>
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
-        <translation>Schreibt ein debug.log in den Datenordner der App, um einem Fehler nachzugehen. Es hält fest, was die App tut, darunter die Absenderadresse und die Namen von Anhängen — schalten Sie es ein, während der Fehler auftritt, und danach wieder aus. Mails und Schlüssel landen nie darin.</translation>
+        <translation>Scrie un debug.log în dosarul de date al aplicației, pentru a ajuta la depistarea unei probleme. Înregistrează ce face aplicația, inclusiv adresa de la care trimiteți și numele atașamentelor — activați-l cât timp reproduceți defecțiunea, apoi dezactivați-l la loc. Mesajele și cheile nu ajung niciodată în el.</translation>
     </message>
 </context>
 <context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
-        <translation>Inline-PGP kann Blindkopien nicht verbergen — PGP/MIME verwenden.</translation>
+        <translation>Inline PGP nu poate ascunde copiile oarbe — folosiți PGP/MIME.</translation>
     </message>
     <message>
         <source>Choose an account</source>
-        <translation>Konto wählen</translation>
+        <translation>Alegeți un cont</translation>
     </message>
     <message>
         <source>Enter recipients first</source>
-        <translation>Erst Empfänger eingeben</translation>
+        <translation>Introduceți întâi destinatarii</translation>
     </message>
     <message>
         <source>No usable signing key for %1</source>
-        <translation>Kein nutzbarer Signaturschlüssel für %1</translation>
+        <translation>Nicio cheie de semnare utilizabilă pentru %1</translation>
     </message>
     <message>
         <source>To sign the message</source>
-        <translation>Zum Signieren der Nachricht</translation>
+        <translation>Pentru a semna mesajul</translation>
     </message>
     <message>
         <source>Signing &amp; sending…</source>
-        <translation>Signieren &amp; Senden…</translation>
+        <translation>Se semnează și se trimite…</translation>
     </message>
     <message>
         <source>Inline PGP cannot carry attachments — use PGP/MIME.</source>
-        <translation>Inline-PGP kann keine Anhänge tragen – nutze PGP/MIME.</translation>
+        <translation>Inline PGP nu poate transporta atașamente — folosiți PGP/MIME.</translation>
     </message>
     <message>
         <source>Missing a key for one or more recipients.</source>
-        <translation>Schlüssel für einen oder mehrere Empfänger fehlt.</translation>
+        <translation>Lipsește cheia pentru unul sau mai mulți destinatari.</translation>
     </message>
     <message>
         <source>Inline PGP cannot encrypt attachments — use PGP/MIME.</source>
-        <translation>Inline-PGP kann keine Anhänge verschlüsseln – nutze PGP/MIME.</translation>
+        <translation>Inline PGP nu poate cripta atașamente — folosiți PGP/MIME.</translation>
     </message>
     <message>
         <source>Encrypting &amp; sending…</source>
-        <translation>Verschlüsseln &amp; Senden…</translation>
+        <translation>Se criptează și se trimite…</translation>
     </message>
     <message>
         <source>Send failed: %1</source>
-        <translation>Senden fehlgeschlagen: %1</translation>
+        <translation>Trimiterea a eșuat: %1</translation>
     </message>
     <message>
         <source>Encryption failed: %1</source>
-        <translation>Verschlüsseln fehlgeschlagen: %1</translation>
+        <translation>Criptarea a eșuat: %1</translation>
     </message>
     <message>
         <source>Encrypt &amp; send</source>
-        <translation>Verschlüsseln &amp; Senden</translation>
+        <translation>Criptează și trimite</translation>
     </message>
     <message>
         <source>Sign &amp; send</source>
-        <translation>Signieren &amp; Senden</translation>
+        <translation>Semnează și trimite</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation>Senden</translation>
+        <translation>Trimite</translation>
     </message>
     <message>
         <source>Save as draft</source>
-        <translation>Als Entwurf speichern</translation>
+        <translation>Salvează ca ciornă</translation>
     </message>
     <message>
         <source>Could not save the draft</source>
-        <translation>Entwurf konnte nicht gespeichert werden</translation>
+        <translation>Ciorna nu a putut fi salvată</translation>
     </message>
     <message>
         <source>Save as template</source>
-        <translation>Als Vorlage speichern</translation>
+        <translation>Salvează ca șablon</translation>
     </message>
     <message>
         <source>Saved as template</source>
-        <translation>Als Vorlage gespeichert</translation>
+        <translation>Salvat ca șablon</translation>
     </message>
     <message>
         <source>Could not save the template</source>
-        <translation>Vorlage konnte nicht gespeichert werden</translation>
+        <translation>Șablonul nu a putut fi salvat</translation>
     </message>
     <message>
         <source>Add attachment</source>
-        <translation>Anhang hinzufügen</translation>
+        <translation>Adaugă atașament</translation>
     </message>
     <message>
         <source>New message</source>
-        <translation>Neue Nachricht</translation>
+        <translation>Mesaj nou</translation>
     </message>
     <message>
         <source>From</source>
-        <translation>Von</translation>
+        <translation>De la</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>An</translation>
+        <translation>Către</translation>
     </message>
     <message>
         <source>Cc</source>
@@ -188,11 +188,11 @@
     </message>
     <message>
         <source>name@example.com, …</source>
-        <translation>name@example.com, …</translation>
+        <translation>nume@example.com, …</translation>
     </message>
     <message>
         <source>＋ Add recipient</source>
-        <translation>＋ Empfänger hinzufügen</translation>
+        <translation>＋ Adaugă destinatar</translation>
     </message>
     <message>
         <source>…</source>
@@ -200,27 +200,27 @@
     </message>
     <message>
         <source>Subject</source>
-        <translation>Betreff</translation>
+        <translation>Subiect</translation>
     </message>
     <message>
         <source>Encrypt</source>
-        <translation>Verschlüsseln</translation>
+        <translation>Criptare</translation>
     </message>
     <message>
         <source>Sign</source>
-        <translation>Signieren</translation>
+        <translation>Semnare</translation>
     </message>
     <message>
         <source>Encrypted to the recipients&apos; keys and signed with your key.</source>
-        <translation>An die Schlüssel der Empfänger verschlüsselt und mit deinem Schlüssel signiert.</translation>
+        <translation>Criptat către cheile destinatarilor și semnat cu cheia dumneavoastră.</translation>
     </message>
     <message>
         <source>Encrypted to the recipients&apos; keys.</source>
-        <translation>An die Schlüssel der Empfänger verschlüsselt.</translation>
+        <translation>Criptat către cheile destinatarilor.</translation>
     </message>
     <message>
         <source>Signed with your key — anyone can read it, the recipient can verify it is from you.</source>
-        <translation>Mit deinem Schlüssel signiert – jeder kann es lesen, der Empfänger kann prüfen, dass es von dir ist.</translation>
+        <translation>Semnat cu cheia dumneavoastră — oricine îl poate citi, iar destinatarul poate verifica faptul că vine de la dumneavoastră.</translation>
     </message>
     <message>
         <source>Format</source>
@@ -228,43 +228,43 @@
     </message>
     <message>
         <source>PGP/MIME (with attachments)</source>
-        <translation>PGP/MIME (mit Anhängen)</translation>
+        <translation>PGP/MIME (cu atașamente)</translation>
     </message>
     <message>
         <source>Inline PGP (text only)</source>
-        <translation>Inline-PGP (nur Text)</translation>
+        <translation>Inline PGP (doar text)</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation>Nachricht</translation>
+        <translation>Mesaj</translation>
     </message>
     <message>
         <source>Write your message…</source>
-        <translation>Schreibe deine Nachricht…</translation>
+        <translation>Scrieți mesajul…</translation>
     </message>
     <message>
         <source>Attachments (%1)</source>
-        <translation>Anhänge (%1)</translation>
+        <translation>Atașamente (%1)</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation>Elimină</translation>
     </message>
     <message>
         <source>Select attachment</source>
-        <translation>Anhang auswählen</translation>
+        <translation>Selectați atașamentul</translation>
     </message>
     <message>
         <source>No S/MIME certificate for %1 — open a signed mail from them and import it.</source>
-        <translation>Kein S/MIME-Zertifikat für %1 — öffne eine signierte Mail von dieser Person und importiere es.</translation>
+        <translation>Niciun certificat S/MIME pentru %1 — deschideți un mesaj semnat de la această persoană și importați-l.</translation>
     </message>
     <message>
         <source>S/MIME — sending…</source>
-        <translation>S/MIME — senden…</translation>
+        <translation>S/MIME — se trimite…</translation>
     </message>
     <message>
         <source>Encryption type</source>
-        <translation>Verschlüsselungsart</translation>
+        <translation>Tip de criptare</translation>
     </message>
     <message>
         <source>OpenPGP</source>
@@ -276,61 +276,61 @@
     </message>
     <message>
         <source>🔑 PGP key + 📜 S/MIME certificate</source>
-        <translation>🔑 PGP-Schlüssel + 📜 S/MIME-Zertifikat</translation>
+        <translation>🔑 Cheie PGP + 📜 certificat S/MIME</translation>
     </message>
     <message>
         <source>🔑 PGP key available</source>
-        <translation>🔑 PGP-Schlüssel vorhanden</translation>
+        <translation>🔑 Cheie PGP disponibilă</translation>
     </message>
     <message>
         <source>📜 S/MIME certificate available</source>
-        <translation>📜 S/MIME-Zertifikat vorhanden</translation>
+        <translation>📜 Certificat S/MIME disponibil</translation>
     </message>
     <message>
         <source>no key/certificate for this address</source>
-        <translation>kein Schlüssel/Zertifikat für diese Adresse</translation>
+        <translation>nicio cheie/niciun certificat pentru această adresă</translation>
     </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
     <message>
         <source>Are you sure?</source>
-        <translation>Bist du sicher?</translation>
+        <translation>Sunteți sigur?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Anulează</translation>
     </message>
 </context>
 <context>
     <name>ContactPickerPage</name>
     <message>
         <source>Address book</source>
-        <translation>Adressbuch</translation>
+        <translation>Agendă</translation>
     </message>
     <message>
         <source>Search contacts</source>
-        <translation>Kontakte suchen</translation>
+        <translation>Caută contacte</translation>
     </message>
     <message>
         <source>(no name)</source>
-        <translation>(kein Name)</translation>
+        <translation>(fără nume)</translation>
     </message>
     <message>
         <source>%1 addresses — tap to choose</source>
-        <translation>%1 Adressen — zum Wählen tippen</translation>
+        <translation>%1 adrese — atingeți pentru a alege</translation>
     </message>
     <message>
         <source>No matches</source>
-        <translation>Keine Treffer</translation>
+        <translation>Nicio potrivire</translation>
     </message>
     <message>
         <source>No contacts with an e-mail address</source>
-        <translation>Keine Kontakte mit E-Mail-Adresse</translation>
+        <translation>Niciun contact cu adresă de e-mail</translation>
     </message>
 </context>
 <context>
@@ -344,91 +344,91 @@
     <name>CryptoInfoPage</name>
     <message>
         <source>Blind copy — named in no header of this message:</source>
-        <translation>Blindkopie — in keiner Kopfzeile dieser Nachricht genannt:</translation>
+        <translation>Copie oarbă — nu apare în niciun antet al acestui mesaj:</translation>
     </message>
     <message>
         <source>Further recipient keys above cannot be named — they are not in your keyring. Look them up on keys.openpgp.org from the menu.</source>
-        <translation>Weitere Empfängerschlüssel oben sind nicht zuzuordnen — sie liegen nicht in deinem Schlüsselbund. Über das Menü auf keys.openpgp.org nachschlagen.</translation>
+        <translation>Celelalte chei de destinatar de mai sus nu pot fi identificate — nu se află în inelul dumneavoastră de chei. Căutați-le pe keys.openpgp.org din meniu.</translation>
     </message>
     <message>
         <source>Addressed to, but not a recipient of this copy: %1</source>
-        <translation>In der Adressierung genannt, aber nicht Empfänger dieser Kopie: %1</translation>
+        <translation>Menționat în adresare, dar nu este destinatar al acestei copii: %1</translation>
     </message>
     <message>
         <source>Listed in To/Cc</source>
-        <translation>Steht in An/Kopie</translation>
+        <translation>Apare în Către/Cc</translation>
     </message>
     <message>
         <source>The sender (copy to self)</source>
-        <translation>Der Absender (Kopie an sich selbst)</translation>
+        <translation>Expeditorul (copie către sine)</translation>
     </message>
     <message>
         <source>⚠ Blind copy — this is you</source>
-        <translation>⚠ Blindkopie — das bist du</translation>
+        <translation>⚠ Copie oarbă — acesta sunteți dumneavoastră</translation>
     </message>
     <message>
         <source>⚠ Blind copy — in no header</source>
-        <translation>⚠ Blindkopie — steht in keiner Kopfzeile</translation>
+        <translation>⚠ Copie oarbă — nu apare în niciun antet</translation>
     </message>
     <message>
         <source>Cannot be named — key not in your keyring</source>
-        <translation>Nicht zuzuordnen — Schlüssel nicht in deinem Schlüsselbund</translation>
+        <translation>Nu poate fi identificat — cheia nu se află în inelul dumneavoastră de chei</translation>
     </message>
     <message>
         <source>A blind copy is hidden from the headers only. Every recipient key is named in the encrypted data itself, so anyone who receives this message can read this list too.</source>
-        <translation>Eine Blindkopie ist nur vor den Kopfzeilen verborgen. Jeder Empfängerschlüssel wird in den verschlüsselten Daten selbst genannt — wer diese Nachricht bekommt, kann diese Liste ebenfalls lesen.</translation>
+        <translation>O copie oarbă este ascunsă doar din antete. Fiecare cheie de destinatar este numită chiar în datele criptate, așa că oricine primește acest mesaj poate citi și această listă.</translation>
     </message>
     <message>
         <source>Encryption info</source>
-        <translation>Verschlüsselungs-Info</translation>
+        <translation>Informații despre criptare</translation>
     </message>
     <message>
         <source>Imported %1 key(s) into your keyring. Reopen Encryption info to refresh.</source>
-        <translation>%1 Schlüssel in den Schlüsselbund importiert. Verschlüsselungs-Info neu öffnen zum Aktualisieren.</translation>
+        <translation>%1 chei importate în inelul dumneavoastră de chei. Redeschideți Informații despre criptare pentru a actualiza.</translation>
     </message>
     <message>
         <source>Key import failed: %1</source>
-        <translation>Schlüssel-Import fehlgeschlagen: %1</translation>
+        <translation>Importul cheii a eșuat: %1</translation>
     </message>
     <message>
         <source>Searching keys.openpgp.org…</source>
-        <translation>Suche auf keys.openpgp.org…</translation>
+        <translation>Se caută pe keys.openpgp.org…</translation>
     </message>
     <message>
         <source>keys.openpgp.org has the sender&apos;s key:
 %1%2
 The key this message used (0x%3) belongs to it (encryption subkey). Verify the fingerprint, then import.</source>
-        <translation>keys.openpgp.org hat den Schlüssel des Absenders:
+        <translation>keys.openpgp.org deține cheia expeditorului:
 %1%2
-Der für diese Nachricht genutzte Schlüssel (0x%3) gehört dazu (Verschlüsselungs-Unterschlüssel). Prüfe den Fingerprint, dann importiere.</translation>
+Cheia folosită de acest mesaj (0x%3) îi aparține (subcheie de criptare). Verificați amprenta, apoi importați.</translation>
     </message>
     <message>
         <source>⚠ SECURITY: the message used key 0x%1, but a DIFFERENT key is published for this address:
 %2%3
 This can mean an old/wrong/forged key. Only import if you trust this.</source>
-        <translation>⚠ SICHERHEIT: Die Nachricht nutzte Schlüssel 0x%1, aber für diese Adresse ist ein ANDERER Schlüssel veröffentlicht:
+        <translation>⚠ SECURITATE: mesajul a folosit cheia 0x%1, dar pentru această adresă este publicată o cheie DIFERITĂ:
 %2%3
-Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn du dem vertraust.</translation>
+Aceasta poate însemna o cheie veche, greșită sau falsificată. Importați doar dacă aveți încredere în ea.</translation>
     </message>
     <message>
         <source>Import key from message</source>
-        <translation>Schlüssel aus Nachricht importieren</translation>
+        <translation>Importă cheia din mesaj</translation>
     </message>
     <message>
         <source>Search key on keys.openpgp.org</source>
-        <translation>Schlüssel auf keys.openpgp.org suchen</translation>
+        <translation>Caută cheia pe keys.openpgp.org</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
-        <translation>In Zwischenablage kopieren</translation>
+        <translation>Copiază în clipboard</translation>
     </message>
     <message>
         <source>Import this key</source>
-        <translation>Diesen Schlüssel importieren</translation>
+        <translation>Importă această cheie</translation>
     </message>
     <message>
         <source>Import anyway</source>
-        <translation>Trotzdem importieren</translation>
+        <translation>Importă oricum</translation>
     </message>
     <message>
         <source>Format</source>
@@ -436,66 +436,66 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>Encrypted to %1 key(s)</source>
-        <translation>An %1 Schlüssel verschlüsselt</translation>
+        <translation>Criptat către %1 chei</translation>
     </message>
     <message>
         <source>Status: </source>
-        <translation>Status: </translation>
+        <translation>Stare: </translation>
     </message>
     <message>
         <source>This key is not in your keyring.</source>
-        <translation>Dieser Schlüssel ist nicht in deinem Schlüsselbund.</translation>
+        <translation>Această cheie nu se află în inelul dumneavoastră de chei.</translation>
     </message>
     <message>
         <source>Created: </source>
-        <translation>Erstellt: </translation>
+        <translation>Creată: </translation>
     </message>
     <message>
         <source>Fingerprint: </source>
-        <translation>Fingerprint: </translation>
+        <translation>Amprentă: </translation>
     </message>
     <message>
         <source>✓ secret key present — decryptable</source>
-        <translation>✓ Geheimer Schlüssel vorhanden – entschlüsselbar</translation>
+        <translation>✓ cheia secretă este prezentă — se poate decripta</translation>
     </message>
     <message>
         <source>No recipient key IDs found — this may not be an encrypted message.</source>
-        <translation>Keine Empfänger-Schlüssel-IDs gefunden – evtl. keine verschlüsselte Nachricht.</translation>
+        <translation>Nu s-au găsit identificatori de chei destinatar — s-ar putea să nu fie un mesaj criptat.</translation>
     </message>
     <message>
         <source>You hold a secret key for a recipient above — you CAN decrypt this message.</source>
-        <translation>Du hast einen geheimen Schlüssel für einen Empfänger oben – du KANNST diese Nachricht entschlüsseln.</translation>
+        <translation>Dețineți o cheie secretă pentru unul dintre destinatarii de mai sus — PUTEȚI decripta acest mesaj.</translation>
     </message>
     <message>
         <source>You do NOT hold a secret key for any recipient — you cannot decrypt this. The sender probably used an old or wrong key of yours.</source>
-        <translation>Du hast für KEINEN Empfänger einen geheimen Schlüssel – du kannst das nicht entschlüsseln. Der Absender nutzte wohl einen alten oder falschen Schlüssel von dir.</translation>
+        <translation>NU dețineți nicio cheie secretă pentru niciun destinatar — nu puteți decripta acest mesaj. Probabil expeditorul a folosit o cheie veche sau greșită de-a dumneavoastră.</translation>
     </message>
     <message>
         <source>The encrypted data also carries a signature; the signer is shown after decryption.</source>
-        <translation>Die verschlüsselten Daten tragen auch eine Signatur; der Unterzeichner wird nach dem Entschlüsseln angezeigt.</translation>
+        <translation>Datele criptate poartă și o semnătură; semnatarul este afișat după decriptare.</translation>
     </message>
 </context>
 <context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Primite</translation>
     </message>
     <message>
         <source>Outbox</source>
-        <translation>Postausgang</translation>
+        <translation>De trimis</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation>Gesendet</translation>
+        <translation>Trimise</translation>
     </message>
     <message>
         <source>Drafts</source>
-        <translation>Entwürfe</translation>
+        <translation>Ciorne</translation>
     </message>
     <message>
         <source>Trash</source>
-        <translation>Papierkorb</translation>
+        <translation>Coș de gunoi</translation>
     </message>
     <message>
         <source>Junk</source>
@@ -503,180 +503,180 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Șabloane</translation>
     </message>
     <message>
         <source>(unnamed)</source>
-        <translation>(ohne Namen)</translation>
+        <translation>(nedenumit)</translation>
     </message>
     <message>
         <source>Move to</source>
-        <translation>Verschieben nach</translation>
+        <translation>Mută în</translation>
     </message>
     <message>
         <source>%1 messages</source>
-        <translation>%1 Nachrichten</translation>
+        <translation>%1 mesaje</translation>
     </message>
     <message>
         <source>No folders</source>
-        <translation>Keine Ordner</translation>
+        <translation>Niciun dosar</translation>
     </message>
     <message>
         <source>Sync the account first, then the folders show up here.</source>
-        <translation>Synchronisiere zuerst das Konto, dann erscheinen hier die Ordner.</translation>
+        <translation>Sincronizați întâi contul, apoi dosarele apar aici.</translation>
     </message>
 </context>
 <context>
     <name>FoldersPage</name>
     <message>
         <source>Folders</source>
-        <translation>Ordner</translation>
+        <translation>Dosare</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Șabloane</translation>
     </message>
     <message>
         <source>Syncing…</source>
-        <translation>Synchronisiere…</translation>
+        <translation>Se sincronizează…</translation>
     </message>
     <message>
         <source>Sync folders</source>
-        <translation>Ordner synchronisieren</translation>
+        <translation>Sincronizează dosarele</translation>
     </message>
     <message>
         <source>(unnamed)</source>
-        <translation>(unbenannt)</translation>
+        <translation>(nedenumit)</translation>
     </message>
     <message>
         <source>No folders</source>
-        <translation>Keine Ordner</translation>
+        <translation>Niciun dosar</translation>
     </message>
     <message>
         <source>Pull down to sync the account</source>
-        <translation>Herunterziehen, um das Konto zu synchronisieren</translation>
+        <translation>Trageți în jos pentru a sincroniza contul</translation>
     </message>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Primite</translation>
     </message>
     <message>
         <source>Outbox</source>
-        <translation>Postausgang</translation>
+        <translation>De trimis</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation>Gesendet</translation>
+        <translation>Trimise</translation>
     </message>
     <message>
         <source>Drafts</source>
-        <translation>Entwürfe</translation>
+        <translation>Ciorne</translation>
     </message>
     <message>
         <source>Trash</source>
-        <translation>Gelöschte Elemente</translation>
+        <translation>Coș de gunoi</translation>
     </message>
     <message>
         <source>Junk</source>
-        <translation>Junk</translation>
+        <translation>Spam</translation>
     </message>
 </context>
 <context>
     <name>GenerateIdentityDialog</name>
     <message>
         <source>Generate new key</source>
-        <translation>Neuen Schlüssel erzeugen</translation>
+        <translation>Generează o cheie nouă</translation>
     </message>
     <message>
         <source>Generate</source>
-        <translation>Erzeugen</translation>
+        <translation>Generează</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Nume</translation>
     </message>
     <message>
         <source>Your name (optional)</source>
-        <translation>Ihr Name (optional)</translation>
+        <translation>Numele dumneavoastră (opțional)</translation>
     </message>
     <message>
         <source>E-mail address</source>
-        <translation>E-Mail-Adresse</translation>
+        <translation>Adresă de e-mail</translation>
     </message>
     <message>
         <source>you@example.org</source>
-        <translation>sie@example.org</translation>
+        <translation>eu@example.com</translation>
     </message>
     <message>
         <source>Passphrase</source>
-        <translation>Passphrase</translation>
+        <translation>Frază de acces</translation>
     </message>
     <message>
         <source>At least 12 characters</source>
-        <translation>Mindestens 12 Zeichen</translation>
+        <translation>Cel puțin 12 caractere</translation>
     </message>
     <message>
         <source>Repeat passphrase</source>
-        <translation>Passphrase wiederholen</translation>
+        <translation>Repetați fraza de acces</translation>
     </message>
     <message>
         <source>at least 12 characters</source>
-        <translation>mindestens 12 Zeichen</translation>
+        <translation>cel puțin 12 caractere</translation>
     </message>
     <message>
         <source>upper- and lower-case letters</source>
-        <translation>Groß- und Kleinbuchstaben</translation>
+        <translation>litere mari și mici</translation>
     </message>
     <message>
         <source>a digit</source>
-        <translation>eine Ziffer</translation>
+        <translation>o cifră</translation>
     </message>
     <message>
         <source>a special character</source>
-        <translation>ein Sonderzeichen</translation>
+        <translation>un caracter special</translation>
     </message>
     <message>
         <source>passphrases match</source>
-        <translation>Passphrasen stimmen überein</translation>
+        <translation>frazele de acces coincid</translation>
     </message>
     <message>
         <source>Command used (example data)</source>
-        <translation>Verwendeter Befehl (Beispieldaten)</translation>
+        <translation>Comanda folosită (date de exemplu)</translation>
     </message>
 </context>
 <context>
     <name>HeaderPage</name>
     <message>
         <source>⚠ listed on %1 list(s)!</source>
-        <translation>⚠ auf %1 Liste(n) gelistet!</translation>
+        <translation>⚠ apare pe %1 liste!</translation>
     </message>
     <message>
         <source>Done — not listed.</source>
-        <translation>Fertig – nicht gelistet.</translation>
+        <translation>Gata — nu apare pe liste.</translation>
     </message>
     <message>
         <source>Checking…</source>
-        <translation>Prüfe…</translation>
+        <translation>Se verifică…</translation>
     </message>
     <message>
         <source>Check sender against blacklists</source>
-        <translation>Absender gegen Blacklists prüfen</translation>
+        <translation>Verifică expeditorul pe listele negre</translation>
     </message>
     <message>
         <source>Copy headers</source>
-        <translation>Header kopieren</translation>
+        <translation>Copiază antetele</translation>
     </message>
     <message>
         <source>Header &amp; sender check</source>
-        <translation>Header- &amp; Absenderprüfung</translation>
+        <translation>Verificare antet și expeditor</translation>
     </message>
     <message>
         <source>Sender analysis</source>
-        <translation>Absender-Analyse</translation>
+        <translation>Analiza expeditorului</translation>
     </message>
     <message>
         <source>From</source>
-        <translation>Von</translation>
+        <translation>De la</translation>
     </message>
     <message>
         <source>Return-Path</source>
@@ -684,457 +684,457 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>⚠ From domain (%1) ≠ Return-Path domain (%2) — possible spoofing.</source>
-        <translation>⚠ From-Domain (%1) ≠ Return-Path-Domain (%2) – mögliches Spoofing.</translation>
+        <translation>⚠ Domeniul From (%1) ≠ domeniul Return-Path (%2) — posibilă falsificare.</translation>
     </message>
     <message>
         <source>signature present (d=%1) — not cryptographically verified here</source>
-        <translation>Signatur vorhanden (d=%1) – hier nicht kryptografisch geprüft</translation>
+        <translation>semnătură prezentă (d=%1) — neverificată criptografic aici</translation>
     </message>
     <message>
         <source>no DKIM signature</source>
-        <translation>keine DKIM-Signatur</translation>
+        <translation>nicio semnătură DKIM</translation>
     </message>
     <message>
         <source>Sender IP</source>
-        <translation>Absender-IP</translation>
+        <translation>IP-ul expeditorului</translation>
     </message>
     <message>
         <source>Link domains (%1)</source>
-        <translation>Link-Domains (%1)</translation>
+        <translation>Domenii din legături (%1)</translation>
     </message>
     <message>
         <source>Pull down to check the sender&apos;s IP/domain — and any link domains — against blacklists. Only those values are sent to the blacklist DNS, nothing of yours.</source>
-        <translation>Herunterziehen, um IP/Domain des Absenders – und etwaige Link-Domains – gegen Blacklists zu prüfen. Nur diese Werte gehen ans Blacklist-DNS, nichts von dir.</translation>
+        <translation>Trageți în jos pentru a verifica IP-ul/domeniul expeditorului — și eventualele domenii din legături — pe listele negre. Doar aceste valori sunt trimise către DNS-ul listelor negre, nimic de-al dumneavoastră.</translation>
     </message>
     <message>
         <source>Blacklists</source>
-        <translation>Blacklists</translation>
+        <translation>Liste negre</translation>
     </message>
     <message>
         <source>Raw headers</source>
-        <translation>Roh-Header</translation>
+        <translation>Antete brute</translation>
     </message>
 </context>
 <context>
     <name>KeyDetailPage</name>
     <message>
         <source>Copy public key block</source>
-        <translation>Öffentlichen Schlüsselblock kopieren</translation>
+        <translation>Copiază blocul cheii publice</translation>
     </message>
     <message>
         <source>Key details</source>
-        <translation>Schlüssel-Details</translation>
+        <translation>Detalii despre cheie</translation>
     </message>
     <message>
         <source>Status: </source>
-        <translation>Status: </translation>
+        <translation>Stare: </translation>
     </message>
     <message>
         <source>secret key present</source>
-        <translation>geheimer Schlüssel vorhanden</translation>
+        <translation>cheie secretă prezentă</translation>
     </message>
     <message>
         <source>Identities (%1)</source>
-        <translation>Identitäten (%1)</translation>
+        <translation>Identități (%1)</translation>
     </message>
     <message>
         <source>Primary key</source>
-        <translation>Hauptschlüssel</translation>
+        <translation>Cheie principală</translation>
     </message>
     <message>
         <source>Key ID</source>
-        <translation>Schlüssel-ID</translation>
+        <translation>ID cheie</translation>
     </message>
     <message>
         <source>Fingerprint: </source>
-        <translation>Fingerprint: </translation>
+        <translation>Amprentă: </translation>
     </message>
     <message>
         <source>Algorithm</source>
-        <translation>Algorithmus</translation>
+        <translation>Algoritm</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation>Erstellt</translation>
+        <translation>Creată</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Läuft ab</translation>
+        <translation>Expiră</translation>
     </message>
     <message>
         <source>Usage</source>
-        <translation>Verwendung</translation>
+        <translation>Utilizare</translation>
     </message>
     <message>
         <source>Subkeys (%1)</source>
-        <translation>Unterschlüssel (%1)</translation>
+        <translation>Subchei (%1)</translation>
     </message>
     <message>
         <source>created </source>
-        <translation>erstellt </translation>
+        <translation>creată </translation>
     </message>
     <message>
         <source>expires </source>
-        <translation>läuft ab </translation>
+        <translation>expiră </translation>
     </message>
     <message>
         <source>Public key block</source>
-        <translation>Öffentlicher Schlüsselblock</translation>
+        <translation>Bloc de cheie publică</translation>
     </message>
     <message>
         <source>Passphrase of this key (to back it up)</source>
-        <translation>Passphrase dieses Schlüssels (für das Backup)</translation>
+        <translation>Fraza de acces a acestei chei (pentru copia de siguranță)</translation>
     </message>
     <message>
         <source>Backup failed — wrong passphrase?</source>
-        <translation>Backup fehlgeschlagen – falsche Passphrase?</translation>
+        <translation>Copia de siguranță a eșuat — frază de acces greșită?</translation>
     </message>
     <message>
         <source>Back up secret key to Documents…</source>
-        <translation>Geheimen Schlüssel in Dokumente sichern…</translation>
+        <translation>Salvează cheia secretă în Documente…</translation>
     </message>
     <message>
         <source>Save public key to Documents</source>
-        <translation>Öffentlichen Schlüssel in Dokumente speichern</translation>
+        <translation>Salvează cheia publică în Documente</translation>
     </message>
     <message>
         <source>Public key saved to %1</source>
-        <translation>Öffentlicher Schlüssel gespeichert nach %1</translation>
+        <translation>Cheia publică a fost salvată în %1</translation>
     </message>
     <message>
         <source>Save failed</source>
-        <translation>Speichern fehlgeschlagen</translation>
+        <translation>Salvarea a eșuat</translation>
     </message>
     <message>
         <source>It is encrypted with your passphrase, but lies outside the app sandbox. Copy it to safe off-device storage and then delete it from the phone.</source>
-        <translation>Sie ist mit deiner Passphrase verschlüsselt, liegt aber außerhalb der App-Sandbox. Kopiere sie auf einen sicheren Speicher außerhalb des Geräts und lösche sie dann vom Telefon.</translation>
+        <translation>Este criptată cu fraza dumneavoastră de acces, dar se află în afara sandbox-ului aplicației. Copiați-o pe un mediu sigur din afara dispozitivului, apoi ștergeți-o de pe telefon.</translation>
     </message>
     <message>
         <source>Secret key backed up to %1.</source>
-        <translation>Geheimer Schlüssel gesichert nach %1.</translation>
+        <translation>Cheia secretă a fost salvată în %1.</translation>
     </message>
     <message>
         <source>Passphrase of this key (to extend it)</source>
-        <translation>Passphrase dieses Schlüssels (zum Verlängern)</translation>
+        <translation>Fraza de acces a acestei chei (pentru prelungire)</translation>
     </message>
     <message>
         <source>Revocation certificate saved to %1. Keep it safe; it lets you revoke this key later even without the passphrase.</source>
-        <translation>Widerrufszertifikat gespeichert nach %1. Bewahre es sicher auf; damit kannst du diesen Schlüssel später auch ohne Passphrase zurückziehen.</translation>
+        <translation>Certificatul de revocare a fost salvat în %1. Păstrați-l în siguranță; vă permite să revocați această cheie mai târziu, chiar și fără fraza de acces.</translation>
     </message>
     <message>
         <source>No revocation certificate available for this key.</source>
-        <translation>Für diesen Schlüssel ist kein Widerrufszertifikat verfügbar.</translation>
+        <translation>Pentru această cheie nu este disponibil niciun certificat de revocare.</translation>
     </message>
     <message>
         <source>Really revoke this key?</source>
-        <translation>Diesen Schlüssel wirklich zurückziehen?</translation>
+        <translation>Chiar revocați această cheie?</translation>
     </message>
     <message>
         <source>This is IRREVERSIBLE. The key can never be used to encrypt to you again. Afterwards publish it so others learn it is revoked.</source>
-        <translation>Das ist UNUMKEHRBAR. Mit dem Schlüssel kann nie wieder an dich verschlüsselt werden. Veröffentliche ihn danach, damit andere vom Widerruf erfahren.</translation>
+        <translation>Acest lucru este IREVERSIBIL. Cheia nu va mai putea fi folosită niciodată pentru a cripta către dumneavoastră. Publicați-o apoi, ca alții să afle că este revocată.</translation>
     </message>
     <message>
         <source>Revoke</source>
-        <translation>Zurückziehen</translation>
+        <translation>Revocă</translation>
     </message>
     <message>
         <source>Publish to keys.openpgp.org</source>
-        <translation>Auf keys.openpgp.org veröffentlichen</translation>
+        <translation>Publică pe keys.openpgp.org</translation>
     </message>
     <message>
         <source>Revoke this key…</source>
-        <translation>Diesen Schlüssel zurückziehen…</translation>
+        <translation>Revocă această cheie…</translation>
     </message>
     <message>
         <source>Save revocation certificate…</source>
-        <translation>Widerrufszertifikat speichern…</translation>
+        <translation>Salvează certificatul de revocare…</translation>
     </message>
     <message>
         <source>Extend validity (2 years)…</source>
-        <translation>Gültigkeit verlängern (2 Jahre)…</translation>
+        <translation>Prelungește valabilitatea (2 ani)…</translation>
     </message>
 </context>
 <context>
     <name>KeyImportDialog</name>
     <message>
         <source>Re-import</source>
-        <translation>Erneut importieren</translation>
+        <translation>Reimportă</translation>
     </message>
     <message>
         <source>Import anyway</source>
-        <translation>Trotzdem importieren</translation>
+        <translation>Importă oricum</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importieren</translation>
+        <translation>Importă</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Anulează</translation>
     </message>
     <message>
         <source>Import public key?</source>
-        <translation>Öffentlichen Schlüssel importieren?</translation>
+        <translation>Importați cheia publică?</translation>
     </message>
     <message>
         <source>(no user id)</source>
-        <translation>(keine Benutzerkennung)</translation>
+        <translation>(fără identificator de utilizator)</translation>
     </message>
     <message>
         <source>Key ID</source>
-        <translation>Schlüssel-ID</translation>
+        <translation>ID cheie</translation>
     </message>
     <message>
         <source>Fingerprint</source>
-        <translation>Fingerabdruck</translation>
+        <translation>Amprentă</translation>
     </message>
     <message>
         <source>Algorithm</source>
-        <translation>Algorithmus</translation>
+        <translation>Algoritm</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation>Erstellt</translation>
+        <translation>Creată</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Läuft ab</translation>
+        <translation>Expiră</translation>
     </message>
     <message>
         <source>never</source>
-        <translation>nie</translation>
+        <translation>niciodată</translation>
     </message>
     <message>
         <source>⚠ This key has been REVOKED by its owner. It should not be used to encrypt — import only to read old messages or to verify old signatures.</source>
-        <translation>⚠ Dieser Schlüssel wurde vom Besitzer WIDERRUFEN. Zum Verschlüsseln sollte er nicht mehr benutzt werden — nur importieren, um alte Nachrichten zu lesen oder alte Signaturen zu prüfen.</translation>
+        <translation>⚠ Această cheie a fost REVOCATĂ de proprietarul ei. Nu ar trebui folosită pentru criptare — importați-o doar pentru a citi mesaje vechi sau pentru a verifica semnături vechi.</translation>
     </message>
     <message>
         <source>This key is EXPIRED. You cannot encrypt to it until the owner extends it.</source>
-        <translation>Dieser Schlüssel ist ABGELAUFEN. An ihn kann erst wieder verschlüsselt werden, wenn der Besitzer ihn verlängert.</translation>
+        <translation>Această cheie este EXPIRATĂ. Nu puteți cripta către ea până când proprietarul nu o prelungește.</translation>
     </message>
     <message>
         <source>You already have a DIFFERENT key for %1:
 0x%2  (%3)
 Importing adds a SECOND key for this address — make sure this new key is genuine before you trust it.</source>
-        <translation>Du hast bereits einen ANDEREN Schlüssel für %1:
+        <translation>Aveți deja o cheie DIFERITĂ pentru %1:
 0x%2  (%3)
-Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewissere dich, dass der neue echt ist, bevor du ihm vertraust.</translation>
+Importul adaugă o A DOUA cheie pentru această adresă — asigurați-vă că noua cheie este autentică înainte de a avea încredere în ea.</translation>
     </message>
     <message>
         <source>This exact key is already in your keyring. Re-importing just refreshes it (e.g. new signatures or a longer expiry).</source>
-        <translation>Genau dieser Schlüssel ist bereits in deinem Schlüsselbund. Ein erneuter Import frischt ihn nur auf (z. B. neue Signaturen oder eine längere Gültigkeit).</translation>
+        <translation>Exact această cheie se află deja în inelul dumneavoastră de chei. Reimportul doar o împrospătează (de ex. semnături noi sau o valabilitate mai lungă).</translation>
     </message>
     <message>
         <source>This key is new and valid. Verify the fingerprint with the owner through a separate channel before you rely on it.</source>
-        <translation>Dieser Schlüssel ist neu und gültig. Prüfe den Fingerabdruck mit dem Besitzer über einen getrennten Kanal, bevor du dich darauf verlässt.</translation>
+        <translation>Această cheie este nouă și validă. Verificați amprenta cu proprietarul pe un canal separat înainte de a vă baza pe ea.</translation>
     </message>
     <message>
         <source>⚠ This key is NOT issued for the sender&apos;s address (%1). Its addresses are: %2. Only import it if you are sure it really is this sender&apos;s key.</source>
-        <translation>⚠ Dieser Schlüssel ist NICHT für die Absenderadresse (%1) ausgestellt. Seine Adressen sind: %2. Nur importieren, wenn du sicher bist, dass es wirklich der Schlüssel dieses Absenders ist.</translation>
+        <translation>⚠ Această cheie NU este emisă pentru adresa expeditorului (%1). Adresele ei sunt: %2. Importați-o doar dacă sunteți sigur că este într-adevăr cheia acestui expeditor.</translation>
     </message>
     <message>
         <source>✓ This key belongs to the sender&apos;s address (%1).</source>
-        <translation>✓ Dieser Schlüssel gehört zur Absenderadresse (%1).</translation>
+        <translation>✓ Această cheie aparține adresei expeditorului (%1).</translation>
     </message>
     <message>
         <source>Import %1 public keys?</source>
-        <translation>%1 öffentliche Schlüssel importieren?</translation>
+        <translation>Importați %1 chei publice?</translation>
     </message>
     <message>
         <source>⚠ This block contains %1 further key(s), which will be imported as well:</source>
-        <translation>⚠ Dieser Block enthält %1 weitere(n) Schlüssel, die ebenfalls importiert werden:</translation>
+        <translation>⚠ Acest bloc conține încă %1 chei, care vor fi importate și ele:</translation>
     </message>
 </context>
 <context>
     <name>KeySelectDialog</name>
     <message>
         <source>Choose recipient keys</source>
-        <translation>Empfänger-Schlüssel wählen</translation>
+        <translation>Alegeți cheile destinatarilor</translation>
     </message>
     <message>
         <source>Use selected</source>
-        <translation>Auswahl verwenden</translation>
+        <translation>Folosește selecția</translation>
     </message>
     <message>
         <source>More than one key — or a revoked/expired key — was found for a recipient. Check the address and pick the right key.</source>
-        <translation>Für einen Empfänger wurde mehr als ein Schlüssel – oder ein widerrufener/abgelaufener – gefunden. Prüfe die Adresse und wähle den richtigen Schlüssel.</translation>
+        <translation>Pentru un destinatar au fost găsite mai multe chei — sau o cheie revocată ori expirată. Verificați adresa și alegeți cheia potrivită.</translation>
     </message>
     <message>
         <source>Recipient %1</source>
-        <translation>Empfänger %1</translation>
+        <translation>Destinatarul %1</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation>Adresse</translation>
+        <translation>Adresă</translation>
     </message>
     <message>
         <source>No key for this address.</source>
-        <translation>Kein Schlüssel für diese Adresse.</translation>
+        <translation>Nicio cheie pentru această adresă.</translation>
     </message>
 </context>
 <context>
     <name>KeyTextPage</name>
     <message>
         <source>Copy to clipboard</source>
-        <translation>In Zwischenablage kopieren</translation>
+        <translation>Copiază în clipboard</translation>
     </message>
 </context>
 <context>
     <name>KeysPage</name>
     <message>
         <source>Generate new key…</source>
-        <translation>Neuen Schlüssel erzeugen…</translation>
+        <translation>Generează o cheie nouă…</translation>
     </message>
     <message>
         <source>Generating a 4096-bit key — this can take a minute…</source>
-        <translation>Erzeuge einen 4096-Bit-Schlüssel — das kann eine Minute dauern…</translation>
+        <translation>Se generează o cheie de 4096 de biți — poate dura un minut…</translation>
     </message>
     <message>
         <source>New key created: %1</source>
-        <translation>Neuer Schlüssel erstellt: %1</translation>
+        <translation>Cheie nouă creată: %1</translation>
     </message>
     <message>
         <source>New key created.</source>
-        <translation>Neuer Schlüssel erstellt.</translation>
+        <translation>Cheie nouă creată.</translation>
     </message>
     <message>
         <source>Key generation failed: %1</source>
-        <translation>Schlüsselerzeugung fehlgeschlagen: %1</translation>
+        <translation>Generarea cheii a eșuat: %1</translation>
     </message>
     <message>
         <source>Creates a new RSA-4096 OpenPGP key (signing + encryption) in your keyring. Highest security; the passphrase is mandatory.</source>
-        <translation>Erstellt einen neuen RSA-4096-OpenPGP-Schlüssel (Signieren + Verschlüsseln) in Ihrem Schlüsselbund. Höchste Sicherheit; das Passwort ist Pflicht.</translation>
+        <translation>Creează în inelul dumneavoastră de chei o nouă cheie OpenPGP RSA-4096 (semnare + criptare). Securitate maximă; fraza de acces este obligatorie.</translation>
     </message>
     <message>
         <source>Imported %1 key(s)</source>
-        <translation>%1 Schlüssel importiert</translation>
+        <translation>%1 chei importate</translation>
     </message>
     <message>
         <source>Import failed: %1</source>
-        <translation>Import fehlgeschlagen: %1</translation>
+        <translation>Importul a eșuat: %1</translation>
     </message>
     <message>
         <source>Key deleted</source>
-        <translation>Schlüssel gelöscht</translation>
+        <translation>Cheie ștearsă</translation>
     </message>
     <message>
         <source>Delete failed: %1</source>
-        <translation>Löschen fehlgeschlagen: %1</translation>
+        <translation>Ștergerea a eșuat: %1</translation>
     </message>
     <message>
         <source>Import PGP key</source>
-        <translation>PGP-Schlüssel importieren</translation>
+        <translation>Importă cheie PGP</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importieren</translation>
+        <translation>Importă</translation>
     </message>
     <message>
         <source>Paste public key block</source>
-        <translation>Öffentlichen Schlüsselblock einfügen</translation>
+        <translation>Lipiți blocul cheii publice</translation>
     </message>
     <message>
         <source>Import from file…</source>
-        <translation>Aus Datei importieren…</translation>
+        <translation>Importă din fișier…</translation>
     </message>
     <message>
         <source>Paste key…</source>
-        <translation>Schlüssel einfügen…</translation>
+        <translation>Lipește cheia…</translation>
     </message>
     <message>
         <source>PGP Keys</source>
-        <translation>PGP-Schlüssel</translation>
+        <translation>Chei PGP</translation>
     </message>
     <message>
         <source>Keyring: %1</source>
-        <translation>Schlüsselbund: %1</translation>
+        <translation>Inel de chei: %1</translation>
     </message>
     <message>
         <source>Show / export public key</source>
-        <translation>Öffentlichen Schlüssel anzeigen / exportieren</translation>
+        <translation>Arată / exportă cheia publică</translation>
     </message>
     <message>
         <source>Delete key (incl. secret)</source>
-        <translation>Schlüssel löschen (inkl. geheimem)</translation>
+        <translation>Șterge cheia (inclusiv cea secretă)</translation>
     </message>
     <message>
         <source>Delete key</source>
-        <translation>Schlüssel löschen</translation>
+        <translation>Șterge cheia</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation>Lösche</translation>
+        <translation>Se șterge</translation>
     </message>
     <message>
         <source>private</source>
-        <translation>privat</translation>
+        <translation>privată</translation>
     </message>
     <message>
         <source>revoked</source>
-        <translation>widerrufen</translation>
+        <translation>revocată</translation>
     </message>
     <message>
         <source>expired</source>
-        <translation>abgelaufen</translation>
+        <translation>expirată</translation>
     </message>
     <message>
         <source>created </source>
-        <translation>erstellt </translation>
+        <translation>creată </translation>
     </message>
     <message>
         <source>expires </source>
-        <translation>läuft ab </translation>
+        <translation>expiră </translation>
     </message>
     <message>
         <source>No keys</source>
-        <translation>Keine Schlüssel</translation>
+        <translation>Nicio cheie</translation>
     </message>
     <message>
         <source>Generate PGP key</source>
-        <translation>PGP-Schlüssel erzeugen</translation>
+        <translation>Generează cheie PGP</translation>
     </message>
     <message>
         <source>Really delete this key?</source>
-        <translation>Diesen Schlüssel wirklich löschen?</translation>
+        <translation>Chiar ștergeți această cheie?</translation>
     </message>
     <message>
         <source>This includes your PRIVATE key. Without a backup it cannot be recovered.</source>
-        <translation>Das schließt Ihren PRIVATEN Schlüssel ein. Ohne Backup ist er nicht wiederherstellbar.</translation>
+        <translation>Aceasta include cheia dumneavoastră PRIVATĂ. Fără o copie de siguranță nu poate fi recuperată.</translation>
     </message>
     <message>
         <source>The public key will be removed from your keyring.</source>
-        <translation>Der öffentliche Schlüssel wird aus Ihrem Schlüsselbund entfernt.</translation>
+        <translation>Cheia publică va fi eliminată din inelul dumneavoastră de chei.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <source>Pull down to create your own key, or to import one</source>
-        <translation>Nach unten ziehen, um einen eigenen Schlüssel zu erzeugen oder einen zu importieren</translation>
+        <translation>Trageți în jos pentru a crea o cheie proprie sau pentru a importa una</translation>
     </message>
 </context>
 <context>
     <name>MailAccountsPage</name>
     <message>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>Despre</translation>
     </message>
     <message>
         <source>New message</source>
-        <translation>Neue Nachricht</translation>
+        <translation>Mesaj nou</translation>
     </message>
     <message>
         <source>PGP keys</source>
-        <translation>PGP-Schlüssel</translation>
+        <translation>Chei PGP</translation>
     </message>
     <message>
         <source>S/MIME certificates</source>
-        <translation>S/MIME-Zertifikate</translation>
+        <translation>Certificate S/MIME</translation>
     </message>
     <message>
         <source>Sync all inboxes</source>
-        <translation>Alle Posteingänge synchronisieren</translation>
+        <translation>Sincronizează toate căsuțele</translation>
     </message>
     <message>
         <source>SF-Mail</source>
@@ -1142,259 +1142,261 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Syncing…</source>
-        <translation>Synchronisiere…</translation>
+        <translation>Se sincronizează…</translation>
     </message>
     <message>
         <source>Combined inbox</source>
-        <translation>Kombinierter Posteingang</translation>
+        <translation>Căsuță comună</translation>
     </message>
     <message>
         <source>Show folders</source>
-        <translation>Ordner anzeigen</translation>
+        <translation>Arată dosarele</translation>
     </message>
     <message>
         <source>Remove as default sender</source>
-        <translation>Als Standardabsender entfernen</translation>
+        <translation>Elimină ca expeditor implicit</translation>
     </message>
     <message>
         <source>Set as default sender</source>
-        <translation>Als Standardabsender festlegen</translation>
+        <translation>Setează ca expeditor implicit</translation>
     </message>
     <message>
         <source>unread</source>
-        <translation>ungelesen</translation>
+        <translation>necitite</translation>
     </message>
     <message>
         <source>No e-mail accounts</source>
-        <translation>Keine E-Mail-Konten</translation>
+        <translation>Niciun cont de e-mail</translation>
     </message>
     <message>
         <source>Add an account in the system settings first</source>
-        <translation>Erst ein Konto in den Systemeinstellungen anlegen</translation>
+        <translation>Adăugați întâi un cont în setările sistemului</translation>
     </message>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Primite</translation>
     </message>
     <message numerus="yes">
         <source>Trying again in %n minute(s) (attempt %1 of %2).</source>
         <translation>
-            <numerusform>Neuer Versuch in %n Minute (Versuch %1 von %2).</numerusform>
-            <numerusform>Neuer Versuch in %n Minuten (Versuch %1 von %2).</numerusform>
+            <numerusform>Se încearcă din nou peste %n minut (încercarea %1 din %2).</numerusform>
+            <numerusform>Se încearcă din nou peste %n minute (încercarea %1 din %2).</numerusform>
+            <numerusform>Se încearcă din nou peste %n de minute (încercarea %1 din %2).</numerusform>
         </translation>
     </message>
     <message>
         <source>Sending stopped: %1</source>
-        <translation>Senden abgebrochen: %1</translation>
+        <translation>Trimiterea s-a oprit: %1</translation>
     </message>
     <message numerus="yes">
         <source>%n message(s) not sent yet</source>
         <translation>
-            <numerusform>%n Nachricht noch nicht gesendet</numerusform>
-            <numerusform>%n Nachrichten noch nicht gesendet</numerusform>
+            <numerusform>%n mesaj încă netrimis</numerusform>
+            <numerusform>%n mesaje încă netrimise</numerusform>
+            <numerusform>%n de mesaje încă netrimise</numerusform>
         </translation>
     </message>
     <message>
         <source>Tap to try sending again.</source>
-        <translation>Antippen, um erneut zu senden.</translation>
+        <translation>Atingeți pentru a încerca din nou trimiterea.</translation>
     </message>
 </context>
 <context>
     <name>MessageListPage</name>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Primite</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Șabloane</translation>
     </message>
     <message>
         <source>Syncing…</source>
-        <translation>Synchronisiere…</translation>
+        <translation>Se sincronizează…</translation>
     </message>
     <message>
         <source>New message</source>
-        <translation>Neue Nachricht</translation>
+        <translation>Mesaj nou</translation>
     </message>
     <message>
         <source>Folders</source>
-        <translation>Ordner</translation>
+        <translation>Dosare</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation>Synchronisieren</translation>
+        <translation>Sincronizează</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation>Lösche</translation>
+        <translation>Se șterge</translation>
     </message>
     <message>
         <source>Mark as unread</source>
-        <translation>Als ungelesen markieren</translation>
+        <translation>Marchează ca necitit</translation>
     </message>
     <message>
         <source>Mark as read</source>
-        <translation>Als gelesen markieren</translation>
+        <translation>Marchează ca citit</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Bearbeiten</translation>
+        <translation>Editează</translation>
     </message>
     <message>
         <source>Mark all as read</source>
-        <translation>Alle als gelesen markieren</translation>
+        <translation>Marchează toate ca citite</translation>
     </message>
     <message>
         <source>Empty Trash</source>
-        <translation>Papierkorb leeren</translation>
+        <translation>Golește coșul</translation>
     </message>
     <message>
         <source>Empty Trash?</source>
-        <translation>Papierkorb leeren?</translation>
+        <translation>Goliți coșul?</translation>
     </message>
     <message>
         <source>All messages in Trash will be permanently deleted.</source>
-        <translation>Alle Nachrichten im Papierkorb werden endgültig gelöscht.</translation>
+        <translation>Toate mesajele din coș vor fi șterse definitiv.</translation>
     </message>
     <message>
         <source>Empty</source>
-        <translation>Leeren</translation>
+        <translation>Golește</translation>
     </message>
     <message>
         <source>Select messages</source>
-        <translation>Nachrichten auswählen</translation>
+        <translation>Selectați mesaje</translation>
     </message>
     <message>
         <source>Selected: %1</source>
-        <translation>Ausgewählt: %1</translation>
+        <translation>Selectate: %1</translation>
     </message>
     <message>
         <source>Tap messages to select</source>
-        <translation>Nachrichten zum Auswählen antippen</translation>
+        <translation>Atingeți mesajele pentru a le selecta</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Anulează</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation>Alle auswählen</translation>
+        <translation>Selectează tot</translation>
     </message>
     <message>
         <source>Deselect all</source>
-        <translation>Auswahl aufheben</translation>
+        <translation>Deselectează tot</translation>
     </message>
     <message>
         <source>Mark selected as read</source>
-        <translation>Ausgewählte als gelesen markieren</translation>
+        <translation>Marchează selecția ca citită</translation>
     </message>
     <message>
         <source>Mark selected as unread</source>
-        <translation>Ausgewählte als ungelesen markieren</translation>
+        <translation>Marchează selecția ca necitită</translation>
     </message>
     <message>
         <source>Delete selected</source>
-        <translation>Ausgewählte löschen</translation>
+        <translation>Șterge selecția</translation>
     </message>
     <message>
         <source>Deleting %1</source>
-        <translation>Lösche %1</translation>
+        <translation>Se șterge %1</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(fără subiect)</translation>
     </message>
     <message>
         <source>Loading inbox…</source>
-        <translation>Lade Posteingang…</translation>
+        <translation>Se încarcă mesajele primite…</translation>
     </message>
     <message>
         <source>No messages</source>
-        <translation>Keine Nachrichten</translation>
+        <translation>Niciun mesaj</translation>
     </message>
     <message>
         <source>Pull down to sync</source>
-        <translation>Herunterziehen zum Synchronisieren</translation>
+        <translation>Trageți în jos pentru a sincroniza</translation>
     </message>
     <message>
         <source>(header only)</source>
-        <translation>(nur Header)</translation>
+        <translation>(doar antet)</translation>
     </message>
     <message>
         <source>Move to folder…</source>
-        <translation>In Ordner verschieben…</translation>
+        <translation>Mută în dosar…</translation>
     </message>
     <message>
         <source>Move selected…</source>
-        <translation>Ausgewählte verschieben…</translation>
+        <translation>Mută selecția…</translation>
     </message>
     <message>
         <source>Failed — trying again in a minute (%1/%2)</source>
-        <translation>Fehlgeschlagen — neuer Versuch in einer Minute (%1/%2)</translation>
+        <translation>A eșuat — se reîncearcă peste un minut (%1/%2)</translation>
     </message>
     <message>
         <source>Failed — trying again in %1 minutes (%2/%3)</source>
-        <translation>Fehlgeschlagen — neuer Versuch in %1 Minuten (%2/%3)</translation>
+        <translation>A eșuat — se reîncearcă peste %1 minute (%2/%3)</translation>
     </message>
     <message>
         <source>Not sent. The server refused it — use Send again after fixing the cause.</source>
-        <translation>Nicht gesendet. Der Server hat sie abgelehnt — nach Behebung der Ursache „Erneut senden“ benutzen.</translation>
+        <translation>Netrimis. Serverul l-a refuzat — folosiți Trimite din nou după ce ați remediat cauza.</translation>
     </message>
     <message>
         <source>Send again</source>
-        <translation>Erneut senden</translation>
+        <translation>Trimite din nou</translation>
     </message>
     <message>
         <source>Sending again…</source>
-        <translation>Sende erneut…</translation>
+        <translation>Se trimite din nou…</translation>
     </message>
 </context>
 <context>
     <name>MessagePage</name>
     <message>
         <source>bcc</source>
-        <translation>Bcc</translation>
+        <translation>copie oarbă</translation>
     </message>
     <message>
         <source>hidden from the other recipients</source>
-        <translation>für die anderen Empfänger unsichtbar</translation>
+        <translation>ascuns față de ceilalți destinatari</translation>
     </message>
     <message>
         <source>Decrypted</source>
-        <translation>Entschlüsselt</translation>
+        <translation>Decriptat</translation>
     </message>
     <message>
         <source>(no text — see attachments below)</source>
-        <translation>(kein Text – siehe Anhänge unten)</translation>
+        <translation>(fără text — vedeți atașamentele de mai jos)</translation>
     </message>
     <message>
         <source>Decrypted — %1 attachment(s)</source>
-        <translation>Entschlüsselt – %1 Anhang/Anhänge</translation>
+        <translation>Decriptat — %1 atașamente</translation>
     </message>
     <message>
         <source>Imported %1 key(s) into your keyring.</source>
-        <translation>%1 Schlüssel in den Schlüsselbund importiert.</translation>
+        <translation>%1 chei importate în inelul dumneavoastră de chei.</translation>
     </message>
     <message>
         <source>Key import failed: %1</source>
-        <translation>Schlüssel-Import fehlgeschlagen: %1</translation>
+        <translation>Importul cheii a eșuat: %1</translation>
     </message>
     <message>
         <source>Your certificate isn&apos;t installed yet — open “S/MIME certificates” in the menu to import your .p12</source>
-        <translation>Dein Zertifikat ist noch nicht installiert – öffne „S/MIME-Zertifikate“ im Menü, um deine .p12 zu importieren</translation>
+        <translation>Certificatul dumneavoastră nu este încă instalat — deschideți „Certificate S/MIME” din meniu pentru a importa fișierul .p12</translation>
     </message>
     <message>
         <source>Decrypt failed: %1</source>
-        <translation>Entschlüsseln fehlgeschlagen: %1</translation>
+        <translation>Decriptarea a eșuat: %1</translation>
     </message>
     <message>
         <source>Sender certificate imported</source>
-        <translation>Absender-Zertifikat importiert</translation>
+        <translation>Certificatul expeditorului a fost importat</translation>
     </message>
     <message>
         <source>Import: %1</source>
@@ -1402,91 +1404,91 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Encrypted part not found</source>
-        <translation>Verschlüsselter Teil nicht gefunden</translation>
+        <translation>Partea criptată nu a fost găsită</translation>
     </message>
     <message>
         <source>Downloading encrypted part…</source>
-        <translation>Lade verschlüsselten Teil…</translation>
+        <translation>Se descarcă partea criptată…</translation>
     </message>
     <message>
         <source>Downloading key…</source>
-        <translation>Lade Schlüssel…</translation>
+        <translation>Se descarcă cheia…</translation>
     </message>
     <message>
         <source>No PGP key found in this message — the sender did not include their public key. Get it from a keyserver or import the .asc file via the Keys page.</source>
-        <translation>Kein PGP-Schlüssel in dieser Nachricht – der Absender hat seinen öffentlichen Schlüssel nicht beigelegt. Hole ihn von einem Keyserver oder importiere die .asc-Datei über die Schlüssel-Seite.</translation>
+        <translation>Nicio cheie PGP în acest mesaj — expeditorul nu și-a atașat cheia publică. Obțineți-o de la un server de chei sau importați fișierul .asc din pagina Chei.</translation>
     </message>
     <message>
         <source>Signature: decrypt first</source>
-        <translation>Signatur: erst entschlüsseln</translation>
+        <translation>Semnătură: decriptați întâi</translation>
     </message>
     <message>
         <source>Valid signature</source>
-        <translation>Gültige Signatur</translation>
+        <translation>Semnătură validă</translation>
     </message>
     <message>
         <source>INVALID signature</source>
-        <translation>UNGÜLTIGE Signatur</translation>
+        <translation>Semnătură INVALIDĂ</translation>
     </message>
     <message>
         <source>Signature from expired key</source>
-        <translation>Signatur von abgelaufenem Schlüssel</translation>
+        <translation>Semnătură de la o cheie expirată</translation>
     </message>
     <message>
         <source>Public key missing — cannot verify</source>
-        <translation>Öffentlicher Schlüssel fehlt – nicht prüfbar</translation>
+        <translation>Lipsește cheia publică — nu se poate verifica</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <source>Deleting message</source>
-        <translation>Lösche Nachricht</translation>
+        <translation>Se șterge mesajul</translation>
     </message>
     <message>
         <source>Show header</source>
-        <translation>Header anzeigen</translation>
+        <translation>Arată antetul</translation>
     </message>
     <message>
         <source>Encryption info</source>
-        <translation>Verschlüsselungs-Info</translation>
+        <translation>Informații despre criptare</translation>
     </message>
     <message>
         <source>S/MIME certificates…</source>
-        <translation>S/MIME-Zertifikate…</translation>
+        <translation>Certificate S/MIME…</translation>
     </message>
     <message>
         <source>Download full message</source>
-        <translation>Ganze Nachricht laden</translation>
+        <translation>Descarcă mesajul complet</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation>Antworten</translation>
+        <translation>Răspunde</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(fără subiect)</translation>
     </message>
     <message>
         <source>to</source>
-        <translation>an</translation>
+        <translation>către</translation>
     </message>
     <message>
         <source>Encrypted message</source>
-        <translation>Verschlüsselte Nachricht</translation>
+        <translation>Mesaj criptat</translation>
     </message>
     <message>
         <source>Decrypting…</source>
-        <translation>Entschlüssele…</translation>
+        <translation>Se decriptează…</translation>
     </message>
     <message>
         <source>Decryption failed</source>
-        <translation>Entschlüsseln fehlgeschlagen</translation>
+        <translation>Decriptarea a eșuat</translation>
     </message>
     <message>
         <source>Encrypted</source>
-        <translation>Verschlüsselt</translation>
+        <translation>Criptat</translation>
     </message>
     <message>
         <source>Format: PGP/MIME</source>
@@ -1494,31 +1496,31 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Decrypt</source>
-        <translation>Entschlüsseln</translation>
+        <translation>Decriptează</translation>
     </message>
     <message>
         <source>To decrypt this message</source>
-        <translation>Zum Entschlüsseln dieser Nachricht</translation>
+        <translation>Pentru a decripta acest mesaj</translation>
     </message>
     <message>
         <source>Inline PGP message</source>
-        <translation>Inline-PGP-Nachricht</translation>
+        <translation>Mesaj Inline PGP</translation>
     </message>
     <message>
         <source>Inline PGP signature</source>
-        <translation>Inline-PGP-Signatur</translation>
+        <translation>Semnătură Inline PGP</translation>
     </message>
     <message>
         <source>Format: Inline PGP</source>
-        <translation>Format: Inline-PGP</translation>
+        <translation>Format: Inline PGP</translation>
     </message>
     <message>
         <source>Verify</source>
-        <translation>Prüfen</translation>
+        <translation>Verifică</translation>
     </message>
     <message>
         <source>Encrypted S/MIME message</source>
-        <translation>Verschlüsselte S/MIME-Nachricht</translation>
+        <translation>Mesaj S/MIME criptat</translation>
     </message>
     <message>
         <source>Format: S/MIME (PKI)</source>
@@ -1526,167 +1528,167 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>To decrypt this S/MIME message</source>
-        <translation>Zum Entschlüsseln dieser S/MIME-Nachricht</translation>
+        <translation>Pentru a decripta acest mesaj S/MIME</translation>
     </message>
     <message>
         <source>Import sender&apos;s certificate</source>
-        <translation>Absender-Zertifikat importieren</translation>
+        <translation>Importă certificatul expeditorului</translation>
     </message>
     <message>
         <source>(empty — pull down to download)</source>
-        <translation>(leer – herunterziehen zum Laden)</translation>
+        <translation>(gol — trageți în jos pentru descărcare)</translation>
     </message>
     <message>
         <source>Decrypted attachments (%1)</source>
-        <translation>Entschlüsselte Anhänge (%1)</translation>
+        <translation>Atașamente decriptate (%1)</translation>
     </message>
     <message>
         <source>Attachments (%1)</source>
-        <translation>Anhänge (%1)</translation>
+        <translation>Atașamente (%1)</translation>
     </message>
     <message>
         <source>Import sender&apos;s key</source>
-        <translation>Absender-Schlüssel importieren</translation>
+        <translation>Importă cheia expeditorului</translation>
     </message>
     <message>
         <source>Unusually large attachment detected. Expecting a larger e-mail? You can load it once without the size limit.</source>
-        <translation>Ungewöhnlich großer Anhang erkannt. Erwartest du eine größere E-Mail? Du kannst sie einmalig ohne Größenlimit laden.</translation>
+        <translation>Atașament neobișnuit de mare. Așteptați un e-mail mai voluminos? Îl puteți încărca o dată fără limita de dimensiune.</translation>
     </message>
     <message>
         <source>Load without limit (15 min)</source>
-        <translation>Ohne Limit laden (15 Min)</translation>
+        <translation>Încarcă fără limită (15 min)</translation>
     </message>
     <message>
         <source>Saved to %1</source>
-        <translation>Gespeichert nach %1</translation>
+        <translation>Salvat în %1</translation>
     </message>
     <message>
         <source>Could not save the attachment</source>
-        <translation>Anhang konnte nicht gespeichert werden</translation>
+        <translation>Atașamentul nu a putut fi salvat</translation>
     </message>
     <message>
         <source>Save to folder</source>
-        <translation>In Ordner speichern</translation>
+        <translation>Salvează în dosar</translation>
     </message>
     <message>
         <source>Open with…</source>
-        <translation>Öffnen mit…</translation>
+        <translation>Deschide cu…</translation>
     </message>
     <message>
         <source>Save as…</source>
-        <translation>Speichern unter…</translation>
+        <translation>Salvează ca…</translation>
     </message>
     <message>
         <source>Downloading the full message…</source>
-        <translation>Lade die ganze Nachricht…</translation>
+        <translation>Se descarcă mesajul complet…</translation>
     </message>
     <message>
         <source>The message is already fully downloaded.</source>
-        <translation>Die Nachricht ist bereits vollständig geladen.</translation>
+        <translation>Mesajul este deja descărcat complet.</translation>
     </message>
     <message>
         <source>Message downloaded.</source>
-        <translation>Nachricht geladen.</translation>
+        <translation>Mesajul a fost descărcat.</translation>
     </message>
     <message>
         <source>Pull down “Download full message” to load the attachment(s).</source>
-        <translation>Zum Laden der Anhänge oben „Ganze Nachricht laden“ ziehen.</translation>
+        <translation>Trageți „Descarcă mesajul complet” pentru a încărca atașamentele.</translation>
     </message>
     <message>
         <source>Downloading attachment…</source>
-        <translation>Anhang wird heruntergeladen…</translation>
+        <translation>Se descarcă atașamentul…</translation>
     </message>
     <message>
         <source>Could not load the attachment</source>
-        <translation>Anhang konnte nicht geladen werden</translation>
+        <translation>Atașamentul nu a putut fi încărcat</translation>
     </message>
     <message>
         <source>Could not open the attachment</source>
-        <translation>Anhang konnte nicht geöffnet werden</translation>
+        <translation>Atașamentul nu a putut fi deschis</translation>
     </message>
     <message>
         <source>Show plain text</source>
-        <translation>Klartext anzeigen</translation>
+        <translation>Arată textul simplu</translation>
     </message>
     <message>
         <source>Show simple HTML (no external content loaded)</source>
-        <translation>Einfaches HTML anzeigen (keine externen Inhalte)</translation>
+        <translation>Arată HTML simplu (fără conținut extern încărcat)</translation>
     </message>
     <message>
         <source>Move to folder…</source>
-        <translation>In Ordner verschieben…</translation>
+        <translation>Mută în dosar…</translation>
     </message>
     <message>
         <source>No certificate to import: %1</source>
-        <translation>Kein Zertifikat zum Importieren: %1</translation>
+        <translation>Niciun certificat de importat: %1</translation>
     </message>
     <message>
         <source>These certificates came with this message. Nothing is stored until you confirm.</source>
-        <translation>Diese Zertifikate kamen mit dieser Nachricht. Es wird nichts gespeichert, bis Sie bestätigen.</translation>
+        <translation>Aceste certificate au venit cu acest mesaj. Nimic nu este stocat până când nu confirmați.</translation>
     </message>
     <message>
         <source>S/MIME message with a signature</source>
-        <translation>S/MIME-Nachricht mit Signatur</translation>
+        <translation>Mesaj S/MIME cu semnătură</translation>
     </message>
     <message>
         <source>✓ Valid signature from %1</source>
-        <translation>✓ Gültige Signatur von %1</translation>
+        <translation>✓ Semnătură validă de la %1</translation>
     </message>
     <message>
         <source>Signature is mathematically valid (%1), but you have not trusted the authority that issued the certificate.</source>
-        <translation>Die Signatur ist rechnerisch gültig (%1), aber der ausstellenden Stelle haben Sie nicht vertraut.</translation>
+        <translation>Semnătura este validă matematic (%1), dar nu ați acordat încredere autorității care a emis certificatul.</translation>
     </message>
     <message>
         <source>⚠ INVALID signature — this message was altered after signing, or the signature is forged.</source>
-        <translation>⚠ UNGÜLTIGE Signatur — diese Nachricht wurde nach dem Signieren verändert, oder die Signatur ist gefälscht.</translation>
+        <translation>⚠ Semnătură INVALIDĂ — acest mesaj a fost modificat după semnare sau semnătura este falsificată.</translation>
     </message>
     <message>
         <source>Signed, but the signer&apos;s certificate is missing — the signature cannot be checked.</source>
-        <translation>Signiert, aber das Zertifikat des Signierenden fehlt — die Signatur lässt sich nicht prüfen.</translation>
+        <translation>Semnat, dar certificatul semnatarului lipsește — semnătura nu poate fi verificată.</translation>
     </message>
     <message>
         <source>The signature could not be checked.</source>
-        <translation>Die Signatur konnte nicht geprüft werden.</translation>
+        <translation>Semnătura nu a putut fi verificată.</translation>
     </message>
     <message>
         <source>Signature not checked yet.</source>
-        <translation>Signatur noch nicht geprüft.</translation>
+        <translation>Semnătura nu a fost încă verificată.</translation>
     </message>
     <message>
         <source>✓ Good signature from %1</source>
-        <translation>✓ Gültige Signatur von %1</translation>
+        <translation>✓ Semnătură validă de la %1</translation>
     </message>
     <message>
         <source>⚠ Good signature, but from %1 — NOT the sender&apos;s address (%2)</source>
-        <translation>⚠ Gültige Signatur, aber von %1 — NICHT von der Absenderadresse (%2)</translation>
+        <translation>⚠ Semnătură validă, dar de la %1 — NU de la adresa expeditorului (%2)</translation>
     </message>
     <message>
         <source>⚠ BAD signature — this message was altered or forged.</source>
-        <translation>⚠ UNGÜLTIGE Signatur — diese Nachricht wurde verändert oder gefälscht.</translation>
+        <translation>⚠ Semnătură GREȘITĂ — acest mesaj a fost modificat sau falsificat.</translation>
     </message>
     <message>
         <source>Signed, but the signer&apos;s key is missing — cannot verify.</source>
-        <translation>Signiert, aber der Schlüssel des Signierenden fehlt — nicht prüfbar.</translation>
+        <translation>Semnat, dar cheia semnatarului lipsește — nu se poate verifica.</translation>
     </message>
     <message>
         <source>⚠ Signed with a REVOKED key (%1) — the owner withdrew it.</source>
-        <translation>⚠ Mit einem WIDERRUFENEN Schlüssel signiert (%1) — der Inhaber hat ihn zurückgezogen.</translation>
+        <translation>⚠ Semnat cu o cheie REVOCATĂ (%1) — proprietarul a retras-o.</translation>
     </message>
     <message>
         <source>Signed with an EXPIRED key (%1).</source>
-        <translation>Mit einem ABGELAUFENEN Schlüssel signiert (%1).</translation>
+        <translation>Semnat cu o cheie EXPIRATĂ (%1).</translation>
     </message>
     <message>
         <source>The signature has expired (%1).</source>
-        <translation>Die Signatur ist abgelaufen (%1).</translation>
+        <translation>Semnătura a expirat (%1).</translation>
     </message>
     <message>
         <source>The message could not be downloaded — no connection?</source>
-        <translation>Die Nachricht konnte nicht geladen werden — keine Verbindung?</translation>
+        <translation>Mesajul nu a putut fi descărcat — nicio conexiune?</translation>
     </message>
     <message>
         <source>Could not download the message — no connection?</source>
-        <translation>Die Nachricht konnte nicht geladen werden — keine Verbindung?</translation>
+        <translation>Nu s-a putut descărca mesajul — nicio conexiune?</translation>
     </message>
 </context>
 <context>
@@ -1697,54 +1699,54 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Passphrase</source>
-        <translation>Passphrase</translation>
+        <translation>Frază de acces</translation>
     </message>
     <message>
         <source>Secret key passphrase</source>
-        <translation>Passphrase des geheimen Schlüssels</translation>
+        <translation>Fraza de acces a cheii secrete</translation>
     </message>
     <message>
         <source>After import, the key lives safely in the app&apos;s encrypted keyring. The file you imported stays where you picked it (e.g. Downloads), outside the app sandbox, where other apps could read it — so it is no longer needed on the device. If you have a backup elsewhere, delete it here.</source>
-        <translation>Nach dem Import liegt der Schlüssel sicher im verschlüsselten Schlüsselbund der App. Die importierte Datei bleibt dort, wo du sie ausgewählt hast (z. B. Downloads) — außerhalb der App-Sandbox, wo andere Apps sie lesen könnten — und wird auf dem Gerät nicht mehr gebraucht. Wenn du anderswo ein Backup hast, lösche sie hier.</translation>
+        <translation>După import, cheia stă în siguranță în inelul de chei criptat al aplicației. Fișierul importat rămâne unde l-ați ales (de ex. în Descărcări), în afara sandbox-ului aplicației, unde alte aplicații l-ar putea citi — deci nu mai este necesar pe dispozitiv. Dacă aveți o copie de siguranță în altă parte, ștergeți-l aici.</translation>
     </message>
     <message>
         <source>Delete the import file after import</source>
-        <translation>Importdatei nach dem Import löschen</translation>
+        <translation>Șterge fișierul de import după import</translation>
     </message>
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
-        <translation>Nur wenn du ein anderes Backup hast. Dies kann nicht rückgängig gemacht werden.</translation>
+        <translation>Doar dacă aveți altă copie de siguranță. Acest lucru nu poate fi anulat.</translation>
     </message>
 </context>
 <context>
     <name>SmimeCertsPage</name>
     <message>
         <source>Root CA</source>
-        <translation>Root-CA</translation>
+        <translation>CA rădăcină</translation>
     </message>
     <message>
         <source>Intermediate CA</source>
-        <translation>Zwischen-CA</translation>
+        <translation>CA intermediară</translation>
     </message>
     <message>
         <source>Your encryption certificate</source>
-        <translation>Dein Verschlüsselungs-Zertifikat</translation>
+        <translation>Certificatul dumneavoastră de criptare</translation>
     </message>
     <message>
         <source>Your signing certificate</source>
-        <translation>Dein Signatur-Zertifikat</translation>
+        <translation>Certificatul dumneavoastră de semnare</translation>
     </message>
     <message>
         <source>Certificate</source>
-        <translation>Zertifikat</translation>
+        <translation>Certificat</translation>
     </message>
     <message>
         <source>Import certificate from file…</source>
-        <translation>Zertifikat aus Datei importieren…</translation>
+        <translation>Importă certificat din fișier…</translation>
     </message>
     <message>
         <source>S/MIME certificates</source>
-        <translation>S/MIME-Zertifikate</translation>
+        <translation>Certificate S/MIME</translation>
     </message>
     <message>
         <source>gpgsm</source>
@@ -1752,273 +1754,273 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>ready</source>
-        <translation>bereit</translation>
+        <translation>pregătit</translation>
     </message>
     <message>
         <source>NOT FOUND</source>
-        <translation>NICHT GEFUNDEN</translation>
+        <translation>NEGĂSIT</translation>
     </message>
     <message>
         <source>store: </source>
-        <translation>Speicher: </translation>
+        <translation>depozit: </translation>
     </message>
     <message>
         <source>Certificates (%1)</source>
-        <translation>Zertifikate (%1)</translation>
+        <translation>Certificate (%1)</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(fără subiect)</translation>
     </message>
     <message>
         <source>Show / export certificate</source>
-        <translation>Zertifikat anzeigen / exportieren</translation>
+        <translation>Arată / exportă certificatul</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation>Protokoll</translation>
+        <translation>Jurnal</translation>
     </message>
     <message>
         <source>Select certificate (.p12 / .pfx / .pem / .crt / .p7b)</source>
-        <translation>Zertifikat wählen (.p12 / .pfx / .pem / .crt / .p7b)</translation>
+        <translation>Selectați certificatul (.p12 / .pfx / .pem / .crt / .p7b)</translation>
     </message>
     <message>
         <source>Passphrase of the .p12 file</source>
-        <translation>Passphrase der .p12-Datei</translation>
+        <translation>Fraza de acces a fișierului .p12</translation>
     </message>
     <message>
         <source>Delete certificate + private key</source>
-        <translation>Zertifikat + privaten Schlüssel löschen</translation>
+        <translation>Șterge certificatul + cheia privată</translation>
     </message>
     <message>
         <source>Delete certificate</source>
-        <translation>Zertifikat löschen</translation>
+        <translation>Șterge certificatul</translation>
     </message>
     <message>
         <source>Deleting certificate</source>
-        <translation>Lösche Zertifikat</translation>
+        <translation>Se șterge certificatul</translation>
     </message>
     <message>
         <source>Generate new certificate…</source>
-        <translation>Neues Zertifikat erzeugen…</translation>
+        <translation>Generează un certificat nou…</translation>
     </message>
     <message>
         <source>Generate S/MIME certificate</source>
-        <translation>S/MIME-Zertifikat erzeugen</translation>
+        <translation>Generează certificat S/MIME</translation>
     </message>
     <message>
         <source>Creates a new self-signed RSA-4096 S/MIME certificate (signing + encryption) in your store. The recipient must trust it once, like a first key exchange. Highest security; the passphrase is mandatory.</source>
-        <translation>Erstellt ein neues selbstsigniertes RSA-4096-S/MIME-Zertifikat (Signieren + Verschlüsseln) in Ihrem Speicher. Die Gegenstelle muss ihm einmalig vertrauen, wie beim ersten Schlüsselaustausch. Höchste Sicherheit; das Passwort ist Pflicht.</translation>
+        <translation>Creează în depozitul dumneavoastră un nou certificat S/MIME RSA-4096 autosemnat (semnare + criptare). Destinatarul trebuie să îi acorde încredere o dată, ca la un prim schimb de chei. Securitate maximă; fraza de acces este obligatorie.</translation>
     </message>
     <message>
         <source>Generating a 4096-bit certificate — this can take a minute…</source>
-        <translation>Erzeuge ein 4096-Bit-Zertifikat — das kann eine Minute dauern…</translation>
+        <translation>Se generează un certificat de 4096 de biți — poate dura un minut…</translation>
     </message>
     <message>
         <source>Certificate backed up to %1</source>
-        <translation>Zertifikat gesichert nach %1</translation>
+        <translation>Certificatul a fost salvat în %1</translation>
     </message>
     <message>
         <source>Backup failed — wrong passphrase?</source>
-        <translation>Backup fehlgeschlagen – falsche Passphrase?</translation>
+        <translation>Copia de siguranță a eșuat — frază de acces greșită?</translation>
     </message>
     <message>
         <source>Back up as .p12 to Documents…</source>
-        <translation>Als .p12 in Dokumente sichern…</translation>
+        <translation>Salvează ca .p12 în Documente…</translation>
     </message>
     <message>
         <source>Passphrase of this certificate</source>
-        <translation>Passphrase dieses Zertifikats</translation>
+        <translation>Fraza de acces a acestui certificat</translation>
     </message>
     <message>
         <source>Really delete this certificate?</source>
-        <translation>Dieses Zertifikat wirklich löschen?</translation>
+        <translation>Chiar ștergeți acest certificat?</translation>
     </message>
     <message>
         <source>This includes the PRIVATE key. Without a .p12 backup it cannot be recovered.</source>
-        <translation>Das schließt den PRIVATEN Schlüssel ein. Ohne .p12-Backup ist er nicht wiederherstellbar.</translation>
+        <translation>Aceasta include cheia PRIVATĂ. Fără o copie de siguranță .p12 nu poate fi recuperată.</translation>
     </message>
     <message>
         <source>The certificate will be removed from your store.</source>
-        <translation>Das Zertifikat wird aus Ihrem Speicher entfernt.</translation>
+        <translation>Certificatul va fi eliminat din depozitul dumneavoastră.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <source>Import file deleted from the device.</source>
-        <translation>Importdatei vom Gerät gelöscht.</translation>
+        <translation>Fișierul de import a fost șters de pe dispozitiv.</translation>
     </message>
     <message>
         <source>Could not delete the import file.</source>
-        <translation>Importdatei konnte nicht gelöscht werden.</translation>
+        <translation>Fișierul de import nu a putut fi șters.</translation>
     </message>
     <message>
         <source>It is passphrase-protected but lies outside the app sandbox — copy it off-device and then delete it from the phone.</source>
-        <translation>Sie ist passphrase-geschützt, liegt aber außerhalb der App-Sandbox — kopiere sie vom Gerät weg und lösche sie dann vom Telefon.</translation>
+        <translation>Este protejat cu o frază de acces, dar se află în afara sandbox-ului aplicației — copiați-l în afara dispozitivului, apoi ștergeți-l de pe telefon.</translation>
     </message>
     <message>
         <source>Do not prefer for encryption any more</source>
-        <translation>Nicht mehr zum Verschlüsseln bevorzugen</translation>
+        <translation>Nu mai prefera pentru criptare</translation>
     </message>
     <message>
         <source>Prefer for encryption</source>
-        <translation>Zum Verschlüsseln bevorzugen</translation>
+        <translation>Preferă pentru criptare</translation>
     </message>
     <message>
         <source>Read from the selected file. Nothing is stored until you confirm.</source>
-        <translation>Aus der gewählten Datei gelesen. Es wird nichts gespeichert, bis Sie bestätigen.</translation>
+        <translation>Citit din fișierul selectat. Nimic nu este stocat până când nu confirmați.</translation>
     </message>
     <message>
         <source>No certificate found in that file: %1</source>
-        <translation>Kein Zertifikat in dieser Datei gefunden: %1</translation>
+        <translation>Niciun certificat găsit în acel fișier: %1</translation>
     </message>
     <message>
         <source>Delete all certificates…</source>
-        <translation>Alle Zertifikate löschen…</translation>
+        <translation>Șterge toate certificatele…</translation>
     </message>
     <message>
         <source>Delete all certificates?</source>
-        <translation>Alle Zertifikate löschen?</translation>
+        <translation>Ștergeți toate certificatele?</translation>
     </message>
     <message>
         <source>This removes every S/MIME certificate and every private key from this app&apos;s store. Mail encrypted to those keys can no longer be read. Certificates you backed up as .p12 can be imported again.</source>
-        <translation>Das entfernt jedes S/MIME-Zertifikat und jeden privaten Schlüssel aus dem Speicher dieser App. Mit diesen Schlüsseln verschlüsselte Mail ist danach nicht mehr lesbar. Als .p12 gesicherte Zertifikate können Sie wieder importieren.</translation>
+        <translation>Aceasta elimină fiecare certificat S/MIME și fiecare cheie privată din depozitul acestei aplicații. Mesajele criptate către acele chei nu vor mai putea fi citite. Certificatele salvate ca .p12 pot fi importate din nou.</translation>
     </message>
     <message>
         <source>Delete everything</source>
-        <translation>Alles löschen</translation>
+        <translation>Șterge tot</translation>
     </message>
 </context>
 <context>
     <name>SmimeImportDialog</name>
     <message>
         <source>Import anyway</source>
-        <translation>Trotzdem importieren</translation>
+        <translation>Importă oricum</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importieren</translation>
+        <translation>Importă</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Anulează</translation>
     </message>
     <message>
         <source>Import %1 certificates?</source>
-        <translation>%1 Zertifikate importieren?</translation>
+        <translation>Importați %1 certificate?</translation>
     </message>
     <message>
         <source>Import certificate?</source>
-        <translation>Zertifikat importieren?</translation>
+        <translation>Importați certificatul?</translation>
     </message>
     <message>
         <source>⚠ None of these certificates is issued for the sender&apos;s address (%1). Only import them if you are sure they really belong to this sender.</source>
-        <translation>⚠ Keines dieser Zertifikate ist für die Absenderadresse (%1) ausgestellt. Importieren Sie sie nur, wenn Sie sicher sind, dass sie wirklich zu diesem Absender gehören.</translation>
+        <translation>⚠ Niciunul dintre aceste certificate nu este emis pentru adresa expeditorului (%1). Importați-le doar dacă sunteți sigur că aparțin într-adevăr acestui expeditor.</translation>
     </message>
     <message>
         <source>✓ Issued for the sender&apos;s address (%1).</source>
-        <translation>✓ Für die Absenderadresse (%1) ausgestellt.</translation>
+        <translation>✓ Emis pentru adresa expeditorului (%1).</translation>
     </message>
     <message>
         <source>Root certificate authority</source>
-        <translation>Wurzelzertifizierungsstelle</translation>
+        <translation>Autoritate de certificare rădăcină</translation>
     </message>
     <message>
         <source>Certificate authority</source>
-        <translation>Zertifizierungsstelle</translation>
+        <translation>Autoritate de certificare</translation>
     </message>
     <message>
         <source>Certificate</source>
-        <translation>Zertifikat</translation>
+        <translation>Certificat</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Inhaber)</translation>
+        <translation>(fără subiect)</translation>
     </message>
     <message>
         <source>issued by: </source>
-        <translation>ausgestellt von: </translation>
+        <translation>emis de: </translation>
     </message>
     <message>
         <source>EXPIRED on %1</source>
-        <translation>ABGELAUFEN am %1</translation>
+        <translation>EXPIRAT la %1</translation>
     </message>
     <message>
         <source>valid until %1</source>
-        <translation>gültig bis %1</translation>
+        <translation>valabil până la %1</translation>
     </message>
     <message>
         <source>Already in your store — importing changes nothing.</source>
-        <translation>Bereits in Ihrem Speicher — ein Import ändert nichts.</translation>
+        <translation>Se află deja în depozitul dumneavoastră — importul nu schimbă nimic.</translation>
     </message>
     <message>
         <source>⚠ You already have a DIFFERENT certificate for this address: %1. Importing adds a second one; the newest usable certificate is used when encrypting.</source>
-        <translation>⚠ Für diese Adresse haben Sie bereits ein ANDERES Zertifikat: %1. Ein Import legt ein zweites daneben; beim Verschlüsseln wird das neueste brauchbare verwendet.</translation>
+        <translation>⚠ Aveți deja un certificat DIFERIT pentru această adresă: %1. Importul adaugă un al doilea; la criptare se folosește cel mai nou certificat utilizabil.</translation>
     </message>
     <message>
         <source>Trust</source>
-        <translation>Vertrauen</translation>
+        <translation>Încredere</translation>
     </message>
     <message>
         <source>Trust this root certificate</source>
-        <translation>Diesem Wurzelzertifikat vertrauen</translation>
+        <translation>Acordă încredere acestui certificat rădăcină</translation>
     </message>
     <message>
         <source>Signatures from every certificate this authority issues will count as valid, now and in future. Turn this on only for an authority you know — for example your own certificate, or your organisation&apos;s.</source>
-        <translation>Signaturen aller Zertifikate, die diese Stelle ausstellt, gelten dann als gültig, jetzt und künftig. Schalten Sie das nur für eine Stelle ein, die Sie kennen — etwa Ihr eigenes Zertifikat oder das Ihrer Organisation.</translation>
+        <translation>Semnăturile de la fiecare certificat emis de această autoritate vor fi considerate valide, acum și în viitor. Activați aceasta doar pentru o autoritate pe care o cunoașteți — de exemplu propriul dumneavoastră certificat sau cel al organizației dumneavoastră.</translation>
     </message>
     <message>
         <source>This root is already one of your trust anchors.</source>
-        <translation>Dieses Wurzelzertifikat ist bereits einer Ihrer Vertrauensanker.</translation>
+        <translation>Acest certificat rădăcină este deja una dintre ancorele dumneavoastră de încredere.</translation>
     </message>
     <message>
         <source>Fetch missing issuer certificates</source>
-        <translation>Fehlende Ausstellerzertifikate holen</translation>
+        <translation>Descarcă certificatele emitente lipsă</translation>
     </message>
     <message>
         <source>Downloads the issuing authorities named inside the certificate, over an encrypted connection. This tells that server that you received this mail. Nothing downloaded becomes trusted.</source>
-        <translation>Lädt die im Zertifikat genannten ausstellenden Stellen über eine verschlüsselte Verbindung. Dabei erfährt dieser Server, dass Sie diese Mail erhalten haben. Nichts Geladenes wird dadurch vertrauenswürdig.</translation>
+        <translation>Descarcă, printr-o conexiune criptată, autoritățile emitente numite în certificat. Astfel acel server află că ați primit acest mesaj. Nimic din ce se descarcă nu devine de încredere.</translation>
     </message>
 </context>
 <context>
     <name>SmimeInfoPage</name>
     <message>
         <source>The sender (copy to self)</source>
-        <translation>Der Absender (Kopie an sich selbst)</translation>
+        <translation>Expeditorul (copie către sine)</translation>
     </message>
     <message>
         <source>⚠ Blind copy — this is you</source>
-        <translation>⚠ Blindkopie — das bist du</translation>
+        <translation>⚠ Copie oarbă — acesta sunteți dumneavoastră</translation>
     </message>
     <message>
         <source>⚠ Blind copy — in no header</source>
-        <translation>⚠ Blindkopie — steht in keiner Kopfzeile</translation>
+        <translation>⚠ Copie oarbă — nu apare în niciun antet</translation>
     </message>
     <message>
         <source>A blind copy is hidden from the headers only. Every recipient certificate is named in the encrypted data itself, so anyone who receives this message can read this list too.</source>
-        <translation>Eine Blindkopie ist nur vor den Kopfzeilen verborgen. Jedes Empfängerzertifikat wird in den verschlüsselten Daten selbst genannt — wer diese Nachricht bekommt, kann diese Liste ebenfalls lesen.</translation>
+        <translation>O copie oarbă este ascunsă doar din antete. Fiecare certificat de destinatar este numit chiar în datele criptate, așa că oricine primește acest mesaj poate citi și această listă.</translation>
     </message>
     <message>
         <source>Encryption info</source>
-        <translation>Verschlüsselungs-Info</translation>
+        <translation>Informații despre criptare</translation>
     </message>
     <message>
         <source>You (your certificate — decryptable)</source>
-        <translation>Du (dein Zertifikat — entschlüsselbar)</translation>
+        <translation>Dumneavoastră (certificatul dumneavoastră — se poate decripta)</translation>
     </message>
     <message>
         <source>Recipient (cert not in your store)</source>
-        <translation>Empfänger (Zertifikat nicht in deinem Bestand)</translation>
+        <translation>Destinatar (certificatul nu se află în depozitul dumneavoastră)</translation>
     </message>
     <message>
         <source>Other recipient</source>
-        <translation>Weiterer Empfänger</translation>
+        <translation>Alt destinatar</translation>
     </message>
     <message>
         <source>Copy all to clipboard</source>
-        <translation>Alles in die Zwischenablage kopieren</translation>
+        <translation>Copiază tot în clipboard</translation>
     </message>
     <message>
         <source>Format</source>
@@ -2026,90 +2028,90 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>No encryption</source>
-        <translation>Keine Verschlüsselung</translation>
+        <translation>Fără criptare</translation>
     </message>
     <message>
         <source>This message is not encrypted.</source>
-        <translation>Diese Nachricht ist nicht verschlüsselt.</translation>
+        <translation>Acest mesaj nu este criptat.</translation>
     </message>
     <message>
         <source>Encrypted to %1 certificate(s)</source>
-        <translation>Verschlüsselt an %1 Zertifikat(e)</translation>
+        <translation>Criptat către %1 certificate</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(fără subiect)</translation>
     </message>
     <message>
         <source>Key usage: </source>
-        <translation>Schlüsselverwendung: </translation>
+        <translation>Utilizarea cheii: </translation>
     </message>
     <message>
         <source>Signature certificate(s): %1</source>
-        <translation>Signatur-Zertifikat(e): %1</translation>
+        <translation>Certificate de semnătură: %1</translation>
     </message>
     <message>
         <source>issued by: </source>
-        <translation>ausgestellt von: </translation>
+        <translation>emis de: </translation>
     </message>
     <message>
         <source>Debug</source>
-        <translation>Debug</translation>
+        <translation>Depanare</translation>
     </message>
     <message>
         <source>Hide debug info</source>
-        <translation>Debug-Infos ausblenden</translation>
+        <translation>Ascunde informațiile de depanare</translation>
     </message>
     <message>
         <source>Show debug info</source>
-        <translation>Debug-Infos anzeigen</translation>
+        <translation>Arată informațiile de depanare</translation>
     </message>
     <message>
         <source>Blind copy — named in no header of this message:</source>
-        <translation>Blindkopie — in keiner Kopfzeile dieser Nachricht genannt:</translation>
+        <translation>Copie oarbă — nu apare în niciun antet al acestui mesaj:</translation>
     </message>
 </context>
 <context>
     <name>TemplatesPage</name>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Șabloane</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation>Wird gelöscht</translation>
+        <translation>Se șterge</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(fără subiect)</translation>
     </message>
     <message>
         <source>Encrypted + signed (%1)</source>
-        <translation>Verschlüsselt + signiert (%1)</translation>
+        <translation>Criptat + semnat (%1)</translation>
     </message>
     <message>
         <source>Encrypted (%1)</source>
-        <translation>Verschlüsselt (%1)</translation>
+        <translation>Criptat (%1)</translation>
     </message>
     <message>
         <source>Signed (%1)</source>
-        <translation>Signiert (%1)</translation>
+        <translation>Semnat (%1)</translation>
     </message>
     <message>
         <source>Not encrypted</source>
-        <translation>Nicht verschlüsselt</translation>
+        <translation>Necriptat</translation>
     </message>
     <message>
         <source>No templates</source>
-        <translation>Keine Vorlagen</translation>
+        <translation>Niciun șablon</translation>
     </message>
     <message>
         <source>Save a message as a template from the composer</source>
-        <translation>Eine Nachricht im Editor als Vorlage speichern</translation>
+        <translation>Salvați un mesaj ca șablon din editor</translation>
     </message>
 </context>
 </TS>
