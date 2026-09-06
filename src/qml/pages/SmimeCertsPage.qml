@@ -132,7 +132,7 @@ Page {
         }
         onRoundTripFinished: page._appendLog(ok ? ("✓ round-trip OK: " + text.trim())
                                                 : ("✗ round-trip failed: " + error))
-        onDecryptFinished: page._appendLog(ok ? ("✓ decrypted:\n" + text)
+        onDecryptFinished: if (messageId === -1) page._appendLog(ok ? ("✓ decrypted:\n" + text)
                                               : ("✗ decrypt failed: " + error))
     }
 
@@ -149,6 +149,17 @@ Page {
         if (status === PageStatus.Active && _pendingAction !== "") {
             var a = _pendingAction, arg = _pendingArg, info = _pendingInfo
             _pendingAction = ""; _pendingArg = ""; _pendingInfo = ""
+            if (a === "inspect") {
+                var ci = Smime.inspectCertImport("file", arg, "")
+                if (ci && ci.count)
+                    pageStack.push(Qt.resolvedUrl("SmimeImportDialog.qml"),
+                                   { info: ci,
+                                     intro: qsTr("Read from the selected file. Nothing is stored until you confirm.") })
+                else
+                    page._appendLog(qsTr("No certificate found in that file: %1")
+                                    .arg(ci && ci.error ? ci.error : "?"))
+                return
+            }
             _runWithPassphrase(a, arg, info)
         }
     }
@@ -163,7 +174,6 @@ Page {
                 Smime.importP12(arg, dlg.passphrase, "")
             }
             else if (action === "decrypt")   Smime.decryptFile(arg, dlg.passphrase)
-            else if (action === "roundtrip") Smime.roundTripTest(dlg.passphrase)
             else if (action === "exportp12") {
                 var p = Smime.saveP12ToDocuments(arg, dlg.passphrase)
                 page._appendLog(p.length > 0
@@ -179,10 +189,19 @@ Page {
         contentHeight: col.height + Theme.paddingLarge
 
         PullDownMenu {
-            MenuItem { text: qsTr("Wipe store"); onClicked: Smime.wipeStore() }
-            MenuItem { text: qsTr("Round-trip self-test")
-                       enabled: Smime.available
-                       onClicked: _runWithPassphrase("roundtrip", "", qsTr("Passphrase of your key")) }
+            // Destroys every certificate AND private key in the S/MIME store —
+            // behind a confirmation, like every other destructive action here.
+            MenuItem {
+                text: qsTr("Delete all certificates…")
+                onClicked: {
+                    var dlg = pageStack.push(Qt.resolvedUrl("ConfirmDialog.qml"), {
+                        question: qsTr("Delete all certificates?"),
+                        warning: qsTr("This removes every S/MIME certificate and every private key from this app's store. Mail encrypted to those keys can no longer be read. Certificates you backed up as .p12 can be imported again."),
+                        acceptText: qsTr("Delete everything")
+                    })
+                    dlg.accepted.connect(function() { Smime.wipeStore() })
+                }
+            }
             // One file-import for BOTH: your own identity cert (.p12/.pfx, with a
             // private key → asks the passphrase) and a public/CA certificate
             // (.pem/.crt/.p7b → imported directly). The type is detected from the
@@ -375,8 +394,11 @@ Page {
                     page._pendingAction = "import"
                     pageStack.pop(page)
                 } else {
-                    // Public certificate / CA → import directly, no passphrase.
-                    Smime.importCertFromFile(f)
+                    // Public certificate / CA → show what it is and let the user
+                    // confirm; a certificate from a file is no more trustworthy
+                    // than one out of a mail.
+                    page._pendingArg = f
+                    page._pendingAction = "inspect"
                     pageStack.pop(page)
                 }
             }

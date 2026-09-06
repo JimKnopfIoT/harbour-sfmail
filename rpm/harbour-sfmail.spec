@@ -3,27 +3,42 @@
 %global _buildhost reproducible-builder
 
 Name:       harbour-sfmail
-Summary:    E-mail client with built-in OpenPGP for Sailfish OS
-Version:    0.8.4
+Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
+Version:    0.8.7
 Release:    1
 Group:      Applications/Productivity
-License:    GPLv3+
+# The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
+# QGpgME (GPLv2+) and an OpenSSL build (ASL 2.0) — see THIRD-PARTY-NOTICES.md.
+License:    GPLv3+ and LGPLv2+ and GPLv2+ and ASL 2.0
 URL:        https://github.com/JimKnopfIoT/harbour-sfmail
 Source0:    %{name}-%{version}.tar.bz2
 
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(Qt5Network)
+BuildRequires:  pkgconfig(Qt5Sql)
+BuildRequires:  pkgconfig(Qt5Concurrent)
+BuildRequires:  pkgconfig(Qt5DBus)
+BuildRequires:  pkgconfig(QmfClient)
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  desktop-file-utils
 
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   nemo-qml-plugin-email-qt5
+# The plugin links the QMF client library directly (the send path builds the
+# RFC 822 message itself). The library's package name carries its soname, so
+# depend on the file rpm already tracks rather than on a package name.
+Requires:   libqmfclient1-qt5
+# The bundled OpenSSL tool links the system libcrypto; rpm derives the exact
+# soname dependency from the binary itself, so nothing has to be named here.
+# S/MIME exists on aarch64 only, which is where that binary ships.
 
 %description
 A full e-mail client built on the Qt Messaging Framework (Nemo.Email), with
-OpenPGP encryption / signing integrated. Development version, installed in
-parallel to the stable harbour-sfmail-pgp companion app.
+OpenPGP and S/MIME encryption and signing built in. It brings its own modern
+GnuPG stack, because the one on the device is too old to read current keyrings.
+S/MIME needs the bundled OpenSSL and is available on aarch64 only.
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -58,7 +73,7 @@ install -m 644 rpm/EmailUi.permission \
 %else
 %define stackstage stack/stage-modern-aarch64
 %endif
-# The switchboard the D-Bus activation entry points at; the About -> System
+# The switchboard the D-Bus activation entry points at; the About → System
 # switch writes the marker file it reads (absent = ON, see rpm/mailui-dispatch).
 install -D -m 755 rpm/mailui-dispatch \
     %{buildroot}%{_datadir}/%{name}/bin/mailui-dispatch
@@ -71,21 +86,38 @@ cp -a %{stackstage}/usr/share/harbour-sfmail-pgp/bin \
       %{buildroot}%{_datadir}/%{name}/gpg/
 
 # --- Slim the bundled GnuPG stack -------------------------------------------
-# Ship only what the app actually uses at runtime (libgpgme + the C++/Qt
-# bindings libgpgmepp/libqgpgme + gpg, gpg-agent, gpgsm, dirmngr, gpgconf,
-# openssl, pinentry, gpg-protect-tool) — a smaller RPM AND a smaller attack
-# surface. (PGP goes through the GpgME++/QGpgME bindings since 0.5.0; the
-# locale prune is kept for size — errors are typed now, not parsed from stderr.)
+# Keep a NAMED list of what the app runs, and delete everything else. The list
+# used to be the other way round — name what to remove — which meant every
+# program a new GnuPG release added was shipped by default; the 2.5 stack
+# arrived with several that nothing here calls.
+#
+# gpg          OpenPGP, driven through GPGME
+# gpg-agent    holds the secret keys for gpg and gpgsm
+# gpgsm        S/MIME
+# gpgconf      tells us where the agent listens
+# openssl      PKCS#12 plumbing gpgsm cannot do (aarch64 only)
+# gpg-protect-tool  gpg-agent calls it while importing a .p12
+#
+# The locale prune stays: results are read from status lines, and English
+# fallback text keeps the few remaining message checks predictable.
 GPGDIR=%{buildroot}%{_datadir}/%{name}/gpg
-rm -rf "$GPGDIR"/lib/cmake
-for b in dirmngr-client dumpsexp gpg-error gpg-error-config gpgme-config \
-         gpgme-json gpgme-tool gpgparsemail gpgrt-config gpgscm gpgsplit gpgv \
-         hmac256 kbxutil ksba-config libassuan-config libgcrypt-config mpicalc \
-         npth-config watchgnupg yat2m gpg-connect-agent; do
-    rm -f "$GPGDIR/bin/$b"
+rm -rf "$GPGDIR"/lib/cmake "$GPGDIR"/lib/pkgconfig
+find "$GPGDIR/lib" -maxdepth 1 -type l -name '*.so' -delete
+KEEP_BIN=" gpg gpg-agent gpgsm gpgconf openssl "
+for f in "$GPGDIR"/bin/*; do
+    [ -e "$f" ] || continue
+    case "$KEEP_BIN" in
+        *" $(basename "$f") "*) : ;;
+        *) rm -rf "$f" ;;
+    esac
 done
-for x in scdaemon gpg-wks-client gpg-check-pattern gpg-preset-passphrase; do
-    rm -f "$GPGDIR/libexec/$x"
+KEEP_LIBEXEC=" gpg-protect-tool "
+for f in "$GPGDIR"/libexec/*; do
+    [ -e "$f" ] || continue
+    case "$KEEP_LIBEXEC" in
+        *" $(basename "$f") "*) : ;;
+        *) rm -rf "$f" ;;
+    esac
 done
 rm -rf "$GPGDIR"/share/locale "$GPGDIR"/share/info "$GPGDIR"/share/man \
        "$GPGDIR"/share/doc "$GPGDIR"/share/aclocal "$GPGDIR"/share/common-lisp
@@ -94,6 +126,11 @@ rm -rf "$GPGDIR"/share/locale "$GPGDIR"/share/info "$GPGDIR"/share/man \
 # remain in the shipped app.
 strip %{buildroot}%{_bindir}/%{name} || true
 strip %{buildroot}%{_libdir}/qt5/qml/SFMail/Gpg/libsfmailgpg.so || true
+
+# The QML of the frozen OpenPGP-only helper app lives in the same source tree
+# but belongs to a different program. It is dead weight here — and dead code
+# that ships still has to be audited, so it does not ship.
+rm -f %{buildroot}%{_datadir}/%{name}/qml/pages/Pgp*.qml
 
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop || echo "warn"
 
@@ -117,8 +154,13 @@ done
 %define emailsvc %{_datadir}/dbus-1/services/com.jolla.email.ui.service
 %define emailsvcbak %{emailsvc}.sfmail-orig
 
+# Back up only a file that is NOT already ours. Without that check a reinstall
+# after an uninstall that left our own dispatcher behind would save the
+# dispatcher as "the previous owner" — and switching the hand-off off would then
+# point the dispatcher at itself.
 %post
-if [ -f %{emailsvc} ] && [ ! -f %{emailsvcbak} ]; then
+if [ -f %{emailsvc} ] && [ ! -f %{emailsvcbak} ] \
+   && ! grep -q 'mailui-dispatch' %{emailsvc}; then
     cp -a %{emailsvc} %{emailsvcbak}
 fi
 cat > %{emailsvc} <<'SFMAIL_EOF'
@@ -132,7 +174,9 @@ SFMAIL_EOF
 # silently take the notifications back. Re-claim it whenever that package is
 # touched, so the setting survives OS updates.
 %triggerin -- jolla-email
-if [ -f %{emailsvc} ] && [ ! -f %{emailsvcbak} ]; then
+# jolla-email just wrote its own file back; that is the one worth keeping, so
+# refresh the backup — but never save our dispatcher as the previous owner.
+if [ -f %{emailsvc} ] && ! grep -q 'mailui-dispatch' %{emailsvc}; then
     cp -a %{emailsvc} %{emailsvcbak}
 fi
 cat > %{emailsvc} <<'SFMAIL_EOF'
@@ -148,6 +192,10 @@ SFMAIL_EOF
 if [ "$1" -eq 0 ]; then
     if [ -f %{emailsvcbak} ]; then
         mv -f %{emailsvcbak} %{emailsvc}
+    elif grep -q 'mailui-dispatch' %{emailsvc} 2>/dev/null; then
+        # Nothing to hand back to, and the file points at a program that is
+        # being removed: leaving it would make every mail activation fail.
+        rm -f %{emailsvc}
     fi
 fi
 
@@ -161,6 +209,40 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Sun Sep 06 2026 harbour-sfmail contributors 0.8.7-1
+- S/MIME signatures are now actually verified. Until this release the app
+  reported "Signed S/MIME message" on the strength of a header alone and listed
+  the certificates the message carried; nothing was checked. Signatures are now
+  put to gpgsm and the reader states the outcome: valid, valid but issued by an
+  authority you have not trusted, invalid, or not checkable. The certificates a
+  message brings along are no longer left behind in the store as a side effect.
+- Importing somebody's certificate goes through a dialog first: subject,
+  addresses, issuer, fingerprint, expiry, and a warning when a different
+  certificate is already stored for that address. A root becomes a trust anchor
+  only if you say so; it used to happen by itself. Missing issuer certificates
+  are fetched only on request, only over HTTPS, and never become trusted.
+- The OpenPGP signature verdict distinguishes what it used to hide: a revoked or
+  expired key no longer reads as an ordinary signature, and a good signature made
+  by a key that does not carry the sender's address is flagged as such. A key
+  block containing several keys names all of them before importing.
+- Recipient lookup matches the address exactly. A key for
+  "you@example.com.somewhere-else" can no longer answer a search for
+  "you@example.com".
+- Message lists and headers are drawn as plain text. A crafted subject line
+  could previously make the list fetch a remote image, which tells the sender
+  that the message was displayed.
+- Decrypted attachments are erased when the app starts and when it closes,
+  including the copies handed to other apps. The debug log is off by default,
+  capped in size, and readable only by its owner.
+- Mail that could not be sent is visible: the account page shows how much is
+  waiting and retries every account, not just the last one used. Delivery
+  failures are told apart by their cause instead of by pattern-matching the
+  server's reply.
+- The bundled GnuPG stack ships only the programs the app runs, its sources are
+  checked against recorded digests at build time, and the unused pinentry stub
+  is gone. The aarch64 package states its real requirement: Sailfish OS 5.1.
+- The interface speaks 32 languages.
+
 * Tue Aug 18 2026 harbour-sfmail contributors 0.8.4-1
 - Release build from the repository tree, so the package header names the
   project's repository (the 0.8.3 packages carried an incomplete URL). Also

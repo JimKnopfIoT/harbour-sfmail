@@ -65,11 +65,15 @@ What you will notice:
   copy; use PGP/MIME.
 
 **Encrypted subject.** A subject sent in the clear passes every server on the
-way and often says more than the body. Encrypted mail therefore carries the real subject
-**inside** the encryption ([protected
+way and often says more than the body. **PGP/MIME** mail therefore carries the real
+subject **inside** the encryption ([protected
 headers](https://datatracker.ietf.org/doc/html/draft-ietf-lamps-header-protection),
 as other clients do) and shows `...` on the outside. The same mechanism carries the
 recipients, so a blind copy still sees whom the message was addressed to.
+
+This applies to PGP/MIME only. **Inline PGP and S/MIME send the subject in the
+clear**, because their formats have no agreed place to hide it that the receiving
+side would find.
 
 The price is real and worth knowing before you use it:
 
@@ -100,28 +104,45 @@ the body anyway.
   key, **extend** the expiry, **revoke** (a protected revocation certificate is
   created for you; revoking is a deliberate two-step with confirmation), and
   **publish** to `keys.openpgp.org`. Keyserver lookup never auto-imports — it shows
-  the fingerprint, you decide. When generating a key the exact command is shown for
-  transparency.
-- **S/MIME** — decrypt by tap, sign and/or encrypt outgoing mail (CMS,
-  `application/pkcs7-mime`) with attachments. Certificate management: **create** your
-  own self-signed RSA-4096 certificate (with the `emailProtection` /
-  `keyEncipherment` e-mail attributes), import your own `.p12`, **back it up** as a
-  `.p12`, import a sender's certificate from a signed message, automatic trust-chain
-  completion
+  the fingerprint, you decide. When generating a key an equivalent `gpg` command
+  line is shown, so you can see what is being made.
+- **S/MIME** (aarch64 only, switch it on under *About*) — decrypt by tap, sign
+  and/or encrypt outgoing mail (CMS, `application/pkcs7-mime`) with attachments.
+  Signatures are **verified against your certificate store**, and the result is
+  what you see: valid, valid-but-from-an-authority-you-have-not-trusted, invalid,
+  or not checkable. Certificate management: **create** your own self-signed
+  RSA-4096 certificate (with the `emailProtection` / `keyEncipherment` e-mail
+  attributes), import your own `.p12`, **back it up** as a `.p12`, import a
+  sender's certificate from a signed message — always through a dialog that shows
+  subject, addresses, issuer and fingerprint first. Missing issuer certificates
+  can be fetched on request (over HTTPS); nothing fetched becomes trusted by
+  itself
 - Crypto type follows the conversation: replies match the received mail
   (S/MIME → S/MIME, PGP → PGP, plain → plain); for a new message you only choose
   when both PGP and S/MIME are actually possible for sender and recipients
 - 1-tap key import with safety checks — warns about revoked/expired keys, a key
   already present, a *different* key already stored for the address, and whether
-  the key matches the sender; never imports without your confirmation
+  the key matches the sender's address; a block carrying several keys names all of
+  them, because importing takes all of them; never imports without your
+  confirmation
 - Address-book picker per recipient, with a per-recipient crypto hint
   (🔑 PGP / 📜 S/MIME / no key)
 - German + English UI (follows the system language); localized folder names
 - **Key hygiene & privacy** — the bundled GnuPG agent is hardened so unlocked keys
-  are not kept in memory between operations; after importing a key file you can have
-  it securely deleted from the device; backups are passphrase-protected and the app
-  reminds you to move them off-device; a debug log can be turned on or off under
-  *About → Diagnostics* (off for normal use)
+  are not kept in memory between operations; passphrases never reach a command
+  line and private keys are never written to disk unprotected; the process is not
+  dumpable, so other programs cannot read its memory; after importing a key file
+  you can have it securely deleted from the device; backups are passphrase-protected
+  and the app reminds you to move them off-device
+- **Decrypted mail is not kept** — attachments you open or hand to another app are
+  written to a cache and to `~/Downloads/sfmail`, and both are emptied when the app
+  starts and when it quits. What stays on the device is the encrypted message
+- **The debug log is off** and only records anything while you switch it on under
+  *About*. It then holds diagnostic output including your account address and
+  attachment file names, is capped in size, and is meant for reporting a problem
+- **32 languages**, following the device language, falling back to English. Only
+  the German and English texts have been read by a native speaker; the rest are
+  offered as they are. Corrections are welcome — see below
 
 ## Trust model
 
@@ -130,8 +151,11 @@ authority. The app is built for encrypted mail across trust boundaries — with
 or without a CA on the other side — so it carries no PKI of its own:
 identities you create yourself and identities you import stand on the same
 footing, and each becomes trusted the moment you, having seen its
-fingerprint, say so. This holds for S/MIME exactly as for PGP. Revocation
-lists belong to the delegated-trust world and are consequently not consulted.
+fingerprint, say so. This holds for S/MIME exactly as for PGP: a certificate
+authority becomes an anchor for everything it signs only when you tick that box
+in the import dialog, and your own identity is an anchor because you made it.
+Revocation lists belong to the delegated-trust world and are consequently not
+consulted — a certificate withdrawn by its authority still verifies here.
 
 ## Why a bundled GnuPG
 
@@ -157,8 +181,25 @@ mb2 -t SailfishOS-5.0.0.62-aarch64.default build
 mb2 -t SailfishOS-4.6.0.13-armv7hl.default build
 ```
 
-RPMs are written to `RPMS/`. Install on the device with
-`rpm -U --force <rpm>`.
+RPMs are written to `RPMS/`. Install on the device with `pkcon install-local <rpm>`.
+
+**Which release runs where.** The aarch64 package needs **Sailfish OS 5.1 or
+newer**: it bundles an OpenSSL build for the S/MIME plumbing, and that binary
+needs the system libraries of 5.1. The armv7hl package is built against 4.6 and
+carries no OpenSSL, so S/MIME is unavailable there by design; OpenPGP works
+fully. A device running 5.2 uses the same aarch64 package.
+
+## Translations
+
+The interface ships in 32 languages under `src/translations/`. English and
+German were written by hand; the others were prepared for this release and have
+not yet been read by a native speaker.
+
+If one of them is yours and something reads wrong, please say so — an issue with
+"this line should say that" is enough, and the security wording matters most:
+the lines stating whether a signature is valid, whether a certificate authority
+is trusted, and what deleting a key destroys are a verdict the user acts on, so
+they have to be as clear and as sharp as the English.
 
 The bundled GnuPG binaries are checked in under `stack/stage-modern-aarch64/` and
 `stack/stage-modern-armv7hl/` so the RPM builds out of the box. To rebuild the GnuPG
@@ -168,7 +209,9 @@ stack from the upstream tarballs in `stack/src/`, see `stack/build-stack.sh`.
 
 **GPL-3.0-or-later** — see [`LICENSE`](LICENSE).
 
-The app bundles GnuPG and its libraries (GPL / LGPL). Their licenses, versions
-and corresponding upstream source are documented in
-[`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md); the exact source tarballs the
-bundled binaries were built from are included under `stack/src/`.
+The app bundles GnuPG and its libraries (GPL / LGPL) and an OpenSSL build
+(Apache 2.0). Their licenses, versions and corresponding upstream source are
+documented in [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md); the source
+tarballs are included under `stack/src/`, with their SHA-256 digests recorded in
+`stack/build-stack.sh`, which also carries the build-time patches applied to
+them.

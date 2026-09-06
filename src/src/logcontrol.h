@@ -27,11 +27,16 @@ public:
         return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
                + QStringLiteral("/signed.ini");
     }
-    // Default ON so testers keep getting logs unless they opt out.
+    // Default OFF. The log mirrors every Qt/QML message, which includes the
+    // account address a message was sent from, attachment file names and the
+    // certificate subjects gpgsm prints — a record of who the user corresponds
+    // with, in the clear, growing for as long as nobody looks. It is a
+    // diagnostic tool and is switched on when one is needed (About → Debug
+    // logging).
     static bool readSetting()
     {
         QSettings s(storePath(), QSettings::IniFormat);
-        return s.value(QStringLiteral("debugLogging"), true).toBool();
+        return s.value(QStringLiteral("debugLogging"), false).toBool();
     }
 
     bool enabled() const { return g_fileLog.load(); }

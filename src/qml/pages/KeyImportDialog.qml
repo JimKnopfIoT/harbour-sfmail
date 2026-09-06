@@ -22,6 +22,7 @@ Dialog {
     readonly property bool _senderKnown: info.senderKnown === true
     readonly property bool _senderMatches: info.senderMatches === true
     readonly property bool _senderMismatch: _senderKnown && !_senderMatches
+    readonly property var _others: info.others ? info.others : []
 
     function _grouped(fpr) {
         var s = ("" + fpr).toUpperCase().replace(/\s/g, "")
@@ -43,11 +44,12 @@ Dialog {
             spacing: Theme.paddingMedium
 
             DialogHeader {
-                acceptText: dialog._inKeyring && !dialog._hasConflict && !dialog._senderMismatch ? qsTr("Re-import")
-                          : (dialog._revoked || dialog._expired || dialog._hasConflict || dialog._senderMismatch) ? qsTr("Import anyway")
+                acceptText: dialog._inKeyring && !dialog._hasConflict && !dialog._senderMismatch && dialog._others.length === 0 ? qsTr("Re-import")
+                          : (dialog._revoked || dialog._expired || dialog._hasConflict || dialog._senderMismatch || dialog._others.length > 0) ? qsTr("Import anyway")
                           : qsTr("Import")
                 cancelText: qsTr("Cancel")
-                title: qsTr("Import public key?")
+                title: dialog._others.length > 0 ? qsTr("Import %1 public keys?").arg(dialog._others.length + 1)
+                                                 : qsTr("Import public key?")
             }
 
             // --- what the key is ---------------------------------------------
@@ -99,6 +101,40 @@ Dialog {
                 color: "#60c060"
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("✓ This key belongs to the sender's address (%1).").arg(info.senderEmail)
+            }
+
+            // The armored block may carry MORE than the key described above, and
+            // an import takes all of them — so they are named here.
+            Label {
+                visible: dialog._others.length > 0
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.WordWrap
+                color: "#ffa030"
+                font.pixelSize: Theme.fontSizeSmall
+                text: qsTr("⚠ This block contains %1 further key(s), which will be imported as well:")
+                      .arg(dialog._others.length)
+            }
+            Repeater {
+                model: dialog._others
+                delegate: Column {
+                    x: Theme.horizontalPageMargin
+                    width: dialog.width - 2 * Theme.horizontalPageMargin
+                    spacing: 0
+                    Label {
+                        width: parent.width; wrapMode: Text.WordWrap
+                        font.pixelSize: Theme.fontSizeSmall
+                        text: modelData.uids ? modelData.uids : qsTr("(no user id)")
+                    }
+                    Label {
+                        width: parent.width; wrapMode: Text.WrapAnywhere
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        font.family: "monospace"
+                        color: Theme.highlightColor
+                        text: dialog._grouped(modelData.fpr)
+                    }
+                    Item { width: 1; height: Theme.paddingSmall }
+                }
             }
 
             // --- warnings / status -------------------------------------------

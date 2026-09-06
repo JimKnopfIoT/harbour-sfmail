@@ -60,10 +60,6 @@
         <translation>Debug-Protokoll</translation>
     </message>
     <message>
-        <source>Write a debug.log in the app&apos;s data folder to help diagnose problems. Turn it off for normal use; it has no effect on your mail or keys.</source>
-        <translation>Schreibt eine debug.log im Datenordner der App zur Fehlersuche. Für den normalen Gebrauch ausschalten; hat keinen Einfluss auf deine Mails oder Schlüssel.</translation>
-    </message>
-    <message>
         <source>System</source>
         <translation>System</translation>
     </message>
@@ -78,6 +74,10 @@
     <message>
         <source>Takes over mail notifications, mailto: links and &quot;share via email&quot;. Off means the client you used before keeps them.</source>
         <translation>Übernimmt Mail-Benachrichtigungen, mailto:-Links und „Per E-Mail teilen“. Aus bedeutet: das zuvor genutzte Programm behält sie.</translation>
+    </message>
+    <message>
+        <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
+        <translation>Schreibt ein debug.log in den Datenordner der App, um einem Fehler nachzugehen. Es hält fest, was die App tut, darunter die Absenderadresse und die Namen von Anhängen — schalten Sie es ein, während der Fehler auftritt, und danach wieder aus. Mails und Schlüssel landen nie darin.</translation>
     </message>
 </context>
 <context>
@@ -188,7 +188,7 @@
     </message>
     <message>
         <source>name@example.com, …</source>
-        <translation>name@beispiel.de, …</translation>
+        <translation>name@example.com, …</translation>
     </message>
     <message>
         <source>＋ Add recipient</source>
@@ -936,6 +936,14 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
         <source>✓ This key belongs to the sender&apos;s address (%1).</source>
         <translation>✓ Dieser Schlüssel gehört zur Absenderadresse (%1).</translation>
     </message>
+    <message>
+        <source>Import %1 public keys?</source>
+        <translation>%1 öffentliche Schlüssel importieren?</translation>
+    </message>
+    <message>
+        <source>⚠ This block contains %1 further key(s), which will be imported as well:</source>
+        <translation>⚠ Dieser Block enthält %1 weitere(n) Schlüssel, die ebenfalls importiert werden:</translation>
+    </message>
 </context>
 <context>
     <name>KeySelectDialog</name>
@@ -1082,10 +1090,6 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
         <translation>Keine Schlüssel</translation>
     </message>
     <message>
-        <source>Import a key with the pull-down menu</source>
-        <translation>Schlüssel über das Pulley-Menü importieren</translation>
-    </message>
-    <message>
         <source>Generate PGP key</source>
         <translation>PGP-Schlüssel erzeugen</translation>
     </message>
@@ -1104,6 +1108,10 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     <message>
         <source>Delete</source>
         <translation>Löschen</translation>
+    </message>
+    <message>
+        <source>Pull down to create your own key, or to import one</source>
+        <translation>Nach unten ziehen, um einen eigenen Schlüssel zu erzeugen oder einen zu importieren</translation>
     </message>
 </context>
 <context>
@@ -1167,6 +1175,28 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     <message>
         <source>Inbox</source>
         <translation>Posteingang</translation>
+    </message>
+    <message numerus="yes">
+        <source>Trying again in %n minute(s) (attempt %1 of %2).</source>
+        <translation>
+            <numerusform>Neuer Versuch in %n Minute (Versuch %1 von %2).</numerusform>
+            <numerusform>Neuer Versuch in %n Minuten (Versuch %1 von %2).</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sending stopped: %1</source>
+        <translation>Senden abgebrochen: %1</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) not sent yet</source>
+        <translation>
+            <numerusform>%n Nachricht noch nicht gesendet</numerusform>
+            <numerusform>%n Nachrichten noch nicht gesendet</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Tap to try sending again.</source>
+        <translation>Antippen, um erneut zu senden.</translation>
     </message>
 </context>
 <context>
@@ -1491,10 +1521,6 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
         <translation>Verschlüsselte S/MIME-Nachricht</translation>
     </message>
     <message>
-        <source>Signed S/MIME message</source>
-        <translation>Signierte S/MIME-Nachricht</translation>
-    </message>
-    <message>
         <source>Format: S/MIME (PKI)</source>
         <translation>Format: S/MIME (PKI)</translation>
     </message>
@@ -1590,6 +1616,78 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
         <source>Move to folder…</source>
         <translation>In Ordner verschieben…</translation>
     </message>
+    <message>
+        <source>No certificate to import: %1</source>
+        <translation>Kein Zertifikat zum Importieren: %1</translation>
+    </message>
+    <message>
+        <source>These certificates came with this message. Nothing is stored until you confirm.</source>
+        <translation>Diese Zertifikate kamen mit dieser Nachricht. Es wird nichts gespeichert, bis Sie bestätigen.</translation>
+    </message>
+    <message>
+        <source>S/MIME message with a signature</source>
+        <translation>S/MIME-Nachricht mit Signatur</translation>
+    </message>
+    <message>
+        <source>✓ Valid signature from %1</source>
+        <translation>✓ Gültige Signatur von %1</translation>
+    </message>
+    <message>
+        <source>Signature is mathematically valid (%1), but you have not trusted the authority that issued the certificate.</source>
+        <translation>Die Signatur ist rechnerisch gültig (%1), aber der ausstellenden Stelle haben Sie nicht vertraut.</translation>
+    </message>
+    <message>
+        <source>⚠ INVALID signature — this message was altered after signing, or the signature is forged.</source>
+        <translation>⚠ UNGÜLTIGE Signatur — diese Nachricht wurde nach dem Signieren verändert, oder die Signatur ist gefälscht.</translation>
+    </message>
+    <message>
+        <source>Signed, but the signer&apos;s certificate is missing — the signature cannot be checked.</source>
+        <translation>Signiert, aber das Zertifikat des Signierenden fehlt — die Signatur lässt sich nicht prüfen.</translation>
+    </message>
+    <message>
+        <source>The signature could not be checked.</source>
+        <translation>Die Signatur konnte nicht geprüft werden.</translation>
+    </message>
+    <message>
+        <source>Signature not checked yet.</source>
+        <translation>Signatur noch nicht geprüft.</translation>
+    </message>
+    <message>
+        <source>✓ Good signature from %1</source>
+        <translation>✓ Gültige Signatur von %1</translation>
+    </message>
+    <message>
+        <source>⚠ Good signature, but from %1 — NOT the sender&apos;s address (%2)</source>
+        <translation>⚠ Gültige Signatur, aber von %1 — NICHT von der Absenderadresse (%2)</translation>
+    </message>
+    <message>
+        <source>⚠ BAD signature — this message was altered or forged.</source>
+        <translation>⚠ UNGÜLTIGE Signatur — diese Nachricht wurde verändert oder gefälscht.</translation>
+    </message>
+    <message>
+        <source>Signed, but the signer&apos;s key is missing — cannot verify.</source>
+        <translation>Signiert, aber der Schlüssel des Signierenden fehlt — nicht prüfbar.</translation>
+    </message>
+    <message>
+        <source>⚠ Signed with a REVOKED key (%1) — the owner withdrew it.</source>
+        <translation>⚠ Mit einem WIDERRUFENEN Schlüssel signiert (%1) — der Inhaber hat ihn zurückgezogen.</translation>
+    </message>
+    <message>
+        <source>Signed with an EXPIRED key (%1).</source>
+        <translation>Mit einem ABGELAUFENEN Schlüssel signiert (%1).</translation>
+    </message>
+    <message>
+        <source>The signature has expired (%1).</source>
+        <translation>Die Signatur ist abgelaufen (%1).</translation>
+    </message>
+    <message>
+        <source>The message could not be downloaded — no connection?</source>
+        <translation>Die Nachricht konnte nicht geladen werden — keine Verbindung?</translation>
+    </message>
+    <message>
+        <source>Could not download the message — no connection?</source>
+        <translation>Die Nachricht konnte nicht geladen werden — keine Verbindung?</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1639,18 +1737,6 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     <message>
         <source>Certificate</source>
         <translation>Zertifikat</translation>
-    </message>
-    <message>
-        <source>Wipe store</source>
-        <translation>Speicher leeren</translation>
-    </message>
-    <message>
-        <source>Round-trip self-test</source>
-        <translation>Round-Trip-Selbsttest</translation>
-    </message>
-    <message>
-        <source>Passphrase of your key</source>
-        <translation>Passphrase deines Schlüssels</translation>
     </message>
     <message>
         <source>Import certificate from file…</source>
@@ -1779,6 +1865,121 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     <message>
         <source>Prefer for encryption</source>
         <translation>Zum Verschlüsseln bevorzugen</translation>
+    </message>
+    <message>
+        <source>Read from the selected file. Nothing is stored until you confirm.</source>
+        <translation>Aus der gewählten Datei gelesen. Es wird nichts gespeichert, bis Sie bestätigen.</translation>
+    </message>
+    <message>
+        <source>No certificate found in that file: %1</source>
+        <translation>Kein Zertifikat in dieser Datei gefunden: %1</translation>
+    </message>
+    <message>
+        <source>Delete all certificates…</source>
+        <translation>Alle Zertifikate löschen…</translation>
+    </message>
+    <message>
+        <source>Delete all certificates?</source>
+        <translation>Alle Zertifikate löschen?</translation>
+    </message>
+    <message>
+        <source>This removes every S/MIME certificate and every private key from this app&apos;s store. Mail encrypted to those keys can no longer be read. Certificates you backed up as .p12 can be imported again.</source>
+        <translation>Das entfernt jedes S/MIME-Zertifikat und jeden privaten Schlüssel aus dem Speicher dieser App. Mit diesen Schlüsseln verschlüsselte Mail ist danach nicht mehr lesbar. Als .p12 gesicherte Zertifikate können Sie wieder importieren.</translation>
+    </message>
+    <message>
+        <source>Delete everything</source>
+        <translation>Alles löschen</translation>
+    </message>
+</context>
+<context>
+    <name>SmimeImportDialog</name>
+    <message>
+        <source>Import anyway</source>
+        <translation>Trotzdem importieren</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation>Importieren</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>Import %1 certificates?</source>
+        <translation>%1 Zertifikate importieren?</translation>
+    </message>
+    <message>
+        <source>Import certificate?</source>
+        <translation>Zertifikat importieren?</translation>
+    </message>
+    <message>
+        <source>⚠ None of these certificates is issued for the sender&apos;s address (%1). Only import them if you are sure they really belong to this sender.</source>
+        <translation>⚠ Keines dieser Zertifikate ist für die Absenderadresse (%1) ausgestellt. Importieren Sie sie nur, wenn Sie sicher sind, dass sie wirklich zu diesem Absender gehören.</translation>
+    </message>
+    <message>
+        <source>✓ Issued for the sender&apos;s address (%1).</source>
+        <translation>✓ Für die Absenderadresse (%1) ausgestellt.</translation>
+    </message>
+    <message>
+        <source>Root certificate authority</source>
+        <translation>Wurzelzertifizierungsstelle</translation>
+    </message>
+    <message>
+        <source>Certificate authority</source>
+        <translation>Zertifizierungsstelle</translation>
+    </message>
+    <message>
+        <source>Certificate</source>
+        <translation>Zertifikat</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(kein Inhaber)</translation>
+    </message>
+    <message>
+        <source>issued by: </source>
+        <translation>ausgestellt von: </translation>
+    </message>
+    <message>
+        <source>EXPIRED on %1</source>
+        <translation>ABGELAUFEN am %1</translation>
+    </message>
+    <message>
+        <source>valid until %1</source>
+        <translation>gültig bis %1</translation>
+    </message>
+    <message>
+        <source>Already in your store — importing changes nothing.</source>
+        <translation>Bereits in Ihrem Speicher — ein Import ändert nichts.</translation>
+    </message>
+    <message>
+        <source>⚠ You already have a DIFFERENT certificate for this address: %1. Importing adds a second one; the newest usable certificate is used when encrypting.</source>
+        <translation>⚠ Für diese Adresse haben Sie bereits ein ANDERES Zertifikat: %1. Ein Import legt ein zweites daneben; beim Verschlüsseln wird das neueste brauchbare verwendet.</translation>
+    </message>
+    <message>
+        <source>Trust</source>
+        <translation>Vertrauen</translation>
+    </message>
+    <message>
+        <source>Trust this root certificate</source>
+        <translation>Diesem Wurzelzertifikat vertrauen</translation>
+    </message>
+    <message>
+        <source>Signatures from every certificate this authority issues will count as valid, now and in future. Turn this on only for an authority you know — for example your own certificate, or your organisation&apos;s.</source>
+        <translation>Signaturen aller Zertifikate, die diese Stelle ausstellt, gelten dann als gültig, jetzt und künftig. Schalten Sie das nur für eine Stelle ein, die Sie kennen — etwa Ihr eigenes Zertifikat oder das Ihrer Organisation.</translation>
+    </message>
+    <message>
+        <source>This root is already one of your trust anchors.</source>
+        <translation>Dieses Wurzelzertifikat ist bereits einer Ihrer Vertrauensanker.</translation>
+    </message>
+    <message>
+        <source>Fetch missing issuer certificates</source>
+        <translation>Fehlende Ausstellerzertifikate holen</translation>
+    </message>
+    <message>
+        <source>Downloads the issuing authorities named inside the certificate, over an encrypted connection. This tells that server that you received this mail. Nothing downloaded becomes trusted.</source>
+        <translation>Lädt die im Zertifikat genannten ausstellenden Stellen über eine verschlüsselte Verbindung. Dabei erfährt dieser Server, dass Sie diese Mail erhalten haben. Nichts Geladenes wird dadurch vertrauenswürdig.</translation>
     </message>
 </context>
 <context>
