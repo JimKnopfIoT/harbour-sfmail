@@ -33,10 +33,19 @@ if [ "$(cat "$STATE" 2>/dev/null)" = "0" ] && [ -r "$PREVIOUS" ]; then
     # invoker/booster arguments included, which is why the line is copied rather
     # than reinvented.
     EXEC=$(sed -n 's/^[Ee]xec=//p' "$PREVIOUS" | head -n 1)
+    # Refuse a backup that names this very script: that can only come from a
+    # backup taken of our own file, and running it would fork this script for
+    # ever instead of starting a mail program.
+    case "$EXEC" in
+        *mailui-dispatch*) EXEC="" ;;
+    esac
     if [ -n "$EXEC" ]; then
         exec /bin/sh -c "$EXEC"
     fi
 fi
 
-# Marker absent, says "1", or the backup is unusable: SF-Mail it is.
-exec /usr/bin/sailjail -p harbour-sfmail.desktop /usr/bin/harbour-sfmail
+# Marker absent, says "1", or the backup is unusable: SF-Mail it is. Started the
+# way the launcher starts it, so a mail tapped from a notification lands in the
+# instance that is already running instead of opening a second one.
+exec /usr/bin/invoker --type=silica-qt5 --single-instance \
+     --desktop-file=harbour-sfmail.desktop /usr/bin/harbour-sfmail

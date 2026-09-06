@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de">
+<TS version="2.1" language="en">
 <context>
     <name>AboutPage</name>
     <message>
         <source>About SF-Mail</source>
-        <translation>Über SF-Mail</translation>
+        <translation>About SF-Mail</translation>
     </message>
     <message>
         <source>SF-Mail</source>
@@ -21,43 +21,43 @@
     </message>
     <message>
         <source>Making e-mail encryption easy and friendly on Sailfish OS. Reads, writes, encrypts, decrypts and signs mail with built-in OpenPGP (PGP/MIME and inline) — and, when enabled, S/MIME (PKI / X.509) — using a bundled modern GnuPG with its own keyring.</source>
-        <translation>Macht E-Mail-Verschlüsselung unter Sailfish OS einfach und zugänglich. Liest, schreibt, verschlüsselt, entschlüsselt und signiert Mails mit eingebautem OpenPGP (PGP/MIME und Inline) – und, wenn aktiviert, S/MIME (PKI / X.509) – über ein mitgeliefertes modernes GnuPG mit eigenem Schlüsselbund.</translation>
+        <translation>Making e-mail encryption easy and friendly on Sailfish OS. Reads, writes, encrypts, decrypts and signs mail with built-in OpenPGP (PGP/MIME and inline) — and, when enabled, S/MIME (PKI / X.509) — using a bundled modern GnuPG with its own keyring.</translation>
     </message>
     <message>
         <source>Features</source>
-        <translation>Funktionen</translation>
+        <translation>Features</translation>
     </message>
     <message>
         <source>Enable S/MIME (PKI / X.509)</source>
-        <translation>S/MIME aktivieren (PKI / X.509)</translation>
+        <translation>Enable S/MIME (PKI / X.509)</translation>
     </message>
     <message>
         <source>Adds certificate management and S/MIME decrypt / import in the mail view. Off keeps the app PGP-only and slim.</source>
-        <translation>Fügt Zertifikatsverwaltung und S/MIME-Entschlüsseln/-Import in der Mailansicht hinzu. Aus bleibt die App reine PGP-App und schlank.</translation>
+        <translation>Adds certificate management and S/MIME decrypt / import in the mail view. Off keeps the app PGP-only and slim.</translation>
     </message>
     <message>
         <source>OpenPGP backend</source>
-        <translation>OpenPGP-Backend</translation>
+        <translation>OpenPGP backend</translation>
     </message>
     <message>
         <source>ready</source>
-        <translation>bereit</translation>
+        <translation>ready</translation>
     </message>
     <message>
         <source>unavailable</source>
-        <translation>nicht verfügbar</translation>
+        <translation>unavailable</translation>
     </message>
     <message>
         <source>Keyring</source>
-        <translation>Schlüsselbund</translation>
+        <translation>Keyring</translation>
     </message>
     <message>
         <source>Diagnostics</source>
-        <translation>Diagnose</translation>
+        <translation>Diagnostics</translation>
     </message>
     <message>
         <source>Debug logging</source>
-        <translation>Debug-Protokoll</translation>
+        <translation>Debug logging</translation>
     </message>
     <message>
         <source>System</source>
@@ -65,118 +65,118 @@
     </message>
     <message>
         <source>Open mail notifications in this app</source>
-        <translation>Mail-Benachrichtigungen in dieser App öffnen</translation>
+        <translation>Open mail notifications in this app</translation>
     </message>
     <message>
         <source>Switched on, but the other mail client is holding the connection right now — this takes effect once it is closed.</source>
-        <translation>Eingeschaltet, aber das andere Mail-Programm hält die Verbindung gerade noch — wirksam, sobald es geschlossen wird.</translation>
+        <translation>Switched on, but the other mail client is holding the connection right now — this takes effect once it is closed.</translation>
     </message>
     <message>
         <source>Takes over mail notifications, mailto: links and &quot;share via email&quot;. Off means the client you used before keeps them.</source>
-        <translation>Übernimmt Mail-Benachrichtigungen, mailto:-Links und „Per E-Mail teilen“. Aus bedeutet: das zuvor genutzte Programm behält sie.</translation>
+        <translation>Takes over mail notifications, mailto: links and &quot;share via email&quot;. Off means the client you used before keeps them.</translation>
     </message>
     <message>
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
-        <translation>Schreibt ein debug.log in den Datenordner der App, um einem Fehler nachzugehen. Es hält fest, was die App tut, darunter die Absenderadresse und die Namen von Anhängen — schalten Sie es ein, während der Fehler auftritt, und danach wieder aus. Mails und Schlüssel landen nie darin.</translation>
+        <translation>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</translation>
     </message>
 </context>
 <context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
-        <translation>Inline-PGP kann Blindkopien nicht verbergen — PGP/MIME verwenden.</translation>
+        <translation>Inline PGP cannot hide blind copies — use PGP/MIME.</translation>
     </message>
     <message>
         <source>Choose an account</source>
-        <translation>Konto wählen</translation>
+        <translation>Choose an account</translation>
     </message>
     <message>
         <source>Enter recipients first</source>
-        <translation>Erst Empfänger eingeben</translation>
+        <translation>Enter recipients first</translation>
     </message>
     <message>
         <source>No usable signing key for %1</source>
-        <translation>Kein nutzbarer Signaturschlüssel für %1</translation>
+        <translation>No usable signing key for %1</translation>
     </message>
     <message>
         <source>To sign the message</source>
-        <translation>Zum Signieren der Nachricht</translation>
+        <translation>To sign the message</translation>
     </message>
     <message>
         <source>Signing &amp; sending…</source>
-        <translation>Signieren &amp; Senden…</translation>
+        <translation>Signing &amp; sending…</translation>
     </message>
     <message>
         <source>Inline PGP cannot carry attachments — use PGP/MIME.</source>
-        <translation>Inline-PGP kann keine Anhänge tragen – nutze PGP/MIME.</translation>
+        <translation>Inline PGP cannot carry attachments — use PGP/MIME.</translation>
     </message>
     <message>
         <source>Missing a key for one or more recipients.</source>
-        <translation>Schlüssel für einen oder mehrere Empfänger fehlt.</translation>
+        <translation>Missing a key for one or more recipients.</translation>
     </message>
     <message>
         <source>Inline PGP cannot encrypt attachments — use PGP/MIME.</source>
-        <translation>Inline-PGP kann keine Anhänge verschlüsseln – nutze PGP/MIME.</translation>
+        <translation>Inline PGP cannot encrypt attachments — use PGP/MIME.</translation>
     </message>
     <message>
         <source>Encrypting &amp; sending…</source>
-        <translation>Verschlüsseln &amp; Senden…</translation>
+        <translation>Encrypting &amp; sending…</translation>
     </message>
     <message>
         <source>Send failed: %1</source>
-        <translation>Senden fehlgeschlagen: %1</translation>
+        <translation>Send failed: %1</translation>
     </message>
     <message>
         <source>Encryption failed: %1</source>
-        <translation>Verschlüsseln fehlgeschlagen: %1</translation>
+        <translation>Encryption failed: %1</translation>
     </message>
     <message>
         <source>Encrypt &amp; send</source>
-        <translation>Verschlüsseln &amp; Senden</translation>
+        <translation>Encrypt &amp; send</translation>
     </message>
     <message>
         <source>Sign &amp; send</source>
-        <translation>Signieren &amp; Senden</translation>
+        <translation>Sign &amp; send</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation>Senden</translation>
+        <translation>Send</translation>
     </message>
     <message>
         <source>Save as draft</source>
-        <translation>Als Entwurf speichern</translation>
+        <translation>Save as draft</translation>
     </message>
     <message>
         <source>Could not save the draft</source>
-        <translation>Entwurf konnte nicht gespeichert werden</translation>
+        <translation>Could not save the draft</translation>
     </message>
     <message>
         <source>Save as template</source>
-        <translation>Als Vorlage speichern</translation>
+        <translation>Save as template</translation>
     </message>
     <message>
         <source>Saved as template</source>
-        <translation>Als Vorlage gespeichert</translation>
+        <translation>Saved as template</translation>
     </message>
     <message>
         <source>Could not save the template</source>
-        <translation>Vorlage konnte nicht gespeichert werden</translation>
+        <translation>Could not save the template</translation>
     </message>
     <message>
         <source>Add attachment</source>
-        <translation>Anhang hinzufügen</translation>
+        <translation>Add attachment</translation>
     </message>
     <message>
         <source>New message</source>
-        <translation>Neue Nachricht</translation>
+        <translation>New message</translation>
     </message>
     <message>
         <source>From</source>
-        <translation>Von</translation>
+        <translation>From</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>An</translation>
+        <translation>To</translation>
     </message>
     <message>
         <source>Cc</source>
@@ -192,7 +192,7 @@
     </message>
     <message>
         <source>＋ Add recipient</source>
-        <translation>＋ Empfänger hinzufügen</translation>
+        <translation>＋ Add recipient</translation>
     </message>
     <message>
         <source>…</source>
@@ -200,27 +200,27 @@
     </message>
     <message>
         <source>Subject</source>
-        <translation>Betreff</translation>
+        <translation>Subject</translation>
     </message>
     <message>
         <source>Encrypt</source>
-        <translation>Verschlüsseln</translation>
+        <translation>Encrypt</translation>
     </message>
     <message>
         <source>Sign</source>
-        <translation>Signieren</translation>
+        <translation>Sign</translation>
     </message>
     <message>
         <source>Encrypted to the recipients&apos; keys and signed with your key.</source>
-        <translation>An die Schlüssel der Empfänger verschlüsselt und mit deinem Schlüssel signiert.</translation>
+        <translation>Encrypted to the recipients&apos; keys and signed with your key.</translation>
     </message>
     <message>
         <source>Encrypted to the recipients&apos; keys.</source>
-        <translation>An die Schlüssel der Empfänger verschlüsselt.</translation>
+        <translation>Encrypted to the recipients&apos; keys.</translation>
     </message>
     <message>
         <source>Signed with your key — anyone can read it, the recipient can verify it is from you.</source>
-        <translation>Mit deinem Schlüssel signiert – jeder kann es lesen, der Empfänger kann prüfen, dass es von dir ist.</translation>
+        <translation>Signed with your key — anyone can read it, the recipient can verify it is from you.</translation>
     </message>
     <message>
         <source>Format</source>
@@ -228,43 +228,43 @@
     </message>
     <message>
         <source>PGP/MIME (with attachments)</source>
-        <translation>PGP/MIME (mit Anhängen)</translation>
+        <translation>PGP/MIME (with attachments)</translation>
     </message>
     <message>
         <source>Inline PGP (text only)</source>
-        <translation>Inline-PGP (nur Text)</translation>
+        <translation>Inline PGP (text only)</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation>Nachricht</translation>
+        <translation>Message</translation>
     </message>
     <message>
         <source>Write your message…</source>
-        <translation>Schreibe deine Nachricht…</translation>
+        <translation>Write your message…</translation>
     </message>
     <message>
         <source>Attachments (%1)</source>
-        <translation>Anhänge (%1)</translation>
+        <translation>Attachments (%1)</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation>Remove</translation>
     </message>
     <message>
         <source>Select attachment</source>
-        <translation>Anhang auswählen</translation>
+        <translation>Select attachment</translation>
     </message>
     <message>
         <source>No S/MIME certificate for %1 — open a signed mail from them and import it.</source>
-        <translation>Kein S/MIME-Zertifikat für %1 — öffne eine signierte Mail von dieser Person und importiere es.</translation>
+        <translation>No S/MIME certificate for %1 — open a signed mail from them and import it.</translation>
     </message>
     <message>
         <source>S/MIME — sending…</source>
-        <translation>S/MIME — senden…</translation>
+        <translation>S/MIME — sending…</translation>
     </message>
     <message>
         <source>Encryption type</source>
-        <translation>Verschlüsselungsart</translation>
+        <translation>Encryption type</translation>
     </message>
     <message>
         <source>OpenPGP</source>
@@ -276,61 +276,61 @@
     </message>
     <message>
         <source>🔑 PGP key + 📜 S/MIME certificate</source>
-        <translation>🔑 PGP-Schlüssel + 📜 S/MIME-Zertifikat</translation>
+        <translation>🔑 PGP key + 📜 S/MIME certificate</translation>
     </message>
     <message>
         <source>🔑 PGP key available</source>
-        <translation>🔑 PGP-Schlüssel vorhanden</translation>
+        <translation>🔑 PGP key available</translation>
     </message>
     <message>
         <source>📜 S/MIME certificate available</source>
-        <translation>📜 S/MIME-Zertifikat vorhanden</translation>
+        <translation>📜 S/MIME certificate available</translation>
     </message>
     <message>
         <source>no key/certificate for this address</source>
-        <translation>kein Schlüssel/Zertifikat für diese Adresse</translation>
+        <translation>no key/certificate for this address</translation>
     </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
     <message>
         <source>Are you sure?</source>
-        <translation>Bist du sicher?</translation>
+        <translation>Are you sure?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Cancel</translation>
     </message>
 </context>
 <context>
     <name>ContactPickerPage</name>
     <message>
         <source>Address book</source>
-        <translation>Adressbuch</translation>
+        <translation>Address book</translation>
     </message>
     <message>
         <source>Search contacts</source>
-        <translation>Kontakte suchen</translation>
+        <translation>Search contacts</translation>
     </message>
     <message>
         <source>(no name)</source>
-        <translation>(kein Name)</translation>
+        <translation>(no name)</translation>
     </message>
     <message>
         <source>%1 addresses — tap to choose</source>
-        <translation>%1 Adressen — zum Wählen tippen</translation>
+        <translation>%1 addresses — tap to choose</translation>
     </message>
     <message>
         <source>No matches</source>
-        <translation>Keine Treffer</translation>
+        <translation>No matches</translation>
     </message>
     <message>
         <source>No contacts with an e-mail address</source>
-        <translation>Keine Kontakte mit E-Mail-Adresse</translation>
+        <translation>No contacts with an e-mail address</translation>
     </message>
 </context>
 <context>
@@ -344,91 +344,91 @@
     <name>CryptoInfoPage</name>
     <message>
         <source>Blind copy — named in no header of this message:</source>
-        <translation>Blindkopie — in keiner Kopfzeile dieser Nachricht genannt:</translation>
+        <translation>Blind copy — named in no header of this message:</translation>
     </message>
     <message>
         <source>Further recipient keys above cannot be named — they are not in your keyring. Look them up on keys.openpgp.org from the menu.</source>
-        <translation>Weitere Empfängerschlüssel oben sind nicht zuzuordnen — sie liegen nicht in deinem Schlüsselbund. Über das Menü auf keys.openpgp.org nachschlagen.</translation>
+        <translation>Further recipient keys above cannot be named — they are not in your keyring. Look them up on keys.openpgp.org from the menu.</translation>
     </message>
     <message>
         <source>Addressed to, but not a recipient of this copy: %1</source>
-        <translation>In der Adressierung genannt, aber nicht Empfänger dieser Kopie: %1</translation>
+        <translation>Addressed to, but not a recipient of this copy: %1</translation>
     </message>
     <message>
         <source>Listed in To/Cc</source>
-        <translation>Steht in An/Kopie</translation>
+        <translation>Listed in To/Cc</translation>
     </message>
     <message>
         <source>The sender (copy to self)</source>
-        <translation>Der Absender (Kopie an sich selbst)</translation>
+        <translation>The sender (copy to self)</translation>
     </message>
     <message>
         <source>⚠ Blind copy — this is you</source>
-        <translation>⚠ Blindkopie — das bist du</translation>
+        <translation>⚠ Blind copy — this is you</translation>
     </message>
     <message>
         <source>⚠ Blind copy — in no header</source>
-        <translation>⚠ Blindkopie — steht in keiner Kopfzeile</translation>
+        <translation>⚠ Blind copy — in no header</translation>
     </message>
     <message>
         <source>Cannot be named — key not in your keyring</source>
-        <translation>Nicht zuzuordnen — Schlüssel nicht in deinem Schlüsselbund</translation>
+        <translation>Cannot be named — key not in your keyring</translation>
     </message>
     <message>
         <source>A blind copy is hidden from the headers only. Every recipient key is named in the encrypted data itself, so anyone who receives this message can read this list too.</source>
-        <translation>Eine Blindkopie ist nur vor den Kopfzeilen verborgen. Jeder Empfängerschlüssel wird in den verschlüsselten Daten selbst genannt — wer diese Nachricht bekommt, kann diese Liste ebenfalls lesen.</translation>
+        <translation>A blind copy is hidden from the headers only. Every recipient key is named in the encrypted data itself, so anyone who receives this message can read this list too.</translation>
     </message>
     <message>
         <source>Encryption info</source>
-        <translation>Verschlüsselungs-Info</translation>
+        <translation>Encryption info</translation>
     </message>
     <message>
         <source>Imported %1 key(s) into your keyring. Reopen Encryption info to refresh.</source>
-        <translation>%1 Schlüssel in den Schlüsselbund importiert. Verschlüsselungs-Info neu öffnen zum Aktualisieren.</translation>
+        <translation>Imported %1 key(s) into your keyring. Reopen Encryption info to refresh.</translation>
     </message>
     <message>
         <source>Key import failed: %1</source>
-        <translation>Schlüssel-Import fehlgeschlagen: %1</translation>
+        <translation>Key import failed: %1</translation>
     </message>
     <message>
         <source>Searching keys.openpgp.org…</source>
-        <translation>Suche auf keys.openpgp.org…</translation>
+        <translation>Searching keys.openpgp.org…</translation>
     </message>
     <message>
         <source>keys.openpgp.org has the sender&apos;s key:
 %1%2
 The key this message used (0x%3) belongs to it (encryption subkey). Verify the fingerprint, then import.</source>
-        <translation>keys.openpgp.org hat den Schlüssel des Absenders:
+        <translation>keys.openpgp.org has the sender&apos;s key:
 %1%2
-Der für diese Nachricht genutzte Schlüssel (0x%3) gehört dazu (Verschlüsselungs-Unterschlüssel). Prüfe den Fingerprint, dann importiere.</translation>
+The key this message used (0x%3) belongs to it (encryption subkey). Verify the fingerprint, then import.</translation>
     </message>
     <message>
         <source>⚠ SECURITY: the message used key 0x%1, but a DIFFERENT key is published for this address:
 %2%3
 This can mean an old/wrong/forged key. Only import if you trust this.</source>
-        <translation>⚠ SICHERHEIT: Die Nachricht nutzte Schlüssel 0x%1, aber für diese Adresse ist ein ANDERER Schlüssel veröffentlicht:
+        <translation>⚠ SECURITY: the message used key 0x%1, but a DIFFERENT key is published for this address:
 %2%3
-Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn du dem vertraust.</translation>
+This can mean an old/wrong/forged key. Only import if you trust this.</translation>
     </message>
     <message>
         <source>Import key from message</source>
-        <translation>Schlüssel aus Nachricht importieren</translation>
+        <translation>Import key from message</translation>
     </message>
     <message>
         <source>Search key on keys.openpgp.org</source>
-        <translation>Schlüssel auf keys.openpgp.org suchen</translation>
+        <translation>Search key on keys.openpgp.org</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
-        <translation>In Zwischenablage kopieren</translation>
+        <translation>Copy to clipboard</translation>
     </message>
     <message>
         <source>Import this key</source>
-        <translation>Diesen Schlüssel importieren</translation>
+        <translation>Import this key</translation>
     </message>
     <message>
         <source>Import anyway</source>
-        <translation>Trotzdem importieren</translation>
+        <translation>Import anyway</translation>
     </message>
     <message>
         <source>Format</source>
@@ -436,7 +436,7 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>Encrypted to %1 key(s)</source>
-        <translation>An %1 Schlüssel verschlüsselt</translation>
+        <translation>Encrypted to %1 key(s)</translation>
     </message>
     <message>
         <source>Status: </source>
@@ -444,11 +444,11 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>This key is not in your keyring.</source>
-        <translation>Dieser Schlüssel ist nicht in deinem Schlüsselbund.</translation>
+        <translation>This key is not in your keyring.</translation>
     </message>
     <message>
         <source>Created: </source>
-        <translation>Erstellt: </translation>
+        <translation>Created: </translation>
     </message>
     <message>
         <source>Fingerprint: </source>
@@ -456,125 +456,125 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>✓ secret key present — decryptable</source>
-        <translation>✓ Geheimer Schlüssel vorhanden – entschlüsselbar</translation>
+        <translation>✓ secret key present — decryptable</translation>
     </message>
     <message>
         <source>No recipient key IDs found — this may not be an encrypted message.</source>
-        <translation>Keine Empfänger-Schlüssel-IDs gefunden – evtl. keine verschlüsselte Nachricht.</translation>
+        <translation>No recipient key IDs found — this may not be an encrypted message.</translation>
     </message>
     <message>
         <source>You hold a secret key for a recipient above — you CAN decrypt this message.</source>
-        <translation>Du hast einen geheimen Schlüssel für einen Empfänger oben – du KANNST diese Nachricht entschlüsseln.</translation>
+        <translation>You hold a secret key for a recipient above — you CAN decrypt this message.</translation>
     </message>
     <message>
         <source>You do NOT hold a secret key for any recipient — you cannot decrypt this. The sender probably used an old or wrong key of yours.</source>
-        <translation>Du hast für KEINEN Empfänger einen geheimen Schlüssel – du kannst das nicht entschlüsseln. Der Absender nutzte wohl einen alten oder falschen Schlüssel von dir.</translation>
+        <translation>You do NOT hold a secret key for any recipient — you cannot decrypt this. The sender probably used an old or wrong key of yours.</translation>
     </message>
     <message>
         <source>The encrypted data also carries a signature; the signer is shown after decryption.</source>
-        <translation>Die verschlüsselten Daten tragen auch eine Signatur; der Unterzeichner wird nach dem Entschlüsseln angezeigt.</translation>
+        <translation>The encrypted data also carries a signature; the signer is shown after decryption.</translation>
     </message>
 </context>
 <context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Inbox</translation>
     </message>
     <message>
         <source>Outbox</source>
-        <translation>Postausgang</translation>
+        <translation>Outbox</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation>Gesendet</translation>
+        <translation>Sent</translation>
     </message>
     <message>
         <source>Drafts</source>
-        <translation>Entwürfe</translation>
+        <translation>Drafts</translation>
     </message>
     <message>
         <source>Trash</source>
-        <translation>Papierkorb</translation>
+        <translation>Trash</translation>
     </message>
     <message>
         <source>Junk</source>
-        <translation>Spam</translation>
+        <translation>Junk</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Templates</translation>
     </message>
     <message>
         <source>(unnamed)</source>
-        <translation>(ohne Namen)</translation>
+        <translation>(unnamed)</translation>
     </message>
     <message>
         <source>Move to</source>
-        <translation>Verschieben nach</translation>
+        <translation>Move to</translation>
     </message>
     <message>
         <source>%1 messages</source>
-        <translation>%1 Nachrichten</translation>
+        <translation>%1 messages</translation>
     </message>
     <message>
         <source>No folders</source>
-        <translation>Keine Ordner</translation>
+        <translation>No folders</translation>
     </message>
     <message>
         <source>Sync the account first, then the folders show up here.</source>
-        <translation>Synchronisiere zuerst das Konto, dann erscheinen hier die Ordner.</translation>
+        <translation>Sync the account first, then the folders show up here.</translation>
     </message>
 </context>
 <context>
     <name>FoldersPage</name>
     <message>
         <source>Folders</source>
-        <translation>Ordner</translation>
+        <translation>Folders</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Templates</translation>
     </message>
     <message>
         <source>Syncing…</source>
-        <translation>Synchronisiere…</translation>
+        <translation>Syncing…</translation>
     </message>
     <message>
         <source>Sync folders</source>
-        <translation>Ordner synchronisieren</translation>
+        <translation>Sync folders</translation>
     </message>
     <message>
         <source>(unnamed)</source>
-        <translation>(unbenannt)</translation>
+        <translation>(unnamed)</translation>
     </message>
     <message>
         <source>No folders</source>
-        <translation>Keine Ordner</translation>
+        <translation>No folders</translation>
     </message>
     <message>
         <source>Pull down to sync the account</source>
-        <translation>Herunterziehen, um das Konto zu synchronisieren</translation>
+        <translation>Pull down to sync the account</translation>
     </message>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Inbox</translation>
     </message>
     <message>
         <source>Outbox</source>
-        <translation>Postausgang</translation>
+        <translation>Outbox</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation>Gesendet</translation>
+        <translation>Sent</translation>
     </message>
     <message>
         <source>Drafts</source>
-        <translation>Entwürfe</translation>
+        <translation>Drafts</translation>
     </message>
     <message>
         <source>Trash</source>
-        <translation>Gelöschte Elemente</translation>
+        <translation>Trash</translation>
     </message>
     <message>
         <source>Junk</source>
@@ -585,11 +585,11 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     <name>GenerateIdentityDialog</name>
     <message>
         <source>Generate new key</source>
-        <translation>Neuen Schlüssel erzeugen</translation>
+        <translation>Generate new key</translation>
     </message>
     <message>
         <source>Generate</source>
-        <translation>Erzeugen</translation>
+        <translation>Generate</translation>
     </message>
     <message>
         <source>Name</source>
@@ -597,15 +597,15 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>Your name (optional)</source>
-        <translation>Ihr Name (optional)</translation>
+        <translation>Your name (optional)</translation>
     </message>
     <message>
         <source>E-mail address</source>
-        <translation>E-Mail-Adresse</translation>
+        <translation>E-mail address</translation>
     </message>
     <message>
         <source>you@example.org</source>
-        <translation>sie@example.org</translation>
+        <translation>you@example.org</translation>
     </message>
     <message>
         <source>Passphrase</source>
@@ -613,70 +613,70 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>At least 12 characters</source>
-        <translation>Mindestens 12 Zeichen</translation>
+        <translation>At least 12 characters</translation>
     </message>
     <message>
         <source>Repeat passphrase</source>
-        <translation>Passphrase wiederholen</translation>
+        <translation>Repeat passphrase</translation>
     </message>
     <message>
         <source>at least 12 characters</source>
-        <translation>mindestens 12 Zeichen</translation>
+        <translation>at least 12 characters</translation>
     </message>
     <message>
         <source>upper- and lower-case letters</source>
-        <translation>Groß- und Kleinbuchstaben</translation>
+        <translation>upper- and lower-case letters</translation>
     </message>
     <message>
         <source>a digit</source>
-        <translation>eine Ziffer</translation>
+        <translation>a digit</translation>
     </message>
     <message>
         <source>a special character</source>
-        <translation>ein Sonderzeichen</translation>
+        <translation>a special character</translation>
     </message>
     <message>
         <source>passphrases match</source>
-        <translation>Passphrasen stimmen überein</translation>
+        <translation>passphrases match</translation>
     </message>
     <message>
         <source>Command used (example data)</source>
-        <translation>Verwendeter Befehl (Beispieldaten)</translation>
+        <translation>Command used (example data)</translation>
     </message>
 </context>
 <context>
     <name>HeaderPage</name>
     <message>
         <source>⚠ listed on %1 list(s)!</source>
-        <translation>⚠ auf %1 Liste(n) gelistet!</translation>
+        <translation>⚠ listed on %1 list(s)!</translation>
     </message>
     <message>
         <source>Done — not listed.</source>
-        <translation>Fertig – nicht gelistet.</translation>
+        <translation>Done — not listed.</translation>
     </message>
     <message>
         <source>Checking…</source>
-        <translation>Prüfe…</translation>
+        <translation>Checking…</translation>
     </message>
     <message>
         <source>Check sender against blacklists</source>
-        <translation>Absender gegen Blacklists prüfen</translation>
+        <translation>Check sender against blacklists</translation>
     </message>
     <message>
         <source>Copy headers</source>
-        <translation>Header kopieren</translation>
+        <translation>Copy headers</translation>
     </message>
     <message>
         <source>Header &amp; sender check</source>
-        <translation>Header- &amp; Absenderprüfung</translation>
+        <translation>Header &amp; sender check</translation>
     </message>
     <message>
         <source>Sender analysis</source>
-        <translation>Absender-Analyse</translation>
+        <translation>Sender analysis</translation>
     </message>
     <message>
         <source>From</source>
-        <translation>Von</translation>
+        <translation>From</translation>
     </message>
     <message>
         <source>Return-Path</source>
@@ -684,27 +684,27 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>⚠ From domain (%1) ≠ Return-Path domain (%2) — possible spoofing.</source>
-        <translation>⚠ From-Domain (%1) ≠ Return-Path-Domain (%2) – mögliches Spoofing.</translation>
+        <translation>⚠ From domain (%1) ≠ Return-Path domain (%2) — possible spoofing.</translation>
     </message>
     <message>
         <source>signature present (d=%1) — not cryptographically verified here</source>
-        <translation>Signatur vorhanden (d=%1) – hier nicht kryptografisch geprüft</translation>
+        <translation>signature present (d=%1) — not cryptographically verified here</translation>
     </message>
     <message>
         <source>no DKIM signature</source>
-        <translation>keine DKIM-Signatur</translation>
+        <translation>no DKIM signature</translation>
     </message>
     <message>
         <source>Sender IP</source>
-        <translation>Absender-IP</translation>
+        <translation>Sender IP</translation>
     </message>
     <message>
         <source>Link domains (%1)</source>
-        <translation>Link-Domains (%1)</translation>
+        <translation>Link domains (%1)</translation>
     </message>
     <message>
         <source>Pull down to check the sender&apos;s IP/domain — and any link domains — against blacklists. Only those values are sent to the blacklist DNS, nothing of yours.</source>
-        <translation>Herunterziehen, um IP/Domain des Absenders – und etwaige Link-Domains – gegen Blacklists zu prüfen. Nur diese Werte gehen ans Blacklist-DNS, nichts von dir.</translation>
+        <translation>Pull down to check the sender&apos;s IP/domain — and any link domains — against blacklists. Only those values are sent to the blacklist DNS, nothing of yours.</translation>
     </message>
     <message>
         <source>Blacklists</source>
@@ -712,18 +712,18 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>Raw headers</source>
-        <translation>Roh-Header</translation>
+        <translation>Raw headers</translation>
     </message>
 </context>
 <context>
     <name>KeyDetailPage</name>
     <message>
         <source>Copy public key block</source>
-        <translation>Öffentlichen Schlüsselblock kopieren</translation>
+        <translation>Copy public key block</translation>
     </message>
     <message>
         <source>Key details</source>
-        <translation>Schlüssel-Details</translation>
+        <translation>Key details</translation>
     </message>
     <message>
         <source>Status: </source>
@@ -731,19 +731,19 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>secret key present</source>
-        <translation>geheimer Schlüssel vorhanden</translation>
+        <translation>secret key present</translation>
     </message>
     <message>
         <source>Identities (%1)</source>
-        <translation>Identitäten (%1)</translation>
+        <translation>Identities (%1)</translation>
     </message>
     <message>
         <source>Primary key</source>
-        <translation>Hauptschlüssel</translation>
+        <translation>Primary key</translation>
     </message>
     <message>
         <source>Key ID</source>
-        <translation>Schlüssel-ID</translation>
+        <translation>Key ID</translation>
     </message>
     <message>
         <source>Fingerprint: </source>
@@ -751,390 +751,390 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>Algorithm</source>
-        <translation>Algorithmus</translation>
+        <translation>Algorithm</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation>Erstellt</translation>
+        <translation>Created</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Läuft ab</translation>
+        <translation>Expires</translation>
     </message>
     <message>
         <source>Usage</source>
-        <translation>Verwendung</translation>
+        <translation>Usage</translation>
     </message>
     <message>
         <source>Subkeys (%1)</source>
-        <translation>Unterschlüssel (%1)</translation>
+        <translation>Subkeys (%1)</translation>
     </message>
     <message>
         <source>created </source>
-        <translation>erstellt </translation>
+        <translation>created </translation>
     </message>
     <message>
         <source>expires </source>
-        <translation>läuft ab </translation>
+        <translation>expires </translation>
     </message>
     <message>
         <source>Public key block</source>
-        <translation>Öffentlicher Schlüsselblock</translation>
+        <translation>Public key block</translation>
     </message>
     <message>
         <source>Passphrase of this key (to back it up)</source>
-        <translation>Passphrase dieses Schlüssels (für das Backup)</translation>
+        <translation>Passphrase of this key (to back it up)</translation>
     </message>
     <message>
         <source>Backup failed — wrong passphrase?</source>
-        <translation>Backup fehlgeschlagen – falsche Passphrase?</translation>
+        <translation>Backup failed — wrong passphrase?</translation>
     </message>
     <message>
         <source>Back up secret key to Documents…</source>
-        <translation>Geheimen Schlüssel in Dokumente sichern…</translation>
+        <translation>Back up secret key to Documents…</translation>
     </message>
     <message>
         <source>Save public key to Documents</source>
-        <translation>Öffentlichen Schlüssel in Dokumente speichern</translation>
+        <translation>Save public key to Documents</translation>
     </message>
     <message>
         <source>Public key saved to %1</source>
-        <translation>Öffentlicher Schlüssel gespeichert nach %1</translation>
+        <translation>Public key saved to %1</translation>
     </message>
     <message>
         <source>Save failed</source>
-        <translation>Speichern fehlgeschlagen</translation>
+        <translation>Save failed</translation>
     </message>
     <message>
         <source>It is encrypted with your passphrase, but lies outside the app sandbox. Copy it to safe off-device storage and then delete it from the phone.</source>
-        <translation>Sie ist mit deiner Passphrase verschlüsselt, liegt aber außerhalb der App-Sandbox. Kopiere sie auf einen sicheren Speicher außerhalb des Geräts und lösche sie dann vom Telefon.</translation>
+        <translation>It is encrypted with your passphrase, but lies outside the app sandbox. Copy it to safe off-device storage and then delete it from the phone.</translation>
     </message>
     <message>
         <source>Secret key backed up to %1.</source>
-        <translation>Geheimer Schlüssel gesichert nach %1.</translation>
+        <translation>Secret key backed up to %1.</translation>
     </message>
     <message>
         <source>Passphrase of this key (to extend it)</source>
-        <translation>Passphrase dieses Schlüssels (zum Verlängern)</translation>
+        <translation>Passphrase of this key (to extend it)</translation>
     </message>
     <message>
         <source>Revocation certificate saved to %1. Keep it safe; it lets you revoke this key later even without the passphrase.</source>
-        <translation>Widerrufszertifikat gespeichert nach %1. Bewahre es sicher auf; damit kannst du diesen Schlüssel später auch ohne Passphrase zurückziehen.</translation>
+        <translation>Revocation certificate saved to %1. Keep it safe; it lets you revoke this key later even without the passphrase.</translation>
     </message>
     <message>
         <source>No revocation certificate available for this key.</source>
-        <translation>Für diesen Schlüssel ist kein Widerrufszertifikat verfügbar.</translation>
+        <translation>No revocation certificate available for this key.</translation>
     </message>
     <message>
         <source>Really revoke this key?</source>
-        <translation>Diesen Schlüssel wirklich zurückziehen?</translation>
+        <translation>Really revoke this key?</translation>
     </message>
     <message>
         <source>This is IRREVERSIBLE. The key can never be used to encrypt to you again. Afterwards publish it so others learn it is revoked.</source>
-        <translation>Das ist UNUMKEHRBAR. Mit dem Schlüssel kann nie wieder an dich verschlüsselt werden. Veröffentliche ihn danach, damit andere vom Widerruf erfahren.</translation>
+        <translation>This is IRREVERSIBLE. The key can never be used to encrypt to you again. Afterwards publish it so others learn it is revoked.</translation>
     </message>
     <message>
         <source>Revoke</source>
-        <translation>Zurückziehen</translation>
+        <translation>Revoke</translation>
     </message>
     <message>
         <source>Publish to keys.openpgp.org</source>
-        <translation>Auf keys.openpgp.org veröffentlichen</translation>
+        <translation>Publish to keys.openpgp.org</translation>
     </message>
     <message>
         <source>Revoke this key…</source>
-        <translation>Diesen Schlüssel zurückziehen…</translation>
+        <translation>Revoke this key…</translation>
     </message>
     <message>
         <source>Save revocation certificate…</source>
-        <translation>Widerrufszertifikat speichern…</translation>
+        <translation>Save revocation certificate…</translation>
     </message>
     <message>
         <source>Extend validity (2 years)…</source>
-        <translation>Gültigkeit verlängern (2 Jahre)…</translation>
+        <translation>Extend validity (2 years)…</translation>
     </message>
 </context>
 <context>
     <name>KeyImportDialog</name>
     <message>
         <source>Re-import</source>
-        <translation>Erneut importieren</translation>
+        <translation>Re-import</translation>
     </message>
     <message>
         <source>Import anyway</source>
-        <translation>Trotzdem importieren</translation>
+        <translation>Import anyway</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importieren</translation>
+        <translation>Import</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Cancel</translation>
     </message>
     <message>
         <source>Import public key?</source>
-        <translation>Öffentlichen Schlüssel importieren?</translation>
+        <translation>Import public key?</translation>
     </message>
     <message>
         <source>(no user id)</source>
-        <translation>(keine Benutzerkennung)</translation>
+        <translation>(no user id)</translation>
     </message>
     <message>
         <source>Key ID</source>
-        <translation>Schlüssel-ID</translation>
+        <translation>Key ID</translation>
     </message>
     <message>
         <source>Fingerprint</source>
-        <translation>Fingerabdruck</translation>
+        <translation>Fingerprint</translation>
     </message>
     <message>
         <source>Algorithm</source>
-        <translation>Algorithmus</translation>
+        <translation>Algorithm</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation>Erstellt</translation>
+        <translation>Created</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Läuft ab</translation>
+        <translation>Expires</translation>
     </message>
     <message>
         <source>never</source>
-        <translation>nie</translation>
+        <translation>never</translation>
     </message>
     <message>
         <source>⚠ This key has been REVOKED by its owner. It should not be used to encrypt — import only to read old messages or to verify old signatures.</source>
-        <translation>⚠ Dieser Schlüssel wurde vom Besitzer WIDERRUFEN. Zum Verschlüsseln sollte er nicht mehr benutzt werden — nur importieren, um alte Nachrichten zu lesen oder alte Signaturen zu prüfen.</translation>
+        <translation>⚠ This key has been REVOKED by its owner. It should not be used to encrypt — import only to read old messages or to verify old signatures.</translation>
     </message>
     <message>
         <source>This key is EXPIRED. You cannot encrypt to it until the owner extends it.</source>
-        <translation>Dieser Schlüssel ist ABGELAUFEN. An ihn kann erst wieder verschlüsselt werden, wenn der Besitzer ihn verlängert.</translation>
+        <translation>This key is EXPIRED. You cannot encrypt to it until the owner extends it.</translation>
     </message>
     <message>
         <source>You already have a DIFFERENT key for %1:
 0x%2  (%3)
 Importing adds a SECOND key for this address — make sure this new key is genuine before you trust it.</source>
-        <translation>Du hast bereits einen ANDEREN Schlüssel für %1:
+        <translation>You already have a DIFFERENT key for %1:
 0x%2  (%3)
-Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewissere dich, dass der neue echt ist, bevor du ihm vertraust.</translation>
+Importing adds a SECOND key for this address — make sure this new key is genuine before you trust it.</translation>
     </message>
     <message>
         <source>This exact key is already in your keyring. Re-importing just refreshes it (e.g. new signatures or a longer expiry).</source>
-        <translation>Genau dieser Schlüssel ist bereits in deinem Schlüsselbund. Ein erneuter Import frischt ihn nur auf (z. B. neue Signaturen oder eine längere Gültigkeit).</translation>
+        <translation>This exact key is already in your keyring. Re-importing just refreshes it (e.g. new signatures or a longer expiry).</translation>
     </message>
     <message>
         <source>This key is new and valid. Verify the fingerprint with the owner through a separate channel before you rely on it.</source>
-        <translation>Dieser Schlüssel ist neu und gültig. Prüfe den Fingerabdruck mit dem Besitzer über einen getrennten Kanal, bevor du dich darauf verlässt.</translation>
+        <translation>This key is new and valid. Verify the fingerprint with the owner through a separate channel before you rely on it.</translation>
     </message>
     <message>
         <source>⚠ This key is NOT issued for the sender&apos;s address (%1). Its addresses are: %2. Only import it if you are sure it really is this sender&apos;s key.</source>
-        <translation>⚠ Dieser Schlüssel ist NICHT für die Absenderadresse (%1) ausgestellt. Seine Adressen sind: %2. Nur importieren, wenn du sicher bist, dass es wirklich der Schlüssel dieses Absenders ist.</translation>
+        <translation>⚠ This key is NOT issued for the sender&apos;s address (%1). Its addresses are: %2. Only import it if you are sure it really is this sender&apos;s key.</translation>
     </message>
     <message>
         <source>✓ This key belongs to the sender&apos;s address (%1).</source>
-        <translation>✓ Dieser Schlüssel gehört zur Absenderadresse (%1).</translation>
+        <translation>✓ This key belongs to the sender&apos;s address (%1).</translation>
     </message>
     <message>
         <source>Import %1 public keys?</source>
-        <translation>%1 öffentliche Schlüssel importieren?</translation>
+        <translation>Import %1 public keys?</translation>
     </message>
     <message>
         <source>⚠ This block contains %1 further key(s), which will be imported as well:</source>
-        <translation>⚠ Dieser Block enthält %1 weitere(n) Schlüssel, die ebenfalls importiert werden:</translation>
+        <translation>⚠ This block contains %1 further key(s), which will be imported as well:</translation>
     </message>
 </context>
 <context>
     <name>KeySelectDialog</name>
     <message>
         <source>Choose recipient keys</source>
-        <translation>Empfänger-Schlüssel wählen</translation>
+        <translation>Choose recipient keys</translation>
     </message>
     <message>
         <source>Use selected</source>
-        <translation>Auswahl verwenden</translation>
+        <translation>Use selected</translation>
     </message>
     <message>
         <source>More than one key — or a revoked/expired key — was found for a recipient. Check the address and pick the right key.</source>
-        <translation>Für einen Empfänger wurde mehr als ein Schlüssel – oder ein widerrufener/abgelaufener – gefunden. Prüfe die Adresse und wähle den richtigen Schlüssel.</translation>
+        <translation>More than one key — or a revoked/expired key — was found for a recipient. Check the address and pick the right key.</translation>
     </message>
     <message>
         <source>Recipient %1</source>
-        <translation>Empfänger %1</translation>
+        <translation>Recipient %1</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation>Adresse</translation>
+        <translation>Address</translation>
     </message>
     <message>
         <source>No key for this address.</source>
-        <translation>Kein Schlüssel für diese Adresse.</translation>
+        <translation>No key for this address.</translation>
     </message>
 </context>
 <context>
     <name>KeyTextPage</name>
     <message>
         <source>Copy to clipboard</source>
-        <translation>In Zwischenablage kopieren</translation>
+        <translation>Copy to clipboard</translation>
     </message>
 </context>
 <context>
     <name>KeysPage</name>
     <message>
         <source>Generate new key…</source>
-        <translation>Neuen Schlüssel erzeugen…</translation>
+        <translation>Generate new key…</translation>
     </message>
     <message>
         <source>Generating a 4096-bit key — this can take a minute…</source>
-        <translation>Erzeuge einen 4096-Bit-Schlüssel — das kann eine Minute dauern…</translation>
+        <translation>Generating a 4096-bit key — this can take a minute…</translation>
     </message>
     <message>
         <source>New key created: %1</source>
-        <translation>Neuer Schlüssel erstellt: %1</translation>
+        <translation>New key created: %1</translation>
     </message>
     <message>
         <source>New key created.</source>
-        <translation>Neuer Schlüssel erstellt.</translation>
+        <translation>New key created.</translation>
     </message>
     <message>
         <source>Key generation failed: %1</source>
-        <translation>Schlüsselerzeugung fehlgeschlagen: %1</translation>
+        <translation>Key generation failed: %1</translation>
     </message>
     <message>
         <source>Creates a new RSA-4096 OpenPGP key (signing + encryption) in your keyring. Highest security; the passphrase is mandatory.</source>
-        <translation>Erstellt einen neuen RSA-4096-OpenPGP-Schlüssel (Signieren + Verschlüsseln) in Ihrem Schlüsselbund. Höchste Sicherheit; das Passwort ist Pflicht.</translation>
+        <translation>Creates a new RSA-4096 OpenPGP key (signing + encryption) in your keyring. Highest security; the passphrase is mandatory.</translation>
     </message>
     <message>
         <source>Imported %1 key(s)</source>
-        <translation>%1 Schlüssel importiert</translation>
+        <translation>Imported %1 key(s)</translation>
     </message>
     <message>
         <source>Import failed: %1</source>
-        <translation>Import fehlgeschlagen: %1</translation>
+        <translation>Import failed: %1</translation>
     </message>
     <message>
         <source>Key deleted</source>
-        <translation>Schlüssel gelöscht</translation>
+        <translation>Key deleted</translation>
     </message>
     <message>
         <source>Delete failed: %1</source>
-        <translation>Löschen fehlgeschlagen: %1</translation>
+        <translation>Delete failed: %1</translation>
     </message>
     <message>
         <source>Import PGP key</source>
-        <translation>PGP-Schlüssel importieren</translation>
+        <translation>Import PGP key</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importieren</translation>
+        <translation>Import</translation>
     </message>
     <message>
         <source>Paste public key block</source>
-        <translation>Öffentlichen Schlüsselblock einfügen</translation>
+        <translation>Paste public key block</translation>
     </message>
     <message>
         <source>Import from file…</source>
-        <translation>Aus Datei importieren…</translation>
+        <translation>Import from file…</translation>
     </message>
     <message>
         <source>Paste key…</source>
-        <translation>Schlüssel einfügen…</translation>
+        <translation>Paste key…</translation>
     </message>
     <message>
         <source>PGP Keys</source>
-        <translation>PGP-Schlüssel</translation>
+        <translation>PGP Keys</translation>
     </message>
     <message>
         <source>Keyring: %1</source>
-        <translation>Schlüsselbund: %1</translation>
+        <translation>Keyring: %1</translation>
     </message>
     <message>
         <source>Show / export public key</source>
-        <translation>Öffentlichen Schlüssel anzeigen / exportieren</translation>
+        <translation>Show / export public key</translation>
     </message>
     <message>
         <source>Delete key (incl. secret)</source>
-        <translation>Schlüssel löschen (inkl. geheimem)</translation>
+        <translation>Delete key (incl. secret)</translation>
     </message>
     <message>
         <source>Delete key</source>
-        <translation>Schlüssel löschen</translation>
+        <translation>Delete key</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation>Lösche</translation>
+        <translation>Deleting</translation>
     </message>
     <message>
         <source>private</source>
-        <translation>privat</translation>
+        <translation>private</translation>
     </message>
     <message>
         <source>revoked</source>
-        <translation>widerrufen</translation>
+        <translation>revoked</translation>
     </message>
     <message>
         <source>expired</source>
-        <translation>abgelaufen</translation>
+        <translation>expired</translation>
     </message>
     <message>
         <source>created </source>
-        <translation>erstellt </translation>
+        <translation>created </translation>
     </message>
     <message>
         <source>expires </source>
-        <translation>läuft ab </translation>
+        <translation>expires </translation>
     </message>
     <message>
         <source>No keys</source>
-        <translation>Keine Schlüssel</translation>
+        <translation>No keys</translation>
     </message>
     <message>
         <source>Generate PGP key</source>
-        <translation>PGP-Schlüssel erzeugen</translation>
+        <translation>Generate PGP key</translation>
     </message>
     <message>
         <source>Really delete this key?</source>
-        <translation>Diesen Schlüssel wirklich löschen?</translation>
+        <translation>Really delete this key?</translation>
     </message>
     <message>
         <source>This includes your PRIVATE key. Without a backup it cannot be recovered.</source>
-        <translation>Das schließt Ihren PRIVATEN Schlüssel ein. Ohne Backup ist er nicht wiederherstellbar.</translation>
+        <translation>This includes your PRIVATE key. Without a backup it cannot be recovered.</translation>
     </message>
     <message>
         <source>The public key will be removed from your keyring.</source>
-        <translation>Der öffentliche Schlüssel wird aus Ihrem Schlüsselbund entfernt.</translation>
+        <translation>The public key will be removed from your keyring.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>Pull down to create your own key, or to import one</source>
-        <translation>Nach unten ziehen, um einen eigenen Schlüssel zu erzeugen oder einen zu importieren</translation>
+        <translation>Pull down to create your own key, or to import one</translation>
     </message>
 </context>
 <context>
     <name>MailAccountsPage</name>
     <message>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>About</translation>
     </message>
     <message>
         <source>New message</source>
-        <translation>Neue Nachricht</translation>
+        <translation>New message</translation>
     </message>
     <message>
         <source>PGP keys</source>
-        <translation>PGP-Schlüssel</translation>
+        <translation>PGP keys</translation>
     </message>
     <message>
         <source>S/MIME certificates</source>
-        <translation>S/MIME-Zertifikate</translation>
+        <translation>S/MIME certificates</translation>
     </message>
     <message>
         <source>Sync all inboxes</source>
-        <translation>Alle Posteingänge synchronisieren</translation>
+        <translation>Sync all inboxes</translation>
     </message>
     <message>
         <source>SF-Mail</source>
@@ -1142,259 +1142,259 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Syncing…</source>
-        <translation>Synchronisiere…</translation>
+        <translation>Syncing…</translation>
     </message>
     <message>
         <source>Combined inbox</source>
-        <translation>Kombinierter Posteingang</translation>
+        <translation>Combined inbox</translation>
     </message>
     <message>
         <source>Show folders</source>
-        <translation>Ordner anzeigen</translation>
+        <translation>Show folders</translation>
     </message>
     <message>
         <source>Remove as default sender</source>
-        <translation>Als Standardabsender entfernen</translation>
+        <translation>Remove as default sender</translation>
     </message>
     <message>
         <source>Set as default sender</source>
-        <translation>Als Standardabsender festlegen</translation>
+        <translation>Set as default sender</translation>
     </message>
     <message>
         <source>unread</source>
-        <translation>ungelesen</translation>
+        <translation>unread</translation>
     </message>
     <message>
         <source>No e-mail accounts</source>
-        <translation>Keine E-Mail-Konten</translation>
+        <translation>No e-mail accounts</translation>
     </message>
     <message>
         <source>Add an account in the system settings first</source>
-        <translation>Erst ein Konto in den Systemeinstellungen anlegen</translation>
+        <translation>Add an account in the system settings first</translation>
     </message>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Inbox</translation>
     </message>
     <message numerus="yes">
         <source>Trying again in %n minute(s) (attempt %1 of %2).</source>
         <translation>
-            <numerusform>Neuer Versuch in %n Minute (Versuch %1 von %2).</numerusform>
-            <numerusform>Neuer Versuch in %n Minuten (Versuch %1 von %2).</numerusform>
+            <numerusform>Trying again in %n minute (attempt %1 of %2).</numerusform>
+            <numerusform>Trying again in %n minutes (attempt %1 of %2).</numerusform>
         </translation>
     </message>
     <message>
         <source>Sending stopped: %1</source>
-        <translation>Senden abgebrochen: %1</translation>
+        <translation>Sending stopped: %1</translation>
     </message>
     <message numerus="yes">
         <source>%n message(s) not sent yet</source>
         <translation>
-            <numerusform>%n Nachricht noch nicht gesendet</numerusform>
-            <numerusform>%n Nachrichten noch nicht gesendet</numerusform>
+            <numerusform>%n message not sent yet</numerusform>
+            <numerusform>%n messages not sent yet</numerusform>
         </translation>
     </message>
     <message>
         <source>Tap to try sending again.</source>
-        <translation>Antippen, um erneut zu senden.</translation>
+        <translation>Tap to try sending again.</translation>
     </message>
 </context>
 <context>
     <name>MessageListPage</name>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Inbox</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Templates</translation>
     </message>
     <message>
         <source>Syncing…</source>
-        <translation>Synchronisiere…</translation>
+        <translation>Syncing…</translation>
     </message>
     <message>
         <source>New message</source>
-        <translation>Neue Nachricht</translation>
+        <translation>New message</translation>
     </message>
     <message>
         <source>Folders</source>
-        <translation>Ordner</translation>
+        <translation>Folders</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation>Synchronisieren</translation>
+        <translation>Sync</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation>Lösche</translation>
+        <translation>Deleting</translation>
     </message>
     <message>
         <source>Mark as unread</source>
-        <translation>Als ungelesen markieren</translation>
+        <translation>Mark as unread</translation>
     </message>
     <message>
         <source>Mark as read</source>
-        <translation>Als gelesen markieren</translation>
+        <translation>Mark as read</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Bearbeiten</translation>
+        <translation>Edit</translation>
     </message>
     <message>
         <source>Mark all as read</source>
-        <translation>Alle als gelesen markieren</translation>
+        <translation>Mark all as read</translation>
     </message>
     <message>
         <source>Empty Trash</source>
-        <translation>Papierkorb leeren</translation>
+        <translation>Empty Trash</translation>
     </message>
     <message>
         <source>Empty Trash?</source>
-        <translation>Papierkorb leeren?</translation>
+        <translation>Empty Trash?</translation>
     </message>
     <message>
         <source>All messages in Trash will be permanently deleted.</source>
-        <translation>Alle Nachrichten im Papierkorb werden endgültig gelöscht.</translation>
+        <translation>All messages in Trash will be permanently deleted.</translation>
     </message>
     <message>
         <source>Empty</source>
-        <translation>Leeren</translation>
+        <translation>Empty</translation>
     </message>
     <message>
         <source>Select messages</source>
-        <translation>Nachrichten auswählen</translation>
+        <translation>Select messages</translation>
     </message>
     <message>
         <source>Selected: %1</source>
-        <translation>Ausgewählt: %1</translation>
+        <translation>Selected: %1</translation>
     </message>
     <message>
         <source>Tap messages to select</source>
-        <translation>Nachrichten zum Auswählen antippen</translation>
+        <translation>Tap messages to select</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Cancel</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation>Alle auswählen</translation>
+        <translation>Select all</translation>
     </message>
     <message>
         <source>Deselect all</source>
-        <translation>Auswahl aufheben</translation>
+        <translation>Deselect all</translation>
     </message>
     <message>
         <source>Mark selected as read</source>
-        <translation>Ausgewählte als gelesen markieren</translation>
+        <translation>Mark selected as read</translation>
     </message>
     <message>
         <source>Mark selected as unread</source>
-        <translation>Ausgewählte als ungelesen markieren</translation>
+        <translation>Mark selected as unread</translation>
     </message>
     <message>
         <source>Delete selected</source>
-        <translation>Ausgewählte löschen</translation>
+        <translation>Delete selected</translation>
     </message>
     <message>
         <source>Deleting %1</source>
-        <translation>Lösche %1</translation>
+        <translation>Deleting %1</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(no subject)</translation>
     </message>
     <message>
         <source>Loading inbox…</source>
-        <translation>Lade Posteingang…</translation>
+        <translation>Loading inbox…</translation>
     </message>
     <message>
         <source>No messages</source>
-        <translation>Keine Nachrichten</translation>
+        <translation>No messages</translation>
     </message>
     <message>
         <source>Pull down to sync</source>
-        <translation>Herunterziehen zum Synchronisieren</translation>
+        <translation>Pull down to sync</translation>
     </message>
     <message>
         <source>(header only)</source>
-        <translation>(nur Header)</translation>
+        <translation>(header only)</translation>
     </message>
     <message>
         <source>Move to folder…</source>
-        <translation>In Ordner verschieben…</translation>
+        <translation>Move to folder…</translation>
     </message>
     <message>
         <source>Move selected…</source>
-        <translation>Ausgewählte verschieben…</translation>
+        <translation>Move selected…</translation>
     </message>
     <message>
         <source>Failed — trying again in a minute (%1/%2)</source>
-        <translation>Fehlgeschlagen — neuer Versuch in einer Minute (%1/%2)</translation>
+        <translation>Failed — trying again in a minute (%1/%2)</translation>
     </message>
     <message>
         <source>Failed — trying again in %1 minutes (%2/%3)</source>
-        <translation>Fehlgeschlagen — neuer Versuch in %1 Minuten (%2/%3)</translation>
+        <translation>Failed — trying again in %1 minutes (%2/%3)</translation>
     </message>
     <message>
         <source>Not sent. The server refused it — use Send again after fixing the cause.</source>
-        <translation>Nicht gesendet. Der Server hat sie abgelehnt — nach Behebung der Ursache „Erneut senden“ benutzen.</translation>
+        <translation>Not sent. The server refused it — use Send again after fixing the cause.</translation>
     </message>
     <message>
         <source>Send again</source>
-        <translation>Erneut senden</translation>
+        <translation>Send again</translation>
     </message>
     <message>
         <source>Sending again…</source>
-        <translation>Sende erneut…</translation>
+        <translation>Sending again…</translation>
     </message>
 </context>
 <context>
     <name>MessagePage</name>
     <message>
         <source>bcc</source>
-        <translation>Bcc</translation>
+        <translation>bcc</translation>
     </message>
     <message>
         <source>hidden from the other recipients</source>
-        <translation>für die anderen Empfänger unsichtbar</translation>
+        <translation>hidden from the other recipients</translation>
     </message>
     <message>
         <source>Decrypted</source>
-        <translation>Entschlüsselt</translation>
+        <translation>Decrypted</translation>
     </message>
     <message>
         <source>(no text — see attachments below)</source>
-        <translation>(kein Text – siehe Anhänge unten)</translation>
+        <translation>(no text — see attachments below)</translation>
     </message>
     <message>
         <source>Decrypted — %1 attachment(s)</source>
-        <translation>Entschlüsselt – %1 Anhang/Anhänge</translation>
+        <translation>Decrypted — %1 attachment(s)</translation>
     </message>
     <message>
         <source>Imported %1 key(s) into your keyring.</source>
-        <translation>%1 Schlüssel in den Schlüsselbund importiert.</translation>
+        <translation>Imported %1 key(s) into your keyring.</translation>
     </message>
     <message>
         <source>Key import failed: %1</source>
-        <translation>Schlüssel-Import fehlgeschlagen: %1</translation>
+        <translation>Key import failed: %1</translation>
     </message>
     <message>
         <source>Your certificate isn&apos;t installed yet — open “S/MIME certificates” in the menu to import your .p12</source>
-        <translation>Dein Zertifikat ist noch nicht installiert – öffne „S/MIME-Zertifikate“ im Menü, um deine .p12 zu importieren</translation>
+        <translation>Your certificate isn&apos;t installed yet — open “S/MIME certificates” in the menu to import your .p12</translation>
     </message>
     <message>
         <source>Decrypt failed: %1</source>
-        <translation>Entschlüsseln fehlgeschlagen: %1</translation>
+        <translation>Decrypt failed: %1</translation>
     </message>
     <message>
         <source>Sender certificate imported</source>
-        <translation>Absender-Zertifikat importiert</translation>
+        <translation>Sender certificate imported</translation>
     </message>
     <message>
         <source>Import: %1</source>
@@ -1402,91 +1402,91 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Encrypted part not found</source>
-        <translation>Verschlüsselter Teil nicht gefunden</translation>
+        <translation>Encrypted part not found</translation>
     </message>
     <message>
         <source>Downloading encrypted part…</source>
-        <translation>Lade verschlüsselten Teil…</translation>
+        <translation>Downloading encrypted part…</translation>
     </message>
     <message>
         <source>Downloading key…</source>
-        <translation>Lade Schlüssel…</translation>
+        <translation>Downloading key…</translation>
     </message>
     <message>
         <source>No PGP key found in this message — the sender did not include their public key. Get it from a keyserver or import the .asc file via the Keys page.</source>
-        <translation>Kein PGP-Schlüssel in dieser Nachricht – der Absender hat seinen öffentlichen Schlüssel nicht beigelegt. Hole ihn von einem Keyserver oder importiere die .asc-Datei über die Schlüssel-Seite.</translation>
+        <translation>No PGP key found in this message — the sender did not include their public key. Get it from a keyserver or import the .asc file via the Keys page.</translation>
     </message>
     <message>
         <source>Signature: decrypt first</source>
-        <translation>Signatur: erst entschlüsseln</translation>
+        <translation>Signature: decrypt first</translation>
     </message>
     <message>
         <source>Valid signature</source>
-        <translation>Gültige Signatur</translation>
+        <translation>Valid signature</translation>
     </message>
     <message>
         <source>INVALID signature</source>
-        <translation>UNGÜLTIGE Signatur</translation>
+        <translation>INVALID signature</translation>
     </message>
     <message>
         <source>Signature from expired key</source>
-        <translation>Signatur von abgelaufenem Schlüssel</translation>
+        <translation>Signature from expired key</translation>
     </message>
     <message>
         <source>Public key missing — cannot verify</source>
-        <translation>Öffentlicher Schlüssel fehlt – nicht prüfbar</translation>
+        <translation>Public key missing — cannot verify</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>Deleting message</source>
-        <translation>Lösche Nachricht</translation>
+        <translation>Deleting message</translation>
     </message>
     <message>
         <source>Show header</source>
-        <translation>Header anzeigen</translation>
+        <translation>Show header</translation>
     </message>
     <message>
         <source>Encryption info</source>
-        <translation>Verschlüsselungs-Info</translation>
+        <translation>Encryption info</translation>
     </message>
     <message>
         <source>S/MIME certificates…</source>
-        <translation>S/MIME-Zertifikate…</translation>
+        <translation>S/MIME certificates…</translation>
     </message>
     <message>
         <source>Download full message</source>
-        <translation>Ganze Nachricht laden</translation>
+        <translation>Download full message</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation>Antworten</translation>
+        <translation>Reply</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(no subject)</translation>
     </message>
     <message>
         <source>to</source>
-        <translation>an</translation>
+        <translation>to</translation>
     </message>
     <message>
         <source>Encrypted message</source>
-        <translation>Verschlüsselte Nachricht</translation>
+        <translation>Encrypted message</translation>
     </message>
     <message>
         <source>Decrypting…</source>
-        <translation>Entschlüssele…</translation>
+        <translation>Decrypting…</translation>
     </message>
     <message>
         <source>Decryption failed</source>
-        <translation>Entschlüsseln fehlgeschlagen</translation>
+        <translation>Decryption failed</translation>
     </message>
     <message>
         <source>Encrypted</source>
-        <translation>Verschlüsselt</translation>
+        <translation>Encrypted</translation>
     </message>
     <message>
         <source>Format: PGP/MIME</source>
@@ -1494,31 +1494,31 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Decrypt</source>
-        <translation>Entschlüsseln</translation>
+        <translation>Decrypt</translation>
     </message>
     <message>
         <source>To decrypt this message</source>
-        <translation>Zum Entschlüsseln dieser Nachricht</translation>
+        <translation>To decrypt this message</translation>
     </message>
     <message>
         <source>Inline PGP message</source>
-        <translation>Inline-PGP-Nachricht</translation>
+        <translation>Inline PGP message</translation>
     </message>
     <message>
         <source>Inline PGP signature</source>
-        <translation>Inline-PGP-Signatur</translation>
+        <translation>Inline PGP signature</translation>
     </message>
     <message>
         <source>Format: Inline PGP</source>
-        <translation>Format: Inline-PGP</translation>
+        <translation>Format: Inline PGP</translation>
     </message>
     <message>
         <source>Verify</source>
-        <translation>Prüfen</translation>
+        <translation>Verify</translation>
     </message>
     <message>
         <source>Encrypted S/MIME message</source>
-        <translation>Verschlüsselte S/MIME-Nachricht</translation>
+        <translation>Encrypted S/MIME message</translation>
     </message>
     <message>
         <source>Format: S/MIME (PKI)</source>
@@ -1526,167 +1526,167 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>To decrypt this S/MIME message</source>
-        <translation>Zum Entschlüsseln dieser S/MIME-Nachricht</translation>
+        <translation>To decrypt this S/MIME message</translation>
     </message>
     <message>
         <source>Import sender&apos;s certificate</source>
-        <translation>Absender-Zertifikat importieren</translation>
+        <translation>Import sender&apos;s certificate</translation>
     </message>
     <message>
         <source>(empty — pull down to download)</source>
-        <translation>(leer – herunterziehen zum Laden)</translation>
+        <translation>(empty — pull down to download)</translation>
     </message>
     <message>
         <source>Decrypted attachments (%1)</source>
-        <translation>Entschlüsselte Anhänge (%1)</translation>
+        <translation>Decrypted attachments (%1)</translation>
     </message>
     <message>
         <source>Attachments (%1)</source>
-        <translation>Anhänge (%1)</translation>
+        <translation>Attachments (%1)</translation>
     </message>
     <message>
         <source>Import sender&apos;s key</source>
-        <translation>Absender-Schlüssel importieren</translation>
+        <translation>Import sender&apos;s key</translation>
     </message>
     <message>
         <source>Unusually large attachment detected. Expecting a larger e-mail? You can load it once without the size limit.</source>
-        <translation>Ungewöhnlich großer Anhang erkannt. Erwartest du eine größere E-Mail? Du kannst sie einmalig ohne Größenlimit laden.</translation>
+        <translation>Unusually large attachment detected. Expecting a larger e-mail? You can load it once without the size limit.</translation>
     </message>
     <message>
         <source>Load without limit (15 min)</source>
-        <translation>Ohne Limit laden (15 Min)</translation>
+        <translation>Load without limit (15 min)</translation>
     </message>
     <message>
         <source>Saved to %1</source>
-        <translation>Gespeichert nach %1</translation>
+        <translation>Saved to %1</translation>
     </message>
     <message>
         <source>Could not save the attachment</source>
-        <translation>Anhang konnte nicht gespeichert werden</translation>
+        <translation>Could not save the attachment</translation>
     </message>
     <message>
         <source>Save to folder</source>
-        <translation>In Ordner speichern</translation>
+        <translation>Save to folder</translation>
     </message>
     <message>
         <source>Open with…</source>
-        <translation>Öffnen mit…</translation>
+        <translation>Open with…</translation>
     </message>
     <message>
         <source>Save as…</source>
-        <translation>Speichern unter…</translation>
+        <translation>Save as…</translation>
     </message>
     <message>
         <source>Downloading the full message…</source>
-        <translation>Lade die ganze Nachricht…</translation>
+        <translation>Downloading the full message…</translation>
     </message>
     <message>
         <source>The message is already fully downloaded.</source>
-        <translation>Die Nachricht ist bereits vollständig geladen.</translation>
+        <translation>The message is already fully downloaded.</translation>
     </message>
     <message>
         <source>Message downloaded.</source>
-        <translation>Nachricht geladen.</translation>
+        <translation>Message downloaded.</translation>
     </message>
     <message>
         <source>Pull down “Download full message” to load the attachment(s).</source>
-        <translation>Zum Laden der Anhänge oben „Ganze Nachricht laden“ ziehen.</translation>
+        <translation>Pull down “Download full message” to load the attachment(s).</translation>
     </message>
     <message>
         <source>Downloading attachment…</source>
-        <translation>Anhang wird heruntergeladen…</translation>
+        <translation>Downloading attachment…</translation>
     </message>
     <message>
         <source>Could not load the attachment</source>
-        <translation>Anhang konnte nicht geladen werden</translation>
+        <translation>Could not load the attachment</translation>
     </message>
     <message>
         <source>Could not open the attachment</source>
-        <translation>Anhang konnte nicht geöffnet werden</translation>
+        <translation>Could not open the attachment</translation>
     </message>
     <message>
         <source>Show plain text</source>
-        <translation>Klartext anzeigen</translation>
+        <translation>Show plain text</translation>
     </message>
     <message>
         <source>Show simple HTML (no external content loaded)</source>
-        <translation>Einfaches HTML anzeigen (keine externen Inhalte)</translation>
+        <translation>Show simple HTML (no external content loaded)</translation>
     </message>
     <message>
         <source>Move to folder…</source>
-        <translation>In Ordner verschieben…</translation>
+        <translation>Move to folder…</translation>
     </message>
     <message>
         <source>No certificate to import: %1</source>
-        <translation>Kein Zertifikat zum Importieren: %1</translation>
+        <translation>No certificate to import: %1</translation>
     </message>
     <message>
         <source>These certificates came with this message. Nothing is stored until you confirm.</source>
-        <translation>Diese Zertifikate kamen mit dieser Nachricht. Es wird nichts gespeichert, bis Sie bestätigen.</translation>
+        <translation>These certificates came with this message. Nothing is stored until you confirm.</translation>
     </message>
     <message>
         <source>S/MIME message with a signature</source>
-        <translation>S/MIME-Nachricht mit Signatur</translation>
+        <translation>S/MIME message with a signature</translation>
     </message>
     <message>
         <source>✓ Valid signature from %1</source>
-        <translation>✓ Gültige Signatur von %1</translation>
+        <translation>✓ Valid signature from %1</translation>
     </message>
     <message>
         <source>Signature is mathematically valid (%1), but you have not trusted the authority that issued the certificate.</source>
-        <translation>Die Signatur ist rechnerisch gültig (%1), aber der ausstellenden Stelle haben Sie nicht vertraut.</translation>
+        <translation>Signature is mathematically valid (%1), but you have not trusted the authority that issued the certificate.</translation>
     </message>
     <message>
         <source>⚠ INVALID signature — this message was altered after signing, or the signature is forged.</source>
-        <translation>⚠ UNGÜLTIGE Signatur — diese Nachricht wurde nach dem Signieren verändert, oder die Signatur ist gefälscht.</translation>
+        <translation>⚠ INVALID signature — this message was altered after signing, or the signature is forged.</translation>
     </message>
     <message>
         <source>Signed, but the signer&apos;s certificate is missing — the signature cannot be checked.</source>
-        <translation>Signiert, aber das Zertifikat des Signierenden fehlt — die Signatur lässt sich nicht prüfen.</translation>
+        <translation>Signed, but the signer&apos;s certificate is missing — the signature cannot be checked.</translation>
     </message>
     <message>
         <source>The signature could not be checked.</source>
-        <translation>Die Signatur konnte nicht geprüft werden.</translation>
+        <translation>The signature could not be checked.</translation>
     </message>
     <message>
         <source>Signature not checked yet.</source>
-        <translation>Signatur noch nicht geprüft.</translation>
+        <translation>Signature not checked yet.</translation>
     </message>
     <message>
         <source>✓ Good signature from %1</source>
-        <translation>✓ Gültige Signatur von %1</translation>
+        <translation>✓ Good signature from %1</translation>
     </message>
     <message>
         <source>⚠ Good signature, but from %1 — NOT the sender&apos;s address (%2)</source>
-        <translation>⚠ Gültige Signatur, aber von %1 — NICHT von der Absenderadresse (%2)</translation>
+        <translation>⚠ Good signature, but from %1 — NOT the sender&apos;s address (%2)</translation>
     </message>
     <message>
         <source>⚠ BAD signature — this message was altered or forged.</source>
-        <translation>⚠ UNGÜLTIGE Signatur — diese Nachricht wurde verändert oder gefälscht.</translation>
+        <translation>⚠ BAD signature — this message was altered or forged.</translation>
     </message>
     <message>
         <source>Signed, but the signer&apos;s key is missing — cannot verify.</source>
-        <translation>Signiert, aber der Schlüssel des Signierenden fehlt — nicht prüfbar.</translation>
+        <translation>Signed, but the signer&apos;s key is missing — cannot verify.</translation>
     </message>
     <message>
         <source>⚠ Signed with a REVOKED key (%1) — the owner withdrew it.</source>
-        <translation>⚠ Mit einem WIDERRUFENEN Schlüssel signiert (%1) — der Inhaber hat ihn zurückgezogen.</translation>
+        <translation>⚠ Signed with a REVOKED key (%1) — the owner withdrew it.</translation>
     </message>
     <message>
         <source>Signed with an EXPIRED key (%1).</source>
-        <translation>Mit einem ABGELAUFENEN Schlüssel signiert (%1).</translation>
+        <translation>Signed with an EXPIRED key (%1).</translation>
     </message>
     <message>
         <source>The signature has expired (%1).</source>
-        <translation>Die Signatur ist abgelaufen (%1).</translation>
+        <translation>The signature has expired (%1).</translation>
     </message>
     <message>
         <source>The message could not be downloaded — no connection?</source>
-        <translation>Die Nachricht konnte nicht geladen werden — keine Verbindung?</translation>
+        <translation>The message could not be downloaded — no connection?</translation>
     </message>
     <message>
         <source>Could not download the message — no connection?</source>
-        <translation>Die Nachricht konnte nicht geladen werden — keine Verbindung?</translation>
+        <translation>Could not download the message — no connection?</translation>
     </message>
 </context>
 <context>
@@ -1701,50 +1701,50 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Secret key passphrase</source>
-        <translation>Passphrase des geheimen Schlüssels</translation>
+        <translation>Secret key passphrase</translation>
     </message>
     <message>
         <source>After import, the key lives safely in the app&apos;s encrypted keyring. The file you imported stays where you picked it (e.g. Downloads), outside the app sandbox, where other apps could read it — so it is no longer needed on the device. If you have a backup elsewhere, delete it here.</source>
-        <translation>Nach dem Import liegt der Schlüssel sicher im verschlüsselten Schlüsselbund der App. Die importierte Datei bleibt dort, wo du sie ausgewählt hast (z. B. Downloads) — außerhalb der App-Sandbox, wo andere Apps sie lesen könnten — und wird auf dem Gerät nicht mehr gebraucht. Wenn du anderswo ein Backup hast, lösche sie hier.</translation>
+        <translation>After import, the key lives safely in the app&apos;s encrypted keyring. The file you imported stays where you picked it (e.g. Downloads), outside the app sandbox, where other apps could read it — so it is no longer needed on the device. If you have a backup elsewhere, delete it here.</translation>
     </message>
     <message>
         <source>Delete the import file after import</source>
-        <translation>Importdatei nach dem Import löschen</translation>
+        <translation>Delete the import file after import</translation>
     </message>
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
-        <translation>Nur wenn du ein anderes Backup hast. Dies kann nicht rückgängig gemacht werden.</translation>
+        <translation>Only if you have another backup. This cannot be undone.</translation>
     </message>
 </context>
 <context>
     <name>SmimeCertsPage</name>
     <message>
         <source>Root CA</source>
-        <translation>Root-CA</translation>
+        <translation>Root CA</translation>
     </message>
     <message>
         <source>Intermediate CA</source>
-        <translation>Zwischen-CA</translation>
+        <translation>Intermediate CA</translation>
     </message>
     <message>
         <source>Your encryption certificate</source>
-        <translation>Dein Verschlüsselungs-Zertifikat</translation>
+        <translation>Your encryption certificate</translation>
     </message>
     <message>
         <source>Your signing certificate</source>
-        <translation>Dein Signatur-Zertifikat</translation>
+        <translation>Your signing certificate</translation>
     </message>
     <message>
         <source>Certificate</source>
-        <translation>Zertifikat</translation>
+        <translation>Certificate</translation>
     </message>
     <message>
         <source>Import certificate from file…</source>
-        <translation>Zertifikat aus Datei importieren…</translation>
+        <translation>Import certificate from file…</translation>
     </message>
     <message>
         <source>S/MIME certificates</source>
-        <translation>S/MIME-Zertifikate</translation>
+        <translation>S/MIME certificates</translation>
     </message>
     <message>
         <source>gpgsm</source>
@@ -1752,273 +1752,273 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>ready</source>
-        <translation>bereit</translation>
+        <translation>ready</translation>
     </message>
     <message>
         <source>NOT FOUND</source>
-        <translation>NICHT GEFUNDEN</translation>
+        <translation>NOT FOUND</translation>
     </message>
     <message>
         <source>store: </source>
-        <translation>Speicher: </translation>
+        <translation>store: </translation>
     </message>
     <message>
         <source>Certificates (%1)</source>
-        <translation>Zertifikate (%1)</translation>
+        <translation>Certificates (%1)</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(no subject)</translation>
     </message>
     <message>
         <source>Show / export certificate</source>
-        <translation>Zertifikat anzeigen / exportieren</translation>
+        <translation>Show / export certificate</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation>Protokoll</translation>
+        <translation>Log</translation>
     </message>
     <message>
         <source>Select certificate (.p12 / .pfx / .pem / .crt / .p7b)</source>
-        <translation>Zertifikat wählen (.p12 / .pfx / .pem / .crt / .p7b)</translation>
+        <translation>Select certificate (.p12 / .pfx / .pem / .crt / .p7b)</translation>
     </message>
     <message>
         <source>Passphrase of the .p12 file</source>
-        <translation>Passphrase der .p12-Datei</translation>
+        <translation>Passphrase of the .p12 file</translation>
     </message>
     <message>
         <source>Delete certificate + private key</source>
-        <translation>Zertifikat + privaten Schlüssel löschen</translation>
+        <translation>Delete certificate + private key</translation>
     </message>
     <message>
         <source>Delete certificate</source>
-        <translation>Zertifikat löschen</translation>
+        <translation>Delete certificate</translation>
     </message>
     <message>
         <source>Deleting certificate</source>
-        <translation>Lösche Zertifikat</translation>
+        <translation>Deleting certificate</translation>
     </message>
     <message>
         <source>Generate new certificate…</source>
-        <translation>Neues Zertifikat erzeugen…</translation>
+        <translation>Generate new certificate…</translation>
     </message>
     <message>
         <source>Generate S/MIME certificate</source>
-        <translation>S/MIME-Zertifikat erzeugen</translation>
+        <translation>Generate S/MIME certificate</translation>
     </message>
     <message>
         <source>Creates a new self-signed RSA-4096 S/MIME certificate (signing + encryption) in your store. The recipient must trust it once, like a first key exchange. Highest security; the passphrase is mandatory.</source>
-        <translation>Erstellt ein neues selbstsigniertes RSA-4096-S/MIME-Zertifikat (Signieren + Verschlüsseln) in Ihrem Speicher. Die Gegenstelle muss ihm einmalig vertrauen, wie beim ersten Schlüsselaustausch. Höchste Sicherheit; das Passwort ist Pflicht.</translation>
+        <translation>Creates a new self-signed RSA-4096 S/MIME certificate (signing + encryption) in your store. The recipient must trust it once, like a first key exchange. Highest security; the passphrase is mandatory.</translation>
     </message>
     <message>
         <source>Generating a 4096-bit certificate — this can take a minute…</source>
-        <translation>Erzeuge ein 4096-Bit-Zertifikat — das kann eine Minute dauern…</translation>
+        <translation>Generating a 4096-bit certificate — this can take a minute…</translation>
     </message>
     <message>
         <source>Certificate backed up to %1</source>
-        <translation>Zertifikat gesichert nach %1</translation>
+        <translation>Certificate backed up to %1</translation>
     </message>
     <message>
         <source>Backup failed — wrong passphrase?</source>
-        <translation>Backup fehlgeschlagen – falsche Passphrase?</translation>
+        <translation>Backup failed — wrong passphrase?</translation>
     </message>
     <message>
         <source>Back up as .p12 to Documents…</source>
-        <translation>Als .p12 in Dokumente sichern…</translation>
+        <translation>Back up as .p12 to Documents…</translation>
     </message>
     <message>
         <source>Passphrase of this certificate</source>
-        <translation>Passphrase dieses Zertifikats</translation>
+        <translation>Passphrase of this certificate</translation>
     </message>
     <message>
         <source>Really delete this certificate?</source>
-        <translation>Dieses Zertifikat wirklich löschen?</translation>
+        <translation>Really delete this certificate?</translation>
     </message>
     <message>
         <source>This includes the PRIVATE key. Without a .p12 backup it cannot be recovered.</source>
-        <translation>Das schließt den PRIVATEN Schlüssel ein. Ohne .p12-Backup ist er nicht wiederherstellbar.</translation>
+        <translation>This includes the PRIVATE key. Without a .p12 backup it cannot be recovered.</translation>
     </message>
     <message>
         <source>The certificate will be removed from your store.</source>
-        <translation>Das Zertifikat wird aus Ihrem Speicher entfernt.</translation>
+        <translation>The certificate will be removed from your store.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>Import file deleted from the device.</source>
-        <translation>Importdatei vom Gerät gelöscht.</translation>
+        <translation>Import file deleted from the device.</translation>
     </message>
     <message>
         <source>Could not delete the import file.</source>
-        <translation>Importdatei konnte nicht gelöscht werden.</translation>
+        <translation>Could not delete the import file.</translation>
     </message>
     <message>
         <source>It is passphrase-protected but lies outside the app sandbox — copy it off-device and then delete it from the phone.</source>
-        <translation>Sie ist passphrase-geschützt, liegt aber außerhalb der App-Sandbox — kopiere sie vom Gerät weg und lösche sie dann vom Telefon.</translation>
+        <translation>It is passphrase-protected but lies outside the app sandbox — copy it off-device and then delete it from the phone.</translation>
     </message>
     <message>
         <source>Do not prefer for encryption any more</source>
-        <translation>Nicht mehr zum Verschlüsseln bevorzugen</translation>
+        <translation>Do not prefer for encryption any more</translation>
     </message>
     <message>
         <source>Prefer for encryption</source>
-        <translation>Zum Verschlüsseln bevorzugen</translation>
+        <translation>Prefer for encryption</translation>
     </message>
     <message>
         <source>Read from the selected file. Nothing is stored until you confirm.</source>
-        <translation>Aus der gewählten Datei gelesen. Es wird nichts gespeichert, bis Sie bestätigen.</translation>
+        <translation>Read from the selected file. Nothing is stored until you confirm.</translation>
     </message>
     <message>
         <source>No certificate found in that file: %1</source>
-        <translation>Kein Zertifikat in dieser Datei gefunden: %1</translation>
+        <translation>No certificate found in that file: %1</translation>
     </message>
     <message>
         <source>Delete all certificates…</source>
-        <translation>Alle Zertifikate löschen…</translation>
+        <translation>Delete all certificates…</translation>
     </message>
     <message>
         <source>Delete all certificates?</source>
-        <translation>Alle Zertifikate löschen?</translation>
+        <translation>Delete all certificates?</translation>
     </message>
     <message>
         <source>This removes every S/MIME certificate and every private key from this app&apos;s store. Mail encrypted to those keys can no longer be read. Certificates you backed up as .p12 can be imported again.</source>
-        <translation>Das entfernt jedes S/MIME-Zertifikat und jeden privaten Schlüssel aus dem Speicher dieser App. Mit diesen Schlüsseln verschlüsselte Mail ist danach nicht mehr lesbar. Als .p12 gesicherte Zertifikate können Sie wieder importieren.</translation>
+        <translation>This removes every S/MIME certificate and every private key from this app&apos;s store. Mail encrypted to those keys can no longer be read. Certificates you backed up as .p12 can be imported again.</translation>
     </message>
     <message>
         <source>Delete everything</source>
-        <translation>Alles löschen</translation>
+        <translation>Delete everything</translation>
     </message>
 </context>
 <context>
     <name>SmimeImportDialog</name>
     <message>
         <source>Import anyway</source>
-        <translation>Trotzdem importieren</translation>
+        <translation>Import anyway</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importieren</translation>
+        <translation>Import</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Cancel</translation>
     </message>
     <message>
         <source>Import %1 certificates?</source>
-        <translation>%1 Zertifikate importieren?</translation>
+        <translation>Import %1 certificates?</translation>
     </message>
     <message>
         <source>Import certificate?</source>
-        <translation>Zertifikat importieren?</translation>
+        <translation>Import certificate?</translation>
     </message>
     <message>
         <source>⚠ None of these certificates is issued for the sender&apos;s address (%1). Only import them if you are sure they really belong to this sender.</source>
-        <translation>⚠ Keines dieser Zertifikate ist für die Absenderadresse (%1) ausgestellt. Importieren Sie sie nur, wenn Sie sicher sind, dass sie wirklich zu diesem Absender gehören.</translation>
+        <translation>⚠ None of these certificates is issued for the sender&apos;s address (%1). Only import them if you are sure they really belong to this sender.</translation>
     </message>
     <message>
         <source>✓ Issued for the sender&apos;s address (%1).</source>
-        <translation>✓ Für die Absenderadresse (%1) ausgestellt.</translation>
+        <translation>✓ Issued for the sender&apos;s address (%1).</translation>
     </message>
     <message>
         <source>Root certificate authority</source>
-        <translation>Wurzelzertifizierungsstelle</translation>
+        <translation>Root certificate authority</translation>
     </message>
     <message>
         <source>Certificate authority</source>
-        <translation>Zertifizierungsstelle</translation>
+        <translation>Certificate authority</translation>
     </message>
     <message>
         <source>Certificate</source>
-        <translation>Zertifikat</translation>
+        <translation>Certificate</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Inhaber)</translation>
+        <translation>(no subject)</translation>
     </message>
     <message>
         <source>issued by: </source>
-        <translation>ausgestellt von: </translation>
+        <translation>issued by: </translation>
     </message>
     <message>
         <source>EXPIRED on %1</source>
-        <translation>ABGELAUFEN am %1</translation>
+        <translation>EXPIRED on %1</translation>
     </message>
     <message>
         <source>valid until %1</source>
-        <translation>gültig bis %1</translation>
+        <translation>valid until %1</translation>
     </message>
     <message>
         <source>Already in your store — importing changes nothing.</source>
-        <translation>Bereits in Ihrem Speicher — ein Import ändert nichts.</translation>
+        <translation>Already in your store — importing changes nothing.</translation>
     </message>
     <message>
         <source>⚠ You already have a DIFFERENT certificate for this address: %1. Importing adds a second one; the newest usable certificate is used when encrypting.</source>
-        <translation>⚠ Für diese Adresse haben Sie bereits ein ANDERES Zertifikat: %1. Ein Import legt ein zweites daneben; beim Verschlüsseln wird das neueste brauchbare verwendet.</translation>
+        <translation>⚠ You already have a DIFFERENT certificate for this address: %1. Importing adds a second one; the newest usable certificate is used when encrypting.</translation>
     </message>
     <message>
         <source>Trust</source>
-        <translation>Vertrauen</translation>
+        <translation>Trust</translation>
     </message>
     <message>
         <source>Trust this root certificate</source>
-        <translation>Diesem Wurzelzertifikat vertrauen</translation>
+        <translation>Trust this root certificate</translation>
     </message>
     <message>
         <source>Signatures from every certificate this authority issues will count as valid, now and in future. Turn this on only for an authority you know — for example your own certificate, or your organisation&apos;s.</source>
-        <translation>Signaturen aller Zertifikate, die diese Stelle ausstellt, gelten dann als gültig, jetzt und künftig. Schalten Sie das nur für eine Stelle ein, die Sie kennen — etwa Ihr eigenes Zertifikat oder das Ihrer Organisation.</translation>
+        <translation>Signatures from every certificate this authority issues will count as valid, now and in future. Turn this on only for an authority you know — for example your own certificate, or your organisation&apos;s.</translation>
     </message>
     <message>
         <source>This root is already one of your trust anchors.</source>
-        <translation>Dieses Wurzelzertifikat ist bereits einer Ihrer Vertrauensanker.</translation>
+        <translation>This root is already one of your trust anchors.</translation>
     </message>
     <message>
         <source>Fetch missing issuer certificates</source>
-        <translation>Fehlende Ausstellerzertifikate holen</translation>
+        <translation>Fetch missing issuer certificates</translation>
     </message>
     <message>
         <source>Downloads the issuing authorities named inside the certificate, over an encrypted connection. This tells that server that you received this mail. Nothing downloaded becomes trusted.</source>
-        <translation>Lädt die im Zertifikat genannten ausstellenden Stellen über eine verschlüsselte Verbindung. Dabei erfährt dieser Server, dass Sie diese Mail erhalten haben. Nichts Geladenes wird dadurch vertrauenswürdig.</translation>
+        <translation>Downloads the issuing authorities named inside the certificate, over an encrypted connection. This tells that server that you received this mail. Nothing downloaded becomes trusted.</translation>
     </message>
 </context>
 <context>
     <name>SmimeInfoPage</name>
     <message>
         <source>The sender (copy to self)</source>
-        <translation>Der Absender (Kopie an sich selbst)</translation>
+        <translation>The sender (copy to self)</translation>
     </message>
     <message>
         <source>⚠ Blind copy — this is you</source>
-        <translation>⚠ Blindkopie — das bist du</translation>
+        <translation>⚠ Blind copy — this is you</translation>
     </message>
     <message>
         <source>⚠ Blind copy — in no header</source>
-        <translation>⚠ Blindkopie — steht in keiner Kopfzeile</translation>
+        <translation>⚠ Blind copy — in no header</translation>
     </message>
     <message>
         <source>A blind copy is hidden from the headers only. Every recipient certificate is named in the encrypted data itself, so anyone who receives this message can read this list too.</source>
-        <translation>Eine Blindkopie ist nur vor den Kopfzeilen verborgen. Jedes Empfängerzertifikat wird in den verschlüsselten Daten selbst genannt — wer diese Nachricht bekommt, kann diese Liste ebenfalls lesen.</translation>
+        <translation>A blind copy is hidden from the headers only. Every recipient certificate is named in the encrypted data itself, so anyone who receives this message can read this list too.</translation>
     </message>
     <message>
         <source>Encryption info</source>
-        <translation>Verschlüsselungs-Info</translation>
+        <translation>Encryption info</translation>
     </message>
     <message>
         <source>You (your certificate — decryptable)</source>
-        <translation>Du (dein Zertifikat — entschlüsselbar)</translation>
+        <translation>You (your certificate — decryptable)</translation>
     </message>
     <message>
         <source>Recipient (cert not in your store)</source>
-        <translation>Empfänger (Zertifikat nicht in deinem Bestand)</translation>
+        <translation>Recipient (cert not in your store)</translation>
     </message>
     <message>
         <source>Other recipient</source>
-        <translation>Weiterer Empfänger</translation>
+        <translation>Other recipient</translation>
     </message>
     <message>
         <source>Copy all to clipboard</source>
-        <translation>Alles in die Zwischenablage kopieren</translation>
+        <translation>Copy all to clipboard</translation>
     </message>
     <message>
         <source>Format</source>
@@ -2026,31 +2026,31 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>No encryption</source>
-        <translation>Keine Verschlüsselung</translation>
+        <translation>No encryption</translation>
     </message>
     <message>
         <source>This message is not encrypted.</source>
-        <translation>Diese Nachricht ist nicht verschlüsselt.</translation>
+        <translation>This message is not encrypted.</translation>
     </message>
     <message>
         <source>Encrypted to %1 certificate(s)</source>
-        <translation>Verschlüsselt an %1 Zertifikat(e)</translation>
+        <translation>Encrypted to %1 certificate(s)</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(no subject)</translation>
     </message>
     <message>
         <source>Key usage: </source>
-        <translation>Schlüsselverwendung: </translation>
+        <translation>Key usage: </translation>
     </message>
     <message>
         <source>Signature certificate(s): %1</source>
-        <translation>Signatur-Zertifikat(e): %1</translation>
+        <translation>Signature certificate(s): %1</translation>
     </message>
     <message>
         <source>issued by: </source>
-        <translation>ausgestellt von: </translation>
+        <translation>issued by: </translation>
     </message>
     <message>
         <source>Debug</source>
@@ -2058,58 +2058,58 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Hide debug info</source>
-        <translation>Debug-Infos ausblenden</translation>
+        <translation>Hide debug info</translation>
     </message>
     <message>
         <source>Show debug info</source>
-        <translation>Debug-Infos anzeigen</translation>
+        <translation>Show debug info</translation>
     </message>
     <message>
         <source>Blind copy — named in no header of this message:</source>
-        <translation>Blindkopie — in keiner Kopfzeile dieser Nachricht genannt:</translation>
+        <translation>Blind copy — named in no header of this message:</translation>
     </message>
 </context>
 <context>
     <name>TemplatesPage</name>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Templates</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation>Wird gelöscht</translation>
+        <translation>Deleting</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(no subject)</translation>
     </message>
     <message>
         <source>Encrypted + signed (%1)</source>
-        <translation>Verschlüsselt + signiert (%1)</translation>
+        <translation>Encrypted + signed (%1)</translation>
     </message>
     <message>
         <source>Encrypted (%1)</source>
-        <translation>Verschlüsselt (%1)</translation>
+        <translation>Encrypted (%1)</translation>
     </message>
     <message>
         <source>Signed (%1)</source>
-        <translation>Signiert (%1)</translation>
+        <translation>Signed (%1)</translation>
     </message>
     <message>
         <source>Not encrypted</source>
-        <translation>Nicht verschlüsselt</translation>
+        <translation>Not encrypted</translation>
     </message>
     <message>
         <source>No templates</source>
-        <translation>Keine Vorlagen</translation>
+        <translation>No templates</translation>
     </message>
     <message>
         <source>Save a message as a template from the composer</source>
-        <translation>Eine Nachricht im Editor als Vorlage speichern</translation>
+        <translation>Save a message as a template from the composer</translation>
     </message>
 </context>
 </TS>

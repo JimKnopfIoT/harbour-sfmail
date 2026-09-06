@@ -23,6 +23,25 @@ Page {
     // leaves it dangling when the page is destroyed — that is the delete crash.
     // The property keeps the old name so every emailAgent.* call below is unchanged.
     property var emailAgent: MailAgent
+    // Outbox state for the banner above.
+    property int _outboxCount: 0
+    property string _retryNote: ""
+    function _refreshOutbox() { page._outboxCount = Gpg.outboxTotal() }
+
+    Connections {
+        target: Gpg
+        onOutboxChanged: page._refreshOutbox()
+        onRetryScheduled: {
+            page._refreshOutbox()
+            page._retryNote = qsTr("Trying again in %n minute(s) (attempt %1 of %2).", "", minutes)
+                              .arg(attempt).arg(total)
+        }
+        onRetryStopped: {
+            page._refreshOutbox()
+            page._retryNote = reason === "" ? "" : qsTr("Sending stopped: %1").arg(reason)
+        }
+    }
+
     Connections {
         target: MailAgent
         onError: console.warn("[sfmail] sync error account", accountId, "err", syncError)
@@ -83,7 +102,14 @@ Page {
     // Tells EmailUi that QML can take requests now. When D-Bus ACTIVATED the app
     // (cold start from a notification tap), the call already arrived before this
     // point and was parked — this is what replays it.
-    Component.onCompleted: EmailUi.setReady()
+    Component.onCompleted: { EmailUi.setReady(); page._refreshOutbox() }
+    // Coming back to this page (and back to the foreground) re-reads the outbox:
+    // a transmission may have finished or failed while it was not visible.
+    onStatusChanged: if (status === PageStatus.Active) page._refreshOutbox()
+    Connections {
+        target: Qt.application
+        onActiveChanged: if (Qt.application.active) page._refreshOutbox()
+    }
 
     SilicaFlickable {
         anchors.fill: parent
@@ -123,6 +149,42 @@ Page {
             PageHeader {
                 title: qsTr("SF-Mail")
                 description: emailAgent.synchronizing ? qsTr("Syncing…") : ""
+            }
+
+            // Mail that could not be sent is otherwise invisible: the composer
+            // closes as soon as the message is queued, and a failed transmission
+            // leaves it sitting in an outbox the user has no reason to open. This
+            // says so on the page every start lands on.
+            BackgroundItem {
+                id: outboxBanner
+                width: parent.width
+                height: outboxCol.height + 2 * Theme.paddingMedium
+                visible: page._outboxCount > 0
+                onClicked: Gpg.retryAllOutboxes()
+                Rectangle {
+                    anchors.fill: parent
+                    color: Theme.rgba("#ffa726", outboxBanner.highlighted ? 0.3 : 0.15)
+                }
+                Column {
+                    id: outboxCol
+                    x: Theme.horizontalPageMargin
+                    y: Theme.paddingMedium
+                    width: parent.width - 2 * Theme.horizontalPageMargin
+                    spacing: 2
+                    Label {
+                        width: parent.width; wrapMode: Text.WordWrap
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: "#ffa726"
+                        text: qsTr("%n message(s) not sent yet", "", page._outboxCount)
+                    }
+                    Label {
+                        width: parent.width; wrapMode: Text.WordWrap
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        color: Theme.secondaryColor
+                        text: page._retryNote !== "" ? page._retryNote
+                                                     : qsTr("Tap to try sending again.")
+                    }
+                }
             }
 
             BackgroundItem {

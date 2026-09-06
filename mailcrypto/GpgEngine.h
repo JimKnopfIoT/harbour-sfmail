@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QVariantList>
+#include <QSet>
 #include <QVariantMap>
 #include <QStringList>
 #include <QByteArray>
@@ -68,6 +69,13 @@ public:
     Q_INVOKABLE bool retryOutbox(int accountId);
     // How many messages currently sit in that account's outbox (0 = nothing stuck).
     Q_INVOKABLE int outboxCount(int accountId);
+    // Messages waiting in ANY account's outbox, and which accounts they belong
+    // to ([{accountId, name}]). The reader shows this so mail that could not go
+    // out is visible without opening the outbox folder of the right account.
+    Q_INVOKABLE int outboxTotal();
+    Q_INVOKABLE QVariantList outboxAccounts();
+    // Try every account that still has something waiting.
+    Q_INVOKABLE void retryAllOutboxes();
     // Cancel a running automatic retry schedule.
     Q_INVOKABLE void cancelRetries();
     // Minutes until the next automatic attempt, -1 when nothing is scheduled.
@@ -226,8 +234,6 @@ public:
     //                  recipients: [ { keyId, inKeyring, status, revoked,
     //                  expired, hasSecret, uids, created, algo, bits, fpr } ] }.
     Q_INVOKABLE QVariantMap encryptionInfo(const QString &src);
-    // Raw RFC 822 header block of a stored QMF message (for inspection).
-    Q_INVOKABLE QString messageHeaders(int messageId);
 
     // --- raw headers + sender reputation -----------------------------------
     // Full raw RFC822 header block read directly from the QMF content file (via
@@ -299,6 +305,8 @@ public:
 signals:
     // Progress of the automatic retry schedule, for the UI: attempt number (1-based),
     // total attempts, minutes until the next one (-1 = no further attempt).
+    // Something entered or left an outbox — the banner re-reads outboxTotal().
+    void outboxChanged();
     void retryScheduled(int attempt, int total, int minutes);
     void retryStopped(const QString &reason);
 
@@ -314,11 +322,17 @@ signals:
     // reload this message once without the limit.
     void oversizedContent();
     void encryptFinished(bool ok, const QString &armored, const QString &error);
-    void decryptFinished(bool ok, const QString &text, const QString &signedBy, const QString &error);
+    // sig = the typed verification result (see signatureInfo in the .cpp):
+    // status "" | good | bad | nokey | revoked | key-expired | sig-expired |
+    // error, plus fpr, uid, emails and validity. signedBy stays as the one-line
+    // rendering for the places that only display text.
+    void decryptFinished(bool ok, const QString &text, const QString &signedBy, const QString &error,
+                         const QVariantMap &sig);
     // Rich result for PGP/MIME: attachments is a list of maps with keys
     // name, mimeType, path, isImage.
     void decryptMimeFinished(bool ok, const QString &text, const QString &signedBy,
-                             const QVariantList &attachments, const QString &error);
+                             const QVariantList &attachments, const QVariantMap &sig,
+                             const QString &error);
     void sendFinished(bool ok, const QString &error);
     void signedChanged();
     void defaultAccountChanged();
@@ -345,6 +359,16 @@ signals:
     void dmarcResult(const QString &policy, const QString &verdict, const QString &info);
 
 private:
+    // Delete every file in the plaintext caches (decrypted attachments, the
+    // copies staged under Downloads for "open with"). Run at startup and on
+    // quit — decrypted mail must not outlive the session that opened it.
+    void purgePlaintextCaches();
+    QMailTransmitAction *transmitAction();
+    void rememberOutboxAccount(quint64 acc);
+    // Socket paths of the GnuPG agents (OpenPGP home, S/MIME home).
+    QStringList m_agentSockets;
+    QStringList m_agentHomes;             // same order, for readable log lines
+
     QVariantList listKeys(bool secret, const QString &pattern);
     // Fetch the first URL that returns a public-key block; cb gets the armored
     // bytes (empty if none of the URLs yielded a key).
@@ -391,9 +415,9 @@ private:
     // harm the sender's reputation.
     QTimer m_retryTimer;
     int m_retryStep = -1;                 // index into kRetryMinutes, -1 = idle
-    quint64 m_retryAccount = 0;
+    QSet<quint64> m_retryAccounts;        // accounts whose outbox we keep trying
     void scheduleRetry(const QMailAccountId &accId);
-    void onTransmitFailed(const QString &error);
+    void onTransmitFailed(const QString &error, int code);
 
     QNetworkAccessManager *m_nam = nullptr;
     int m_blPending = 0;

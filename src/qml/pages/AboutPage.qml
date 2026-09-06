@@ -106,8 +106,10 @@ Page {
             SectionHeader { text: qsTr("Diagnostics") }
             TextSwitch {
                 text: qsTr("Debug logging")
-                description: qsTr("Write a debug.log in the app's data folder to help diagnose problems. "
-                                  + "Turn it off for normal use; it has no effect on your mail or keys.")
+                description: qsTr("Write a debug.log in the app's data folder to help diagnose a problem. "
+                                  + "It records what the app does, including the address you send from and "
+                                  + "the names of attachments — switch it on while reproducing a fault, then "
+                                  + "off again. Mail and keys are never written to it.")
                 automaticCheck: false
                 checked: DebugLog.enabled
                 onClicked: DebugLog.enabled = !DebugLog.enabled

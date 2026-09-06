@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de">
+<TS version="2.1" language="it">
 <context>
     <name>AboutPage</name>
     <message>
         <source>About SF-Mail</source>
-        <translation>Über SF-Mail</translation>
+        <translation>Informazioni su SF-Mail</translation>
     </message>
     <message>
         <source>SF-Mail</source>
@@ -17,166 +17,166 @@
     </message>
     <message>
         <source>Version %1</source>
-        <translation>Version %1</translation>
+        <translation>Versione %1</translation>
     </message>
     <message>
         <source>Making e-mail encryption easy and friendly on Sailfish OS. Reads, writes, encrypts, decrypts and signs mail with built-in OpenPGP (PGP/MIME and inline) — and, when enabled, S/MIME (PKI / X.509) — using a bundled modern GnuPG with its own keyring.</source>
-        <translation>Macht E-Mail-Verschlüsselung unter Sailfish OS einfach und zugänglich. Liest, schreibt, verschlüsselt, entschlüsselt und signiert Mails mit eingebautem OpenPGP (PGP/MIME und Inline) – und, wenn aktiviert, S/MIME (PKI / X.509) – über ein mitgeliefertes modernes GnuPG mit eigenem Schlüsselbund.</translation>
+        <translation>Rende la cifratura della posta semplice e accessibile su Sailfish OS. Legge, scrive, cifra, decifra e firma i messaggi con OpenPGP integrato (PGP/MIME e inline) — e, se attivato, S/MIME (PKI / X.509) — tramite un GnuPG moderno incluso, con un proprio portachiavi.</translation>
     </message>
     <message>
         <source>Features</source>
-        <translation>Funktionen</translation>
+        <translation>Funzioni</translation>
     </message>
     <message>
         <source>Enable S/MIME (PKI / X.509)</source>
-        <translation>S/MIME aktivieren (PKI / X.509)</translation>
+        <translation>Attiva S/MIME (PKI / X.509)</translation>
     </message>
     <message>
         <source>Adds certificate management and S/MIME decrypt / import in the mail view. Off keeps the app PGP-only and slim.</source>
-        <translation>Fügt Zertifikatsverwaltung und S/MIME-Entschlüsseln/-Import in der Mailansicht hinzu. Aus bleibt die App reine PGP-App und schlank.</translation>
+        <translation>Aggiunge la gestione dei certificati e la decifratura o l&apos;importazione S/MIME nella vista dei messaggi. Disattivato, l&apos;app resta leggera e solo PGP.</translation>
     </message>
     <message>
         <source>OpenPGP backend</source>
-        <translation>OpenPGP-Backend</translation>
+        <translation>Motore OpenPGP</translation>
     </message>
     <message>
         <source>ready</source>
-        <translation>bereit</translation>
+        <translation>pronto</translation>
     </message>
     <message>
         <source>unavailable</source>
-        <translation>nicht verfügbar</translation>
+        <translation>non disponibile</translation>
     </message>
     <message>
         <source>Keyring</source>
-        <translation>Schlüsselbund</translation>
+        <translation>Portachiavi</translation>
     </message>
     <message>
         <source>Diagnostics</source>
-        <translation>Diagnose</translation>
+        <translation>Diagnostica</translation>
     </message>
     <message>
         <source>Debug logging</source>
-        <translation>Debug-Protokoll</translation>
+        <translation>Registro di debug</translation>
     </message>
     <message>
         <source>System</source>
-        <translation>System</translation>
+        <translation>Sistema</translation>
     </message>
     <message>
         <source>Open mail notifications in this app</source>
-        <translation>Mail-Benachrichtigungen in dieser App öffnen</translation>
+        <translation>Apri le notifiche di posta in questa app</translation>
     </message>
     <message>
         <source>Switched on, but the other mail client is holding the connection right now — this takes effect once it is closed.</source>
-        <translation>Eingeschaltet, aber das andere Mail-Programm hält die Verbindung gerade noch — wirksam, sobald es geschlossen wird.</translation>
+        <translation>Attivo, ma in questo momento l&apos;altra applicazione di posta occupa la connessione — avrà effetto appena verrà chiusa.</translation>
     </message>
     <message>
         <source>Takes over mail notifications, mailto: links and &quot;share via email&quot;. Off means the client you used before keeps them.</source>
-        <translation>Übernimmt Mail-Benachrichtigungen, mailto:-Links und „Per E-Mail teilen“. Aus bedeutet: das zuvor genutzte Programm behält sie.</translation>
+        <translation>Assume le notifiche di posta, i collegamenti mailto: e «Condividi via e-mail». Se disattivato, li mantiene l&apos;applicazione usata in precedenza.</translation>
     </message>
     <message>
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
-        <translation>Schreibt ein debug.log in den Datenordner der App, um einem Fehler nachzugehen. Es hält fest, was die App tut, darunter die Absenderadresse und die Namen von Anhängen — schalten Sie es ein, während der Fehler auftritt, und danach wieder aus. Mails und Schlüssel landen nie darin.</translation>
+        <translation>Scrive un debug.log nella cartella dati dell&apos;app per analizzare un problema. Registra ciò che l&apos;app fa, compresi l&apos;indirizzo del mittente e i nomi degli allegati — attivalo mentre riproduci il malfunzionamento, poi disattivalo. Messaggi e chiavi non vi vengono mai scritti.</translation>
     </message>
 </context>
 <context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
-        <translation>Inline-PGP kann Blindkopien nicht verbergen — PGP/MIME verwenden.</translation>
+        <translation>Il PGP inline non può nascondere le copie nascoste — usa PGP/MIME.</translation>
     </message>
     <message>
         <source>Choose an account</source>
-        <translation>Konto wählen</translation>
+        <translation>Scegli un account</translation>
     </message>
     <message>
         <source>Enter recipients first</source>
-        <translation>Erst Empfänger eingeben</translation>
+        <translation>Inserisci prima i destinatari</translation>
     </message>
     <message>
         <source>No usable signing key for %1</source>
-        <translation>Kein nutzbarer Signaturschlüssel für %1</translation>
+        <translation>Nessuna chiave di firma utilizzabile per %1</translation>
     </message>
     <message>
         <source>To sign the message</source>
-        <translation>Zum Signieren der Nachricht</translation>
+        <translation>Per firmare il messaggio</translation>
     </message>
     <message>
         <source>Signing &amp; sending…</source>
-        <translation>Signieren &amp; Senden…</translation>
+        <translation>Firma e invio…</translation>
     </message>
     <message>
         <source>Inline PGP cannot carry attachments — use PGP/MIME.</source>
-        <translation>Inline-PGP kann keine Anhänge tragen – nutze PGP/MIME.</translation>
+        <translation>Il PGP inline non può trasportare allegati — usa PGP/MIME.</translation>
     </message>
     <message>
         <source>Missing a key for one or more recipients.</source>
-        <translation>Schlüssel für einen oder mehrere Empfänger fehlt.</translation>
+        <translation>Manca la chiave per uno o più destinatari.</translation>
     </message>
     <message>
         <source>Inline PGP cannot encrypt attachments — use PGP/MIME.</source>
-        <translation>Inline-PGP kann keine Anhänge verschlüsseln – nutze PGP/MIME.</translation>
+        <translation>Il PGP inline non può cifrare gli allegati — usa PGP/MIME.</translation>
     </message>
     <message>
         <source>Encrypting &amp; sending…</source>
-        <translation>Verschlüsseln &amp; Senden…</translation>
+        <translation>Cifratura e invio…</translation>
     </message>
     <message>
         <source>Send failed: %1</source>
-        <translation>Senden fehlgeschlagen: %1</translation>
+        <translation>Invio non riuscito: %1</translation>
     </message>
     <message>
         <source>Encryption failed: %1</source>
-        <translation>Verschlüsseln fehlgeschlagen: %1</translation>
+        <translation>Cifratura non riuscita: %1</translation>
     </message>
     <message>
         <source>Encrypt &amp; send</source>
-        <translation>Verschlüsseln &amp; Senden</translation>
+        <translation>Cifra e invia</translation>
     </message>
     <message>
         <source>Sign &amp; send</source>
-        <translation>Signieren &amp; Senden</translation>
+        <translation>Firma e invia</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation>Senden</translation>
+        <translation>Invia</translation>
     </message>
     <message>
         <source>Save as draft</source>
-        <translation>Als Entwurf speichern</translation>
+        <translation>Salva come bozza</translation>
     </message>
     <message>
         <source>Could not save the draft</source>
-        <translation>Entwurf konnte nicht gespeichert werden</translation>
+        <translation>Impossibile salvare la bozza</translation>
     </message>
     <message>
         <source>Save as template</source>
-        <translation>Als Vorlage speichern</translation>
+        <translation>Salva come modello</translation>
     </message>
     <message>
         <source>Saved as template</source>
-        <translation>Als Vorlage gespeichert</translation>
+        <translation>Salvato come modello</translation>
     </message>
     <message>
         <source>Could not save the template</source>
-        <translation>Vorlage konnte nicht gespeichert werden</translation>
+        <translation>Impossibile salvare il modello</translation>
     </message>
     <message>
         <source>Add attachment</source>
-        <translation>Anhang hinzufügen</translation>
+        <translation>Aggiungi allegato</translation>
     </message>
     <message>
         <source>New message</source>
-        <translation>Neue Nachricht</translation>
+        <translation>Nuovo messaggio</translation>
     </message>
     <message>
         <source>From</source>
-        <translation>Von</translation>
+        <translation>Da</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>An</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>Cc</source>
@@ -184,15 +184,15 @@
     </message>
     <message>
         <source>Bcc</source>
-        <translation>Bcc</translation>
+        <translation>Ccn</translation>
     </message>
     <message>
         <source>name@example.com, …</source>
-        <translation>name@example.com, …</translation>
+        <translation>nome@example.com, …</translation>
     </message>
     <message>
         <source>＋ Add recipient</source>
-        <translation>＋ Empfänger hinzufügen</translation>
+        <translation>＋ Aggiungi destinatario</translation>
     </message>
     <message>
         <source>…</source>
@@ -200,71 +200,71 @@
     </message>
     <message>
         <source>Subject</source>
-        <translation>Betreff</translation>
+        <translation>Oggetto</translation>
     </message>
     <message>
         <source>Encrypt</source>
-        <translation>Verschlüsseln</translation>
+        <translation>Cifra</translation>
     </message>
     <message>
         <source>Sign</source>
-        <translation>Signieren</translation>
+        <translation>Firma</translation>
     </message>
     <message>
         <source>Encrypted to the recipients&apos; keys and signed with your key.</source>
-        <translation>An die Schlüssel der Empfänger verschlüsselt und mit deinem Schlüssel signiert.</translation>
+        <translation>Cifrato con le chiavi dei destinatari e firmato con la tua chiave.</translation>
     </message>
     <message>
         <source>Encrypted to the recipients&apos; keys.</source>
-        <translation>An die Schlüssel der Empfänger verschlüsselt.</translation>
+        <translation>Cifrato con le chiavi dei destinatari.</translation>
     </message>
     <message>
         <source>Signed with your key — anyone can read it, the recipient can verify it is from you.</source>
-        <translation>Mit deinem Schlüssel signiert – jeder kann es lesen, der Empfänger kann prüfen, dass es von dir ist.</translation>
+        <translation>Firmato con la tua chiave — chiunque può leggerlo, il destinatario può verificare che viene da te.</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation>Format</translation>
+        <translation>Formato</translation>
     </message>
     <message>
         <source>PGP/MIME (with attachments)</source>
-        <translation>PGP/MIME (mit Anhängen)</translation>
+        <translation>PGP/MIME (con allegati)</translation>
     </message>
     <message>
         <source>Inline PGP (text only)</source>
-        <translation>Inline-PGP (nur Text)</translation>
+        <translation>PGP inline (solo testo)</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation>Nachricht</translation>
+        <translation>Messaggio</translation>
     </message>
     <message>
         <source>Write your message…</source>
-        <translation>Schreibe deine Nachricht…</translation>
+        <translation>Scrivi il tuo messaggio…</translation>
     </message>
     <message>
         <source>Attachments (%1)</source>
-        <translation>Anhänge (%1)</translation>
+        <translation>Allegati (%1)</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation>Rimuovi</translation>
     </message>
     <message>
         <source>Select attachment</source>
-        <translation>Anhang auswählen</translation>
+        <translation>Scegli allegato</translation>
     </message>
     <message>
         <source>No S/MIME certificate for %1 — open a signed mail from them and import it.</source>
-        <translation>Kein S/MIME-Zertifikat für %1 — öffne eine signierte Mail von dieser Person und importiere es.</translation>
+        <translation>Nessun certificato S/MIME per %1 — apri un messaggio firmato di questa persona e importalo.</translation>
     </message>
     <message>
         <source>S/MIME — sending…</source>
-        <translation>S/MIME — senden…</translation>
+        <translation>S/MIME — invio…</translation>
     </message>
     <message>
         <source>Encryption type</source>
-        <translation>Verschlüsselungsart</translation>
+        <translation>Tipo di cifratura</translation>
     </message>
     <message>
         <source>OpenPGP</source>
@@ -276,61 +276,61 @@
     </message>
     <message>
         <source>🔑 PGP key + 📜 S/MIME certificate</source>
-        <translation>🔑 PGP-Schlüssel + 📜 S/MIME-Zertifikat</translation>
+        <translation>🔑 chiave PGP + 📜 certificato S/MIME</translation>
     </message>
     <message>
         <source>🔑 PGP key available</source>
-        <translation>🔑 PGP-Schlüssel vorhanden</translation>
+        <translation>🔑 chiave PGP disponibile</translation>
     </message>
     <message>
         <source>📜 S/MIME certificate available</source>
-        <translation>📜 S/MIME-Zertifikat vorhanden</translation>
+        <translation>📜 certificato S/MIME disponibile</translation>
     </message>
     <message>
         <source>no key/certificate for this address</source>
-        <translation>kein Schlüssel/Zertifikat für diese Adresse</translation>
+        <translation>nessuna chiave o certificato per questo indirizzo</translation>
     </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
     <message>
         <source>Are you sure?</source>
-        <translation>Bist du sicher?</translation>
+        <translation>Sei sicuro?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Annulla</translation>
     </message>
 </context>
 <context>
     <name>ContactPickerPage</name>
     <message>
         <source>Address book</source>
-        <translation>Adressbuch</translation>
+        <translation>Rubrica</translation>
     </message>
     <message>
         <source>Search contacts</source>
-        <translation>Kontakte suchen</translation>
+        <translation>Cerca contatti</translation>
     </message>
     <message>
         <source>(no name)</source>
-        <translation>(kein Name)</translation>
+        <translation>(senza nome)</translation>
     </message>
     <message>
         <source>%1 addresses — tap to choose</source>
-        <translation>%1 Adressen — zum Wählen tippen</translation>
+        <translation>%1 indirizzi — tocca per scegliere</translation>
     </message>
     <message>
         <source>No matches</source>
-        <translation>Keine Treffer</translation>
+        <translation>Nessun risultato</translation>
     </message>
     <message>
         <source>No contacts with an e-mail address</source>
-        <translation>Keine Kontakte mit E-Mail-Adresse</translation>
+        <translation>Nessun contatto con indirizzo e-mail</translation>
     </message>
 </context>
 <context>
@@ -344,268 +344,268 @@
     <name>CryptoInfoPage</name>
     <message>
         <source>Blind copy — named in no header of this message:</source>
-        <translation>Blindkopie — in keiner Kopfzeile dieser Nachricht genannt:</translation>
+        <translation>Copia nascosta — non nominata in nessuna intestazione di questo messaggio:</translation>
     </message>
     <message>
         <source>Further recipient keys above cannot be named — they are not in your keyring. Look them up on keys.openpgp.org from the menu.</source>
-        <translation>Weitere Empfängerschlüssel oben sind nicht zuzuordnen — sie liegen nicht in deinem Schlüsselbund. Über das Menü auf keys.openpgp.org nachschlagen.</translation>
+        <translation>Le altre chiavi dei destinatari qui sopra non sono identificabili — non si trovano nel tuo portachiavi. Cercale su keys.openpgp.org dal menu.</translation>
     </message>
     <message>
         <source>Addressed to, but not a recipient of this copy: %1</source>
-        <translation>In der Adressierung genannt, aber nicht Empfänger dieser Kopie: %1</translation>
+        <translation>Indicato tra i destinatari, ma non destinatario di questa copia: %1</translation>
     </message>
     <message>
         <source>Listed in To/Cc</source>
-        <translation>Steht in An/Kopie</translation>
+        <translation>Presente in A/Cc</translation>
     </message>
     <message>
         <source>The sender (copy to self)</source>
-        <translation>Der Absender (Kopie an sich selbst)</translation>
+        <translation>Il mittente (copia a sé stesso)</translation>
     </message>
     <message>
         <source>⚠ Blind copy — this is you</source>
-        <translation>⚠ Blindkopie — das bist du</translation>
+        <translation>⚠ Copia nascosta — sei tu</translation>
     </message>
     <message>
         <source>⚠ Blind copy — in no header</source>
-        <translation>⚠ Blindkopie — steht in keiner Kopfzeile</translation>
+        <translation>⚠ Copia nascosta — in nessuna intestazione</translation>
     </message>
     <message>
         <source>Cannot be named — key not in your keyring</source>
-        <translation>Nicht zuzuordnen — Schlüssel nicht in deinem Schlüsselbund</translation>
+        <translation>Non identificabile — chiave assente dal tuo portachiavi</translation>
     </message>
     <message>
         <source>A blind copy is hidden from the headers only. Every recipient key is named in the encrypted data itself, so anyone who receives this message can read this list too.</source>
-        <translation>Eine Blindkopie ist nur vor den Kopfzeilen verborgen. Jeder Empfängerschlüssel wird in den verschlüsselten Daten selbst genannt — wer diese Nachricht bekommt, kann diese Liste ebenfalls lesen.</translation>
+        <translation>Una copia nascosta è celata solo alle intestazioni. Ogni chiave dei destinatari è nominata nei dati cifrati stessi: chiunque riceva questo messaggio può leggere anche questo elenco.</translation>
     </message>
     <message>
         <source>Encryption info</source>
-        <translation>Verschlüsselungs-Info</translation>
+        <translation>Informazioni di cifratura</translation>
     </message>
     <message>
         <source>Imported %1 key(s) into your keyring. Reopen Encryption info to refresh.</source>
-        <translation>%1 Schlüssel in den Schlüsselbund importiert. Verschlüsselungs-Info neu öffnen zum Aktualisieren.</translation>
+        <translation>%1 chiave/i importate nel tuo portachiavi. Riapri le informazioni di cifratura per aggiornare.</translation>
     </message>
     <message>
         <source>Key import failed: %1</source>
-        <translation>Schlüssel-Import fehlgeschlagen: %1</translation>
+        <translation>Importazione della chiave non riuscita: %1</translation>
     </message>
     <message>
         <source>Searching keys.openpgp.org…</source>
-        <translation>Suche auf keys.openpgp.org…</translation>
+        <translation>Ricerca su keys.openpgp.org…</translation>
     </message>
     <message>
         <source>keys.openpgp.org has the sender&apos;s key:
 %1%2
 The key this message used (0x%3) belongs to it (encryption subkey). Verify the fingerprint, then import.</source>
-        <translation>keys.openpgp.org hat den Schlüssel des Absenders:
+        <translation>keys.openpgp.org ha la chiave del mittente:
 %1%2
-Der für diese Nachricht genutzte Schlüssel (0x%3) gehört dazu (Verschlüsselungs-Unterschlüssel). Prüfe den Fingerprint, dann importiere.</translation>
+La chiave usata da questo messaggio (0x%3) le appartiene (sottochiave di cifratura). Verifica l&apos;impronta, poi importa.</translation>
     </message>
     <message>
         <source>⚠ SECURITY: the message used key 0x%1, but a DIFFERENT key is published for this address:
 %2%3
 This can mean an old/wrong/forged key. Only import if you trust this.</source>
-        <translation>⚠ SICHERHEIT: Die Nachricht nutzte Schlüssel 0x%1, aber für diese Adresse ist ein ANDERER Schlüssel veröffentlicht:
+        <translation>⚠ SICUREZZA: il messaggio ha usato la chiave 0x%1, ma per questo indirizzo è pubblicata una chiave DIVERSA:
 %2%3
-Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn du dem vertraust.</translation>
+Può trattarsi di una chiave vecchia, sbagliata o falsificata. Importa solo se ti fidi.</translation>
     </message>
     <message>
         <source>Import key from message</source>
-        <translation>Schlüssel aus Nachricht importieren</translation>
+        <translation>Importa la chiave dal messaggio</translation>
     </message>
     <message>
         <source>Search key on keys.openpgp.org</source>
-        <translation>Schlüssel auf keys.openpgp.org suchen</translation>
+        <translation>Cerca la chiave su keys.openpgp.org</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
-        <translation>In Zwischenablage kopieren</translation>
+        <translation>Copia negli appunti</translation>
     </message>
     <message>
         <source>Import this key</source>
-        <translation>Diesen Schlüssel importieren</translation>
+        <translation>Importa questa chiave</translation>
     </message>
     <message>
         <source>Import anyway</source>
-        <translation>Trotzdem importieren</translation>
+        <translation>Importa comunque</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation>Format</translation>
+        <translation>Formato</translation>
     </message>
     <message>
         <source>Encrypted to %1 key(s)</source>
-        <translation>An %1 Schlüssel verschlüsselt</translation>
+        <translation>Cifrato con %1 chiave/i</translation>
     </message>
     <message>
         <source>Status: </source>
-        <translation>Status: </translation>
+        <translation>Stato: </translation>
     </message>
     <message>
         <source>This key is not in your keyring.</source>
-        <translation>Dieser Schlüssel ist nicht in deinem Schlüsselbund.</translation>
+        <translation>Questa chiave non è nel tuo portachiavi.</translation>
     </message>
     <message>
         <source>Created: </source>
-        <translation>Erstellt: </translation>
+        <translation>Creata: </translation>
     </message>
     <message>
         <source>Fingerprint: </source>
-        <translation>Fingerprint: </translation>
+        <translation>Impronta: </translation>
     </message>
     <message>
         <source>✓ secret key present — decryptable</source>
-        <translation>✓ Geheimer Schlüssel vorhanden – entschlüsselbar</translation>
+        <translation>✓ chiave segreta presente — decifrabile</translation>
     </message>
     <message>
         <source>No recipient key IDs found — this may not be an encrypted message.</source>
-        <translation>Keine Empfänger-Schlüssel-IDs gefunden – evtl. keine verschlüsselte Nachricht.</translation>
+        <translation>Nessun ID di chiave dei destinatari trovato — forse non è un messaggio cifrato.</translation>
     </message>
     <message>
         <source>You hold a secret key for a recipient above — you CAN decrypt this message.</source>
-        <translation>Du hast einen geheimen Schlüssel für einen Empfänger oben – du KANNST diese Nachricht entschlüsseln.</translation>
+        <translation>Possiedi la chiave segreta di uno dei destinatari qui sopra — PUOI decifrare questo messaggio.</translation>
     </message>
     <message>
         <source>You do NOT hold a secret key for any recipient — you cannot decrypt this. The sender probably used an old or wrong key of yours.</source>
-        <translation>Du hast für KEINEN Empfänger einen geheimen Schlüssel – du kannst das nicht entschlüsseln. Der Absender nutzte wohl einen alten oder falschen Schlüssel von dir.</translation>
+        <translation>NON possiedi la chiave segreta di nessun destinatario — non puoi decifrare questo messaggio. Probabilmente il mittente ha usato una tua chiave vecchia o sbagliata.</translation>
     </message>
     <message>
         <source>The encrypted data also carries a signature; the signer is shown after decryption.</source>
-        <translation>Die verschlüsselten Daten tragen auch eine Signatur; der Unterzeichner wird nach dem Entschlüsseln angezeigt.</translation>
+        <translation>I dati cifrati contengono anche una firma; il firmatario viene mostrato dopo la decifratura.</translation>
     </message>
 </context>
 <context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Posta in arrivo</translation>
     </message>
     <message>
         <source>Outbox</source>
-        <translation>Postausgang</translation>
+        <translation>Posta in uscita</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation>Gesendet</translation>
+        <translation>Inviati</translation>
     </message>
     <message>
         <source>Drafts</source>
-        <translation>Entwürfe</translation>
+        <translation>Bozze</translation>
     </message>
     <message>
         <source>Trash</source>
-        <translation>Papierkorb</translation>
+        <translation>Cestino</translation>
     </message>
     <message>
         <source>Junk</source>
-        <translation>Spam</translation>
+        <translation>Indesiderata</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Modelli</translation>
     </message>
     <message>
         <source>(unnamed)</source>
-        <translation>(ohne Namen)</translation>
+        <translation>(senza nome)</translation>
     </message>
     <message>
         <source>Move to</source>
-        <translation>Verschieben nach</translation>
+        <translation>Sposta in</translation>
     </message>
     <message>
         <source>%1 messages</source>
-        <translation>%1 Nachrichten</translation>
+        <translation>%1 messaggi</translation>
     </message>
     <message>
         <source>No folders</source>
-        <translation>Keine Ordner</translation>
+        <translation>Nessuna cartella</translation>
     </message>
     <message>
         <source>Sync the account first, then the folders show up here.</source>
-        <translation>Synchronisiere zuerst das Konto, dann erscheinen hier die Ordner.</translation>
+        <translation>Sincronizza prima l&apos;account, poi le cartelle compariranno qui.</translation>
     </message>
 </context>
 <context>
     <name>FoldersPage</name>
     <message>
         <source>Folders</source>
-        <translation>Ordner</translation>
+        <translation>Cartelle</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Modelli</translation>
     </message>
     <message>
         <source>Syncing…</source>
-        <translation>Synchronisiere…</translation>
+        <translation>Sincronizzazione…</translation>
     </message>
     <message>
         <source>Sync folders</source>
-        <translation>Ordner synchronisieren</translation>
+        <translation>Sincronizza le cartelle</translation>
     </message>
     <message>
         <source>(unnamed)</source>
-        <translation>(unbenannt)</translation>
+        <translation>(senza nome)</translation>
     </message>
     <message>
         <source>No folders</source>
-        <translation>Keine Ordner</translation>
+        <translation>Nessuna cartella</translation>
     </message>
     <message>
         <source>Pull down to sync the account</source>
-        <translation>Herunterziehen, um das Konto zu synchronisieren</translation>
+        <translation>Trascina verso il basso per sincronizzare l&apos;account</translation>
     </message>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Posta in arrivo</translation>
     </message>
     <message>
         <source>Outbox</source>
-        <translation>Postausgang</translation>
+        <translation>Posta in uscita</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation>Gesendet</translation>
+        <translation>Inviati</translation>
     </message>
     <message>
         <source>Drafts</source>
-        <translation>Entwürfe</translation>
+        <translation>Bozze</translation>
     </message>
     <message>
         <source>Trash</source>
-        <translation>Gelöschte Elemente</translation>
+        <translation>Cestino</translation>
     </message>
     <message>
         <source>Junk</source>
-        <translation>Junk</translation>
+        <translation>Indesiderata</translation>
     </message>
 </context>
 <context>
     <name>GenerateIdentityDialog</name>
     <message>
         <source>Generate new key</source>
-        <translation>Neuen Schlüssel erzeugen</translation>
+        <translation>Genera una nuova chiave</translation>
     </message>
     <message>
         <source>Generate</source>
-        <translation>Erzeugen</translation>
+        <translation>Genera</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Your name (optional)</source>
-        <translation>Ihr Name (optional)</translation>
+        <translation>Il tuo nome (facoltativo)</translation>
     </message>
     <message>
         <source>E-mail address</source>
-        <translation>E-Mail-Adresse</translation>
+        <translation>Indirizzo e-mail</translation>
     </message>
     <message>
         <source>you@example.org</source>
-        <translation>sie@example.org</translation>
+        <translation>tu@example.org</translation>
     </message>
     <message>
         <source>Passphrase</source>
@@ -613,70 +613,70 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>At least 12 characters</source>
-        <translation>Mindestens 12 Zeichen</translation>
+        <translation>Almeno 12 caratteri</translation>
     </message>
     <message>
         <source>Repeat passphrase</source>
-        <translation>Passphrase wiederholen</translation>
+        <translation>Ripeti la passphrase</translation>
     </message>
     <message>
         <source>at least 12 characters</source>
-        <translation>mindestens 12 Zeichen</translation>
+        <translation>almeno 12 caratteri</translation>
     </message>
     <message>
         <source>upper- and lower-case letters</source>
-        <translation>Groß- und Kleinbuchstaben</translation>
+        <translation>lettere maiuscole e minuscole</translation>
     </message>
     <message>
         <source>a digit</source>
-        <translation>eine Ziffer</translation>
+        <translation>una cifra</translation>
     </message>
     <message>
         <source>a special character</source>
-        <translation>ein Sonderzeichen</translation>
+        <translation>un carattere speciale</translation>
     </message>
     <message>
         <source>passphrases match</source>
-        <translation>Passphrasen stimmen überein</translation>
+        <translation>le passphrase coincidono</translation>
     </message>
     <message>
         <source>Command used (example data)</source>
-        <translation>Verwendeter Befehl (Beispieldaten)</translation>
+        <translation>Comando usato (dati di esempio)</translation>
     </message>
 </context>
 <context>
     <name>HeaderPage</name>
     <message>
         <source>⚠ listed on %1 list(s)!</source>
-        <translation>⚠ auf %1 Liste(n) gelistet!</translation>
+        <translation>⚠ presente in %1 lista/e!</translation>
     </message>
     <message>
         <source>Done — not listed.</source>
-        <translation>Fertig – nicht gelistet.</translation>
+        <translation>Fatto — non elencato.</translation>
     </message>
     <message>
         <source>Checking…</source>
-        <translation>Prüfe…</translation>
+        <translation>Verifica…</translation>
     </message>
     <message>
         <source>Check sender against blacklists</source>
-        <translation>Absender gegen Blacklists prüfen</translation>
+        <translation>Verifica il mittente nelle blacklist</translation>
     </message>
     <message>
         <source>Copy headers</source>
-        <translation>Header kopieren</translation>
+        <translation>Copia le intestazioni</translation>
     </message>
     <message>
         <source>Header &amp; sender check</source>
-        <translation>Header- &amp; Absenderprüfung</translation>
+        <translation>Controllo intestazioni e mittente</translation>
     </message>
     <message>
         <source>Sender analysis</source>
-        <translation>Absender-Analyse</translation>
+        <translation>Analisi del mittente</translation>
     </message>
     <message>
         <source>From</source>
-        <translation>Von</translation>
+        <translation>Da</translation>
     </message>
     <message>
         <source>Return-Path</source>
@@ -684,457 +684,457 @@ Das kann ein alter/falscher/gefälschter Schlüssel sein. Nur importieren, wenn 
     </message>
     <message>
         <source>⚠ From domain (%1) ≠ Return-Path domain (%2) — possible spoofing.</source>
-        <translation>⚠ From-Domain (%1) ≠ Return-Path-Domain (%2) – mögliches Spoofing.</translation>
+        <translation>⚠ Dominio From (%1) ≠ dominio Return-Path (%2) — possibile spoofing.</translation>
     </message>
     <message>
         <source>signature present (d=%1) — not cryptographically verified here</source>
-        <translation>Signatur vorhanden (d=%1) – hier nicht kryptografisch geprüft</translation>
+        <translation>firma presente (d=%1) — qui non verificata crittograficamente</translation>
     </message>
     <message>
         <source>no DKIM signature</source>
-        <translation>keine DKIM-Signatur</translation>
+        <translation>nessuna firma DKIM</translation>
     </message>
     <message>
         <source>Sender IP</source>
-        <translation>Absender-IP</translation>
+        <translation>IP del mittente</translation>
     </message>
     <message>
         <source>Link domains (%1)</source>
-        <translation>Link-Domains (%1)</translation>
+        <translation>Domini dei collegamenti (%1)</translation>
     </message>
     <message>
         <source>Pull down to check the sender&apos;s IP/domain — and any link domains — against blacklists. Only those values are sent to the blacklist DNS, nothing of yours.</source>
-        <translation>Herunterziehen, um IP/Domain des Absenders – und etwaige Link-Domains – gegen Blacklists zu prüfen. Nur diese Werte gehen ans Blacklist-DNS, nichts von dir.</translation>
+        <translation>Trascina verso il basso per verificare l&apos;IP e il dominio del mittente — ed eventuali domini dei collegamenti — nelle blacklist. Al DNS delle blacklist vengono inviati solo quei valori, nulla che ti riguardi.</translation>
     </message>
     <message>
         <source>Blacklists</source>
-        <translation>Blacklists</translation>
+        <translation>Blacklist</translation>
     </message>
     <message>
         <source>Raw headers</source>
-        <translation>Roh-Header</translation>
+        <translation>Intestazioni grezze</translation>
     </message>
 </context>
 <context>
     <name>KeyDetailPage</name>
     <message>
         <source>Copy public key block</source>
-        <translation>Öffentlichen Schlüsselblock kopieren</translation>
+        <translation>Copia il blocco della chiave pubblica</translation>
     </message>
     <message>
         <source>Key details</source>
-        <translation>Schlüssel-Details</translation>
+        <translation>Dettagli della chiave</translation>
     </message>
     <message>
         <source>Status: </source>
-        <translation>Status: </translation>
+        <translation>Stato: </translation>
     </message>
     <message>
         <source>secret key present</source>
-        <translation>geheimer Schlüssel vorhanden</translation>
+        <translation>chiave segreta presente</translation>
     </message>
     <message>
         <source>Identities (%1)</source>
-        <translation>Identitäten (%1)</translation>
+        <translation>Identità (%1)</translation>
     </message>
     <message>
         <source>Primary key</source>
-        <translation>Hauptschlüssel</translation>
+        <translation>Chiave primaria</translation>
     </message>
     <message>
         <source>Key ID</source>
-        <translation>Schlüssel-ID</translation>
+        <translation>ID chiave</translation>
     </message>
     <message>
         <source>Fingerprint: </source>
-        <translation>Fingerprint: </translation>
+        <translation>Impronta: </translation>
     </message>
     <message>
         <source>Algorithm</source>
-        <translation>Algorithmus</translation>
+        <translation>Algoritmo</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation>Erstellt</translation>
+        <translation>Creata</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Läuft ab</translation>
+        <translation>Scade</translation>
     </message>
     <message>
         <source>Usage</source>
-        <translation>Verwendung</translation>
+        <translation>Uso</translation>
     </message>
     <message>
         <source>Subkeys (%1)</source>
-        <translation>Unterschlüssel (%1)</translation>
+        <translation>Sottochiavi (%1)</translation>
     </message>
     <message>
         <source>created </source>
-        <translation>erstellt </translation>
+        <translation>creata </translation>
     </message>
     <message>
         <source>expires </source>
-        <translation>läuft ab </translation>
+        <translation>scade </translation>
     </message>
     <message>
         <source>Public key block</source>
-        <translation>Öffentlicher Schlüsselblock</translation>
+        <translation>Blocco della chiave pubblica</translation>
     </message>
     <message>
         <source>Passphrase of this key (to back it up)</source>
-        <translation>Passphrase dieses Schlüssels (für das Backup)</translation>
+        <translation>Passphrase di questa chiave (per il backup)</translation>
     </message>
     <message>
         <source>Backup failed — wrong passphrase?</source>
-        <translation>Backup fehlgeschlagen – falsche Passphrase?</translation>
+        <translation>Backup non riuscito — passphrase errata?</translation>
     </message>
     <message>
         <source>Back up secret key to Documents…</source>
-        <translation>Geheimen Schlüssel in Dokumente sichern…</translation>
+        <translation>Salva la chiave segreta in Documenti…</translation>
     </message>
     <message>
         <source>Save public key to Documents</source>
-        <translation>Öffentlichen Schlüssel in Dokumente speichern</translation>
+        <translation>Salva la chiave pubblica in Documenti</translation>
     </message>
     <message>
         <source>Public key saved to %1</source>
-        <translation>Öffentlicher Schlüssel gespeichert nach %1</translation>
+        <translation>Chiave pubblica salvata in %1</translation>
     </message>
     <message>
         <source>Save failed</source>
-        <translation>Speichern fehlgeschlagen</translation>
+        <translation>Salvataggio non riuscito</translation>
     </message>
     <message>
         <source>It is encrypted with your passphrase, but lies outside the app sandbox. Copy it to safe off-device storage and then delete it from the phone.</source>
-        <translation>Sie ist mit deiner Passphrase verschlüsselt, liegt aber außerhalb der App-Sandbox. Kopiere sie auf einen sicheren Speicher außerhalb des Geräts und lösche sie dann vom Telefon.</translation>
+        <translation>È cifrata con la tua passphrase, ma si trova fuori dalla sandbox dell&apos;app. Copiala su un supporto sicuro esterno al dispositivo, poi eliminala dal telefono.</translation>
     </message>
     <message>
         <source>Secret key backed up to %1.</source>
-        <translation>Geheimer Schlüssel gesichert nach %1.</translation>
+        <translation>Chiave segreta salvata in %1.</translation>
     </message>
     <message>
         <source>Passphrase of this key (to extend it)</source>
-        <translation>Passphrase dieses Schlüssels (zum Verlängern)</translation>
+        <translation>Passphrase di questa chiave (per prolungarla)</translation>
     </message>
     <message>
         <source>Revocation certificate saved to %1. Keep it safe; it lets you revoke this key later even without the passphrase.</source>
-        <translation>Widerrufszertifikat gespeichert nach %1. Bewahre es sicher auf; damit kannst du diesen Schlüssel später auch ohne Passphrase zurückziehen.</translation>
+        <translation>Certificato di revoca salvato in %1. Conservalo al sicuro: ti permette di revocare questa chiave in seguito anche senza la passphrase.</translation>
     </message>
     <message>
         <source>No revocation certificate available for this key.</source>
-        <translation>Für diesen Schlüssel ist kein Widerrufszertifikat verfügbar.</translation>
+        <translation>Nessun certificato di revoca disponibile per questa chiave.</translation>
     </message>
     <message>
         <source>Really revoke this key?</source>
-        <translation>Diesen Schlüssel wirklich zurückziehen?</translation>
+        <translation>Revocare davvero questa chiave?</translation>
     </message>
     <message>
         <source>This is IRREVERSIBLE. The key can never be used to encrypt to you again. Afterwards publish it so others learn it is revoked.</source>
-        <translation>Das ist UNUMKEHRBAR. Mit dem Schlüssel kann nie wieder an dich verschlüsselt werden. Veröffentliche ihn danach, damit andere vom Widerruf erfahren.</translation>
+        <translation>L&apos;operazione è IRREVERSIBILE. Con questa chiave non sarà mai più possibile cifrare verso di te. Pubblicala poi, affinché gli altri sappiano che è revocata.</translation>
     </message>
     <message>
         <source>Revoke</source>
-        <translation>Zurückziehen</translation>
+        <translation>Revoca</translation>
     </message>
     <message>
         <source>Publish to keys.openpgp.org</source>
-        <translation>Auf keys.openpgp.org veröffentlichen</translation>
+        <translation>Pubblica su keys.openpgp.org</translation>
     </message>
     <message>
         <source>Revoke this key…</source>
-        <translation>Diesen Schlüssel zurückziehen…</translation>
+        <translation>Revoca questa chiave…</translation>
     </message>
     <message>
         <source>Save revocation certificate…</source>
-        <translation>Widerrufszertifikat speichern…</translation>
+        <translation>Salva il certificato di revoca…</translation>
     </message>
     <message>
         <source>Extend validity (2 years)…</source>
-        <translation>Gültigkeit verlängern (2 Jahre)…</translation>
+        <translation>Prolunga la validità (2 anni)…</translation>
     </message>
 </context>
 <context>
     <name>KeyImportDialog</name>
     <message>
         <source>Re-import</source>
-        <translation>Erneut importieren</translation>
+        <translation>Reimporta</translation>
     </message>
     <message>
         <source>Import anyway</source>
-        <translation>Trotzdem importieren</translation>
+        <translation>Importa comunque</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importieren</translation>
+        <translation>Importa</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Import public key?</source>
-        <translation>Öffentlichen Schlüssel importieren?</translation>
+        <translation>Importare la chiave pubblica?</translation>
     </message>
     <message>
         <source>(no user id)</source>
-        <translation>(keine Benutzerkennung)</translation>
+        <translation>(nessun ID utente)</translation>
     </message>
     <message>
         <source>Key ID</source>
-        <translation>Schlüssel-ID</translation>
+        <translation>ID chiave</translation>
     </message>
     <message>
         <source>Fingerprint</source>
-        <translation>Fingerabdruck</translation>
+        <translation>Impronta</translation>
     </message>
     <message>
         <source>Algorithm</source>
-        <translation>Algorithmus</translation>
+        <translation>Algoritmo</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation>Erstellt</translation>
+        <translation>Creata</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Läuft ab</translation>
+        <translation>Scade</translation>
     </message>
     <message>
         <source>never</source>
-        <translation>nie</translation>
+        <translation>mai</translation>
     </message>
     <message>
         <source>⚠ This key has been REVOKED by its owner. It should not be used to encrypt — import only to read old messages or to verify old signatures.</source>
-        <translation>⚠ Dieser Schlüssel wurde vom Besitzer WIDERRUFEN. Zum Verschlüsseln sollte er nicht mehr benutzt werden — nur importieren, um alte Nachrichten zu lesen oder alte Signaturen zu prüfen.</translation>
+        <translation>⚠ Questa chiave è stata REVOCATA dal suo proprietario. Non va più usata per cifrare — importala solo per leggere vecchi messaggi o verificare vecchie firme.</translation>
     </message>
     <message>
         <source>This key is EXPIRED. You cannot encrypt to it until the owner extends it.</source>
-        <translation>Dieser Schlüssel ist ABGELAUFEN. An ihn kann erst wieder verschlüsselt werden, wenn der Besitzer ihn verlängert.</translation>
+        <translation>Questa chiave è SCADUTA. Non potrai cifrare verso di essa finché il proprietario non la prolunga.</translation>
     </message>
     <message>
         <source>You already have a DIFFERENT key for %1:
 0x%2  (%3)
 Importing adds a SECOND key for this address — make sure this new key is genuine before you trust it.</source>
-        <translation>Du hast bereits einen ANDEREN Schlüssel für %1:
+        <translation>Hai già una chiave DIVERSA per %1:
 0x%2  (%3)
-Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewissere dich, dass der neue echt ist, bevor du ihm vertraust.</translation>
+L&apos;importazione aggiunge una SECONDA chiave per questo indirizzo — accertati che la nuova chiave sia autentica prima di fidartene.</translation>
     </message>
     <message>
         <source>This exact key is already in your keyring. Re-importing just refreshes it (e.g. new signatures or a longer expiry).</source>
-        <translation>Genau dieser Schlüssel ist bereits in deinem Schlüsselbund. Ein erneuter Import frischt ihn nur auf (z. B. neue Signaturen oder eine längere Gültigkeit).</translation>
+        <translation>Questa identica chiave è già nel tuo portachiavi. Reimportarla la aggiorna soltanto (ad es. nuove firme o una scadenza più lunga).</translation>
     </message>
     <message>
         <source>This key is new and valid. Verify the fingerprint with the owner through a separate channel before you rely on it.</source>
-        <translation>Dieser Schlüssel ist neu und gültig. Prüfe den Fingerabdruck mit dem Besitzer über einen getrennten Kanal, bevor du dich darauf verlässt.</translation>
+        <translation>Questa chiave è nuova e valida. Verifica l&apos;impronta con il proprietario attraverso un canale separato prima di affidarti a essa.</translation>
     </message>
     <message>
         <source>⚠ This key is NOT issued for the sender&apos;s address (%1). Its addresses are: %2. Only import it if you are sure it really is this sender&apos;s key.</source>
-        <translation>⚠ Dieser Schlüssel ist NICHT für die Absenderadresse (%1) ausgestellt. Seine Adressen sind: %2. Nur importieren, wenn du sicher bist, dass es wirklich der Schlüssel dieses Absenders ist.</translation>
+        <translation>⚠ Questa chiave NON è emessa per l&apos;indirizzo del mittente (%1). I suoi indirizzi sono: %2. Importala solo se sei certo che sia davvero la chiave di questo mittente.</translation>
     </message>
     <message>
         <source>✓ This key belongs to the sender&apos;s address (%1).</source>
-        <translation>✓ Dieser Schlüssel gehört zur Absenderadresse (%1).</translation>
+        <translation>✓ Questa chiave appartiene all&apos;indirizzo del mittente (%1).</translation>
     </message>
     <message>
         <source>Import %1 public keys?</source>
-        <translation>%1 öffentliche Schlüssel importieren?</translation>
+        <translation>Importare %1 chiavi pubbliche?</translation>
     </message>
     <message>
         <source>⚠ This block contains %1 further key(s), which will be imported as well:</source>
-        <translation>⚠ Dieser Block enthält %1 weitere(n) Schlüssel, die ebenfalls importiert werden:</translation>
+        <translation>⚠ Questo blocco contiene altre %1 chiave/i, che verranno importate anch&apos;esse:</translation>
     </message>
 </context>
 <context>
     <name>KeySelectDialog</name>
     <message>
         <source>Choose recipient keys</source>
-        <translation>Empfänger-Schlüssel wählen</translation>
+        <translation>Scegli le chiavi dei destinatari</translation>
     </message>
     <message>
         <source>Use selected</source>
-        <translation>Auswahl verwenden</translation>
+        <translation>Usa la selezione</translation>
     </message>
     <message>
         <source>More than one key — or a revoked/expired key — was found for a recipient. Check the address and pick the right key.</source>
-        <translation>Für einen Empfänger wurde mehr als ein Schlüssel – oder ein widerrufener/abgelaufener – gefunden. Prüfe die Adresse und wähle den richtigen Schlüssel.</translation>
+        <translation>Per un destinatario è stata trovata più di una chiave — o una chiave revocata o scaduta. Controlla l&apos;indirizzo e scegli la chiave giusta.</translation>
     </message>
     <message>
         <source>Recipient %1</source>
-        <translation>Empfänger %1</translation>
+        <translation>Destinatario %1</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation>Adresse</translation>
+        <translation>Indirizzo</translation>
     </message>
     <message>
         <source>No key for this address.</source>
-        <translation>Kein Schlüssel für diese Adresse.</translation>
+        <translation>Nessuna chiave per questo indirizzo.</translation>
     </message>
 </context>
 <context>
     <name>KeyTextPage</name>
     <message>
         <source>Copy to clipboard</source>
-        <translation>In Zwischenablage kopieren</translation>
+        <translation>Copia negli appunti</translation>
     </message>
 </context>
 <context>
     <name>KeysPage</name>
     <message>
         <source>Generate new key…</source>
-        <translation>Neuen Schlüssel erzeugen…</translation>
+        <translation>Genera una nuova chiave…</translation>
     </message>
     <message>
         <source>Generating a 4096-bit key — this can take a minute…</source>
-        <translation>Erzeuge einen 4096-Bit-Schlüssel — das kann eine Minute dauern…</translation>
+        <translation>Generazione di una chiave da 4096 bit — può richiedere un minuto…</translation>
     </message>
     <message>
         <source>New key created: %1</source>
-        <translation>Neuer Schlüssel erstellt: %1</translation>
+        <translation>Nuova chiave creata: %1</translation>
     </message>
     <message>
         <source>New key created.</source>
-        <translation>Neuer Schlüssel erstellt.</translation>
+        <translation>Nuova chiave creata.</translation>
     </message>
     <message>
         <source>Key generation failed: %1</source>
-        <translation>Schlüsselerzeugung fehlgeschlagen: %1</translation>
+        <translation>Generazione della chiave non riuscita: %1</translation>
     </message>
     <message>
         <source>Creates a new RSA-4096 OpenPGP key (signing + encryption) in your keyring. Highest security; the passphrase is mandatory.</source>
-        <translation>Erstellt einen neuen RSA-4096-OpenPGP-Schlüssel (Signieren + Verschlüsseln) in Ihrem Schlüsselbund. Höchste Sicherheit; das Passwort ist Pflicht.</translation>
+        <translation>Crea una nuova chiave OpenPGP RSA-4096 (firma + cifratura) nel tuo portachiavi. Massima sicurezza; la passphrase è obbligatoria.</translation>
     </message>
     <message>
         <source>Imported %1 key(s)</source>
-        <translation>%1 Schlüssel importiert</translation>
+        <translation>%1 chiave/i importate</translation>
     </message>
     <message>
         <source>Import failed: %1</source>
-        <translation>Import fehlgeschlagen: %1</translation>
+        <translation>Importazione non riuscita: %1</translation>
     </message>
     <message>
         <source>Key deleted</source>
-        <translation>Schlüssel gelöscht</translation>
+        <translation>Chiave eliminata</translation>
     </message>
     <message>
         <source>Delete failed: %1</source>
-        <translation>Löschen fehlgeschlagen: %1</translation>
+        <translation>Eliminazione non riuscita: %1</translation>
     </message>
     <message>
         <source>Import PGP key</source>
-        <translation>PGP-Schlüssel importieren</translation>
+        <translation>Importa una chiave PGP</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importieren</translation>
+        <translation>Importa</translation>
     </message>
     <message>
         <source>Paste public key block</source>
-        <translation>Öffentlichen Schlüsselblock einfügen</translation>
+        <translation>Incolla il blocco della chiave pubblica</translation>
     </message>
     <message>
         <source>Import from file…</source>
-        <translation>Aus Datei importieren…</translation>
+        <translation>Importa da file…</translation>
     </message>
     <message>
         <source>Paste key…</source>
-        <translation>Schlüssel einfügen…</translation>
+        <translation>Incolla una chiave…</translation>
     </message>
     <message>
         <source>PGP Keys</source>
-        <translation>PGP-Schlüssel</translation>
+        <translation>Chiavi PGP</translation>
     </message>
     <message>
         <source>Keyring: %1</source>
-        <translation>Schlüsselbund: %1</translation>
+        <translation>Portachiavi: %1</translation>
     </message>
     <message>
         <source>Show / export public key</source>
-        <translation>Öffentlichen Schlüssel anzeigen / exportieren</translation>
+        <translation>Mostra / esporta la chiave pubblica</translation>
     </message>
     <message>
         <source>Delete key (incl. secret)</source>
-        <translation>Schlüssel löschen (inkl. geheimem)</translation>
+        <translation>Elimina la chiave (segreta inclusa)</translation>
     </message>
     <message>
         <source>Delete key</source>
-        <translation>Schlüssel löschen</translation>
+        <translation>Elimina la chiave</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation>Lösche</translation>
+        <translation>Eliminazione</translation>
     </message>
     <message>
         <source>private</source>
-        <translation>privat</translation>
+        <translation>privata</translation>
     </message>
     <message>
         <source>revoked</source>
-        <translation>widerrufen</translation>
+        <translation>revocata</translation>
     </message>
     <message>
         <source>expired</source>
-        <translation>abgelaufen</translation>
+        <translation>scaduta</translation>
     </message>
     <message>
         <source>created </source>
-        <translation>erstellt </translation>
+        <translation>creata </translation>
     </message>
     <message>
         <source>expires </source>
-        <translation>läuft ab </translation>
+        <translation>scade </translation>
     </message>
     <message>
         <source>No keys</source>
-        <translation>Keine Schlüssel</translation>
+        <translation>Nessuna chiave</translation>
     </message>
     <message>
         <source>Generate PGP key</source>
-        <translation>PGP-Schlüssel erzeugen</translation>
+        <translation>Genera una chiave PGP</translation>
     </message>
     <message>
         <source>Really delete this key?</source>
-        <translation>Diesen Schlüssel wirklich löschen?</translation>
+        <translation>Eliminare davvero questa chiave?</translation>
     </message>
     <message>
         <source>This includes your PRIVATE key. Without a backup it cannot be recovered.</source>
-        <translation>Das schließt Ihren PRIVATEN Schlüssel ein. Ohne Backup ist er nicht wiederherstellbar.</translation>
+        <translation>Questo include la tua chiave PRIVATA. Senza un backup non è recuperabile.</translation>
     </message>
     <message>
         <source>The public key will be removed from your keyring.</source>
-        <translation>Der öffentliche Schlüssel wird aus Ihrem Schlüsselbund entfernt.</translation>
+        <translation>La chiave pubblica verrà rimossa dal tuo portachiavi.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <source>Pull down to create your own key, or to import one</source>
-        <translation>Nach unten ziehen, um einen eigenen Schlüssel zu erzeugen oder einen zu importieren</translation>
+        <translation>Trascina verso il basso per creare la tua chiave o per importarne una</translation>
     </message>
 </context>
 <context>
     <name>MailAccountsPage</name>
     <message>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>Informazioni</translation>
     </message>
     <message>
         <source>New message</source>
-        <translation>Neue Nachricht</translation>
+        <translation>Nuovo messaggio</translation>
     </message>
     <message>
         <source>PGP keys</source>
-        <translation>PGP-Schlüssel</translation>
+        <translation>Chiavi PGP</translation>
     </message>
     <message>
         <source>S/MIME certificates</source>
-        <translation>S/MIME-Zertifikate</translation>
+        <translation>Certificati S/MIME</translation>
     </message>
     <message>
         <source>Sync all inboxes</source>
-        <translation>Alle Posteingänge synchronisieren</translation>
+        <translation>Sincronizza tutte le caselle</translation>
     </message>
     <message>
         <source>SF-Mail</source>
@@ -1142,551 +1142,551 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Syncing…</source>
-        <translation>Synchronisiere…</translation>
+        <translation>Sincronizzazione…</translation>
     </message>
     <message>
         <source>Combined inbox</source>
-        <translation>Kombinierter Posteingang</translation>
+        <translation>Posta in arrivo combinata</translation>
     </message>
     <message>
         <source>Show folders</source>
-        <translation>Ordner anzeigen</translation>
+        <translation>Mostra le cartelle</translation>
     </message>
     <message>
         <source>Remove as default sender</source>
-        <translation>Als Standardabsender entfernen</translation>
+        <translation>Non usare più come mittente predefinito</translation>
     </message>
     <message>
         <source>Set as default sender</source>
-        <translation>Als Standardabsender festlegen</translation>
+        <translation>Imposta come mittente predefinito</translation>
     </message>
     <message>
         <source>unread</source>
-        <translation>ungelesen</translation>
+        <translation>non letti</translation>
     </message>
     <message>
         <source>No e-mail accounts</source>
-        <translation>Keine E-Mail-Konten</translation>
+        <translation>Nessun account e-mail</translation>
     </message>
     <message>
         <source>Add an account in the system settings first</source>
-        <translation>Erst ein Konto in den Systemeinstellungen anlegen</translation>
+        <translation>Aggiungi prima un account nelle impostazioni di sistema</translation>
     </message>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Posta in arrivo</translation>
     </message>
     <message numerus="yes">
         <source>Trying again in %n minute(s) (attempt %1 of %2).</source>
         <translation>
-            <numerusform>Neuer Versuch in %n Minute (Versuch %1 von %2).</numerusform>
-            <numerusform>Neuer Versuch in %n Minuten (Versuch %1 von %2).</numerusform>
+            <numerusform>Nuovo tentativo tra %n minuto (tentativo %1 di %2).</numerusform>
+            <numerusform>Nuovo tentativo tra %n minuti (tentativo %1 di %2).</numerusform>
         </translation>
     </message>
     <message>
         <source>Sending stopped: %1</source>
-        <translation>Senden abgebrochen: %1</translation>
+        <translation>Invio interrotto: %1</translation>
     </message>
     <message numerus="yes">
         <source>%n message(s) not sent yet</source>
         <translation>
-            <numerusform>%n Nachricht noch nicht gesendet</numerusform>
-            <numerusform>%n Nachrichten noch nicht gesendet</numerusform>
+            <numerusform>%n messaggio non ancora inviato</numerusform>
+            <numerusform>%n messaggi non ancora inviati</numerusform>
         </translation>
     </message>
     <message>
         <source>Tap to try sending again.</source>
-        <translation>Antippen, um erneut zu senden.</translation>
+        <translation>Tocca per riprovare l&apos;invio.</translation>
     </message>
 </context>
 <context>
     <name>MessageListPage</name>
     <message>
         <source>Inbox</source>
-        <translation>Posteingang</translation>
+        <translation>Posta in arrivo</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Modelli</translation>
     </message>
     <message>
         <source>Syncing…</source>
-        <translation>Synchronisiere…</translation>
+        <translation>Sincronizzazione…</translation>
     </message>
     <message>
         <source>New message</source>
-        <translation>Neue Nachricht</translation>
+        <translation>Nuovo messaggio</translation>
     </message>
     <message>
         <source>Folders</source>
-        <translation>Ordner</translation>
+        <translation>Cartelle</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation>Synchronisieren</translation>
+        <translation>Sincronizza</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation>Lösche</translation>
+        <translation>Eliminazione</translation>
     </message>
     <message>
         <source>Mark as unread</source>
-        <translation>Als ungelesen markieren</translation>
+        <translation>Segna come non letto</translation>
     </message>
     <message>
         <source>Mark as read</source>
-        <translation>Als gelesen markieren</translation>
+        <translation>Segna come letto</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Bearbeiten</translation>
+        <translation>Modifica</translation>
     </message>
     <message>
         <source>Mark all as read</source>
-        <translation>Alle als gelesen markieren</translation>
+        <translation>Segna tutti come letti</translation>
     </message>
     <message>
         <source>Empty Trash</source>
-        <translation>Papierkorb leeren</translation>
+        <translation>Svuota il cestino</translation>
     </message>
     <message>
         <source>Empty Trash?</source>
-        <translation>Papierkorb leeren?</translation>
+        <translation>Svuotare il cestino?</translation>
     </message>
     <message>
         <source>All messages in Trash will be permanently deleted.</source>
-        <translation>Alle Nachrichten im Papierkorb werden endgültig gelöscht.</translation>
+        <translation>Tutti i messaggi nel cestino verranno eliminati definitivamente.</translation>
     </message>
     <message>
         <source>Empty</source>
-        <translation>Leeren</translation>
+        <translation>Svuota</translation>
     </message>
     <message>
         <source>Select messages</source>
-        <translation>Nachrichten auswählen</translation>
+        <translation>Seleziona messaggi</translation>
     </message>
     <message>
         <source>Selected: %1</source>
-        <translation>Ausgewählt: %1</translation>
+        <translation>Selezionati: %1</translation>
     </message>
     <message>
         <source>Tap messages to select</source>
-        <translation>Nachrichten zum Auswählen antippen</translation>
+        <translation>Tocca i messaggi per selezionarli</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation>Alle auswählen</translation>
+        <translation>Seleziona tutto</translation>
     </message>
     <message>
         <source>Deselect all</source>
-        <translation>Auswahl aufheben</translation>
+        <translation>Deseleziona tutto</translation>
     </message>
     <message>
         <source>Mark selected as read</source>
-        <translation>Ausgewählte als gelesen markieren</translation>
+        <translation>Segna i selezionati come letti</translation>
     </message>
     <message>
         <source>Mark selected as unread</source>
-        <translation>Ausgewählte als ungelesen markieren</translation>
+        <translation>Segna i selezionati come non letti</translation>
     </message>
     <message>
         <source>Delete selected</source>
-        <translation>Ausgewählte löschen</translation>
+        <translation>Elimina i selezionati</translation>
     </message>
     <message>
         <source>Deleting %1</source>
-        <translation>Lösche %1</translation>
+        <translation>Eliminazione di %1</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(senza oggetto)</translation>
     </message>
     <message>
         <source>Loading inbox…</source>
-        <translation>Lade Posteingang…</translation>
+        <translation>Caricamento della posta in arrivo…</translation>
     </message>
     <message>
         <source>No messages</source>
-        <translation>Keine Nachrichten</translation>
+        <translation>Nessun messaggio</translation>
     </message>
     <message>
         <source>Pull down to sync</source>
-        <translation>Herunterziehen zum Synchronisieren</translation>
+        <translation>Trascina verso il basso per sincronizzare</translation>
     </message>
     <message>
         <source>(header only)</source>
-        <translation>(nur Header)</translation>
+        <translation>(solo intestazione)</translation>
     </message>
     <message>
         <source>Move to folder…</source>
-        <translation>In Ordner verschieben…</translation>
+        <translation>Sposta in una cartella…</translation>
     </message>
     <message>
         <source>Move selected…</source>
-        <translation>Ausgewählte verschieben…</translation>
+        <translation>Sposta i selezionati…</translation>
     </message>
     <message>
         <source>Failed — trying again in a minute (%1/%2)</source>
-        <translation>Fehlgeschlagen — neuer Versuch in einer Minute (%1/%2)</translation>
+        <translation>Non riuscito — nuovo tentativo tra un minuto (%1/%2)</translation>
     </message>
     <message>
         <source>Failed — trying again in %1 minutes (%2/%3)</source>
-        <translation>Fehlgeschlagen — neuer Versuch in %1 Minuten (%2/%3)</translation>
+        <translation>Non riuscito — nuovo tentativo tra %1 minuti (%2/%3)</translation>
     </message>
     <message>
         <source>Not sent. The server refused it — use Send again after fixing the cause.</source>
-        <translation>Nicht gesendet. Der Server hat sie abgelehnt — nach Behebung der Ursache „Erneut senden“ benutzen.</translation>
+        <translation>Non inviato. Il server lo ha rifiutato — usa «Invia di nuovo» dopo aver rimosso la causa.</translation>
     </message>
     <message>
         <source>Send again</source>
-        <translation>Erneut senden</translation>
+        <translation>Invia di nuovo</translation>
     </message>
     <message>
         <source>Sending again…</source>
-        <translation>Sende erneut…</translation>
+        <translation>Nuovo invio…</translation>
     </message>
 </context>
 <context>
     <name>MessagePage</name>
     <message>
         <source>bcc</source>
-        <translation>Bcc</translation>
+        <translation>ccn</translation>
     </message>
     <message>
         <source>hidden from the other recipients</source>
-        <translation>für die anderen Empfänger unsichtbar</translation>
+        <translation>invisibile agli altri destinatari</translation>
     </message>
     <message>
         <source>Decrypted</source>
-        <translation>Entschlüsselt</translation>
+        <translation>Decifrato</translation>
     </message>
     <message>
         <source>(no text — see attachments below)</source>
-        <translation>(kein Text – siehe Anhänge unten)</translation>
+        <translation>(nessun testo — vedi gli allegati qui sotto)</translation>
     </message>
     <message>
         <source>Decrypted — %1 attachment(s)</source>
-        <translation>Entschlüsselt – %1 Anhang/Anhänge</translation>
+        <translation>Decifrato — %1 allegato/i</translation>
     </message>
     <message>
         <source>Imported %1 key(s) into your keyring.</source>
-        <translation>%1 Schlüssel in den Schlüsselbund importiert.</translation>
+        <translation>%1 chiave/i importate nel tuo portachiavi.</translation>
     </message>
     <message>
         <source>Key import failed: %1</source>
-        <translation>Schlüssel-Import fehlgeschlagen: %1</translation>
+        <translation>Importazione della chiave non riuscita: %1</translation>
     </message>
     <message>
         <source>Your certificate isn&apos;t installed yet — open “S/MIME certificates” in the menu to import your .p12</source>
-        <translation>Dein Zertifikat ist noch nicht installiert – öffne „S/MIME-Zertifikate“ im Menü, um deine .p12 zu importieren</translation>
+        <translation>Il tuo certificato non è ancora installato — apri «Certificati S/MIME» nel menu per importare il tuo .p12</translation>
     </message>
     <message>
         <source>Decrypt failed: %1</source>
-        <translation>Entschlüsseln fehlgeschlagen: %1</translation>
+        <translation>Decifratura non riuscita: %1</translation>
     </message>
     <message>
         <source>Sender certificate imported</source>
-        <translation>Absender-Zertifikat importiert</translation>
+        <translation>Certificato del mittente importato</translation>
     </message>
     <message>
         <source>Import: %1</source>
-        <translation>Import: %1</translation>
+        <translation>Importazione: %1</translation>
     </message>
     <message>
         <source>Encrypted part not found</source>
-        <translation>Verschlüsselter Teil nicht gefunden</translation>
+        <translation>Parte cifrata non trovata</translation>
     </message>
     <message>
         <source>Downloading encrypted part…</source>
-        <translation>Lade verschlüsselten Teil…</translation>
+        <translation>Scaricamento della parte cifrata…</translation>
     </message>
     <message>
         <source>Downloading key…</source>
-        <translation>Lade Schlüssel…</translation>
+        <translation>Scaricamento della chiave…</translation>
     </message>
     <message>
         <source>No PGP key found in this message — the sender did not include their public key. Get it from a keyserver or import the .asc file via the Keys page.</source>
-        <translation>Kein PGP-Schlüssel in dieser Nachricht – der Absender hat seinen öffentlichen Schlüssel nicht beigelegt. Hole ihn von einem Keyserver oder importiere die .asc-Datei über die Schlüssel-Seite.</translation>
+        <translation>Nessuna chiave PGP in questo messaggio — il mittente non ha allegato la sua chiave pubblica. Prendila da un keyserver o importa il file .asc dalla pagina delle chiavi.</translation>
     </message>
     <message>
         <source>Signature: decrypt first</source>
-        <translation>Signatur: erst entschlüsseln</translation>
+        <translation>Firma: prima decifra</translation>
     </message>
     <message>
         <source>Valid signature</source>
-        <translation>Gültige Signatur</translation>
+        <translation>Firma valida</translation>
     </message>
     <message>
         <source>INVALID signature</source>
-        <translation>UNGÜLTIGE Signatur</translation>
+        <translation>Firma NON VALIDA</translation>
     </message>
     <message>
         <source>Signature from expired key</source>
-        <translation>Signatur von abgelaufenem Schlüssel</translation>
+        <translation>Firma da una chiave scaduta</translation>
     </message>
     <message>
         <source>Public key missing — cannot verify</source>
-        <translation>Öffentlicher Schlüssel fehlt – nicht prüfbar</translation>
+        <translation>Chiave pubblica mancante — verifica impossibile</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <source>Deleting message</source>
-        <translation>Lösche Nachricht</translation>
+        <translation>Eliminazione del messaggio</translation>
     </message>
     <message>
         <source>Show header</source>
-        <translation>Header anzeigen</translation>
+        <translation>Mostra le intestazioni</translation>
     </message>
     <message>
         <source>Encryption info</source>
-        <translation>Verschlüsselungs-Info</translation>
+        <translation>Informazioni di cifratura</translation>
     </message>
     <message>
         <source>S/MIME certificates…</source>
-        <translation>S/MIME-Zertifikate…</translation>
+        <translation>Certificati S/MIME…</translation>
     </message>
     <message>
         <source>Download full message</source>
-        <translation>Ganze Nachricht laden</translation>
+        <translation>Scarica il messaggio completo</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation>Antworten</translation>
+        <translation>Rispondi</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(senza oggetto)</translation>
     </message>
     <message>
         <source>to</source>
-        <translation>an</translation>
+        <translation>a</translation>
     </message>
     <message>
         <source>Encrypted message</source>
-        <translation>Verschlüsselte Nachricht</translation>
+        <translation>Messaggio cifrato</translation>
     </message>
     <message>
         <source>Decrypting…</source>
-        <translation>Entschlüssele…</translation>
+        <translation>Decifratura…</translation>
     </message>
     <message>
         <source>Decryption failed</source>
-        <translation>Entschlüsseln fehlgeschlagen</translation>
+        <translation>Decifratura non riuscita</translation>
     </message>
     <message>
         <source>Encrypted</source>
-        <translation>Verschlüsselt</translation>
+        <translation>Cifrato</translation>
     </message>
     <message>
         <source>Format: PGP/MIME</source>
-        <translation>Format: PGP/MIME</translation>
+        <translation>Formato: PGP/MIME</translation>
     </message>
     <message>
         <source>Decrypt</source>
-        <translation>Entschlüsseln</translation>
+        <translation>Decifra</translation>
     </message>
     <message>
         <source>To decrypt this message</source>
-        <translation>Zum Entschlüsseln dieser Nachricht</translation>
+        <translation>Per decifrare questo messaggio</translation>
     </message>
     <message>
         <source>Inline PGP message</source>
-        <translation>Inline-PGP-Nachricht</translation>
+        <translation>Messaggio PGP inline</translation>
     </message>
     <message>
         <source>Inline PGP signature</source>
-        <translation>Inline-PGP-Signatur</translation>
+        <translation>Firma PGP inline</translation>
     </message>
     <message>
         <source>Format: Inline PGP</source>
-        <translation>Format: Inline-PGP</translation>
+        <translation>Formato: PGP inline</translation>
     </message>
     <message>
         <source>Verify</source>
-        <translation>Prüfen</translation>
+        <translation>Verifica</translation>
     </message>
     <message>
         <source>Encrypted S/MIME message</source>
-        <translation>Verschlüsselte S/MIME-Nachricht</translation>
+        <translation>Messaggio S/MIME cifrato</translation>
     </message>
     <message>
         <source>Format: S/MIME (PKI)</source>
-        <translation>Format: S/MIME (PKI)</translation>
+        <translation>Formato: S/MIME (PKI)</translation>
     </message>
     <message>
         <source>To decrypt this S/MIME message</source>
-        <translation>Zum Entschlüsseln dieser S/MIME-Nachricht</translation>
+        <translation>Per decifrare questo messaggio S/MIME</translation>
     </message>
     <message>
         <source>Import sender&apos;s certificate</source>
-        <translation>Absender-Zertifikat importieren</translation>
+        <translation>Importa il certificato del mittente</translation>
     </message>
     <message>
         <source>(empty — pull down to download)</source>
-        <translation>(leer – herunterziehen zum Laden)</translation>
+        <translation>(vuoto — trascina verso il basso per scaricare)</translation>
     </message>
     <message>
         <source>Decrypted attachments (%1)</source>
-        <translation>Entschlüsselte Anhänge (%1)</translation>
+        <translation>Allegati decifrati (%1)</translation>
     </message>
     <message>
         <source>Attachments (%1)</source>
-        <translation>Anhänge (%1)</translation>
+        <translation>Allegati (%1)</translation>
     </message>
     <message>
         <source>Import sender&apos;s key</source>
-        <translation>Absender-Schlüssel importieren</translation>
+        <translation>Importa la chiave del mittente</translation>
     </message>
     <message>
         <source>Unusually large attachment detected. Expecting a larger e-mail? You can load it once without the size limit.</source>
-        <translation>Ungewöhnlich großer Anhang erkannt. Erwartest du eine größere E-Mail? Du kannst sie einmalig ohne Größenlimit laden.</translation>
+        <translation>Rilevato un allegato insolitamente grande. Aspetti un&apos;e-mail più grande? Puoi caricarla una volta senza limite di dimensione.</translation>
     </message>
     <message>
         <source>Load without limit (15 min)</source>
-        <translation>Ohne Limit laden (15 Min)</translation>
+        <translation>Carica senza limite (15 min)</translation>
     </message>
     <message>
         <source>Saved to %1</source>
-        <translation>Gespeichert nach %1</translation>
+        <translation>Salvato in %1</translation>
     </message>
     <message>
         <source>Could not save the attachment</source>
-        <translation>Anhang konnte nicht gespeichert werden</translation>
+        <translation>Impossibile salvare l&apos;allegato</translation>
     </message>
     <message>
         <source>Save to folder</source>
-        <translation>In Ordner speichern</translation>
+        <translation>Salva in una cartella</translation>
     </message>
     <message>
         <source>Open with…</source>
-        <translation>Öffnen mit…</translation>
+        <translation>Apri con…</translation>
     </message>
     <message>
         <source>Save as…</source>
-        <translation>Speichern unter…</translation>
+        <translation>Salva come…</translation>
     </message>
     <message>
         <source>Downloading the full message…</source>
-        <translation>Lade die ganze Nachricht…</translation>
+        <translation>Scaricamento del messaggio completo…</translation>
     </message>
     <message>
         <source>The message is already fully downloaded.</source>
-        <translation>Die Nachricht ist bereits vollständig geladen.</translation>
+        <translation>Il messaggio è già stato scaricato per intero.</translation>
     </message>
     <message>
         <source>Message downloaded.</source>
-        <translation>Nachricht geladen.</translation>
+        <translation>Messaggio scaricato.</translation>
     </message>
     <message>
         <source>Pull down “Download full message” to load the attachment(s).</source>
-        <translation>Zum Laden der Anhänge oben „Ganze Nachricht laden“ ziehen.</translation>
+        <translation>Trascina «Scarica il messaggio completo» per caricare gli allegati.</translation>
     </message>
     <message>
         <source>Downloading attachment…</source>
-        <translation>Anhang wird heruntergeladen…</translation>
+        <translation>Scaricamento dell&apos;allegato…</translation>
     </message>
     <message>
         <source>Could not load the attachment</source>
-        <translation>Anhang konnte nicht geladen werden</translation>
+        <translation>Impossibile caricare l&apos;allegato</translation>
     </message>
     <message>
         <source>Could not open the attachment</source>
-        <translation>Anhang konnte nicht geöffnet werden</translation>
+        <translation>Impossibile aprire l&apos;allegato</translation>
     </message>
     <message>
         <source>Show plain text</source>
-        <translation>Klartext anzeigen</translation>
+        <translation>Mostra il testo semplice</translation>
     </message>
     <message>
         <source>Show simple HTML (no external content loaded)</source>
-        <translation>Einfaches HTML anzeigen (keine externen Inhalte)</translation>
+        <translation>Mostra l&apos;HTML semplice (nessun contenuto esterno caricato)</translation>
     </message>
     <message>
         <source>Move to folder…</source>
-        <translation>In Ordner verschieben…</translation>
+        <translation>Sposta in una cartella…</translation>
     </message>
     <message>
         <source>No certificate to import: %1</source>
-        <translation>Kein Zertifikat zum Importieren: %1</translation>
+        <translation>Nessun certificato da importare: %1</translation>
     </message>
     <message>
         <source>These certificates came with this message. Nothing is stored until you confirm.</source>
-        <translation>Diese Zertifikate kamen mit dieser Nachricht. Es wird nichts gespeichert, bis Sie bestätigen.</translation>
+        <translation>Questi certificati sono arrivati con questo messaggio. Nulla viene salvato finché non confermi.</translation>
     </message>
     <message>
         <source>S/MIME message with a signature</source>
-        <translation>S/MIME-Nachricht mit Signatur</translation>
+        <translation>Messaggio S/MIME con firma</translation>
     </message>
     <message>
         <source>✓ Valid signature from %1</source>
-        <translation>✓ Gültige Signatur von %1</translation>
+        <translation>✓ Firma valida di %1</translation>
     </message>
     <message>
         <source>Signature is mathematically valid (%1), but you have not trusted the authority that issued the certificate.</source>
-        <translation>Die Signatur ist rechnerisch gültig (%1), aber der ausstellenden Stelle haben Sie nicht vertraut.</translation>
+        <translation>La firma è matematicamente valida (%1), ma non hai dato fiducia all&apos;autorità che ha emesso il certificato.</translation>
     </message>
     <message>
         <source>⚠ INVALID signature — this message was altered after signing, or the signature is forged.</source>
-        <translation>⚠ UNGÜLTIGE Signatur — diese Nachricht wurde nach dem Signieren verändert, oder die Signatur ist gefälscht.</translation>
+        <translation>⚠ Firma NON VALIDA — questo messaggio è stato alterato dopo la firma, oppure la firma è falsificata.</translation>
     </message>
     <message>
         <source>Signed, but the signer&apos;s certificate is missing — the signature cannot be checked.</source>
-        <translation>Signiert, aber das Zertifikat des Signierenden fehlt — die Signatur lässt sich nicht prüfen.</translation>
+        <translation>Firmato, ma manca il certificato del firmatario — la firma non può essere verificata.</translation>
     </message>
     <message>
         <source>The signature could not be checked.</source>
-        <translation>Die Signatur konnte nicht geprüft werden.</translation>
+        <translation>Non è stato possibile verificare la firma.</translation>
     </message>
     <message>
         <source>Signature not checked yet.</source>
-        <translation>Signatur noch nicht geprüft.</translation>
+        <translation>Firma non ancora verificata.</translation>
     </message>
     <message>
         <source>✓ Good signature from %1</source>
-        <translation>✓ Gültige Signatur von %1</translation>
+        <translation>✓ Firma valida di %1</translation>
     </message>
     <message>
         <source>⚠ Good signature, but from %1 — NOT the sender&apos;s address (%2)</source>
-        <translation>⚠ Gültige Signatur, aber von %1 — NICHT von der Absenderadresse (%2)</translation>
+        <translation>⚠ Firma valida, ma di %1 — NON dell&apos;indirizzo del mittente (%2)</translation>
     </message>
     <message>
         <source>⚠ BAD signature — this message was altered or forged.</source>
-        <translation>⚠ UNGÜLTIGE Signatur — diese Nachricht wurde verändert oder gefälscht.</translation>
+        <translation>⚠ Firma NON VALIDA — questo messaggio è stato alterato o falsificato.</translation>
     </message>
     <message>
         <source>Signed, but the signer&apos;s key is missing — cannot verify.</source>
-        <translation>Signiert, aber der Schlüssel des Signierenden fehlt — nicht prüfbar.</translation>
+        <translation>Firmato, ma manca la chiave del firmatario — verifica impossibile.</translation>
     </message>
     <message>
         <source>⚠ Signed with a REVOKED key (%1) — the owner withdrew it.</source>
-        <translation>⚠ Mit einem WIDERRUFENEN Schlüssel signiert (%1) — der Inhaber hat ihn zurückgezogen.</translation>
+        <translation>⚠ Firmato con una chiave REVOCATA (%1) — il proprietario l&apos;ha ritirata.</translation>
     </message>
     <message>
         <source>Signed with an EXPIRED key (%1).</source>
-        <translation>Mit einem ABGELAUFENEN Schlüssel signiert (%1).</translation>
+        <translation>Firmato con una chiave SCADUTA (%1).</translation>
     </message>
     <message>
         <source>The signature has expired (%1).</source>
-        <translation>Die Signatur ist abgelaufen (%1).</translation>
+        <translation>La firma è scaduta (%1).</translation>
     </message>
     <message>
         <source>The message could not be downloaded — no connection?</source>
-        <translation>Die Nachricht konnte nicht geladen werden — keine Verbindung?</translation>
+        <translation>Non è stato possibile scaricare il messaggio — manca la connessione?</translation>
     </message>
     <message>
         <source>Could not download the message — no connection?</source>
-        <translation>Die Nachricht konnte nicht geladen werden — keine Verbindung?</translation>
+        <translation>Impossibile scaricare il messaggio — manca la connessione?</translation>
     </message>
 </context>
 <context>
@@ -1701,50 +1701,50 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Secret key passphrase</source>
-        <translation>Passphrase des geheimen Schlüssels</translation>
+        <translation>Passphrase della chiave segreta</translation>
     </message>
     <message>
         <source>After import, the key lives safely in the app&apos;s encrypted keyring. The file you imported stays where you picked it (e.g. Downloads), outside the app sandbox, where other apps could read it — so it is no longer needed on the device. If you have a backup elsewhere, delete it here.</source>
-        <translation>Nach dem Import liegt der Schlüssel sicher im verschlüsselten Schlüsselbund der App. Die importierte Datei bleibt dort, wo du sie ausgewählt hast (z. B. Downloads) — außerhalb der App-Sandbox, wo andere Apps sie lesen könnten — und wird auf dem Gerät nicht mehr gebraucht. Wenn du anderswo ein Backup hast, lösche sie hier.</translation>
+        <translation>Dopo l&apos;importazione la chiave risiede al sicuro nel portachiavi cifrato dell&apos;app. Il file importato resta dove l&apos;hai scelto (ad es. Scaricati), fuori dalla sandbox dell&apos;app, dove altre applicazioni potrebbero leggerlo — sul dispositivo non serve più. Se hai un backup altrove, eliminalo qui.</translation>
     </message>
     <message>
         <source>Delete the import file after import</source>
-        <translation>Importdatei nach dem Import löschen</translation>
+        <translation>Elimina il file importato dopo l&apos;importazione</translation>
     </message>
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
-        <translation>Nur wenn du ein anderes Backup hast. Dies kann nicht rückgängig gemacht werden.</translation>
+        <translation>Solo se hai un altro backup. L&apos;operazione non può essere annullata.</translation>
     </message>
 </context>
 <context>
     <name>SmimeCertsPage</name>
     <message>
         <source>Root CA</source>
-        <translation>Root-CA</translation>
+        <translation>CA radice</translation>
     </message>
     <message>
         <source>Intermediate CA</source>
-        <translation>Zwischen-CA</translation>
+        <translation>CA intermedia</translation>
     </message>
     <message>
         <source>Your encryption certificate</source>
-        <translation>Dein Verschlüsselungs-Zertifikat</translation>
+        <translation>Il tuo certificato di cifratura</translation>
     </message>
     <message>
         <source>Your signing certificate</source>
-        <translation>Dein Signatur-Zertifikat</translation>
+        <translation>Il tuo certificato di firma</translation>
     </message>
     <message>
         <source>Certificate</source>
-        <translation>Zertifikat</translation>
+        <translation>Certificato</translation>
     </message>
     <message>
         <source>Import certificate from file…</source>
-        <translation>Zertifikat aus Datei importieren…</translation>
+        <translation>Importa un certificato da file…</translation>
     </message>
     <message>
         <source>S/MIME certificates</source>
-        <translation>S/MIME-Zertifikate</translation>
+        <translation>Certificati S/MIME</translation>
     </message>
     <message>
         <source>gpgsm</source>
@@ -1752,305 +1752,305 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>ready</source>
-        <translation>bereit</translation>
+        <translation>pronto</translation>
     </message>
     <message>
         <source>NOT FOUND</source>
-        <translation>NICHT GEFUNDEN</translation>
+        <translation>NON TROVATO</translation>
     </message>
     <message>
         <source>store: </source>
-        <translation>Speicher: </translation>
+        <translation>archivio: </translation>
     </message>
     <message>
         <source>Certificates (%1)</source>
-        <translation>Zertifikate (%1)</translation>
+        <translation>Certificati (%1)</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(senza oggetto)</translation>
     </message>
     <message>
         <source>Show / export certificate</source>
-        <translation>Zertifikat anzeigen / exportieren</translation>
+        <translation>Mostra / esporta il certificato</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation>Protokoll</translation>
+        <translation>Registro</translation>
     </message>
     <message>
         <source>Select certificate (.p12 / .pfx / .pem / .crt / .p7b)</source>
-        <translation>Zertifikat wählen (.p12 / .pfx / .pem / .crt / .p7b)</translation>
+        <translation>Scegli un certificato (.p12 / .pfx / .pem / .crt / .p7b)</translation>
     </message>
     <message>
         <source>Passphrase of the .p12 file</source>
-        <translation>Passphrase der .p12-Datei</translation>
+        <translation>Passphrase del file .p12</translation>
     </message>
     <message>
         <source>Delete certificate + private key</source>
-        <translation>Zertifikat + privaten Schlüssel löschen</translation>
+        <translation>Elimina il certificato + la chiave privata</translation>
     </message>
     <message>
         <source>Delete certificate</source>
-        <translation>Zertifikat löschen</translation>
+        <translation>Elimina il certificato</translation>
     </message>
     <message>
         <source>Deleting certificate</source>
-        <translation>Lösche Zertifikat</translation>
+        <translation>Eliminazione del certificato</translation>
     </message>
     <message>
         <source>Generate new certificate…</source>
-        <translation>Neues Zertifikat erzeugen…</translation>
+        <translation>Genera un nuovo certificato…</translation>
     </message>
     <message>
         <source>Generate S/MIME certificate</source>
-        <translation>S/MIME-Zertifikat erzeugen</translation>
+        <translation>Genera un certificato S/MIME</translation>
     </message>
     <message>
         <source>Creates a new self-signed RSA-4096 S/MIME certificate (signing + encryption) in your store. The recipient must trust it once, like a first key exchange. Highest security; the passphrase is mandatory.</source>
-        <translation>Erstellt ein neues selbstsigniertes RSA-4096-S/MIME-Zertifikat (Signieren + Verschlüsseln) in Ihrem Speicher. Die Gegenstelle muss ihm einmalig vertrauen, wie beim ersten Schlüsselaustausch. Höchste Sicherheit; das Passwort ist Pflicht.</translation>
+        <translation>Crea un nuovo certificato S/MIME RSA-4096 autofirmato (firma + cifratura) nel tuo archivio. Il destinatario deve dargli fiducia una volta, come in un primo scambio di chiavi. Massima sicurezza; la passphrase è obbligatoria.</translation>
     </message>
     <message>
         <source>Generating a 4096-bit certificate — this can take a minute…</source>
-        <translation>Erzeuge ein 4096-Bit-Zertifikat — das kann eine Minute dauern…</translation>
+        <translation>Generazione di un certificato da 4096 bit — può richiedere un minuto…</translation>
     </message>
     <message>
         <source>Certificate backed up to %1</source>
-        <translation>Zertifikat gesichert nach %1</translation>
+        <translation>Certificato salvato in %1</translation>
     </message>
     <message>
         <source>Backup failed — wrong passphrase?</source>
-        <translation>Backup fehlgeschlagen – falsche Passphrase?</translation>
+        <translation>Backup non riuscito — passphrase errata?</translation>
     </message>
     <message>
         <source>Back up as .p12 to Documents…</source>
-        <translation>Als .p12 in Dokumente sichern…</translation>
+        <translation>Salva come .p12 in Documenti…</translation>
     </message>
     <message>
         <source>Passphrase of this certificate</source>
-        <translation>Passphrase dieses Zertifikats</translation>
+        <translation>Passphrase di questo certificato</translation>
     </message>
     <message>
         <source>Really delete this certificate?</source>
-        <translation>Dieses Zertifikat wirklich löschen?</translation>
+        <translation>Eliminare davvero questo certificato?</translation>
     </message>
     <message>
         <source>This includes the PRIVATE key. Without a .p12 backup it cannot be recovered.</source>
-        <translation>Das schließt den PRIVATEN Schlüssel ein. Ohne .p12-Backup ist er nicht wiederherstellbar.</translation>
+        <translation>Questo include la chiave PRIVATA. Senza un backup .p12 non è recuperabile.</translation>
     </message>
     <message>
         <source>The certificate will be removed from your store.</source>
-        <translation>Das Zertifikat wird aus Ihrem Speicher entfernt.</translation>
+        <translation>Il certificato verrà rimosso dal tuo archivio.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <source>Import file deleted from the device.</source>
-        <translation>Importdatei vom Gerät gelöscht.</translation>
+        <translation>File di importazione eliminato dal dispositivo.</translation>
     </message>
     <message>
         <source>Could not delete the import file.</source>
-        <translation>Importdatei konnte nicht gelöscht werden.</translation>
+        <translation>Impossibile eliminare il file di importazione.</translation>
     </message>
     <message>
         <source>It is passphrase-protected but lies outside the app sandbox — copy it off-device and then delete it from the phone.</source>
-        <translation>Sie ist passphrase-geschützt, liegt aber außerhalb der App-Sandbox — kopiere sie vom Gerät weg und lösche sie dann vom Telefon.</translation>
+        <translation>È protetto da passphrase, ma si trova fuori dalla sandbox dell&apos;app — copialo fuori dal dispositivo, poi eliminalo dal telefono.</translation>
     </message>
     <message>
         <source>Do not prefer for encryption any more</source>
-        <translation>Nicht mehr zum Verschlüsseln bevorzugen</translation>
+        <translation>Non preferire più per la cifratura</translation>
     </message>
     <message>
         <source>Prefer for encryption</source>
-        <translation>Zum Verschlüsseln bevorzugen</translation>
+        <translation>Preferisci per la cifratura</translation>
     </message>
     <message>
         <source>Read from the selected file. Nothing is stored until you confirm.</source>
-        <translation>Aus der gewählten Datei gelesen. Es wird nichts gespeichert, bis Sie bestätigen.</translation>
+        <translation>Letto dal file scelto. Nulla viene salvato finché non confermi.</translation>
     </message>
     <message>
         <source>No certificate found in that file: %1</source>
-        <translation>Kein Zertifikat in dieser Datei gefunden: %1</translation>
+        <translation>Nessun certificato trovato in quel file: %1</translation>
     </message>
     <message>
         <source>Delete all certificates…</source>
-        <translation>Alle Zertifikate löschen…</translation>
+        <translation>Elimina tutti i certificati…</translation>
     </message>
     <message>
         <source>Delete all certificates?</source>
-        <translation>Alle Zertifikate löschen?</translation>
+        <translation>Eliminare tutti i certificati?</translation>
     </message>
     <message>
         <source>This removes every S/MIME certificate and every private key from this app&apos;s store. Mail encrypted to those keys can no longer be read. Certificates you backed up as .p12 can be imported again.</source>
-        <translation>Das entfernt jedes S/MIME-Zertifikat und jeden privaten Schlüssel aus dem Speicher dieser App. Mit diesen Schlüsseln verschlüsselte Mail ist danach nicht mehr lesbar. Als .p12 gesicherte Zertifikate können Sie wieder importieren.</translation>
+        <translation>Questo rimuove ogni certificato S/MIME e ogni chiave privata dall&apos;archivio di quest&apos;app. I messaggi cifrati con quelle chiavi non potranno più essere letti. I certificati salvati come .p12 possono essere importati di nuovo.</translation>
     </message>
     <message>
         <source>Delete everything</source>
-        <translation>Alles löschen</translation>
+        <translation>Elimina tutto</translation>
     </message>
 </context>
 <context>
     <name>SmimeImportDialog</name>
     <message>
         <source>Import anyway</source>
-        <translation>Trotzdem importieren</translation>
+        <translation>Importa comunque</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importieren</translation>
+        <translation>Importa</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Import %1 certificates?</source>
-        <translation>%1 Zertifikate importieren?</translation>
+        <translation>Importare %1 certificati?</translation>
     </message>
     <message>
         <source>Import certificate?</source>
-        <translation>Zertifikat importieren?</translation>
+        <translation>Importare il certificato?</translation>
     </message>
     <message>
         <source>⚠ None of these certificates is issued for the sender&apos;s address (%1). Only import them if you are sure they really belong to this sender.</source>
-        <translation>⚠ Keines dieser Zertifikate ist für die Absenderadresse (%1) ausgestellt. Importieren Sie sie nur, wenn Sie sicher sind, dass sie wirklich zu diesem Absender gehören.</translation>
+        <translation>⚠ Nessuno di questi certificati è emesso per l&apos;indirizzo del mittente (%1). Importali solo se sei certo che appartengano davvero a questo mittente.</translation>
     </message>
     <message>
         <source>✓ Issued for the sender&apos;s address (%1).</source>
-        <translation>✓ Für die Absenderadresse (%1) ausgestellt.</translation>
+        <translation>✓ Emesso per l&apos;indirizzo del mittente (%1).</translation>
     </message>
     <message>
         <source>Root certificate authority</source>
-        <translation>Wurzelzertifizierungsstelle</translation>
+        <translation>Autorità di certificazione radice</translation>
     </message>
     <message>
         <source>Certificate authority</source>
-        <translation>Zertifizierungsstelle</translation>
+        <translation>Autorità di certificazione</translation>
     </message>
     <message>
         <source>Certificate</source>
-        <translation>Zertifikat</translation>
+        <translation>Certificato</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Inhaber)</translation>
+        <translation>(senza oggetto)</translation>
     </message>
     <message>
         <source>issued by: </source>
-        <translation>ausgestellt von: </translation>
+        <translation>emesso da: </translation>
     </message>
     <message>
         <source>EXPIRED on %1</source>
-        <translation>ABGELAUFEN am %1</translation>
+        <translation>SCADUTO il %1</translation>
     </message>
     <message>
         <source>valid until %1</source>
-        <translation>gültig bis %1</translation>
+        <translation>valido fino al %1</translation>
     </message>
     <message>
         <source>Already in your store — importing changes nothing.</source>
-        <translation>Bereits in Ihrem Speicher — ein Import ändert nichts.</translation>
+        <translation>Già nel tuo archivio — importarlo non cambia nulla.</translation>
     </message>
     <message>
         <source>⚠ You already have a DIFFERENT certificate for this address: %1. Importing adds a second one; the newest usable certificate is used when encrypting.</source>
-        <translation>⚠ Für diese Adresse haben Sie bereits ein ANDERES Zertifikat: %1. Ein Import legt ein zweites daneben; beim Verschlüsseln wird das neueste brauchbare verwendet.</translation>
+        <translation>⚠ Per questo indirizzo hai già un certificato DIVERSO: %1. L&apos;importazione ne aggiunge un secondo; per cifrare viene usato il certificato utilizzabile più recente.</translation>
     </message>
     <message>
         <source>Trust</source>
-        <translation>Vertrauen</translation>
+        <translation>Fiducia</translation>
     </message>
     <message>
         <source>Trust this root certificate</source>
-        <translation>Diesem Wurzelzertifikat vertrauen</translation>
+        <translation>Dai fiducia a questo certificato radice</translation>
     </message>
     <message>
         <source>Signatures from every certificate this authority issues will count as valid, now and in future. Turn this on only for an authority you know — for example your own certificate, or your organisation&apos;s.</source>
-        <translation>Signaturen aller Zertifikate, die diese Stelle ausstellt, gelten dann als gültig, jetzt und künftig. Schalten Sie das nur für eine Stelle ein, die Sie kennen — etwa Ihr eigenes Zertifikat oder das Ihrer Organisation.</translation>
+        <translation>Le firme di ogni certificato emesso da questa autorità varranno come valide, ora e in futuro. Attivalo solo per un&apos;autorità che conosci — ad esempio il tuo stesso certificato o quello della tua organizzazione.</translation>
     </message>
     <message>
         <source>This root is already one of your trust anchors.</source>
-        <translation>Dieses Wurzelzertifikat ist bereits einer Ihrer Vertrauensanker.</translation>
+        <translation>Questo certificato radice è già uno dei tuoi ancoraggi di fiducia.</translation>
     </message>
     <message>
         <source>Fetch missing issuer certificates</source>
-        <translation>Fehlende Ausstellerzertifikate holen</translation>
+        <translation>Recupera i certificati dell&apos;emittente mancanti</translation>
     </message>
     <message>
         <source>Downloads the issuing authorities named inside the certificate, over an encrypted connection. This tells that server that you received this mail. Nothing downloaded becomes trusted.</source>
-        <translation>Lädt die im Zertifikat genannten ausstellenden Stellen über eine verschlüsselte Verbindung. Dabei erfährt dieser Server, dass Sie diese Mail erhalten haben. Nichts Geladenes wird dadurch vertrauenswürdig.</translation>
+        <translation>Scarica le autorità emittenti indicate nel certificato, tramite una connessione cifrata. Quel server viene così a sapere che hai ricevuto questo messaggio. Nulla di ciò che viene scaricato diventa per questo affidabile.</translation>
     </message>
 </context>
 <context>
     <name>SmimeInfoPage</name>
     <message>
         <source>The sender (copy to self)</source>
-        <translation>Der Absender (Kopie an sich selbst)</translation>
+        <translation>Il mittente (copia a sé stesso)</translation>
     </message>
     <message>
         <source>⚠ Blind copy — this is you</source>
-        <translation>⚠ Blindkopie — das bist du</translation>
+        <translation>⚠ Copia nascosta — sei tu</translation>
     </message>
     <message>
         <source>⚠ Blind copy — in no header</source>
-        <translation>⚠ Blindkopie — steht in keiner Kopfzeile</translation>
+        <translation>⚠ Copia nascosta — in nessuna intestazione</translation>
     </message>
     <message>
         <source>A blind copy is hidden from the headers only. Every recipient certificate is named in the encrypted data itself, so anyone who receives this message can read this list too.</source>
-        <translation>Eine Blindkopie ist nur vor den Kopfzeilen verborgen. Jedes Empfängerzertifikat wird in den verschlüsselten Daten selbst genannt — wer diese Nachricht bekommt, kann diese Liste ebenfalls lesen.</translation>
+        <translation>Una copia nascosta è celata solo alle intestazioni. Ogni certificato dei destinatari è nominato nei dati cifrati stessi: chiunque riceva questo messaggio può leggere anche questo elenco.</translation>
     </message>
     <message>
         <source>Encryption info</source>
-        <translation>Verschlüsselungs-Info</translation>
+        <translation>Informazioni di cifratura</translation>
     </message>
     <message>
         <source>You (your certificate — decryptable)</source>
-        <translation>Du (dein Zertifikat — entschlüsselbar)</translation>
+        <translation>Tu (il tuo certificato — decifrabile)</translation>
     </message>
     <message>
         <source>Recipient (cert not in your store)</source>
-        <translation>Empfänger (Zertifikat nicht in deinem Bestand)</translation>
+        <translation>Destinatario (certificato assente dal tuo archivio)</translation>
     </message>
     <message>
         <source>Other recipient</source>
-        <translation>Weiterer Empfänger</translation>
+        <translation>Altro destinatario</translation>
     </message>
     <message>
         <source>Copy all to clipboard</source>
-        <translation>Alles in die Zwischenablage kopieren</translation>
+        <translation>Copia tutto negli appunti</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation>Format</translation>
+        <translation>Formato</translation>
     </message>
     <message>
         <source>No encryption</source>
-        <translation>Keine Verschlüsselung</translation>
+        <translation>Nessuna cifratura</translation>
     </message>
     <message>
         <source>This message is not encrypted.</source>
-        <translation>Diese Nachricht ist nicht verschlüsselt.</translation>
+        <translation>Questo messaggio non è cifrato.</translation>
     </message>
     <message>
         <source>Encrypted to %1 certificate(s)</source>
-        <translation>Verschlüsselt an %1 Zertifikat(e)</translation>
+        <translation>Cifrato con %1 certificato/i</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(senza oggetto)</translation>
     </message>
     <message>
         <source>Key usage: </source>
-        <translation>Schlüsselverwendung: </translation>
+        <translation>Uso della chiave: </translation>
     </message>
     <message>
         <source>Signature certificate(s): %1</source>
-        <translation>Signatur-Zertifikat(e): %1</translation>
+        <translation>Certificato/i di firma: %1</translation>
     </message>
     <message>
         <source>issued by: </source>
-        <translation>ausgestellt von: </translation>
+        <translation>emesso da: </translation>
     </message>
     <message>
         <source>Debug</source>
@@ -2058,58 +2058,58 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     </message>
     <message>
         <source>Hide debug info</source>
-        <translation>Debug-Infos ausblenden</translation>
+        <translation>Nascondi le info di debug</translation>
     </message>
     <message>
         <source>Show debug info</source>
-        <translation>Debug-Infos anzeigen</translation>
+        <translation>Mostra le info di debug</translation>
     </message>
     <message>
         <source>Blind copy — named in no header of this message:</source>
-        <translation>Blindkopie — in keiner Kopfzeile dieser Nachricht genannt:</translation>
+        <translation>Copia nascosta — non nominata in nessuna intestazione di questo messaggio:</translation>
     </message>
 </context>
 <context>
     <name>TemplatesPage</name>
     <message>
         <source>Templates</source>
-        <translation>Vorlagen</translation>
+        <translation>Modelli</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation>Wird gelöscht</translation>
+        <translation>Eliminazione</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation>(kein Betreff)</translation>
+        <translation>(senza oggetto)</translation>
     </message>
     <message>
         <source>Encrypted + signed (%1)</source>
-        <translation>Verschlüsselt + signiert (%1)</translation>
+        <translation>Cifrato + firmato (%1)</translation>
     </message>
     <message>
         <source>Encrypted (%1)</source>
-        <translation>Verschlüsselt (%1)</translation>
+        <translation>Cifrato (%1)</translation>
     </message>
     <message>
         <source>Signed (%1)</source>
-        <translation>Signiert (%1)</translation>
+        <translation>Firmato (%1)</translation>
     </message>
     <message>
         <source>Not encrypted</source>
-        <translation>Nicht verschlüsselt</translation>
+        <translation>Non cifrato</translation>
     </message>
     <message>
         <source>No templates</source>
-        <translation>Keine Vorlagen</translation>
+        <translation>Nessun modello</translation>
     </message>
     <message>
         <source>Save a message as a template from the composer</source>
-        <translation>Eine Nachricht im Editor als Vorlage speichern</translation>
+        <translation>Salva un messaggio come modello dall&apos;editor</translation>
     </message>
 </context>
 </TS>

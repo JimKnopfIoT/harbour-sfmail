@@ -22,9 +22,41 @@ EXTRAS="$ROOT/extras/$ARCH"                          # prebuilt files we do not 
 
 mkdir -p "$SRC" "$WORK" "$STAGE"
 
+# SHA-256 of every tarball this script builds. A download is only as trustworthy
+# as the mirror that served it, and a mirror is exactly what an attacker would
+# aim at to get code into a package that handles other people's keys. Anything
+# that does not match these digests stops the build; to move to a new upstream
+# release, verify the release signature by hand and put the new digest here.
+sha256_of() {
+  case "$1" in
+    gnupg-2.5.21.tar.bz2)       echo e3af2c8caa46a66a9329fa7c6880af260451914d819595beabc2c26597b31352 ;;
+    gpgme-1.18.0.tar.bz2)       echo 361d4eae47ce925dba0ea569af40e7b52c645c4ae2e65e5621bf1b6cdd8b0e9e ;;
+    libassuan-2.5.7.tar.bz2)    echo 0103081ffc27838a2e50479153ca105e873d3d65d8a9593282e9c94c7e6afb76 ;;
+    libassuan-3.0.2.tar.bz2)    echo d2931cdad266e633510f9970e1a2f346055e351bb19f9b78912475b8074c36f6 ;;
+    libgcrypt-1.12.2.tar.bz2)   echo 7ce33c2492221a0436f96a8500215e9f3e3dcb5fd26a757cd415e7a843babd5e ;;
+    libgpg-error-1.61.tar.bz2)  echo 7a85413f2bc354f4f8aa832b718af122e48965e9e0eb9012ee659c13c6385c93 ;;
+    libksba-1.8.0.tar.bz2)      echo 296b9db9095749f2aa104202d7ab7fd09ad10710e00780a709c9754b1a1d9292 ;;
+    npth-1.8.tar.bz2)           echo 8bd24b4f23a3065d6e5b26e98aba9ce783ea4fd781069c1b35d149694e90ca3e ;;
+    *) echo "" ;;
+  esac
+}
+
 fetch() { # url -> path (on host; chroot curl lacks CA certs)
   local t; t="$(basename "$1")"
   [ -f "$SRC/$t" ] || { echo ">> fetch $t" >&2; curl -sSL -o "$SRC/$t" "$1"; }
+  local want have
+  want="$(sha256_of "$t")"
+  if [ -z "$want" ]; then
+    echo "!! no known digest for $t — refusing to build it" >&2
+    exit 1
+  fi
+  have="$(sha256sum "$SRC/$t" | cut -d' ' -f1)"
+  if [ "$have" != "$want" ]; then
+    echo "!! checksum mismatch for $t" >&2
+    echo "   expected $want" >&2
+    echo "   got      $have" >&2
+    exit 1
+  fi
   echo "$SRC/$t"
 }
 
@@ -186,7 +218,7 @@ b_gpgme()       { build gpgme-$V_GPGME        https://www.gnupg.org/ftp/gcrypt/g
     --disable-gpg-test --enable-languages=cpp,qt; }
 
 # Files that are NOT built here but belong to a complete stack (openssl and its
-# legacy provider for S/MIME, pinentry). A full rebuild replaces the staging tree,
+# legacy provider for S/MIME). A full rebuild replaces the staging tree,
 # and on 2026-08-13 that silently dropped them: gpgsm was still there, but
 # SmimeEngine also requires a runnable openssl, so S/MIME failed with "gpgsm not
 # available" and the cause was three missing files. They live in extras/ now.
@@ -216,7 +248,7 @@ check_manifest() {
                   lib/libassuan.so.0 lib/libassuan.so.9
                   lib/libksba.so.8 lib/libnpth.so.0 lib/libgpgme.so.11"
   # S/MIME is aarch64-only by design; armv7hl never carried openssl.
-  [ "$ARCH" = "aarch64" ] && required="$required bin/openssl bin/pinentry lib/ossl-modules/legacy.so"
+  [ "$ARCH" = "aarch64" ] && required="$required bin/openssl lib/ossl-modules/legacy.so"
   for r in $required; do
     [ -e "$SPX/$r" ] || missing="$missing $r"
   done

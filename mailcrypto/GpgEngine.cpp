@@ -1,4 +1,5 @@
 #include "GpgEngine.h"
+#include <qmailnamespace.h>
 
 #include <QtConcurrent>
 #include <QVector>
@@ -22,6 +23,11 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QTimer>
+#include <QProcess>
+#include <QTextCodec>
+#include <QLocalSocket>
+#include <dlfcn.h>
+#include <QCoreApplication>
 #include <QDebug>
 
 // App version, injected by the spec %build (single source of truth). Included
@@ -96,11 +102,134 @@
 
 // Modern bundled GnuPG 2.2 stack, shipped under OUR OWN app prefix so the
 // sandbox (which hides other apps' /usr/share/<app>) can see it.
+// The host application may offer a place to record the GnuPG daemon pids, so
+// its crash handler can take them down (a surviving agent blocks the next start
+// from the app grid). Looked up at runtime: the plugin must load and work even
+// where that function does not exist.
+typedef void (*SfmailNoteAgentPid)(int, int);
+static SfmailNoteAgentPid noteAgentPid()
+{
+    static SfmailNoteAgentPid fn =
+        reinterpret_cast<SfmailNoteAgentPid>(dlsym(RTLD_DEFAULT, "sfmail_note_agent_pid"));
+    return fn;
+}
+
 static const char *kStackBin = "/usr/share/harbour-sfmail/gpg/bin";
 static const char *kGpg = "/usr/share/harbour-sfmail/gpg/bin/gpg";
 static const char *kGpgsm = "/usr/share/harbour-sfmail/gpg/bin/gpgsm";
 static const char *kLibDir = "/usr/share/harbour-sfmail/gpg/lib";
 static const char *kAgent = "/usr/share/harbour-sfmail/gpg/bin/gpg-agent";
+static const char *kGpgconf = "/usr/share/harbour-sfmail/gpg/bin/gpgconf";
+
+// Shut down the gpg-agent serving the given homedir. GnuPG's daemons are
+// designed to outlive their clients — but a surviving daemon keeps the app's
+// launch sandbox alive after the UI is gone, and the launcher, still waiting
+// on that sandbox, then holds its single-instance lock: every further start
+// from the app grid is silently swallowed. Called on exit (same sandbox, so
+// the daemon's socket is reachable) and defensively at startup (clears
+// leftovers of a crashed instance where the socket is shared). Daemons respawn
+// on demand, and with the zero-TTL agent cache there is nothing worth keeping
+// alive between runs anyway.
+//
+// NOT via `gpgconf --kill`: that delegates to gpg-connect-agent, which the
+// bundle prunes — and gpgconf looks for it under its compiled-in prefix, which
+// does not exist on the device either. It returns 0 and does nothing. So we
+// speak Assuan to the agent socket ourselves: greeting, KILLAGENT, done. The
+// agent takes its scdaemon down with it. gpgconf is still the authority on
+// WHERE the socket lives (runtime dir vs. homedir fallback).
+// Where the agent for this homedir listens. Pure path arithmetic inside
+// gpgconf, so the answer is stable for the life of the process — asked once.
+static QString agentSocketPath(const QString &home)
+{
+    QProcess p;
+    p.start(QString::fromUtf8(kGpgconf),
+            QStringList() << QStringLiteral("--homedir") << home
+                          << QStringLiteral("--list-dirs")
+                          << QStringLiteral("agent-socket"));
+    if (!p.waitForFinished(3000)) { p.kill(); return QString(); }
+    return QString::fromUtf8(p.readAllStandardOutput()).trimmed();
+}
+
+// Talk to the agent: read its greeting ("OK Pleased to meet you, process N"),
+// optionally tell it to quit. Returns the agent's pid, 0 if none is listening.
+static int agentTalk(const QString &sock, bool kill, const QString &home)
+{
+    if (sock.isEmpty() || !QFileInfo::exists(sock))
+        return 0;                                // no agent running: nothing to do
+    QLocalSocket s;
+    s.connectToServer(sock);
+    if (!s.waitForConnected(1000))
+        return 0;                                // stale socket file, agent already gone
+    QByteArray greeting;
+    if (s.waitForReadyRead(1000))
+        greeting = s.readAll();
+    int pid = 0;
+    const int at = greeting.indexOf("process ");
+    if (at >= 0) pid = greeting.mid(at + 8).trimmed().toInt();
+    if (kill) {
+        s.write("KILLAGENT\n");
+        s.flush();
+        QByteArray reply;
+        if (s.waitForReadyRead(2000))
+            reply = s.readAll().trimmed();       // "OK closing connection"
+        qWarning() << "[gpg] agent shutdown for" << home << "->" << reply;
+    }
+    s.disconnectFromServer();
+    return pid;
+}
+
+// Write a file only when its content differs. These are OUR managed settings,
+// but the directory is a normal GnuPG home a user can also work in over ssh —
+// rewriting on every start would silently drop anything they added there, and
+// touching the file needlessly wakes the agent's config watch.
+static void writeIfChanged(const QString &path, const QByteArray &content)
+{
+    QFile f(path);
+    if (f.open(QIODevice::ReadOnly)) {
+        const QByteArray have = f.readAll();
+        f.close();
+        if (have == content) return;
+    }
+    if (f.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+        f.write(content);
+        f.close();
+    }
+}
+
+// Where decrypted content is put down so the UI can show or hand it on. Both
+// are caches, not storage: whatever is in them is plaintext of somebody's mail.
+static QString decryptedCacheDir()
+{
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+           + QStringLiteral("/decrypted");
+}
+static QString stagingDir()
+{
+    QString dir = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+    if (dir.isEmpty()) dir = QDir::homePath() + QStringLiteral("/Downloads");
+    return dir + QStringLiteral("/sfmail");
+}
+
+// Empty the plaintext caches. Called at startup and when the app quits, so a
+// decrypted attachment lives exactly as long as the session that opened it.
+// The staging copy under Downloads matters most: that directory is readable by
+// every app holding the Downloads permission, and nothing else ever cleans it.
+void GpgEngine::purgePlaintextCaches()
+{
+    int n = 0;
+    const QStringList dirs = QStringList() << decryptedCacheDir()
+                                           << (QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+                                               + QStringLiteral("/smime-decrypted"))
+                                           << stagingDir();
+    for (const QString &d : dirs) {
+        QDir dd(d);
+        if (!dd.exists()) continue;
+        for (const QString &f : dd.entryList(QDir::Files | QDir::Hidden)) {
+            if (QFile::remove(dd.filePath(f))) ++n;
+        }
+    }
+    if (n) qWarning() << "[gpg] cleared" << n << "plaintext cache file(s)";
+}
 
 // Per-app keyring (modern format), separate from the unusable system ~/.gnupg.
 static QString keyringHome()
@@ -124,24 +253,19 @@ GpgEngine::GpgEngine(QObject *parent) : QObject(parent)
     // decrypted only for the moment it is used, then dropped — shrinking the window
     // in which a live attacker (code execution on the unlocked device) could scrape
     // it from RAM. We always pass the passphrase via loopback anyway, so no UX cost.
-    QFile ac(home + QStringLiteral("/gpg-agent.conf"));
-    if (ac.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)) {
-        ac.write("default-cache-ttl 0\n"
-                 "max-cache-ttl 0\n"
-                 "ignore-cache-for-signing\n"
-                 "allow-loopback-pinentry\n");
-        ac.close();
-    }
+    writeIfChanged(home + QStringLiteral("/gpg-agent.conf"),
+                   "default-cache-ttl 0\n"
+                   "max-cache-ttl 0\n"
+                   "ignore-cache-for-signing\n"
+                   "allow-loopback-pinentry\n"
+                   "disable-scdaemon\n");
 
     // gpg.conf: the bundled gpg's RPATH points at the old -pgp prefix, and its
     // compiled-in agent path likewise — pin the agent to OUR bundled binary.
     // (Previously passed per-invocation as --agent-program; with GPGME the gpg
     // command line is not ours to build, so the config file carries it.)
-    QFile gc(home + QStringLiteral("/gpg.conf"));
-    if (gc.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)) {
-        gc.write(QByteArray("agent-program ") + kAgent + "\n");
-        gc.close();
-    }
+    writeIfChanged(home + QStringLiteral("/gpg.conf"),
+                   QByteArray("agent-program ") + kAgent + "\n");
 
     // Environment for GPGME and the gpg/gpg-agent processes it spawns: the
     // bundled binaries' RPATH points at the absent -pgp prefix, so they need
@@ -155,6 +279,38 @@ GpgEngine::GpgEngine(QObject *parent) : QObject(parent)
                                                 : QByteArray(kLibDir) + ":" + oldLlp);
     qputenv("PATH", QByteArray(kStackBin) + ":" + qgetenv("PATH"));
     qputenv("GNUPGHOME", home.toUtf8());
+
+    // Both keyring homes spawn agents; neither may outlive the app (see
+    // agentTalk above). Clean up leftovers now, and again when the
+    // app quits.
+    const QString smimeHome =
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+        + QStringLiteral("/smime");
+    m_agentSockets << agentSocketPath(home) << agentSocketPath(smimeHome);
+    m_agentHomes   << home << smimeHome;
+    for (int i = 0; i < m_agentSockets.size(); ++i)
+        agentTalk(m_agentSockets.at(i), true, m_agentHomes.at(i));
+    // Plaintext left over from a previous run (a crash, a kill) goes now, and
+    // whatever this session decrypts goes when it ends.
+    purgePlaintextCaches();
+    connect(QCoreApplication::instance(), &QCoreApplication::aboutToQuit, this,
+            [this]() {
+        for (int i = 0; i < m_agentSockets.size(); ++i)
+            agentTalk(m_agentSockets.at(i), true, m_agentHomes.value(i));
+        purgePlaintextCaches();
+    });
+    // A crash never reaches aboutToQuit, and a surviving agent then blocks the
+    // next start from the icon. Keep the current agent pids where the signal
+    // handler can reach them (see sfmail_note_agent_pid in main.cpp).
+    QTimer *agentWatch = new QTimer(this);
+    agentWatch->setInterval(15000);
+    connect(agentWatch, &QTimer::timeout, this, [this]() {
+        SfmailNoteAgentPid note = noteAgentPid();
+        if (!note) return;
+        for (int i = 0; i < m_agentSockets.size() && i < 4; ++i)
+            note(i, agentTalk(m_agentSockets.at(i), false, QString()));
+    });
+    agentWatch->start();
 
     // Pin the OpenPGP engine to OUR bundled gpg + keyring home, GLOBALLY, before
     // any context is created. Without this, checkEngine() and every fresh
@@ -171,9 +327,7 @@ GpgEngine::GpgEngine(QObject *parent) : QObject(parent)
     // "gpgsm version 1.0.0 installed, but at least version 2.0.4 required".
     // SmimeEngine itself is unaffected (runs gpgsm via QProcess) — this fixes
     // gpgme's view. Homedir = the S/MIME keystore, NOT the gnupg dir.
-    const QByteArray smimeHomeUtf8 =
-        (QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
-         + QStringLiteral("/smime")).toUtf8();
+    const QByteArray smimeHomeUtf8 = smimeHome.toUtf8();
     gpgme_set_engine_info(GPGME_PROTOCOL_CMS, kGpgsm, smimeHomeUtf8.constData());
     m_available = QFileInfo::exists(QString::fromUtf8(kGpg))
                   && !GpgME::checkEngine(GpgME::OpenPGP);
@@ -189,7 +343,15 @@ GpgEngine::GpgEngine(QObject *parent) : QObject(parent)
     // (QMailMessageMetaData), never a full QMailMessage(id) which would freeze the GUI
     // (see memory qmailmessage-im-plugin-friert-app-ein). Filtered to OUTGOING mail so
     // an inbox sync does not flood the log. Toggle via About → Diagnostics.
-    if (QMailStore *st = QMailStore::instance()) {
+    // These listeners load metadata for EVERY message the store reports, which on
+    // a first sync of a large mailbox is thousands of loads on the GUI thread —
+    // exactly while the retrieval queue is busiest. They exist for diagnosis, so
+    // they are wired up only when the on-device log is switched on.
+    QSettings diagSettings(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+                           + QStringLiteral("/signed.ini"), QSettings::IniFormat);
+    const bool wantDiag = diagSettings.value(QStringLiteral("debugLogging"), false).toBool();
+    QMailStore *diagStore = wantDiag ? QMailStore::instance() : nullptr;
+    if (QMailStore *st = diagStore) {
         const quint64 outMask = QMailMessage::Outgoing | QMailMessage::Sent
                               | QMailMessage::Outbox | QMailMessage::Draft;
         connect(st, &QMailStore::messagesRemoved, this,
@@ -311,11 +473,28 @@ static QString gpgErrString(const GpgME::Error &err)
 
 // Human-friendly message for the common failures (locale-independent — mapped
 // from the typed error code, not from gpg's stderr text).
+// Is there any secret key at all in this keyring? Used to tell "the message is
+// not for you" apart from "you have no key yet" — the same GnuPG error code
+// covers both, and telling a new user they are not a recipient when they simply
+// have not set up a key sends them looking in the wrong place.
+static bool haveAnySecretKey()
+{
+    QGpgME::Protocol *pg = QGpgME::openpgp();
+    std::unique_ptr<QGpgME::KeyListJob> job(pg ? pg->keyListJob(false) : nullptr);
+    if (!job) return true;                 // cannot tell: keep the neutral wording
+    std::vector<GpgME::Key> keys;
+    job->exec(QStringList(), true, keys);
+    return !keys.empty();
+}
+
 static QString friendlyGpgError(const GpgME::Error &err)
 {
     switch (err.code()) {
     case GPG_ERR_NO_SECKEY:
-        return QStringLiteral("This message is not encrypted to your key — you are not one of its recipients.");
+        return haveAnySecretKey()
+            ? QStringLiteral("This message is not encrypted to your key — you are not one of its recipients.")
+            : QStringLiteral("There is no private key in this app yet. Import your key, or create one "
+                             "under Keys, before you can read encrypted mail.");
     case GPG_ERR_BAD_PASSPHRASE:
     case GPG_ERR_CANCELED:   // loopback provider cancels on a retry after a bad passphrase
         return QStringLiteral("Wrong passphrase.");
@@ -358,44 +537,105 @@ static unsigned long expirySpecToSeconds(const QString &spec)
     return 0;
 }
 
-// Primary UID ("Name <mail>") of the key with this fingerprint/keyid, "" if absent.
-static QString lookupPrimaryUid(const QString &fprOrId)
+// Identity of the key with this fingerprint/keyid as it is stored HERE: primary
+// user id plus every address on the key. Empty map if the key is not in the ring.
+static QVariantMap lookupKeyIdentity(const QString &fprOrId)
 {
-    if (fprOrId.isEmpty()) return QString();
+    QVariantMap m;
+    if (fprOrId.isEmpty()) return m;
     std::unique_ptr<GpgME::Context> ctx = makeCtx();
-    if (!ctx) return QString();
+    if (!ctx) return m;
     GpgME::Error kerr;
     const GpgME::Key key = ctx->key(fprOrId.toUtf8().constData(), kerr, false);
-    if (kerr || key.isNull()) return QString();
+    if (kerr || key.isNull()) return m;
     const char *uid = key.userID(0).id();
-    return uid ? QString::fromUtf8(uid) : QString();
+    m[QStringLiteral("uid")] = uid ? QString::fromUtf8(uid) : QString();
+    QStringList emails;
+    for (const GpgME::UserID &u : key.userIDs()) {
+        if (u.isRevoked() || u.isInvalid()) continue;
+        const QString e = QString::fromUtf8(u.email() ? u.email() : "").toLower();
+        if (!e.isEmpty() && !emails.contains(e)) emails << e;
+    }
+    m[QStringLiteral("emails")] = emails;
+    return m;
 }
 
-// Human note for the (first) signature of a decrypt/verify result. Returns ""
-// when there is no signature at all. The exact wordings are load-bearing: the
-// QML colors the result by matching "Good signature"/"BAD".
-static QString signatureNote(const GpgME::VerificationResult &vr)
+static QString validityName(GpgME::Signature::Validity v)
 {
-    if (vr.numSignatures() == 0) return QString();
+    switch (v) {
+    case GpgME::Signature::Ultimate: return QStringLiteral("ultimate");
+    case GpgME::Signature::Full:     return QStringLiteral("full");
+    case GpgME::Signature::Marginal: return QStringLiteral("marginal");
+    case GpgME::Signature::Never:    return QStringLiteral("never");
+    case GpgME::Signature::Undefined:return QStringLiteral("undefined");
+    default:                         return QStringLiteral("unknown");
+    }
+}
+
+// Everything the reader needs to judge a signature, as data rather than prose.
+// GpgME reports the verdict twice: as an error code and as summary bits. A
+// revoked or expired signing key still yields a mathematically GOOD signature,
+// so those bits must be read — deciding on the error code alone (what this used
+// to do) showed a revoked key as an ordinary signed message.
+//   status: "" none | good | bad | nokey | revoked | key-expired | sig-expired | error
+static QVariantMap signatureInfo(const GpgME::VerificationResult &vr)
+{
+    QVariantMap m;
+    m[QStringLiteral("status")] = QString();
+    if (vr.numSignatures() == 0) return m;
+
     const GpgME::Signature s = vr.signature(0);
-    const QString fpr = QString::fromUtf8(s.fingerprint() ? s.fingerprint() : "");
-    switch (s.status().code()) {
-    case GPG_ERR_NO_ERROR: {
-        const QString uid = lookupPrimaryUid(fpr);
-        return uid.isEmpty()
-            ? QStringLiteral("Good signature from key %1").arg(fpr.right(16))
-            : QStringLiteral("Good signature from \"%1\"").arg(uid);
-    }
-    case GPG_ERR_BAD_SIGNATURE:
-        return QStringLiteral("⚠ BAD signature — do not trust this message!");
-    case GPG_ERR_NO_PUBKEY:
-        return QStringLiteral("Signed, but the signer's public key is missing — cannot verify.");
-    case GPG_ERR_KEY_EXPIRED:
-    case GPG_ERR_SIG_EXPIRED:
-    case GPG_ERR_CERT_REVOKED:
-    default:
-        return QStringLiteral("Signed (signature present).");
-    }
+    const unsigned int sum = static_cast<unsigned int>(s.summary());
+    const int code = s.status().code();
+    const QString fpr = QString::fromUtf8(s.fingerprint() ? s.fingerprint() : "").toUpper();
+
+    QString status;
+    if (code == GPG_ERR_BAD_SIGNATURE || (sum & GpgME::Signature::Red))
+        status = QStringLiteral("bad");
+    else if (code == GPG_ERR_NO_PUBKEY || (sum & GpgME::Signature::KeyMissing))
+        status = QStringLiteral("nokey");
+    else if (code == GPG_ERR_CERT_REVOKED || (sum & GpgME::Signature::KeyRevoked))
+        status = QStringLiteral("revoked");
+    else if (code == GPG_ERR_KEY_EXPIRED || (sum & GpgME::Signature::KeyExpired))
+        status = QStringLiteral("key-expired");
+    else if (code == GPG_ERR_SIG_EXPIRED || (sum & GpgME::Signature::SigExpired))
+        status = QStringLiteral("sig-expired");
+    else if (code == GPG_ERR_NO_ERROR)
+        status = QStringLiteral("good");
+    else
+        status = QStringLiteral("error");
+
+    const QVariantMap ident = lookupKeyIdentity(fpr);
+    m[QStringLiteral("status")]   = status;
+    m[QStringLiteral("fpr")]      = fpr;
+    m[QStringLiteral("keyId")]    = fpr.right(16);
+    m[QStringLiteral("uid")]      = ident.value(QStringLiteral("uid"));
+    m[QStringLiteral("emails")]   = ident.value(QStringLiteral("emails"), QStringList());
+    m[QStringLiteral("validity")] = validityName(s.validity());
+    m[QStringLiteral("count")]    = int(vr.numSignatures());
+    m[QStringLiteral("error")]    = s.status().asString() ? QString::fromUtf8(s.status().asString()) : QString();
+    return m;
+}
+
+// One-line rendering of the map above, for the places that show plain text
+// (the raw-info page, the signed-memory store). The reader page builds its own
+// wording from the status so it can colour it — this is the fallback.
+static QString signatureNote(const QVariantMap &sig)
+{
+    const QString st = sig.value(QStringLiteral("status")).toString();
+    if (st.isEmpty()) return QString();
+    const QStringList emails = sig.value(QStringLiteral("emails")).toStringList();
+    const QString who = !emails.isEmpty() ? emails.first()
+                      : sig.value(QStringLiteral("uid")).toString().isEmpty()
+                        ? sig.value(QStringLiteral("keyId")).toString()
+                        : sig.value(QStringLiteral("uid")).toString();
+    if (st == QLatin1String("good"))        return QStringLiteral("Good signature from \"%1\"").arg(who);
+    if (st == QLatin1String("bad"))         return QStringLiteral("⚠ BAD signature — do not trust this message!");
+    if (st == QLatin1String("nokey"))       return QStringLiteral("Signed, but the signer's public key is missing — cannot verify.");
+    if (st == QLatin1String("revoked"))     return QStringLiteral("⚠ Signed with a REVOKED key (%1).").arg(who);
+    if (st == QLatin1String("key-expired")) return QStringLiteral("Signed with an expired key (%1).").arg(who);
+    if (st == QLatin1String("sig-expired")) return QStringLiteral("The signature itself has expired (%1).").arg(who);
+    return QStringLiteral("Signature could not be checked.");
 }
 
 QVariantList GpgEngine::listKeys(bool secret, const QString &pattern)
@@ -413,8 +653,20 @@ QVariantList GpgEngine::listKeys(bool secret, const QString &pattern)
     if (GpgME::Context *ctx = QGpgME::Job::context(job.get()))
         ctx->setKeyListMode(GpgME::Local | GpgME::WithSecret);
 
+    // An address pattern goes to GnuPG in ANGLE BRACKETS. Bare text is matched
+    // as a SUBSTRING (userids.c, KEYDB_SEARCH_MODE_SUBSTR), so a lookup for
+    // "bob@example.com" would also find a key for "bob@example.com.attacker" —
+    // and a recipient search must never resolve to somebody else's key. The
+    // bracket form is GnuPG's exact-address mode.
+    QStringList pat;
+    if (!pattern.isEmpty()) {
+        const QString p = pattern.trimmed();
+        const bool isAddress = p.contains(QLatin1Char('@')) && !p.startsWith(QLatin1Char('<'))
+                               && !p.startsWith(QLatin1String("0x"));
+        pat << (isAddress ? (QLatin1Char('<') + p + QLatin1Char('>')) : p);
+    }
     std::vector<GpgME::Key> keys;
-    job->exec(pattern.isEmpty() ? QStringList() : QStringList(pattern), secret, keys);
+    job->exec(pat, secret, keys);
     for (const GpgME::Key &key : keys) {
         const GpgME::Subkey pk = key.subkey(0);   // primary key
         if (pk.isNull()) continue;
@@ -434,6 +686,13 @@ QVariantList GpgEngine::listKeys(bool secret, const QString &pattern)
             m["name"] = QString::fromUtf8(u.name() ? u.name() : "");
             m["email"] = QString::fromUtf8(u.email() ? u.email() : "");
         }
+        QStringList emails;
+        for (const GpgME::UserID &uu : key.userIDs()) {
+            if (uu.isRevoked() || uu.isInvalid()) continue;
+            const QString e = QString::fromUtf8(uu.email() ? uu.email() : "").toLower();
+            if (!e.isEmpty() && !emails.contains(e)) emails << e;
+        }
+        m["emails"] = emails;
         m["hasSecret"] = secret ? true : key.hasSecret();
         // Whether the key can encrypt at all (a signing-only key must fall out
         // of recipient selection up front, not fail later inside the encrypt job).
@@ -488,11 +747,16 @@ QString GpgEngine::saveKeyToDocuments(const QString &fingerprint, bool secret,
     const QString name = QStringLiteral("sfmail-") + shortId
                        + (secret ? QStringLiteral("-secret") : QString()) + QStringLiteral(".asc");
     const QString path = dir + QStringLiteral("/") + name;
+    // Report the path only if every byte reached the disk. A backup that was
+    // silently truncated (storage full) and reported as done is how a user
+    // deletes the only copy of a key.
+    const QByteArray payload = armored.toUtf8();
     QFile f(path);
     if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate)) return QString();
     f.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
-    f.write(armored.toUtf8());
+    const bool written = (f.write(payload) == payload.size()) && f.flush();
     f.close();
+    if (!written) { QFile::remove(path); return QString(); }
     return path;
 }
 
@@ -576,9 +840,7 @@ QString GpgEngine::stageForOpen(const QString &cachePathOrUrl,
     if (!QFileInfo::exists(src)) return QString();
 
     // ~/Downloads/sfmail — Downloads is whitelisted for other apps by Sailjail.
-    QString dir = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
-    if (dir.isEmpty()) dir = QDir::homePath() + QStringLiteral("/Downloads");
-    dir += QStringLiteral("/sfmail");
+    const QString dir = stagingDir();
     QDir().mkpath(dir);
 
     QString base = suggestedName.trimmed();
@@ -589,6 +851,8 @@ QString GpgEngine::stageForOpen(const QString &cachePathOrUrl,
     const QString target = dir + QStringLiteral("/") + base;
     if (QFileInfo::exists(target)) QFile::remove(target);   // refresh, don't duplicate
     if (!QFile::copy(src, target)) return QString();
+    // This copy leaves our sandbox so another app can open it; it is removed
+    // again when this session ends (see purgePlaintextCaches).
     // The private decrypted cache is owner-only (0600); make the staged copy
     // readable so the target app (a separate sandboxed process) can open it.
     QFile::setPermissions(target, QFileDevice::ReadOwner | QFileDevice::WriteOwner
@@ -660,8 +924,9 @@ QString GpgEngine::saveRevocationCert(const QString &fingerprint)
     QFile out(path);
     if (!out.open(QIODevice::WriteOnly | QIODevice::Truncate)) return QString();
     out.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
-    out.write(data);
+    const bool written = (out.write(data) == data.size()) && out.flush();
     out.close();
+    if (!written) { QFile::remove(path); return QString(); }
     return path;
 }
 
@@ -847,20 +1112,39 @@ static QStringList keyserverUrls(const QString &query)
 void GpgEngine::httpGetFirst(const QStringList &urls, int idx, std::function<void(QByteArray)> cb)
 {
     if (idx >= urls.size()) { cb(QByteArray()); return; }
-    qWarning() << "[ks] get" << idx << urls[idx];
+    qWarning() << "[ks] get" << idx;
     if (!m_nam) m_nam = new QNetworkAccessManager(this);
-    QNetworkRequest req((QUrl(urls[idx])));
-    req.setRawHeader("User-Agent", "harbour-sfmail");
+    const QUrl target(urls[idx]);
+    if (target.scheme().toLower() != QLatin1String("https")) {
+        httpGetFirst(urls, idx + 1, cb);      // a key lookup is not for cleartext
+        return;
+    }
+    QNetworkRequest req(target);
+    // No product header: it would tell every keyserver which app (and therefore
+    // which platform) asked. Qt's default is generic.
     req.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
     QNetworkReply *reply = m_nam->get(req);
     const QStringList u = urls; const int i = idx;
+    // Qt 5.6 has no transfer timeout: without this a lookup on a network that
+    // accepts the connection but never answers hangs until the TCP stack gives
+    // up, and the UI says "searching" for minutes.
+    QTimer *guard = new QTimer(reply);
+    guard->setSingleShot(true);
+    connect(guard, &QTimer::timeout, reply, [reply]() { reply->abort(); });
+    guard->start(20000);
+    // A keyserver answer is a key, not a stream. Anything larger is not one.
+    connect(reply, &QNetworkReply::downloadProgress, reply, [reply](qint64 got, qint64) {
+        if (got > 1024 * 1024) reply->abort();
+    });
     connect(reply, &QNetworkReply::finished, this, [this, reply, u, i, cb]() {
         const QByteArray data = reply->readAll();
+        const bool ok = reply->error() == QNetworkReply::NoError
+                        && reply->url().scheme().toLower() == QLatin1String("https")
+                        && data.size() <= 1024 * 1024
+                        && data.contains("BEGIN PGP PUBLIC KEY BLOCK");
         reply->deleteLater();
-        if (reply->error() == QNetworkReply::NoError && data.contains("BEGIN PGP PUBLIC KEY BLOCK"))
-            cb(data);
-        else
-            httpGetFirst(u, i + 1, cb);
+        if (ok) cb(data);
+        else    httpGetFirst(u, i + 1, cb);
     });
 }
 
@@ -952,11 +1236,29 @@ static QVariantMap inspectArmoredKey(const QByteArray &armored)
     QVariantMap m;
     GpgME::Data din(armored.constData(), static_cast<size_t>(armored.size()), false);
 
+    // EVERY key in the block, not just the first: importing is all-or-nothing,
+    // so a dialog that showed only the first key would have the user confirm one
+    // key and store another. The extra keys are listed in "others".
     QStringList uids, emails;
+    QVariantList others;
     bool havePub = false;
     for (const GpgME::Key &key : din.toKeys(GpgME::OpenPGP)) {
         const GpgME::Subkey pk = key.subkey(0);
-        if (havePub || pk.isNull()) continue;   // only the FIRST key block matters here
+        if (pk.isNull()) continue;
+        if (havePub) {
+            QVariantMap o;
+            o[QStringLiteral("fpr")] = QString::fromUtf8(pk.fingerprint() ? pk.fingerprint() : "").toUpper();
+            QStringList ou;
+            for (const GpgME::UserID &u : key.userIDs()) {
+                const QString us = QString::fromUtf8(u.id() ? u.id() : "");
+                if (!us.isEmpty() && !ou.contains(us)) ou << us;
+            }
+            o[QStringLiteral("uids")] = ou.join(QStringLiteral("; "));
+            o[QStringLiteral("revoked")] = key.isRevoked();
+            o[QStringLiteral("expired")] = key.isExpired();
+            others.append(o);
+            continue;
+        }
         havePub = true;
         m[QStringLiteral("keyId")] = QString::fromUtf8(pk.keyID() ? pk.keyID() : "");
         m[QStringLiteral("fpr")] = QString::fromUtf8(pk.fingerprint() ? pk.fingerprint() : "").toUpper();
@@ -984,6 +1286,8 @@ static QVariantMap inspectArmoredKey(const QByteArray &armored)
     if (!havePub) return QVariantMap();
     m[QStringLiteral("uids")] = uids.join(QStringLiteral("; "));
     m[QStringLiteral("emails")] = emails;
+    m[QStringLiteral("others")] = others;
+    m[QStringLiteral("count")] = others.size() + 1;
     return m;
 }
 
@@ -1330,6 +1634,65 @@ static QString headerValue(const QString &unfolded, const QString &name)
 
 // Extract a parameter (e.g. boundary, filename, name, charset) from a header
 // value, handling quoted and unquoted forms. "" if absent.
+// RFC 2047 encoded words ("=?utf-8?Q?...?=") appear wherever a header carries
+// non-ASCII text — including an attachment's file name. Undecoded they reach
+// the user as gibberish and, worse, become the name of a file written to disk.
+// Adjacent encoded words are joined without the whitespace between them, as the
+// standard requires.
+static QString decodeEncodedWords(const QString &in)
+{
+    if (!in.contains(QStringLiteral("=?"))) return in;
+    QString out;
+    int pos = 0;
+    bool lastWasWord = false;
+    while (pos < in.length()) {
+        const int start = in.indexOf(QStringLiteral("=?"), pos);
+        if (start < 0) { out += in.mid(pos); break; }
+        // charset ? encoding ? text ?=
+        const int q1 = in.indexOf(QLatin1Char('?'), start + 2);
+        const int q2 = q1 > 0 ? in.indexOf(QLatin1Char('?'), q1 + 1) : -1;
+        const int end = q2 > 0 ? in.indexOf(QStringLiteral("?="), q2 + 1) : -1;
+        if (q1 < 0 || q2 != q1 + 2 || end < 0) {          // not a well-formed word
+            out += in.mid(pos, start - pos + 2);
+            pos = start + 2;
+            lastWasWord = false;
+            continue;
+        }
+        const QString between = in.mid(pos, start - pos);
+        // Whitespace BETWEEN two encoded words is separator, not content.
+        if (!(lastWasWord && between.trimmed().isEmpty())) out += between;
+
+        const QString charset = in.mid(start + 2, q1 - start - 2);
+        const QChar enc = in.at(q1 + 1).toUpper();
+        const QByteArray raw = in.mid(q2 + 1, end - q2 - 1).toLatin1();
+        QByteArray bytes;
+        if (enc == QLatin1Char('B')) {
+            bytes = QByteArray::fromBase64(raw);
+        } else if (enc == QLatin1Char('Q')) {
+            for (int i = 0; i < raw.size(); ++i) {
+                const char c = raw.at(i);
+                if (c == '_') { bytes.append(' '); }
+                else if (c == '=' && i + 2 < raw.size()) {
+                    bool ok = false;
+                    const int v = raw.mid(i + 1, 2).toInt(&ok, 16);
+                    if (ok) { bytes.append(char(v)); i += 2; }
+                    else bytes.append(c);
+                } else bytes.append(c);
+            }
+        } else {
+            out += in.mid(start, end + 2 - start);        // unknown encoding: verbatim
+            pos = end + 2;
+            lastWasWord = true;
+            continue;
+        }
+        QTextCodec *codec = QTextCodec::codecForName(charset.toLatin1());
+        out += codec ? codec->toUnicode(bytes) : QString::fromUtf8(bytes);
+        pos = end + 2;
+        lastWasWord = true;
+    }
+    return out;
+}
+
 static QString headerParam(const QString &unfolded, const QString &name, const QString &param)
 {
     const QString val = headerValue(unfolded, name);
@@ -1341,12 +1704,12 @@ static QString headerParam(const QString &unfolded, const QString &name, const Q
     QString rest = val.mid(p + needle.length()).trimmed();
     if (rest.startsWith('"')) {
         int e = rest.indexOf('"', 1);
-        return e > 0 ? rest.mid(1, e - 1) : rest.mid(1);
+        return decodeEncodedWords(e > 0 ? rest.mid(1, e - 1) : rest.mid(1));
     }
     int e = rest.length();
     for (int k = 0; k < rest.length(); ++k)
         if (rest[k] == ';' || rest[k].isSpace()) { e = k; break; }
-    return rest.left(e);
+    return decodeEncodedWords(rest.left(e));
 }
 
 struct MimeAttachment {
@@ -1498,7 +1861,7 @@ void GpgEngine::decryptMimeFile(const QString &pathOrUrl, const QString &passphr
 
     QFile f(path);
     if (!f.open(QIODevice::ReadOnly)) {
-        emit decryptMimeFinished(false, QString(), QString(), QVariantList(),
+        emit decryptMimeFinished(false, QString(), QString(), QVariantList(), QVariantMap(),
                                  QStringLiteral("Cannot open encrypted part"));
         return;
     }
@@ -1513,7 +1876,7 @@ void GpgEngine::decryptMimeFile(const QString &pathOrUrl, const QString &passphr
     QGpgME::Protocol *pg = QGpgME::openpgp();
     std::unique_ptr<QGpgME::DecryptVerifyJob> job(pg ? pg->decryptVerifyJob(false) : nullptr);
     if (!job) {
-        emit decryptMimeFinished(false, QString(), QString(), QVariantList(),
+        emit decryptMimeFinished(false, QString(), QString(), QVariantList(), QVariantMap(),
                                  QStringLiteral("GPGME context unavailable."));
         return;
     }
@@ -1525,11 +1888,13 @@ void GpgEngine::decryptMimeFile(const QString &pathOrUrl, const QString &passphr
     const std::pair<GpgME::DecryptionResult, GpgME::VerificationResult> res =
         job->exec(block, out);
     if (res.first.error()) {
-        emit decryptMimeFinished(false, QString(), QString(), QVariantList(),
+        qWarning() << "[gpg] decryptMime FAILED:" << gpgErrString(res.first.error());
+        emit decryptMimeFinished(false, QString(), QString(), QVariantList(), QVariantMap(),
                                  friendlyGpgError(res.first.error()));
         return;
     }
-    const QString signedBy = signatureNote(res.second);
+    const QVariantMap sig = signatureInfo(res.second);
+    const QString signedBy = signatureNote(sig);
 
     // Fully parse the inner MIME: body text + every attachment (size-bounded unless
     // the user just lifted the limit for this load).
@@ -1566,8 +1931,7 @@ void GpgEngine::decryptMimeFile(const QString &pathOrUrl, const QString &passphr
 
     // Write decrypted attachments into a fresh private cache so QML can open
     // them. Cleared each time to avoid accumulating plaintext on disk.
-    const QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
-                             + QStringLiteral("/decrypted");
+    const QString cacheDir = decryptedCacheDir();
     QDir cd(cacheDir);
     if (cd.exists())
         for (const QString &old : cd.entryList(QDir::Files))
@@ -1578,15 +1942,29 @@ void GpgEngine::decryptMimeFile(const QString &pathOrUrl, const QString &passphr
     for (int i = 0; i < atts.size(); ++i) {
         const MimeAttachment &a = atts[i];
         const QString name = safeName(a.name, i, a.mimeType);
-        const QString outPath = cacheDir + QStringLiteral("/") + name;
+        // Two parts may carry the same file name; without a unique target the
+        // second would silently replace the first and both list entries would
+        // point at the same content.
+        QString outPath = cacheDir + QStringLiteral("/") + name;
+        if (QFileInfo::exists(outPath)) {
+            QString stem = name, ext;
+            const int dot = name.lastIndexOf(QLatin1Char('.'));
+            if (dot > 0) { stem = name.left(dot); ext = name.mid(dot); }
+            for (int n = 1; n < 1000; ++n) {
+                outPath = cacheDir + QStringLiteral("/") + stem + QStringLiteral("-%1").arg(n) + ext;
+                if (!QFileInfo::exists(outPath)) break;
+            }
+        }
         QFile af(outPath);
+        bool written = false;
         if (af.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
             af.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
-            af.write(a.data);
+            written = (af.write(a.data) == a.data.size()) && af.flush();
             af.close();
         }
+        if (!written) { QFile::remove(outPath); continue; }
         QVariantMap m;
-        m[QStringLiteral("name")] = name;
+        m[QStringLiteral("name")] = QFileInfo(outPath).fileName();
         m[QStringLiteral("mimeType")] = a.mimeType;
         m[QStringLiteral("path")] = outPath;
         m[QStringLiteral("url")] = QStringLiteral("file://") + outPath;
@@ -1596,7 +1974,10 @@ void GpgEngine::decryptMimeFile(const QString &pathOrUrl, const QString &passphr
         qWarning() << "[mime] decrypted attachment" << name << a.mimeType << a.data.size() << "bytes";
     }
 
-    emit decryptMimeFinished(true, text.trimmed(), signedBy, attList, QString());
+    qWarning() << "[gpg] decrypted PGP/MIME:" << attList.size() << "attachment(s), signature"
+               << (sig.value(QStringLiteral("status")).toString().isEmpty()
+                   ? QStringLiteral("none") : sig.value(QStringLiteral("status")).toString());
+    emit decryptMimeFinished(true, text.trimmed(), signedBy, attList, sig, QString());
 }
 
 void GpgEngine::decryptText(const QString &armored, const QString &passphrase)
@@ -1613,14 +1994,14 @@ void GpgEngine::decryptText(const QString &armored, const QString &passphrase)
     if (clearsigned) {
         QGpgME::Protocol *pg = QGpgME::openpgp();
         std::unique_ptr<QGpgME::VerifyOpaqueJob> job(pg ? pg->verifyOpaqueJob(false) : nullptr);
-        if (!job) { emit decryptFinished(false, QString(), QString(), QStringLiteral("GPGME context unavailable.")); return; }
+        if (!job) { emit decryptFinished(false, QString(), QString(), QStringLiteral("GPGME context unavailable."), QVariantMap()); return; }
         configureJob(job.get());
         vr = job->exec(in, out);
         gerr = vr.error();
     } else {
         QGpgME::Protocol *pg = QGpgME::openpgp();
         std::unique_ptr<QGpgME::DecryptVerifyJob> job(pg ? pg->decryptVerifyJob(false) : nullptr);
-        if (!job) { emit decryptFinished(false, QString(), QString(), QStringLiteral("GPGME context unavailable.")); return; }
+        if (!job) { emit decryptFinished(false, QString(), QString(), QStringLiteral("GPGME context unavailable."), QVariantMap()); return; }
         configureJob(job.get(), &pp);
         const std::pair<GpgME::DecryptionResult, GpgME::VerificationResult> res =
             job->exec(in, out);
@@ -1628,10 +2009,12 @@ void GpgEngine::decryptText(const QString &armored, const QString &passphrase)
         vr = res.second;
     }
 
-    if (!gerr)
-        emit decryptFinished(true, QString::fromUtf8(out), signatureNote(vr), QString());
-    else
-        emit decryptFinished(false, QString(), QString(), friendlyGpgError(gerr));
+    if (!gerr) {
+        const QVariantMap sig = signatureInfo(vr);
+        emit decryptFinished(true, QString::fromUtf8(out), signatureNote(sig), QString(), sig);
+    } else {
+        emit decryptFinished(false, QString(), QString(), friendlyGpgError(gerr), QVariantMap());
+    }
 }
 
 // --- PGP/MIME sending via QMF ----------------------------------------------
@@ -2015,29 +2398,51 @@ bool GpgEngine::storeInOutbox(const QMailAccountId &accId, const QByteArray &rfc
 
 // The transmit half. QMF has no per-message send: this pushes the account's
 // whole outbox, which is why several stored copies need only ONE call.
-void GpgEngine::transmitOutbox(const QMailAccountId &accId)
+// One transmit action for the whole engine, created once. It used to be built
+// in two places with two slightly different lambdas, which is how a success
+// could fail to stop the retry schedule depending on who created it first.
+QMailTransmitAction *GpgEngine::transmitAction()
 {
-    // Trigger transmission of the account's outbox (messageserver does the actual
-    // SMTP). activityChanged is kept for logging only.
     if (!m_tx) {
         m_tx = new QMailTransmitAction(this);
         connect(m_tx, &QMailTransmitAction::activityChanged, this,
                 [this](QMailServiceAction::Activity a) {
-            if (a == QMailServiceAction::Successful)
+            if (a == QMailServiceAction::Successful) {
                 qWarning() << "[send] transmit Successful";
-            else if (a == QMailServiceAction::Failed) {
+                // Delivered — but only stop the schedule when nothing is left.
+                if (outboxTotal() == 0) {
+                    m_retryTimer.stop();
+                    m_retryStep = -1;
+                    emit outboxChanged();
+                    emit retryStopped(QString());
+                } else {
+                    emit outboxChanged();
+                }
+            } else if (a == QMailServiceAction::Failed) {
                 qWarning() << "[send] transmit Failed:" << m_tx->status().text;
-                onTransmitFailed(m_tx->status().text);
-            } else if (a == QMailServiceAction::Successful) {
-                // Delivered: stop any running schedule.
-                m_retryTimer.stop();
-                m_retryStep = -1;
+                onTransmitFailed(m_tx->status().text, m_tx->status().errorCode);
             }
         });
     }
-    m_retryAccount = accId.toULongLong();
-    m_tx->transmitMessages(accId);
+    return m_tx;
+}
+
+void GpgEngine::transmitOutbox(const QMailAccountId &accId)
+{
+    // Trigger transmission of the account's outbox (messageserver does the actual
+    // SMTP). activityChanged is kept for logging only.
+    rememberOutboxAccount(accId.toULongLong());
+    transmitAction()->transmitMessages(accId);
+    emit outboxChanged();
     qWarning() << "[send] transmit call returned";
+}
+
+// Accounts whose outbox we are trying to flush. Kept as a set: with two accounts
+// the single "last account" the retry used to remember meant the other one's
+// mail was never sent again.
+void GpgEngine::rememberOutboxAccount(quint64 acc)
+{
+    if (acc && !m_retryAccounts.contains(acc)) m_retryAccounts.insert(acc);
 }
 
 // --- Re-sending a stuck outbox ---------------------------------------------
@@ -2054,10 +2459,29 @@ void GpgEngine::transmitOutbox(const QMailAccountId &accId)
 static const int kRetryMinutes[] = { 1, 2, 5, 10, 15, 30, 45, 60 };
 static const int kRetryCount = int(sizeof(kRetryMinutes) / sizeof(kRetryMinutes[0]));
 
-// A permanent refusal (SMTP 5xx) is not worth repeating. QMF hands us the server
-// text verbatim, so look for the code the server actually sent.
-static bool isPermanentFailure(const QString &err)
+// A permanent refusal is not worth repeating: the server judged the message,
+// not the connection. QMF classifies the failure itself — that is the reliable
+// signal; the 5xx text is only a fallback for codes QMF maps to a generic
+// error. (Reading the free-text alone used to misfire on any message that
+// merely mentioned a three-digit number in the server's reply.)
+static bool isPermanentFailure(const QString &err, int code)
 {
+    switch (code) {
+    case QMailServiceAction::Status::ErrInvalidAddress:
+    case QMailServiceAction::Status::ErrInvalidData:
+    case QMailServiceAction::Status::ErrConfiguration:
+    case QMailServiceAction::Status::ErrLoginFailed:
+    case QMailServiceAction::Status::ErrNonexistentMessage:
+        return true;
+    case QMailServiceAction::Status::ErrNoConnection:
+    case QMailServiceAction::Status::ErrConnectionNotReady:
+    case QMailServiceAction::Status::ErrConnectionInUse:
+    case QMailServiceAction::Status::ErrTimeout:
+    case QMailServiceAction::Status::ErrInternalStateReset:
+        return false;                       // transient: keep trying
+    default:
+        break;
+    }
     static const QRegularExpression re(QStringLiteral("\\b5[0-9][0-9]\\b"));
     return re.match(err).hasMatch();
 }
@@ -2071,28 +2495,56 @@ int GpgEngine::outboxCount(int accountId)
     return QMailStore::instance()->countMessages(key);
 }
 
+// How many messages are waiting in ANY account's outbox, and for which accounts.
+// A message that could not be sent is invisible in this app unless something
+// says so on a page the user actually looks at — offline, the composer closes
+// and the mail simply stays put.
+int GpgEngine::outboxTotal()
+{
+    QMailMessageKey key(QMailMessageKey::status(QMailMessage::Outbox, QMailDataComparator::Includes));
+    QMailStore *st = QMailStore::instance();
+    return st ? st->countMessages(key) : 0;
+}
+
+QVariantList GpgEngine::outboxAccounts()
+{
+    QVariantList res;
+    QMailStore *st = QMailStore::instance();
+    if (!st) return res;
+    QMailMessageKey key(QMailMessageKey::status(QMailMessage::Outbox, QMailDataComparator::Includes));
+    QSet<quint64> seen;
+    for (const QMailMessageId &id : st->queryMessages(key)) {
+        const QMailMessageMetaData meta(id);
+        const quint64 acc = meta.parentAccountId().toULongLong();
+        if (!acc || seen.contains(acc)) continue;
+        seen.insert(acc);
+        QVariantMap m;
+        m[QStringLiteral("accountId")] = QVariant::fromValue(int(acc));
+        m[QStringLiteral("name")] = QMailAccount(meta.parentAccountId()).name();
+        res.append(m);
+    }
+    return res;
+}
+
+// Try every account that still has something in its outbox.
+void GpgEngine::retryAllOutboxes()
+{
+    for (const QVariant &v : outboxAccounts()) {
+        const int acc = v.toMap().value(QStringLiteral("accountId")).toInt();
+        rememberOutboxAccount(quint64(acc));
+        retryOutbox(acc);
+    }
+}
+
 bool GpgEngine::retryOutbox(int accountId)
 {
     QMailAccountId accId(static_cast<quint64>(accountId));
     if (!accId.isValid()) return false;
 
-    if (!m_tx) {
-        m_tx = new QMailTransmitAction(this);
-        connect(m_tx, &QMailTransmitAction::activityChanged, this,
-                [this](QMailServiceAction::Activity a) {
-            if (a == QMailServiceAction::Successful) {
-                qWarning() << "[send] transmit Successful";
-                m_retryTimer.stop();
-                m_retryStep = -1;
-            } else if (a == QMailServiceAction::Failed) {
-                qWarning() << "[send] transmit Failed:" << m_tx->status().text;
-                onTransmitFailed(m_tx->status().text);
-            }
-        });
-    }
+    rememberOutboxAccount(accId.toULongLong());
     qWarning() << "[send] manual retry for account" << accountId
                << "outbox holds" << outboxCount(accountId);
-    m_tx->transmitMessages(accId);
+    transmitAction()->transmitMessages(accId);
     return true;
 }
 
@@ -2111,9 +2563,10 @@ int GpgEngine::minutesToNextRetry()
     return (m_retryTimer.remainingTime() + 59999) / 60000;
 }
 
-void GpgEngine::onTransmitFailed(const QString &error)
+void GpgEngine::onTransmitFailed(const QString &error, int code)
 {
-    if (isPermanentFailure(error)) {
+    emit outboxChanged();
+    if (isPermanentFailure(error, code)) {
         // The server said no, for good. Retrying cannot help and would only keep
         // re-offering a message it already judged.
         m_retryTimer.stop();
@@ -2122,13 +2575,13 @@ void GpgEngine::onTransmitFailed(const QString &error)
         qWarning() << "[send] permanent refusal — no automatic retry:" << error;
         return;
     }
-    scheduleRetry(QMailAccountId(m_retryAccount ? m_retryAccount : 0));
+    scheduleRetry(QMailAccountId());
 }
 
 void GpgEngine::scheduleRetry(const QMailAccountId &accId)
 {
-    if (accId.isValid()) m_retryAccount = accId.toULongLong();
-    if (!m_retryAccount) return;
+    rememberOutboxAccount(accId.toULongLong());
+    if (outboxTotal() == 0) { m_retryTimer.stop(); m_retryStep = -1; return; }
 
     if (++m_retryStep >= kRetryCount) {
         m_retryStep = -1;
@@ -2142,7 +2595,7 @@ void GpgEngine::scheduleRetry(const QMailAccountId &accId)
     m_retryTimer.disconnect();
     connect(&m_retryTimer, &QTimer::timeout, this, [this]() {
         qWarning() << "[send] automatic retry" << (m_retryStep + 1) << "of" << kRetryCount;
-        retryOutbox(int(m_retryAccount));
+        retryAllOutboxes();
     });
     m_retryTimer.start(minutes * 60 * 1000);
     emit retryScheduled(m_retryStep + 1, kRetryCount, minutes);
@@ -2353,68 +2806,6 @@ QVariantMap GpgEngine::encryptionInfo(const QString &src)
     return result;
 }
 
-QString GpgEngine::messageHeaders(int messageId)
-{
-    qWarning() << "[hdr] messageHeaders id=" << messageId;
-    QMailMessageId mid(static_cast<quint64>(messageId));
-    if (!mid.isValid())
-        return QStringLiteral("(No valid message id.)");
-
-    // Build from the parsed header fields rather than toRfc2822(): serializing
-    // a not-fully-downloaded message can dereference an absent body and crash.
-    QMailMessage m(mid);
-    const QList<QMailMessageHeaderField> fields = m.headerFields();
-    qWarning() << "[hdr] header fields:" << fields.size();
-
-    // Build a SAFE-to-render header dump. The scene-graph render thread hangs on
-    // certain header content (long DKIM/ARC lines, and exotic glyphs from decoded
-    // From/Subject fields). So: restrict to printable ASCII (no font fallback /
-    // complex shaping), collapse newlines, cap each line and the total length.
-    // Whitelist of the headers worth inspecting. Rendering the FULL header set
-    // (with multi-kB DKIM/ARC/X-SG blobs) as one big text block stalls this
-    // device's scene-graph render thread, so we keep it small & curated.
-    // NB: QMailMessageHeaderField::toString(…,presentable=false) hangs on some
-    // fields (observed on Return-Path) — use id()+content() (plain accessors).
-    static const QSet<QString> kWanted = {
-        QStringLiteral("from"), QStringLiteral("to"), QStringLiteral("cc"),
-        QStringLiteral("bcc"), QStringLiteral("reply-to"), QStringLiteral("sender"),
-        QStringLiteral("subject"), QStringLiteral("date"), QStringLiteral("message-id"),
-        QStringLiteral("in-reply-to"), QStringLiteral("references"),
-        QStringLiteral("return-path"), QStringLiteral("content-type"),
-        QStringLiteral("mime-version"), QStringLiteral("x-mailer"),
-        QStringLiteral("user-agent"), QStringLiteral("received-spf"),
-        QStringLiteral("authentication-results"), QStringLiteral("list-unsubscribe")
-    };
-    const int kMaxLine = 160;
-    QString out;
-    for (int fi = 0; fi < fields.size(); ++fi) {
-        const QByteArray id = fields[fi].id();
-        if (!kWanted.contains(QString::fromLatin1(id).toLower())) continue;
-        QByteArray raw = id + ": " + fields[fi].content();
-        const int n = qMin(raw.size(), kMaxLine);
-        QString line;
-        line.reserve(n);
-        for (int k = 0; k < n; ++k) {
-            const unsigned char u = static_cast<unsigned char>(raw.at(k));
-            if (u == '\n' || u == '\r' || u == '\t') line += ' ';
-            else if (u >= 32 && u < 127) line += QChar(u);   // printable ASCII only
-            else line += '.';                                // sanitise everything else
-        }
-        line = line.trimmed();
-        if (line.isEmpty()) continue;
-        if (raw.size() > n) line += QStringLiteral(" [+%1]").arg(raw.size() - n);
-        // Hard-wrap into <=40-char physical lines. A long line WITHOUT spaces
-        // (Message-ID, DKIM token, …) cannot be word-wrapped by the Text element
-        // and renders as one giant glyph run that stalls the render thread.
-        const int kWrap = 40;
-        for (int p = 0; p < line.length(); p += kWrap)
-            out += line.mid(p, kWrap) + QLatin1Char('\n');
-    }
-    qWarning() << "[hdr] built" << out.length() << "chars";
-    if (out.trimmed().isEmpty())
-        return QStringLiteral("(No headers available yet — open 'Download full message' first.)");
-    return out;
-}
 
 // --- "verified signed" memory (persisted) ----------------------------------
 
@@ -2486,7 +2877,10 @@ void GpgEngine::setSmimeEnabled(bool on)
 // the app, see memory note).
 static QString messageFilePath(int messageId)
 {
-    const QString dbPath = QDir::homePath() + QStringLiteral("/.qmf/database/qmailstore.db");
+    // QMF knows where its store lives (legacy ~/.qmf vs. the XDG data directory
+    // on newer systems) — never guess the dot-directory.
+    const QString dbPath = QDir::cleanPath(QMail::dataPath())
+                           + QStringLiteral("/database/qmailstore.db");
     if (!QFileInfo::exists(dbPath)) return QString();
     const QString conn = QStringLiteral("sfmail_ro_%1").arg(messageId);
     QString path;
