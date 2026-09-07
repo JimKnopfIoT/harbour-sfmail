@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>برای پیگیری یک مشکل، فایل debug.log را در پوشهٔ دادهٔ برنامه می‌نویسد. آنچه را برنامه انجام می‌دهد ثبت می‌کند، از جمله نشانی‌ای که با آن می‌فرستید و نام پیوست‌ها — هنگام بازتولید خطا آن را روشن و پس از آن دوباره خاموش کنید. متن ایمیل‌ها و کلیدها هرگز در آن نوشته نمی‌شوند.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>با لمس یک اعلان ممکن است کاشی برنامهٔ رایانامهٔ دیگر لحظه‌ای چشمک بزند. آنجا چیزی اجرا نمی‌شود: صفحهٔ خانه برای کسی که سرویس رایانامه را ادعا می‌کند یک جانگهدار می‌کشد، خودِ پیام اینجا باز می‌شود و جانگهدار خالی دوباره ناپدید می‌شود. این برنامه از آن تأثیر نمی‌پذیرد.
+
+اگر آزاردهنده است، مدخل دیگر را در یک پوستهٔ ریشه از آن نگاشت بیرون بیاورید. این کاملاً ظاهری است، چیزی در کار رایانامه تغییر نمی‌دهد و به‌روزرسانی سامانه به‌هرحال پرونده را بازمی‌گرداند:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>هر زمان با همان فرمان در جهت معکوس قابل بازگرداندن است:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>تا زمانی که مدخل جابه‌جا شده باشد، برنامهٔ دیگر نمادی در فهرست برنامه‌ها ندارد. اگر می‌خواهید دوباره از آن استفاده کنید یا پیش از خاموش کردن گزینهٔ بالا، آن را برگردانید.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

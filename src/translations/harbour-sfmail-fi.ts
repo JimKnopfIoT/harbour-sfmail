@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Kirjoittaa sovelluksen datakansioon debug.log-tiedoston ongelman selvittämistä varten. Se kirjaa, mitä sovellus tekee, mukaan lukien osoitteen, josta lähetät, ja liitteiden nimet — kytke se päälle vian toistamisen ajaksi ja sitten taas pois. Postia tai avaimia siihen ei koskaan kirjoiteta.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Ilmoitusta napautettaessa toisen sähköpostiohjelman ruutu saattaa välähtää. Siellä ei käynnisty mitään: aloitusnäyttö piirtää paikanvaraajan sille, joka vaatii sähköpostipalvelua itselleen, viesti itse avautuu tässä, ja tyhjä paikanvaraaja katoaa taas. Tähän sovellukseen se ei vaikuta.
+
+Jos se häiritsee, poista toinen merkintä tuosta kytkennästä root-kuoresta. Tämä on pelkkää kosmetiikkaa, ei muuta mitään postin toiminnassa, ja järjestelmäpäivitys palauttaa tiedoston joka tapauksessa:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Peruttavissa milloin tahansa samalla komennolla toisin päin:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Niin kauan kuin merkintä on siirretty, toisella ohjelmalla ei ole kuvaketta sovellusvalikossa. Palauta se, jos haluat käyttää sitä taas, tai ennen kuin kytket yllä olevan asetuksen pois.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

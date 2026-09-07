@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Skriver en debug.log i appens datamappe for at hjælpe med at finde en fejl. Den registrerer, hvad appen gør, herunder den adresse du sender fra og navnene på vedhæftede filer — slå den til, mens du genskaber fejlen, og slå den fra igen bagefter. Post og nøgler havner aldrig i den.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Når du trykker på en notifikation, kan det andet e-mailprograms felt blinke op. Der starter ingenting: startskærmen tegner en pladsholder for den, der gør krav på e-mailtjenesten, selve beskeden åbnes her, og den tomme pladsholder forsvinder igen. Denne app påvirkes ikke.
+
+Hvis det generer, kan du tage den anden post ud af den tilknytning fra en root-shell. Det er rent kosmetisk, ændrer intet ved hvordan posten virker, og en systemopdatering gendanner filen alligevel:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Kan til enhver tid fortrydes med den samme kommando omvendt:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Så længe posten er flyttet, har det andet program intet ikon i programmenuen. Læg den tilbage, hvis du vil bruge det igen, eller før du slår indstillingen ovenfor fra.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

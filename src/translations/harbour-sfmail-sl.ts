@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Zapisuje debug.log v podatkovno mapo aplikacije, da je laže najti vzrok težave. Beleži, kaj aplikacija počne, vključno z naslovom, s katerega pošiljate, in imeni priponk — vklopite ga med ponavljanjem napake, nato ga spet izklopite. Pošta in ključi se vanj nikoli ne zapišejo.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Ob dotiku obvestila lahko za hip zasveti ploščica drugega poštnega programa. Tam se nič ne zažene: začetni zaslon nariše držalo mesta za tistega, ki si lasti poštno storitev, samo sporočilo se odpre tukaj, prazno držalo pa spet izgine. Na to aplikacijo to ne vpliva.
+
+Če vas moti, odstranite drugi vnos iz te povezave iz root lupine. To je zgolj kozmetično, ne spremeni ničesar pri delovanju pošte, posodobitev sistema pa datoteko tako ali tako obnovi:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Kadar koli razveljavljivo z istim ukazom v obratni smeri:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Dokler je vnos premaknjen, drugi program nima ikone v meniju aplikacij. Vrnite ga, če ga želite spet uporabljati, ali preden izklopite možnost zgoraj.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

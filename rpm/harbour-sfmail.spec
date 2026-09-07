@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.7
+Version:    0.8.13
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -209,6 +209,25 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Sun Sep 07 2026 harbour-sfmail contributors 0.8.13-1
+- An attachment opens on the first tap. The note of what you asked for used to
+  live in the attachment list itself; finishing the download rebuilds that list,
+  which threw the request away, so the first tap did nothing and only a second
+  one — on an attachment that was already downloaded — opened anything. A failed
+  download now says so instead of leaving a notice standing.
+- Attachments no longer collect in the picture gallery. Fetching a part makes
+  the mail framework drop a copy in the download folder, which the media indexer
+  walks, so every image you merely looked at was listed there afterwards — and
+  for encrypted mail that copy was the decrypted one. Attachments are now opened
+  from a directory the indexer skips, and the framework's copy is removed once it
+  has served its purpose. Keeping an attachment is what "Save as…" is for.
+- A message no longer looks empty until you ask for it by hand. The store marks
+  every incoming message as both complete and partial, so the reader believed a
+  289 kB mail was fully present and displayed its five-character preview as the
+  whole text. It now asks the question that actually distinguishes the two.
+- The About page explains the tile of the other mail client that flashes up when
+  you tap a notification: nothing is starting there, this app is unaffected, and
+  it says how to take that entry out of the way if it bothers you.
 * Sun Sep 06 2026 harbour-sfmail contributors 0.8.7-1
 - S/MIME signatures are now actually verified. Until this release the app
   reported "Signed S/MIME message" on the strength of a header alone and listed

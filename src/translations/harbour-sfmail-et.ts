@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Kirjutab rakenduse andmekausta faili debug.log, et probleemi uurida. See märgib üles, mida rakendus teeb, sealhulgas aadressi, millelt saadad, ja manuste nimed — lülita see sisse vea taastekitamise ajaks ja seejärel jälle välja. Kirju ega võtmeid sinna kunagi ei kirjutata.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Teavitust puudutades võib teise e-posti programmi paan korraks vilkuda. Seal ei käivitu midagi: avaekraan joonistab kohahoidja sellele, kes e-posti teenusele pretendeerib, sõnum ise avaneb siin ja tühi kohahoidja kaob taas. Seda rakendust see ei mõjuta.
+
+Kui see häirib, eemaldage teine kirje sellest seosest root-kestast. See on puhtalt kosmeetiline, ei muuda posti töös midagi ja süsteemiuuendus taastab faili niikuinii:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Igal ajal tagasi võetav sama käsuga vastupidises suunas:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Kuni kirje on ära tõstetud, pole teisel programmil rakenduste menüüs ikooni. Pange see tagasi, kui soovite seda uuesti kasutada, või enne ülaloleva valiku väljalülitamist.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Zapisuje debug.log do datové složky aplikace, aby pomohl objasnit problém. Zaznamenává, co aplikace dělá, včetně odesílací adresy a názvů příloh — zapněte jej při vyvolání chyby a poté zase vypněte. Zprávy ani klíče se do něj nikdy nezapisují.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Po klepnutí na oznámení může probliknout dlaždice druhého poštovního programu. Nic se tam nespouští: domovská obrazovka vykreslí zástupný symbol pro toho, kdo si nárokuje poštovní službu, samotná zpráva se otevře zde a prázdný zástupce zase zmizí. Této aplikace se to nedotýká.
+
+Pokud vám to vadí, odeberte druhou položku z tohoto přiřazení z rootovského shellu. Je to čistě kosmetické, nic nemění na fungování pošty a aktualizace systému soubor stejně obnoví:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Kdykoli vratné stejným příkazem v opačném směru:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Dokud je položka přesunutá, nemá druhý program ikonu v nabídce aplikací. Vraťte ji, pokud jej chcete znovu používat, nebo než vypnete volbu výše.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Scrive un debug.log nella cartella dati dell&apos;app per analizzare un problema. Registra ciò che l&apos;app fa, compresi l&apos;indirizzo del mittente e i nomi degli allegati — attivalo mentre riproduci il malfunzionamento, poi disattivalo. Messaggi e chiavi non vi vengono mai scritti.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Toccando una notifica potreste vedere lampeggiare il riquadro dell&apos;altro client di posta. Lì non si avvia nulla: la schermata iniziale disegna un segnaposto per chi rivendica il servizio di posta, il messaggio si apre qui, e il segnaposto vuoto scompare di nuovo. Questa applicazione non ne è influenzata.
+
+Se la cosa disturba, togliete l&apos;altra voce da quella corrispondenza da una shell di root. È puramente estetico, non cambia nulla nel funzionamento della posta, e un aggiornamento di sistema ripristina comunque il file:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Annullabile in qualsiasi momento con lo stesso comando invertito:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Finché la voce è spostata, l&apos;altro client non ha un&apos;icona nel launcher. Rimettetela se volete usarlo di nuovo, o prima di disattivare l&apos;opzione qui sopra.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

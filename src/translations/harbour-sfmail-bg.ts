@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Записва debug.log в папката с данни на приложението, за да помогне при издирване на проблем. Отбелязва какво прави приложението, включително адреса, от който изпращате, и имената на прикачените файлове — включете го, докато възпроизвеждате грешката, и после го изключете. Писма и ключове никога не се записват в него.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>При докосване на известие може да проблесне плочката на другата пощенска програма. Там нищо не се стартира: началният екран рисува заместител за този, който заявява пощенската услуга, самото писмо се отваря тук, а празният заместител изчезва отново. Това приложение не е засегнато.
+
+Ако ви пречи, махнете другия запис от това съответствие от root обвивка. Това е чиста козметика, не променя нищо в работата на пощата, а системна актуализация така или иначе възстановява файла:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>По всяко време се отменя със същата команда в обратна посока:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Докато записът е преместен, другата програма няма икона в менюто с приложения. Върнете го, ако искате да я използвате отново, или преди да изключите настройката по-горе.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

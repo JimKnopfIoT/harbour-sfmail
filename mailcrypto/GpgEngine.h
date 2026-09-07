@@ -102,6 +102,10 @@ public:
     // an existing staged copy so repeated opens don't pile up duplicates.
     Q_INVOKABLE QString stageForOpen(const QString &cachePathOrUrl,
                                      const QString &suggestedName);
+    // Whether a file is still on disk. The attachment model keeps reporting a
+    // path after staging has removed the framework's download copy, so the
+    // reader has to ask the file system rather than trust that path.
+    Q_INVOKABLE bool fileExists(const QString &pathOrUrl) const;
 
     // True when the message's FULL content (body + all parts) is already on the
     // device. Lets the UI skip a needless downloadMessage() on open — which on a
@@ -110,6 +114,21 @@ public:
     // Reads metadata only (QMailMessageMetaData), never the full QMailMessage, so
     // it does NOT freeze the GUI thread.
     Q_INVOKABLE bool contentAvailable(int messageId);
+    // The honest version of the question above. The store sets its
+    // "content available" and "partial content available" marks TOGETHER on
+    // every incoming message, so neither says anything on its own — measured
+    // on device against the store's own flag table. What does distinguish a
+    // message that is really here from one the server has only announced is
+    // the unloaded-data mark: set while parts are still missing, cleared once
+    // the message has been fetched. Without this the reader opened a 289 kB
+    // message, was handed its five-character preview, and showed that as the
+    // whole mail until the user asked for the download by hand.
+    Q_INVOKABLE bool contentComplete(int messageId);
+    // Diagnostic companion: the store's own words about how much of a
+    // message is really on the device ("full/partial/size/attachments").
+    // A message can carry both the complete and the partial flag at once,
+    // so the decision to fetch cannot rest on either one alone.
+    Q_INVOKABLE QString contentState(int messageId);
 
     // Header fields the sender put INSIDE the encrypted part of the message that
     // was decrypted last (draft-autocrypt-lamps-protected-headers): from/to/cc/

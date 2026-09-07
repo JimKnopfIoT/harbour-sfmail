@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>問題の原因を調べるため、アプリのデータフォルダーに debug.log を書き出します。送信元アドレスや添付ファイル名を含め、アプリの動作を記録します。不具合を再現する間だけオンにし、終わったらオフに戻してください。メール本文や鍵が書き込まれることはありません。</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>通知をタップすると、もう一方のメールプログラムのタイルが一瞬光ることがあります。そこでは何も起動していません。ホーム画面はメールサービスを名乗るアプリのために仮の枠を描き、メッセージ自体はこのアプリで開き、空の枠は再び消えます。このアプリには影響しません。
+
+気になる場合は、root シェルでもう一方の項目をその対応から外してください。これは見た目だけの変更で、メールの動作は何も変わりません。システム更新をすればファイルは元に戻ります:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>同じコマンドを逆向きに実行すれば、いつでも元に戻せます:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>項目を移動している間、もう一方のプログラムはアプリ一覧にアイコンを持ちません。再び使いたいとき、または上の設定をオフにする前に、元に戻してください。</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

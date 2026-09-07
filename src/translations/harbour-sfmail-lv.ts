@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Raksta lietotnes datu mapē debug.log, lai palīdzētu izmeklēt problēmu. Tas fiksē, ko lietotne dara, tostarp adresi, no kuras sūti, un pielikumu nosaukumus — ieslēdz to, kamēr atkārto kļūdu, un pēc tam atkal izslēdz. Pasts un atslēgas tajā nekad netiek rakstītas.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Pieskaroties paziņojumam, var uz mirkli iemirdzēties otras pasta programmas elements. Tur nekas nesākas: sākuma ekrāns uzzīmē vietturi tam, kurš pieprasa pasta pakalpojumu, pati vēstule atveras šeit, un tukšais vietturis atkal pazūd. Šo lietotni tas neietekmē.
+
+Ja tas traucē, izņemiet otru ierakstu no šīs sasaistes root čaulā. Tas ir tīri kosmētiski, neko nemaina pasta darbībā, un sistēmas atjauninājums failu tāpat atjauno:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Jebkurā brīdī atsaucams ar to pašu komandu pretējā virzienā:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Kamēr ieraksts ir pārvietots, otrai programmai nav ikonas lietotņu izvēlnē. Ielieciet to atpakaļ, ja vēlaties to atkal lietot, vai pirms izslēdzat iestatījumu augstāk.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

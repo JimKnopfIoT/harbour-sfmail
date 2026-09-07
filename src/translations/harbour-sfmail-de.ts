@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Schreibt ein debug.log in den Datenordner der App, um einem Fehler nachzugehen. Es hält fest, was die App tut, darunter die Absenderadresse und die Namen von Anhängen — schalten Sie es ein, während der Fehler auftritt, und danach wieder aus. Mails und Schlüssel landen nie darin.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Beim Antippen einer Benachrichtigung blitzt womöglich die Kachel des anderen Mail-Programms auf. Dort startet nichts: die Oberfläche zeichnet einen Platzhalter für denjenigen, der den Mail-Dienst beansprucht, die Nachricht selbst geht hier auf, und der leere Platzhalter verschwindet wieder. Diese App wird davon nicht beeinträchtigt.
+
+Wenn es stört, nehmen Sie den anderen Eintrag in einer Root-Shell aus dieser Zuordnung heraus. Das ist reine Kosmetik, ändert nichts an der Arbeitsweise der Mail, und ein Systemupdate stellt die Datei ohnehin wieder her:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Jederzeit rückgängig zu machen mit demselben Befehl in umgekehrter Richtung:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Solange der Eintrag verschoben ist, hat das andere Programm kein Symbol im Startraster. Schieben Sie ihn zurück, wenn Sie es wieder benutzen wollen — oder bevor Sie die Einstellung darüber ausschalten.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>
