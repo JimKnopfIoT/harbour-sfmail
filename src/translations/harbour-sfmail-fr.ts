@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Écrit un debug.log dans le dossier de données de l&apos;application pour analyser un problème. Il consigne ce que fait l&apos;application, y compris l&apos;adresse d&apos;expédition et le nom des pièces jointes — activez-le pendant que le défaut se produit, puis désactivez-le. Les messages et les clés n&apos;y sont jamais écrits.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>En touchant une notification, vous verrez peut-être clignoter la tuile de l&apos;autre client de messagerie. Rien n&apos;y démarre : l&apos;écran d&apos;accueil dessine un espace réservé pour celui qui revendique le service de messagerie, le message lui-même s&apos;ouvre ici, et l&apos;espace réservé vide disparaît. Cette application n&apos;en est pas affectée.
+
+Si cela vous gêne, retirez l&apos;autre entrée de cette correspondance depuis un shell root. C&apos;est purement cosmétique, cela ne change rien au fonctionnement du courrier, et une mise à jour du système restaure le fichier de toute façon :</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Réversible à tout moment avec la même commande inversée :</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Tant que l&apos;entrée est déplacée, l&apos;autre client n&apos;a pas d&apos;icône dans le lanceur. Remettez-la si vous voulez l&apos;utiliser à nouveau, ou avant de désactiver l&apos;option ci-dessus.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

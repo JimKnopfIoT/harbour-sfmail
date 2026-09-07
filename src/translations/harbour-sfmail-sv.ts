@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Skriver en debug.log i appens datamapp för att spåra ett problem. Den registrerar vad appen gör, bland annat adressen du skickar från och namnen på bilagor — slå på den medan du återskapar felet och slå sedan av den igen. Post och nycklar hamnar aldrig i den.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>När du trycker på en avisering kan den andra e-postklientens ruta blinka till. Där startar ingenting: hemskärmen ritar en platshållare för den som gör anspråk på e-posttjänsten, själva meddelandet öppnas här, och den tomma platshållaren försvinner igen. Den här appen påverkas inte.
+
+Om det stör kan du ta bort den andra posten ur den kopplingen från ett root-skal. Det är rent kosmetiskt, ändrar ingenting i hur e-posten fungerar, och en systemuppdatering återställer filen ändå:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Kan när som helst ångras med samma kommando omvänt:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Så länge posten är flyttad har den andra klienten ingen ikon i programmenyn. Lägg tillbaka den om du vill använda den igen, eller innan du stänger av alternativet ovan.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

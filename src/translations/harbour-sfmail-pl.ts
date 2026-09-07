@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Zapisuje debug.log w folderze danych aplikacji, aby pomóc zbadać problem. Odnotowuje, co robi aplikacja, w tym adres nadawcy i nazwy załączników — włącz go na czas odtworzenia błędu, potem wyłącz z powrotem. Wiadomości ani klucze nigdy do niego nie trafiają.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Po dotknięciu powiadomienia może mignąć kafelek drugiego programu pocztowego. Nic się tam nie uruchamia: ekran główny rysuje symbol zastępczy dla tego, kto zgłasza usługę poczty, sama wiadomość otwiera się tutaj, a pusty symbol znika. Ta aplikacja nie jest tym dotknięta.
+
+Jeśli to przeszkadza, usuń drugi wpis z tego przypisania z powłoki roota. To wyłącznie kosmetyka, nie zmienia niczego w działaniu poczty, a aktualizacja systemu i tak przywróci plik:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>W każdej chwili do cofnięcia tym samym poleceniem w drugą stronę:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Dopóki wpis jest przeniesiony, drugi program nie ma ikony w menu programów. Przywróć go, jeśli chcesz go znowu używać, albo zanim wyłączysz opcję powyżej.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Записывает debug.log в папку данных приложения, чтобы помочь разобраться с проблемой. Он фиксирует, что делает приложение, включая адрес отправителя и имена вложений — включите его, пока воспроизводите ошибку, затем выключите снова. Письма и ключи в него не попадают никогда.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>При касании уведомления может мелькнуть плитка другой почтовой программы. Там ничего не запускается: домашний экран рисует заполнитель для того, кто заявляет почтовую службу, само письмо открывается здесь, а пустой заполнитель снова исчезает. На это приложение это не влияет.
+
+Если это мешает, уберите другую запись из этого сопоставления в root-оболочке. Это чистая косметика, ничего не меняет в работе почты, а обновление системы всё равно восстановит файл:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>В любой момент отменяется той же командой в обратную сторону:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Пока запись перемещена, у другой программы нет значка в меню приложений. Верните её, если снова захотите ею пользоваться, или прежде чем выключить настройку выше.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

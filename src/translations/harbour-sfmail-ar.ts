@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>يكتب ملف debug.log في مجلد بيانات التطبيق للمساعدة في تشخيص مشكلة. يسجّل ما يفعله التطبيق، بما في ذلك العنوان الذي ترسل منه وأسماء المرفقات — فعّله أثناء إعادة إنتاج الخلل ثم أوقفه بعدها. ولا تُكتب فيه الرسائل ولا المفاتيح أبدًا.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>عند لمس إشعار قد ترى مربّع برنامج البريد الآخر يومض للحظة. لا يبدأ هناك أي شيء: تَرسم الشاشة الرئيسية عنصرًا نائبًا لمن يطالب بخدمة البريد، وتُفتح الرسالة نفسها هنا، ثم يختفي العنصر النائب الفارغ مجددًا. لا يؤثّر ذلك على هذا التطبيق.
+
+إن كان يزعجك، فأخرِج المُدخل الآخر من هذا الربط من صدفة الجذر. هذا تجميلي بحت، ولا يغيّر شيئًا في عمل البريد، وتحديث النظام يعيد الملف على أي حال:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>يمكن التراجع عنه في أي وقت بالأمر نفسه في الاتجاه المعاكس:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>ما دام المُدخل منقولًا، لن يكون للبرنامج الآخر أيقونة في قائمة التطبيقات. أعِده إن أردت استخدامه ثانيةً، أو قبل إيقاف الخيار أعلاه.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

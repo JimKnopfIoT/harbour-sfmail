@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>किसी समस्या की जाँच के लिए ऐप के डेटा फ़ोल्डर में debug.log लिखता है। इसमें दर्ज होता है कि ऐप क्या करता है — आपका भेजने वाला पता और अटैचमेंट के नाम भी। गड़बड़ी दोहराते समय इसे चालू करें और बाद में फिर बंद कर दें। मेल और कुंजियाँ इसमें कभी नहीं लिखी जातीं।</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>किसी सूचना पर टैप करने पर दूसरे मेल प्रोग्राम की टाइल एक पल के लिए चमक सकती है। वहाँ कुछ शुरू नहीं होता: होम स्क्रीन उसके लिए एक स्थानधारक बनाती है जो मेल सेवा का दावा करता है, संदेश स्वयं यहीं खुलता है, और खाली स्थानधारक फिर गायब हो जाता है। इस ऐप पर इसका कोई असर नहीं पड़ता।
+
+यदि यह परेशान करता है, तो रूट शेल से दूसरी प्रविष्टि को उस जोड़ से हटा दें। यह पूरी तरह दिखावटी है, मेल के काम करने के तरीके में कुछ नहीं बदलता, और सिस्टम अपडेट फ़ाइल को वैसे भी वापस ले आता है:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>उसी आदेश को उल्टा चलाकर कभी भी पूर्ववत किया जा सकता है:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>जब तक प्रविष्टि हटी हुई है, दूसरे प्रोग्राम का ऐप मेन्यू में कोई चिह्न नहीं होगा। यदि आप उसे फिर से उपयोग करना चाहें, या ऊपर वाला विकल्प बंद करने से पहले, उसे वापस रख दें।</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

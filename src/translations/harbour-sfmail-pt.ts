@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Escreve um debug.log na pasta de dados da aplicação para analisar um problema. Regista o que a aplicação faz, incluindo o endereço a partir do qual envias e os nomes dos anexos — liga-o enquanto reproduzes a falha e desliga-o a seguir. As mensagens e as chaves nunca lá são escritas.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Ao tocar numa notificação poderá ver o mosaico do outro cliente de correio a piscar. Ali não arranca nada: o ecrã inicial desenha um marcador de posição para quem reivindica o serviço de correio, a mensagem abre aqui, e o marcador vazio desaparece de novo. Esta aplicação não é afetada.
+
+Se o incomodar, retire a outra entrada dessa correspondência a partir de uma shell de root. É meramente estético, não altera nada no funcionamento do correio, e uma atualização do sistema repõe o ficheiro de qualquer forma:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Reversível a qualquer momento com o mesmo comando invertido:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Enquanto a entrada estiver afastada, o outro cliente não tem ícone no lançador. Reponha-a se quiser usá-lo de novo, ou antes de desligar a opção acima.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

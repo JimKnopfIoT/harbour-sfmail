@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>在应用的数据目录中写入 debug.log，以便排查问题。它会记录应用的操作，包括你的发件地址和附件名称——请在重现故障时开启，之后再关闭。邮件内容和密钥绝不会写入其中。</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>轻触通知时，另一个邮件程序的磁贴可能会闪现一下。那里并没有启动任何东西：主屏幕为声明了邮件服务的应用绘制一个占位块，邮件本身在这里打开，空占位块随后又消失。这不会影响本应用。
+
+如果觉得碍眼，可以在 root shell 中把另一个条目从该对应关系中移出。这纯粹是外观上的改动，不会改变邮件的工作方式，系统更新也会把文件恢复回来：</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>随时可以用同一条命令反向执行来撤销：</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>条目被移走期间，另一个程序在应用列表中没有图标。若想再次使用它，或在关闭上面的选项之前，请把它放回去。</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

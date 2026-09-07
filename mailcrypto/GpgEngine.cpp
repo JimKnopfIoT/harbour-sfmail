@@ -210,6 +210,26 @@ static QString stagingDir()
     return dir + QStringLiteral("/sfmail");
 }
 
+// Create the staging directory and tell the media indexer to stay out of it.
+// The indexer walks the whole download folder, so without this marker every
+// decrypted image the user opened turned up in the picture gallery — a
+// plaintext copy of encrypted mail, listed next to the holiday photos. The
+// device's indexer skips any directory containing one of these files (its own
+// "ignored directories with content" setting names them); both are written
+// because that list is configuration, not a promise.
+static void ensureStagingDir()
+{
+    const QString dir = stagingDir();
+    QDir().mkpath(dir);
+    static const char *markers[] = { ".trackerignore", ".nomedia" };
+    for (unsigned i = 0; i < sizeof(markers) / sizeof(markers[0]); ++i) {
+        const QString m = dir + QLatin1Char('/') + QLatin1String(markers[i]);
+        if (QFileInfo::exists(m)) continue;
+        QFile f(m);
+        if (f.open(QIODevice::WriteOnly)) f.close();
+    }
+}
+
 // Empty the plaintext caches. Called at startup and when the app quits, so a
 // decrypted attachment lives exactly as long as the session that opened it.
 // The staging copy under Downloads matters most: that directory is readable by
@@ -228,6 +248,9 @@ void GpgEngine::purgePlaintextCaches()
             if (QFile::remove(dd.filePath(f))) ++n;
         }
     }
+    // The purge takes the indexer markers with it (they are files like any
+    // other); put them back before the next attachment is staged.
+    ensureStagingDir();
     if (n) qWarning() << "[gpg] cleared" << n << "plaintext cache file(s)";
 }
 
@@ -839,9 +862,10 @@ QString GpgEngine::stageForOpen(const QString &cachePathOrUrl,
     if (src.startsWith(QStringLiteral("file://"))) src = src.mid(7);
     if (!QFileInfo::exists(src)) return QString();
 
-    // ~/Downloads/sfmail — Downloads is whitelisted for other apps by Sailjail.
+    // ~/Downloads/sfmail — Downloads is whitelisted for other apps by Sailjail,
+    // and the directory is marked so the media indexer skips it.
     const QString dir = stagingDir();
-    QDir().mkpath(dir);
+    ensureStagingDir();
 
     QString base = suggestedName.trimmed();
     if (base.isEmpty()) base = QFileInfo(src).fileName();
@@ -857,7 +881,59 @@ QString GpgEngine::stageForOpen(const QString &cachePathOrUrl,
     // readable so the target app (a separate sandboxed process) can open it.
     QFile::setPermissions(target, QFileDevice::ReadOwner | QFileDevice::WriteOwner
                                 | QFileDevice::ReadGroup | QFileDevice::ReadOther);
+
+    // Asking the mail framework for an attachment makes it drop a copy in the
+    // user's download folder — a location the media indexer walks, so every
+    // image the user merely LOOKED at ended up in the picture gallery and
+    // stayed there. Now that the file has been staged where the indexer does
+    // not go, that copy has done its job and is removed. Keeping an attachment
+    // is what "Save as…" is for, and it remains untouched. Only the download
+    // folder itself is cleaned up this way: our own plaintext cache is left
+    // alone (it is wiped wholesale when the app starts and quits), and the
+    // staged copy obviously must survive its own staging.
+    const QString real = QFileInfo(src).canonicalFilePath();
+    if (!real.isEmpty() && real != QFileInfo(target).canonicalFilePath()) {
+        QString down = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+        if (down.isEmpty()) down = QDir::homePath() + QStringLiteral("/Downloads");
+        const QString downReal = QDir(down).canonicalPath();
+        const QString stageReal = QDir(dir).canonicalPath();
+        const bool inDownloads = !downReal.isEmpty()
+                && real.startsWith(downReal + QLatin1Char('/'));
+        const bool inStaging = !stageReal.isEmpty()
+                && real.startsWith(stageReal + QLatin1Char('/'));
+        if (inDownloads && !inStaging)
+            QFile::remove(real);
+    }
     return target;
+}
+
+bool GpgEngine::fileExists(const QString &pathOrUrl) const
+{
+    QString p = pathOrUrl;
+    if (p.startsWith(QStringLiteral("file://"))) p = p.mid(7);
+    return !p.isEmpty() && QFileInfo::exists(p);
+}
+
+bool GpgEngine::contentComplete(int messageId)
+{
+    QMailMessageId mid(static_cast<quint64>(messageId));
+    if (!mid.isValid()) return false;
+    QMailMessageMetaData meta(mid);
+    if (!meta.contentAvailable()) return false;
+    return !(meta.status() & QMailMessageMetaData::UnloadedData);
+}
+
+QString GpgEngine::contentState(int messageId)
+{
+    QMailMessageId mid(static_cast<quint64>(messageId));
+    if (!mid.isValid()) return QStringLiteral("invalid");
+    QMailMessageMetaData meta(mid);
+    return QStringLiteral("full=%1 partial=%2 size=%3 atts=%4 status=%5")
+            .arg(meta.contentAvailable() ? 1 : 0)
+            .arg(meta.partialContentAvailable() ? 1 : 0)
+            .arg(meta.size())
+            .arg((meta.status() & QMailMessage::HasAttachments) ? 1 : 0)
+            .arg(meta.status());
 }
 
 bool GpgEngine::contentAvailable(int messageId)

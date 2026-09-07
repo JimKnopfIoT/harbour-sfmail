@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Zapisuje debug.log u mapu podataka aplikacije kako bi se lakše ušlo u trag problemu. Bilježi što aplikacija radi, uključujući adresu s koje šaljete i imena privitaka — uključite ga dok ponavljate kvar, zatim ga opet isključite. Pošta i ključevi nikada se u njega ne zapisuju.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Pri dodiru obavijesti može bljesnuti pločica drugog programa za poštu. Ondje se ništa ne pokreće: početni zaslon crta rezervirano mjesto za onoga tko polaže pravo na poštansku uslugu, sama se poruka otvara ovdje, a prazno rezervirano mjesto opet nestaje. Na ovu aplikaciju to ne utječe.
+
+Ako vam smeta, uklonite drugi unos iz te pridruženosti iz root ljuske. To je čisto kozmetički, ne mijenja ništa u radu pošte, a nadogradnja sustava datoteku ionako vraća:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>U svakom trenutku poništivo istom naredbom u obrnutom smjeru:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Dok je unos premješten, drugi program nema ikonu u izborniku aplikacija. Vratite ga ako ga želite ponovno koristiti ili prije nego isključite postavku iznad.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

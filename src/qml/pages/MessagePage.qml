@@ -94,6 +94,16 @@ Page {
     property string _pendingPassphrase: ""
     property string _pendingEncLoc: ""   // SFOS 4.6: encrypted part location being fetched
     property bool _waitingForPart: false
+    // A plain attachment the user asked for while it was still on the server.
+    // This MUST live on the page, not in the list delegate: finishing the
+    // download updates the message record, the attachment model resets, and
+    // every delegate is destroyed and rebuilt — taking delegate-local state
+    // with it. The rebuilt delegate then has the file but no memory of the
+    // request, which is why the first tap did nothing and only a second one
+    // (on an already-downloaded attachment) opened anything.
+    property string _plainLoc: ""        // attachment location being fetched
+    property string _plainAction: ""     // "" | "open" | "save"
+    property string _plainName: ""       // display name for the target app
     property int _pendingKeyIndex: -1   // attachment index to import once downloaded
     property string _topNotice: ""      // transient info line at the top
     property bool _oversized: false     // decrypt hit the size cap (offer lift)
@@ -127,7 +137,7 @@ Page {
             page._body = ""; page._html = ""; return
         }
         if (page._bodyRead) return                       // cached, never ask again
-        if (!Gpg.contentAvailable(page.messageId) && page._bodyReadTries >= 3) return
+        if (!Gpg.contentComplete(page.messageId) && page._bodyReadTries >= 3) return
         page._bodyReadTries++
         page._body = message.body
         page._html = message.htmlBody
@@ -215,6 +225,22 @@ Page {
                 page._inlineInfo = ""
                 page._runEncAction("" + filepath, a, pp)
             }
+            // A plain attachment the user asked to open or save: the agent tells
+            // us where it landed. This is the same notification the attachment
+            // model listens to, so it arrives even though the model reset just
+            // threw the delegate away.
+            page._finishPlainAttachment("" + attachmentLocation, "" + filepath)
+        }
+        // Without this a failed download leaves "Downloading attachment…" on
+        // screen for ever and the next tap looks like it does nothing.
+        onAttachmentDownloadStatusChanged: {
+            if (page._plainAction === "" || ("" + attachmentLocation) !== page._plainLoc) return
+            if (status === EmailAgent.Failed || status === EmailAgent.FailedToSave
+                || status === EmailAgent.Canceled) {
+                plainAttTimeout.stop()
+                page._plainAction = ""; page._plainLoc = ""; page._plainName = ""
+                page._topNotice = qsTr("Could not load the attachment")
+            }
         }
     }
 
@@ -283,6 +309,59 @@ Page {
             Qt.openUrlExternally("file://" + p)
         else
             page._topNotice = qsTr("Could not open the attachment")
+    }
+
+    // --- Plain attachments that still have to come off the server -----------
+    // Ask for the part and remember what to do with it. The bookkeeping stays
+    // on the page because the attachment model resets once the download lands
+    // (see _plainLoc above).
+    function _startPlainAttachment(loc, name, action) {
+        if (loc === "" || loc === "undefined") {
+            page._topNotice = qsTr("Could not load the attachment")
+            return
+        }
+        page._plainLoc = loc
+        page._plainName = name
+        page._plainAction = action
+        page._topNotice = qsTr("Downloading attachment…")
+        plainAttTimeout.restart()
+        message.downloadAttachment(loc)
+    }
+    // The part arrived (either via the agent's path signal or found in the
+    // model afterwards) — carry out what the user asked for.
+    function _finishPlainAttachment(loc, filepath) {
+        if (page._plainAction === "" || loc !== page._plainLoc || filepath === "") return
+        var a = page._plainAction, nm = page._plainName
+        page._plainAction = ""; page._plainLoc = ""; page._plainName = ""
+        plainAttTimeout.stop()
+        page._topNotice = ""
+        if (a === "open") page._openWith(filepath, nm)
+        else if (a === "save") page._saveAs(filepath, nm)
+    }
+    // If neither the path signal nor a failure ever arrives — the framework can
+    // decide it already handed the part over — the notice would sit there for
+    // good and the next tap would look dead. Give up after a while and say so.
+    Timer {
+        id: plainAttTimeout
+        interval: 25000
+        onTriggered: {
+            if (page._plainAction === "") return
+            page._plainAction = ""; page._plainLoc = ""; page._plainName = ""
+            page._topNotice = qsTr("Could not load the attachment")
+        }
+    }
+    // Fallback for the case where the path signal never reaches us: whenever
+    // the message record changes, look the pending part up in the model.
+    function _retryPlainAttachment() {
+        if (page._plainAction === "") return
+        var am = message.attachmentModel
+        if (!am) return
+        for (var i = 0; i < am.count; ++i) {
+            if (("" + am.location(i)) !== page._plainLoc) continue
+            var u = "" + am.url(i)
+            if (u !== "") page._finishPlainAttachment(page._plainLoc, u)
+            return
+        }
     }
 
     // Sanitize HTML for the "Simple HTML" view: keep text and structure, but strip
@@ -380,9 +459,9 @@ Page {
         id: message
         messageId: page.messageId
         autoVerifySignature: true
-        onMessageDownloaded: { message.read = true; page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments() }
-        onStoredMessageChanged: { page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments() }
-        onInlinePartsDownloaded: { page._syncBody(); page._noteLoaded(); page._retryPending(); page._retryPendingKey(); page._loadPlainAttachments() }
+        onMessageDownloaded: { message.read = true; page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments(); page._retryPlainAttachment() }
+        onStoredMessageChanged: { page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments(); page._retryPlainAttachment() }
+        onInlinePartsDownloaded: { page._syncBody(); page._noteLoaded(); page._retryPending(); page._retryPendingKey(); page._loadPlainAttachments(); page._retryPlainAttachment() }
         // Without this the page waits for ever when the connection drops: the
         // "Downloading…" notice stays, a parked passphrase stays in memory, and
         // the 8-second timer then claims the message was already complete.
@@ -411,7 +490,7 @@ Page {
             if (page._topNotice !== qsTr("Downloading the full message…")) return
             // Nothing arrived. Only claim completeness when the store agrees;
             // otherwise the download simply did not get through.
-            page._topNotice = Gpg.contentAvailable(page.messageId)
+            page._topNotice = Gpg.contentComplete(page.messageId)
                               ? qsTr("The message is already fully downloaded.")
                               : qsTr("Could not download the message — no connection?")
         }
@@ -460,12 +539,14 @@ Page {
         // deleted from the server (a field data-loss report). contentAvailable() is a
         // metadata-only check → no GUI freeze. Safe for IMAP: a half-fetched message
         // (body but not attachments) is only PartialContentAvailable → still downloads.
-        var _ready = Gpg.contentAvailable(page.messageId)
+        var _ready = Gpg.contentComplete(page.messageId)
         page._syncBody()   // fills the cache only when the content is local
         var _needDl = !_ready
         console.log("[diag] open mid=" + page.messageId + " atts=" + message.numberOfAttachments
                 + " bodyEmpty=" + (page._body === "") + " enc=" + message.encryptionStatus
                 + " hasModel=" + (!!message.attachmentModel) + " contentAvail=" + _ready
+                + " bodyLen=" + page._body.length + " htmlLen=" + page._html.length
+                + " [" + Gpg.contentState(page.messageId) + "]"
                 + " -> downloadMessage=" + _needDl)
         if (_needDl)
             message.downloadMessage()
@@ -1381,42 +1462,26 @@ Page {
                         // proven location(i) method (same one _ensureEncPart uses); the
                         // location is static metadata, so a one-shot binding is fine.
                         property string attLoc: "" + message.attachmentModel.location(index)
-                        property string _pending: ""   // "open"|"save" once downloaded
-                        // Start the on-demand download, guarding against an empty/bad
-                        // location (QMF dereferences garbage on a malformed location).
-                        function _startDownload(pending) {
-                            if (attLoc === "" || attLoc === "undefined") {
-                                page._topNotice = qsTr("Could not load the attachment")
-                                return
-                            }
-                            pAtt._pending = pending
-                            page._topNotice = qsTr("Downloading attachment…")
-                            message.downloadAttachment(attLoc)
-                        }
-                        // The big attachment downloads on demand; finish the action
-                        // the user picked once its file path arrives.
-                        on_DlChanged: {
-                            if (_dl && _pending !== "") {
-                                if (_pending === "open") page._openWith(attUrl, attName)
-                                else if (_pending === "save") page._saveAs(attUrl, attName)
-                                _pending = ""
-                                page._topNotice = ""
-                            }
-                        }
                         onClicked: openMenu()
                         menu: ContextMenu {
+                            // The model keeps reporting a path even after opening
+                            // has removed the framework's download copy, so ask the
+                            // file system instead of trusting the path — otherwise
+                            // the second tap on the same attachment does nothing.
                             MenuItem {
                                 text: qsTr("Open with…")
                                 onClicked: {
-                                    if (pAtt._dl) page._openWith(pAtt.attUrl, pAtt.attName)
-                                    else pAtt._startDownload("open")
+                                    if (pAtt._dl && Gpg.fileExists(pAtt.attUrl))
+                                        page._openWith(pAtt.attUrl, pAtt.attName)
+                                    else page._startPlainAttachment(pAtt.attLoc, pAtt.attName, "open")
                                 }
                             }
                             MenuItem {
                                 text: qsTr("Save as…")
                                 onClicked: {
-                                    if (pAtt._dl) page._saveAs(pAtt.attUrl, pAtt.attName)
-                                    else pAtt._startDownload("save")
+                                    if (pAtt._dl && Gpg.fileExists(pAtt.attUrl))
+                                        page._saveAs(pAtt.attUrl, pAtt.attName)
+                                    else page._startPlainAttachment(pAtt.attLoc, pAtt.attName, "save")
                                 }
                             }
                         }

@@ -103,6 +103,69 @@ Page {
                 onClicked: EmailUi.takeoverEnabled = !EmailUi.takeoverEnabled
             }
 
+            // The home screen paints a launch tile for whichever application
+            // claims com.jolla.email.ui in its desktop entry, the moment that
+            // service is activated. The activation itself reaches this app (the
+            // switch above), so that tile never gets a window and is dropped
+            // again — it looks like a program starting and dying, and it is
+            // neither. Measured on device: no process is started, none exits,
+            // and the journal stays clean. Only the stock entry can be taken out
+            // of that lookup, and only a root shell may move it, so this is an
+            // instruction rather than a switch.
+            Label {
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                text: qsTr("You may see the other mail client's tile flash up when you tap a "
+                           + "notification. Nothing is starting there: the home screen draws a "
+                           + "placeholder for whoever claims the mail service, the message itself "
+                           + "opens here, and the empty placeholder disappears again. It does not "
+                           + "affect this app.\n\n"
+                           + "If it bothers you, take the other entry out of that lookup from a "
+                           + "root shell. This is cosmetic, changes nothing about how mail works, "
+                           + "and a system update restores the file anyway:")
+            }
+            Label {
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.Wrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                font.family: "monospace"
+                color: Theme.highlightColor
+                text: "devel-su mv /usr/share/applications/jolla-email.desktop "
+                      + "/usr/share/applications/jolla-email.desktop.off"
+            }
+            Label {
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                text: qsTr("Undo it at any time with the same command reversed:")
+            }
+            Label {
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.Wrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                font.family: "monospace"
+                color: Theme.highlightColor
+                text: "devel-su mv /usr/share/applications/jolla-email.desktop.off "
+                      + "/usr/share/applications/jolla-email.desktop"
+            }
+            Label {
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                text: qsTr("While the entry is moved away, the other client has no icon in the "
+                           + "launcher. Put it back if you want to use it again, or before "
+                           + "switching the option above off.")
+            }
+
             SectionHeader { text: qsTr("Diagnostics") }
             TextSwitch {
                 text: qsTr("Debug logging")

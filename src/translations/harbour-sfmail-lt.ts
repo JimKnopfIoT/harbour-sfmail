@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Rašo programos duomenų aplanke debug.log, kad būtų lengviau ištirti triktį. Jame fiksuojama, ką programa daro, taip pat adresas, iš kurio siunti, ir priedų pavadinimai — įjunk jį atkartodamas triktį ir paskui vėl išjunk. Laiškai ir raktai į jį niekada nerašomi.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Palietus pranešimą gali blykstelėti kitos pašto programos plytelė. Ten niekas nepasileidžia: pradžios ekranas nupiešia vietaženklį tam, kuris reiškia pretenzijas į pašto tarnybą, pats laiškas atsiveria čia, o tuščias vietaženklis vėl dingsta. Šiai programai tai įtakos neturi.
+
+Jei tai trukdo, pašalinkite kitą įrašą iš to susiejimo root aplinkoje. Tai grynai kosmetika, nieko nekeičia pašto veikime, o sistemos atnaujinimas failą vis tiek atkurs:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Bet kada atšaukiama ta pačia komanda priešinga kryptimi:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Kol įrašas perkeltas, kita programa neturi piktogramos programų meniu. Grąžinkite jį, jei norite ją vėl naudoti, arba prieš išjungdami aukščiau esantį nustatymą.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>

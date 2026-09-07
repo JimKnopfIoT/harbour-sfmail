@@ -79,6 +79,22 @@
         <source>Write a debug.log in the app&apos;s data folder to help diagnose a problem. It records what the app does, including the address you send from and the names of attachments — switch it on while reproducing a fault, then off again. Mail and keys are never written to it.</source>
         <translation>Scríobhann sé debug.log i bhfillteán sonraí an fheidhmchláir chun cabhrú le fadhb a fhiosrú. Taifeadann sé a ndéanann an feidhmchlár, an seoladh as a seolann tú agus ainmneacha na gceangaltán san áireamh — cas air é agus tú ag atáirgeadh na faidhbe, agus cas as arís é ina dhiaidh sin. Ní scríobhtar post ná eochracha ann riamh.</translation>
     </message>
+    <message>
+        <source>You may see the other mail client&apos;s tile flash up when you tap a notification. Nothing is starting there: the home screen draws a placeholder for whoever claims the mail service, the message itself opens here, and the empty placeholder disappears again. It does not affect this app.
+
+If it bothers you, take the other entry out of that lookup from a root shell. This is cosmetic, changes nothing about how mail works, and a system update restores the file anyway:</source>
+        <translation>Nuair a bhuaileann tú fógra, seans go bpreabfaidh tíl an chliaint ríomhphoist eile. Ní thosaíonn aon rud ansin: tarraingíonn an scáileán baile ionadaí don té a éilíonn an tseirbhís ríomhphoist, osclaítear an teachtaireacht féin anseo, agus imíonn an t-ionadaí folamh arís. Ní chuireann sé isteach ar an bhfeidhmchlár seo.
+
+Má chuireann sé isteach ort, bain an iontráil eile as an nasc sin ó bhlaosc root. Is cúrsaí cosmaideacha amháin é, ní athraíonn sé aon rud faoi obair an phoist, agus cuirfidh nuashonrú córais an comhad ar ais ar aon nós:</translation>
+    </message>
+    <message>
+        <source>Undo it at any time with the same command reversed:</source>
+        <translation>Is féidir é a chur ar ceal am ar bith leis an ordú céanna droim ar ais:</translation>
+    </message>
+    <message>
+        <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
+        <translation>Fad is atá an iontráil bogtha, níl deilbhín ag an gcliant eile sa roghchlár feidhmchlár. Cuir ar ais é más mian leat é a úsáid arís, nó sula gcuireann tú an rogha thuas as.</translation>
+    </message>
 </context>
 <context>
     <name>ComposerPage</name>
