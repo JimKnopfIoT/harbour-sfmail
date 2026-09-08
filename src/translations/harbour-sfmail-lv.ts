@@ -97,6 +97,37 @@ Ja tas traucē, izņemiet otru ierakstu no šīs sasaistes root čaulā. Tas ir 
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Iegaumētās adreses</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP atslēga</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME sertifikāts</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Adrešu grāmata</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Jau zināms: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Meklē šo adresi…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Šeit vēl nav zināma</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Ja tas traucē, izņemiet otru ierakstu no šīs sasaistes root čaulā. Tas ir 
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Nav kontaktu ar e-pasta adresi</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Aizmirst šo adresi</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Iegaumētās adreses</translation>
     </message>
 </context>
 <context>
@@ -1216,6 +1255,10 @@ Imports pievieno šai adresei OTRU atslēgu — pārliecinies, ka jaunā atslēg
         <source>Tap to try sending again.</source>
         <translation>Pieskaries, lai mēģinātu sūtīt vēlreiz.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Iegaumētās adreses</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1706,6 +1749,22 @@ Imports pievieno šai adresei OTRU atslēgu — pārliecinies, ka jaunā atslēg
         <source>Could not download the message — no connection?</source>
         <translation>Vēstuli neizdevās lejupielādēt — nav savienojuma?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Iegaumēt %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Adrese iegaumēta</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Iegaumētās adreses</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 jau ir iegaumēta</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1732,6 +1791,76 @@ Imports pievieno šai adresei OTRU atslēgu — pārliecinies, ka jaunā atslēg
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Tikai tad, ja tev ir cits dublējums. To nevar atsaukt.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Iegaumēt</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Atcelt</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Pievienot iegaumētajām adresēm?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Pievienot adresi</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Iegaumētās adreses</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Noņemšana</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Rediģēt</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Aizmirst</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Nav iegaumētu adrešu</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Turiet nospiestu adresi ziņojumā, lai to pievienotu šeit</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Saglabāt</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Atcelt</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Iegaumēta adrese</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Vārds</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>E-pasta adrese</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>vards@example.com</translation>
     </message>
 </context>
 <context>

@@ -97,6 +97,37 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Αποθηκευμένες διευθύνσεις</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>Κλειδί PGP</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>Πιστοποιητικό S/MIME</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Ευρετήριο διευθύνσεων</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Ήδη γνωστή: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Αναζήτηση αυτής της διεύθυνσης…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Δεν είναι ακόμη γνωστή εδώ</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Καμία επαφή με διεύθυνση e-mail</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Διαγραφή αυτής της διεύθυνσης</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Αποθηκευμένες διευθύνσεις</translation>
     </message>
 </context>
 <context>
@@ -1214,6 +1253,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Tap to try sending again.</source>
         <translation>Πατήστε για νέα προσπάθεια αποστολής.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Αποθηκευμένες διευθύνσεις</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1704,6 +1747,22 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Could not download the message — no connection?</source>
         <translation>Δεν ήταν δυνατή η λήψη του μηνύματος — δεν υπάρχει σύνδεση;</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Απομνημόνευση %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Η διεύθυνση απομνημονεύτηκε</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Αποθηκευμένες διευθύνσεις</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>Η %1 έχει ήδη απομνημονευτεί</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1730,6 +1789,76 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Μόνο αν έχετε άλλο αντίγραφο ασφαλείας. Αυτό δεν αναιρείται.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Απομνημόνευση</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Άκυρο</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Προσθήκη στις αποθηκευμένες διευθύνσεις;</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Προσθήκη διεύθυνσης</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Αποθηκευμένες διευθύνσεις</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Διαγραφή</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Επεξεργασία</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Διαγραφή</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Καμία αποθηκευμένη διεύθυνση</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Πατήστε παρατεταμένα μια διεύθυνση σε ένα μήνυμα για να την προσθέσετε εδώ</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Αποθήκευση</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Άκυρο</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Αποθηκευμένη διεύθυνση</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Όνομα</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>Διεύθυνση e-mail</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>onoma@example.com</translation>
     </message>
 </context>
 <context>

@@ -97,6 +97,37 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>याद रखे गए पते</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP कुंजी</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME प्रमाणपत्र</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>पता-पुस्तिका</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>पहले से ज्ञात: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>यह पता खोजा जा रहा है…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>यहाँ अभी तक ज्ञात नहीं</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>ई-मेल पते वाला कोई संपर्क नहीं</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>यह पता भूल जाएँ</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>याद रखे गए पते</translation>
     </message>
 </context>
 <context>
@@ -1214,6 +1253,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Tap to try sending again.</source>
         <translation>दोबारा भेजने के लिए टैप करें।</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>याद रखे गए पते</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1704,6 +1747,22 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Could not download the message — no connection?</source>
         <translation>संदेश डाउनलोड नहीं हो सका — कोई कनेक्शन नहीं?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>%1 याद रखें</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>पता याद रखा गया</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>याद रखे गए पते</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 पहले से याद है</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1730,6 +1789,76 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>केवल तभी, जब आपके पास कोई दूसरा बैकअप हो। इसे पलटा नहीं जा सकता।</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>याद रखें</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>रद्द करें</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>याद रखे गए पतों में जोड़ें?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>पता जोड़ें</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>याद रखे गए पते</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>हटाया जा रहा है</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>संपादित करें</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>भूल जाएँ</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>कोई याद रखा गया पता नहीं</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>किसी संदेश में पते को दबाकर रखें ताकि वह यहाँ जुड़ जाए</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>सहेजें</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>रद्द करें</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>याद रखा गया पता</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>नाम</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>ई-मेल पता</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>naam@example.com</translation>
     </message>
 </context>
 <context>

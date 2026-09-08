@@ -97,6 +97,37 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>已记住的地址</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP 密钥</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME 证书</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>通讯录</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>已知：%1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>正在查找该地址…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>此处尚未记录</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>没有带邮件地址的联系人</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>忘记此地址</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>已记住的地址</translation>
     </message>
 </context>
 <context>
@@ -1212,6 +1251,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Tap to try sending again.</source>
         <translation>点按可再次尝试发送。</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>已记住的地址</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1702,6 +1745,22 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Could not download the message — no connection?</source>
         <translation>无法下载这封邮件——是否没有网络连接？</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>记住 %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>地址已记住</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>已记住的地址</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 已在记忆列表中</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1728,6 +1787,76 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>仅当你另有备份时才这样做。此操作无法撤销。</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>记住</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>添加到已记住的地址？</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>添加地址</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>已记住的地址</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>正在移除</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>编辑</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>忘记</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>没有已记住的地址</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>长按邮件中的地址即可添加到此处</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>已记住的地址</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>姓名</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>电子邮件地址</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>name@example.com</translation>
     </message>
 </context>
 <context>

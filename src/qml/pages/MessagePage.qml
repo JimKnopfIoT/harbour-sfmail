@@ -130,18 +130,35 @@ Page {
     // message is complete when it is (an inline-PGP mail here reports otherwise),
     // and refusing to read then leaves the reader empty. So: read until something
     // arrives, and cap the attempts for a message that stays incomplete.
+    //
+    // Plain text and HTML are cached SEPARATELY. htmlBody() does not simply read
+    // what is there: it checks whether the HTML part is on the device and, if it
+    // is not, returns nothing and asks the server for that part instead. Senders
+    // who put everything into HTML and leave a one-line stub in the text part hit
+    // exactly that — the stub arrives, the HTML part does not. A single shared
+    // "read once" flag then stopped us from ever picking the HTML up when it
+    // finally arrived, so the reader offered no HTML view at all for those mails.
     property bool _bodyRead: false
+    property bool _htmlRead: false
     property int _bodyReadTries: 0
+    property int _htmlReadTries: 0
     function _syncBody() {
         if (message.encryptionStatus === EmailMessage.Encrypted) {
             page._body = ""; page._html = ""; return
         }
-        if (page._bodyRead) return                       // cached, never ask again
-        if (!Gpg.contentComplete(page.messageId) && page._bodyReadTries >= 3) return
-        page._bodyReadTries++
-        page._body = message.body
-        page._html = message.htmlBody
-        if (page._body !== "" || page._html !== "") page._bodyRead = true
+        var complete = Gpg.contentComplete(page.messageId)
+        if (!page._bodyRead && (complete || page._bodyReadTries < 3)) {
+            page._bodyReadTries++
+            page._body = message.body
+            if (page._body !== "") page._bodyRead = true
+        }
+        // A few more tries for the HTML part: the first read only triggers its
+        // download, the value arrives with one of the later store changes.
+        if (!page._htmlRead && (complete || page._htmlReadTries < 6)) {
+            page._htmlReadTries++
+            page._html = message.htmlBody
+            if (page._html !== "") page._htmlRead = true
+        }
     }
 
     // "Simple HTML" view (by request): render the HTML body WITHOUT loading any
@@ -411,6 +428,22 @@ Page {
         s = s.replace(/<\/(?:tr|td|th)\s*>/gi, " ")
         s = s.replace(/<(?:td|th)\b[^>]*>/gi, " ")
         s = s.replace(/white-space\s*:\s*nowrap/gi, "")         // never force no-wrap
+        // Colour is laid out for white paper, and we are not white paper. A mail
+        // that sets "#333 on #fff" turns into dark grey on a dark screen; a mail
+        // whose light text sits on a dark background IMAGE keeps, once that image
+        // is removed, only its pale fallback colour. Both are unreadable, and no
+        // rule can repair a pair of colours after one half of it is gone. So drop
+        // colour altogether and let the theme decide — this view is for reading,
+        // not for the sender's design. Links stay visible via the item's linkColor.
+        s = s.replace(/(?:background-)?color\s*:\s*[^;"']*/gi, "")   // CSS fore/background
+        s = s.replace(/\bbackground\s*:\s*[^;"']*/gi, "")           // CSS shorthand
+        s = s.replace(/\bbgcolor\s*=\s*("[^"]*"|'[^']*'|[^\s>]*)/gi, "")
+        s = s.replace(/\b(?:color|text|link|vlink|alink)\s*=\s*("[^"]*"|'[^']*'|[^\s>]*)/gi, "")
+        // The removed images leave their empty blocks behind — without this the
+        // text is torn apart by holes where the pictures used to be.
+        for (var i = 0; i < 3; ++i)
+            s = s.replace(/<(p|div|span)\b[^>]*>(?:\s|&nbsp;|<br\s*\/?>)*<\/\1>/gi, "")
+        s = s.replace(/(?:<br\s*\/?>\s*){3,}/gi, "<br><br>")
         return s
     }
     // Readable plain text from an HTML body (used when a mail has NO plain-text part).
@@ -806,6 +839,43 @@ Page {
     // one: the visible To: of a blind copy names only its own recipient, because
     // the mail server delivers by exactly that header. Showing it would claim we
     // were the addressee when we were not.
+    // Every address this message puts on screen — sender first, then the
+    // recipients as shown. Feeds the long-press menu that remembers one.
+    // It has to live on the Page: declared inside the content Column it became
+    // a method of that Column, and "page._addressesHere is not a function" is
+    // exactly what the log said.
+    function _addressesHere() {
+        var out = []
+        var from = ("" + message.fromAddress).trim()
+        if (from !== "") out.push(from)
+        var rest = ("" + page._shownTo).split(/[,;]/)
+        for (var i = 0; i < rest.length && out.length < 10; ++i) {
+            var a = rest[i].replace(/^.*</, "").replace(/>.*$/, "").trim()
+            if (a.indexOf("@") < 1) continue
+            var dup = false
+            for (var d = 0; d < out.length; ++d)
+                if (out[d].toLowerCase() === a.toLowerCase()) { dup = true; break }
+            if (!dup) out.push(a)
+        }
+        return out
+    }
+
+    // Bumped when the remembered list changes from this page, so the long-press
+    // menu re-reads it.
+    property int _rememberRev: 0
+
+    // Cheap check — the remembered list is a small file we hold in memory. The
+    // other places an address may be known (keys, certificates, address book)
+    // cost a lookup each and are named in the dialog, not in the menu.
+    function _isRemembered(address) {
+        var a = ("" + address).trim().toLowerCase()
+        if (a.indexOf("@") < 1) return false
+        var mine = Gpg.rememberedAddresses()
+        for (var i = 0; i < mine.length; ++i)
+            if (("" + mine[i].address).trim().toLowerCase() === a) return true
+        return false
+    }
+
     readonly property string _shownTo: _protectedTo !== "" ? _protectedTo
                                        : (message.to ? message.to.join(", ") : "")
     function _readProtectedHeaders() {
@@ -1071,7 +1141,7 @@ Page {
                 title: page._shownSubject !== "" ? page._shownSubject : qsTr("(no subject)")
             }
 
-            // Transient info line (key import / download status).
+    // Transient info line (key import / download status).
             Label {
                 visible: page._topNotice !== ""
                 x: Theme.horizontalPageMargin
@@ -1082,9 +1152,62 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
             }
 
+            // Long-pressing the sender block offers to remember one of the
+            // addresses it shows. Collecting them by hand is the point: the
+            // list then holds what the user chose, not everything that ever
+            // arrived.
+            ListItem {
+                width: parent.width
+                contentHeight: senderCol.height + Theme.paddingSmall
+                menu: ContextMenu {
+                    Repeater {
+                        model: page._addressesHere()
+                        MenuItem {
+                            // _rememberRev is what makes the label follow the
+                            // list: without it the text would keep saying
+                            // "Remember" after the address was added.
+                            text: (page._rememberRev, page._isRemembered(modelData))
+                                  ? qsTr("%1 is already remembered").arg(modelData)
+                                  : qsTr("Remember %1").arg(modelData)
+                            // Ask first: a long press is easy to trigger by
+                            // accident, and a list that fills itself behind the
+                            // user's back is the opposite of a list they chose.
+                            // The dialog also names the places that already hold
+                            // the address, so a second copy is a decision.
+                            onClicked: {
+                                var addr = "" + modelData
+                                if (page._isRemembered(addr)) {
+                                    // Nothing left to add here — show the entry
+                                    // instead, where it can be edited or dropped.
+                                    pageStack.push(Qt.resolvedUrl("RememberedAddressesPage.qml"))
+                                    return
+                                }
+                                var nm = (addr.toLowerCase()
+                                          === ("" + message.fromAddress).toLowerCase())
+                                         ? ("" + message.fromDisplayName) : ""
+                                var dlg = pageStack.push(Qt.resolvedUrl("RememberAddressDialog.qml"), {
+                                    address: addr,
+                                    entryName: nm
+                                })
+                                dlg.accepted.connect(function() {
+                                    if (Gpg.rememberAddress(addr, nm)) {
+                                        page._topNotice = qsTr("Address remembered")
+                                        page._rememberRev = page._rememberRev + 1
+                                    }
+                                })
+                            }
+                        }
+                    }
+                    MenuItem {
+                        text: qsTr("Remembered addresses")
+                        onClicked: pageStack.push(Qt.resolvedUrl("RememberedAddressesPage.qml"))
+                    }
+                }
             Column {
+                id: senderCol
                 x: Theme.horizontalPageMargin
                 width: parent.width - 2 * Theme.horizontalPageMargin
+                anchors.verticalCenter: parent.verticalCenter
                 Label {
                     width: parent.width
                     truncationMode: TruncationMode.Fade
@@ -1115,6 +1238,7 @@ Page {
                     color: Theme.secondaryColor
                     text: Format.formatDate(message.date, Formatter.Timepoint)
                 }
+            }
             }
 
             // --- Krypto-Banner ---------------------------------------------
@@ -1330,6 +1454,8 @@ Page {
                         : page._hasHtml ? page._htmlToText(page._html)
                         : qsTr("(empty — pull down to download)")
                 color: Theme.primaryColor
+                // The mail's own colours are stripped, so the links need ours.
+                linkColor: Theme.highlightColor
                 // HTML uses our readable base size (the mail's own tiny sizes were
                 // stripped); plain text keeps the compact size.
                 font.pixelSize: (page._showHtml && page._hasHtml) ? Theme.fontSizeMedium

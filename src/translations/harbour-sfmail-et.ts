@@ -97,6 +97,37 @@ Kui see häirib, eemaldage teine kirje sellest seosest root-kestast. See on puht
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Meelde jäetud aadressid</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP-võti</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME-sertifikaat</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Aadressiraamat</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Juba teada: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Selle aadressi otsimine…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Siin veel tundmatu</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Kui see häirib, eemaldage teine kirje sellest seosest root-kestast. See on puht
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Ühelgi kontaktil pole e-posti aadressi</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Unusta see aadress</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Meelde jäetud aadressid</translation>
     </message>
 </context>
 <context>
@@ -1214,6 +1253,10 @@ Import lisab sellele aadressile TEISE võtme — veendu, et uus võti on ehtne, 
         <source>Tap to try sending again.</source>
         <translation>Puuduta, et saatmist uuesti proovida.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Meelde jäetud aadressid</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1704,6 +1747,22 @@ Import lisab sellele aadressile TEISE võtme — veendu, et uus võti on ehtne, 
         <source>Could not download the message — no connection?</source>
         <translation>Kirja ei õnnestunud alla laadida — ühendus puudub?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Jäta %1 meelde</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Aadress jäeti meelde</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Meelde jäetud aadressid</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 on juba meelde jäetud</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1730,6 +1789,76 @@ Import lisab sellele aadressile TEISE võtme — veendu, et uus võti on ehtne, 
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Ainult siis, kui sul on teine varukoopia. Seda ei saa tagasi võtta.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Jäta meelde</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Loobu</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Kas lisada meelde jäetud aadressidesse?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Lisa aadress</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Meelde jäetud aadressid</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Unustamine</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Muuda</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Unusta</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Meelde jäetud aadresse pole</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Hoia sõnumis aadressi all, et see siia lisada</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Salvesta</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Loobu</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Meelde jäetud aadress</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nimi</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>E-posti aadress</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>nimi@example.com</translation>
     </message>
 </context>
 <context>

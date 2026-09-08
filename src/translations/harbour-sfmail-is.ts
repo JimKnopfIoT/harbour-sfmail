@@ -97,6 +97,37 @@ Ef það truflar má taka hina færsluna út úr þessari tengingu úr root-skel
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Vistuð netföng</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP-lykill</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME-skilríki</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Nafnaskrá</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Þegar þekkt: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Leita að þessu netfangi…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Ekki þekkt hér enn</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Ef það truflar má taka hina færsluna út úr þessari tengingu úr root-skel
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Engir tengiliðir með netfang</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Gleyma þessu netfangi</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Vistuð netföng</translation>
     </message>
 </context>
 <context>
@@ -1214,6 +1253,10 @@ Innflutningur bætir ÖÐRUM lykli við þetta netfang — gakktu úr skugga um 
         <source>Tap to try sending again.</source>
         <translation>Ýttu til að reyna að senda aftur.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Vistuð netföng</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1704,6 +1747,22 @@ Innflutningur bætir ÖÐRUM lykli við þetta netfang — gakktu úr skugga um 
         <source>Could not download the message — no connection?</source>
         <translation>Ekki tókst að sækja skeytið — engin tenging?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Muna %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Netfang vistað</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Vistuð netföng</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 er þegar vistað</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1730,6 +1789,76 @@ Innflutningur bætir ÖÐRUM lykli við þetta netfang — gakktu úr skugga um 
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Aðeins ef þú átt annað afrit. Þessu verður ekki snúið við.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Muna</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Hætta við</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Bæta við vistuð netföng?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Bæta við netfangi</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Vistuð netföng</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Fjarlægi</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Breyta</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Gleyma</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Engin vistuð netföng</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Haltu inni netfangi í skeyti til að bæta því hér við</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Vista</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Hætta við</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Vistað netfang</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nafn</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>Netfang</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>nafn@example.com</translation>
     </message>
 </context>
 <context>

@@ -2,6 +2,7 @@ import QtQuick 2.6
 import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
 import Nemo.Email 0.1
+import org.nemomobile.contacts 1.0
 import SFMail.Gpg 1.0
 
 // Neue Nachricht verfassen und senden. Zwei Sende-Wege:
@@ -59,7 +60,7 @@ Page {
         return false
     }
     function _recomputeCrypto() {
-        var from = accountCombo.currentIndex >= 0 ? accountsModel.emailAddress(accountCombo.currentIndex) : ""
+        var from = page._fromAddr()
         // Start from what the SENDER can do; encryption additionally needs every
         // recipient to have a key/cert in that method. Sign-only needs no recipients.
         var pgp = _senderHasPgp(from)
@@ -115,6 +116,59 @@ Page {
     property var _inlineBcc: []
 
     EmailAccountListModel { id: accountsModel }
+    // Sending identities: every account address, followed by the alias
+    // addresses the system's account settings hold for it. We read the very
+    // setting those settings write, so our list and the platform's are one
+    // list. An alias is a full sender: it goes into the From header, and the
+    // key/certificate lookup follows it — so an alias without its own key
+    // simply cannot sign, which is the truth rather than a signature in
+    // somebody else's name.
+    ListModel { id: identities }        // {accountId, address, alias}
+    // This model has no countChanged; it announces itself through these.
+    Connections {
+        target: accountsModel
+        onModelReset: page._buildIdentities()
+        onAccountsAdded: page._buildIdentities()
+        onAccountsRemoved: page._buildIdentities()
+        onAccountsUpdated: page._buildIdentities()
+    }
+    function _buildIdentities() {
+        var keepAcct = page._acctId()
+        var keepAddr = page._fromAddr()
+        identities.clear()
+        for (var i = 0; i < accountsModel.count; ++i) {
+            var addr = "" + accountsModel.emailAddress(i)
+            var id = accountsModel.accountId(i)
+            identities.append({ "accountId": id, "address": addr, "alias": "" })
+            var aliases = Gpg.accountAliases(addr)
+            for (var j = 0; j < aliases.length; ++j)
+                identities.append({ "accountId": id, "address": "" + aliases[j],
+                                    "alias": "" + aliases[j] })
+        }
+        // Keep the user's pick across a rebuild.
+        if (keepAddr !== "") {
+            for (var k = 0; k < identities.count; ++k) {
+                var e = identities.get(k)
+                if (e.accountId === keepAcct && e.address === keepAddr) {
+                    accountCombo.currentIndex = k
+                    return
+                }
+            }
+        }
+    }
+    function _identity() {
+        var i = accountCombo.currentIndex
+        return (i >= 0 && i < identities.count) ? identities.get(i) : null
+    }
+    function _acctId()   { var d = page._identity(); return d ? d.accountId : 0 }
+    function _fromAddr() { var d = page._identity(); return d ? ("" + d.address) : "" }
+    function _fromAlias(){ var d = page._identity(); return d ? ("" + d.alias) : "" }
+    // First identity of an account = the account's own address, not an alias.
+    function _identityIndexForAccount(acct) {
+        for (var i = 0; i < identities.count; ++i)
+            if (identities.get(i).accountId === acct) return i
+        return -1
+    }
     EmailMessage { id: outgoing }
     ListModel { id: attModel }   // {name, path, mimeType}
     // Dynamic recipient rows: {kind: "to"|"cc"|"bcc", addr}. Starts with one To row;
@@ -123,13 +177,107 @@ Page {
 
     function _addRecip(kind) { recipModel.append({ kind: kind, addr: "" }) }
 
+    // --- Suggestions while typing a recipient -------------------------------
+    // Source: the addresses the user remembered, then the address book. Built
+    // once into a flat array; matching then happens in memory, per keystroke.
+    // Nothing here may touch gpg/gpgsm — the key hint deliberately runs only
+    // when a field is left, because each of those calls starts a process.
+    property var _addrPool: []
+    PeopleModel {
+        id: people
+        filterType: PeopleModel.FilterAll
+        requiredProperty: PeopleModel.EmailAddressRequired
+        onPopulatedChanged: poolTimer.restart()
+        onCountChanged: poolTimer.restart()
+    }
+    Timer { id: poolTimer; interval: 150; onTriggered: page._buildAddrPool() }
+    function _buildAddrPool() {
+        var pool = []
+        var seen = {}
+        function addPool(addr, name, remembered) {
+            var a = ("" + addr).trim()
+            if (a.indexOf("@") < 1) return
+            var low = a.toLowerCase()
+            if (seen[low]) return           // first source wins, see the order below
+            seen[low] = true
+            pool.push({ "name": (name === undefined || name === null) ? "" : ("" + name),
+                        "address": a, "remembered": !!remembered })
+        }
+
+        // Order matters: what the user remembered on purpose comes first, then
+        // everyone we hold a key or certificate for (addresses already worked
+        // with, and often not in the address book at all), then the address
+        // book itself.
+        var mine = Gpg.rememberedAddresses()
+        for (var m = 0; m < mine.length; ++m)
+            addPool(mine[m].address, mine[m].name, true)
+
+        var keys = Gpg.publicKeys()
+        for (var k = 0; k < keys.length; ++k) {
+            var ka = keys[k].emails
+            if (ka && ka.length > 0) {
+                for (var ke = 0; ke < ka.length; ++ke) addPool(ka[ke], keys[k].name, false)
+            } else {
+                addPool(keys[k].email, keys[k].name, false)
+            }
+        }
+        if (Gpg.smimeEnabled && Smime.available) {
+            var certs = Smime.listCerts()
+            for (var ci = 0; ci < certs.length; ++ci) {
+                var ce = certs[ci].emails
+                for (var cj = 0; ce && cj < ce.length; ++cj) addPool(ce[cj], certs[ci].uid, false)
+            }
+        }
+
+        for (var i = 0; i < people.count; ++i) {
+            var c = people.get(i)
+            if (!c) continue
+            var details = c.emailDetails
+            if (!details) continue
+            for (var j = 0; j < details.length; ++j)
+                addPool(details[j].address, c.displayLabel, false)
+        }
+        page._addrPool = pool
+    }
+    // The field may already hold "a@b.c, " — only the part after the last comma
+    // is being typed, and only that part gets replaced when a suggestion is
+    // tapped.
+    function _typedFragment(text) {
+        var t = "" + text
+        var i = t.lastIndexOf(",")
+        return (i < 0 ? t : t.substring(i + 1)).replace(/^\s+/, "")
+    }
+    function _withFragment(text, address) {
+        var t = "" + text
+        var i = t.lastIndexOf(",")
+        return (i < 0 ? "" : t.substring(0, i + 1) + " ") + address
+    }
+    function _suggest(text) {
+        var q = page._typedFragment(text).toLowerCase()
+        if (q.length < 2) return []
+        var hits = []
+        for (var i = 0; i < page._addrPool.length && hits.length < 6; ++i) {
+            var e = page._addrPool[i]
+            var a = ("" + e.address).toLowerCase()
+            if (a === q) continue                       // already typed in full
+            if (a.indexOf(q) >= 0 || ("" + e.name).toLowerCase().indexOf(q) >= 0) {
+                var dup = false
+                for (var d = 0; d < hits.length; ++d)
+                    if (("" + hits[d].address).toLowerCase() === a) { dup = true; break }
+                if (!dup) hits.push(e)
+            }
+        }
+        return hits
+    }
+
     Component.onCompleted: {
         // Pick the sending account: reply → the original mail's account; new mail
         // from a mailbox → that mailbox; otherwise the user's chosen default.
         var acct = replyAccountId > 0 ? replyAccountId
                  : composeAccountId > 0 ? composeAccountId
                  : Gpg.defaultAccountId()
-        var idx = acct > 0 ? accountsModel.indexFromAccountId(acct) : -1
+        page._buildIdentities()
+        var idx = acct > 0 ? page._identityIndexForAccount(acct) : -1
         if (idx >= 0) accountCombo.currentIndex = idx
         if (("" + replyTo) !== "") recipModel.setProperty(0, "addr", "" + replyTo)
         if (("" + ccPrefill) !== "") recipModel.append({ kind: "cc", addr: "" + ccPrefill })
@@ -174,8 +322,8 @@ Page {
     // Save the current message as a reusable template (stays in the Templates
     // folder until actively deleted; not consumed on use, unlike a draft).
     function _saveTemplate() {
-        if (accountCombo.currentIndex < 0) { status.text = qsTr("Choose an account"); status.error = true; return }
-        var acct = accountsModel.accountId(accountCombo.currentIndex)
+        if (page._acctId() <= 0) { status.text = qsTr("Choose an account"); status.error = true; return }
+        var acct = page._acctId()
         var id = Gpg.saveTemplate(acct, subjectField.text,
                                   _recipsByKind("to"), _recipsByKind("cc"), _bccList(),
                                   bodyField.text, page.cryptoKind,
@@ -251,7 +399,7 @@ Page {
 
     function _send() {
         status.text = ""
-        if (accountCombo.currentIndex < 0) { status.text = qsTr("Choose an account"); status.error = true; return }
+        if (page._acctId() <= 0) { status.text = qsTr("Choose an account"); status.error = true; return }
         var to = _recipsByKind("to")
         var cc = _recipsByKind("cc")
         // At least one real recipient somewhere (To/Cc/Bcc or the self-Bcc).
@@ -293,13 +441,14 @@ Page {
     function _dispatchSmime(to, cc, enc, sign, passphrase) {
         busy.running = true; page._sending = true
         status.error = false; status.text = qsTr("S/MIME — sending…")
-        Smime.sendSmime(accountsModel.accountId(accountCombo.currentIndex),
+        Smime.sendSmime(page._acctId(),
                         subjectField.text, to, cc, _bccList(),
-                        bodyField.text, _attachmentArray(), enc, sign, passphrase)
+                        bodyField.text, _attachmentArray(), enc, sign, passphrase,
+                        page._fromAlias())
     }
 
     function _sendPlain(to, cc) {
-        outgoing.from = accountsModel.emailAddress(accountCombo.currentIndex)
+        outgoing.from = page._fromAddr()
         outgoing.to = to
         outgoing.cc = cc
         outgoing.bcc = _bccList()
@@ -316,8 +465,8 @@ Page {
     // leave the composer (text could otherwise be lost). Encryption happens at send;
     // the draft keeps the editable plaintext.
     function _saveDraft() {
-        if (accountCombo.currentIndex < 0) { status.text = qsTr("Choose an account"); status.error = true; return }
-        var acct = accountsModel.accountId(accountCombo.currentIndex)
+        if (page._acctId() <= 0) { status.text = qsTr("Choose an account"); status.error = true; return }
+        var acct = page._acctId()
         // Save via the plugin (self-built RFC2822 + heap), NOT the native
         // EmailMessage.saveDraft(): the native incremental-QMF path intermittently
         // crashed on POP3 on the first save (same class the send/template paths
@@ -393,7 +542,7 @@ Page {
     // failure. Always work via the from-address + fingerprint, never an index into
     // the whole keyring.
     function _resolveSignKey() {
-        var from = accountsModel.emailAddress(accountCombo.currentIndex)
+        var from = page._fromAddr()
         var sec = Gpg.secretKeys(from)
         for (var i = 0; i < sec.length; ++i)
             if (!sec[i].revoked && !sec[i].expired) return sec[i].fingerprint
@@ -425,10 +574,10 @@ Page {
             page._inlineTo = to; page._inlineCc = cc; page._inlineBcc = bcc
             Gpg.clearSign(bodyField.text, signFpr, passphrase)   // → onEncryptFinished
         } else {
-            Gpg.signPgpMime(accountsModel.accountId(accountCombo.currentIndex),
+            Gpg.signPgpMime(page._acctId(),
                             subjectField.text, to, cc, bcc,
                             bodyField.text, _attachmentArray(),
-                            signFpr, passphrase)                  // → onSendFinished
+                            signFpr, passphrase, page._fromAlias())  // → onSendFinished
         }
     }
 
@@ -464,7 +613,7 @@ Page {
     // preferred: only that one can actually decrypt the Sent copy (a public key
     // imported for our own address must not win over our real identity).
     function _withSelfKey(fprs) {
-        var from = accountsModel.emailAddress(accountCombo.currentIndex)
+        var from = page._fromAddr()
         if (("" + from) === "") return fprs
         var keys = Gpg.publicKeys(from)
         var selfFpr = ""
@@ -510,10 +659,10 @@ Page {
         } else {
             busy.running = true; page._sending = true
             status.error = false; status.text = qsTr("Encrypting & sending…")
-            Gpg.sendPgpMime(accountsModel.accountId(accountCombo.currentIndex),
+            Gpg.sendPgpMime(page._acctId(),
                             subjectField.text, to, cc, blindCopies,
                             bodyField.text, _attachmentArray(),
-                            fprs, signFpr, passphrase)
+                            fprs, signFpr, passphrase, page._fromAlias())
         }
     }
 
@@ -554,7 +703,7 @@ Page {
                 status.text = qsTr("Encryption failed: %1").arg(error); status.error = true
                 return
             }
-            outgoing.from = accountsModel.emailAddress(accountCombo.currentIndex)
+            outgoing.from = page._fromAddr()
             outgoing.to = page._inlineTo
             outgoing.cc = page._inlineCc
             outgoing.bcc = page._inlineBcc
@@ -613,8 +762,8 @@ Page {
                 onCurrentIndexChanged: page._recomputeCrypto()
                 menu: ContextMenu {
                     Repeater {
-                        model: accountsModel
-                        MenuItem { text: model.emailAddress }
+                        model: identities
+                        MenuItem { text: model.address }
                     }
                 }
             }
@@ -625,6 +774,10 @@ Page {
                 delegate: Column {
                     id: recipRow
                     width: col.width
+                    // The suggestion list below is a Repeater of its own, and
+                    // its `index` shadows this one. Keep ours under a name that
+                    // cannot be shadowed.
+                    readonly property int _rowIndex: index
                     property string _hint: ""
                     property bool _hintOk: false
                     // Cross-check the address against our keys/certs (on focus-out or
@@ -654,7 +807,10 @@ Page {
                             inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText | Qt.ImhEmailCharactersOnly
                             EnterKey.iconSource: "image://theme/icon-m-enter-next"
                             EnterKey.onClicked: focus = false
-                            onTextChanged: recipModel.setProperty(index, "addr", text)
+                            onTextChanged: {
+                                recipModel.setProperty(index, "addr", text)
+                                suggestions.hits = page._suggest(text)
+                            }
                             onActiveFocusChanged: if (!activeFocus) { recipRow._updateHint(text); page._recomputeCrypto() }
                         }
                         // "+" → address book (live search), fills this row.
@@ -667,6 +823,7 @@ Page {
                                 picker.picked.connect(function(email) {
                                     recipModel.setProperty(index, "addr", email)
                                     recipField.text = email
+                                    suggestions.hits = []
                                     recipRow._updateHint(email)
                                     page._recomputeCrypto()
                                 })
@@ -678,6 +835,49 @@ Page {
                             icon.source: "image://theme/icon-m-remove"
                             visible: recipModel.count > 1
                             onClicked: { recipModel.remove(index); page._recomputeCrypto() }
+                        }
+                    }
+                    // Suggestions from the remembered addresses and the address
+                    // book. They appear while the field has focus and enough has
+                    // been typed; tapping one replaces only the fragment being
+                    // typed, so a second address can follow a comma.
+                    Column {
+                        id: suggestions
+                        width: parent.width
+                        property var hits: []
+                        visible: recipField.activeFocus && hits.length > 0
+                        Repeater {
+                            model: suggestions.visible ? suggestions.hits : []
+                            BackgroundItem {
+                                width: suggestions.width
+                                height: Theme.itemSizeSmall
+                                onClicked: {
+                                    var full = page._withFragment(recipField.text, "" + modelData.address)
+                                    recipField.text = full
+                                    recipModel.setProperty(recipRow._rowIndex, "addr", full)
+                                    suggestions.hits = []
+                                    recipRow._updateHint(full)
+                                    page._recomputeCrypto()
+                                }
+                                Column {
+                                    x: Theme.horizontalPageMargin
+                                    width: parent.width - 2 * Theme.horizontalPageMargin
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    Label {
+                                        width: parent.width; truncationMode: TruncationMode.Fade
+                                        font.pixelSize: Theme.fontSizeSmall
+                                        color: modelData.remembered ? Theme.highlightColor : Theme.primaryColor
+                                        text: ("" + modelData.name) !== "" ? modelData.name : modelData.address
+                                    }
+                                    Label {
+                                        width: parent.width; truncationMode: TruncationMode.Fade
+                                        font.pixelSize: Theme.fontSizeExtraSmall
+                                        color: Theme.secondaryColor
+                                        text: ("" + modelData.name) !== "" ? modelData.address : ""
+                                        visible: text !== ""
+                                    }
+                                }
+                            }
                         }
                     }
                     Label {

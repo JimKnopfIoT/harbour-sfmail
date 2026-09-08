@@ -97,6 +97,37 @@ Als het stoort, haalt u het andere item in een root-shell uit die toewijzing. Di
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Onthouden adressen</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP-sleutel</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME-certificaat</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Adresboek</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Al bekend: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Bezig met zoeken naar dit adres…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Hier nog niet bekend</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Als het stoort, haalt u het andere item in een root-shell uit die toewijzing. Di
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Geen contacten met een e-mailadres</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Dit adres vergeten</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Onthouden adressen</translation>
     </message>
 </context>
 <context>
@@ -1214,6 +1253,10 @@ Importeren voegt een TWEEDE sleutel voor dit adres toe — vergewis je ervan dat
         <source>Tap to try sending again.</source>
         <translation>Tik om opnieuw te verzenden.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Onthouden adressen</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1704,6 +1747,22 @@ Importeren voegt een TWEEDE sleutel voor dit adres toe — vergewis je ervan dat
         <source>Could not download the message — no connection?</source>
         <translation>Kon het bericht niet downloaden — geen verbinding?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>%1 onthouden</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Adres onthouden</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Onthouden adressen</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 is al onthouden</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1730,6 +1789,76 @@ Importeren voegt een TWEEDE sleutel voor dit adres toe — vergewis je ervan dat
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Alleen als je een andere back-up hebt. Dit kan niet ongedaan worden gemaakt.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Onthouden</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annuleren</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Toevoegen aan onthouden adressen?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Adres toevoegen</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Onthouden adressen</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Vergeten</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Bewerken</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Vergeten</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Geen onthouden adressen</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Houd een adres in een bericht ingedrukt om het hier toe te voegen</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Opslaan</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annuleren</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Onthouden adres</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Naam</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>E-mailadres</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>naam@example.com</translation>
     </message>
 </context>
 <context>

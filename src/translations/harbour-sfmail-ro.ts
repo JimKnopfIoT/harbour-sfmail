@@ -97,6 +97,37 @@ Dacă vă deranjează, scoateți cealaltă intrare din acea asociere dintr-un sh
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Adrese reținute</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>Cheie PGP</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>Certificat S/MIME</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Agendă</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Deja cunoscută: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Se caută această adresă…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Încă necunoscută aici</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Dacă vă deranjează, scoateți cealaltă intrare din acea asociere dintr-un sh
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Niciun contact cu adresă de e-mail</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Uită această adresă</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Adrese reținute</translation>
     </message>
 </context>
 <context>
@@ -1216,6 +1255,10 @@ Importul adaugă o A DOUA cheie pentru această adresă — asigurați-vă că n
         <source>Tap to try sending again.</source>
         <translation>Atingeți pentru a încerca din nou trimiterea.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Adrese reținute</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1706,6 +1749,22 @@ Importul adaugă o A DOUA cheie pentru această adresă — asigurați-vă că n
         <source>Could not download the message — no connection?</source>
         <translation>Nu s-a putut descărca mesajul — nicio conexiune?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Reține %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Adresă reținută</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Adrese reținute</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 este deja memorată</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1732,6 +1791,76 @@ Importul adaugă o A DOUA cheie pentru această adresă — asigurați-vă că n
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Doar dacă aveți altă copie de siguranță. Acest lucru nu poate fi anulat.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Reține</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Anulează</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Adăugați la adresele reținute?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Adaugă adresă</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Adrese reținute</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Se elimină</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Editează</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Uită</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Nicio adresă reținută</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Țineți apăsat pe o adresă dintr-un mesaj pentru a o adăuga aici</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Salvează</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Anulează</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Adresă reținută</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nume</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>Adresă de e-mail</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>nume@example.com</translation>
     </message>
 </context>
 <context>

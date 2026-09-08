@@ -27,6 +27,11 @@ TARGET = sfmailgpg
 
 # QMF (libqmfclient) for the PGP/MIME send path (multipart/encrypted).
 PKGCONFIG += QmfClient
+# The account database, for the sender's alias addresses. We read the very
+# key the system settings write, so our list and the platform's are the same
+# list — and it is readable on every target, including those whose mail
+# framework has no alias API yet.
+PKGCONFIG += accounts-qt5
 # QMF private headers (for qmf_abi_compat.cpp — the impl destructors need the
 # COMPLETE private impl types to navigate the base subobject correctly). Both the
 # aarch64 (5.0.0.62) and armv7hl (4.6.0.13) sysroots ship them under .../5.0.0.

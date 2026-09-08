@@ -97,6 +97,37 @@ Si le molesta, saque la otra entrada de esa correspondencia desde un shell de ro
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Direcciones guardadas</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>Clave PGP</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>Certificado S/MIME</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Agenda</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Ya conocida: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Buscando esta dirección…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Aún no conocida aquí</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Si le molesta, saque la otra entrada de esa correspondencia desde un shell de ro
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Ningún contacto con dirección de correo</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Olvidar esta dirección</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Direcciones guardadas</translation>
     </message>
 </context>
 <context>
@@ -1214,6 +1253,10 @@ Al importar se añade una SEGUNDA clave para esta dirección — asegúrate de q
         <source>Tap to try sending again.</source>
         <translation>Toca para intentar el envío de nuevo.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Direcciones guardadas</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1704,6 +1747,22 @@ Al importar se añade una SEGUNDA clave para esta dirección — asegúrate de q
         <source>Could not download the message — no connection?</source>
         <translation>No se pudo descargar el mensaje — ¿no hay conexión?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Recordar %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Dirección recordada</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Direcciones guardadas</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 ya está memorizada</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1730,6 +1789,76 @@ Al importar se añade una SEGUNDA clave para esta dirección — asegúrate de q
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Solo si tienes otra copia de seguridad. Esto no se puede deshacer.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Guardar</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>¿Añadir a las direcciones guardadas?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Añadir dirección</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Direcciones guardadas</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Olvidando</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Editar</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Olvidar</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>No hay direcciones guardadas</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Mantén pulsada una dirección en un mensaje para añadirla aquí</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Guardar</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Dirección guardada</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nombre</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>Dirección de correo</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>nombre@example.com</translation>
     </message>
 </context>
 <context>

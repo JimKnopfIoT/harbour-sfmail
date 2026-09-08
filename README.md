@@ -92,6 +92,9 @@ the body anyway.
 - Read / delete messages, raw header view with sender checks
   (active SPF/DMARC via DNS, From↔Return-Path mismatch, optional DNS blacklists —
   only the sender's IP/domain are ever looked up, nothing of yours)
+- HTML mail is drawn in the device theme: the colours a message brings are
+  dropped, so text written for white paper stays readable on a dark screen, and
+  remote images are never loaded (loading one would tell the sender you read it)
 - Attachments (plain, PGP and S/MIME) with their size — **open with…** or
   **save as…** to a folder you pick; large attachments download on demand
 - **Blind copies stay blind** — one message per audience, so no recipient can read
@@ -125,9 +128,18 @@ the body anyway.
   the key matches the sender's address; a block carrying several keys names all of
   them, because importing takes all of them; never imports without your
   confirmation
-- Address-book picker per recipient, with a per-recipient crypto hint
-  (🔑 PGP / 📜 S/MIME / no key)
-- German + English UI (follows the system language); localized folder names
+- Recipient fields complete an address after two characters — from the addresses
+  you remembered, from the keys and certificates you hold, and from the address
+  book — next to an address-book picker per recipient and a per-recipient crypto
+  hint (🔑 PGP / 📜 S/MIME / no key)
+- **Remembered addresses** — press and hold the sender block of a message to keep
+  an address, and edit or forget it on a page of its own. Before a second copy is
+  made, the app names the places that already hold the address (address book, PGP
+  key, S/MIME certificate); one already remembered is named as such instead of
+  being offered again
+- **Send from an alias** — the alias addresses configured for an account in the
+  system settings can be picked as the sender, protected headers included
+- Localized folder names; the interface follows the device language
 - **Key hygiene & privacy** — the bundled GnuPG agent is hardened so unlocked keys
   are not kept in memory between operations; passphrases never reach a command
   line and private keys are never written to disk unprotected; the process is not

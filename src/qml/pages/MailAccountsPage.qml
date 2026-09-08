@@ -130,6 +130,10 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("SmimeCertsPage.qml"))
             }
             MenuItem {
+                text: qsTr("Remembered addresses")
+                onClicked: pageStack.push(Qt.resolvedUrl("RememberedAddressesPage.qml"))
+            }
+            MenuItem {
                 text: qsTr("Sync all inboxes")
                 onClicked: emailAgent.accountsSyncInbox()
             }

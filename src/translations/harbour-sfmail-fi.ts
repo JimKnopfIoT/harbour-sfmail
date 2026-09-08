@@ -97,6 +97,37 @@ Jos se häiritsee, poista toinen merkintä tuosta kytkennästä root-kuoresta. T
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Muistetut osoitteet</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP-avain</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME-varmenne</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Osoitekirja</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Jo tiedossa: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Etsitään tätä osoitetta…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Ei vielä tiedossa täällä</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Jos se häiritsee, poista toinen merkintä tuosta kytkennästä root-kuoresta. T
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Ei yhteystietoja, joilla on sähköpostiosoite</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Unohda tämä osoite</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Muistetut osoitteet</translation>
     </message>
 </context>
 <context>
@@ -1214,6 +1253,10 @@ Tuonti lisää TOISEN avaimen tälle osoitteelle — varmista, että uusi avain 
         <source>Tap to try sending again.</source>
         <translation>Napauta yrittääksesi lähetystä uudelleen.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Muistetut osoitteet</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1704,6 +1747,22 @@ Tuonti lisää TOISEN avaimen tälle osoitteelle — varmista, että uusi avain 
         <source>Could not download the message — no connection?</source>
         <translation>Viestiä ei voitu ladata — ei yhteyttä?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Muista %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Osoite muistettu</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Muistetut osoitteet</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 on jo muistissa</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1730,6 +1789,76 @@ Tuonti lisää TOISEN avaimen tälle osoitteelle — varmista, että uusi avain 
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Vain jos sinulla on toinen varmuuskopio. Tätä ei voi perua.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Muista</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Peruuta</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Lisätäänkö muistettuihin osoitteisiin?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Lisää osoite</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Muistetut osoitteet</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Unohdetaan</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Muokkaa</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Unohda</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Ei muistettuja osoitteita</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Pidä viestin osoitetta painettuna lisätäksesi sen tähän</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Tallenna</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Peruuta</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Muistettu osoite</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nimi</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>Sähköpostiosoite</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>nimi@example.com</translation>
     </message>
 </context>
 <context>

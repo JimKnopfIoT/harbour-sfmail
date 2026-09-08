@@ -97,6 +97,37 @@ Ha zavarja, vegye ki a másik bejegyzést ebből a hozzárendelésből egy root 
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Megjegyzett címek</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP-kulcs</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME-tanúsítvány</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Címjegyzék</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Már ismert: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>A cím keresése…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Itt még ismeretlen</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Ha zavarja, vegye ki a másik bejegyzést ebből a hozzárendelésből egy root 
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Nincs e-mail-címmel rendelkező névjegy</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Cím elfelejtése</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Megjegyzett címek</translation>
     </message>
 </context>
 <context>
@@ -1212,6 +1251,10 @@ Az importálás MÁSODIK kulcsot ad ehhez a címhez — győződjön meg róla, 
         <source>Tap to try sending again.</source>
         <translation>Koppintson az újbóli küldéshez.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Megjegyzett címek</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1702,6 +1745,22 @@ Az importálás MÁSODIK kulcsot ad ehhez a címhez — győződjön meg róla, 
         <source>Could not download the message — no connection?</source>
         <translation>Nem sikerült letölteni az üzenetet — nincs kapcsolat?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>%1 megjegyzése</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Cím megjegyezve</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Megjegyzett címek</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 már meg van jegyezve</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1728,6 +1787,76 @@ Az importálás MÁSODIK kulcsot ad ehhez a címhez — győződjön meg róla, 
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Csak akkor, ha van másik mentése. Ez nem vonható vissza.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Megjegyzés</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Mégse</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Hozzáadja a megjegyzett címekhez?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Cím hozzáadása</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Megjegyzett címek</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Törlés</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Szerkesztés</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Elfelejtés</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Nincsenek megjegyzett címek</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Tartsa nyomva egy üzenetben a címet, hogy ide kerüljön</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Mentés</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Mégse</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Megjegyzett cím</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Név</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>E-mail-cím</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>nev@example.com</translation>
     </message>
 </context>
 <context>

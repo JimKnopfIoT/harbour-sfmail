@@ -97,6 +97,37 @@ Ako vam smeta, uklonite drugi unos iz te pridruženosti iz root ljuske. To je č
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamćene adrese</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP ključ</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME certifikat</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Imenik</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Već poznato: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Traženje ove adrese…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Ovdje još nije poznata</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Ako vam smeta, uklonite drugi unos iz te pridruženosti iz root ljuske. To je č
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Nema kontakata s adresom e-pošte</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Zaboravi ovu adresu</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamćene adrese</translation>
     </message>
 </context>
 <context>
@@ -1216,6 +1255,10 @@ Uvozom se za ovu adresu dodaje DRUGI ključ — uvjerite se da je taj novi klju�
         <source>Tap to try sending again.</source>
         <translation>Dodirnite za ponovni pokušaj slanja.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamćene adrese</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1706,6 +1749,22 @@ Uvozom se za ovu adresu dodaje DRUGI ključ — uvjerite se da je taj novi klju�
         <source>Could not download the message — no connection?</source>
         <translation>Poruku nije bilo moguće preuzeti — nema veze?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Zapamti %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Adresa zapamćena</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamćene adrese</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 je već zapamćena</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1732,6 +1791,76 @@ Uvozom se za ovu adresu dodaje DRUGI ključ — uvjerite se da je taj novi klju�
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Samo ako imate drugu sigurnosnu kopiju. Ovo se ne može poništiti.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Zapamti</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Odustani</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Dodati u zapamćene adrese?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Dodaj adresu</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamćene adrese</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Uklanjanje</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Uredi</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Zaboravi</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Nema zapamćenih adresa</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Dugo pritisnite adresu u poruci da biste je dodali ovdje</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Spremi</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Odustani</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Zapamćena adresa</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Ime</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>Adresa e-pošte</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>ime@example.com</translation>
     </message>
 </context>
 <context>

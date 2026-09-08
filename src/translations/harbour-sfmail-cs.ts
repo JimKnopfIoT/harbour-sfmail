@@ -97,6 +97,37 @@ Pokud vám to vadí, odeberte druhou položku z tohoto přiřazení z rootovské
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamatované adresy</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>Klíč PGP</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>Certifikát S/MIME</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Adresář</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Již známo: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Hledání této adresy…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Zde zatím neznámé</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Pokud vám to vadí, odeberte druhou položku z tohoto přiřazení z rootovské
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Žádné kontakty s e-mailovou adresou</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Zapomenout tuto adresu</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamatované adresy</translation>
     </message>
 </context>
 <context>
@@ -1216,6 +1255,10 @@ Import přidá pro tuto adresu DRUHÝ klíč — než mu budete důvěřovat, uj
         <source>Tap to try sending again.</source>
         <translation>Klepnutím zkusíte odeslat znovu.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamatované adresy</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1706,6 +1749,22 @@ Import přidá pro tuto adresu DRUHÝ klíč — než mu budete důvěřovat, uj
         <source>Could not download the message — no connection?</source>
         <translation>Zprávu nelze stáhnout — chybí spojení?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Zapamatovat %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Adresa zapamatována</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamatované adresy</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 je již zapamatována</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1732,6 +1791,76 @@ Import přidá pro tuto adresu DRUHÝ klíč — než mu budete důvěřovat, uj
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Jen pokud máte jinou zálohu. Tuto akci nelze vzít zpět.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Zapamatovat</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Zrušit</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Přidat mezi zapamatované adresy?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Přidat adresu</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamatované adresy</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Odstraňování</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Upravit</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Zapomenout</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Žádné zapamatované adresy</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Podržte adresu ve zprávě, chcete-li ji sem přidat</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Uložit</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Zrušit</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Zapamatovaná adresa</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Jméno</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>E-mailová adresa</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>jmeno@example.com</translation>
     </message>
 </context>
 <context>

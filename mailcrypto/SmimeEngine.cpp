@@ -2183,12 +2183,17 @@ void SmimeEngine::sendSmime(int accountId, const QString &subject,
                             const QStringList &to, const QStringList &cc,
                             const QStringList &bcc, const QString &body,
                             const QVariantList &attachments,
-                            bool encrypt, bool sign, const QString &passphrase)
+                            bool encrypt, bool sign, const QString &passphrase,
+                            const QString &fromAlias)
 {
     if (!m_available) { emit sendFinished(false, QStringLiteral("S/MIME not available")); return; }
     const QMailAccountId accId(static_cast<quint64>(accountId));
     QMailAccount account(accId);
-    const QString fromAddr = account.fromAddress().address();
+    // Sending as an alias means the alias is the sender in every respect: the
+    // header, the encrypt-to-self copy, and the certificate we look for. An
+    // alias without its own certificate therefore cannot sign — which is the
+    // truth, and better than signing as somebody the message does not claim.
+    const QString fromAddr = fromAlias.isEmpty() ? account.fromAddress().address() : fromAlias;
 
     QString signFpr;
     if (sign) {
@@ -2304,7 +2309,7 @@ void SmimeEngine::sendSmime(int accountId, const QString &subject,
     for (int ci = 0; ci < copies.size(); ++ci) {
         const Copy &c = copies.at(ci);
         QByteArray rfc;
-        rfc += "From: " + account.fromAddress().toString().toUtf8() + "\r\n";
+        rfc += "From: " + (fromAlias.isEmpty() ? account.fromAddress().toString() : fromAlias).toUtf8() + "\r\n";
         // A blind copy carries no To/Cc: QMF builds the SMTP envelope FROM these
         // headers, so naming the open recipients would deliver this copy to them
         // twice. The group placeholder is not an e-mail address, so QMF's

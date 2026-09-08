@@ -97,6 +97,37 @@ Jei tai trukdo, pašalinkite kitą įrašą iš to susiejimo root aplinkoje. Tai
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Įsiminti adresai</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP raktas</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME liudijimas</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Adresų knyga</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Jau žinoma: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Ieškoma šio adreso…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Čia dar nežinomas</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Jei tai trukdo, pašalinkite kitą įrašą iš to susiejimo root aplinkoje. Tai
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Nėra adresatų su el. pašto adresu</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Pamiršti šį adresą</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Įsiminti adresai</translation>
     </message>
 </context>
 <context>
@@ -1216,6 +1255,10 @@ Importavus šiam adresui atsiras ANTRAS raktas — įsitikink, kad naujasis rakt
         <source>Tap to try sending again.</source>
         <translation>Bakstelėk, kad bandytum siųsti dar kartą.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Įsiminti adresai</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1706,6 +1749,22 @@ Importavus šiam adresui atsiras ANTRAS raktas — įsitikink, kad naujasis rakt
         <source>Could not download the message — no connection?</source>
         <translation>Laiško atsiųsti nepavyko — nėra ryšio?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Įsiminti %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Adresas įsimintas</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Įsiminti adresai</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 jau įsimintas</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1732,6 +1791,76 @@ Importavus šiam adresui atsiras ANTRAS raktas — įsitikink, kad naujasis rakt
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Tik jei turi kitą atsarginę kopiją. To atšaukti nepavyks.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Įsiminti</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Atsisakyti</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Pridėti prie įsimintų adresų?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Pridėti adresą</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Įsiminti adresai</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Šalinama</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Taisyti</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Pamiršti</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Įsimintų adresų nėra</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Palaikykite adresą laiške, kad pridėtumėte jį čia</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Įrašyti</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Atsisakyti</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Įsimintas adresas</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Vardas</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>El. pašto adresas</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>vardas@example.com</translation>
     </message>
 </context>
 <context>

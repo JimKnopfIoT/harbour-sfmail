@@ -97,6 +97,37 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>記憶したアドレス</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP鍵</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME証明書</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>アドレス帳</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>すでに登録済み: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>このアドレスを検索中…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>ここではまだ未登録</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>メールアドレスのある連絡先がありません</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>このアドレスを削除</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>記憶したアドレス</translation>
     </message>
 </context>
 <context>
@@ -1212,6 +1251,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Tap to try sending again.</source>
         <translation>タップすると再送します。</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>記憶したアドレス</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1702,6 +1745,22 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Could not download the message — no connection?</source>
         <translation>メッセージをダウンロードできませんでした — 接続がありませんか？</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>%1 を記憶</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>アドレスを記憶しました</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>記憶したアドレス</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 はすでに記憶済みです</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1728,6 +1787,76 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>別のバックアップがある場合のみ。取り消せません。</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>記憶</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>記憶したアドレスに追加しますか？</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>アドレスを追加</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>記憶したアドレス</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>削除中</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>編集</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>削除</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>記憶したアドレスはありません</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>メッセージ内のアドレスを長押しすると、ここに追加できます</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>記憶したアドレス</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>名前</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>メールアドレス</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>name@example.com</translation>
     </message>
 </context>
 <context>
