@@ -97,6 +97,37 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Запомнени адреси</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP ключ</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME сертификат</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Адресник</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Вече известен: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Търсене на този адрес…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Още не е известен тук</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Няма контакти с адрес за е-поща</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Забрави този адрес</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Запомнени адреси</translation>
     </message>
 </context>
 <context>
@@ -1214,6 +1253,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Tap to try sending again.</source>
         <translation>Докоснете, за да опитате да изпратите отново.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Запомнени адреси</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1704,6 +1747,22 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Could not download the message — no connection?</source>
         <translation>Съобщението не можа да се изтегли — няма ли връзка?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Запомни %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Адресът е запомнен</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Запомнени адреси</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 вече е запомнен</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1730,6 +1789,76 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Само ако имате друго резервно копие. Това не може да бъде върнато.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Запомни</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Отказ</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Добавяне към запомнените адреси?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Добавяне на адрес</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Запомнени адреси</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Премахване</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Редактиране</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Забрави</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Няма запомнени адреси</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Задръжте адрес в съобщение, за да го добавите тук</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Запази</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Отказ</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Запомнен адрес</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Име</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>Адрес на е-поща</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>ime@example.com</translation>
     </message>
 </context>
 <context>

@@ -97,6 +97,37 @@ Om det stör kan du ta bort den andra posten ur den kopplingen från ett root-sk
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Sparade adresser</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP-nyckel</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME-certifikat</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Adressbok</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Redan känd: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Söker efter denna adress…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Inte känd här ännu</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Om det stör kan du ta bort den andra posten ur den kopplingen från ett root-sk
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Inga kontakter med e-postadress</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Glöm den här adressen</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Sparade adresser</translation>
     </message>
 </context>
 <context>
@@ -1214,6 +1253,10 @@ En import lägger till en ANDRA nyckel för den här adressen — försäkra dig
         <source>Tap to try sending again.</source>
         <translation>Tryck för att försöka skicka igen.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Sparade adresser</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1704,6 +1747,22 @@ En import lägger till en ANDRA nyckel för den här adressen — försäkra dig
         <source>Could not download the message — no connection?</source>
         <translation>Kunde inte hämta meddelandet — ingen anslutning?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Kom ihåg %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Adressen sparad</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Sparade adresser</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 är redan sparad</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1730,6 +1789,76 @@ En import lägger till en ANDRA nyckel för den här adressen — försäkra dig
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Bara om du har en annan säkerhetskopia. Detta går inte att ångra.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Spara</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Lägga till bland sparade adresser?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Lägg till adress</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Sparade adresser</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Glömmer</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Redigera</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Glöm</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Inga sparade adresser</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Håll ned en adress i ett meddelande för att lägga till den här</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Spara</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Sparad adress</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Namn</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>E-postadress</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>namn@example.com</translation>
     </message>
 </context>
 <context>

@@ -97,6 +97,37 @@ Hvis det generer, kan du tage den anden post ud af den tilknytning fra en root-s
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Huskede adresser</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP-nøgle</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME-certifikat</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Adressebog</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Allerede kendt: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Søger efter denne adresse…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Endnu ikke kendt her</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Hvis det generer, kan du tage den anden post ud af den tilknytning fra en root-s
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Ingen kontakter med en e-mail-adresse</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Glem denne adresse</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Huskede adresser</translation>
     </message>
 </context>
 <context>
@@ -1214,6 +1253,10 @@ En import lægger en EKSTRA nøgle til denne adresse — sikr dig, at den nye n�
         <source>Tap to try sending again.</source>
         <translation>Tryk for at prøve at sende igen.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Huskede adresser</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1704,6 +1747,22 @@ En import lægger en EKSTRA nøgle til denne adresse — sikr dig, at den nye n�
         <source>Could not download the message — no connection?</source>
         <translation>Kunne ikke hente beskeden — ingen forbindelse?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Husk %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Adressen er husket</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Huskede adresser</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 er allerede husket</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1730,6 +1789,76 @@ En import lægger en EKSTRA nøgle til denne adresse — sikr dig, at den nye n�
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Kun hvis du har en anden sikkerhedskopi. Dette kan ikke fortrydes.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Husk</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annullér</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Føj til huskede adresser?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Tilføj adresse</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Huskede adresser</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Glemmer</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Rediger</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Glem</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Ingen huskede adresser</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Hold en adresse i en besked nede for at føje den hertil</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Gem</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annullér</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Husket adresse</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Navn</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>E-mailadresse</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>navn@example.com</translation>
     </message>
 </context>
 <context>

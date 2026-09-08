@@ -141,7 +141,8 @@ public:
                                const QStringList &to, const QStringList &cc,
                                const QStringList &bcc, const QString &body,
                                const QVariantList &attachments,
-                               bool encrypt, bool sign, const QString &passphrase);
+                               bool encrypt, bool sign, const QString &passphrase,
+                               const QString &fromAlias = QString());
 
     // Attachments of a PLAIN (unencrypted) message, parsed straight from its raw
     // RFC822 file in QMF — works on BOTH SFOS 4.6 (no EmailMessage.attachmentModel)

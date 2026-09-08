@@ -97,6 +97,37 @@ Jeśli to przeszkadza, usuń drugi wpis z tego przypisania z powłoki roota. To 
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamiętane adresy</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>Klucz PGP</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>Certyfikat S/MIME</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Książka adresowa</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Już znane: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Szukanie tego adresu…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Tutaj jeszcze nieznany</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Jeśli to przeszkadza, usuń drugi wpis z tego przypisania z powłoki roota. To 
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Brak kontaktów z adresem e-mail</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Zapomnij ten adres</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamiętane adresy</translation>
     </message>
 </context>
 <context>
@@ -1216,6 +1255,10 @@ Import doda DRUGI klucz dla tego adresu — upewnij się, że nowy klucz jest pr
         <source>Tap to try sending again.</source>
         <translation>Dotknij, aby spróbować wysłać ponownie.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamiętane adresy</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1706,6 +1749,22 @@ Import doda DRUGI klucz dla tego adresu — upewnij się, że nowy klucz jest pr
         <source>Could not download the message — no connection?</source>
         <translation>Nie można pobrać wiadomości — brak połączenia?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Zapamiętaj %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Adres zapamiętany</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamiętane adresy</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 jest już zapamiętany</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1732,6 +1791,76 @@ Import doda DRUGI klucz dla tego adresu — upewnij się, że nowy klucz jest pr
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Tylko jeśli masz inną kopię zapasową. Tego nie można cofnąć.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Zapamiętaj</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Anuluj</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Dodać do zapamiętanych adresów?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Dodaj adres</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Zapamiętane adresy</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Usuwanie</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Edytuj</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Zapomnij</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Brak zapamiętanych adresów</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Przytrzymaj adres w wiadomości, aby dodać go tutaj</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Zapisz</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Anuluj</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Zapamiętany adres</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nazwa</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>Adres e-mail</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>nazwa@example.com</translation>
     </message>
 </context>
 <context>

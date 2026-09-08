@@ -97,6 +97,37 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>نشانی‌های ذخیره‌شده</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>کلید PGP</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>گواهی S/MIME</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>دفترچه نشانی</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>از پیش شناخته‌شده: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>در حال جست‌وجوی این نشانی…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>هنوز اینجا شناخته نشده</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>مخاطبی با نشانی ایمیل نیست</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>فراموش کردن این نشانی</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>نشانی‌های ذخیره‌شده</translation>
     </message>
 </context>
 <context>
@@ -1212,6 +1251,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Tap to try sending again.</source>
         <translation>برای تلاش دوبارهٔ ارسال ضربه بزنید.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>نشانی‌های ذخیره‌شده</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1702,6 +1745,22 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Could not download the message — no connection?</source>
         <translation>پیام دریافت نشد — اتصالی برقرار نیست؟</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>به خاطر سپردن %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>نشانی به خاطر سپرده شد</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>نشانی‌های ذخیره‌شده</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 از پیش ذخیره شده است</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1728,6 +1787,76 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>تنها اگر پشتیبان دیگری دارید. این کار برگشت‌ناپذیر است.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>به خاطر سپردن</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>انصراف</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>به نشانی‌های ذخیره‌شده افزوده شود؟</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>افزودن نشانی</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>نشانی‌های ذخیره‌شده</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>در حال حذف</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>ویرایش</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>فراموش کردن</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>هیچ نشانی ذخیره‌شده‌ای نیست</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>برای افزودن یک نشانی، آن را در پیام لمس کرده و نگه دارید</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>ذخیره</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>لغو</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>نشانی ذخیره‌شده</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>نام</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>نشانی رایانامه</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>name@example.com</translation>
     </message>
 </context>
 <context>

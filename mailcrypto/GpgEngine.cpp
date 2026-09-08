@@ -17,6 +17,7 @@
 #include <QNetworkReply>
 #include <QUrl>
 #include <QJsonObject>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QDnsLookup>
 #include <QHostAddress>
@@ -26,6 +27,9 @@
 #include <QProcess>
 #include <QTextCodec>
 #include <QLocalSocket>
+#include <Accounts/Manager>
+#include <Accounts/Account>
+#include <Accounts/Service>
 #include <dlfcn.h>
 #include <QCoreApplication>
 #include <QDebug>
@@ -2180,7 +2184,8 @@ void GpgEngine::sendPgpMime(int accountId, const QString &subject,
                             const QVariantList &blindCopies, const QString &bodyText,
                             const QVariantList &attachments,
                             const QStringList &recipientFingerprints,
-                            const QString &signFingerprint, const QString &passphrase)
+                            const QString &signFingerprint, const QString &passphrase,
+                            const QString &fromAlias)
 {
     const bool hasOpen = !to.isEmpty() || !cc.isEmpty();
     if (hasOpen && recipientFingerprints.isEmpty()) {
@@ -2199,7 +2204,11 @@ void GpgEngine::sendPgpMime(int accountId, const QString &subject,
     //    nothing they don't already know. Only the sender's own address and the
     //    open recipients ever appear here; a blind address never does.
     const QMailAccountId accIdForHdrs(static_cast<quint64>(accountId));
-    const QString fromAddr = QMailAccount(accIdForHdrs).fromAddress().toString();
+    // The sender may have picked one of the account's alias addresses; that
+    // choice must show in the protected headers too, or the signed part would
+    // name a different sender than the envelope does.
+    const QString fromAddr = fromAlias.isEmpty()
+            ? QMailAccount(accIdForHdrs).fromAddress().toString() : fromAlias;
     QByteArray prot;
     if (!fromAddr.isEmpty()) prot += "From: " + fromAddr.toUtf8() + "\r\n";
     if (!to.isEmpty())       prot += "To: " + to.join(QStringLiteral(", ")).toUtf8() + "\r\n";
@@ -2271,8 +2280,8 @@ void GpgEngine::sendPgpMime(int accountId, const QString &subject,
     //    an idle GUI-thread turn. Capture everything by value.
     qWarning() << "[send] encrypted ok (" << copies.size() << "message(s), "
                << blindCopies.size() << "blind); deferring QMF build, accountId=" << accountId;
-    QTimer::singleShot(0, this, [this, accountId, subject, copies, attachments]() {
-        finishPgpMimeSend(accountId, subject, copies, !attachments.isEmpty());
+    QTimer::singleShot(0, this, [this, accountId, subject, copies, attachments, fromAlias]() {
+        finishPgpMimeSend(accountId, subject, copies, !attachments.isEmpty(), fromAlias);
     });
 }
 
@@ -2280,11 +2289,12 @@ void GpgEngine::sendPgpMime(int accountId, const QString &subject,
 // outer multipart/encrypted (RFC 3156) message, stores it in the outbox and
 // kicks off transmission. Must NOT run inline during a page transition.
 void GpgEngine::finishPgpMimeSend(int accountId, const QString &subject,
-                                  const QVariantList &copies, bool hasAttachments)
+                                  const QVariantList &copies, bool hasAttachments,
+                                  const QString &fromAlias)
 {
     const QMailAccountId accId(static_cast<quint64>(accountId));
     QMailAccount account(accId);
-    const QString fromAddr = account.fromAddress().toString();
+    const QString fromAddr = fromAlias.isEmpty() ? account.fromAddress().toString() : fromAlias;
     qWarning() << "[send] building" << copies.size() << "message(s), account"
                << accountId << "from" << fromAddr;
 
@@ -2684,7 +2694,8 @@ void GpgEngine::signPgpMime(int accountId, const QString &subject,
                             const QStringList &to, const QStringList &cc,
                             const QStringList &bcc, const QString &bodyText,
                             const QVariantList &attachments,
-                            const QString &signFingerprint, const QString &passphrase)
+                            const QString &signFingerprint, const QString &passphrase,
+                            const QString &fromAlias)
 {
     if (signFingerprint.isEmpty()) {
         emit sendFinished(false, QStringLiteral("No signing key."));
@@ -2708,8 +2719,8 @@ void GpgEngine::signPgpMime(int accountId, const QString &subject,
                << "); deferring QMF build, accountId=" << accountId;
     const QByteArray sigCrlf = toCrlf(sig);
     const bool hasAtt = !attachments.isEmpty();
-    QTimer::singleShot(0, this, [this, accountId, subject, to, cc, bcc, signedInner, sigCrlf, micalg, hasAtt]() {
-        finishSignedMimeSend(accountId, subject, to, cc, bcc, signedInner, sigCrlf, micalg, hasAtt);
+    QTimer::singleShot(0, this, [this, accountId, subject, to, cc, bcc, signedInner, sigCrlf, micalg, hasAtt, fromAlias]() {
+        finishSignedMimeSend(accountId, subject, to, cc, bcc, signedInner, sigCrlf, micalg, hasAtt, fromAlias);
     });
 }
 
@@ -2717,11 +2728,11 @@ void GpgEngine::finishSignedMimeSend(int accountId, const QString &subject,
                                      const QStringList &to, const QStringList &cc,
                                      const QStringList &bcc, const QByteArray &signedInner,
                                      const QByteArray &signature, const QString &micalg,
-                                     bool hasAttachments)
+                                     bool hasAttachments, const QString &fromAlias)
 {
     const QMailAccountId accId(static_cast<quint64>(accountId));
     QMailAccount account(accId);
-    const QString fromAddr = account.fromAddress().toString();
+    const QString fromAddr = fromAlias.isEmpty() ? account.fromAddress().toString() : fromAlias;
     qWarning() << "[sign] building msg, account" << accountId << "from" << fromAddr;
 
     const QByteArray boundary = mimeBoundary();
@@ -2882,6 +2893,157 @@ QVariantMap GpgEngine::encryptionInfo(const QString &src)
     return result;
 }
 
+
+// --- Alias addresses of an account -------------------------------------------
+//
+// The platform keeps them as the account service setting "emailAliases", which
+// is exactly what the system's account settings page writes and what the mail
+// framework reads back. Reading that key directly means our list and the
+// platform's are one list, not two that can drift; it also works on targets
+// whose mail framework has no alias call yet (that call is newer than the
+// setting). We only ever read — a wrong write here would damage the account.
+
+QStringList GpgEngine::accountAliases(const QString &accountAddress)
+{
+    QStringList out;
+    const QString want = accountAddress.trimmed().toLower();
+    if (want.isEmpty()) return out;
+
+    Accounts::Manager mgr;
+    const Accounts::AccountIdList ids = mgr.accountList();
+    for (const Accounts::AccountId id : ids) {
+        QScopedPointer<Accounts::Account> acc(mgr.account(id));
+        if (acc.isNull()) continue;
+        const Accounts::ServiceList services = acc->services();
+        // The address and the aliases sit in the same service; check every
+        // service of the account and take the one whose address matches.
+        for (const Accounts::Service &svc : services) {
+            acc->selectService(svc);
+            const QString addr = acc->valueAsString(QStringLiteral("emailaddress")).trimmed();
+            if (addr.isEmpty() || addr.toLower() != want) continue;
+            const QVariant v = acc->value(QStringLiteral("emailAliases"));
+            for (const QString &a : v.toStringList()) {
+                const QString alias = a.trimmed();
+                if (alias.isEmpty() || !alias.contains(QLatin1Char('@'))) continue;
+                if (alias.toLower() == want) continue;          // that is the address itself
+                if (!out.contains(alias, Qt::CaseInsensitive)) out << alias;
+            }
+        }
+        acc->selectService();
+    }
+    return out;
+}
+
+// --- Remembered addresses (our own address cache) ---------------------------
+//
+// A list the user fills deliberately. It is stored as plain JSON with mode
+// 0600 — deliberately, not for lack of means: the very same addresses already
+// sit in clear text in every message on the device, in the platform's own
+// address book (which is even world-readable), and in the envelope of anything
+// the user sends. A passphrase on this one copy would buy no secrecy that the
+// device does not already give away, and would cost a prompt every session.
+// The file mode keeps other users out; the sandbox keeps other apps out.
+
+QString GpgEngine::addressStorePath() const
+{
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+           + QStringLiteral("/addresses.json");
+}
+
+void GpgEngine::loadAddressStore()
+{
+    if (m_addrLoaded) return;
+    m_addrLoaded = true;                       // a missing file is an empty list
+    QFile f(addressStorePath());
+    if (!f.open(QIODevice::ReadOnly)) return;
+    const QByteArray raw = f.readAll();
+    f.close();
+
+    const QJsonDocument doc = QJsonDocument::fromJson(raw);
+    if (!doc.isArray()) return;
+    const QJsonArray arr = doc.array();
+    for (int i = 0; i < arr.size(); ++i) {
+        const QJsonObject o = arr.at(i).toObject();
+        const QString addr = o.value(QStringLiteral("address")).toString().trimmed();
+        if (addr.isEmpty()) continue;
+        QVariantMap m;
+        m[QStringLiteral("address")] = addr;
+        m[QStringLiteral("name")]    = o.value(QStringLiteral("name")).toString();
+        m[QStringLiteral("added")]   = o.value(QStringLiteral("added")).toString();
+        m_addresses << m;
+    }
+}
+
+bool GpgEngine::writeAddressStore()
+{
+    QJsonArray arr;
+    for (const QVariant &v : m_addresses) {
+        const QVariantMap m = v.toMap();
+        QJsonObject o;
+        o[QStringLiteral("address")] = m.value(QStringLiteral("address")).toString();
+        o[QStringLiteral("name")]    = m.value(QStringLiteral("name")).toString();
+        o[QStringLiteral("added")]   = m.value(QStringLiteral("added")).toString();
+        arr.append(o);
+    }
+    const QByteArray payload = QJsonDocument(arr).toJson(QJsonDocument::Compact);
+
+    // Write beside the target and rename, so a failure never truncates a list
+    // that is already there.
+    const QString path = addressStorePath();
+    const QString tmp = path + QStringLiteral(".new");
+    QFile f(tmp);
+    if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate)) return false;
+    const bool written = f.write(payload) == payload.size() && f.flush();
+    f.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
+    f.close();
+    if (!written) { QFile::remove(tmp); return false; }
+    QFile::remove(path);
+    if (!QFile::rename(tmp, path)) { QFile::remove(tmp); return false; }
+    return true;
+}
+
+QVariantList GpgEngine::rememberedAddresses()
+{
+    loadAddressStore();
+    return m_addresses;
+}
+
+bool GpgEngine::rememberAddress(const QString &address, const QString &name)
+{
+    loadAddressStore();
+    const QString addr = address.trimmed();
+    if (addr.isEmpty() || !addr.contains(QLatin1Char('@'))) return false;
+
+    for (int i = 0; i < m_addresses.size(); ++i) {   // update, never duplicate
+        QVariantMap m = m_addresses.at(i).toMap();
+        if (m.value(QStringLiteral("address")).toString().compare(addr, Qt::CaseInsensitive) == 0) {
+            if (name.trimmed().isEmpty()) return true;
+            m[QStringLiteral("name")] = name.trimmed();
+            m_addresses[i] = m;
+            return writeAddressStore();
+        }
+    }
+    QVariantMap m;
+    m[QStringLiteral("address")] = addr;
+    m[QStringLiteral("name")]    = name.trimmed();
+    m[QStringLiteral("added")]   = QDateTime::currentDateTime().toString(Qt::ISODate);
+    m_addresses << m;
+    return writeAddressStore();
+}
+
+bool GpgEngine::forgetAddress(const QString &address)
+{
+    loadAddressStore();
+    const QString addr = address.trimmed();
+    for (int i = 0; i < m_addresses.size(); ++i) {
+        if (m_addresses.at(i).toMap().value(QStringLiteral("address")).toString()
+                .compare(addr, Qt::CaseInsensitive) == 0) {
+            m_addresses.removeAt(i);
+            return writeAddressStore();
+        }
+    }
+    return false;
+}
 
 // --- "verified signed" memory (persisted) ----------------------------------
 

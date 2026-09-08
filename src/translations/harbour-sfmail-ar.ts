@@ -97,6 +97,37 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>العناوين المحفوظة</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>مفتاح PGP</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>شهادة S/MIME</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>دفتر العناوين</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>معروف بالفعل: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>جارٍ البحث عن هذا العنوان…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>غير معروف هنا بعد</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>لا توجد جهات اتصال لها عنوان بريد إلكتروني</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>نسيان هذا العنوان</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>العناوين المحفوظة</translation>
     </message>
 </context>
 <context>
@@ -1222,6 +1261,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Tap to try sending again.</source>
         <translation>انقر لإعادة محاولة الإرسال.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>العناوين المحفوظة</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1712,6 +1755,22 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Could not download the message — no connection?</source>
         <translation>تعذّر تنزيل الرسالة — لا يوجد اتصال؟</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>تذكّر %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>تم تذكّر العنوان</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>العناوين المحفوظة</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 محفوظ بالفعل</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1738,6 +1797,76 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>فقط إن كانت لديك نسخة احتياطية أخرى. ولا يمكن التراجع عن ذلك.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>تذكّر</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>إلغاء</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>إضافة إلى العناوين المحفوظة؟</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>إضافة عنوان</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>العناوين المحفوظة</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>جارٍ الحذف</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>تحرير</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>نسيان</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>لا توجد عناوين محفوظة</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>اضغط مطولاً على عنوان في رسالة لإضافته هنا</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>حفظ</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>إلغاء</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>عنوان محفوظ</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>الاسم</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>عنوان البريد الإلكتروني</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>name@example.com</translation>
     </message>
 </context>
 <context>

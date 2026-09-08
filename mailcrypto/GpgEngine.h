@@ -230,7 +230,8 @@ public:
                                  const QVariantList &blindCopies, const QString &bodyText,
                                  const QVariantList &attachments,
                                  const QStringList &recipientFingerprints,
-                                 const QString &signFingerprint, const QString &passphrase);
+                                 const QString &signFingerprint, const QString &passphrase,
+                                 const QString &fromAlias = QString());
 
     // Build a real multipart/signed (RFC 3156) message: the body + attachments are
     // assembled into an inner MIME entity, a DETACHED OpenPGP signature is computed
@@ -241,7 +242,8 @@ public:
                                  const QStringList &to, const QStringList &cc,
                                  const QStringList &bcc, const QString &bodyText,
                                  const QVariantList &attachments,
-                                 const QString &signFingerprint, const QString &passphrase);
+                                 const QString &signFingerprint, const QString &passphrase,
+                                 const QString &fromAlias = QString());
 
     // --- diagnostics (synchronous, read-only) ------------------------------
     // Without decrypting, inspect an encrypted block: which recipient key IDs it
@@ -283,6 +285,24 @@ public:
     Q_INVOKABLE QString signerOf(int messageId);
 
     // User's preferred default sending account (persisted). 0 = none chosen.
+    // Alias addresses of the account that sends from `accountAddress`, as
+    // entered in the system's account settings. Read-only, and read from the
+    // same place the settings write them, so both lists can never drift apart.
+    Q_INVOKABLE QStringList accountAliases(const QString &accountAddress);
+
+    // --- Remembered addresses (our own address cache) ----------------------
+    // A list the user fills deliberately ("remember this address"). Kept as a
+    // plain 0600 file, and that is a decision, not an omission: the same
+    // addresses already sit in clear text in every stored message, in the
+    // system's own address book (which is world-readable), and in the envelope
+    // of everything the user sends. Encrypting this one copy would cost a
+    // passphrase prompt and protect nothing that is not already public on the
+    // device. The file mode keeps it out of reach of other users; the sandbox
+    // keeps it out of reach of other apps.
+    Q_INVOKABLE QVariantList rememberedAddresses();
+    Q_INVOKABLE bool rememberAddress(const QString &address, const QString &name);
+    Q_INVOKABLE bool forgetAddress(const QString &address);
+
     Q_INVOKABLE int defaultAccountId();
     Q_INVOKABLE void setDefaultAccountId(int accountId);
 
@@ -410,12 +430,13 @@ private:
     // when the message has blind copies; they are stored one after another and
     // transmitted together (QMF sends the whole outbox in one go anyway).
     void finishPgpMimeSend(int accountId, const QString &subject,
-                           const QVariantList &copies, bool hasAttachments);
+                           const QVariantList &copies, bool hasAttachments,
+                           const QString &fromAlias);
     void finishSignedMimeSend(int accountId, const QString &subject,
                               const QStringList &to, const QStringList &cc,
                               const QStringList &bcc, const QByteArray &signedInner,
                               const QByteArray &signature, const QString &micalg,
-                              bool hasAttachments);
+                              bool hasAttachments, const QString &fromAlias);
     // Shared tail for both PGP/MIME paths: parse the fully-built RFC2822 bytes,
     // store in the account's outbox (with local-folder fallback) and transmit.
     void storeAndTransmit(const QMailAccountId &accId, const QByteArray &rfc,
@@ -437,6 +458,13 @@ private:
     QSet<quint64> m_retryAccounts;        // accounts whose outbox we keep trying
     void scheduleRetry(const QMailAccountId &accId);
     void onTransmitFailed(const QString &error, int code);
+
+    // Remembered-address store (see the Q_INVOKABLEs above).
+    QString addressStorePath() const;
+    void loadAddressStore();       // first use only; the list then lives here
+    bool writeAddressStore();
+    bool m_addrLoaded = false;
+    QVariantList m_addresses;      // [{address, name, added}]
 
     QNetworkAccessManager *m_nam = nullptr;
     int m_blPending = 0;

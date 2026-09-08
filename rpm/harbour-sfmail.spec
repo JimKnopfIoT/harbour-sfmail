@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.13
+Version:    0.8.14
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -21,6 +21,7 @@ BuildRequires:  pkgconfig(Qt5Sql)
 BuildRequires:  pkgconfig(Qt5Concurrent)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(QmfClient)
+BuildRequires:  pkgconfig(accounts-qt5)
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  desktop-file-utils
 
@@ -30,6 +31,8 @@ Requires:   nemo-qml-plugin-email-qt5
 # RFC 822 message itself). The library's package name carries its soname, so
 # depend on the file rpm already tracks rather than on a package name.
 Requires:   libqmfclient1-qt5
+# Read-only access to the account settings, for the sender's alias addresses.
+Requires:   libaccounts-qt5
 # The bundled OpenSSL tool links the system libcrypto; rpm derives the exact
 # soname dependency from the binary itself, so nothing has to be named here.
 # S/MIME exists on aarch64 only, which is where that binary ships.
@@ -209,6 +212,29 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Mon Sep 08 2026 harbour-sfmail contributors 0.8.14-1
+- HTML mail is readable again. A message that brings its own colours used to
+  keep them, so text written for white paper arrived as dark grey on a dark
+  screen, and where the light text sat on a background image that the app does
+  not load, nothing was left to read. Colours from the message are now dropped
+  and the theme's own are used.
+- Messages whose HTML part had not been fetched yet were shown as the stub text
+  their sender puts there for clients that cannot read HTML. The HTML part is
+  now requested and displayed when it arrives.
+- The address book works: contacts are listed in the order the system sorts
+  them, one line per address, and the search field filters as you type — it had
+  no effect at all before. Recipient fields suggest addresses after two
+  characters, from your remembered addresses, from the keys and certificates you
+  hold, and from the address book.
+- Alias addresses can be used as the sender. The addresses configured for an
+  account in the system settings are offered in the composer, and the one chosen
+  is what the message — including its protected headers — is sent from.
+- Addresses can be remembered by pressing and holding the sender block, and
+  managed on a page of their own. The list says where else an address is already
+  known — address book, PGP key, S/MIME certificate — before a second copy of it
+  is made, and an address already remembered is named as such instead of being
+  offered again. The address book no longer lists the same address twice when
+  two sources hold it.
 * Sun Sep 07 2026 harbour-sfmail contributors 0.8.13-1
 - An attachment opens on the first tap. The note of what you asked for used to
   live in the attachment list itself; finishing the download rebuilds that list,

@@ -97,6 +97,37 @@ Jekk idejqek, neħħi l-entrata l-oħra minn dik ir-rabta minn shell ta&apos; ro
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Indirizzi mfakkra</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>Ċavetta PGP</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>Ċertifikat S/MIME</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Ktieb tal-indirizzi</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Diġà magħruf: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Qed infittxu dan l-indirizz…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Għadu mhux magħruf hawn</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Jekk idejqek, neħħi l-entrata l-oħra minn dik ir-rabta minn shell ta&apos; ro
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>L-ebda kuntatt b&apos;indirizz tal-imejl</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Insa dan l-indirizz</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Indirizzi mfakkra</translation>
     </message>
 </context>
 <context>
@@ -1218,6 +1257,10 @@ L-importazzjoni żżid IT-TIENI ċavetta għal dan l-indirizz — kun żgur li d
         <source>Tap to try sending again.</source>
         <translation>Agħfas biex terġa&apos; tipprova tibgħat.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Indirizzi mfakkra</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1708,6 +1751,22 @@ L-importazzjoni żżid IT-TIENI ċavetta għal dan l-indirizz — kun żgur li d
         <source>Could not download the message — no connection?</source>
         <translation>Il-messaġġ ma setax jitniżżel — m&apos;hemmx konnessjoni?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Ftakar %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>L-indirizz ġie mfakkar</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Indirizzi mfakkra</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 diġà miżmum</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1734,6 +1793,76 @@ L-importazzjoni żżid IT-TIENI ċavetta għal dan l-indirizz — kun żgur li d
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Biss jekk għandek backup ieħor. Dan ma jistax jitreġġa&apos; lura.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Ftakar</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Ikkanċella</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Iżżid mal-indirizzi mfakkra?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Żid indirizz</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Indirizzi mfakkra</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Qed jitneħħa</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Editja</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Insa</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>L-ebda indirizz imfakkar</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Żomm subgħajk fuq indirizz f&apos;messaġġ biex iżżidu hawn</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Issejvja</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Ikkanċella</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Indirizz imfakkar</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Isem</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>Indirizz elettroniku</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>isem@example.com</translation>
     </message>
 </context>
 <context>

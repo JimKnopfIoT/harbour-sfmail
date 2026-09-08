@@ -97,6 +97,37 @@ Má chuireann sé isteach ort, bain an iontráil eile as an nasc sin ó bhlaosc 
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Seoltaí coinnithe</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>Eochair PGP</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>Teastas S/MIME</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Leabhar seoltaí</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Ar eolas cheana: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Ag cuardach an seolta seo…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Gan aithne fós anseo</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ Má chuireann sé isteach ort, bain an iontráil eile as an nasc sin ó bhlaosc 
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>Níl aon teagmhálaí le seoladh ríomhphoist ann</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Déan dearmad ar an seoladh seo</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Seoltaí coinnithe</translation>
     </message>
 </context>
 <context>
@@ -1216,6 +1255,10 @@ Cuireann an iompórtáil an DARA heochair leis an seoladh seo — déan cinnte g
         <source>Tap to try sending again.</source>
         <translation>Tapáil chun iarracht eile a dhéanamh í a sheoladh.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Seoltaí coinnithe</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1706,6 +1749,22 @@ Cuireann an iompórtáil an DARA heochair leis an seoladh seo — déan cinnte g
         <source>Could not download the message — no connection?</source>
         <translation>Níorbh fhéidir an teachtaireacht a íoslódáil — gan cheangal?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Cuimhnigh ar %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Seoladh coinnithe i gcuimhne</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Seoltaí coinnithe</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>Tá %1 sábháilte cheana</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1732,6 +1791,76 @@ Cuireann an iompórtáil an DARA heochair leis an seoladh seo — déan cinnte g
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Ná déan é seo ach má tá cúltaca eile agat. Ní féidir é a chur ar ceal.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Coinnigh</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cealaigh</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Cuir leis na seoltaí coinnithe?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Cuir seoladh leis</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Seoltaí coinnithe</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Á scriosadh</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Cuir in eagar</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Déan dearmad</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>Níl aon seoladh coinnithe</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Coinnigh do mhéar ar sheoladh i dteachtaireacht chun é a chur leis anseo</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Sábháil</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cealaigh</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Seoladh coinnithe</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Ainm</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>Seoladh ríomhphoist</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>ainm@example.com</translation>
     </message>
 </context>
 <context>

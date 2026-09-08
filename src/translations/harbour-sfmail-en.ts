@@ -97,6 +97,37 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     </message>
 </context>
 <context>
+    <name>AddressKnowledge</name>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Remembered addresses</translation>
+    </message>
+    <message>
+        <source>PGP key</source>
+        <translation>PGP key</translation>
+    </message>
+    <message>
+        <source>S/MIME certificate</source>
+        <translation>S/MIME certificate</translation>
+    </message>
+    <message>
+        <source>Address book</source>
+        <translation>Address book</translation>
+    </message>
+    <message>
+        <source>Already known: %1</source>
+        <translation>Already known: %1</translation>
+    </message>
+    <message>
+        <source>Looking for this address…</source>
+        <translation>Looking for this address…</translation>
+    </message>
+    <message>
+        <source>Not known here yet</source>
+        <translation>Not known here yet</translation>
+    </message>
+</context>
+<context>
     <name>ComposerPage</name>
     <message>
         <source>Inline PGP cannot hide blind copies — use PGP/MIME.</source>
@@ -347,6 +378,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>No contacts with an e-mail address</source>
         <translation>No contacts with an e-mail address</translation>
+    </message>
+    <message>
+        <source>Forget this address</source>
+        <translation>Forget this address</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Remembered addresses</translation>
     </message>
 </context>
 <context>
@@ -1214,6 +1253,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Tap to try sending again.</source>
         <translation>Tap to try sending again.</translation>
     </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Remembered addresses</translation>
+    </message>
 </context>
 <context>
     <name>MessageListPage</name>
@@ -1704,6 +1747,22 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Could not download the message — no connection?</source>
         <translation>Could not download the message — no connection?</translation>
     </message>
+    <message>
+        <source>Remember %1</source>
+        <translation>Remember %1</translation>
+    </message>
+    <message>
+        <source>Address remembered</source>
+        <translation>Address remembered</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Remembered addresses</translation>
+    </message>
+    <message>
+        <source>%1 is already remembered</source>
+        <translation>%1 is already remembered</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1730,6 +1789,76 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Only if you have another backup. This cannot be undone.</translation>
+    </message>
+</context>
+<context>
+    <name>RememberAddressDialog</name>
+    <message>
+        <source>Remember</source>
+        <translation>Remember</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <source>Add to remembered addresses?</source>
+        <translation>Add to remembered addresses?</translation>
+    </message>
+</context>
+<context>
+    <name>RememberedAddressesPage</name>
+    <message>
+        <source>Add address</source>
+        <translation>Add address</translation>
+    </message>
+    <message>
+        <source>Remembered addresses</source>
+        <translation>Remembered addresses</translation>
+    </message>
+    <message>
+        <source>Forgetting</source>
+        <translation>Forgetting</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Edit</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation>Forget</translation>
+    </message>
+    <message>
+        <source>No remembered addresses</source>
+        <translation>No remembered addresses</translation>
+    </message>
+    <message>
+        <source>Press and hold an address in a message to add it here</source>
+        <translation>Press and hold an address in a message to add it here</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Save</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <source>Remembered address</source>
+        <translation>Remembered address</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <source>E-mail address</source>
+        <translation>E-mail address</translation>
+    </message>
+    <message>
+        <source>name@example.com</source>
+        <translation>name@example.com</translation>
     </message>
 </context>
 <context>
