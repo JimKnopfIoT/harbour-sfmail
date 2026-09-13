@@ -27,6 +27,13 @@ Page {
             remorsePopup.cancel()
         }
     }
+    // Same for leaving the page: a countdown must not outlive the page it was
+    // started on, or it fires while the user is somewhere else.
+    onStatusChanged: {
+        if (status !== PageStatus.Active && remorsePopup.pending) {
+            remorsePopup.cancel()
+        }
+    }
 
     // Inline-PGP (nicht PGP/MIME) wird vom nativen Pfad nicht erkannt — wir
     // entschlüsseln/prüfen den Body dann selbst über das gpg2-Plugin.

@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.14
+Version:    0.8.15
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -212,6 +212,21 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Sun Sep 13 2026 harbour-sfmail contributors 0.8.15-1
+- Deleting a message acts on the message that was chosen. A context menu hands
+  its click over only once it has closed, and by then the list can have been
+  rebuilt underneath it — mail arriving, a sync, the message just read being
+  written back — so the delete could land on a different row. The message is now
+  pinned the moment the menu opens, and so are the other entries of that menu.
+- A delete that is counting down belongs to the page it was started on. Opening
+  another message, going back, or putting the app aside takes it back, instead
+  of leaving a countdown running out of sight that would carry the delete out
+  the moment you came back.
+- A second delete during a running countdown no longer inherits what is left of
+  the first one's four seconds. The two are still carried out together, as the
+  bar says, but the countdown starts over so every message gets the same time to
+  be taken back.
+
 * Mon Sep 08 2026 harbour-sfmail contributors 0.8.14-1
 - HTML mail is readable again. A message that brings its own colours used to
   keep them, so text written for white paper arrived as dark grey on a dark
