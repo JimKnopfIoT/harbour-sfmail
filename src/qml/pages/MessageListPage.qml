@@ -56,6 +56,32 @@ Page {
     // otherwise silently drop the first. Cancel drops the whole batch, which is
     // what the bar says ("Deleting 3").
     property var _pendingDeletes: []
+    // Set while the bar is taken down only to restart it, so the canceled()
+    // that comes with it does not throw the batch away.
+    property bool _remorseRestarting: false
+
+    // Arming the bar, always with a full countdown. execute() on a bar that is
+    // already counting does nothing to the countdown (the state is "active"
+    // already, so the transition that restarts it never runs) and the message
+    // queued second would inherit the remains of the first four seconds. Going
+    // through "inactive" starts it over.
+    function _armRemorse(text, action) {
+        // A context menu hands its click over only once it has closed, so this
+        // can arrive when the page is already on its way out. A bar armed then
+        // is never seen and runs out the moment the user comes back.
+        if (page.status !== PageStatus.Active || !Qt.application.active) {
+            console.warn("[del] not arming, the page is no longer in front:",
+                         page._pendingDeletes.join(","))
+            page._pendingDeletes = []
+            return
+        }
+        if (remorse.pending) {
+            page._remorseRestarting = true
+            remorse.cancel()
+            page._remorseRestarting = false
+        }
+        remorse.execute(text, action)
+    }
 
     // What the automatic retry schedule is doing, shown in the header of the
     // outbox. Empty when nothing is pending.
@@ -123,32 +149,52 @@ Page {
     }
 
     function _queueDelete(mid) {
+        var id = Number(mid) || 0
+        if (id <= 0) {
+            // Nothing identifies a message here, so delete nothing.
+            console.warn("[del] delete asked for without a message id - ignored")
+            return
+        }
         var ids = page._pendingDeletes.slice()
-        ids.push(mid)
+        if (ids.indexOf(id) < 0) {
+            ids.push(id)
+        }
         page._pendingDeletes = ids
-        remorse.execute(ids.length > 1 ? qsTr("Deleting %1").arg(ids.length)
-                                       : qsTr("Deleting"),
-                        function() {
-                            var pending = page._pendingDeletes
-                            page._pendingDeletes = []
-                            // Two ways out, both of which must abort rather
-                            // than commit. Leaving the page: Silica runs a
-                            // remorse on PageStatus.Deactivating. Leaving the
-                            // app: the page is destroyed without ever going
-                            // through Deactivating, and minimising does not
-                            // change the page at all - the countdown would just
-                            // run out behind the user's back. Both were
-                            // reproduced on an armv7 device.
-                            if (page.status !== PageStatus.Active || !Qt.application.active) {
-                                return
-                            }
-                            for (var i = 0; i < pending.length; ++i) {
-                                emailAgent.deleteMessage(pending[i])
-                            }
-                        })
+        console.warn("[del] queued", id, "pending=", ids.join(","))
+        _armRemorse(ids.length > 1 ? qsTr("Deleting %1").arg(ids.length)
+                                   : qsTr("Deleting"),
+                    function() { page._commitDeletes() })
+    }
+
+    function _commitDeletes() {
+        var pending = page._pendingDeletes
+        page._pendingDeletes = []
+        if (pending.length === 0) {
+            return
+        }
+        // Two ways out, both of which must abort rather than commit: leaving
+        // the page (Silica would run the action on Deactivating) and leaving
+        // the app (minimising does not change the page at all, so the countdown
+        // would run out behind the user's back). Both are cancelled outright
+        // where they happen; this is the second line of defence.
+        if (page.status !== PageStatus.Active || !Qt.application.active) {
+            console.warn("[del] aborted", pending.join(","),
+                         "status=", page.status, "foreground=", Qt.application.active)
+            return
+        }
+        console.warn("[del] deleting", pending.join(","))
+        for (var i = 0; i < pending.length; ++i) {
+            emailAgent.deleteMessage(pending[i])
+        }
     }
 
     onStatusChanged: {
+        // Opening another message, or going back, takes the delete back rather
+        // than leaving a countdown running behind a page nobody is looking at.
+        if (status !== PageStatus.Active && remorse.pending) {
+            console.warn("[del] page left while a delete was pending - cancelled")
+            remorse.cancel()
+        }
         if (status === PageStatus.Active && attachFolders && !_foldersAttached) {
             var acc = accountId > 0 ? accountId : pendingAccountId
             if (acc > 0) {
@@ -265,7 +311,7 @@ Page {
                 text: qsTr("Delete selected")
                 onClicked: {
                     var n = messageModel.selectedMessageCount
-                    remorse.execute(qsTr("Deleting %1").arg(n), function() {
+                    page._armRemorse(qsTr("Deleting %1").arg(n), function() {
                         // This execute() replaced whatever single-row deletes
                         // were queued on the same popup; drop them rather than
                         // letting them ride along with a later delete.
@@ -371,7 +417,17 @@ Page {
         // have to go with it.
         RemorsePopup {
             id: remorse
-            onCanceled: page._pendingDeletes = []
+            onCanceled: {
+                if (page._remorseRestarting) {
+                    // Only the bar was taken down to start its countdown over;
+                    // the batch it stands for is still being collected.
+                    return
+                }
+                if (page._pendingDeletes.length > 0) {
+                    console.warn("[del] cancelled", page._pendingDeletes.join(","))
+                }
+                page._pendingDeletes = []
+            }
         }
 
         onAtYEndChanged: if (atYEnd && messageModel.canFetchMore) messageModel.limit += 50
@@ -408,10 +464,26 @@ Page {
                                    { messageId: model.messageId })
             }
 
+            // The message this row stood for when its context menu was opened.
+            // A context menu delivers its click only after it has closed, and
+            // `model` is a row at an index, not a message: if the list is
+            // rebuilt in between - new mail, a sync, the message just read being
+            // written back - model.messageId in the click handler can belong to
+            // someone else's mail. Pinning it here makes every entry act on the
+            // row the user actually touched.
+            property int menuMessageId: 0
+            property bool menuWasRead: false
+            onMenuOpenChanged: {
+                if (menuOpen) {
+                    item.menuMessageId = model.messageId
+                    item.menuWasRead = model.readStatus
+                }
+            }
+
             function deleteMessage() {
                 // Just the remorse timer (with undo) — the extra confirm dialog
                 // was one tap too many.
-                page._queueDelete(model.messageId)
+                page._queueDelete(item.menuMessageId)
             }
 
             menu: ContextMenu {
@@ -421,18 +493,18 @@ Page {
                     visible: page.isDrafts
                     text: qsTr("Edit")
                     onClicked: pageStack.push(Qt.resolvedUrl("ComposerPage.qml"),
-                                              { fromDraftId: model.messageId,
+                                              { fromDraftId: item.menuMessageId,
                                                 composeAccountId: page.accountId })
                 }
                 MenuItem {
                     visible: !page.isDrafts
-                    text: model.readStatus ? qsTr("Mark as unread") : qsTr("Mark as read")
-                    onClicked: model.readStatus ? emailAgent.markMessageAsUnread(model.messageId)
-                                                : emailAgent.markMessageAsRead(model.messageId)
+                    text: item.menuWasRead ? qsTr("Mark as unread") : qsTr("Mark as read")
+                    onClicked: item.menuWasRead ? emailAgent.markMessageAsUnread(item.menuMessageId)
+                                                : emailAgent.markMessageAsRead(item.menuMessageId)
                 }
                 MenuItem {
                     text: qsTr("Move to folder…")
-                    onClicked: page._moveMessage(model.messageId)
+                    onClicked: page._moveMessage(item.menuMessageId)
                 }
                 MenuItem {
                     text: qsTr("Delete")
