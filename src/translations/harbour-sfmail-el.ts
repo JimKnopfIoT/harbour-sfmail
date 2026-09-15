@@ -1412,6 +1412,28 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Sending again…</source>
         <translation>Αποστέλλεται ξανά…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Να συγχρονιστεί αυτός ο φάκελος;</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Ο διακομιστής δεν έχει ανακοινώσει ποτέ μήνυμα για αυτόν τον φάκελο. Αν τον δηλώσει κενό, %n μήνυμα που φυλάσσεται εδώ διαγράφεται οριστικά — δεν υπάρχει αναίρεση ούτε δεύτερο αντίγραφο.</numerusform>
+            <numerusform>Ο διακομιστής δεν έχει ανακοινώσει ποτέ μήνυμα για αυτόν τον φάκελο. Αν τον δηλώσει κενό, %n μηνύματα που φυλάσσονται εδώ διαγράφονται οριστικά — δεν υπάρχει αναίρεση ούτε δεύτερο αντίγραφο.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Συγχρονισμός ούτως ή άλλως</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n μήνυμα αφαιρέθηκε: ο διακομιστής δεν το έχει πια</numerusform>
+            <numerusform>%n μηνύματα αφαιρέθηκαν: ο διακομιστής δεν τα έχει πια</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

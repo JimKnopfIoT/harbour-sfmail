@@ -1412,6 +1412,28 @@ L&apos;importazione aggiunge una SECONDA chiave per questo indirizzo — accerta
         <source>Sending again…</source>
         <translation>Nuovo invio…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Sincronizzare questa cartella?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Il server non ha mai annunciato un messaggio per questa cartella. Se la segnala come vuota, %n messaggio conservato qui viene eliminato per sempre — non c&apos;è modo di annullare e non esiste una seconda copia.</numerusform>
+            <numerusform>Il server non ha mai annunciato un messaggio per questa cartella. Se la segnala come vuota, %n messaggi conservati qui vengono eliminati per sempre — non c&apos;è modo di annullare e non esiste una seconda copia.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Sincronizza comunque</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n messaggio rimosso: il server non lo ha più</numerusform>
+            <numerusform>%n messaggi rimossi: il server non li ha più</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

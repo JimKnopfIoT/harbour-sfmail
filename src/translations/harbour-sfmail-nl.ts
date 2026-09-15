@@ -1412,6 +1412,28 @@ Importeren voegt een TWEEDE sleutel voor dit adres toe — vergewis je ervan dat
         <source>Sending again…</source>
         <translation>Opnieuw verzenden…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Deze map synchroniseren?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>De server heeft voor deze map nooit een bericht aangekondigd. Meldt hij de map als leeg, dan wordt het %n bericht dat hier bewaard is definitief verwijderd — dat is niet ongedaan te maken en er is geen tweede kopie.</numerusform>
+            <numerusform>De server heeft voor deze map nooit een bericht aangekondigd. Meldt hij de map als leeg, dan worden de %n berichten die hier bewaard zijn definitief verwijderd — dat is niet ongedaan te maken en er is geen tweede kopie.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Toch synchroniseren</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n bericht verwijderd: de server heeft het niet meer</numerusform>
+            <numerusform>%n berichten verwijderd: de server heeft ze niet meer</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

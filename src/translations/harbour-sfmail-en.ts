@@ -1412,6 +1412,28 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Sending again…</source>
         <translation>Sending again…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Sync this folder?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>The server has never announced a message for this folder. If it reports the folder as empty, the %n message kept here is deleted for good — there is no undo and no second copy.</numerusform>
+            <numerusform>The server has never announced a message for this folder. If it reports the folder as empty, the %n messages kept here are deleted for good — there is no undo and no second copy.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Sync anyway</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n message removed: the server no longer has it</numerusform>
+            <numerusform>%n messages removed: the server no longer has them</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

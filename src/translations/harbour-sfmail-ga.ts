@@ -1414,6 +1414,30 @@ Cuireann an iompórtáil an DARA heochair leis an seoladh seo — déan cinnte g
         <source>Sending again…</source>
         <translation>Á seoladh arís…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>An fillteán seo a shioncronú?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Níor fhógair an freastalaí teachtaireacht ar bith don fhillteán seo riamh. Má thuairiscíonn sé go bhfuil an fillteán folamh, scriosfar go buan an %n teachtaireacht atá coinnithe anseo — níl aon chealú ann agus níl an dara cóip ann.</numerusform>
+            <numerusform>Níor fhógair an freastalaí teachtaireacht ar bith don fhillteán seo riamh. Má thuairiscíonn sé go bhfuil an fillteán folamh, scriosfar go buan an %n theachtaireacht atá coinnithe anseo — níl aon chealú ann agus níl an dara cóip ann.</numerusform>
+            <numerusform>Níor fhógair an freastalaí teachtaireacht ar bith don fhillteán seo riamh. Má thuairiscíonn sé go bhfuil an fillteán folamh, scriosfar go buan na %n teachtaireacht atá coinnithe anseo — níl aon chealú ann agus níl an dara cóip ann.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Sioncronaigh mar sin féin</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>Baineadh %n teachtaireacht: níl sí ag an bhfreastalaí a thuilleadh</numerusform>
+            <numerusform>Baineadh %n theachtaireacht: níl siad ag an bhfreastalaí a thuilleadh</numerusform>
+            <numerusform>Baineadh %n teachtaireacht: níl siad ag an bhfreastalaí a thuilleadh</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

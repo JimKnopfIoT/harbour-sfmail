@@ -1414,6 +1414,30 @@ Import doda DRUGI klucz dla tego adresu — upewnij się, że nowy klucz jest pr
         <source>Sending again…</source>
         <translation>Ponowne wysyłanie…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Zsynchronizować ten folder?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Serwer nigdy nie zgłosił żadnej wiadomości w tym folderze. Jeśli zgłosi folder jako pusty, %n wiadomość przechowywana tutaj zostanie trwale usunięta — nie da się tego cofnąć i nie ma drugiej kopii.</numerusform>
+            <numerusform>Serwer nigdy nie zgłosił żadnej wiadomości w tym folderze. Jeśli zgłosi folder jako pusty, %n wiadomości przechowywane tutaj zostaną trwale usunięte — nie da się tego cofnąć i nie ma drugiej kopii.</numerusform>
+            <numerusform>Serwer nigdy nie zgłosił żadnej wiadomości w tym folderze. Jeśli zgłosi folder jako pusty, %n wiadomości przechowywanych tutaj zostanie trwale usuniętych — nie da się tego cofnąć i nie ma drugiej kopii.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Synchronizuj mimo to</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>Usunięto %n wiadomość: serwer już jej nie ma</numerusform>
+            <numerusform>Usunięto %n wiadomości: serwer już ich nie ma</numerusform>
+            <numerusform>Usunięto %n wiadomości: serwer już ich nie ma</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

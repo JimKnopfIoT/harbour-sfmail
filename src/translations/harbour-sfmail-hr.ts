@@ -1414,6 +1414,30 @@ Uvozom se za ovu adresu dodaje DRUGI ključ — uvjerite se da je taj novi klju�
         <source>Sending again…</source>
         <translation>Ponovno slanje…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Sinkronizirati ovu mapu?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Poslužitelj za ovu mapu nikada nije najavio nijednu poruku. Prijavi li mapu kao praznu, %n poruka pohranjena ovdje bit će trajno izbrisana — nema poništavanja ni druge kopije.</numerusform>
+            <numerusform>Poslužitelj za ovu mapu nikada nije najavio nijednu poruku. Prijavi li mapu kao praznu, %n poruke pohranjene ovdje bit će trajno izbrisane — nema poništavanja ni druge kopije.</numerusform>
+            <numerusform>Poslužitelj za ovu mapu nikada nije najavio nijednu poruku. Prijavi li mapu kao praznu, %n poruka pohranjenih ovdje bit će trajno izbrisano — nema poništavanja ni druge kopije.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Ipak sinkroniziraj</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n poruka uklonjena: poslužitelj je više nema</numerusform>
+            <numerusform>%n poruke uklonjene: poslužitelj ih više nema</numerusform>
+            <numerusform>%n poruka uklonjeno: poslužitelj ih više nema</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

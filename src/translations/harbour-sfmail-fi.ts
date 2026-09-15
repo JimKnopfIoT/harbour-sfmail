@@ -1412,6 +1412,28 @@ Tuonti lisää TOISEN avaimen tälle osoitteelle — varmista, että uusi avain 
         <source>Sending again…</source>
         <translation>Lähetetään uudelleen…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Synkronoidaanko tämä kansio?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Palvelin ei ole koskaan ilmoittanut yhtään viestiä tähän kansioon. Jos se ilmoittaa kansion tyhjäksi, %n tänne tallennettu viesti poistetaan lopullisesti — peruuttamista ei ole eikä toista kopiota ole.</numerusform>
+            <numerusform>Palvelin ei ole koskaan ilmoittanut yhtään viestiä tähän kansioon. Jos se ilmoittaa kansion tyhjäksi, %n tänne tallennettua viestiä poistetaan lopullisesti — peruuttamista ei ole eikä toista kopiota ole.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Synkronoi silti</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n viesti poistettu: palvelimella ei ole sitä enää</numerusform>
+            <numerusform>%n viestiä poistettu: palvelimella ei ole niitä enää</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

@@ -1414,6 +1414,30 @@ Importul adaugă o A DOUA cheie pentru această adresă — asigurați-vă că n
         <source>Sending again…</source>
         <translation>Se trimite din nou…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Sincronizați acest dosar?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Serverul nu a anunțat niciodată vreun mesaj pentru acest dosar. Dacă îl raportează ca gol, %n mesaj păstrat aici este șters definitiv — nu există revenire și nici o a doua copie.</numerusform>
+            <numerusform>Serverul nu a anunțat niciodată vreun mesaj pentru acest dosar. Dacă îl raportează ca gol, %n mesaje păstrate aici sunt șterse definitiv — nu există revenire și nici o a doua copie.</numerusform>
+            <numerusform>Serverul nu a anunțat niciodată vreun mesaj pentru acest dosar. Dacă îl raportează ca gol, %n de mesaje păstrate aici sunt șterse definitiv — nu există revenire și nici o a doua copie.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Sincronizează oricum</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n mesaj eliminat: serverul nu îl mai are</numerusform>
+            <numerusform>%n mesaje eliminate: serverul nu le mai are</numerusform>
+            <numerusform>%n de mesaje eliminate: serverul nu le mai are</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

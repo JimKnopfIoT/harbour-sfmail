@@ -66,9 +66,9 @@ Page {
     // queued second would inherit the remains of the first four seconds. Going
     // through "inactive" starts it over.
     function _armRemorse(text, action) {
-        // A context menu hands its click over only once it has closed, so this
-        // can arrive when the page is already on its way out. A bar armed then
-        // is never seen and runs out the moment the user comes back.
+        // This can be reached when the page is already on its way out - a tap
+        // that lands as the reader is being pushed, for instance. A bar armed
+        // then is never seen and runs out the moment the user comes back.
         if (page.status !== PageStatus.Active || !Qt.application.active) {
             console.warn("[del] not arming, the page is no longer in front:",
                          page._pendingDeletes.join(","))
@@ -86,6 +86,11 @@ Page {
     // What the automatic retry schedule is doing, shown in the header of the
     // outbox. Empty when nothing is pending.
     property string _retryNotice: ""
+    // Said out loud when the store drops messages on its own: a folder sync
+    // found them gone from the server and removed the local copies. There is no
+    // trash they went to, so the least the app can do is not pretend it did not
+    // happen.
+    property string _vanishedNotice: ""
 
     Connections {
         target: Gpg
@@ -148,6 +153,32 @@ Page {
         })
     }
 
+    // Syncing a folder is a destructive operation, so it is worth one look
+    // before it runs. The server decides what stays: everything stored here
+    // that it does not list is removed, permanently. That is fine when the
+    // server has announced messages for this folder — then the two are simply
+    // compared. It is not fine when the server count is zero and messages are
+    // stored here: the store cannot tell "the folder is empty on the server"
+    // from "we have never asked", and both answers end the same way.
+    function _syncFolder() {
+        var held = Gpg.folderMessageCount(page.folderId)
+        var announced = Gpg.folderServerCount(page.folderId)
+        console.warn("[sync] asked folder=" + page.folderId + " acct=" + page.accountId
+                     + " stored=" + held + " " + Gpg.folderServerState(page.folderId))
+        if (held > 0 && announced <= 0) {
+            var dlg = pageStack.push(Qt.resolvedUrl("ConfirmDialog.qml"),
+                { question: qsTr("Sync this folder?"),
+                  warning: qsTr("The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.", "", held),
+                  acceptText: qsTr("Sync anyway") })
+            dlg.accepted.connect(function() {
+                console.warn("[sync] confirmed folder=" + page.folderId)
+                emailAgent.retrieveMessageList(page.accountId, page.folderId, 40)
+            })
+            return
+        }
+        emailAgent.retrieveMessageList(page.accountId, page.folderId, 40)
+    }
+
     function _queueDelete(mid) {
         var id = Number(mid) || 0
         if (id <= 0) {
@@ -184,6 +215,9 @@ Page {
         }
         console.warn("[del] deleting", pending.join(","))
         for (var i = 0; i < pending.length; ++i) {
+            // Say so first, or the store's removal signal reaches the user as
+            // "the server took these away".
+            Gpg.noteOwnDelete(pending[i])
             emailAgent.deleteMessage(pending[i])
         }
     }
@@ -207,10 +241,24 @@ Page {
         // the app's normal sync fetches the inbox only, so folders like Junk/Sent
         // stay empty until we retrieve them from the server. Do it once on open, so
         // e.g. mail another client filed into Junk actually shows up here.
+        //
+        // ONLY while the folder holds nothing here. Asking the server for a
+        // folder's message list hands it the last word over what is stored: a
+        // folder the server reports as empty is emptied on the device too — at
+        // once, permanently, with no removal record and taking the message files
+        // along. Two trash folders were lost that way, 26 messages, by nothing
+        // more than opening them. An empty folder has nothing to lose, so that
+        // is where this may still run by itself; everything else waits for the
+        // user to ask through "Sync", which says what is at stake first.
         if (status === PageStatus.Active && !_folderRetrieved && !page.isTemplates
                 && page.folderId > 0 && page.accountId > 0) {
             _folderRetrieved = true
-            emailAgent.retrieveMessageList(page.accountId, page.folderId, 40)
+            var held = Gpg.folderMessageCount(page.folderId)
+            console.warn("[sync] open folder=" + page.folderId + " acct=" + page.accountId
+                         + " stored=" + held + " " + Gpg.folderServerState(page.folderId)
+                         + " -> retrieve=" + (held === 0))
+            if (held === 0)
+                emailAgent.retrieveMessageList(page.accountId, page.folderId, 40)
         }
     }
     // Bumped when the "verified signed" memory changes, to re-evaluate the
@@ -220,6 +268,15 @@ Page {
     Connections {
         target: Gpg
         onSignedChanged: page._sigTick++
+        onMessagesVanished: {
+            page._vanishedNotice = qsTr("%n message(s) removed: the server no longer has them", "", count)
+            vanishedTimer.restart()
+        }
+    }
+    Timer {
+        id: vanishedTimer
+        interval: 20000
+        onTriggered: page._vanishedNotice = ""
     }
 
     // One shared, process-wide agent (see qml/agent/MailAgent.qml). Declaring an
@@ -257,6 +314,7 @@ Page {
             title: page._selectMode ? qsTr("Selected: %1").arg(messageModel.selectedMessageCount)
                                     : page.title
             description: page._selectMode ? qsTr("Tap messages to select")
+                       : page._vanishedNotice !== "" ? page._vanishedNotice
                        : page._retryNotice !== "" ? page._retryNotice
                        : emailAgent.synchronizing ? qsTr("Syncing…") : ""
         }
@@ -326,6 +384,7 @@ Page {
                         if (page.status !== PageStatus.Active || !Qt.application.active) {
                             return
                         }
+                        Gpg.noteOwnDeletes()
                         messageModel.deleteSelectedMessages()
                         // deleteSelectedMessages() already clears the selection.
                         // Do NOT call _exitSelect() here: its extra
@@ -365,7 +424,7 @@ Page {
                     // In a specific folder → sync THAT folder from the server;
                     // otherwise sync the inbox (single account or all).
                     if (page.folderId > 0 && page.accountId > 0) {
-                        emailAgent.retrieveMessageList(page.accountId, page.folderId, 40)
+                        page._syncFolder()
                     } else {
                         var accId = page.pendingAccountId > 0 ? page.pendingAccountId : 0
                         if (accId > 0) emailAgent.synchronizeInbox(accId)
@@ -396,6 +455,10 @@ Page {
                                                warning: qsTr("All messages in Trash will be permanently deleted."),
                                                acceptText: qsTr("Empty") })
                     dlg.accepted.connect(function() {
+                        // Ours, not the server's — so it is not reported as a
+                        // disappearance. The ids are inside the model here, so
+                        // the whole batch is covered at once.
+                        Gpg.noteOwnDeletes()
                         messageModel.selectAllMessages()
                         messageModel.deleteSelectedMessages()
                     })
@@ -465,12 +528,12 @@ Page {
             }
 
             // The message this row stood for when its context menu was opened.
-            // A context menu delivers its click only after it has closed, and
-            // `model` is a row at an index, not a message: if the list is
-            // rebuilt in between - new mail, a sync, the message just read being
-            // written back - model.messageId in the click handler can belong to
-            // someone else's mail. Pinning it here makes every entry act on the
-            // row the user actually touched.
+            // The menu can stand open for as long as the user likes, and
+            // `model` is a row at an index, not a message: new mail or a sync
+            // re-sorts the list underneath, the delegate stays alive and reads
+            // its values again at the same index. Pinning the id (and the read
+            // state, so the entry's label and its action cannot disagree) makes
+            // every entry act on the row the user actually touched.
             property int menuMessageId: 0
             property bool menuWasRead: false
             onMenuOpenChanged: {

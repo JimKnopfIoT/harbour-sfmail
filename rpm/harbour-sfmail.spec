@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.15
+Version:    0.8.16
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -212,10 +212,28 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Tue Sep 15 2026 harbour-sfmail contributors 0.8.16-1
+- Opening a folder no longer deletes what is kept in it. Asking the server for a
+  folder's message list hands it the last word over the local copies: a folder
+  the server reports as empty is emptied on the device too, at once, with no way
+  back. That request went out by itself every time a folder was opened. It is now
+  made only for a folder that holds nothing here, and otherwise by hand through
+  "Sync" — which first says how many messages are at stake when the server has
+  never announced any for that folder.
+- Messages that disappear are said out loud. When the store drops messages
+  because the server no longer has them, the list says so, instead of leaving it
+  to be noticed as a gap.
+- A message that is already on the device is no longer fetched again when it is
+  opened. The check that was meant to establish this never once said yes: it
+  asked a mark that the store sets as soon as a message has any content at all
+  and never clears, so every open asked the server for the message once more —
+  and asking for a message the server no longer keeps is what makes the local
+  copy disappear. Completeness is now read from the message itself, part by part.
+
 * Sun Sep 13 2026 harbour-sfmail contributors 0.8.15-1
-- Deleting a message acts on the message that was chosen. A context menu hands
-  its click over only once it has closed, and by then the list can have been
-  rebuilt underneath it — mail arriving, a sync, the message just read being
+- Deleting a message acts on the message that was chosen. A context menu can
+  stand open for as long as the reader likes, and in that time the list can be
+  re-sorted underneath it — mail arriving, a sync, the message just read being
   written back — so the delete could land on a different row. The message is now
   pinned the moment the menu opens, and so are the other entries of that menu.
 - A delete that is counting down belongs to the page it was started on. Opening

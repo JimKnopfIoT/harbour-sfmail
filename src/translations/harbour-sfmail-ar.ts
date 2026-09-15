@@ -1420,6 +1420,36 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Sending again…</source>
         <translation>جارٍ إعادة الإرسال…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>مزامنة هذا المجلد؟</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>لم يُعلن الخادم قط عن أي رسالة في هذا المجلد. وإن أبلغ أن المجلد فارغ، فستُحذف نهائيًا %n رسالة محفوظة هنا — لا تراجع ولا نسخة ثانية.</numerusform>
+            <numerusform>لم يُعلن الخادم قط عن أي رسالة في هذا المجلد. وإن أبلغ أن المجلد فارغ، فستُحذف نهائيًا %n رسالة محفوظة هنا — لا تراجع ولا نسخة ثانية.</numerusform>
+            <numerusform>لم يُعلن الخادم قط عن أي رسالة في هذا المجلد. وإن أبلغ أن المجلد فارغ، فستُحذف نهائيًا الرسالتان المحفوظتان هنا وعددهما %n — لا تراجع ولا نسخة ثانية.</numerusform>
+            <numerusform>لم يُعلن الخادم قط عن أي رسالة في هذا المجلد. وإن أبلغ أن المجلد فارغ، فستُحذف نهائيًا %n رسائل محفوظة هنا — لا تراجع ولا نسخة ثانية.</numerusform>
+            <numerusform>لم يُعلن الخادم قط عن أي رسالة في هذا المجلد. وإن أبلغ أن المجلد فارغ، فستُحذف نهائيًا %n رسالة محفوظة هنا — لا تراجع ولا نسخة ثانية.</numerusform>
+            <numerusform>لم يُعلن الخادم قط عن أي رسالة في هذا المجلد. وإن أبلغ أن المجلد فارغ، فستُحذف نهائيًا %n رسالة محفوظة هنا — لا تراجع ولا نسخة ثانية.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>مزامنة رغم ذلك</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>أُزيلت %n رسالة: لم يعد الخادم يملكها</numerusform>
+            <numerusform>أُزيلت %n رسالة: لم يعد الخادم يملكها</numerusform>
+            <numerusform>أُزيلت الرسالتان وعددهما %n: لم يعد الخادم يملكهما</numerusform>
+            <numerusform>أُزيلت %n رسائل: لم يعد الخادم يملكها</numerusform>
+            <numerusform>أُزيلت %n رسالة: لم يعد الخادم يملكها</numerusform>
+            <numerusform>أُزيلت %n رسالة: لم يعد الخادم يملكها</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

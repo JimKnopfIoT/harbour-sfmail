@@ -149,11 +149,20 @@ Page {
     property bool _htmlRead: false
     property int _bodyReadTries: 0
     property int _htmlReadTries: 0
+    // Asking whether everything is here means reading the message's parts, so
+    // the answer is kept once it is yes — a message that is here stays here,
+    // and _syncBody() runs on every store change.
+    property bool _complete: false
+    function _isComplete() {
+        if (page._complete) return true
+        page._complete = Gpg.contentComplete(page.messageId)
+        return page._complete
+    }
     function _syncBody() {
         if (message.encryptionStatus === EmailMessage.Encrypted) {
             page._body = ""; page._html = ""; return
         }
-        var complete = Gpg.contentComplete(page.messageId)
+        var complete = page._isComplete()
         if (!page._bodyRead && (complete || page._bodyReadTries < 3)) {
             page._bodyReadTries++
             page._body = message.body
@@ -530,7 +539,7 @@ Page {
             if (page._topNotice !== qsTr("Downloading the full message…")) return
             // Nothing arrived. Only claim completeness when the store agrees;
             // otherwise the download simply did not get through.
-            page._topNotice = Gpg.contentComplete(page.messageId)
+            page._topNotice = page._isComplete()
                               ? qsTr("The message is already fully downloaded.")
                               : qsTr("Could not download the message — no connection?")
         }
@@ -569,22 +578,23 @@ Page {
 
     Component.onCompleted: {
         message.read = true
-        // For PGP/MIME we need the encrypted.asc part on disk before we can
-        // decrypt or inspect, so fetch the whole message eagerly.
-        // Fetch the full message when needed: empty body, encrypted (need the
-        // ciphertext part), OR it has attachments (we parse them from the raw MIME).
-        // Only fetch from the server if the FULL content isn't already on the device.
-        // Skipping the needless re-fetch on an already-complete message avoids a POP3
-        // round-trip that can drop the local copy when the message was meanwhile
-        // deleted from the server (a field data-loss report). contentAvailable() is a
-        // metadata-only check → no GUI freeze. Safe for IMAP: a half-fetched message
-        // (body but not attachments) is only PartialContentAvailable → still downloads.
-        var _ready = Gpg.contentComplete(page.messageId)
+        // Fetch the whole message unless every part of it is already here: for
+        // PGP/MIME the ciphertext part has to be on disk before anything can be
+        // decrypted, and attachments are read out of the raw message on the
+        // older platform.
+        //
+        // The "already here" question is worth asking carefully, because asking
+        // the server for a message it no longer keeps is what makes the local
+        // copy disappear — reported from the field, and measured here. It is
+        // answered by looking at the message's parts, not at the store's marks:
+        // those are set together on every incoming message and one of them is
+        // set precisely because content exists, so they never said yes.
+        var _ready = page._isComplete()
         page._syncBody()   // fills the cache only when the content is local
         var _needDl = !_ready
         console.log("[diag] open mid=" + page.messageId + " atts=" + message.numberOfAttachments
                 + " bodyEmpty=" + (page._body === "") + " enc=" + message.encryptionStatus
-                + " hasModel=" + (!!message.attachmentModel) + " contentAvail=" + _ready
+                + " hasModel=" + (!!message.attachmentModel) + " complete=" + _ready
                 + " bodyLen=" + page._body.length + " htmlLen=" + page._html.length
                 + " [" + Gpg.contentState(page.messageId) + "]"
                 + " -> downloadMessage=" + _needDl)
@@ -1031,6 +1041,9 @@ Page {
                             // otherwise run the action on PageStatus.Deactivating.
                             return
                         }
+                        // Announce it, so the store's removal signal is not
+                        // reported to the user as a server-side disappearance.
+                        Gpg.noteOwnDelete(mid)
                         emailAgent.deleteMessage(mid)
                         pageStack.pop()
                     })
