@@ -11,6 +11,37 @@ accounts.
 > **SF-Mail = Security Friendly mail.** The "SF" is *not* short for Sailfish — it stands for the goal
 > of making security (PGP and S/MIME) friendly and easy to use.
 
+## Screenshots
+
+Demo data throughout: the people, addresses, keys and certificates shown here were invented for the pictures.
+
+<table>
+  <tr>
+    <td align="center" width="17%"><img src="screenshots/01-accounts.png" width="172" alt="Accounts"><br><sub>Accounts</sub></td>
+    <td align="center" width="17%"><img src="screenshots/02-inbox.png" width="172" alt="Inbox"><br><sub>Inbox</sub></td>
+    <td align="center" width="17%"><img src="screenshots/03-encrypted.png" width="172" alt="Encrypted message"><br><sub>Encrypted message</sub></td>
+    <td align="center" width="17%"><img src="screenshots/04-passphrase.png" width="172" alt="Passphrase"><br><sub>Passphrase</sub></td>
+    <td align="center" width="17%"><img src="screenshots/05-decrypted.png" width="172" alt="Decrypted and signed"><br><sub>Decrypted and signed</sub></td>
+    <td align="center" width="17%"><img src="screenshots/06-menu.png" width="172" alt="Message actions"><br><sub>Message actions</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="17%"><img src="screenshots/07-encryption-info.png" width="172" alt="Encryption info"><br><sub>Encryption info</sub></td>
+    <td align="center" width="17%"><img src="screenshots/08-header-check.png" width="172" alt="Header and sender check"><br><sub>Header and sender check</sub></td>
+    <td align="center" width="17%"><img src="screenshots/09-smime-mail.png" width="172" alt="S/MIME message"><br><sub>S/MIME message</sub></td>
+    <td align="center" width="17%"><img src="screenshots/10-smime-certs.png" width="172" alt="S/MIME certificates"><br><sub>S/MIME certificates</sub></td>
+    <td align="center" width="17%"><img src="screenshots/11-pulley-menu.png" width="172" alt="Folder actions"><br><sub>Folder actions</sub></td>
+    <td align="center" width="17%"><img src="screenshots/12-main-menu.png" width="172" alt="Main menu"><br><sub>Main menu</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="17%"><img src="screenshots/13-about.png" width="172" alt="About"><br><sub>About</sub></td>
+    <td align="center" width="17%"><img src="screenshots/14-pgp-keys.png" width="172" alt="PGP keys"><br><sub>PGP keys</sub></td>
+    <td align="center" width="17%"><img src="screenshots/15-keys-menu.png" width="172" alt="Key actions"><br><sub>Key actions</sub></td>
+    <td align="center" width="17%"><img src="screenshots/16-keygen.png" width="172" alt="Generate a key"><br><sub>Generate a key</sub></td>
+    <td align="center" width="17%"><img src="screenshots/17-smime-menu.png" width="172" alt="Certificate actions"><br><sub>Certificate actions</sub></td>
+    <td align="center" width="17%"><img src="screenshots/18-composer.png" width="172" alt="Writing a message"><br><sub>Writing a message</sub></td>
+  </tr>
+</table>
+
 ## Opening mail from notifications (changes a system file)
 
 Tapping a "new mail" notification is delivered to whichever program **owns** the
