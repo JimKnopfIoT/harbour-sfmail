@@ -1438,6 +1438,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
             <numerusform>Удалено %n писем: на сервере их больше нет</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Зашифровано</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

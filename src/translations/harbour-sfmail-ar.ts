@@ -1450,6 +1450,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
             <numerusform>أُزيلت %n رسالة: لم يعد الخادم يملكها</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>مشفَّرة</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

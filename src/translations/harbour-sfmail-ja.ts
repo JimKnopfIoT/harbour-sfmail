@@ -1430,6 +1430,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
             <numerusform>%n 件のメッセージを削除: サーバーにはもうありません</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>暗号化</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

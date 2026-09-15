@@ -1434,6 +1434,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
             <numerusform>%n संदेश हटाए गए: सर्वर पर अब नहीं हैं</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>एन्क्रिप्टेड</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

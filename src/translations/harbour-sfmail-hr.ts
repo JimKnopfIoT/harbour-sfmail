@@ -1438,6 +1438,10 @@ Uvozom se za ovu adresu dodaje DRUGI ključ — uvjerite se da je taj novi klju�
             <numerusform>%n poruka uklonjeno: poslužitelj ih više nema</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Šifrirano</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

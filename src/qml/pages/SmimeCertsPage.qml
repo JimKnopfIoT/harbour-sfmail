@@ -220,11 +220,11 @@ Page {
                         commandText:
                             "openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem \\\n" +
                             "    -days 730 -nodes -sha256 \\\n" +
-                            "    -subj \"/CN=Max Mustermann/emailAddress=max@example.org\" \\\n" +
+                            "    -subj \"/CN=Jane Doe/emailAddress=jane.doe@example.org\" \\\n" +
                             "    -addext \"basicConstraints=critical,CA:FALSE\" \\\n" +
                             "    -addext \"keyUsage=critical,digitalSignature,keyEncipherment\" \\\n" +
                             "    -addext \"extendedKeyUsage=emailProtection\" \\\n" +
-                            "    -addext \"subjectAltName=email:max@example.org\"\n" +
+                            "    -addext \"subjectAltName=email:jane.doe@example.org\"\n" +
                             "openssl pkcs12 -export -inkey key.pem -in cert.pem -out identity.p12\n" +
                             "gpgsm --import identity.p12   (+ trustlist entry for the self-signed root)"
                     })

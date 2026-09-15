@@ -1434,6 +1434,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
             <numerusform>%n съобщения са премахнати: сървърът вече ги няма</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Шифрирано</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

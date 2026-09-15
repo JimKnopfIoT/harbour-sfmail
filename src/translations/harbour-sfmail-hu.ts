@@ -1430,6 +1430,10 @@ Az importálás MÁSODIK kulcsot ad ehhez a címhez — győződjön meg róla, 
             <numerusform>%n üzenet eltávolítva: a kiszolgálón már nincs meg</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Titkosítva</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

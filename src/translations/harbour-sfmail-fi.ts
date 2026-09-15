@@ -1434,6 +1434,10 @@ Tuonti lisää TOISEN avaimen tälle osoitteelle — varmista, että uusi avain 
             <numerusform>%n viestiä poistettu: palvelimella ei ole niitä enää</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Salattu</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

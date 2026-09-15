@@ -1434,6 +1434,10 @@ Import lisab sellele aadressile TEISE võtme — veendu, et uus võti on ehtne, 
             <numerusform>%n kirja eemaldatud: serveril neid enam pole</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Krüptitud</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

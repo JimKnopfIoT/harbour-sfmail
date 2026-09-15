@@ -1430,6 +1430,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
             <numerusform>%n پیام حذف شد: کارساز دیگر آن‌ها را ندارد</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>رمزگذاری‌شده</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

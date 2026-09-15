@@ -1726,6 +1726,11 @@ Importing adds a SECOND key for this address — make sure this new key is genui
             <numerusform></numerusform>
         </translation>
     </message>
+    <message>
+        <location filename="../qml/pages/MessageListPage.qml" line="164"/>
+        <source>Encrypted</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

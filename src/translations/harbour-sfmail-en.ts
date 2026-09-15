@@ -1434,6 +1434,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
             <numerusform>%n messages removed: the server no longer has them</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Encrypted</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

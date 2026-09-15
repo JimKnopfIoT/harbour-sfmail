@@ -1430,6 +1430,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
             <numerusform>已移除 %n 封邮件：服务器上已不存在</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>已加密</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
