@@ -1410,6 +1410,26 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Sending again…</source>
         <translation>در حال ارسال دوباره…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>این پوشه همگام‌سازی شود؟</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>کارساز تاکنون هیچ پیامی برای این پوشه اعلام نکرده است. اگر پوشه را خالی گزارش کند، %n پیام نگه‌داشته‌شده در اینجا برای همیشه حذف می‌شود — نه بازگشتی هست و نه نسخهٔ دومی.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>با این حال همگام‌سازی</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n پیام حذف شد: کارساز دیگر آن‌ها را ندارد</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

@@ -1414,6 +1414,30 @@ Import pridá pre túto adresu DRUHÝ kľúč — skôr než mu budete dôverova
         <source>Sending again…</source>
         <translation>Opätovné odosielanie…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Synchronizovať tento priečinok?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Server pre tento priečinok nikdy neohlásil žiadnu správu. Ak ho ohlási ako prázdny, %n tu uložená správa sa nenávratne zmaže — bez možnosti vrátenia a bez druhej kópie.</numerusform>
+            <numerusform>Server pre tento priečinok nikdy neohlásil žiadnu správu. Ak ho ohlási ako prázdny, %n tu uložené správy sa nenávratne zmažu — bez možnosti vrátenia a bez druhej kópie.</numerusform>
+            <numerusform>Server pre tento priečinok nikdy neohlásil žiadnu správu. Ak ho ohlási ako prázdny, %n tu uložených správ sa nenávratne zmaže — bez možnosti vrátenia a bez druhej kópie.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Napriek tomu synchronizovať</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n správa odstránená: server ju už nemá</numerusform>
+            <numerusform>%n správy odstránené: server ich už nemá</numerusform>
+            <numerusform>%n správ odstránených: server ich už nemá</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

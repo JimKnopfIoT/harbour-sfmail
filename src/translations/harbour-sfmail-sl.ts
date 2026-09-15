@@ -1416,6 +1416,32 @@ Uvoz doda DRUGI ključ za ta naslov — prepričajte se, da je ta novi ključ pr
         <source>Sending again…</source>
         <translation>Ponovno pošiljanje…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Sinhronizirati to mapo?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Strežnik za to mapo še nikoli ni javil nobenega sporočila. Če jo javi kot prazno, bo %n tu shranjeno sporočilo dokončno izbrisano — razveljavitve ni in drugega izvoda ni.</numerusform>
+            <numerusform>Strežnik za to mapo še nikoli ni javil nobenega sporočila. Če jo javi kot prazno, bosta %n tu shranjeni sporočili dokončno izbrisani — razveljavitve ni in drugega izvoda ni.</numerusform>
+            <numerusform>Strežnik za to mapo še nikoli ni javil nobenega sporočila. Če jo javi kot prazno, bodo %n tu shranjena sporočila dokončno izbrisana — razveljavitve ni in drugega izvoda ni.</numerusform>
+            <numerusform>Strežnik za to mapo še nikoli ni javil nobenega sporočila. Če jo javi kot prazno, bo %n tu shranjenih sporočil dokončno izbrisanih — razveljavitve ni in drugega izvoda ni.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Vseeno sinhroniziraj</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n sporočilo odstranjeno: strežnik ga nima več</numerusform>
+            <numerusform>%n sporočili odstranjeni: strežnik ju nima več</numerusform>
+            <numerusform>%n sporočila odstranjena: strežnik jih nima več</numerusform>
+            <numerusform>%n sporočil odstranjenih: strežnik jih nima več</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

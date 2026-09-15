@@ -1414,6 +1414,30 @@ Importavus šiam adresui atsiras ANTRAS raktas — įsitikink, kad naujasis rakt
         <source>Sending again…</source>
         <translation>Siunčiama dar kartą…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Sinchronizuoti šį aplanką?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Serveris šiam aplankui niekada nepaskelbė nė vieno laiško. Jei jis praneš, kad aplankas tuščias, čia saugomas %n laiškas bus negrįžtamai ištrintas — nė atšaukti, nė antros kopijos nebus.</numerusform>
+            <numerusform>Serveris šiam aplankui niekada nepaskelbė nė vieno laiško. Jei jis praneš, kad aplankas tuščias, čia saugomi %n laiškai bus negrįžtamai ištrinti — nė atšaukti, nė antros kopijos nebus.</numerusform>
+            <numerusform>Serveris šiam aplankui niekada nepaskelbė nė vieno laiško. Jei jis praneš, kad aplankas tuščias, čia saugomų %n laiškų bus negrįžtamai ištrinta — nė atšaukti, nė antros kopijos nebus.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Vis tiek sinchronizuoti</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>Pašalintas %n laiškas: serveryje jo nebėra</numerusform>
+            <numerusform>Pašalinti %n laiškai: serveryje jų nebėra</numerusform>
+            <numerusform>Pašalinta %n laiškų: serveryje jų nebėra</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

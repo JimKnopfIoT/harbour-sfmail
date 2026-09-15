@@ -1410,6 +1410,26 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Sending again…</source>
         <translation>正在再次发送…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>同步此文件夹？</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>服务器从未为此文件夹通告过任何邮件。若它将该文件夹报告为空，此处保存的 %n 封邮件将被永久删除——无法撤销，也没有第二份副本。</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>仍然同步</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>已移除 %n 封邮件：服务器上已不存在</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

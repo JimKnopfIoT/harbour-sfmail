@@ -1414,6 +1414,30 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Sending again…</source>
         <translation>Повторная отправка…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Синхронизировать эту папку?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Сервер ни разу не объявил ни одного письма для этой папки. Если он сообщит, что папка пуста, хранящееся здесь %n письмо будет удалено безвозвратно — отмены нет, и второй копии тоже.</numerusform>
+            <numerusform>Сервер ни разу не объявил ни одного письма для этой папки. Если он сообщит, что папка пуста, хранящиеся здесь %n письма будут удалены безвозвратно — отмены нет, и второй копии тоже.</numerusform>
+            <numerusform>Сервер ни разу не объявил ни одного письма для этой папки. Если он сообщит, что папка пуста, хранящиеся здесь %n писем будут удалены безвозвратно — отмены нет, и второй копии тоже.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Всё равно синхронизировать</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>Удалено %n письмо: на сервере его больше нет</numerusform>
+            <numerusform>Удалено %n письма: на сервере их больше нет</numerusform>
+            <numerusform>Удалено %n писем: на сервере их больше нет</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

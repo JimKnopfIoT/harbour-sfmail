@@ -1410,6 +1410,26 @@ Az importálás MÁSODIK kulcsot ad ehhez a címhez — győződjön meg róla, 
         <source>Sending again…</source>
         <translation>Újraküldés…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Szinkronizálja ezt a mappát?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>A kiszolgáló még soha nem jelzett üzenetet ehhez a mappához. Ha üresként jelenti a mappát, az itt tárolt %n üzenet véglegesen törlődik — nincs visszavonás és nincs másik példány.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Szinkronizálás mégis</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n üzenet eltávolítva: a kiszolgálón már nincs meg</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

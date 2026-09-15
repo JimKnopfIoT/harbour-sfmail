@@ -1412,6 +1412,28 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Sending again…</source>
         <translation>फिर भेजा जा रहा है…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>इस फ़ोल्डर को सिंक करें?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>सर्वर ने इस फ़ोल्डर के लिए कभी कोई संदेश घोषित नहीं किया। अगर वह फ़ोल्डर को खाली बताता है, तो यहाँ रखा %n संदेश हमेशा के लिए मिट जाएगा — न पूर्ववत करना संभव है, न कोई दूसरी प्रति है।</numerusform>
+            <numerusform>सर्वर ने इस फ़ोल्डर के लिए कभी कोई संदेश घोषित नहीं किया। अगर वह फ़ोल्डर को खाली बताता है, तो यहाँ रखे %n संदेश हमेशा के लिए मिट जाएंगे — न पूर्ववत करना संभव है, न कोई दूसरी प्रति है।</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>फिर भी सिंक करें</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n संदेश हटाया गया: सर्वर पर अब नहीं है</numerusform>
+            <numerusform>%n संदेश हटाए गए: सर्वर पर अब नहीं हैं</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

@@ -1412,6 +1412,28 @@ Import lisab sellele aadressile TEISE võtme — veendu, et uus võti on ehtne, 
         <source>Sending again…</source>
         <translation>Saadan uuesti…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Kas sünkroonida see kaust?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Server pole selle kausta kohta kunagi ühtki kirja teatanud. Kui ta teatab kausta tühjana, kustutatakse %n siin hoitav kiri lõplikult — tagasivõtmist ega teist koopiat pole.</numerusform>
+            <numerusform>Server pole selle kausta kohta kunagi ühtki kirja teatanud. Kui ta teatab kausta tühjana, kustutatakse %n siin hoitavat kirja lõplikult — tagasivõtmist ega teist koopiat pole.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Sünkrooni siiski</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n kiri eemaldatud: serveril seda enam pole</numerusform>
+            <numerusform>%n kirja eemaldatud: serveril neid enam pole</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

@@ -114,21 +114,41 @@ public:
     // Reads metadata only (QMailMessageMetaData), never the full QMailMessage, so
     // it does NOT freeze the GUI thread.
     Q_INVOKABLE bool contentAvailable(int messageId);
-    // The honest version of the question above. The store sets its
-    // "content available" and "partial content available" marks TOGETHER on
-    // every incoming message, so neither says anything on its own — measured
-    // on device against the store's own flag table. What does distinguish a
-    // message that is really here from one the server has only announced is
-    // the unloaded-data mark: set while parts are still missing, cleared once
-    // the message has been fetched. Without this the reader opened a 289 kB
-    // message, was handed its five-character preview, and showed that as the
-    // whole mail until the user asked for the download by hand.
+    // The honest version of the question above, and the one the reader decides
+    // on. None of the store's marks can answer it: "content available" and
+    // "partial content available" are set together on every incoming message,
+    // and the unloaded-data mark is never cleared on this platform — measured
+    // on device, a fully fetched message carries it just like a skeleton, so
+    // this check said "not complete" for every message ever opened and each
+    // open asked the server again. That is how messages disappeared while they
+    // were being read: a re-fetch of a message the server no longer keeps makes
+    // the store drop the local copy. It now asks the message's own parts, which
+    // still tells the five-character preview from the whole mail.
     Q_INVOKABLE bool contentComplete(int messageId);
-    // Diagnostic companion: the store's own words about how much of a
-    // message is really on the device ("full/partial/size/attachments").
-    // A message can carry both the complete and the partial flag at once,
-    // so the decision to fetch cannot rest on either one alone.
+    // Diagnostic companion: what the store says about a message, what is really
+    // on disk, and what its parts say about themselves. The flags alone proved
+    // unable to tell a complete message from a skeleton, so the log carries the
+    // evidence the decision actually rests on.
     Q_INVOKABLE QString contentState(int messageId);
+    Q_INVOKABLE QString partState(int messageId);
+
+    // --- Folder sync, which is a destructive operation ---------------------
+    // Asking the server for a folder's message list hands it the last word over
+    // the local copies: a folder the server reports as empty is emptied here
+    // too, permanently, without a removal record and taking the message files
+    // with it. These three let the UI weigh that before it asks.
+    Q_INVOKABLE QString folderServerState(int folderId);
+    // What a sync of this folder would put at stake — counted with the same key
+    // the retrieval strategy purges with.
+    Q_INVOKABLE int folderMessageCount(int folderId);
+    // What the server last announced for this folder. Zero means either "empty
+    // on the server" or "never asked"; the store does not distinguish them.
+    Q_INVOKABLE int folderServerCount(int folderId);
+    // Announce a deletion the app itself is about to make, so that it is not
+    // reported to the user as a disappearance. noteOwnDeletes() covers a batch
+    // whose ids the caller does not have.
+    Q_INVOKABLE void noteOwnDelete(int messageId);
+    Q_INVOKABLE void noteOwnDeletes();
 
     // Header fields the sender put INSIDE the encrypted part of the message that
     // was decrypted last (draft-autocrypt-lamps-protected-headers): from/to/cc/
@@ -349,6 +369,11 @@ signals:
     void retryScheduled(int attempt, int total, int minutes);
     void retryStopped(const QString &reason);
 
+    // Messages left the store without the app having asked for it — a folder
+    // sync found them gone from the server. The user is told, because these
+    // copies are not recoverable and were the last ones.
+    void messagesVanished(int count);
+
     void keysChanged();
     void importFinished(bool ok, int imported, const QString &error);
     void keyDeleted(bool ok, const QString &error);
@@ -456,6 +481,9 @@ private:
     QTimer m_retryTimer;
     int m_retryStep = -1;                 // index into kRetryMinutes, -1 = idle
     QSet<quint64> m_retryAccounts;        // accounts whose outbox we keep trying
+    QSet<quint64> m_contentComplete;      // messages known to be here in full
+    QHash<quint64, qint64> m_ownDeletes;  // id -> when the app asked for it
+    qint64 m_ownDeleteWindow = 0;         // batch deletes: quiet until this time
     void scheduleRetry(const QMailAccountId &accId);
     void onTransmitFailed(const QString &error, int code);
 

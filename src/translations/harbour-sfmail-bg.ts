@@ -1412,6 +1412,28 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Sending again…</source>
         <translation>Изпраща се отново…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Синхронизиране на тази папка?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Сървърът никога не е обявявал съобщение за тази папка. Ако я отчете като празна, %n съобщение, запазено тук, се изтрива окончателно — няма връщане назад и няма второ копие.</numerusform>
+            <numerusform>Сървърът никога не е обявявал съобщение за тази папка. Ако я отчете като празна, %n съобщения, запазени тук, се изтриват окончателно — няма връщане назад и няма второ копие.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Все пак синхронизиране</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n съобщение е премахнато: сървърът вече го няма</numerusform>
+            <numerusform>%n съобщения са премахнати: сървърът вече ги няма</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

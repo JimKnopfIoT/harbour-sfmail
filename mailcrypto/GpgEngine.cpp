@@ -51,6 +51,7 @@
 #include <qmailaccount.h>
 #include <qmailfolder.h>
 #include <qmailfolderkey.h>
+#include <qmaildisconnected.h>
 #include <qmailmessagekey.h>
 #include <qmailstore.h>
 #include <qmailserviceaction.h>
@@ -374,6 +375,39 @@ GpgEngine::GpgEngine(QObject *parent) : QObject(parent)
     // a first sync of a large mailbox is thousands of loads on the GUI thread —
     // exactly while the retrieval queue is busiest. They exist for diagnosis, so
     // they are wired up only when the on-device log is switched on.
+    // Messages can leave the store without anyone here having asked. A folder
+    // sync hands the server the last word over the local copies: a folder the
+    // server reports as empty is emptied on the device too — permanently, with
+    // no removal record and with the stored message files. Those copies can be
+    // the only ones left, so this is not something to swallow in silence. What
+    // the app deletes itself is announced beforehand (noteOwnDelete), so what
+    // reaches the user here came from the server side.
+    if (QMailStore *st = QMailStore::instance()) {
+        connect(st, &QMailStore::messagesRemoved, this,
+                [this](const QMailMessageIdList &ids) {
+            const qint64 now = QDateTime::currentMSecsSinceEpoch();
+            for (auto it = m_ownDeletes.begin(); it != m_ownDeletes.end(); ) {
+                if (now - it.value() > 30000) it = m_ownDeletes.erase(it);
+                else ++it;
+            }
+            int unexpected = 0;
+            for (const QMailMessageId &id : ids) {
+                if (m_ownDeletes.remove(id.toULongLong()) > 0) continue;
+                ++unexpected;
+            }
+            if (unexpected <= 0) return;
+            if (now < m_ownDeleteWindow) {
+                qWarning() << "[sync]" << unexpected
+                           << "message(s) removed while our own batch delete was running";
+                return;
+            }
+            qWarning() << "[sync]" << unexpected
+                       << "message(s) removed by the store on their own - "
+                          "the server does not have them any more";
+            emit messagesVanished(unexpected);
+        });
+    }
+
     QSettings diagSettings(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
                            + QStringLiteral("/signed.ini"), QSettings::IniFormat);
     const bool wantDiag = diagSettings.value(QStringLiteral("debugLogging"), false).toBool();
@@ -918,13 +952,130 @@ bool GpgEngine::fileExists(const QString &pathOrUrl) const
     return !p.isEmpty() && QFileInfo::exists(p);
 }
 
+// Where the store keeps this message's raw RFC 2822 file (defined further down,
+// next to the other store helpers).
+static QString messageFilePath(int messageId);
+static QString unfoldHeaders(const QByteArray &header);
+static QString headerValue(const QString &unfolded, const QString &name);
+static QString headerParam(const QString &unfolded, const QString &name, const QString &param);
+
+// Does every leaf of this message carry its content?
+//
+// The store keeps a message as a skeleton file: all part headers are written
+// out, and the bodies it has fetched live beside it in a directory named after
+// the file, one file per part, named by the part's position in the tree ("2",
+// "1.2", "1.1.1"). A single-part message keeps its body in the skeleton itself.
+// A part that was fetched only in part is marked in the skeleton, and that mark
+// is what the framework itself goes by when it decides whether it can hand the
+// content out. So a leaf counts as here when there is a body for it — inline or
+// beside the file — and it carries no such mark.
+//
+// Deliberately done on the files instead of asking the framework for the parsed
+// message. The package is built against one framework version and installed on
+// devices carrying another; metadata-only loads survive that, but walking the
+// part tree of a stored message crashes the app on the newer devices (measured:
+// every attempt to open a mail died in the loader). Reading files and cutting
+// them at their boundaries has no ABI to get wrong.
+static bool mimeLeavesPresent(const QByteArray &mime, const QString &loc,
+                              const QString &partsDir, int depth, int *leaves, int *here)
+{
+    if (depth > 12) return false;
+
+    int sep = mime.indexOf("\r\n\r\n"); int seplen = 4;
+    if (sep < 0) { sep = mime.indexOf("\n\n"); seplen = 2; }
+    const QByteArray header = sep >= 0 ? mime.left(sep) : mime;
+    const QByteArray body   = sep >= 0 ? mime.mid(sep + seplen) : QByteArray();
+
+    const QString h = unfoldHeaders(header);
+    const QString ctype = headerValue(h, QStringLiteral("content-type"))
+                          .section(';', 0, 0).trimmed().toLower();
+    const bool partial = !headerValue(h, QStringLiteral("x-qmf-internal-partial-content"))
+                          .isEmpty();
+
+    if (ctype.startsWith(QStringLiteral("multipart/"))) {
+        const QString bnd = headerParam(h, QStringLiteral("content-type"),
+                                        QStringLiteral("boundary"));
+        if (bnd.isEmpty()) return false;
+        const QByteArray delim = "--" + bnd.toUtf8();
+        QList<QByteArray> chunks;
+        QByteArray cur;
+        bool started = false;
+        for (const QByteArray &lineRaw : body.split('\n')) {
+            QByteArray line = lineRaw;
+            if (line.endsWith('\r')) line.chop(1);
+            if (line.startsWith(delim)) {
+                if (started && !cur.isEmpty()) chunks.append(cur);
+                cur.clear();
+                started = true;
+                if (line == delim + "--") break;   // closing delimiter
+                continue;
+            }
+            if (started) { cur.append(lineRaw); cur.append('\n'); }
+        }
+        if (chunks.isEmpty()) return false;   // structure known, nothing in it
+        bool all = true;
+        for (int i = 0; i < chunks.size(); ++i) {
+            const QString child = (loc.isEmpty() ? QString() : loc + QLatin1Char('.'))
+                                  + QString::number(i + 1);
+            if (!mimeLeavesPresent(chunks.at(i), child, partsDir, depth + 1, leaves, here))
+                all = false;
+        }
+        return all;
+    }
+
+    ++(*leaves);
+    bool haveBody = !body.trimmed().isEmpty();
+    if (!haveBody && !loc.isEmpty() && !partsDir.isEmpty())
+        haveBody = QFileInfo(partsDir + QLatin1Char('/') + loc).size() > 0;
+    const bool present = haveBody && !partial;
+    if (present) ++(*here);
+    return present;
+}
+
+// Read the stored message, but never more of it than makes sense to look at.
+// A skeleton is small by nature, so past this size the question is settled.
+static const qint64 kSkeletonCeiling = 24LL * 1024 * 1024;
+
+// Is every part of this message on the device?
+//
+// The store's own marks cannot answer that. "Content available" and "partial
+// content available" are set together on every incoming message — and for a
+// multipart mail the first one is set as soon as the structure is known, long
+// before a single part body has been fetched. The "unloaded data" mark this
+// check used to rest on says something else entirely: the store sets it as soon
+// as a message HAS content on disk that a metadata object did not load, and it
+// is never cleared. The check was therefore not just useless but inverted: it
+// answered "not complete" precisely because something was there, so every open
+// asked the server for the message again. That is not merely wasteful — a
+// re-fetch of a message the server no longer keeps makes the store drop the
+// local copy, which is how messages disappeared while they were being read.
 bool GpgEngine::contentComplete(int messageId)
 {
     QMailMessageId mid(static_cast<quint64>(messageId));
     if (!mid.isValid()) return false;
-    QMailMessageMetaData meta(mid);
-    if (!meta.contentAvailable()) return false;
-    return !(meta.status() & QMailMessageMetaData::UnloadedData);
+    if (m_contentComplete.contains(static_cast<quint64>(messageId))) return true;
+
+    QMailMessageMetaData meta(mid);           // metadata only — safe across versions
+    if (meta.status() & QMailMessage::Removed) return false;
+
+    const QString path = messageFilePath(messageId);
+    if (path.isEmpty()) return false;
+    QFileInfo fi(path);
+    if (!fi.exists()) return false;
+    if (fi.size() > kSkeletonCeiling) {
+        m_contentComplete.insert(static_cast<quint64>(messageId));
+        return true;
+    }
+    QFile f(path);
+    if (!f.open(QIODevice::ReadOnly)) return false;
+    const QByteArray raw = f.readAll();
+    f.close();
+
+    int leaves = 0, here = 0;
+    const bool complete = mimeLeavesPresent(raw, QString(), path + QStringLiteral("-parts"),
+                                            0, &leaves, &here) && leaves > 0;
+    if (complete) m_contentComplete.insert(static_cast<quint64>(messageId));
+    return complete;
 }
 
 QString GpgEngine::contentState(int messageId)
@@ -932,12 +1083,90 @@ QString GpgEngine::contentState(int messageId)
     QMailMessageId mid(static_cast<quint64>(messageId));
     if (!mid.isValid()) return QStringLiteral("invalid");
     QMailMessageMetaData meta(mid);
-    return QStringLiteral("full=%1 partial=%2 size=%3 atts=%4 status=%5")
+    QString out = QStringLiteral("full=%1 partial=%2 size=%3 atts=%4 status=%5")
             .arg(meta.contentAvailable() ? 1 : 0)
             .arg(meta.partialContentAvailable() ? 1 : 0)
             .arg(meta.size())
             .arg((meta.status() & QMailMessage::HasAttachments) ? 1 : 0)
             .arg(meta.status());
+    // What is actually on disk, and what the parts say about themselves. The
+    // flags above proved unable to tell a complete message from a skeleton, so
+    // the log carries the evidence the decision is really made on.
+    const QString path = messageFilePath(messageId);
+    if (!path.isEmpty()) out += QStringLiteral(" file=%1").arg(QFileInfo(path).size());
+    out += QStringLiteral(" parts=%1").arg(partState(messageId));
+    return out;
+}
+
+// Part-by-part account of a message: how many leaves its stored MIME tree has
+// and how many of them carry a body. Kept apart from contentComplete() so the
+// log can show the reasoning without the decision depending on a string.
+QString GpgEngine::partState(int messageId)
+{
+    const QString path = messageFilePath(messageId);
+    if (path.isEmpty()) return QStringLiteral("nofile");
+    QFile f(path);
+    if (!f.open(QIODevice::ReadOnly)) return QStringLiteral("unreadable");
+    const QByteArray raw = f.read(kSkeletonCeiling);
+    f.close();
+    int leaves = 0, here = 0;
+    const bool all = mimeLeavesPresent(raw, QString(), path + QStringLiteral("-parts"),
+                                       0, &leaves, &here);
+    return QStringLiteral("leaves=%1 here=%2 complete=%3")
+            .arg(leaves).arg(here).arg(all ? 1 : 0);
+}
+
+// What the store knows about a folder from the server side. A folder sync
+// hands the server the last word over the local copies, so before asking for
+// one the log should say what was at stake: how many messages the server
+// announced, and how many undiscovered ones it still has.
+QString GpgEngine::folderServerState(int folderId)
+{
+    QMailFolderId fid(static_cast<quint64>(folderId));
+    if (!fid.isValid()) return QStringLiteral("invalid");
+    QMailFolder f(fid);
+    return QStringLiteral("path=%1 servercount=%2 undiscovered=%3 status=0x%4")
+            .arg(f.path())
+            .arg(f.serverCount())
+            .arg(f.serverUndiscoveredCount())
+            .arg(QString::number(f.status(), 16));
+}
+
+// How much a folder sync would put at stake: the number of stored messages a
+// server-side "this folder is empty" would take with it. Deliberately the same
+// key the retrieval strategy purges with, so this counts what would really be
+// lost and not merely what a list happens to show (a list model is paged and
+// asynchronous, and the decision has to be made before anything is on screen).
+int GpgEngine::folderMessageCount(int folderId)
+{
+    QMailFolderId fid(static_cast<quint64>(folderId));
+    if (!fid.isValid()) return 0;
+    return QMailStore::instance()->countMessages(QMailDisconnected::sourceKey(fid));
+}
+
+// How many messages the server last announced for this folder. Zero means
+// either "the server says the folder is empty" or "we have never asked" — the
+// two cannot be told apart here, which is exactly why a folder that holds
+// local messages and has a zero here must not be synced without asking.
+int GpgEngine::folderServerCount(int folderId)
+{
+    QMailFolderId fid(static_cast<quint64>(folderId));
+    if (!fid.isValid()) return 0;
+    return QMailFolder(fid).serverCount();
+}
+
+// The app's own deletions, announced before they happen. Everything else that
+// disappears from the store came from the server side, and the user is told
+// about it — see the listener in the constructor.
+void GpgEngine::noteOwnDelete(int messageId)
+{
+    m_ownDeletes.insert(static_cast<quint64>(messageId),
+                        QDateTime::currentMSecsSinceEpoch());
+}
+
+void GpgEngine::noteOwnDeletes()
+{
+    m_ownDeleteWindow = QDateTime::currentMSecsSinceEpoch() + 30000;
 }
 
 bool GpgEngine::contentAvailable(int messageId)

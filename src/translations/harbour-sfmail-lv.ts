@@ -1414,6 +1414,30 @@ Imports pievieno šai adresei OTRU atslēgu — pārliecinies, ka jaunā atslēg
         <source>Sending again…</source>
         <translation>Sūta vēlreiz…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Sinhronizēt šo mapi?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Serveris šai mapei nekad nav paziņojis nevienu vēstuli. Ja tas ziņos, ka mape ir tukša, šeit glabātā %n vēstule tiks neatgriezeniski izdzēsta — to nevar atsaukt, un otras kopijas nav.</numerusform>
+            <numerusform>Serveris šai mapei nekad nav paziņojis nevienu vēstuli. Ja tas ziņos, ka mape ir tukša, šeit glabāto %n vēstuļu tiks neatgriezeniski izdzēstas — to nevar atsaukt, un otras kopijas nav.</numerusform>
+            <numerusform>Serveris šai mapei nekad nav paziņojis nevienu vēstuli. Ja tas ziņos, ka mape ir tukša, šeit glabātās %n vēstules tiks neatgriezeniski izdzēstas — to nevar atsaukt, un otras kopijas nav.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Tomēr sinhronizēt</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n vēstule noņemta: serverī tās vairs nav</numerusform>
+            <numerusform>%n vēstuļu noņemtas: serverī to vairs nav</numerusform>
+            <numerusform>%n vēstules noņemtas: serverī to vairs nav</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

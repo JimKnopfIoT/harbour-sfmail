@@ -1412,6 +1412,28 @@ En import lägger till en ANDRA nyckel för den här adressen — försäkra dig
         <source>Sending again…</source>
         <translation>Skickar igen…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Synkronisera den här mappen?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Servern har aldrig aviserat något meddelande för den här mappen. Om den rapporterar mappen som tom raderas %n meddelande som sparats här för gott — det går inte att ångra och det finns ingen andra kopia.</numerusform>
+            <numerusform>Servern har aldrig aviserat något meddelande för den här mappen. Om den rapporterar mappen som tom raderas %n meddelanden som sparats här för gott — det går inte att ångra och det finns ingen andra kopia.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Synkronisera ändå</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n meddelande togs bort: servern har det inte längre</numerusform>
+            <numerusform>%n meddelanden togs bort: servern har dem inte längre</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

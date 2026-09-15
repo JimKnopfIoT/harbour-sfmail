@@ -1702,6 +1702,30 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Move selected…</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qml/pages/MessageListPage.qml" line="170"/>
+        <source>Sync this folder?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/MessageListPage.qml" line="171"/>
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessageListPage.qml" line="172"/>
+        <source>Sync anyway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/MessageListPage.qml" line="272"/>
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

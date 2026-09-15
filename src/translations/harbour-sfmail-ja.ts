@@ -1410,6 +1410,26 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Sending again…</source>
         <translation>再送信中…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>このフォルダーを同期しますか？</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>サーバーはこのフォルダーのメッセージを一度も通知していません。フォルダーが空だと報告された場合、ここに保存されている %n 件のメッセージは完全に削除されます。取り消しはできず、控えもありません。</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>それでも同期</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n 件のメッセージを削除: サーバーにはもうありません</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

@@ -1416,6 +1416,32 @@ L-importazzjoni żżid IT-TIENI ċavetta għal dan l-indirizz — kun żgur li d
         <source>Sending again…</source>
         <translation>Qed jerġa&apos; jintbagħat…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Nissinkronizza din il-kartella?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Is-server qatt ma ħabbar messaġġ għal din il-kartella. Jekk jirrapporta li l-kartella hija vojta, %n messaġġ miżmum hawn jitħassar għal dejjem — ma tistax terġa&apos; lura u ma hemmx kopja oħra.</numerusform>
+            <numerusform>Is-server qatt ma ħabbar messaġġ għal din il-kartella. Jekk jirrapporta li l-kartella hija vojta, %n messaġġi miżmuma hawn jitħassru għal dejjem — ma tistax terġa&apos; lura u ma hemmx kopja oħra.</numerusform>
+            <numerusform>Is-server qatt ma ħabbar messaġġ għal din il-kartella. Jekk jirrapporta li l-kartella hija vojta, %n messaġġ miżmuma hawn jitħassru għal dejjem — ma tistax terġa&apos; lura u ma hemmx kopja oħra.</numerusform>
+            <numerusform>Is-server qatt ma ħabbar messaġġ għal din il-kartella. Jekk jirrapporta li l-kartella hija vojta, %n messaġġ miżmuma hawn jitħassru għal dejjem — ma tistax terġa&apos; lura u ma hemmx kopja oħra.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Issinkronizza xorta</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n messaġġ tneħħa: is-server m&apos;għadux jżommu</numerusform>
+            <numerusform>%n messaġġi tneħħew: is-server m&apos;għadux iżommhom</numerusform>
+            <numerusform>%n messaġġ tneħħew: is-server m&apos;għadux iżommhom</numerusform>
+            <numerusform>%n messaġġ tneħħew: is-server m&apos;għadux iżommhom</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

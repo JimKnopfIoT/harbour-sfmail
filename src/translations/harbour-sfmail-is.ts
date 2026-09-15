@@ -1412,6 +1412,28 @@ Innflutningur bætir ÖÐRUM lykli við þetta netfang — gakktu úr skugga um 
         <source>Sending again…</source>
         <translation>Sendi aftur…</translation>
     </message>
+    <message>
+        <source>Sync this folder?</source>
+        <translation>Samstilla þessa möppu?</translation>
+    </message>
+    <message numerus="yes">
+        <source>The server has never announced a message for this folder. If it reports the folder as empty, the %n message(s) kept here are deleted for good — there is no undo and no second copy.</source>
+        <translation>
+            <numerusform>Þjónninn hefur aldrei tilkynnt um skeyti í þessari möppu. Ef hann segir möppuna tóma er %n skeyti sem geymt er hér eytt endanlega — engin afturköllun og ekkert annað eintak.</numerusform>
+            <numerusform>Þjónninn hefur aldrei tilkynnt um skeyti í þessari möppu. Ef hann segir möppuna tóma er %n skeytum sem geymd eru hér eytt endanlega — engin afturköllun og ekkert annað eintak.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Sync anyway</source>
+        <translation>Samstilla samt</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n message(s) removed: the server no longer has them</source>
+        <translation>
+            <numerusform>%n skeyti fjarlægt: þjónninn hefur það ekki lengur</numerusform>
+            <numerusform>%n skeyti fjarlægð: þjónninn hefur þau ekki lengur</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
