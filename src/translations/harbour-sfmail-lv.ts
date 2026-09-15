@@ -1438,6 +1438,10 @@ Imports pievieno šai adresei OTRU atslēgu — pārliecinies, ka jaunā atslēg
             <numerusform>%n vēstules noņemtas: serverī to vairs nav</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Šifrēta</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

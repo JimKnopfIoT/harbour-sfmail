@@ -1438,6 +1438,10 @@ Import pridá pre túto adresu DRUHÝ kľúč — skôr než mu budete dôverova
             <numerusform>%n správ odstránených: server ich už nemá</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Zašifrované</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

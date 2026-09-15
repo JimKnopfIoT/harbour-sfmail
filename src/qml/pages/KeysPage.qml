@@ -119,7 +119,7 @@ Page {
                         intro: qsTr("Creates a new RSA-4096 OpenPGP key (signing + encryption) in your keyring. Highest security; the passphrase is mandatory."),
                         commandText:
                             "gpg --batch --pinentry-mode loopback --passphrase-fd 0 \\\n" +
-                            "    --quick-generate-key \"Max Mustermann <max@example.org>\" \\\n" +
+                            "    --quick-generate-key \"Jane Doe <jane.doe@example.org>\" \\\n" +
                             "    rsa4096 cert,sign 2y\n" +
                             "gpg --batch --quick-add-key <FINGERPRINT> rsa4096 encrypt 2y"
                     })

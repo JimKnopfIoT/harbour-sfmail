@@ -21,7 +21,10 @@ Page {
 
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "image://theme/icon-launcher-default"
+                // The app's own icon, not the system placeholder: the theme's
+                // "default launcher" image is a grey tile with no relation to
+                // this program, and that is what the About page showed.
+                source: Qt.resolvedUrl("../images/harbour-sfmail.png")
                 width: Theme.iconSizeLauncher
                 height: width
                 fillMode: Image.PreserveAspectFit

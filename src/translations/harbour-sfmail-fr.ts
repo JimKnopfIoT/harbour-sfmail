@@ -1434,6 +1434,10 @@ L&apos;import ajoute une DEUXIÈME clé pour cette adresse — assurez-vous que 
             <numerusform>%n messages supprimés : le serveur ne les a plus</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Chiffré</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

@@ -1438,6 +1438,10 @@ Cuireann an iompórtáil an DARA heochair leis an seoladh seo — déan cinnte g
             <numerusform>Baineadh %n teachtaireacht: níl siad ag an bhfreastalaí a thuilleadh</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Criptithe</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

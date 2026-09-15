@@ -1442,6 +1442,10 @@ L-importazzjoni żżid IT-TIENI ċavetta għal dan l-indirizz — kun żgur li d
             <numerusform>%n messaġġ tneħħew: is-server m&apos;għadux iżommhom</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Ikkriptat</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

@@ -1438,6 +1438,10 @@ Import doda DRUGI klucz dla tego adresu — upewnij się, że nowy klucz jest pr
             <numerusform>Usunięto %n wiadomości: serwer już ich nie ma</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Zaszyfrowana</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

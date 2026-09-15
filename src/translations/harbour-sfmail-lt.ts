@@ -1438,6 +1438,10 @@ Importavus šiam adresui atsiras ANTRAS raktas — įsitikink, kad naujasis rakt
             <numerusform>Pašalinta %n laiškų: serveryje jų nebėra</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Užšifruota</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

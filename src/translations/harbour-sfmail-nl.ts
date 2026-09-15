@@ -1434,6 +1434,10 @@ Importeren voegt een TWEEDE sleutel voor dit adres toe — vergewis je ervan dat
             <numerusform>%n berichten verwijderd: de server heeft ze niet meer</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Versleuteld</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

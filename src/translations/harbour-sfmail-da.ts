@@ -1434,6 +1434,10 @@ En import lægger en EKSTRA nøgle til denne adresse — sikr dig, at den nye n�
             <numerusform>%n beskeder fjernet: serveren har dem ikke længere</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Krypteret</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

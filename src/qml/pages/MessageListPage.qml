@@ -153,6 +153,18 @@ Page {
         })
     }
 
+    // What the store keeps as a preview of an encrypted message is the armour
+    // of the ciphertext ("-----BEGIN PGP MESSAGE----- hQGMA88..."), which tells
+    // the reader nothing and crowds out what does. Say what the message is
+    // instead. The armour is checked as well as the store's own flag: inline
+    // PGP is not always flagged as encrypted.
+    function _previewText(encrypted, preview) {
+        var p = preview ? String(preview) : ""
+        if (encrypted || p.indexOf("-----BEGIN PGP MESSAGE-----") === 0)
+            return "(" + qsTr("Encrypted") + ")"
+        return p
+    }
+
     // Syncing a folder is a destructive operation, so it is worth one look
     // before it runs. The server decides what stays: everything stored here
     // that it does not list is removed, permanently. That is fine when the
@@ -635,7 +647,7 @@ Page {
                     Label {
                         width: parent.width - icons.width - parent.spacing
                         truncationMode: TruncationMode.Fade
-                        text: model.preview
+                        text: page._previewText(model.isEncrypted, model.preview)
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor
                     }

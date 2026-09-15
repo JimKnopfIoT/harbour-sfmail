@@ -1442,6 +1442,10 @@ Uvoz doda DRUGI ključ za ta naslov — prepričajte se, da je ta novi ključ pr
             <numerusform>%n sporočil odstranjenih: strežnik jih nima več</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Šifrirano</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

@@ -1438,6 +1438,10 @@ Importul adaugă o A DOUA cheie pentru această adresă — asigurați-vă că n
             <numerusform>%n de mesaje eliminate: serverul nu le mai are</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Criptat</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

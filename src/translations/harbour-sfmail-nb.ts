@@ -1434,6 +1434,10 @@ En import legger til en EKSTRA nøkkel for denne adressen — forsikre deg om at
             <numerusform>%n meldinger fjernet: tjeneren har dem ikke lenger</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Kryptert</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

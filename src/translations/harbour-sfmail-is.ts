@@ -1434,6 +1434,10 @@ Innflutningur bætir ÖÐRUM lykli við þetta netfang — gakktu úr skugga um 
             <numerusform>%n skeyti fjarlægð: þjónninn hefur þau ekki lengur</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Dulkóðað</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

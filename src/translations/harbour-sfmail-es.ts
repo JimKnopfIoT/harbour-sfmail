@@ -1434,6 +1434,10 @@ Al importar se añade una SEGUNDA clave para esta dirección — asegúrate de q
             <numerusform>%n mensajes eliminados: el servidor ya no los tiene</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Cifrado</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>

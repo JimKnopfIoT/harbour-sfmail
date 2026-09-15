@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.16
+Version:    0.8.17
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -212,6 +212,14 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Tue Sep 15 2026 harbour-sfmail contributors 0.8.17-1
+- An encrypted message no longer shows the armour of its ciphertext where the
+  list shows a preview. It says that it is encrypted instead.
+- The About page shows the app's own icon rather than the system's placeholder
+  tile.
+- The example commands for generating a key and a certificate use a neutral
+  example name.
+
 * Tue Sep 15 2026 harbour-sfmail contributors 0.8.16-1
 - Opening a folder no longer deletes what is kept in it. Asking the server for a
   folder's message list hands it the last word over the local copies: a folder

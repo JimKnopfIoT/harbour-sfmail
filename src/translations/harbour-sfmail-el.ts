@@ -1434,6 +1434,10 @@ Importing adds a SECOND key for this address — make sure this new key is genui
             <numerusform>%n μηνύματα αφαιρέθηκαν: ο διακομιστής δεν τα έχει πια</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Κρυπτογραφημένο</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
