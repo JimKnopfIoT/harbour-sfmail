@@ -95,6 +95,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Όσο η καταχώριση είναι μετακινημένη, το άλλο πρόγραμμα δεν έχει εικονίδιο στο μενού εφαρμογών. Επαναφέρετέ την αν θέλετε να το χρησιμοποιήσετε ξανά, ή πριν απενεργοποιήσετε την παραπάνω επιλογή.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Όταν σταματούν να έρχονται μηνύματα</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Γιατί οι λογαριασμοί σιωπούν κάποιες φορές, ενώ το γραμματοκιβώτιο έχει νέα μηνύματα — μια βλάβη στην υπηρεσία αλληλογραφίας του συστήματος, τι έμαθε γι' αυτήν η εφαρμογή και πώς επιστρέφει η παράδοση.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>Search contacts</source>
         <translation>Αναζήτηση επαφών</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(χωρίς όνομα)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 διευθύνσεις — πατήστε για επιλογή</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1256,6 +1256,128 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Remembered addresses</source>
         <translation>Αποθηκευμένες διευθύνσεις</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Διαγραφή των καταγεγραμμένων γραμμών</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Ανανέωση</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Όταν σταματούν να έρχονται μηνύματα</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Αν οι λογαριασμοί σας σιωπήσουν — τίποτα νέο για ώρες ή μέρες, ενώ το ίδιο γραμματοκιβώτιο έχει ολοφάνερα νέα μηνύματα όταν το δείτε από αλλού — αυτή η σελίδα εξηγεί τι συμβαίνει.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Αυτή η σελίδα είναι προσωρινή λύση. Η βλάβη δεν βρίσκεται σε αυτή την εφαρμογή, και η διόρθωσή της υπάρχει ήδη στο λειτουργικό σύστημα. Μόλις μια ενημέρωση του συστήματος φέρει μια διόρθωση που λειτουργεί σε αυτή τη συσκευή, αυτή η σελίδα και το κουμπί της θα αφαιρεθούν από την εφαρμογή.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Από πού προέρχεται</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Η παραλαβή της αλληλογραφίας δεν είναι δουλειά αυτής της εφαρμογής. Κάθε εφαρμογή αλληλογραφίας σε αυτή τη συσκευή αναθέτει τη συνομιλία με τους διακομιστές αλληλογραφίας σας στην ίδια υπηρεσία του συστήματος· αυτή η εφαρμογή απλώς της ζητά μηνύματα και δείχνει ό,τι επιστρέφει.
+
+Η υπηρεσία αυτή περιορίζει πόσα γραμματοκιβώτια μπορούν να παρακολουθούνται ταυτόχρονα για νέα μηνύματα, και μετράει λάθος: μια σύνδεση που πέφτει δεν επιστρέφει αξιόπιστα τη θέση που είχε δεσμεύσει. Έπειτα από λίγες μέρες ο αριθμός έχει σκαρφαλώσει πάνω από το όριο, και από εκεί και πέρα η υπηρεσία αρνείται να ανοίξει οποιαδήποτε τέτοια σύνδεση — για όλους τους λογαριασμούς μονομιάς. Ένας λογαριασμός που περιμένει να του αναγγελθούν τα νέα μηνύματα, αντί να τα παραλαμβάνει σε τακτά διαστήματα, δεν λαμβάνει τότε τίποτα, ώσπου να επανεκκινηθεί η υπηρεσία.
+
+Καμία εφαρμογή δεν μπορεί να το αποτρέψει ούτε να μηδενίσει αυτόν τον αριθμό. Αυτό που μπορεί να κάνει η εφαρμογή είναι να σας το πει, αντί να σας αφήσει με ένα άδειο γραμματοκιβώτιο και καμία εξήγηση.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Σε αυτή τη συσκευή</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Λογαριασμοί αλληλογραφίας</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Παρακολουθούμενα γραμματοκιβώτια</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 από %2 το πολύ</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Μόνο αναγγελλόμενα μηνύματα</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Κάθε παρακολουθούμενο γραμματοκιβώτιο κρατά μία σύνδεση. Το όριο των %1 είναι ενσωματωμένο στην υπηρεσία του συστήματος και δεν αλλάζει. Μετριέται συνολικά για όλους τους λογαριασμούς — γι' αυτό ένας λογαριασμός που εξαντλεί το όριο παρασύρει μαζί του και τους υπόλοιπους. Οι λογαριασμοί που αναφέρονται ως «μόνο αναγγελλόμενα μηνύματα» δεν έχουν χρονισμένη παραλαβή για να στηριχθούν.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Τι έμαθε αυτή η εφαρμογή</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Τίποτα καταγεγραμμένο. Εδώ βρίσκονται οι αστοχίες που η υπηρεσία αλληλογραφίας αναφέρει πίσω σε αυτή την εφαρμογή· φυλάσσονται ακόμη και όταν η καταγραφή σφαλμάτων είναι απενεργοποιημένη, επειδή μια τέτοια βλάβη γίνεται αντιληπτή πολύ αργότερα από τη στιγμή που συνέβη.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Τι βοηθά</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Ο αριθμός ζει μέσα σε αυτή την υπηρεσία και πουθενά αλλού, γι' αυτό η επανεκκίνησή της είναι όλη κι όλη η θεραπεία. Τίποτα δεν χάνεται: η αλληλογραφία σας βρίσκεται στον χώρο αποθήκευσης μηνυμάτων και η υπηρεσία ανεβαίνει αμέσως ξανά. Μια μεταφορά που εκτελείται εκείνη τη στιγμή συνεχίζεται κατόπιν.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Επανεκκίνηση της υπηρεσίας αλληλογραφίας</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Έγινε επανεκκίνηση. Περιμένετε μια στιγμή και ζητήστε ξανά τα μηνύματα.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Δεν ήταν δυνατή η επανεκκίνηση: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Η επανεκκίνηση της συσκευής κάνει το ίδιο.
+
+Αν επανέρχεται συνεχώς, δώστε τουλάχιστον σε έναν λογαριασμό ένα διάστημα παραλαβής στις ρυθμίσεις λογαριασμών του συστήματος, αντί να τον αφήνετε να περιμένει μόνο αναγγελλόμενα μηνύματα. Η χρονισμένη παραλαβή δεν χρησιμοποιεί αυτές τις συνδέσεις και εξακολουθεί να λειτουργεί όταν η υπηρεσία τις αρνείται.
+
+Αν το παραπάνω κουμπί δεν περνά, το ίδιο μπορεί να γίνει και από ένα τερματικό:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Ήδη διορθωμένο στην πηγή</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Η βλάβη είναι γνωστή και έχει ήδη διορθωθεί στον ίδιο τον πηγαίο κώδικα του λειτουργικού συστήματος (σφάλμα JB#64979, Σεπτέμβριος 2026): η μέτρηση εγκαταλείφθηκε εντελώς και μια συσκευή χρησιμοποιεί πλέον όσα παρακολουθούμενα γραμματοκιβώτια μπορεί να εξασφαλίσει, αντί να τα αρνείται όλα. Η διόρθωση αυτή δεν υπάρχει στην έκδοση του συστήματος που τρέχει εδώ, οπότε αναμένεται να φτάσει σε αυτή τη συσκευή με μια μελλοντική ενημέρωση του Sailfish OS — και τότε αυτή η σελίδα θα είναι περιττή.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>καμία σύνδεση με τον δίαυλο συνεδρίας</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>απορρίφθηκε, χωρίς να δοθεί αιτία</translation>
     </message>
 </context>
 <context>

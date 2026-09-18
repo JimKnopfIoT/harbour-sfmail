@@ -95,6 +95,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>項目を移動している間、もう一方のプログラムはアプリ一覧にアイコンを持ちません。再び使いたいとき、または上の設定をオフにする前に、元に戻してください。</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>メールが届かなくなったとき</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>メールボックスに新しいメッセージがあるのに、アカウントが静かになってしまうことがあるのはなぜか — システムのメールサービスの不具合、このアプリがそれについて受け取った情報、そして受信を取り戻す方法。</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>Search contacts</source>
         <translation>連絡先を検索</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>（名前なし）</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 件のアドレス — タップして選択</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1254,6 +1254,128 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Remembered addresses</source>
         <translation>記憶したアドレス</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>記録された行を消去</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>更新</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>メールが届かなくなったとき</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>アカウントが静まり返ってしまったとき — 何時間も何日も新着がないのに、同じメールボックスを別のところで見ると明らかに新しいメッセージがある — このページは何が起きているのかを説明します。</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>このページは一時的な応急処置です。不具合はこのアプリにあるのではなく、その修正はオペレーティングシステムの側にすでに存在します。システムの更新が有効な修正をこの端末にもたらし次第、このページとこのボタンはアプリから取り除かれます。</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>原因はどこにあるか</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>メールを受信するのは、このアプリの仕事ではありません。この端末のすべてのメールアプリケーションは、同じシステムサービスに依頼してメールサーバーとやり取りします。このアプリはそのサービスにメッセージを求め、返ってきたものを表示するだけです。
+
+そのサービスは、新着メールの監視をいくつのメールボックスに対して同時に行えるかを制限していますが、その数え方を誤ります。切れた接続は、確保していた枠を確実には返しません。数日たつと数はいつの間にか上限を越え、それ以降サービスはその種の接続をいっさい開かなくなります — しかもすべてのアカウントについて一度に。一定間隔で取得するのではなく新着の通知を待つアカウントは、サービスが再起動されるまで何も受け取れません。
+
+どのアプリケーションも、これを防ぐことも、その数をリセットすることもできません。このアプリにできるのは、空の受信箱と説明のない状態であなたを放置するのではなく、このことをお伝えすることです。</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>この端末では</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>メールアカウント</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>監視中のメールボックス</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>最大 %2 のうち %1</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>新着通知のみ</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>監視中のメールボックスは、それぞれ接続を一つ占有します。%1 という上限はシステムサービスに組み込まれており、変更できません。この数はすべてのアカウントをまとめて数えられるため、一つのアカウントが使い切ると、ほかのアカウントも巻き添えになります。「新着通知のみ」に挙げられているアカウントには、代わりに頼れる定期取得がありません。</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>このアプリが受け取った情報</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>記録はありません。ここに並ぶのは、メールサービスがこのアプリに返してきたエラーです。この種の不具合は起きてからずいぶん後に気づかれるため、デバッグ記録が無効のときも保持されます。</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>有効な対処</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>その数はこのサービスの中だけにあり、ほかのどこにもありません。ですから、サービスを再起動することがそのまま対処のすべてです。失われるものはありません。メールはメッセージの保管場所に残り、サービスはすぐに立ち上がり直します。その時に実行中だった転送も、あとで改めて続けられます。</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>メールサービスを再起動</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>再起動しました。少し待ってから、もう一度メールを取得してください。</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>再起動できませんでした: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>端末を再起動しても、同じ効果があります。
+
+何度も繰り返す場合は、少なくとも一つのアカウントについて、新着通知だけを待たせるのではなく、システムのアカウント設定で取得間隔を指定してください。定期取得はこれらの接続を使わないため、サービスが接続を拒んでいる間も動き続けます。
+
+上のボタンが通らない場合は、同じことをターミナルからも行えます:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>提供元ではすでに修正済み</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>この不具合は既知で、オペレーティングシステム自身のソースコードではすでに修正されています（バグ JB#64979、2026年9月）。数を数えること自体が取りやめになり、端末はすべてを拒否する代わりに、確保できるだけの監視中メールボックスを使うようになりました。この修正はここで動いているシステムのバージョンには入っていないため、今後の Sailfish OS の更新でこの端末に届くはずです — そうなれば、このページは無用になります。</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>セッションバスに接続できません</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>拒否されました。理由は示されていません</translation>
     </message>
 </context>
 <context>

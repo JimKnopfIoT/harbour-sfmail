@@ -170,6 +170,27 @@ Page {
             }
 
             SectionHeader { text: qsTr("Diagnostics") }
+
+            // Mail retrieval is done by a shared system service, and when that
+            // service stops handing out connections the empty mailbox is seen
+            // in THIS window. The page says where the fault actually sits, what
+            // the app was told, and what clears it.
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("When mail stops arriving")
+                onClicked: pageStack.push(Qt.resolvedUrl("MailRetrievalPage.qml"))
+            }
+            Label {
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                text: qsTr("Why accounts sometimes go quiet although the mailbox has new messages — "
+                           + "a fault in the system's mail service, what this app was told about it, "
+                           + "and how to get delivery back.")
+            }
+
             TextSwitch {
                 text: qsTr("Debug logging")
                 description: qsTr("Write a debug.log in the app's data folder to help diagnose a problem. "

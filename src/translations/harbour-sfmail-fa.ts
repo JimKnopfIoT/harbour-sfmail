@@ -95,6 +95,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>تا زمانی که مدخل جابه‌جا شده باشد، برنامهٔ دیگر نمادی در فهرست برنامه‌ها ندارد. اگر می‌خواهید دوباره از آن استفاده کنید یا پیش از خاموش کردن گزینهٔ بالا، آن را برگردانید.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>وقتی دیگر نامه‌ای نمی‌رسد</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>چرا حساب‌ها گاهی خاموش می‌مانند با آنکه صندوق پستی پیام‌های تازه دارد — خطایی در سرویس نامهٔ سیستم، آنچه به این برنامه دربارهٔ آن گفته شده، و راه بازگرداندن دریافت.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>Search contacts</source>
         <translation>جست‌وجوی مخاطبان</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(بدون نام)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 نشانی — برای انتخاب ضربه بزنید</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1254,6 +1254,128 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Remembered addresses</source>
         <translation>نشانی‌های ذخیره‌شده</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>پاک کردن سطرهای ثبت‌شده</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>به‌روزرسانی</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>وقتی دیگر نامه‌ای نمی‌رسد</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>اگر حساب‌هایتان خاموش شدند — ساعت‌ها یا روزها هیچ چیز تازه‌ای نمی‌آید، در حالی که همان صندوق پستی وقتی جای دیگری نگاه می‌کنید آشکارا پیام‌های تازه دارد — این صفحه توضیح می‌دهد که چه رخ می‌دهد.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>این صفحه یک راه‌حل موقت است. خطا در این برنامه نیست و اصلاح آن هم‌اکنون در سیستم‌عامل وجود دارد. به‌محض آنکه یک به‌روزرسانی سیستم، رفع خطای کارآمدی را به این دستگاه بیاورد، این صفحه و دکمه‌اش از برنامه برداشته می‌شود.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>این از کجا می‌آید</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>جمع‌آوری نامه کار این برنامه نیست. هر برنامهٔ نامه‌ای روی این دستگاه از همان سرویس سیستمی می‌خواهد که با کارسازهای نامهٔ شما گفت‌وگو کند؛ این برنامه تنها از آن سرویس پیام می‌خواهد و آنچه را بازمی‌گردد نشان می‌دهد.
+
+آن سرویس محدود می‌کند که هم‌زمان چند صندوق پستی را می‌توان برای نامهٔ تازه زیر نظر گرفت، و در شمردن آن‌ها اشتباه می‌کند: اتصالی که قطع می‌شود، جای رزروشدهٔ خود را به‌طور مطمئن پس نمی‌دهد. پس از چند روز شمارش خزیده و از مرز گذشته است، و از آن پس سرویس اصلاً هیچ اتصالی از این دست را باز نمی‌کند — برای همهٔ حساب‌ها یکجا. حسابی که به جای دریافت در فاصله‌های زمانی معیّن، منتظر اعلام نامهٔ تازه می‌ماند، از آن پس تا راه‌اندازی دوبارهٔ سرویس چیزی دریافت نمی‌کند.
+
+هیچ برنامه‌ای نمی‌تواند جلوی این را بگیرد یا آن شمارش را صفر کند. کاری که این برنامه می‌تواند بکند این است که به شما بگوید، به جای آنکه شما را با صندوق پستی خالی و بی‌هیچ توضیحی رها کند.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>روی این دستگاه</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>حساب‌های نامه</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>صندوق‌های زیر نظر</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 از حداکثر %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>فقط نامهٔ اعلام‌شده</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>هر صندوق پستیِ زیر نظر یک اتصال را اشغال می‌کند. مرز %1 در خود سرویس سیستمی تعبیه شده و تغییرپذیر نیست. شمارش روی همهٔ حساب‌ها روی‌هم انجام می‌شود؛ به همین دلیل حسابی که سهمش تمام شود، بقیه را هم با خود پایین می‌کشد. حساب‌هایی که زیر «فقط نامهٔ اعلام‌شده» فهرست شده‌اند، دریافت زمان‌بندی‌شده‌ای ندارند که به آن پناه ببرند.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>آنچه به این برنامه گفته شده</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>چیزی ثبت نشده است. این‌ها خطاهایی است که سرویس نامه به این برنامه بازمی‌گرداند؛ حتی وقتی ثبت اشکال‌زدایی خاموش است نگه داشته می‌شوند، زیرا چنین خطایی مدت‌ها پس از رخ دادنش دیده می‌شود.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>چه چیزی کمک می‌کند</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>آن شمارش در همان سرویس زندگی می‌کند و جای دیگری نه؛ بنابراین راه‌اندازی دوبارهٔ آن تمامِ چاره است. چیزی از دست نمی‌رود: نامه‌های شما در انبار پیام‌ها می‌مانند و سرویس بی‌درنگ دوباره بالا می‌آید. انتقالی که در آن لحظه در جریان باشد، پس از آن دوباره از سر گرفته می‌شود.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>راه‌اندازی دوبارهٔ سرویس نامه</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>دوباره راه‌اندازی شد. لحظه‌ای صبر کنید، سپس دوباره نامه‌ها را دریافت کنید.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>راه‌اندازی دوباره ممکن نشد: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>راه‌اندازی دوبارهٔ دستگاه همین کار را می‌کند.
+
+اگر باز هم تکرار شد، دست‌کم به یک حساب در تنظیمات حساب‌های سیستم یک فاصلهٔ زمانی برای دریافت بدهید، به جای آنکه تنها منتظر نامهٔ اعلام‌شده بماند. دریافت زمان‌بندی‌شده از این اتصال‌ها استفاده نمی‌کند و وقتی سرویس آن‌ها را رد می‌کند، به کار خود ادامه می‌دهد.
+
+اگر دکمهٔ بالا کارگر نیفتاد، همین کار را می‌توان از پایانه انجام داد:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>پیش‌تر در سرچشمه برطرف شده</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>این خطا شناخته شده و در خودِ کد منبع سیستم‌عامل پیش‌تر اصلاح شده است (اشکال JB#64979، سپتامبر 2026): شمارش یکسره کنار گذاشته شد و دستگاه اکنون به جای رد کردن همهٔ آن‌ها، از هر تعداد صندوق پستیِ زیر نظر که به دست آورد استفاده می‌کند. آن اصلاح در نسخهٔ سیستمی که اینجا اجرا می‌شود نیست، پس باید با یک به‌روزرسانی آیندهٔ Sailfish OS به این دستگاه برسد — و آنگاه این صفحه بی‌معنا می‌شود.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>بدون اتصال به گذرگاه نشست</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>رد شد، بدون آنکه دلیلی گفته شود</translation>
     </message>
 </context>
 <context>

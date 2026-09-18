@@ -95,6 +95,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>条目被移走期间，另一个程序在应用列表中没有图标。若想再次使用它，或在关闭上面的选项之前，请把它放回去。</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>收不到邮件时</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>为什么邮箱里明明有新邮件，账户却有时毫无动静 —— 系统邮件服务中的一个故障、本应用为此得知的情况，以及如何让收信恢复正常。</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>Search contacts</source>
         <translation>搜索联系人</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>（无姓名）</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 个地址——点按选择</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1254,6 +1254,128 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Remembered addresses</source>
         <translation>已记住的地址</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>清除已记录的条目</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>刷新</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>收不到邮件时</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>如果您的账户陷入沉默 —— 数小时甚至数天没有新邮件，而在别处查看同一个邮箱时明明有新消息 —— 本页会说明正在发生什么。</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>本页只是临时的权宜之计。故障不在本应用之中，针对它的修正在操作系统里已经存在。一旦系统更新把可用的修复带到本设备，本页及其按钮就会从应用中移除。</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>问题从何而来</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>收取邮件并不是本应用的工作。本设备上的每一个邮件程序，都委托同一个系统服务与您的邮件服务器通信；本应用只是向它索取邮件，并显示返回的内容。
+
+该服务限制了同时可以监视新邮件的邮箱数量，而且它数错了：断开的连接不一定会可靠地把占用的名额归还。几天之后，计数悄悄越过了上限，从那时起，该服务就完全不再打开任何这类连接 —— 而且是所有账户一起。那些等待新邮件通知、而不是按固定间隔收取的账户，在服务重新启动之前便什么也收不到。
+
+任何应用都无法阻止这种情况，也无法重置这个计数。本应用能做的，是把情况告诉您，而不是让您面对一个空邮箱却得不到任何解释。</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>在本设备上</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>邮件账户</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>受监视的邮箱</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 个，最多 %2 个</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>仅等待新邮件通知</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>每个受监视的邮箱都会占用一个连接。%1 这个上限固化在系统服务之中，无法更改。它把所有账户放在一起计数，所以一个账户用尽名额，会把其他账户一并拖下水。列在“仅等待新邮件通知”下的账户，没有定时收取可以退而求其次。</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>本应用得知的情况</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>没有记录。这里显示的是邮件服务回报给本应用的错误；即使关闭了调试记录，它们也会被保留，因为这类故障往往在发生很久之后才被察觉。</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>有什么办法</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>这个计数只存在于该服务之中，别处都没有，所以重新启动它就是全部的补救办法。不会丢失任何东西：您的邮件保存在消息存储里，服务随即又会启动起来。此刻正在进行的传输，之后会重新继续。</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>重新启动邮件服务</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>已重新启动。请稍候片刻，然后再次收取邮件。</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>无法重新启动：%1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>重新启动设备也能达到同样的效果。
+
+如果问题一再出现，请在系统的账户设置中，至少为一个账户设定收取间隔，而不要让它只等待新邮件通知。定时收取不会使用这些连接，在服务拒绝连接时仍能继续工作。
+
+如果上面的按钮没有奏效，也可以在终端中做同样的事:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>在源头已经修复</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>该故障已为人所知，并且在操作系统自身的源代码中已经得到修正（缺陷 JB#64979，2026 年 9 月）：计数被彻底取消，设备如今会尽可能多地使用受监视的邮箱，而不是把它们全部拒绝。这项修正并不在此处运行的系统版本中，因此它应当随今后的一次 Sailfish OS 更新到达本设备 —— 届时本页也就多余了。</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>无法连接到会话总线</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>被拒绝，且未说明原因</translation>
     </message>
 </context>
 <context>

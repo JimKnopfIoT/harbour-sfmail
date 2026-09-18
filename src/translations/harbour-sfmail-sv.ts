@@ -95,6 +95,14 @@ Om det stör kan du ta bort den andra posten ur den kopplingen från ett root-sk
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Så länge posten är flyttad har den andra klienten ingen ikon i programmenyn. Lägg tillbaka den om du vill använda den igen, eller innan du stänger av alternativet ovan.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>När posten slutar komma fram</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Varför konton ibland tystnar trots att brevlådan har nya meddelanden — ett fel i systemets posttjänst, vad den här appen har fått veta om det, och hur leveransen kommer tillbaka.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Om det stör kan du ta bort den andra posten ur den kopplingen från ett root-sk
     <message>
         <source>Search contacts</source>
         <translation>Sök kontakter</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(inget namn)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 adresser — tryck för att välja</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1256,6 +1256,128 @@ En import lägger till en ANDRA nyckel för den här adressen — försäkra dig
     <message>
         <source>Remembered addresses</source>
         <translation>Sparade adresser</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Rensa registrerade rader</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Uppdatera</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>När posten slutar komma fram</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Om dina konton tystnar — inget nytt på timmar eller dagar, medan samma brevlåda tydligt har nya meddelanden när du tittar på den någon annanstans — så förklarar den här sidan vad som händer.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Den här sidan är en tillfällig nödlösning. Felet sitter inte i den här appen, och rättelsen för det finns redan i operativsystemet. Så snart en systemuppdatering för en fungerande rättelse till den här enheten tas den här sidan och dess knapp bort ur appen.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Varifrån det kommer</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Att hämta post är inte den här appens arbete. Alla e-postprogram på den här enheten ber samma systemtjänst att tala med dina e-postservrar; den här appen ber den bara om meddelanden och visar vad som kommer tillbaka.
+
+Den tjänsten begränsar hur många brevlådor som får bevakas för ny post samtidigt, och den räknar fel: en anslutning som bryts lämnar inte tillbaka sin reservation på ett tillförlitligt sätt. Efter några dagar har räkningen krupit förbi gränsen, och från och med då öppnar tjänsten över huvud taget ingen sådan anslutning längre — för alla konton på en gång. Ett konto som väntar på att ny post ska aviseras, i stället för att hämta med jämna mellanrum, får då ingenting förrän tjänsten startas om.
+
+Ingen app kan förhindra detta eller nollställa den räkningen. Vad den här appen kan göra är att berätta det för dig i stället för att lämna dig med en tom brevlåda och ingen förklaring.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>På den här enheten</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>E-postkonton</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Bevakade brevlådor</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 av högst %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Endast aviserad post</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Varje bevakad brevlåda upptar en anslutning. Gränsen på %1 är inbyggd i systemtjänsten och går inte att ändra. Räkningen sker över alla konton tillsammans — därför drar ett konto som får slut med sig de övriga. Konton under ”Endast aviserad post” har ingen tidsstyrd hämtning att falla tillbaka på.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Vad den här appen har fått veta</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Inget registrerat. Här står de fel som posttjänsten rapporterar tillbaka till den här appen; de sparas även när felloggningen är avstängd, eftersom ett sådant fel märks långt efter att det inträffade.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Vad som hjälper</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Räkningen lever i den tjänsten och ingen annanstans, så att starta om den är hela botemedlet. Ingenting går förlorat: din post ligger i meddelandelagret och tjänsten kommer direkt upp igen. En överföring som pågår i det ögonblicket tas upp igen efteråt.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Starta om posttjänsten</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Omstartad. Vänta ett ögonblick och hämta sedan post igen.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Kunde inte starta om den: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Att starta om enheten gör samma sak.
+
+Om det fortsätter att återkomma, ge minst ett konto ett hämtningsintervall i systemets kontoinställningar i stället för att låta det vänta enbart på aviserad post. En tidsstyrd hämtning använder inte dessa anslutningar och fortsätter att fungera när tjänsten vägrar dem.
+
+Om knappen ovan inte skulle gå fram kan samma sak göras från en terminal:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Redan åtgärdat vid källan</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Felet är känt och har redan rättats i operativsystemets egen källkod (fel JB#64979, september 2026): räknandet övergavs helt, och en enhet använder nu så många bevakade brevlådor som den kan få i stället för att vägra alla. Den rättelsen finns inte i den systemversion som körs här, så den bör nå den här enheten med en framtida Sailfish OS-uppdatering — och då blir den här sidan överflödig.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>ingen anslutning till sessionsbussen</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>avvisad, utan angiven orsak</translation>
     </message>
 </context>
 <context>

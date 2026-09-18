@@ -310,6 +310,13 @@ public:
     // same place the settings write them, so both lists can never drift apart.
     Q_INVOKABLE QStringList accountAliases(const QString &accountAddress);
 
+    // How many IMAP push (IDLE) connections the mail accounts on this device
+    // ask the system mail service for, and how many of them fetch by push
+    // alone. Read from the account settings, the same place the service reads
+    // them. Feeds the About page's delivery report — see the ceiling constant
+    // in GpgEngine.cpp.
+    Q_INVOKABLE QVariantMap mailPushSummary();
+
     // --- Remembered addresses (our own address cache) ----------------------
     // A list the user fills deliberately ("remember this address"). Kept as a
     // plain 0600 file, and that is a decision, not an omission: the same

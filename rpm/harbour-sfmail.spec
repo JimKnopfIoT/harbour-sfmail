@@ -4,7 +4,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.17
+Version:    0.8.18
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -212,6 +212,24 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Fri Sep 18 2026 harbour-sfmail contributors 0.8.18-1
+- A stop-gap, and meant to be one. Collecting mail on this platform is the work
+  of a system service that every mail application shares. That service miscounts
+  the connections it reserves for announced mail: one that drops does not
+  reliably give its reservation back, so after a few days of uptime the count has
+  crept past its built-in ceiling and the service then refuses to open any such
+  connection at all - for every account at once. An account that waits to be told
+  about new mail, rather than fetching on a timer, receives nothing until the
+  service is restarted. The fault is not in this app and cannot be fixed from
+  inside one. It has already been corrected at the source (bug JB#64979), and
+  everything added in this release is written to be taken out again as soon as a
+  system update carries a working fix to devices.
+- Until then, About -> "When mail stops arriving" says what happened and where it
+  comes from, shows how many mailboxes this device watches against the limit it
+  is measured against, keeps the failures the mail service reported back to the
+  app (kept even while debug logging is off, because such a fault is noticed long
+  afterwards), and offers a button that restarts that service.
+
 * Tue Sep 15 2026 harbour-sfmail contributors 0.8.17-1
 - An encrypted message no longer shows the armour of its ciphertext where the
   list shows a preview. It says that it is encrypted instead.

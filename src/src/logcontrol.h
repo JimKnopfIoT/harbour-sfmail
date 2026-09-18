@@ -11,6 +11,11 @@
 // to debug.log. Defined in main.cpp; toggled here and read in the hot logger path.
 extern std::atomic<bool> g_fileLog;
 
+// Defined in main.cpp: the recorded traces of a stalled mail delivery, and a
+// way to drop them again. Kept apart from debug.log — see the comment there.
+QStringList sfmailSyncIssueLines();
+void sfmailClearSyncIssues();
+
 // Exposed to QML as the context property "DebugLog" so the About page can offer a
 // switch (by request): turn the debug.log file on/off at runtime. The choice
 // is persisted in signed.ini (same store as the other app settings) and restored at
@@ -38,6 +43,12 @@ public:
         QSettings s(storePath(), QSettings::IniFormat);
         return s.value(QStringLiteral("debugLogging"), false).toBool();
     }
+
+    // About → "When mail stops arriving". The lines are collected whether or not
+    // debug logging is on, because the fault they describe is not ours to fix
+    // and the user needs to be able to show what happened.
+    Q_INVOKABLE QStringList syncIssues() const { return sfmailSyncIssueLines(); }
+    Q_INVOKABLE void clearSyncIssues() { sfmailClearSyncIssues(); }
 
     bool enabled() const { return g_fileLog.load(); }
     void setEnabled(bool on)

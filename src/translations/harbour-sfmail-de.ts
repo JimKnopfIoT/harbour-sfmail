@@ -95,6 +95,14 @@ Wenn es stört, nehmen Sie den anderen Eintrag in einer Root-Shell aus dieser Zu
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Solange der Eintrag verschoben ist, hat das andere Programm kein Symbol im Startraster. Schieben Sie ihn zurück, wenn Sie es wieder benutzen wollen — oder bevor Sie die Einstellung darüber ausschalten.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Wenn keine Mails mehr ankommen</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Warum Konten manchmal verstummen, obwohl das Postfach neue Nachrichten hat — ein Fehler im Mail-Dienst des Systems, was diese App darüber erfahren hat, und wie der Empfang zurückkommt.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Wenn es stört, nehmen Sie den anderen Eintrag in einer Root-Shell aus dieser Zu
     <message>
         <source>Search contacts</source>
         <translation>Kontakte suchen</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(kein Name)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 Adressen — zum Wählen tippen</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1256,6 +1256,128 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
     <message>
         <source>Remembered addresses</source>
         <translation>Gemerkte Adressen</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Aufgezeichnete Zeilen löschen</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Aktualisieren</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Wenn keine Mails mehr ankommen</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Wenn Ihre Konten verstummen — stundenlang oder tagelang nichts Neues, während dasselbe Postfach anderswo sichtbar neue Nachrichten hat —, erklärt diese Seite, was geschieht.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Diese Seite ist ein temporärer Hotfix. Der Fehler steckt nicht in dieser App, und die Korrektur dafür gibt es im Betriebssystem bereits. Sobald eine Systemaktualisierung einen funktionierenden Fix auf dieses Gerät bringt, werden diese Seite und der Button aus der App entfernt.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Woher das kommt</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Das Abholen der Post ist nicht die Arbeit dieser App. Jedes Mail-Programm auf diesem Gerät beauftragt denselben Systemdienst mit dem Gespräch mit Ihren Mailservern; diese App bittet ihn nur um Nachrichten und zeigt, was zurückkommt.
+
+Dieser Dienst begrenzt, wie viele Postfächer gleichzeitig auf neue Post überwacht werden dürfen, und er verzählt sich dabei: Eine abgebrochene Verbindung gibt ihre Reservierung nicht verlässlich zurück. Nach einigen Tagen ist der Zählstand über die Grenze gekrochen, und von da an öffnet der Dienst überhaupt keine solche Verbindung mehr — für alle Konten auf einmal. Ein Konto, das auf die Ankündigung neuer Post wartet, statt in festen Abständen abzuholen, bekommt dann nichts mehr, bis der Dienst neu gestartet wird.
+
+Keine App kann das verhindern oder diesen Zählstand zurücksetzen. Was diese App tun kann, ist es Ihnen zu sagen, statt Sie mit einem leeren Postfach und ohne Erklärung zurückzulassen.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Auf diesem Gerät</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Mailkonten</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Überwachte Postfächer</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 von höchstens %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Nur angekündigte Post</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Jedes überwachte Postfach hält eine Verbindung. Die Grenze von %1 steckt fest im Systemdienst und lässt sich nicht ändern. Gezählt wird über alle Konten zusammen — deshalb reißt ein Konto, dem sie ausgeht, die anderen mit. Konten unter „Nur angekündigte Post“ haben keinen zeitgesteuerten Abruf als Rückfall.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Was diese App erfahren hat</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Nichts aufgezeichnet. Hier stehen die Fehler, die der Mail-Dienst an diese App zurückmeldet; sie werden auch bei ausgeschalteter Fehleraufzeichnung aufgehoben, weil ein solcher Fehler erst lange nach seinem Auftreten bemerkt wird.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Was hilft</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Der Zählstand lebt in diesem Dienst und sonst nirgends; ihn neu zu starten ist deshalb die ganze Abhilfe. Es geht nichts verloren: Ihre Post liegt im Nachrichtenspeicher, und der Dienst kommt sofort wieder hoch. Eine Übertragung, die gerade läuft, wird danach wieder aufgenommen.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Mail-Dienst neu starten</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Neu gestartet. Einen Augenblick warten, dann erneut Post abrufen.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Neustart nicht möglich: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Ein Neustart des Geräts bewirkt dasselbe.
+
+Wenn es immer wiederkehrt, geben Sie wenigstens einem Konto in den Kontoeinstellungen des Systems einen Abrufabstand, statt es allein auf angekündigte Post warten zu lassen. Ein zeitgesteuerter Abruf benutzt diese Verbindungen nicht und arbeitet weiter, wenn der Dienst sie verweigert.
+
+Falls der Knopf oben nicht durchkommt, geht dasselbe aus einer Konsole:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>An der Quelle bereits behoben</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Der Fehler ist bekannt und im Quelltext des Betriebssystems bereits behoben (Fehler JB#64979, September 2026): Die Zählerei wurde ganz aufgegeben; ein Gerät nutzt jetzt so viele überwachte Postfächer, wie es bekommen kann, statt alle zu verweigern. Diese Korrektur steckt nicht in der hier laufenden Systemfassung — sie sollte mit einer künftigen Sailfish-OS-Aktualisierung hier ankommen, und diese Seite wird damit überflüssig.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>keine Verbindung zum Sitzungsbus</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>abgelehnt, ohne Angabe eines Grundes</translation>
     </message>
 </context>
 <context>

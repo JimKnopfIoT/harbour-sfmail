@@ -95,6 +95,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>ما دام المُدخل منقولًا، لن يكون للبرنامج الآخر أيقونة في قائمة التطبيقات. أعِده إن أردت استخدامه ثانيةً، أو قبل إيقاف الخيار أعلاه.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>عند توقّف وصول البريد</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>لماذا تصمت الحسابات أحيانًا رغم أنّ في صندوق البريد رسائل جديدة — خلل في خدمة البريد في النظام، وما أُبلِغ به هذا التطبيق عنه، وكيف يعود الاستلام.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>Search contacts</source>
         <translation>البحث في جهات الاتصال</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(بلا اسم)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 عناوين — انقر للاختيار</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1264,6 +1264,128 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Remembered addresses</source>
         <translation>العناوين المحفوظة</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>مسح الأسطر المسجَّلة</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>تحديث</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>عند توقّف وصول البريد</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>إذا صمتت حساباتك — لا شيء جديد لساعات أو أيام، بينما يحتوي صندوق البريد نفسه بوضوح على رسائل جديدة عند النظر إليه من مكان آخر — فهذه الصفحة تشرح ما يجري.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>هذه الصفحة إصلاح مؤقت. الخلل ليس في هذا التطبيق، والتصحيح له موجود في نظام التشغيل أصلًا. وبمجرد أن يجلب تحديثٌ للنظام إصلاحًا عاملًا إلى هذا الجهاز، ستُزال هذه الصفحة وزرّها من التطبيق.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>من أين يأتي هذا</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>جمع البريد ليس من عمل هذا التطبيق. كل تطبيق بريد على هذا الجهاز يطلب من خدمة النظام نفسها أن تتحدّث إلى خوادم بريدك؛ وهذا التطبيق لا يفعل سوى أن يطلب منها الرسائل ويعرض ما يعود.
+
+تحدّ تلك الخدمة عدد صناديق البريد التي يجوز مراقبتها بحثًا عن بريد جديد في وقت واحد، وهي تُخطئ في العدّ: الاتصال الذي ينقطع لا يُعيد حجزه بصورة موثوقة. وبعد بضعة أيام يكون العدّ قد تجاوز الحدّ زحفًا، ومن تلك اللحظة ترفض الخدمة فتح أي اتصال من هذا النوع على الإطلاق — لكل الحسابات دفعةً واحدة. والحساب الذي ينتظر أن يُعلَن عن بريد جديد بدلًا من الجلب على فترات زمنية لا يستقبل بعدها شيئًا حتى تُعاد الخدمة إلى التشغيل.
+
+لا يستطيع أي تطبيق منع ذلك أو تصفير هذا العدّ. ما يستطيعه هذا التطبيق هو أن يُخبرك، بدلًا من أن يتركك أمام صندوق بريد فارغ بلا تفسير.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>على هذا الجهاز</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>حسابات البريد</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>صناديق البريد المراقَبة</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 من %2 كحدٍّ أقصى</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>البريد المُعلَن عنه فقط</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>كل صندوق بريد مراقَب يشغل اتصالًا واحدًا. والحدّ البالغ %1 مبنيٌّ داخل خدمة النظام ولا يمكن تغييره. ويُحسب عبر جميع الحسابات مجتمعةً، ولهذا فإن حسابًا واحدًا ينفد رصيده يجرّ البقية معه. والحسابات المدرجة تحت «البريد المُعلَن عنه فقط» ليس لديها جلبٌ زمنيّ ترجع إليه.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>ما أُبلِغ به هذا التطبيق</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>لا شيء مسجَّل. هذه هي الأعطال التي تُبلغ بها خدمة البريد هذا التطبيق؛ وتُحفظ حتى مع إيقاف تسجيل التتبّع، لأن عطلًا كهذا يُلاحَظ بعد وقوعه بوقت طويل.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>ما الذي يساعد</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>العدّ يعيش في تلك الخدمة وحدها ولا مكان سواها، ولذلك فإن إعادة تشغيلها هي العلاج كله. ولا يضيع شيء: بريدك محفوظ في مخزن الرسائل، والخدمة تعود للعمل فورًا. وأي نقلٍ جارٍ في تلك اللحظة يُستأنف بعدها.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>إعادة تشغيل خدمة البريد</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>أُعيد التشغيل. انتظر لحظة، ثم اجلب البريد مرة أخرى.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>تعذّرت إعادة التشغيل: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>إعادة تشغيل الجهاز تفعل الشيء نفسه.
+
+وإن ظلّ الأمر يتكرّر، فامنح حسابًا واحدًا على الأقل فترةَ جلبٍ في إعدادات الحسابات في النظام بدلًا من تركه ينتظر البريد المُعلَن عنه وحده. فالجلب الزمني لا يستعمل هذه الاتصالات ويظل يعمل عندما ترفضها الخدمة.
+
+وإذا لم يصل الزرّ أعلاه إلى غايته، فيمكن فعل الشيء نفسه من الطرفية:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>مُصلَح فعلًا عند المصدر</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>الخلل معروف وقد صُحِّح فعلًا في الشيفرة المصدرية لنظام التشغيل نفسه (العلة JB#64979، سبتمبر 2026): تُرك العدّ كليًا، وصار الجهاز يستخدم ما يستطيع الحصول عليه من صناديق بريد مراقَبة بدلًا من رفضها جميعًا. وهذا التصحيح غير موجود في إصدار النظام العامل هنا، لذا يُفترض أن يصل إلى هذا الجهاز مع تحديث قادم لـ Sailfish OS — وعندئذٍ تفقد هذه الصفحة معناها.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>لا يوجد اتصال بناقل الجلسة</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>رُفض، دون ذكر سبب</translation>
     </message>
 </context>
 <context>

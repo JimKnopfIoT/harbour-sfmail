@@ -95,6 +95,14 @@ Dacă vă deranjează, scoateți cealaltă intrare din acea asociere dintr-un sh
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Cât timp intrarea este mutată, celălalt program nu are pictogramă în meniul de aplicații. Puneți-o la loc dacă vreți să îl folosiți din nou sau înainte de a dezactiva opțiunea de mai sus.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Când poșta nu mai ajunge</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>De ce conturile amuțesc uneori deși căsuța poștală are mesaje noi — o defecțiune în serviciul de poștă al sistemului, ce a aflat această aplicație despre ea și cum se reia livrarea.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Dacă vă deranjează, scoateți cealaltă intrare din acea asociere dintr-un sh
     <message>
         <source>Search contacts</source>
         <translation>Caută contacte</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(fără nume)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 adrese — atingeți pentru a alege</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1258,6 +1258,128 @@ Importul adaugă o A DOUA cheie pentru această adresă — asigurați-vă că n
     <message>
         <source>Remembered addresses</source>
         <translation>Adrese reținute</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Șterge liniile înregistrate</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Reîmprospătează</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Când poșta nu mai ajunge</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Dacă conturile dumneavoastră amuțesc — nimic nou ore sau zile în șir, în timp ce aceeași căsuță poștală are vizibil mesaje noi când o priviți în altă parte —, această pagină explică ce se întâmplă.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Această pagină este o soluție temporară. Defecțiunea nu este în această aplicație, iar corectura pentru ea există deja în sistemul de operare. De îndată ce o actualizare de sistem aduce pe acest dispozitiv o corectură funcțională, această pagină și butonul ei vor fi eliminate din aplicație.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>De unde vine aceasta</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Preluarea poștei nu este treaba acestei aplicații. Fiecare program de poștă de pe acest dispozitiv cere aceluiași serviciu de sistem să vorbească cu serverele dumneavoastră de poștă; această aplicație doar îi cere mesaje și arată ce se întoarce.
+
+Acel serviciu limitează câte căsuțe poștale pot fi supravegheate în același timp pentru poștă nouă și se încurcă la numărătoare: o conexiune care cade nu își restituie în mod sigur rezervarea. După câteva zile numărătoarea s-a strecurat peste limită, iar de atunci serviciul refuză cu totul să mai deschidă o asemenea conexiune — pentru toate conturile deodată. Un cont care așteaptă ca poșta nouă să fie anunțată, în loc să o preia la intervale fixe, nu mai primește atunci nimic până când serviciul este repornit.
+
+Nicio aplicație nu poate împiedica aceasta și nici nu poate readuce la zero acea numărătoare. Ce poate face această aplicație este să vă spună, în loc să vă lase cu o căsuță goală și fără explicație.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Pe acest dispozitiv</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Conturi de poștă</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Căsuțe supravegheate</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 din cel mult %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Doar poștă anunțată</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Fiecare căsuță supravegheată ocupă o conexiune. Limita de %1 este fixată în serviciul de sistem și nu poate fi schimbată. Ea se numără pentru toate conturile la un loc, de aceea un cont căruia i se termină le trage pe celelalte după el. Conturile trecute la „doar poștă anunțată” nu au o preluare la interval pe care să se sprijine.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Ce a aflat această aplicație</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Nimic înregistrat. Aici stau defecțiunile pe care serviciul de poștă le raportează înapoi acestei aplicații; ele se păstrează și atunci când jurnalizarea erorilor este oprită, fiindcă o asemenea defecțiune se observă abia mult după ce s-a produs.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Ce ajută</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Numărătoarea trăiește în acel serviciu și nicăieri altundeva, așa că repornirea lui este tot leacul. Nu se pierde nimic: poșta dumneavoastră stă în depozitul de mesaje, iar serviciul revine imediat. Un transfer aflat în curs în acel moment este reluat după aceea.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Repornește serviciul de poștă</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Repornit. Așteptați o clipă, apoi preluați poșta din nou.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Repornirea nu a fost posibilă: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Repornirea dispozitivului are același efect.
+
+Dacă revine mereu, dați cel puțin unui cont un interval de preluare în setările de conturi ale sistemului, în loc să îl lăsați să aștepte doar poșta anunțată. O preluare la interval nu folosește aceste conexiuni și continuă să funcționeze când serviciul le refuză.
+
+Dacă butonul de mai sus nu răzbate, același lucru se poate face dintr-un terminal:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Deja reparat la sursă</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Defecțiunea este cunoscută și a fost deja corectată în codul sursă al sistemului de operare însuși (eroarea JB#64979, septembrie 2026): numărătoarea a fost abandonată cu totul, iar un dispozitiv folosește acum atâtea căsuțe supravegheate câte poate obține, în loc să le refuze pe toate. Acea corectură nu se află în versiunea de sistem care rulează aici, așa că ar trebui să ajungă pe acest dispozitiv cu o actualizare viitoare a Sailfish OS — iar această pagină devine inutilă.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>nicio conexiune la magistrala de sesiune</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>refuzat, fără a se indica un motiv</translation>
     </message>
 </context>
 <context>

@@ -95,6 +95,14 @@ Ako vam smeta, uklonite drugi unos iz te pridruženosti iz root ljuske. To je č
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Dok je unos premješten, drugi program nema ikonu u izborniku aplikacija. Vratite ga ako ga želite ponovno koristiti ili prije nego isključite postavku iznad.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Kada pošta prestane stizati</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Zašto računi katkad zamuknu iako pretinac ima nove poruke — kvar u poštanskoj usluzi sustava, što je ova aplikacija o tome saznala i kako vratiti dostavu.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Ako vam smeta, uklonite drugi unos iz te pridruženosti iz root ljuske. To je č
     <message>
         <source>Search contacts</source>
         <translation>Pretraži kontakte</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(bez imena)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 adresa — dodirnite za odabir</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1258,6 +1258,128 @@ Uvozom se za ovu adresu dodaje DRUGI ključ — uvjerite se da je taj novi klju�
     <message>
         <source>Remembered addresses</source>
         <translation>Zapamćene adrese</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Izbriši zabilježene retke</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Osvježi</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Kada pošta prestane stizati</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Ako vaši računi zamuknu — satima ili danima ništa novo, dok isti pretinac očito ima nove poruke kada ga pogledate drugdje — ova stranica objašnjava što se događa.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Ova je stranica privremeno rješenje. Kvar nije u ovoj aplikaciji, a ispravak za njega već postoji u operacijskom sustavu. Čim nadogradnja sustava donese ispravak koji radi na ovaj uređaj, ova stranica i njezin gumb bit će uklonjeni iz aplikacije.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Odakle to dolazi</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Dohvaćanje pošte nije posao ove aplikacije. Svaki program za poštu na ovom uređaju traži od iste usluge sustava da razgovara s vašim poslužiteljima pošte; ova aplikacija od nje samo traži poruke i prikazuje ono što stigne natrag.
+
+Ta usluga ograničava koliko se pretinaca smije istodobno nadzirati zbog nove pošte, i pritom se zabroji: veza koja prekine ne vrati pouzdano svoju rezervaciju. Nakon nekoliko dana brojka se prikrala preko granice i od tada usluga uopće više ne otvara nijednu takvu vezu — za sve račune odjednom. Račun koji čeka najavu nove pošte, umjesto da dohvaća u pravilnim razmacima, tada ne prima više ništa dok se usluga ponovno ne pokrene.
+
+Nijedna aplikacija to ne može spriječiti niti poništiti tu brojku. Ono što ova aplikacija može učiniti jest reći vam, umjesto da vas ostavi s praznim pretincem i bez objašnjenja.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Na ovom uređaju</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Računi e-pošte</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Nadzirani pretinci</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 od najviše %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Samo najavljena pošta</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Svaki nadzirani pretinac drži jednu vezu. Granica od %1 čvrsto je ugrađena u uslugu sustava i ne može se promijeniti. Broji se za sve račune zajedno — zato račun kojemu ona ponestane povuče i ostale za sobom. Računi navedeni pod „samo najavljena pošta“ nemaju vremenski dohvat na koji bi se mogli osloniti.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Što je ova aplikacija saznala</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Ništa nije zabilježeno. Ovdje stoje kvarovi koje poštanska usluga javlja natrag ovoj aplikaciji; čuvaju se i dok je zapisivanje pogrešaka isključeno, jer se ovakav kvar primijeti tek dugo nakon što se dogodio.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Što pomaže</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Brojka živi u toj usluzi i nigdje drugdje, pa je njezino ponovno pokretanje cijeli lijek. Ništa se ne gubi: vaša pošta leži u spremištu poruka, a usluga se odmah vraća. Prijenos koji u tom trenutku teče nastavlja se poslije.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Ponovno pokreni poštansku uslugu</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Ponovno pokrenuto. Pričekajte trenutak, zatim ponovno dohvatite poštu.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Ponovno pokretanje nije uspjelo: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Ponovno pokretanje uređaja čini isto.
+
+Ako se to stalno vraća, dajte barem jednom računu razmak dohvaćanja u postavkama računa u sustavu, umjesto da ga ostavite čekati samo na najavljenu poštu. Vremenski dohvat ne koristi te veze i radi dalje kada ih usluga odbija.
+
+Ako gumb iznad ne prolazi, isto se može učiniti iz terminala:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Već popravljeno na izvoru</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Kvar je poznat i već je ispravljen u izvornom kodu samoga operacijskog sustava (greška JB#64979, rujan 2026.): brojenje je posve napušteno, pa uređaj sada koristi onoliko nadziranih pretinaca koliko ih može dobiti, umjesto da odbije sve. Taj ispravak nije u inačici sustava koja radi ovdje, pa bi na ovaj uređaj trebao stići s budućom nadogradnjom sustava Sailfish OS — i ova stranica postat će suvišna.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>nema veze sa sesijskom sabirnicom</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>odbijeno, bez navedenog razloga</translation>
     </message>
 </context>
 <context>

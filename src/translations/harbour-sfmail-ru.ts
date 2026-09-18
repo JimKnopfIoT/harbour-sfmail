@@ -95,6 +95,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Пока запись перемещена, у другой программы нет значка в меню приложений. Верните её, если снова захотите ею пользоваться, или прежде чем выключить настройку выше.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Когда почта перестаёт приходить</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Почему учётные записи иногда умолкают, хотя в почтовом ящике есть новые сообщения — сбой в почтовой службе системы, что об этом узнало приложение и как вернуть доставку.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>Search contacts</source>
         <translation>Поиск контактов</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(без имени)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 адресов — коснитесь, чтобы выбрать</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1258,6 +1258,128 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Remembered addresses</source>
         <translation>Запомненные адреса</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Удалить записанные строки</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Обновить</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Когда почта перестаёт приходить</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Если ваши учётные записи умолкли — часами или днями ничего нового, хотя в том же самом ящике при взгляде из другого места явно есть новые сообщения, — эта страница объясняет, что происходит.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Эта страница — временное решение. Сбой не в этом приложении, а исправление для него в операционной системе уже существует. Как только обновление системы принесёт на это устройство работающее исправление, эта страница и её кнопка будут убраны из приложения.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Откуда это берётся</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Забирать почту — не работа этого приложения. Каждая почтовая программа на этом устройстве поручает разговор с вашими почтовыми серверами одной и той же системной службе; это приложение лишь просит у неё сообщения и показывает то, что приходит в ответ.
+
+Эта служба ограничивает, за сколькими ящиками разрешено одновременно следить в ожидании новой почты, и при этом сбивается со счёта: оборвавшееся соединение не всегда возвращает занятое им место. Через несколько дней счёт переползает за предел, и с этого мгновения служба вообще перестаёт открывать такие соединения — сразу для всех учётных записей. Учётная запись, которая ждёт оповещения о новой почте, а не забирает её через равные промежутки, после этого не получает ничего, пока службу не перезапустят.
+
+Ни одно приложение не может это предотвратить или сбросить этот счёт. Что это приложение может — сказать вам об этом, вместо того чтобы оставить вас с пустым ящиком и без объяснения.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>На этом устройстве</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Почтовые учётные записи</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Отслеживаемые ящики</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 из не более чем %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Только оповещения о новой почте</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Каждый отслеживаемый ящик удерживает одно соединение. Предел в %1 жёстко заложен в системной службе и не поддаётся изменению. Счёт ведётся по всем учётным записям вместе — поэтому запись, у которой соединения закончились, тянет за собой остальные. У записей в разделе «Только оповещения о новой почте» нет запасного пути: они не забирают почту через равные промежутки.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Что узнало это приложение</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Ничего не записано. Здесь стоят сбои, о которых почтовая служба сообщает этому приложению; они сохраняются даже при выключенной записи отладочных сообщений, потому что такую неисправность замечают много позже, чем она случилась.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Что помогает</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Счёт живёт в этой службе и больше нигде, поэтому её перезапуск — и есть всё лечение. Ничего не теряется: ваша почта лежит в хранилище сообщений, а служба тут же поднимается снова. Передача, идущая в этот миг, будет подхвачена после.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Перезапустить почтовую службу</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Перезапущена. Подождите мгновение, затем снова заберите почту.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Перезапустить не удалось: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Перезагрузка устройства делает то же самое.
+
+Если это возвращается снова и снова, задайте хотя бы одной учётной записи промежуток проверки в системных настройках учётных записей, вместо того чтобы оставлять её ждать одних лишь оповещений о новой почте. Проверка через равные промежутки этих соединений не занимает и продолжает работать, когда служба в них отказывает.
+
+Если кнопка выше не проходит, то же самое можно сделать из консоли:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>У истока уже исправлено</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Сбой известен и в исходном коде самой операционной системы уже исправлен (ошибка JB#64979, сентябрь 2026 года): подсчёт убрали целиком, и устройство теперь занимает столько отслеживаемых ящиков, сколько ему удаётся получить, вместо того чтобы отказывать во всех. В работающей здесь версии системы этого исправления нет — оно должно прийти на устройство с будущим обновлением Sailfish OS, и тогда эта страница станет излишней.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>нет соединения с сеансовой шиной</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>отказано, без указания причины</translation>
     </message>
 </context>
 <context>

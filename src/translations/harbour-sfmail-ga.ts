@@ -95,6 +95,14 @@ Má chuireann sé isteach ort, bain an iontráil eile as an nasc sin ó bhlaosc 
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Fad is atá an iontráil bogtha, níl deilbhín ag an gcliant eile sa roghchlár feidhmchlár. Cuir ar ais é más mian leat é a úsáid arís, nó sula gcuireann tú an rogha thuas as.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Nuair a stopann an post ag teacht</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Cén fáth a dtiteann cuntais ina dtost uaireanta cé go bhfuil teachtaireachtaí nua sa bhosca poist — fabht i seirbhís phoist an chórais, ar insíodh don fheidhmchlár seo faoi, agus conas an seachadadh a thabhairt ar ais.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Má chuireann sé isteach ort, bain an iontráil eile as an nasc sin ó bhlaosc 
     <message>
         <source>Search contacts</source>
         <translation>Cuardaigh teagmhálaithe</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(gan ainm)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 seoladh — tapáil chun ceann a roghnú</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1258,6 +1258,128 @@ Cuireann an iompórtáil an DARA heochair leis an seoladh seo — déan cinnte g
     <message>
         <source>Remembered addresses</source>
         <translation>Seoltaí coinnithe</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Glan na línte taifeadta</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Athnuaigh</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Nuair a stopann an post ag teacht</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Má thiteann do chuid cuntas ina dtost — faic nua ar feadh uaireanta nó laethanta, cé go bhfuil teachtaireachtaí nua go soiléir sa bhosca poist céanna nuair a fhéachann tú air in áit eile — míníonn an leathanach seo a bhfuil ag tarlú.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Is réiteach sealadach é an leathanach seo. Níl an fabht san fheidhmchlár seo, agus tá an ceartúchán dó ann cheana sa chóras oibriúcháin. Chomh luath agus a thugann nuashonrú córais ceartúchán oibre chuig an ngléas seo, bainfear an leathanach seo agus a chnaipe as an bhfeidhmchlár.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Cad as a dtagann sé seo</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Ní hé obair an fheidhmchláir seo an post a bhailiú. Iarrann gach feidhmchlár poist ar an ngléas seo ar an tseirbhís chórais chéanna labhairt le do fhreastalaithe poist; ní dhéanann an feidhmchlár seo ach teachtaireachtaí a iarraidh uirthi agus a dtagann ar ais a thaispeáint.
+
+Cuireann an tseirbhís sin teorainn leis an líon boscaí poist a fhéadfar a fhaire ag an am céanna do phost nua, agus déanann sí míchomhaireamh orthu: ceangal a thiteann, ní thugann sé a áirithint ar ais go hiontaofa. Tar éis cúpla lá tá an comhaireamh sleamhnaithe thar an teorainn, agus as sin amach diúltaíonn an tseirbhís aon cheangal den sórt sin a oscailt ar chor ar bith — do gach cuntas in éineacht. Cuntas a fhanann le fógra faoi phost nua, seachas é a fháil ag eatraimh rialta, ní fhaigheann sé rud ar bith ansin go dtí go n-atosaítear an tseirbhís.
+
+Ní féidir le feidhmchlár ar bith é seo a chosc ná an comhaireamh sin a athshocrú. Is é an rud is féidir leis an bhfeidhmchlár seo a dhéanamh ná é a insint duit, seachas tú a fhágáil le bosca poist folamh agus gan míniú.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Ar an ngléas seo</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Cuntais phoist</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Boscaí poist á bhfaire</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 as %2 ar a mhéad</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Post fógartha amháin</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Coinníonn gach bosca poist atá á fhaire ceangal amháin. Tá an teorainn de %1 ionsuite sa tseirbhís chórais agus ní féidir í a athrú. Déantar í a chomhaireamh thar na cuntais go léir le chéile, agus sin an fáth go dtarraingíonn cuntas amháin a ritheann as í na cinn eile síos leis. Níl aon fháil uainithe mar chúltaca ag cuntais atá liostaithe faoi “post fógartha amháin”.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>An méid a insíodh don fheidhmchlár seo</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Níor taifeadadh aon rud. Seo iad na teipeanna a thuairiscíonn an tseirbhís phoist ar ais chuig an bhfeidhmchlár seo; coinnítear iad fiú agus logáil dhífhabhtaithe múchta, mar ní thugtar fabht mar seo faoi deara go dtí i bhfad tar éis dó tarlú.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Cad a chabhraíonn</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Maireann an comhaireamh sa tseirbhís sin agus níl sé in aon áit eile, mar sin is é atosú na seirbhíse an leigheas ar fad. Ní chailltear rud ar bith: tá do chuid poist sa stóras teachtaireachtaí agus tagann an tseirbhís ar ais láithreach. Aistriú atá ar siúl an nóiméad sin, tógtar suas arís é ina dhiaidh sin.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Atosaigh an tseirbhís phoist</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Atosaíodh í. Fan nóiméad, ansin faigh an post arís.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Níorbh fhéidir í a atosú: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Déanann atosú an ghléis an rud céanna.
+
+Má thagann sé ar ais arís is arís eile, tabhair eatramh fála do chuntas amháin ar a laghad i socruithe cuntas an chórais, in ionad é a fhágáil ag fanacht le post fógartha amháin. Ní úsáideann fáil uainithe na ceangail seo agus leanann sí uirthi ag obair nuair a dhiúltaíonn an tseirbhís dóibh.
+
+Mura n-éiríonn leis an gcnaipe thuas, is féidir an rud céanna a dhéanamh ó theirminéal:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Deisithe cheana ag an bhfoinse</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Tá an fabht ar eolas agus ceartaíodh cheana é i gcód foinseach an chórais oibriúcháin féin (fabht JB#64979, Meán Fómhair 2026): tréigeadh an comhaireamh ar fad, agus úsáideann gléas anois an oiread boscaí poist faire agus is féidir leis a fháil in ionad diúltú dóibh go léir. Níl an ceartúchán sin sa leagan den chóras atá ag rith anseo, mar sin ba cheart go sroichfeadh sé an gléas seo le nuashonrú Sailfish OS amach anseo — agus beidh an leathanach seo gan tairbhe.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>gan cheangal leis an mbus seisiúin</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>diúltaithe, gan chúis a thabhairt</translation>
     </message>
 </context>
 <context>

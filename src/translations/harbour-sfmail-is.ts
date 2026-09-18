@@ -95,6 +95,14 @@ Ef það truflar má taka hina færsluna út úr þessari tengingu úr root-skel
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Á meðan færslan er færð til hefur hitt forritið ekkert táknmynd í forritavalmyndinni. Settu hana til baka ef þú vilt nota það aftur, eða áður en þú slekkur á valkostinum að ofan.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Þegar póstur hættir að berast</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Hvers vegna reikningar þagna stundum þótt nýir póstar séu í pósthólfinu — villa í póstþjónustu kerfisins, hvað þessu forriti var sagt um hana, og hvernig móttakan kemst aftur á.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Ef það truflar má taka hina færsluna út úr þessari tengingu úr root-skel
     <message>
         <source>Search contacts</source>
         <translation>Leita í tengiliðum</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(ekkert nafn)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 netföng — ýttu til að velja</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1256,6 +1256,128 @@ Innflutningur bætir ÖÐRUM lykli við þetta netfang — gakktu úr skugga um 
     <message>
         <source>Remembered addresses</source>
         <translation>Vistuð netföng</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Hreinsa skráðar línur</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Endurnýja</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Þegar póstur hættir að berast</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Ef reikningarnir þínir þagna — ekkert nýtt klukkustundum eða dögum saman, á meðan sama pósthólf hefur augljóslega nýja pósta þegar þú skoðar það annars staðar — þá útskýrir þessi síða hvað er að gerast.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Þessi síða er bráðabirgðalausn. Villan er ekki í þessu forriti, og leiðréttingin við henni er þegar til í stýrikerfinu. Um leið og kerfisuppfærsla færir virka lagfæringu í þetta tæki verða þessi síða og hnappurinn hennar fjarlægð úr forritinu.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Hvaðan þetta kemur</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Að sækja póst er ekki verk þessa forrits. Öll póstforrit í þessu tæki biðja sömu kerfisþjónustuna um að tala við póstþjónana þína; þetta forrit biður hana aðeins um skeyti og sýnir það sem kemur til baka.
+
+Sú þjónusta takmarkar hversu mörg pósthólf má vakta eftir nýjum pósti samtímis, og hún telur þau skakkt: tenging sem slitnar skilar frátekningu sinni ekki með áreiðanlegum hætti. Eftir fáeina daga hefur talan mjakast fram úr mörkunum, og upp frá því neitar þjónustan alfarið að opna nokkra slíka tengingu — fyrir alla reikninga í einu. Reikningur sem bíður eftir að nýr póstur sé boðaður, í stað þess að sækja með reglulegu millibili, fær þá ekkert fyrr en þjónustan er endurræst.
+
+Ekkert forrit getur komið í veg fyrir þetta eða núllstillt þessa tölu. Það sem þetta forrit getur gert er að segja þér frá því, í stað þess að skilja þig eftir með tómt pósthólf og enga skýringu.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Í þessu tæki</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Póstreikningar</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Vöktuð pósthólf</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 af %2 að hámarki</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Aðeins boðaður póstur</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Hvert vaktað pósthólf heldur einni tengingu. Mörkin, %1, eru innbyggð í kerfisþjónustuna og þeim verður ekki breytt. Talið er yfir alla reikninga í einu, og þess vegna dregur einn reikningur sem verður uppiskroppa hina niður með sér. Reikningar sem taldir eru upp undir „Aðeins boðaður póstur“ hafa enga tímastýrða sókn til að falla aftur á.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Hvað þessu forriti var sagt</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Ekkert skráð. Hér standa bilanirnar sem póstþjónustan tilkynnir þessu forriti; þeim er haldið til haga jafnvel þótt villuskráning sé slökkt, því slík bilun uppgötvast löngu eftir að hún varð.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Hvað hjálpar</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Talan lifir í þessari þjónustu og hvergi annars staðar, svo það að endurræsa hana er öll lækningin. Ekkert glatast: pósturinn þinn liggur í skeytageymslunni og þjónustan kemur strax upp aftur. Flutningur sem stendur yfir á því augnabliki er tekinn upp aftur á eftir.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Endurræsa póstþjónustuna</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Endurræst. Bíddu andartak og sæktu svo póstinn aftur.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Ekki tókst að endurræsa hana: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Að endurræsa tækið gerir hið sama.
+
+Ef þetta heldur áfram að koma upp aftur skaltu gefa að minnsta kosti einum reikningi sóknarmillibil í reikningsstillingum kerfisins, í stað þess að láta hann bíða eingöngu eftir boðuðum pósti. Tímastýrð sókn notar ekki þessar tengingar og heldur áfram að virka þegar þjónustan neitar þeim.
+
+Komist hnappurinn hér að ofan ekki í gegn má gera hið sama úr skipanalínu:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Þegar lagað við upprunann</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Villan er þekkt og hefur þegar verið leiðrétt í frumkóða stýrikerfisins sjálfs (villa JB#64979, september 2026): talningin var lögð niður með öllu, og tæki notar nú eins mörg vöktuð pósthólf og það fær í stað þess að neita þeim öllum. Sú leiðrétting er ekki í kerfisútgáfunni sem keyrir hér, svo hún ætti að berast í þetta tæki með framtíðaruppfærslu á Sailfish OS — og þá verður þessi síða óþörf.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>engin tenging við samskiptarás setunnar</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>hafnað, án þess að ástæða væri gefin</translation>
     </message>
 </context>
 <context>

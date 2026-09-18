@@ -95,6 +95,14 @@ Jei tai trukdo, pašalinkite kitą įrašą iš to susiejimo root aplinkoje. Tai
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Kol įrašas perkeltas, kita programa neturi piktogramos programų meniu. Grąžinkite jį, jei norite ją vėl naudoti, arba prieš išjungdami aukščiau esantį nustatymą.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Kai paštas nustoja ateiti</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Kodėl paskyros kartais nutyla, nors pašto dėžutėje yra naujų laiškų — sistemos pašto tarnybos klaida, ką ši programa apie tai sužinojo ir kaip susigrąžinti laiškų pristatymą.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Jei tai trukdo, pašalinkite kitą įrašą iš to susiejimo root aplinkoje. Tai
     <message>
         <source>Search contacts</source>
         <translation>Ieškoti adresatų</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(be vardo)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 adresai — bakstelėk, kad pasirinktum</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1258,6 +1258,128 @@ Importavus šiam adresui atsiras ANTRAS raktas — įsitikink, kad naujasis rakt
     <message>
         <source>Remembered addresses</source>
         <translation>Įsiminti adresai</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Išvalyti užrašytas eilutes</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Atnaujinti</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Kai paštas nustoja ateiti</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Jei jūsų paskyros nutyla — valandų valandas ar dienas nieko naujo, nors ta pati pašto dėžutė, žiūrint kitur, akivaizdžiai turi naujų laiškų —, šis puslapis paaiškina, kas vyksta.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Šis puslapis yra laikinas sprendimas. Klaida yra ne šioje programoje, o pataisymas jai operacinėje sistemoje jau yra. Vos tik sistemos atnaujinimas atneš į šį įrenginį veikiantį pataisymą, šis puslapis ir jo mygtukas iš programos bus pašalinti.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Iš kur tai kyla</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Pašto parsisiuntimas nėra šios programos darbas. Kiekviena šio įrenginio pašto programa prašo tos pačios sistemos tarnybos kalbėtis su jūsų pašto serveriais; ši programa tik prašo jos laiškų ir parodo, kas grįžta.
+
+Toji tarnyba riboja, kiek pašto dėžučių vienu metu gali būti stebima laukiant naujo pašto, ir jas suskaičiuoja klaidingai: nutrūkęs ryšys savo rezervacijos patikimai negrąžina. Po kelių dienų skaitiklis nušliaužia už ribos, ir nuo tada tarnyba apskritai atsisako atverti bet kokį tokį ryšį — iškart visoms paskyroms. Paskyra, kuri laukia pranešimo apie naują paštą, užuot parsisiuntusi pagal laikrodį, tada nebegauna nieko, kol tarnyba nepaleidžiama iš naujo.
+
+Jokia programa negali to išvengti ar to skaitiklio atstatyti. Ką ši programa gali padaryti — tai jums pasakyti, užuot palikusi jus su tuščia pašto dėžute ir be jokio paaiškinimo.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Šiame įrenginyje</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Pašto paskyros</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Stebimos pašto dėžutės</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 iš daugiausia %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Tik praneštas paštas</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Kiekviena stebima pašto dėžutė užima vieną ryšį. Riba %1 yra įtvirtinta sistemos tarnyboje ir jos pakeisti negalima. Skaičiuojama visoms paskyroms kartu — todėl viena paskyra, kuriai ryšiai baigiasi, nusitempia ir kitas. Paskyros, pažymėtos kaip „tik praneštas paštas“, neturi atsarginio parsisiuntimo pagal laiką.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Ką ši programa sužinojo</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Nieko neužrašyta. Čia surašytos klaidos, kurias pašto tarnyba praneša atgal šiai programai; jos išsaugomos ir tada, kai derinimo žurnalas išjungtas, nes tokia klaida pastebima praėjus daug laiko po jos atsiradimo.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Kas padeda</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Skaitiklis gyvena toje tarnyboje ir niekur kitur, tad jos paleidimas iš naujo ir yra visas vaistas. Niekas neprarandama: jūsų paštas guli laiškų saugykloje, o tarnyba tuoj pat vėl pakyla. Tuo metu vykstantis perdavimas po to atnaujinamas.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Paleisti pašto tarnybą iš naujo</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Paleista iš naujo. Truputį palaukite ir vėl parsisiųskite paštą.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Nepavyko jos paleisti iš naujo: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Įrenginio paleidimas iš naujo daro tą patį.
+
+Jei tai kartojasi, sistemos paskyrų nustatymuose bent vienai paskyrai nurodykite parsisiuntimo intervalą, užuot leidę jai laukti vien praneštų laiškų. Parsisiuntimas pagal laiką šių ryšių nenaudoja ir veikia toliau, kai tarnyba jų atsisako.
+
+Jei viršuje esantis mygtukas nepraeina, tą patį galima padaryti iš terminalo:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Pirminiame kode jau ištaisyta</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Klaida yra žinoma ir jau ištaisyta pačios operacinės sistemos pirminiame kode (klaida JB#64979, 2026 m. rugsėjis): skaičiavimo apskritai atsisakyta, ir įrenginys dabar naudoja tiek stebimų pašto dėžučių, kiek gali gauti, užuot atsisakęs jų visų. To pataisymo nėra čia veikiančioje sistemos versijoje, tad jis turėtų pasiekti šį įrenginį su būsimu Sailfish OS atnaujinimu — ir šis puslapis taps nebereikalingas.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>nėra ryšio su seanso magistrale</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>atmesta nenurodžius priežasties</translation>
     </message>
 </context>
 <context>

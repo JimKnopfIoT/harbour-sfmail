@@ -95,6 +95,14 @@ Jekk idejqek, neħħi l-entrata l-oħra minn dik ir-rabta minn shell ta&apos; ro
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Sakemm l-entrata tkun imċaqilqa, il-programm l-ieħor ma jkollux ikona fil-menu tal-applikazzjonijiet. Erġa&apos; poġġiha lura jekk trid tużah mill-ġdid, jew qabel ma titfi l-għażla ta&apos; fuq.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Meta l-posta tieqaf tasal</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Għaliex il-kontijiet kultant jiskietu għalkemm il-kaxxa postali jkollha messaġġi ġodda — ħsara fis-servizz tal-posta tas-sistema, dak li ntqal lil din l-applikazzjoni dwarha, u kif terġa' tinkiseb il-konsenja.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Jekk idejqek, neħħi l-entrata l-oħra minn dik ir-rabta minn shell ta&apos; ro
     <message>
         <source>Search contacts</source>
         <translation>Fittex fil-kuntatti</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(bla isem)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 indirizzi — agħfas biex tagħżel</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1260,6 +1260,128 @@ L-importazzjoni żżid IT-TIENI ċavetta għal dan l-indirizz — kun żgur li d
     <message>
         <source>Remembered addresses</source>
         <translation>Indirizzi mfakkra</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Ħassar il-linji rreġistrati</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Aġġorna</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Meta l-posta tieqaf tasal</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Jekk il-kontijiet tiegħek jiskietu — xejn ġdid għal sigħat jew ġranet, filwaqt li l-istess kaxxa postali b'mod ċar ikollha messaġġi ġodda meta tħares lejha band'oħra — din il-paġna tispjega x'qed jiġri.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Din il-paġna hija soluzzjoni temporanja. Il-ħsara mhijiex f'din l-applikazzjoni, u l-korrezzjoni għaliha diġà teżisti fis-sistema operattiva. Hekk kif aġġornament tas-sistema jġib korrezzjoni li taħdem fuq dan l-apparat, din il-paġna u l-buttuna tagħha jitneħħew mill-applikazzjoni.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Minn fejn ġej dan</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Il-ġbir tal-posta mhuwiex ix-xogħol ta' din l-applikazzjoni. Kull applikazzjoni tal-posta fuq dan l-apparat titlob lill-istess servizz tas-sistema biex ikellem is-servers tal-posta tiegħek; din l-applikazzjoni sempliċement titolbu messaġġi u turi dak li jiġi lura.
+
+Dak is-servizz jillimita kemm-il kaxxa postali tista' tiġi mħarsa fl-istess ħin għal posta ġdida, u jiżbalja fl-għadd tagħhom: konnessjoni li taqa' ma tagħtix lura r-riżerva tagħha b'mod affidabbli. Wara ftit ġranet l-għadd ikun tkaxkar lil hinn mil-limitu, u minn dak il-ħin 'il quddiem is-servizz jirrifjuta għal kollox li jiftaħ konnessjoni bħal dik — għall-kontijiet kollha f'daqqa. Kont li jistenna li l-posta l-ġdida titħabbar, minflok ma jiġbed f'intervalli fissi, imbagħad ma jirċievi xejn sakemm is-servizz jerġa' jitqabbad.
+
+L-ebda applikazzjoni ma tista' tevita dan jew treġġa' lura dak l-għadd. Dak li tista' tagħmel din l-applikazzjoni huwa li tgħidlek, minflok ma tħallik b'kaxxa postali vojta u mingħajr spjegazzjoni.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Fuq dan l-apparat</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Kontijiet tal-posta</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Kaxxi postali mħarsa</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 minn mhux aktar minn %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Posta mħabbra biss</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Kull kaxxa postali mħarsa żżomm konnessjoni waħda. Il-limitu ta' %1 huwa mibni fis-servizz tas-sistema u ma jistax jinbidel. Jingħadd għall-kontijiet kollha flimkien, u għalhekk kont wieħed li jispiċċalu jkaxkar lill-oħrajn miegħu. Il-kontijiet imniżżla bħala „posta mħabbra biss” m'għandhomx ġbir bil-ħin biex jistrieħu fuqu.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Dak li ntqal lil din l-applikazzjoni</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Xejn ma ġie rreġistrat. Dawn huma l-ħsarat li s-servizz tal-posta jirrapporta lura lil din l-applikazzjoni; jinżammu anki meta r-reġistrazzjoni tal-iżbalji tkun mitfija, għax ħsara bħal din tiġi nnutata ħafna wara li tkun ġrat.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>X'jgħin</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>L-għadd jgħix f'dak is-servizz u mkien aktar, għalhekk li terġa' tqabbdu huwa r-rimedju kollu. Ma jintilef xejn: il-posta tiegħek tinsab fil-maħżen tal-messaġġi u s-servizz jerġa' jitla' minnufih. Trasferiment li jkun għaddej f'dak il-mument jitkompla wara.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Erġa' qabbad is-servizz tal-posta</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Reġa' tqabbad. Stenna mument, imbagħad erġa' ġib il-posta.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Ma setax jerġa' jitqabbad: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Li terġa' tixgħel l-apparat jagħmel l-istess ħaġa.
+
+Jekk terġa' tiġi lura kontinwament, agħti lil mill-inqas kont wieħed intervall ta' ġbir fl-issettjar tal-kontijiet tas-sistema, minflok ma tħallih jistenna l-posta mħabbra waħedha. Ġbir bil-ħin ma jużax dawn il-konnessjonijiet u jibqa' jaħdem meta s-servizz jirrifjutahom.
+
+Jekk il-buttuna ta' hawn fuq ma tgħaddix, l-istess jista' jsir minn terminal:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Diġà msewwi fis-sors</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Il-ħsara hija magħrufa u diġà ġiet ikkoreġuta fil-kodiċi sors tas-sistema operattiva nnifisha (ħsara JB#64979, Settembru 2026): l-għadd twarrab għal kollox, u apparat issa juża daqs kemm kaxxi postali mħarsa jista' jikseb minflok ma jirrifjutahom kollha. Dik il-korrezzjoni mhijiex fil-verżjoni tas-sistema li qed taħdem hawn, għalhekk għandha tasal fuq dan l-apparat ma' aġġornament futur ta' Sailfish OS — u din il-paġna ssir bla skop.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>l-ebda konnessjoni mal-bus tas-sessjoni</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>irrifjutat, mingħajr ma tingħata raġuni</translation>
     </message>
 </context>
 <context>

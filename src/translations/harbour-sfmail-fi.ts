@@ -95,6 +95,14 @@ Jos se häiritsee, poista toinen merkintä tuosta kytkennästä root-kuoresta. T
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Niin kauan kuin merkintä on siirretty, toisella ohjelmalla ei ole kuvaketta sovellusvalikossa. Palauta se, jos haluat käyttää sitä taas, tai ennen kuin kytket yllä olevan asetuksen pois.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Kun posti lakkaa saapumasta</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Miksi tilit toisinaan hiljenevät, vaikka postilaatikossa on uusia viestejä — vika järjestelmän postipalvelussa, mitä tämä sovellus sai siitä tietää ja miten posti saadaan taas kulkemaan.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Jos se häiritsee, poista toinen merkintä tuosta kytkennästä root-kuoresta. T
     <message>
         <source>Search contacts</source>
         <translation>Hae yhteystiedoista</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(ei nimeä)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 osoitetta — napauta valitaksesi</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1256,6 +1256,128 @@ Tuonti lisää TOISEN avaimen tälle osoitteelle — varmista, että uusi avain 
     <message>
         <source>Remembered addresses</source>
         <translation>Muistetut osoitteet</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Tyhjennä kirjatut rivit</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Päivitä</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Kun posti lakkaa saapumasta</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Jos tilisi hiljenevät — tunteihin tai päiviin ei mitään uutta, vaikka samassa postilaatikossa on muualta katsottuna selvästi uusia viestejä —, tämä sivu kertoo, mistä on kyse.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Tämä sivu on väliaikainen apu. Vika ei ole tässä sovelluksessa, ja korjaus siihen on jo olemassa käyttöjärjestelmässä. Heti kun järjestelmäpäivitys tuo toimivan korjauksen tälle laitteelle, tämä sivu ja sen painike poistetaan sovelluksesta.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Mistä tämä johtuu</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Postin noutaminen ei ole tämän sovelluksen työtä. Jokainen tämän laitteen sähköpostisovellus pyytää samaa järjestelmäpalvelua keskustelemaan postipalvelimiesi kanssa; tämä sovellus vain pyytää siltä viestejä ja näyttää, mitä sieltä tulee takaisin.
+
+Tuo palvelu rajoittaa, kuinka montaa postilaatikkoa saa yhtä aikaa tarkkailla uuden postin varalta, ja se laskee ne väärin: katkennut yhteys ei luotettavasti palauta varaustaan. Muutaman päivän kuluttua laskuri on hiipinyt rajan yli, ja siitä lähtien palvelu kieltäytyy avaamasta yhtäkään tällaista yhteyttä — kaikilta tileiltä kerralla. Tili, joka odottaa ilmoitusta uudesta postista sen sijaan että noutaisi ajastetusti, ei saa enää mitään, ennen kuin palvelu käynnistetään uudelleen.
+
+Mikään sovellus ei voi estää tätä eikä nollata tuota laskuria. Sen tämä sovellus voi tehdä, että se kertoo siitä sinulle — sen sijaan että jättäisi sinut tyhjän postilaatikon ääreen ilman selitystä.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Tällä laitteella</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Sähköpostitilit</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Tarkkailtavat postilaatikot</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 / enintään %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Vain ilmoitettu posti</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Jokainen tarkkailtava postilaatikko varaa yhden yhteyden. Raja %1 on kiinteästi järjestelmäpalvelussa eikä sitä voi muuttaa. Laskenta on yhteinen kaikille tileille — siksi yksi tili, jolta yhteydet loppuvat, vie muutkin mukanaan. Tileillä, jotka on merkitty kohtaan ”vain ilmoitettu posti”, ei ole ajastettua noutoa varalla.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Mitä tämä sovellus sai tietää</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Ei kirjauksia. Tässä ovat virheet, jotka postipalvelu ilmoittaa takaisin tälle sovellukselle; ne säilytetään myös silloin, kun virheenjäljitysloki on pois päältä, koska tällainen vika huomataan vasta pitkän ajan kuluttua.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Mikä auttaa</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Laskuri elää tuossa palvelussa eikä missään muualla, joten sen käynnistäminen uudelleen on koko hoito. Mitään ei menetetä: postisi on viestivarastossa, ja palvelu nousee heti takaisin. Sillä hetkellä kesken oleva siirto jatkuu jälkeenpäin.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Käynnistä postipalvelu uudelleen</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Käynnistetty uudelleen. Odota hetki ja hae posti uudelleen.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Uudelleenkäynnistys ei onnistunut: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Laitteen käynnistäminen uudelleen tekee saman.
+
+Jos ongelma toistuu, anna ainakin yhdelle tilille noutoväli järjestelmän tiliasetuksissa sen sijaan, että annat sen odottaa pelkkää ilmoitettua postia. Ajastettu nouto ei käytä näitä yhteyksiä ja toimii edelleen silloin, kun palvelu kieltäytyy niistä.
+
+Jos yllä oleva painike ei mene läpi, saman voi tehdä päätteestä:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Jo korjattu lähdekoodissa</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Vika on tunnettu, ja se on jo korjattu käyttöjärjestelmän omassa lähdekoodissa (virhe JB#64979, syyskuu 2026): laskennasta luovuttiin kokonaan, ja laite käyttää nyt niin montaa tarkkailtavaa postilaatikkoa kuin se saa, sen sijaan että kieltäytyisi niistä kaikista. Tuota korjausta ei ole tässä käytössä olevassa järjestelmäversiossa, joten sen pitäisi tulla tälle laitteelle tulevan Sailfish OS -päivityksen mukana — ja tämä sivu käy tarpeettomaksi.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>ei yhteyttä istuntoväylään</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>hylätty, syytä ilmoittamatta</translation>
     </message>
 </context>
 <context>
