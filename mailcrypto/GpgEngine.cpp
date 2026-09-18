@@ -3163,6 +3163,68 @@ QStringList GpgEngine::accountAliases(const QString &accountAddress)
     return out;
 }
 
+
+// --- What the device asks of the system mail service -------------------------
+//
+// The service reserves one connection per folder an account watches for new
+// mail (IMAP IDLE), counts those reservations process-wide, and refuses ALL of
+// them once the total would pass this ceiling. The number is compiled into the
+// service, not configurable, and it is the same on every device of this
+// generation — it is quoted here so the delivery report can name the limit the
+// device is measured against instead of leaving the user to guess.
+//
+// The count leaks: a reservation is not reliably returned when a connection
+// drops, so the total creeps up over days of uptime until nothing may open at
+// all. Restarting the service resets it. Fixed upstream in September 2026 by
+// dropping the reservation scheme altogether.
+static const int kPushConnectionCeiling = 10;
+
+QVariantMap GpgEngine::mailPushSummary()
+{
+    QVariantMap out;
+    int accounts = 0, pushAccounts = 0, folders = 0, pushOnly = 0;
+
+    Accounts::Manager mgr;
+    const Accounts::AccountIdList ids = mgr.accountList();
+    for (const Accounts::AccountId id : ids) {
+        QScopedPointer<Accounts::Account> acc(mgr.account(id));
+        if (acc.isNull() || !acc->isEnabled()) continue;
+
+        const Accounts::ServiceList services = acc->services();
+        for (const Accounts::Service &svc : services) {
+            acc->selectService(svc);
+            if (acc->valueAsString(QStringLiteral("emailaddress")).trimmed().isEmpty())
+                continue;
+            ++accounts;
+
+            // Same keys the service reads. The folder list is one string with
+            // newline separators; the interval is seconds, 0 or less meaning
+            // "no timed fetch at all" — such an account has push and nothing
+            // else, and goes completely silent when push is refused.
+            const QStringList push = acc->valueAsString(QStringLiteral("imap4/pushFolders"))
+                    .split(QLatin1Char('\n'), QString::SkipEmptyParts);
+            const bool pushOn = acc->valueAsString(
+                        QStringLiteral("imap4/internalPushEnabledFromButeo")).toInt() != 0;
+            const int interval = acc->valueAsString(QStringLiteral("imap4/checkInterval")).toInt();
+
+            if (pushOn && !push.isEmpty()) {
+                ++pushAccounts;
+                folders += push.size();
+                if (interval <= 0) ++pushOnly;
+            }
+            break;      // one mail service per account
+        }
+        acc->selectService();
+    }
+
+    out.insert(QStringLiteral("accounts"), accounts);
+    out.insert(QStringLiteral("pushAccounts"), pushAccounts);
+    out.insert(QStringLiteral("pushFolders"), folders);
+    out.insert(QStringLiteral("pushOnlyAccounts"), pushOnly);
+    out.insert(QStringLiteral("ceiling"), kPushConnectionCeiling);
+    return out;
+}
+
 // --- Remembered addresses (our own address cache) ---------------------------
 //
 // A list the user fills deliberately. It is stored as plain JSON with mode

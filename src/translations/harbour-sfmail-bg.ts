@@ -95,6 +95,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Докато записът е преместен, другата програма няма икона в менюто с приложения. Върнете го, ако искате да я използвате отново, или преди да изключите настройката по-горе.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Когато пощата спре да пристига</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Защо профилите понякога замлъкват, въпреки че в пощенската кутия има нови съобщения — повреда в пощенската услуга на системата, какво е научило това приложение за нея и как доставката се връща.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>Search contacts</source>
         <translation>Търсене в контактите</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(без име)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 адреса — докоснете за избор</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1256,6 +1256,128 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Remembered addresses</source>
         <translation>Запомнени адреси</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Изтриване на записаните редове</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Обновяване</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Когато пощата спре да пристига</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Ако профилите ви замлъкнат — с часове или дни нищо ново, докато същата пощенска кутия очевидно има нови съобщения, когато я погледнете другаде — тази страница обяснява какво се случва.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Тази страница е временно решение. Повредата не е в това приложение, а поправката за нея вече съществува в операционната система. Щом обновление на системата донесе работеща поправка на това устройство, тази страница и бутонът ѝ ще бъдат премахнати от приложението.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Откъде идва това</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Събирането на пощата не е работа на това приложение. Всяка пощенска програма на това устройство възлага разговора с вашите пощенски сървъри на една и съща системна услуга; това приложение само ѝ иска съобщения и показва каквото се върне.
+
+Тази услуга ограничава колко пощенски кутии може да бъдат следени едновременно за нова поща и при това се обърква в броенето: прекъснала връзка не връща надеждно запазеното си място. След няколко дни броят е пропълзял над границата и оттогава услугата изобщо отказва да отваря такива връзки — наведнъж за всички профили. Профил, който чака новата поща да бъде обявена, вместо да я изтегля през определен интервал, тогава не получава нищо, докато услугата не бъде рестартирана.
+
+Нито едно приложение не може да предотврати това или да нулира този брой. Това, което приложението може да направи, е да ви каже, вместо да ви остави с празна пощенска кутия и без обяснение.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>На това устройство</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Пощенски профили</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Следени пощенски кутии</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 от най-много %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Само обявена поща</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Всяка следена пощенска кутия държи по една връзка. Границата от %1 е вградена в системната услуга и не може да се промени. Броенето е общо за всички профили — затова профил, на когото връзките свършат, повлича и останалите. Профилите, посочени като „само обявена поща“, нямат изтегляне през интервал, на което да се опрат.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Какво е научило това приложение</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Нищо записано. Тук стоят неуспехите, които пощенската услуга съобщава обратно на това приложение; те се пазят дори когато записът за отстраняване на грешки е изключен, защото такава повреда се забелязва дълго след като се е случила.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Какво помага</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Броят живее в тази услуга и никъде другаде, затова рестартирането ѝ е цялото лечение. Нищо не се губи: пощата ви е в хранилището на съобщенията, а услугата се вдига веднага отново. Прехвърляне, което тече в този момент, се подхваща отново след това.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Рестартиране на пощенската услуга</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Рестартирана. Изчакайте малко и изтеглете пощата отново.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Рестартирането не бе възможно: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Рестартирането на устройството прави същото.
+
+Ако се повтаря постоянно, задайте поне на един профил интервал за изтегляне в системните настройки на профилите, вместо да го оставяте да чака само обявена поща. Изтеглянето през интервал не използва тези връзки и продължава да работи, когато услугата ги отказва.
+
+Ако бутонът по-горе не подейства, същото може да се направи и от конзола:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>В източника вече поправено</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Повредата е известна и вече е поправена в изходния код на самата операционна система (грешка JB#64979, септември 2026 г.): броенето е изоставено напълно и устройството вече използва толкова следени пощенски кутии, колкото успее да получи, вместо да отказва всички. Тази поправка не е във версията на системата, която работи тук, затова тя би трябвало да стигне до устройството с бъдещо обновление на Sailfish OS — и тази страница да стане излишна.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>няма връзка със сесийната шина</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>отказано, без посочена причина</translation>
     </message>
 </context>
 <context>

@@ -95,6 +95,14 @@ Als het stoort, haalt u het andere item in een root-shell uit die toewijzing. Di
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Zolang het item verplaatst is, heeft het andere programma geen pictogram in het startscherm. Zet het terug als u het weer wilt gebruiken, of voordat u de optie hierboven uitschakelt.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Wanneer er geen post meer binnenkomt</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Waarom accounts soms zwijgen hoewel het postvak nieuwe berichten heeft — een fout in de e-maildienst van het systeem, wat deze app daarover te horen heeft gekregen, en hoe de bezorging terugkomt.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Als het stoort, haalt u het andere item in een root-shell uit die toewijzing. Di
     <message>
         <source>Search contacts</source>
         <translation>Contacten zoeken</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(geen naam)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 adressen — tik om te kiezen</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1256,6 +1256,128 @@ Importeren voegt een TWEEDE sleutel voor dit adres toe — vergewis je ervan dat
     <message>
         <source>Remembered addresses</source>
         <translation>Onthouden adressen</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Vastgelegde regels wissen</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Vernieuwen</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Wanneer er geen post meer binnenkomt</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Als uw accounts stilvallen — urenlang of dagenlang niets nieuws, terwijl hetzelfde postvak elders zichtbaar nieuwe berichten heeft — legt deze pagina uit wat er gebeurt.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Deze pagina is een tijdelijke noodoplossing. De fout zit niet in deze app, en de correctie ervoor bestaat al in het besturingssysteem. Zodra een systeemupdate een werkende oplossing naar dit apparaat brengt, worden deze pagina en de knop uit de app verwijderd.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Waar dit vandaan komt</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Het ophalen van post is niet het werk van deze app. Elk e-mailprogramma op dit apparaat laat dezelfde systeemdienst met uw mailservers praten; deze app vraagt hem alleen om berichten en toont wat er terugkomt.
+
+Die dienst beperkt hoeveel postvakken tegelijk op nieuwe post bewaakt mogen worden, en hij telt daarbij verkeerd: een verbinding die wegvalt, geeft haar reservering niet betrouwbaar terug. Na een paar dagen is de telling over de grens gekropen, en vanaf dat moment opent de dienst helemaal geen zulke verbinding meer — voor alle accounts tegelijk. Een account dat wacht tot nieuwe post wordt aangekondigd in plaats van op vaste tijden op te halen, ontvangt dan niets meer totdat de dienst opnieuw is gestart.
+
+Geen enkele app kan dit voorkomen of die telling terugzetten. Wat deze app wél kan doen, is het u vertellen in plaats van u met een leeg postvak en zonder uitleg achter te laten.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Op dit apparaat</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>E-mailaccounts</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Bewaakte postvakken</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 van hoogstens %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Alleen aangekondigde post</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Elk bewaakt postvak houdt één verbinding bezet. De grens van %1 zit vast in de systeemdienst en kan niet worden gewijzigd. Er wordt geteld over alle accounts samen — daarom sleept één account dat door zijn grens gaat de andere mee. Accounts onder “Alleen aangekondigde post” hebben geen tijdgestuurde ophaalbeurt om op terug te vallen.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Wat deze app te horen heeft gekregen</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Niets vastgelegd. Hier staan de fouten die de e-maildienst aan deze app terugmeldt; ze worden ook bewaard wanneer de foutregistratie uitstaat, omdat zo’n fout pas lang na het optreden wordt opgemerkt.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Wat helpt</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>De telling leeft in die dienst en nergens anders; hem opnieuw starten is daarom de hele remedie. Er gaat niets verloren: uw post staat in de berichtenopslag en de dienst komt meteen weer op. Een overdracht die op dat moment loopt, wordt daarna weer opgepakt.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>E-maildienst opnieuw starten</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Opnieuw gestart. Even wachten, dan opnieuw post ophalen.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Opnieuw starten lukte niet: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Het apparaat opnieuw starten doet hetzelfde.
+
+Als het steeds terugkomt, geef dan minstens één account in de accountinstellingen van het systeem een ophaalinterval, in plaats van het alleen op aangekondigde post te laten wachten. Een tijdgestuurde ophaalbeurt gebruikt deze verbindingen niet en blijft werken wanneer de dienst ze weigert.
+
+Mocht de knop hierboven niet doorkomen, dan kan hetzelfde vanuit een terminal:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Bij de bron al hersteld</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>De fout is bekend en is in de broncode van het besturingssysteem zelf al gecorrigeerd (fout JB#64979, september 2026): het tellen is helemaal losgelaten, en een apparaat gebruikt nu zoveel bewaakte postvakken als het krijgen kan, in plaats van ze allemaal te weigeren. Die correctie zit niet in de systeemversie die hier draait — ze zou met een toekomstige Sailfish OS-update op dit apparaat moeten aankomen, en daarmee wordt deze pagina overbodig.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>geen verbinding met de sessiebus</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>geweigerd, zonder opgave van reden</translation>
     </message>
 </context>
 <context>

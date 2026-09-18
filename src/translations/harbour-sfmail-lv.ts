@@ -95,6 +95,14 @@ Ja tas traucē, izņemiet otru ierakstu no šīs sasaistes root čaulā. Tas ir 
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Kamēr ieraksts ir pārvietots, otrai programmai nav ikonas lietotņu izvēlnē. Ielieciet to atpakaļ, ja vēlaties to atkal lietot, vai pirms izslēdzat iestatījumu augstāk.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Kad pasts vairs nepienāk</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Kāpēc konti reizēm apklust, lai gan pastkastē ir jaunas vēstules — kļūda sistēmas pasta pakalpojumā, ko šī lietotne par to uzzināja un kā atgūt vēstuļu saņemšanu.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Ja tas traucē, izņemiet otru ierakstu no šīs sasaistes root čaulā. Tas ir 
     <message>
         <source>Search contacts</source>
         <translation>Meklēt kontaktos</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(bez vārda)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 adreses — pieskaries, lai izvēlētos</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1258,6 +1258,128 @@ Imports pievieno šai adresei OTRU atslēgu — pārliecinies, ka jaunā atslēg
     <message>
         <source>Remembered addresses</source>
         <translation>Iegaumētās adreses</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Notīrīt pierakstītās rindas</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Atsvaidzināt</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Kad pasts vairs nepienāk</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Ja jūsu konti apklust — stundām vai dienām nekā jauna, kamēr tajā pašā pastkastē, skatoties citur, skaidri redzamas jaunas vēstules —, šī lapa paskaidro, kas notiek.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Šī lapa ir pagaidu risinājums. Kļūda nav šajā lietotnē, un labojums tai operētājsistēmā jau pastāv. Tiklīdz sistēmas atjauninājums atnesīs uz šo ierīci strādājošu labojumu, šī lapa un tās poga no lietotnes tiks noņemta.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>No kurienes tas nāk</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Pasta saņemšana nav šīs lietotnes darbs. Katra pasta lietotne šajā ierīcē lūdz vienu un to pašu sistēmas pakalpojumu sazināties ar jūsu pasta serveriem; šī lietotne tikai prasa tam vēstules un parāda, kas nāk atpakaļ.
+
+Šis pakalpojums ierobežo, cik pastkastes vienlaikus drīkst novērot, gaidot jaunas vēstules, un tās saskaita nepareizi: pārtraukts savienojums savu rezervāciju droši neatdod atpakaļ. Pēc dažām dienām skaitītājs ir aizlīdis pāri robežai, un no tā brīža pakalpojums vispār atsakās atvērt kaut vienu šādu savienojumu — visiem kontiem uzreiz. Konts, kas gaida paziņojumu par jaunu pastu, nevis saņem to ik pēc noteikta laika, tad vairs nesaņem neko, kamēr pakalpojums netiek pārstartēts.
+
+Neviena lietotne to nevar novērst un nevar atiestatīt šo skaitītāju. Ko šī lietotne var izdarīt — pateikt jums par to, tā vietā lai atstātu jūs ar tukšu pastkasti un bez paskaidrojuma.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Šajā ierīcē</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Pasta konti</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Novērotās pastkastes</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 no ne vairāk kā %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Tikai paziņotais pasts</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Katra novērotā pastkaste aizņem vienu savienojumu. Ierobežojums %1 ir iebūvēts sistēmas pakalpojumā, un to nevar mainīt. To skaita visiem kontiem kopā — tāpēc viens konts, kuram savienojumi beidzas, parauj līdzi arī pārējos. Kontiem, kas norādīti kā „tikai paziņotais pasts“, nav laikā plānotas saņemšanas, uz ko atkāpties.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Ko šī lietotne uzzināja</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Nekas nav pierakstīts. Šeit ir kļūdas, ko pasta pakalpojums paziņo atpakaļ šai lietotnei; tās tiek saglabātas arī tad, kad atkļūdošanas žurnāls ir izslēgts, jo šādu kļūdu pamana ilgi pēc tam, kad tā notikusi.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Kas palīdz</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Skaitītājs mīt šajā pakalpojumā un nekur citur, tāpēc tā pārstartēšana ir viss nepieciešamais. Nekas netiek zaudēts: jūsu pasts atrodas vēstuļu krātuvē, un pakalpojums uzreiz atgriežas. Pārsūtīšana, kas tobrīd notiek, pēc tam tiek atsākta.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Pārstartēt pasta pakalpojumu</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Pārstartēts. Uzgaidiet mirkli un tad saņemiet pastu vēlreiz.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Neizdevās to pārstartēt: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Ierīces pārstartēšana dara to pašu.
+
+Ja tas atkārtojas, sistēmas kontu iestatījumos piešķiriet vismaz vienam kontam saņemšanas intervālu, nevis ļaujiet tam gaidīt vienīgi paziņoto pastu. Plānota saņemšana šos savienojumus neizmanto un turpina darboties tad, kad pakalpojums tos atsaka.
+
+Ja iepriekš redzamā poga netiek cauri, to pašu var izdarīt no termināļa:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Pirmkodā jau izlabots</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Kļūda ir zināma un operētājsistēmas pašas pirmkodā jau izlabota (kļūda JB#64979, 2026. gada septembris): skaitīšana tika atmesta pavisam, un ierīce tagad izmanto tik daudz novēroto pastkastu, cik var dabūt, tā vietā lai atteiktu tās visas. Šā labojuma nav šeit strādājošajā sistēmas versijā, tāpēc tam vajadzētu nonākt šajā ierīcē ar kādu nākamo Sailfish OS atjauninājumu — un šī lapa kļūs lieka.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>nav savienojuma ar sesijas kopni</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>atteikts, nenorādot iemeslu</translation>
     </message>
 </context>
 <context>

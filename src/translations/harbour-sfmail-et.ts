@@ -95,6 +95,14 @@ Kui see häirib, eemaldage teine kirje sellest seosest root-kestast. See on puht
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Kuni kirje on ära tõstetud, pole teisel programmil rakenduste menüüs ikooni. Pange see tagasi, kui soovite seda uuesti kasutada, või enne ülaloleva valiku väljalülitamist.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Kui kirjad enam kohale ei jõua</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Miks kontod vahel vaikivad, kuigi postkastis on uusi kirju — viga süsteemi postiteenuses, mida see rakendus sellest teada sai ja kuidas kirjade saabumine tagasi saada.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Kui see häirib, eemaldage teine kirje sellest seosest root-kestast. See on puht
     <message>
         <source>Search contacts</source>
         <translation>Otsi kontaktidest</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(nimeta)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 aadressi — puuduta valimiseks</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1256,6 +1256,128 @@ Import lisab sellele aadressile TEISE võtme — veendu, et uus võti on ehtne, 
     <message>
         <source>Remembered addresses</source>
         <translation>Meelde jäetud aadressid</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Kustuta salvestatud read</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Värskenda</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Kui kirjad enam kohale ei jõua</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Kui teie kontod jäävad vait — tundide või päevade kaupa ei midagi uut, samal ajal kui samas postkastis on mujalt vaadates selgelt uusi kirju —, selgitab see leht, mis toimub.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>See leht on ajutine abinõu. Viga ei ole selles rakenduses ja parandus selle jaoks on operatsioonisüsteemis juba olemas. Niipea kui süsteemiuuendus toob sellesse seadmesse toimiva paranduse, eemaldatakse see leht ja selle nupp rakendusest.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Kust see tuleb</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Kirjade toomine ei ole selle rakenduse töö. Iga selle seadme postirakendus palub teie postiserveritega rääkida ühel ja samal süsteemiteenusel; see rakendus üksnes küsib sellelt kirju ja näitab, mis vastu tuleb.
+
+See teenus piirab, mitut postkasti tohib korraga uute kirjade suhtes jälgida, ning loeb neid valesti: katkenud ühendus ei anna oma broneeringut usaldusväärselt tagasi. Mõne päeva pärast on loendur piirist üle roomanud ja sellest peale keeldub teenus üldse sellist ühendust avamast — kõigi kontode jaoks korraga. Konto, mis ootab uute kirjade teadaandmist, selle asemel et tuua neid kindla ajavahemiku tagant, ei saa siis enam midagi, kuni teenus taaskäivitatakse.
+
+Ükski rakendus ei saa seda ära hoida ega seda loendurit lähtestada. Mida see rakendus teha saab, on teile sellest rääkida, selle asemel et jätta teid tühja postkasti ja seletuseta.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Selles seadmes</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Postikontod</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Jälgitavad postkastid</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 / kõige rohkem %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Ainult teatatud kirjad</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Iga jälgitav postkast hoiab ühte ühendust. Piir %1 on süsteemiteenusesse sisse ehitatud ja seda ei saa muuta. Loendatakse kõiki kontosid koos — seepärast tõmbab üks konto, millel ühendused otsa saavad, teised endaga kaasa. Kontodel, mis on märgitud kui „ainult teatatud kirjad“, ei ole tagavaraks ajastatud toomist.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Mida see rakendus teada sai</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Midagi ei ole salvestatud. Siin on tõrked, millest postiteenus sellele rakendusele tagasi teatab; neid hoitakse alles ka siis, kui silumislogi on välja lülitatud, sest sellist viga märgatakse alles ammu pärast selle tekkimist.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Mis aitab</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Loendur elab selles teenuses ja mitte kusagil mujal, nii et selle taaskäivitamine ongi kogu abinõu. Midagi ei lähe kaotsi: teie kirjad on sõnumihoidlas ja teenus tuleb kohe tagasi üles. Parajasti käiv ülekanne võetakse pärast uuesti ette.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Taaskäivita postiteenus</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Taaskäivitatud. Oodake hetk ja tooge kirjad uuesti.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Taaskäivitamine ei õnnestunud: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Seadme taaskäivitamine teeb sedasama.
+
+Kui see aina kordub, andke süsteemi kontoseadetes vähemalt ühele kontole toomise ajavahemik, selle asemel et lasta sel oodata üksnes teatatud kirju. Ajastatud toomine neid ühendusi ei kasuta ja töötab edasi ka siis, kui teenus neist keeldub.
+
+Kui ülalolev nupp kohale ei jõua, saab sedasama teha terminalist:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Lähtekoodis juba parandatud</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Viga on teada ja see on operatsioonisüsteemi enda lähtekoodis juba parandatud (viga JB#64979, september 2026): loendamisest loobuti sootuks ja seade kasutab nüüd nii mitut jälgitavat postkasti, kui ta saada suudab, selle asemel et neist kõigist keelduda. Seda parandust ei ole siin töötavas süsteemiversioonis, nii et see peaks jõudma sellesse seadmesse mõne tulevase Sailfish OS-i uuendusega — ja see leht muutub mõttetuks.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>puudub ühendus seansisiiniga</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>keelduti, põhjust nimetamata</translation>
     </message>
 </context>
 <context>

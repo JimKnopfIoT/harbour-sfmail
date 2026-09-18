@@ -95,6 +95,14 @@ Ak vám to prekáža, odoberte druhú položku z tohto priradenia z rootovského
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Kým je položka presunutá, druhý program nemá ikonu v ponuke aplikácií. Vráťte ju, ak ho chcete znova používať, alebo skôr než vypnete voľbu vyššie.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Keď prestane chodiť pošta</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Prečo účty niekedy zmĺknu, hoci v schránke sú nové správy — chyba v poštovej službe systému, čo sa o nej táto aplikácia dozvedela a ako obnoviť doručovanie.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Ak vám to prekáža, odoberte druhú položku z tohto priradenia z rootovského
     <message>
         <source>Search contacts</source>
         <translation>Hľadať kontakty</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(bez mena)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 adries — ťuknutím vyberiete</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1258,6 +1258,128 @@ Import pridá pre túto adresu DRUHÝ kľúč — skôr než mu budete dôverova
     <message>
         <source>Remembered addresses</source>
         <translation>Zapamätané adresy</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Vymazať zaznamenané riadky</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Obnoviť</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Keď prestane chodiť pošta</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Ak vaše účty zmĺknu — hodiny alebo dni nič nové, zatiaľ čo tá istá schránka má pri pohľade inde zjavne nové správy —, táto stránka vysvetľuje, čo sa deje.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Táto stránka je dočasné riešenie. Porucha nie je v tejto aplikácii a oprava pre ňu v operačnom systéme už existuje. Len čo aktualizácia systému prinesie na toto zariadenie funkčnú opravu, táto stránka aj jej tlačidlo sa z aplikácie odstránia.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Odkiaľ to pochádza</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>Vyzdvihovanie pošty nie je práca tejto aplikácie. Každý poštový program v tomto zariadení poveruje rozhovorom s vašimi poštovými servermi tú istú systémovú službu; táto aplikácia ju len žiada o správy a ukazuje, čo sa vráti.
+
+Táto služba obmedzuje, koľko schránok sa smie súčasne sledovať kvôli novej pošte, a pri ich počítaní sa mýli: prerušené spojenie svoju rezerváciu spoľahlivo nevracia. Po niekoľkých dňoch sa počet prehupne cez hranicu a od tej chvíle služba také spojenie už vôbec neotvorí — naraz pre všetky účty. Účet, ktorý čaká na ohlásenie novej pošty namiesto toho, aby ju vyzdvihoval v pravidelných intervaloch, potom nedostane nič, kým sa služba znova nespustí.
+
+Žiadna aplikácia tomu nedokáže zabrániť ani tento počet vynulovať. Čo táto aplikácia urobiť môže, je povedať vám to namiesto toho, aby vás nechala s prázdnou schránkou a bez vysvetlenia.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>V tomto zariadení</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Poštové účty</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Sledované schránky</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 z najviac %2</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Len ohlásená pošta</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Každá sledovaná schránka drží jedno spojenie. Hranica %1 je napevno zabudovaná v systémovej službe a nedá sa zmeniť. Počíta sa spoločne cez všetky účty — preto účet, ktorému spojenia dôjdu, strhne so sebou aj ostatné. Účty uvedené ako „len ohlásená pošta“ nemajú žiadne časované vyzdvihovanie, na ktoré by sa mohli vrátiť.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Čo sa táto aplikácia dozvedela</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Nič nezaznamenané. Sú to chyby, ktoré poštová služba hlási späť tejto aplikácii; uchovávajú sa aj pri vypnutom ladiacom zázname, pretože taká porucha sa spozoruje dlho po tom, čo nastala.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Čo pomáha</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>Ten počet žije v tejto službe a nikde inde, takže jej opätovné spustenie je celý liek. Nič sa nestratí: vaša pošta leží v úložisku správ a služba sa hneď zase rozbehne. Prenos, ktorý práve prebieha, sa potom znova nadviaže.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Znova spustiť poštovú službu</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Znova spustené. Chvíľu počkajte a potom poštu vyzdvihnite znova.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Nepodarilo sa ju znova spustiť: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Reštart zariadenia urobí to isté.
+
+Ak sa to stále vracia, nastavte aspoň jednému účtu v systémových nastaveniach účtov interval vyzdvihovania namiesto toho, aby čakal len na ohlásenú poštu. Časované vyzdvihovanie tieto spojenia nepoužíva a funguje ďalej, aj keď ich služba odmieta.
+
+Ak by tlačidlo vyššie neprešlo, to isté sa dá urobiť z terminálu:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>Pri zdroji už opravené</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>Porucha je známa a v zdrojovom kóde samotného operačného systému už bola opravená (chyba JB#64979, september 2026): počítanie sa celkom opustilo a zariadenie teraz využíva toľko sledovaných schránok, koľko ich dokáže získať, namiesto toho, aby všetky odmietlo. Táto oprava nie je v systémovej verzii, ktorá tu beží — na toto zariadenie by mala doraziť s niektorou budúcou aktualizáciou Sailfish OS a táto stránka sa tým stane zbytočnou.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>žiadne spojenie so zbernicou relácie</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>odmietnuté, bez uvedenia dôvodu</translation>
     </message>
 </context>
 <context>

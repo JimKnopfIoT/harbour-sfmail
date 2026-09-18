@@ -7,6 +7,7 @@
 #include <QTextStream>
 #include <QDateTime>
 #include <QMutex>
+#include <QFileInfo>
 #include <QSocketNotifier>
 #include <QTranslator>
 #include <QLocale>
@@ -14,6 +15,7 @@
 #include <atomic>
 #include <sailfishapp.h>
 #include "logcontrol.h"
+#include "mailservice.h"
 #include "emailui.h"
 
 #include <signal.h>
@@ -165,6 +167,109 @@ static void installCrashHandler(const QString &logPath)
 // Only gates the on-device logfile — stderr/journal output stays on.
 std::atomic<bool> g_fileLog{false};
 
+// --- Stalled-delivery recorder ----------------------------------------------
+//
+// Mail retrieval on this platform is done by a system service that every mail
+// application shares; this app only asks it for messages. That service keeps a
+// process-wide count of reserved IMAP push connections and does not reliably
+// give them back when a connection drops. Once the count passes its built-in
+// ceiling it refuses to open ANY push connection — for every account at once —
+// and accounts that fetch by push alone go silent until the service is
+// restarted. No application can prevent this or clear that count.
+//
+// The service writes its own verdict to the system journal, which a sandboxed
+// application may not read. What does reach us are the errors the mail library
+// reports back into this process, so those are what we keep: they are the
+// evidence that delivery stopped, and where.
+//
+// They live in a small file of their own rather than in debug.log, because that
+// log is off by default (it records addresses and attachment names, these lines
+// do not) and the evidence is needed exactly when nobody was logging. Mode
+// 0600, a hard line cap, QMF status text and numeric account ids only.
+static const int kSyncIssueMax = 40;
+
+static QString syncIssuePath()
+{
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+           + QStringLiteral("/sync-issues.log");
+}
+
+static bool looksLikeStalledDelivery(const QString &msg)
+{
+    static const char *const marks[] = {
+        "not progressing",        // the retrieval request timed out unanswered
+        "push connections",       // the ceiling itself, if it ever reaches us
+        "unable to reserve",
+        "failed to download",
+        "operation failed error code",
+        "sync error account",
+        "expired request",
+        "internal state was reset",
+    };
+    for (const char *const m : marks)
+        if (msg.contains(QLatin1String(m), Qt::CaseInsensitive))
+            return true;
+    return false;
+}
+
+// Appends one line and trims the file to the last kSyncIssueMax. Rewriting the
+// whole file is fine: these lines arrive when delivery breaks, not in a loop.
+static void recordSyncIssue(const QString &line)
+{
+    // Writing may itself produce a Qt warning, which would come straight back
+    // through the message handler.
+    static thread_local bool busy = false;
+    if (busy) return;
+    busy = true;
+
+    static QMutex mutex;
+    QMutexLocker lock(&mutex);
+
+    const QString path = syncIssuePath();
+    QStringList kept;
+    QFile in(path);
+    if (in.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream s(&in);
+        while (!s.atEnd()) {
+            const QString l = s.readLine();
+            if (!l.isEmpty()) kept << l;
+        }
+        in.close();
+    }
+    kept << line.left(400);
+    while (kept.size() > kSyncIssueMax) kept.removeFirst();
+
+    QFile out(path);
+    const bool fresh = !QFileInfo::exists(path);
+    if (out.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)) {
+        if (fresh)
+            out.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
+        QTextStream s(&out);
+        for (const QString &l : kept) s << l << '\n';
+    }
+    busy = false;
+}
+
+// Read back for the About page's report. Declared in logcontrol.h.
+QStringList sfmailSyncIssueLines()
+{
+    QStringList out;
+    QFile f(syncIssuePath());
+    if (f.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream s(&f);
+        while (!s.atEnd()) {
+            const QString l = s.readLine();
+            if (!l.isEmpty()) out << l;
+        }
+    }
+    return out;
+}
+
+void sfmailClearSyncIssues()
+{
+    QFile::remove(syncIssuePath());
+}
+
 // Development logging: mirror every Qt/QML message into a logfile under the
 // app's data dir, so QML warnings ("Type X unavailable", ReferenceErrors, …)
 // can be read without ssh/journalctl. Path:
@@ -195,6 +300,11 @@ static void fileMessageHandler(QtMsgType type, const QMessageLogContext &ctx,
             .arg(msg);
     if (ctx.file && *ctx.file)
         line += QStringLiteral("  (%1:%2)").arg(QString::fromUtf8(ctx.file)).arg(ctx.line);
+
+    // Independent of the debug-log switch: the few lines that show mail
+    // delivery has stopped are kept so the About page can show them afterwards.
+    if ((type == QtWarningMsg || type == QtCriticalMsg) && looksLikeStalledDelivery(msg))
+        recordSyncIssue(line);
 
     // Write to the on-device logfile only when debug logging is enabled
     // (About → "Debug logging"). The stderr/journal line below is always emitted.
@@ -282,6 +392,11 @@ int main(int argc, char *argv[])
     // QML is loaded (the root window binds to it); the bus name is claimed right
     // after, because from that moment calls can arrive and QML must be there to
     // take them — anything still too early is queued inside EmailUi.
+    // Lets the delivery report restart the shared mail service (see
+    // mailservice.h): the fault it works around lives in that process.
+    MailService *mailService = new MailService(view.data());
+    view->rootContext()->setContextProperty(QStringLiteral("MailService"), mailService);
+
     EmailUi *emailUi = new EmailUi(view.data(), view.data());
     view->rootContext()->setContextProperty(QStringLiteral("EmailUi"), emailUi);
     view->setSource(SailfishApp::pathTo(QStringLiteral("qml/harbour-sfmail.qml")));

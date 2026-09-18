@@ -95,6 +95,14 @@ Ha zavarja, vegye ki a másik bejegyzést ebből a hozzárendelésből egy root 
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>Amíg a bejegyzés el van mozdítva, a másik programnak nincs ikonja az alkalmazásmenüben. Tegye vissza, ha újra használni szeretné, vagy mielőtt kikapcsolja a fenti beállítást.</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Amikor nem érkezik több levél</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>Miért hallgatnak el néha a fiókok, noha a postafiókban új üzenetek vannak — hiba a rendszer levelezőszolgáltatásában, mit tudott meg erről ez az alkalmazás, és hogyan tér vissza a kézbesítés.</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ Ha zavarja, vegye ki a másik bejegyzést ebből a hozzárendelésből egy root 
     <message>
         <source>Search contacts</source>
         <translation>Névjegyek keresése</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(nincs név)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 cím — koppintson a választáshoz</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1254,6 +1254,128 @@ Az importálás MÁSODIK kulcsot ad ehhez a címhez — győződjön meg róla, 
     <message>
         <source>Remembered addresses</source>
         <translation>Megjegyzett címek</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>Rögzített sorok törlése</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Frissítés</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>Amikor nem érkezik több levél</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>Ha a fiókjai elhallgatnak — órákig vagy napokig semmi új, miközben ugyanannak a postafióknak máshol nézve láthatóan vannak új üzenetei —, ez az oldal elmagyarázza, mi történik.</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>Ez az oldal ideiglenes megoldás. A hiba nem ebben az alkalmazásban van, a javítása pedig az operációs rendszerben már létezik. Amint egy rendszerfrissítés működő javítást hoz erre az eszközre, ez az oldal és a gombja eltűnik az alkalmazásból.</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>Honnan ered ez</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>A levelek begyűjtése nem ennek az alkalmazásnak a dolga. Ezen az eszközön minden levelezőprogram ugyanazt a rendszerszolgáltatást bízza meg azzal, hogy a levelezőkiszolgálóival beszéljen; ez az alkalmazás csupán üzeneteket kér tőle, és megmutatja, ami visszaérkezik.
+
+Ez a szolgáltatás korlátozza, hány postafiókot lehet egyszerre új levél után figyelni, és elszámolja magát: a megszakadt kapcsolat nem adja vissza megbízhatóan a lefoglalt helyét. Néhány nap múlva a szám átkúszik a határon, és ettől kezdve a szolgáltatás egyáltalán nem nyit több ilyen kapcsolatot — egyszerre az összes fiók számára. Az a fiók, amely megvárja, míg bejelentik az új levelet, ahelyett hogy megadott időközönként töltene le, ezután semmit sem kap, amíg a szolgáltatást újra nem indítják.
+
+Ezt egyetlen alkalmazás sem tudja megakadályozni, és ezt a számot sem tudja nullázni. Amit ez az alkalmazás megtehet: szól Önnek, ahelyett hogy üres postafiókkal és magyarázat nélkül hagyná.</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>Ezen az eszközön</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>Levelezőfiókok</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>Figyelt postafiókok</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>%1 a legfeljebb %2-ből</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>Csak bejelentett levél</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>Minden figyelt postafiók egy kapcsolatot köt le. A %1-es korlát a rendszerszolgáltatásba van beépítve, és nem módosítható. A számolás az összes fiókra együtt vonatkozik — ezért ránt magával egy fiók a többit is, ha elfogy a kerete. A „csak bejelentett levél” alatt felsorolt fiókoknak nincs időzített letöltésük, amelyre visszaeshetnének.</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>Amit ez az alkalmazás megtudott</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>Nincs rögzített bejegyzés. Itt azok a hibák állnak, amelyeket a levelezőszolgáltatás visszajelez ennek az alkalmazásnak; akkor is megőrződnek, ha a hibanaplózás ki van kapcsolva, mert az ilyen hibát jóval a bekövetkezte után veszi észre az ember.</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>Ami segít</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>A szám ebben a szolgáltatásban él, és sehol máshol, ezért az újraindítása a teljes orvosság. Semmi sem vész el: a levelei az üzenettárban vannak, a szolgáltatás pedig azonnal újra elindul. Az éppen futó átvitel utána folytatódik.</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>Levelezőszolgáltatás újraindítása</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>Újraindítva. Várjon egy pillanatot, majd töltse le újra a leveleket.</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>Nem sikerült újraindítani: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>Az eszköz újraindítása ugyanezt teszi.
+
+Ha újra és újra előfordul, adjon legalább egy fióknak letöltési időközt a rendszer fiókbeállításaiban, ahelyett hogy csak a bejelentett levélre várna. Az időzített letöltés nem használja ezeket a kapcsolatokat, és akkor is működik, ha a szolgáltatás megtagadja őket.
+
+Ha a fenti gomb nem ér célba, ugyanez megtehető parancssorból is:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>A forrásban már kijavítva</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>A hiba ismert, és az operációs rendszer saját forráskódjában már ki is javították (JB#64979 hibajegy, 2026. szeptember): a számolást teljesen elhagyták, és az eszköz mostantól annyi figyelt postafiókot használ, amennyit csak kap, ahelyett hogy mindet elutasítaná. Ez a javítás nincs benne az itt futó rendszerváltozatban, ezért egy későbbi Sailfish OS-frissítéssel kell megérkeznie erre az eszközre — és akkor ez az oldal feleslegessé válik.</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>nincs kapcsolat a munkamenetbusszal</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>elutasítva, indoklás nélkül</translation>
     </message>
 </context>
 <context>

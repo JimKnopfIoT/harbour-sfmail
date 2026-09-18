@@ -57,7 +57,7 @@ QMAKE_CXXFLAGS += -ffile-prefix-map=$$absolute_path($$PWD/..)=.
 QMAKE_LFLAGS += -rdynamic
 
 SOURCES += src/main.cpp src/emailui.cpp
-HEADERS += src/logcontrol.h src/emailui.h
+HEADERS += src/logcontrol.h src/emailui.h src/mailservice.h
 
 QML_FILES = \
     qml/harbour-sfmail.qml \

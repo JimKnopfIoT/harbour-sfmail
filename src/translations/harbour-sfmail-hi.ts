@@ -95,6 +95,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>While the entry is moved away, the other client has no icon in the launcher. Put it back if you want to use it again, or before switching the option above off.</source>
         <translation>जब तक प्रविष्टि हटी हुई है, दूसरे प्रोग्राम का ऐप मेन्यू में कोई चिह्न नहीं होगा। यदि आप उसे फिर से उपयोग करना चाहें, या ऊपर वाला विकल्प बंद करने से पहले, उसे वापस रख दें।</translation>
     </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>जब मेल आना बंद हो जाए</translation>
+    </message>
+    <message>
+        <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
+        <translation>खाते कभी-कभी चुप क्यों पड़ जाते हैं, जबकि मेलबॉक्स में नए संदेश होते हैं — सिस्टम की मेल सेवा में एक ख़राबी, इस ऐप को उसके बारे में क्या बताया गया, और डिलीवरी वापस कैसे आती है।</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -362,14 +370,6 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>Search contacts</source>
         <translation>संपर्क खोजें</translation>
-    </message>
-    <message>
-        <source>(no name)</source>
-        <translation>(नाम नहीं)</translation>
-    </message>
-    <message>
-        <source>%1 addresses — tap to choose</source>
-        <translation>%1 पते — चुनने के लिए टैप करें</translation>
     </message>
     <message>
         <source>No matches</source>
@@ -1256,6 +1256,128 @@ Importing adds a SECOND key for this address — make sure this new key is genui
     <message>
         <source>Remembered addresses</source>
         <translation>याद रखे गए पते</translation>
+    </message>
+</context>
+<context>
+    <name>MailRetrievalPage</name>
+    <message>
+        <source>Clear recorded lines</source>
+        <translation>दर्ज पंक्तियाँ मिटाएँ</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>ताज़ा करें</translation>
+    </message>
+    <message>
+        <source>When mail stops arriving</source>
+        <translation>जब मेल आना बंद हो जाए</translation>
+    </message>
+    <message>
+        <source>If your accounts fall silent — nothing new for hours or days, while the same mailbox clearly has new messages when you look at it elsewhere — this page explains what is happening.</source>
+        <translation>अगर आपके खाते चुप पड़ जाएँ — घंटों या दिनों तक कुछ नया नहीं, जबकि वही मेलबॉक्स कहीं और देखने पर साफ़ तौर पर नए संदेश दिखाता है — तो यह पृष्ठ बताता है कि क्या हो रहा है।</translation>
+    </message>
+    <message>
+        <source>This page is a temporary fix. The fault is not in this app, and the correction for it already exists in the operating system. As soon as a system update brings a working fix to this device, this page and its button will be removed from the app.</source>
+        <translation>यह पृष्ठ एक अस्थायी उपाय है। ख़राबी इस ऐप में नहीं है, और उसका सुधार ऑपरेटिंग सिस्टम में पहले से मौजूद है। जैसे ही कोई सिस्टम अपडेट इस डिवाइस पर काम करने वाला सुधार लाएगा, यह पृष्ठ और इसका बटन ऐप से हटा दिए जाएँगे।</translation>
+    </message>
+    <message>
+        <source>Where this comes from</source>
+        <translation>यह कहाँ से आता है</translation>
+    </message>
+    <message>
+        <source>Collecting mail is not this app&apos;s work. Every mail application on this device asks the same system service to talk to your mail servers; this app only asks it for messages and shows what comes back.
+
+That service limits how many mailboxes may be watched for new mail at the same time, and it miscounts them: a connection that drops does not reliably give its reservation back. After a few days the count has crept past the limit, and from then on the service refuses to open any such connection at all — for every account at once. An account that waits for new mail to be announced, rather than fetching on a timer, then receives nothing until the service is restarted.
+
+No application can prevent this or reset that count. What this app can do is tell you, instead of leaving you with an empty mailbox and no explanation.</source>
+        <translation>मेल लाना इस ऐप का काम नहीं है। इस डिवाइस का हर मेल ऐप आपके मेल सर्वरों से बात करने के लिए उसी सिस्टम सेवा से कहता है; यह ऐप सिर्फ़ उससे संदेश माँगता है और जो लौटकर आता है उसे दिखाता है।
+
+वह सेवा यह सीमित करती है कि एक ही समय में कितने मेलबॉक्स नए मेल के लिए निगरानी में रखे जा सकते हैं, और उन्हें गिनने में गलती करती है: जो कनेक्शन टूटता है, वह अपना आरक्षण भरोसे के साथ वापस नहीं करता। कुछ दिनों बाद गिनती सरककर सीमा के पार पहुँच जाती है, और उसके बाद सेवा ऐसा कोई भी कनेक्शन खोलने से बिलकुल इनकार कर देती है — एक साथ सभी खातों के लिए। जो खाता तय अंतराल पर मेल लाने के बजाय नए मेल की सूचना का इंतज़ार करता है, उसे फिर तब तक कुछ नहीं मिलता जब तक सेवा दोबारा शुरू न की जाए।
+
+कोई भी ऐप न तो इसे रोक सकता है और न उस गिनती को रीसेट कर सकता है। यह ऐप इतना कर सकता है कि आपको बता दे, बजाय इसके कि आपको खाली मेलबॉक्स और बिना किसी स्पष्टीकरण के छोड़ दे।</translation>
+    </message>
+    <message>
+        <source>On this device</source>
+        <translation>इस डिवाइस पर</translation>
+    </message>
+    <message>
+        <source>Mail accounts</source>
+        <translation>मेल खाते</translation>
+    </message>
+    <message>
+        <source>Mailboxes watched</source>
+        <translation>निगरानी में मेलबॉक्स</translation>
+    </message>
+    <message>
+        <source>%1 of at most %2</source>
+        <translation>अधिकतम %2 में से %1</translation>
+    </message>
+    <message>
+        <source>Announced mail only</source>
+        <translation>केवल सूचित मेल</translation>
+    </message>
+    <message>
+        <source>Every watched mailbox holds one connection. The limit of %1 is built into the system service and cannot be changed. It is counted across all accounts together, which is why one account running out takes the others down with it. Accounts listed as &quot;announced mail only&quot; have no timed fetch to fall back on.</source>
+        <translation>निगरानी में रखा हर मेलबॉक्स एक कनेक्शन घेरता है। %1 की सीमा सिस्टम सेवा में ही बनी हुई है और बदली नहीं जा सकती। गिनती सभी खातों को मिलाकर होती है, इसीलिए एक खाते का कोटा खत्म होते ही वह बाकियों को भी अपने साथ ठप कर देता है। जो खाते “केवल सूचित मेल” के नीचे सूचीबद्ध हैं, उनके पास सहारे के लिए कोई समयबद्ध फ़ेच नहीं है।</translation>
+    </message>
+    <message>
+        <source>What this app was told</source>
+        <translation>इस ऐप को क्या बताया गया</translation>
+    </message>
+    <message>
+        <source>Nothing recorded. These are the failures the mail service reports back to this app; they are kept even while debug logging is off, because a fault like this is noticed long after it happened.</source>
+        <translation>कुछ भी दर्ज नहीं है। यहाँ वे विफलताएँ आती हैं जो मेल सेवा इस ऐप को वापस बताती है; इन्हें तब भी रखा जाता है जब डीबग लॉगिंग बंद हो, क्योंकि ऐसी ख़राबी घटने के बहुत बाद ध्यान में आती है।</translation>
+    </message>
+    <message>
+        <source>What helps</source>
+        <translation>क्या मदद करता है</translation>
+    </message>
+    <message>
+        <source>The count lives in that service and nowhere else, so restarting it is the whole remedy. Nothing is lost: your mail sits in the message store and the service comes straight back up. A transfer running at that moment is picked up again afterwards.</source>
+        <translation>गिनती उसी सेवा में रहती है और कहीं नहीं, इसलिए उसे दोबारा शुरू करना ही पूरा इलाज है। कुछ खोता नहीं: आपका मेल संदेश-भंडार में रखा रहता है और सेवा तुरंत फिर चालू हो जाती है। उस समय चल रहा कोई स्थानांतरण बाद में फिर से उठा लिया जाता है।</translation>
+    </message>
+    <message>
+        <source>Restart the mail service</source>
+        <translation>मेल सेवा दोबारा शुरू करें</translation>
+    </message>
+    <message>
+        <source>Restarted. Give it a moment, then fetch mail again.</source>
+        <translation>दोबारा शुरू किया गया। एक पल रुकें, फिर मेल दोबारा लाएँ।</translation>
+    </message>
+    <message>
+        <source>Could not restart it: %1</source>
+        <translation>इसे दोबारा शुरू नहीं किया जा सका: %1</translation>
+    </message>
+    <message>
+        <source>Restarting the device does the same thing.
+
+If it keeps coming back, give at least one account a fetch interval in the system&apos;s account settings instead of letting it wait for announced mail alone. A timed fetch does not use these connections and keeps working when the service refuses them.
+
+Should the button above not get through, the same can be done from a terminal:</source>
+        <translation>डिवाइस को दोबारा चालू करने से भी यही होता है।
+
+अगर यह बार-बार लौटता रहे, तो कम से कम एक खाते को सिस्टम की खाता सेटिंग्स में फ़ेच अंतराल दें, बजाय इसके कि वह अकेले सूचित मेल का इंतज़ार करता रहे। समयबद्ध फ़ेच इन कनेक्शनों का इस्तेमाल नहीं करता और तब भी काम करता रहता है जब सेवा उन्हें मना कर देती है।
+
+अगर ऊपर वाला बटन काम न करे, तो यही काम टर्मिनल से भी किया जा सकता है:</translation>
+    </message>
+    <message>
+        <source>Already repaired at the source</source>
+        <translation>स्रोत में पहले ही ठीक किया जा चुका</translation>
+    </message>
+    <message>
+        <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
+        <translation>यह ख़राबी ज्ञात है और ऑपरेटिंग सिस्टम के अपने सोर्स कोड में पहले ही ठीक की जा चुकी है (बग JB#64979, सितंबर 2026): गिनती को पूरी तरह छोड़ दिया गया, और अब डिवाइस सभी को मना करने के बजाय उतने निगरानी वाले मेलबॉक्स इस्तेमाल करता है जितने उसे मिल सकें। वह सुधार यहाँ चल रहे सिस्टम संस्करण में नहीं है, इसलिए वह किसी आगामी Sailfish OS अपडेट के साथ इस डिवाइस तक पहुँचना चाहिए — और तब यह पृष्ठ बेमानी हो जाएगा।</translation>
+    </message>
+</context>
+<context>
+    <name>MailService</name>
+    <message>
+        <source>no connection to the session bus</source>
+        <translation>सत्र बस से कोई कनेक्शन नहीं</translation>
+    </message>
+    <message>
+        <source>refused, without a reason given</source>
+        <translation>अस्वीकृत, बिना कोई कारण बताए</translation>
     </message>
 </context>
 <context>
