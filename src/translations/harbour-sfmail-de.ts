@@ -103,6 +103,10 @@ Wenn es stört, nehmen Sie den anderen Eintrag in einer Root-Shell aus dieser Zu
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Warum Konten manchmal verstummen, obwohl das Postfach neue Nachrichten hat — ein Fehler im Mail-Dienst des Systems, was diese App darüber erfahren hat, und wie der Empfang zurückkommt.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Freie Software unter der GNU GPL v3 oder später; mitgelieferte Komponenten unter ihren eigenen Lizenzen (GPL, LGPL, Apache 2.0). Quelltext und Lizenztexte: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Wenn es stört, nehmen Sie den anderen Eintrag in einer Root-Shell aus dieser Zu
     <message>
         <source>no key/certificate for this address</source>
         <translation>kein Schlüssel/Zertifikat für diese Adresse</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Ein Entwurf behält keine Anhänge. Speichere den Entwurf noch einmal, um ihn ohne sie abzulegen.</translation>
     </message>
 </context>
 <context>
@@ -1257,6 +1265,14 @@ Der Import fügt einen ZWEITEN Schlüssel für diese Adresse hinzu — vergewiss
         <source>Remembered addresses</source>
         <translation>Gemerkte Adressen</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Senden angehalten: Das System hat die Anmeldung dieses Kontos für ausgehende Mail abgelehnt. SF-Mail versucht es nicht mehr von selbst – jeder Versuch würde das Konto erneut als fehlerhaft markieren. Prüfe das Konto unter Einstellungen → Konten und tippe dann hier, um zu senden.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Senden angehalten: Auch der letzte automatische Versuch ist gescheitert. Tippe hier, um es erneut zu versuchen, sobald die Verbindung wieder da ist.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1367,6 +1383,10 @@ Falls der Knopf oben nicht durchkommt, geht dasselbe aus einer Konsole:</transla
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Der Fehler ist bekannt und im Quelltext des Betriebssystems bereits behoben (Fehler JB#64979, September 2026): Die Zählerei wurde ganz aufgegeben; ein Gerät nutzt jetzt so viele überwachte Postfächer, wie es bekommen kann, statt alle zu verweigern. Diese Korrektur steckt nicht in der hier laufenden Systemfassung — sie sollte mit einer künftigen Sailfish-OS-Aktualisierung hier ankommen, und diese Seite wird damit überflüssig.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Mail-Dienst wird neu gestartet</translation>
     </message>
 </context>
 <context>
@@ -1559,6 +1579,14 @@ Falls der Knopf oben nicht durchkommt, geht dasselbe aus einer Konsole:</transla
     <message>
         <source>Encrypted</source>
         <translation>Verschlüsselt</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Nicht gesendet. Das System hat die Anmeldung des Kontos für ausgehende Mail abgelehnt – prüfe das Konto unter Einstellungen → Konten und benutze dann „Erneut senden“.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Nicht gesendet. Auch der letzte automatische Versuch ist gescheitert – benutze „Erneut senden“, sobald die Verbindung wieder da ist.</translation>
     </message>
 </context>
 <context>
@@ -1910,6 +1938,18 @@ Falls der Knopf oben nicht durchkommt, geht dasselbe aus einer Konsole:</transla
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 ist bereits gemerkt</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Signiert, aber der Mail-Speicher dieses Geräts bewahrt die Nachricht nicht mehr genau so auf, wie sie gesendet wurde – die Signatur kann hier nicht geprüft werden. Über die Echtheit der Nachricht sagt das nichts aus.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Signiert (OpenPGP). SF-Mail kann diese Signatur hier nicht prüfen: Der Mail-Speicher des Geräts bewahrt den signierten Teil nicht genau so auf, wie er gesendet wurde.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Mit mehreren verschiedenen Zertifikaten signiert. SF-Mail zeigt nur eine einzelne Signatur als gültig an – prüfe die Nachricht auf anderem Weg.</translation>
     </message>
 </context>
 <context>

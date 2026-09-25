@@ -103,6 +103,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Защо профилите понякога замлъкват, въпреки че в пощенската кутия има нови съобщения — повреда в пощенската услуга на системата, какво е научило това приложение за нея и как доставката се връща.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Свободен софтуер под GNU GPL v3 или по-нова; включените компоненти са под собствените си лицензи (GPL, LGPL, Apache 2.0). Изходен код и текстове на лицензите: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>no key/certificate for this address</source>
         <translation>няма ключ/сертификат за този адрес</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Черновата не запазва прикачените файлове. Запазете черновата още веднъж, за да я съхраните без тях.</translation>
     </message>
 </context>
 <context>
@@ -1257,6 +1265,14 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Remembered addresses</source>
         <translation>Запомнени адреси</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Изпращането спря: системата отхвърли вписването на този акаунт за изходяща поща. SF-Mail вече не опитва отново сам — всеки опит би маркирал акаунта отново. Проверете акаунта в Настройки → Акаунти, след това докоснете тук, за да изпратите.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Изпращането спря: последният автоматичен опит също беше неуспешен. Докоснете тук, за да опитате отново, когато връзката се възстанови.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1367,6 +1383,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Повредата е известна и вече е поправена в изходния код на самата операционна система (грешка JB#64979, септември 2026 г.): броенето е изоставено напълно и устройството вече използва толкова следени пощенски кутии, колкото успее да получи, вместо да отказва всички. Тази поправка не е във версията на системата, която работи тук, затова тя би трябвало да стигне до устройството с бъдещо обновление на Sailfish OS — и тази страница да стане излишна.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Пощенската услуга се рестартира</translation>
     </message>
 </context>
 <context>
@@ -1559,6 +1579,14 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Encrypted</source>
         <translation>Шифрирано</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Не е изпратено. Системата отхвърли вписването на акаунта за изходяща поща — проверете акаунта в Настройки → Акаунти, след това използвайте „Изпращане отново“.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Не е изпратено. Последният автоматичен опит също беше неуспешен — използвайте „Изпращане отново“, когато връзката се възстанови.</translation>
     </message>
 </context>
 <context>
@@ -1910,6 +1938,18 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 вече е запомнен</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Подписано, но пощенското хранилище на това устройство вече не пази съобщението точно такова, каквото е изпратено — подписът не може да бъде проверен тук. Това не казва нищо за това дали съобщението е истинско.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Подписано (OpenPGP). SF-Mail не може да провери този подпис тук: пощенското хранилище на устройството не пази подписаната част точно такава, каквато е изпратена.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Подписано с няколко различни сертификата. SF-Mail показва като валиден само един подпис — проверете съобщението по друг начин.</translation>
     </message>
 </context>
 <context>

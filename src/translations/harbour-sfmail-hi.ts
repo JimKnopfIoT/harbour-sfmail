@@ -103,6 +103,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>खाते कभी-कभी चुप क्यों पड़ जाते हैं, जबकि मेलबॉक्स में नए संदेश होते हैं — सिस्टम की मेल सेवा में एक ख़राबी, इस ऐप को उसके बारे में क्या बताया गया, और डिलीवरी वापस कैसे आती है।</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>GNU GPL v3 या उसके बाद के संस्करण के अंतर्गत मुक्त सॉफ़्टवेयर; साथ आए घटक अपने-अपने लाइसेंसों (GPL, LGPL, Apache 2.0) के अंतर्गत। स्रोत कोड और लाइसेंस पाठ: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>no key/certificate for this address</source>
         <translation>इस पते के लिए कोई कुंजी/प्रमाणपत्र नहीं</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>ड्राफ़्ट अटैचमेंट नहीं रखता। उसे अटैचमेंट के बिना सहेजने के लिए ड्राफ़्ट को फिर से सहेजें।</translation>
     </message>
 </context>
 <context>
@@ -1257,6 +1265,14 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Remembered addresses</source>
         <translation>याद रखे गए पते</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>भेजना रुका: सिस्टम ने आउटगोइंग मेल के लिए इस खाते का साइन-इन अस्वीकार कर दिया। SF-Mail अब अपने आप दोबारा कोशिश नहीं करता — हर कोशिश खाते को फिर से चिह्नित कर देगी। सेटिंग्स → खाते में खाते की जाँच करें, फिर भेजने के लिए यहाँ टैप करें।</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>भेजना रुका: पिछली स्वचालित कोशिश भी विफल रही। कनेक्शन वापस आने पर दोबारा कोशिश करने के लिए यहाँ टैप करें।</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1367,6 +1383,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>यह ख़राबी ज्ञात है और ऑपरेटिंग सिस्टम के अपने सोर्स कोड में पहले ही ठीक की जा चुकी है (बग JB#64979, सितंबर 2026): गिनती को पूरी तरह छोड़ दिया गया, और अब डिवाइस सभी को मना करने के बजाय उतने निगरानी वाले मेलबॉक्स इस्तेमाल करता है जितने उसे मिल सकें। वह सुधार यहाँ चल रहे सिस्टम संस्करण में नहीं है, इसलिए वह किसी आगामी Sailfish OS अपडेट के साथ इस डिवाइस तक पहुँचना चाहिए — और तब यह पृष्ठ बेमानी हो जाएगा।</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>मेल सेवा दोबारा शुरू की जा रही है</translation>
     </message>
 </context>
 <context>
@@ -1559,6 +1579,14 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Encrypted</source>
         <translation>एन्क्रिप्टेड</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>भेजा नहीं गया। सिस्टम ने आउटगोइंग मेल के लिए खाते का साइन-इन अस्वीकार कर दिया — सेटिंग्स → खाते में खाते की जाँच करें, फिर “फिर भेजें” इस्तेमाल करें।</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>भेजा नहीं गया। पिछली स्वचालित कोशिश भी विफल रही — कनेक्शन वापस आने पर “फिर भेजें” इस्तेमाल करें।</translation>
     </message>
 </context>
 <context>
@@ -1910,6 +1938,18 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 पहले से याद है</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>हस्ताक्षरित है, पर इस डिवाइस का मेल भंडार अब संदेश को ठीक वैसा नहीं रखता जैसा वह भेजा गया था — हस्ताक्षर यहाँ जाँचा नहीं जा सकता। इससे संदेश के असली होने के बारे में कुछ पता नहीं चलता।</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>हस्ताक्षरित (OpenPGP)। SF-Mail यह हस्ताक्षर यहाँ नहीं जाँच सकता: डिवाइस का मेल भंडार हस्ताक्षरित भाग को ठीक वैसा नहीं रखता जैसा वह भेजा गया था।</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>कई अलग-अलग प्रमाणपत्रों से हस्ताक्षरित। SF-Mail केवल एक ही हस्ताक्षर को मान्य दिखाता है — संदेश को किसी और तरीके से जाँचें।</translation>
     </message>
 </context>
 <context>

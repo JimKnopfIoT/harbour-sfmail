@@ -54,6 +54,20 @@ Page {
                 font.pixelSize: Theme.fontSizeMedium
                 color: Theme.primaryColor
             }
+            // The package carries GPL-3.0 programs (the app and the bundled
+            // GnuPG) and other free components; the licence and where the
+            // source is belong in front of the user, not only in the repository.
+            Label {
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                horizontalAlignment: Text.AlignHCenter
+                wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                textFormat: Text.PlainText
+                text: qsTr("Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1")
+                      .arg("https://github.com/JimKnopfIoT/harbour-sfmail")
+            }
 
             Item { width: 1; height: Theme.paddingLarge }
 

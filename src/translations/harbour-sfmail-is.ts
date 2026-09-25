@@ -103,6 +103,10 @@ Ef það truflar má taka hina færsluna út úr þessari tengingu úr root-skel
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Hvers vegna reikningar þagna stundum þótt nýir póstar séu í pósthólfinu — villa í póstþjónustu kerfisins, hvað þessu forriti var sagt um hana, og hvernig móttakan kemst aftur á.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Frjáls hugbúnaður samkvæmt GNU GPL v3 eða síðari útgáfu; meðfylgjandi íhlutir samkvæmt eigin leyfum (GPL, LGPL, Apache 2.0). Frumkóði og leyfistextar: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Ef það truflar má taka hina færsluna út úr þessari tengingu úr root-skel
     <message>
         <source>no key/certificate for this address</source>
         <translation>enginn lykill/skilríki fyrir þetta netfang</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Drög halda ekki viðhengjum. Vistaðu drögin aftur til að geyma þau án þeirra.</translation>
     </message>
 </context>
 <context>
@@ -1257,6 +1265,14 @@ Innflutningur bætir ÖÐRUM lykli við þetta netfang — gakktu úr skugga um 
         <source>Remembered addresses</source>
         <translation>Vistuð netföng</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Sending stöðvuð: kerfið hafnaði innskráningu þessa reiknings fyrir útsendan póst. SF-Mail reynir ekki lengur sjálfkrafa — hver tilraun myndi merkja reikninginn aftur. Athugaðu reikninginn undir Stillingar → Reikningar og ýttu svo hér til að senda.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Sending stöðvuð: síðasta sjálfvirka tilraunin mistókst líka. Ýttu hér til að reyna aftur þegar tengingin er komin aftur.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1367,6 +1383,10 @@ Komist hnappurinn hér að ofan ekki í gegn má gera hið sama úr skipanalínu
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Villan er þekkt og hefur þegar verið leiðrétt í frumkóða stýrikerfisins sjálfs (villa JB#64979, september 2026): talningin var lögð niður með öllu, og tæki notar nú eins mörg vöktuð pósthólf og það fær í stað þess að neita þeim öllum. Sú leiðrétting er ekki í kerfisútgáfunni sem keyrir hér, svo hún ætti að berast í þetta tæki með framtíðaruppfærslu á Sailfish OS — og þá verður þessi síða óþörf.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Endurræsi póstþjónustuna</translation>
     </message>
 </context>
 <context>
@@ -1559,6 +1579,14 @@ Komist hnappurinn hér að ofan ekki í gegn má gera hið sama úr skipanalínu
     <message>
         <source>Encrypted</source>
         <translation>Dulkóðað</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Ekki sent. Kerfið hafnaði innskráningu reikningsins fyrir útsendan póst — athugaðu reikninginn undir Stillingar → Reikningar og notaðu svo Senda aftur.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Ekki sent. Síðasta sjálfvirka tilraunin mistókst líka — notaðu Senda aftur þegar tengingin er komin aftur.</translation>
     </message>
 </context>
 <context>
@@ -1910,6 +1938,18 @@ Komist hnappurinn hér að ofan ekki í gegn má gera hið sama úr skipanalínu
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 er þegar vistað</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Undirritað, en póstgeymsla þessa tækis geymir skeytið ekki lengur nákvæmlega eins og það var sent — ekki er hægt að sannreyna undirskriftina hér. Þetta segir ekkert um hvort skeytið sé ósvikið.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Undirritað (OpenPGP). SF-Mail getur ekki sannreynt þessa undirskrift hér: póstgeymsla tækisins geymir undirritaða hlutann ekki nákvæmlega eins og hann var sendur.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Undirritað með nokkrum mismunandi skilríkjum. SF-Mail sýnir aðeins eina undirskrift sem gilda — sannreyndu skeytið eftir öðrum leiðum.</translation>
     </message>
 </context>
 <context>

@@ -103,6 +103,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>メールボックスに新しいメッセージがあるのに、アカウントが静かになってしまうことがあるのはなぜか — システムのメールサービスの不具合、このアプリがそれについて受け取った情報、そして受信を取り戻す方法。</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>GNU GPL v3 以降のもとで配布されるフリーソフトウェアです。同梱のコンポーネントはそれぞれのライセンス(GPL、LGPL、Apache 2.0)に従います。ソースコードとライセンス文: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>no key/certificate for this address</source>
         <translation>このアドレスの鍵・証明書がありません</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>下書きには添付ファイルは保持されません。添付ファイルなしで保存するには、下書きをもう一度保存してください。</translation>
     </message>
 </context>
 <context>
@@ -1255,6 +1263,14 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Remembered addresses</source>
         <translation>記憶したアドレス</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>送信を中止しました: システムがこのアカウントの送信メール用サインインを拒否しました。SF-Mail は自動では再試行しません — 試行するたびにアカウントが再びエラーとして記録されるためです。設定 → アカウント でアカウントを確認してから、ここをタップして送信してください。</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>送信を中止しました: 最後の自動試行も失敗しました。接続が戻ったら、ここをタップして再試行してください。</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1365,6 +1381,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>この不具合は既知で、オペレーティングシステム自身のソースコードではすでに修正されています（バグ JB#64979、2026年9月）。数を数えること自体が取りやめになり、端末はすべてを拒否する代わりに、確保できるだけの監視中メールボックスを使うようになりました。この修正はここで動いているシステムのバージョンには入っていないため、今後の Sailfish OS の更新でこの端末に届くはずです — そうなれば、このページは無用になります。</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>メールサービスを再起動しています</translation>
     </message>
 </context>
 <context>
@@ -1555,6 +1575,14 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Encrypted</source>
         <translation>暗号化</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>送信されていません。システムがアカウントの送信メール用サインインを拒否しました — 設定 → アカウント でアカウントを確認してから、「再送信」を使ってください。</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>送信されていません。最後の自動試行も失敗しました — 接続が戻ったら「再送信」を使ってください。</translation>
     </message>
 </context>
 <context>
@@ -1906,6 +1934,18 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 はすでに記憶済みです</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>署名されていますが、この端末のメール保存領域にはメッセージが送信時のままの形で残っていません — ここでは署名を検証できません。メッセージが本物かどうかについては何も示していません。</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>署名されています(OpenPGP)。SF-Mail はここでこの署名を検証できません: 端末のメール保存領域は、署名された部分を送信時のままの形で保持していません。</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>複数の異なる証明書で署名されています。SF-Mail が有効として表示できる署名は 1 つだけです — 別の方法でメッセージを確認してください。</translation>
     </message>
 </context>
 <context>

@@ -47,12 +47,14 @@ Demo data throughout: the people, addresses, keys and certificates shown here we
 Tapping a "new mail" notification is delivered to whichever program **owns** the
 D-Bus name `com.jolla.email.ui` — the QMF notification plugin has that target
 compiled in, and the same name also carries `mailto:` links and "share via
-e-mail". Out of the box that is the stock Jolla mail client, with no setting to
+e-mail". Out of the box that is the stock mail client, with no setting to
 change it.
 
-SF-Mail can take that name over, so taps, `mailto:` and sharing open
-in SF-Mail — the app implements the full stock interface, so nothing is silently
-dropped. A switch controls this: *About → System → "Open mail
+SF-Mail can take that name over, so taps, `mailto:` and sharing open in
+SF-Mail. It answers the same requests as the stock client: open a message or a
+mailbox, reply, compose, `mailto:` links, and files or text shared "by e-mail"
+from other apps. Files from SF-Mail's own data (keys, caches, logs) are never
+attached on another program's request. A switch controls this: *About → System → "Open mail
 notifications in this app"*, on by default. Switching it off hands everything
 back to the client that owned it before SF-Mail was installed — the D-Bus
 activation entry points at a small dispatcher that reads this setting on every
@@ -120,9 +122,10 @@ the body anyway.
 ## Features
 
 - Accounts + per-account folder list (swipe left in a mailbox), combined inbox
-- Read / delete messages, raw header view with sender checks
-  (active SPF/DMARC via DNS, From↔Return-Path mismatch, optional DNS blacklists —
-  only the sender's IP/domain are ever looked up, nothing of yours)
+- Read / delete messages, raw header view with sender checks: SPF and DMARC are
+  looked up via DNS when the header view opens, a From↔Return-Path mismatch is
+  flagged, and an optional DNS blacklist check (pull down) sends the sender's IP
+  and domain and the domains of links in the message. Nothing about you is sent
 - HTML mail is drawn in the device theme: the colours a message brings are
   dropped, so text written for white paper stays readable on a dark screen, and
   remote images are never loaded (loading one would tell the sender you read it)
@@ -131,20 +134,30 @@ the body anyway.
 - **Blind copies stay blind** — one message per audience, so no recipient can read
   the others off the encryption; encrypted subjects via protected headers (see above)
 - **OpenPGP** — encrypt (+ optional sign), decrypt by tap (PGP/MIME with a
-  passphrase dialog, and inline PGP), signature status, PGP/MIME sending
-  (RFC 3156, `multipart/encrypted`) with attachments
+  passphrase dialog, and inline PGP), PGP/MIME sending (RFC 3156,
+  `multipart/encrypted`) with attachments. Mail it decrypts and inline-signed
+  text get a signature verdict: good, bad, key missing, revoked or expired, and a
+  warning when the signing key does not carry the sender's address. Signed-only
+  PGP/MIME mail is shown as signed but not judged
 - **Easy key management** — **create** your own RSA-4096 key right in the app (a
   strong passphrase is enforced), import / export / details, **back up** the secret
-  key, **extend** the expiry, **revoke** (a protected revocation certificate is
-  created for you; revoking is a deliberate two-step with confirmation), and
+  key, **extend** the expiry, **revoke** (a revocation certificate is created for
+  you and saved to Documents — move it off the device, since anyone holding it
+  can revoke your key; revoking is a deliberate two-step with confirmation), and
   **publish** to `keys.openpgp.org`. Keyserver lookup never auto-imports — it shows
   the fingerprint, you decide. When generating a key an equivalent `gpg` command
   line is shown, so you can see what is being made.
 - **S/MIME** (aarch64 only, switch it on under *About*) — decrypt by tap, sign
   and/or encrypt outgoing mail (CMS, `application/pkcs7-mime`) with attachments.
-  Signatures are **verified against your certificate store**, and the result is
-  what you see: valid, valid-but-from-an-authority-you-have-not-trusted, invalid,
-  or not checkable. Certificate management: **create** your own self-signed
+  Signatures are **verified against your certificate store**, one signature at a
+  time, and the result is what you see: valid; valid but from an authority you
+  have not trusted; valid but from a certificate that does not carry the
+  sender's address; signed by several different certificates (never shown as
+  valid); invalid; or not checkable. **Signatures sent as a separate part — the
+  form most other clients use — cannot be checked on the device**: the system's
+  mail store keeps such messages taken apart and rewritten, and the app says so
+  rather than guessing. Mail signed by SF-Mail travels as one piece and can be
+  checked. Certificate management: **create** your own self-signed
   RSA-4096 certificate (with the `emailProtection` / `keyEncipherment` e-mail
   attributes), import your own `.p12`, **back it up** as a `.p12`, import a
   sender's certificate from a signed message — always through a dialog that shows
@@ -158,7 +171,8 @@ the body anyway.
   already present, a *different* key already stored for the address, and whether
   the key matches the sender's address; a block carrying several keys names all of
   them, because importing takes all of them; never imports without your
-  confirmation
+  confirmation, and refuses a block that carries a private key — from a message,
+  only public keys are taken
 - Recipient fields complete an address after two characters — from the addresses
   you remembered, from the keys and certificates you hold, and from the address
   book — next to an address-book picker per recipient and a per-recipient crypto
@@ -170,6 +184,9 @@ the body anyway.
   being offered again
 - **Send from an alias** — the alias addresses configured for an account in the
   system settings can be picked as the sender, protected headers included
+- **Mail that could not be sent stays visible** — the account page says how much
+  is waiting, and it is retried on a schedule. A sign-in the system refused is
+  not retried on its own; tap the notice once the account is fixed
 - Localized folder names; the interface follows the device language
 - **Key hygiene & privacy** — the bundled GnuPG agent is hardened so unlocked keys
   are not kept in memory between operations; passphrases never reach a command
@@ -179,13 +196,27 @@ the body anyway.
   and the app reminds you to move them off-device
 - **Decrypted mail is not kept** — attachments you open or hand to another app are
   written to a cache and to `~/Downloads/sfmail`, and both are emptied when the app
-  starts and when it quits. What stays on the device is the encrypted message
-- **The debug log is off** and only records anything while you switch it on under
-  *About*. It then holds diagnostic output including your account address and
-  attachment file names, is capped in size, and is meant for reporting a problem
-- **32 languages**, following the device language, falling back to English. Only
-  the German and English texts have been read by a native speaker; the rest are
-  offered as they are. Corrections are welcome — see below
+  quits, or, if it was killed, the next time it starts. What stays on the device
+  is the encrypted message. A **draft** is the exception: it keeps the text you
+  are writing in the clear, also for a message you are going to encrypt, and it
+  is stored in the account's Drafts folder like any other draft. Attachments are
+  not kept in a draft
+- **The debug log is off** by default. While you switch it on under *About*, it
+  holds diagnostic output including your account address and attachment file
+  names, is copied to the system journal, is capped in size, and is meant for
+  reporting a problem. With it off, the app keeps only crash and forced-exit
+  markers and the mail-service failures listed under *When mail stops arriving*;
+  none of them contains mail or addresses
+- **32 languages**, following the device language, falling back to English. Some
+  messages that come from the encryption engine itself (import and certificate
+  details) are in English only. Only the German and English texts have been read
+  by a native speaker; the rest are offered as they are. Corrections are welcome —
+  see below
+- **When mail stops arriving** (*About*) — a temporary page for a fault in the
+  system's shared mail service, not in this app: after some days it can stop
+  watching mailboxes for every account at once. The page shows the evidence and
+  can restart that service. It will be removed once a system update carries the
+  fix
 
 ## Trust model
 
@@ -197,7 +228,10 @@ footing, and each becomes trusted the moment you, having seen its
 fingerprint, say so. This holds for S/MIME exactly as for PGP: a certificate
 authority becomes an anchor for everything it signs only when you tick that box
 in the import dialog, and your own identity is an anchor because you made it.
-Revocation lists belong to the delegated-trust world and are consequently not
+Importing your own `.p12` counts as that decision for the root certificates it
+carries: they become anchors, because they are the chain of your own identity.
+If your certificate comes from a public or company authority, everything that
+authority signs will then verify as valid. Revocation lists belong to the delegated-trust world and are consequently not
 consulted — a certificate withdrawn by its authority still verifies here.
 
 ## Why a bundled GnuPG
@@ -210,7 +244,7 @@ GpgME++/QGpgME C++ bindings (gpgme 1.18) in the app's plugin (`SFMail.Gpg`, QML
 singleton `Gpg`); only S/MIME shells out to `gpgsm`/OpenSSL. The
 app uses its **own keyring** at `~/.local/share/sfmail/harbour-sfmail/gnupg`,
 entirely separate from the system keystore. S/MIME uses `gpgsm` from the same
-bundled stack (plus an OpenSSL helper for `.p12` handling) with its own store
+bundled stack (plus OpenSSL for `.p12` handling and for signing) with its own store
 under `~/.local/share/sfmail/harbour-sfmail/smime`.
 
 ## Build
@@ -258,3 +292,6 @@ documented in [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md); the source
 tarballs are included under `stack/src/`, with their SHA-256 digests recorded in
 `stack/build-stack.sh`, which also carries the build-time patches applied to
 them.
+
+The package carries `LICENSE` and `THIRD-PARTY-NOTICES.md`, and the app's
+*About* page names the licence and links to this repository.

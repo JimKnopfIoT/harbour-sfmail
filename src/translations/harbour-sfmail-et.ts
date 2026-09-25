@@ -103,6 +103,10 @@ Kui see häirib, eemaldage teine kirje sellest seosest root-kestast. See on puht
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Miks kontod vahel vaikivad, kuigi postkastis on uusi kirju — viga süsteemi postiteenuses, mida see rakendus sellest teada sai ja kuidas kirjade saabumine tagasi saada.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Vaba tarkvara GNU GPL v3 või uuema litsentsi all; kaasas olevad komponendid oma litsentside all (GPL, LGPL, Apache 2.0). Lähtekood ja litsentsitekstid: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Kui see häirib, eemaldage teine kirje sellest seosest root-kestast. See on puht
     <message>
         <source>no key/certificate for this address</source>
         <translation>selle aadressi jaoks pole võtit ega sertifikaati</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Mustand ei säilita manuseid. Salvesta mustand uuesti, et see ilma nendeta talletada.</translation>
     </message>
 </context>
 <context>
@@ -1257,6 +1265,14 @@ Import lisab sellele aadressile TEISE võtme — veendu, et uus võti on ehtne, 
         <source>Remembered addresses</source>
         <translation>Meelde jäetud aadressid</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Saatmine peatatud: süsteem lükkas selle konto sisselogimise väljuva posti jaoks tagasi. SF-Mail ei proovi enam ise uuesti — iga katse märgiks konto jälle vigaseks. Kontrolli kontot jaotises Seaded → Kontod ja puuduta siis siin, et saata.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Saatmine peatatud: ka viimane automaatne katse ebaõnnestus. Puuduta siin, et uuesti proovida, kui ühendus on taas olemas.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1367,6 +1383,10 @@ Kui ülalolev nupp kohale ei jõua, saab sedasama teha terminalist:</translation
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Viga on teada ja see on operatsioonisüsteemi enda lähtekoodis juba parandatud (viga JB#64979, september 2026): loendamisest loobuti sootuks ja seade kasutab nüüd nii mitut jälgitavat postkasti, kui ta saada suudab, selle asemel et neist kõigist keelduda. Seda parandust ei ole siin töötavas süsteemiversioonis, nii et see peaks jõudma sellesse seadmesse mõne tulevase Sailfish OS-i uuendusega — ja see leht muutub mõttetuks.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Postiteenuse taaskäivitamine</translation>
     </message>
 </context>
 <context>
@@ -1559,6 +1579,14 @@ Kui ülalolev nupp kohale ei jõua, saab sedasama teha terminalist:</translation
     <message>
         <source>Encrypted</source>
         <translation>Krüptitud</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Saatmata. Süsteem lükkas konto sisselogimise väljuva posti jaoks tagasi — kontrolli kontot jaotises Seaded → Kontod ja kasuta siis Saada uuesti.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Saatmata. Ka viimane automaatne katse ebaõnnestus — kasuta Saada uuesti, kui ühendus on taas olemas.</translation>
     </message>
 </context>
 <context>
@@ -1910,6 +1938,18 @@ Kui ülalolev nupp kohale ei jõua, saab sedasama teha terminalist:</translation
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 on juba meelde jäetud</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Allkirjastatud, kuid selle seadme postihoidla ei säilita kirja enam täpselt sellisena, nagu see saadeti — allkirja ei saa siin kontrollida. See ei ütle midagi selle kohta, kas kiri on ehtne.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Allkirjastatud (OpenPGP). SF-Mail ei saa seda allkirja siin kontrollida: seadme postihoidla ei säilita allkirjastatud osa täpselt sellisena, nagu see saadeti.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Allkirjastatud mitme erineva sertifikaadiga. SF-Mail näitab kehtivana ainult ühte allkirja — kontrolli kirja muul viisil.</translation>
     </message>
 </context>
 <context>

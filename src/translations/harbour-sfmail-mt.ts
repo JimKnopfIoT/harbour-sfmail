@@ -103,6 +103,10 @@ Jekk idejqek, neħħi l-entrata l-oħra minn dik ir-rabta minn shell ta&apos; ro
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Għaliex il-kontijiet kultant jiskietu għalkemm il-kaxxa postali jkollha messaġġi ġodda — ħsara fis-servizz tal-posta tas-sistema, dak li ntqal lil din l-applikazzjoni dwarha, u kif terġa' tinkiseb il-konsenja.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Software ħieles taħt il-GNU GPL v3 jew aktar tard; il-komponenti inklużi taħt il-liċenzji tagħhom stess (GPL, LGPL, Apache 2.0). Kodiċi sors u testi tal-liċenzji: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Jekk idejqek, neħħi l-entrata l-oħra minn dik ir-rabta minn shell ta&apos; ro
     <message>
         <source>no key/certificate for this address</source>
         <translation>l-ebda ċavetta jew ċertifikat għal dan l-indirizz</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Abbozz ma jżommx l-annessi. Erġa&apos; ssejvja l-abbozz biex taħżnu mingħajrhom.</translation>
     </message>
 </context>
 <context>
@@ -1261,6 +1269,14 @@ L-importazzjoni żżid IT-TIENI ċavetta għal dan l-indirizz — kun żgur li d
         <source>Remembered addresses</source>
         <translation>Indirizzi mfakkra</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Il-bgħit twaqqaf: is-sistema rrifjutat id-dħul ta&apos; dan il-kont għall-posta ħierġa. SF-Mail ma tibqax terġa&apos; tipprova waħedha — kull tentattiv jerġa&apos; jimmarka l-kont bħala difettuż. Iċċekkja l-kont f&apos;Issettjar → Kontijiet, imbagħad tektek hawn biex tibgħat.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Il-bgħit twaqqaf: anki l-aħħar tentattiv awtomatiku falla. Tektek hawn biex terġa&apos; tipprova meta l-konnessjoni terġa&apos; lura.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1371,6 +1387,10 @@ Jekk il-buttuna ta' hawn fuq ma tgħaddix, l-istess jista' jsir minn terminal:</
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Il-ħsara hija magħrufa u diġà ġiet ikkoreġuta fil-kodiċi sors tas-sistema operattiva nnifisha (ħsara JB#64979, Settembru 2026): l-għadd twarrab għal kollox, u apparat issa juża daqs kemm kaxxi postali mħarsa jista' jikseb minflok ma jirrifjutahom kollha. Dik il-korrezzjoni mhijiex fil-verżjoni tas-sistema li qed taħdem hawn, għalhekk għandha tasal fuq dan l-apparat ma' aġġornament futur ta' Sailfish OS — u din il-paġna ssir bla skop.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Is-servizz tal-posta qed jerġa&apos; jinxtegħel</translation>
     </message>
 </context>
 <context>
@@ -1567,6 +1587,14 @@ Jekk il-buttuna ta' hawn fuq ma tgħaddix, l-istess jista' jsir minn terminal:</
     <message>
         <source>Encrypted</source>
         <translation>Ikkriptat</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Ma ntbagħatx. Is-sistema rrifjutat id-dħul tal-kont għall-posta ħierġa — iċċekkja l-kont f&apos;Issettjar → Kontijiet, imbagħad uża “Ibgħat mill-ġdid”.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Ma ntbagħatx. Anki l-aħħar tentattiv awtomatiku falla — uża “Ibgħat mill-ġdid” meta l-konnessjoni terġa&apos; lura.</translation>
     </message>
 </context>
 <context>
@@ -1918,6 +1946,18 @@ Jekk il-buttuna ta' hawn fuq ma tgħaddix, l-istess jista' jsir minn terminal:</
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 diġà miżmum</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Iffirmat, imma l-ħażna tal-posta ta&apos; dan l-apparat ma għadhiex iżżomm il-messaġġ eżatt kif intbagħat — il-firma ma tistax tiġi vverifikata hawn. Dan ma jgħid xejn dwar jekk il-messaġġ huwiex ġenwin.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Iffirmat (OpenPGP). SF-Mail ma tistax tivverifika din il-firma hawn: il-ħażna tal-posta tal-apparat ma żżommx il-parti ffirmata eżatt kif intbagħtet.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Iffirmat b&apos;diversi ċertifikati differenti. SF-Mail turi biss firma waħda bħala valida — iċċekkja l-messaġġ b&apos;mod ieħor.</translation>
     </message>
 </context>
 <context>

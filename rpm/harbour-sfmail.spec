@@ -2,9 +2,15 @@
 # released packages must not leak the build environment.
 %global _buildhost reproducible-builder
 
+# The GnuPG stack under /usr/share/%{name}/gpg is private to this app: its
+# libraries must not be offered to the rest of the system, and what the app
+# and plugin link from it is shipped here, not a system dependency.
+%global __provides_exclude_from ^%{_datadir}/%{name}/.*$
+%global __requires_exclude ^lib(gcrypt|gpg-error|assuan|ksba|npth|gpgme|gpgmepp|qgpgme)\\.so.*$
+
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.18
+Version:    0.8.19
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -66,7 +72,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/sailjail/permissions
 install -m 644 rpm/EmailUi.permission \
     %{buildroot}%{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
-# Bundle the modern GnuPG 2.2 stack under our OWN app prefix, so the sandbox
+# Bundle the modern GnuPG stack under our OWN app prefix, so the sandbox
 # (which hides other apps' /usr/share/<app>) can reach it. The bundled gpg's
 # RPATH points at the old prefix; that path is absent here, so the loader falls
 # back to LD_LIBRARY_PATH (set by the plugin) → our own gpg/lib.
@@ -99,7 +105,8 @@ cp -a %{stackstage}/usr/share/harbour-sfmail-pgp/bin \
 # gpgsm        S/MIME
 # gpgconf      tells us where the agent listens
 # openssl      PKCS#12 plumbing gpgsm cannot do (aarch64 only)
-# gpg-protect-tool  gpg-agent calls it while importing a .p12
+# gpg-protect-tool  only gpgsm's debugging command calls it; kept until the
+#                   next stack pass drops it
 #
 # The locale prune stays: results are read from status lines, and English
 # fallback text keeps the few remaining message checks predictable.
@@ -134,6 +141,7 @@ strip %{buildroot}%{_libdir}/qt5/qml/SFMail/Gpg/libsfmailgpg.so || true
 # but belongs to a different program. It is dead weight here — and dead code
 # that ships still has to be audited, so it does not ship.
 rm -f %{buildroot}%{_datadir}/%{name}/qml/pages/Pgp*.qml
+rm -f %{buildroot}%{_datadir}/%{name}/qml/harbour-sfmail-pgp.qml
 
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop || echo "warn"
 
@@ -204,6 +212,7 @@ fi
 
 %files
 %defattr(-,root,root,-)
+%license LICENSE THIRD-PARTY-NOTICES.md
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_libdir}/qt5/qml/SFMail/Gpg
@@ -212,6 +221,80 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Fri Sep 25 2026 harbour-sfmail contributors 0.8.19-1
+- Mail can be sent again. Releases 0.8.14 to 0.8.18 could not send at all: the
+  composer looked up the accounts through a property the account list does not
+  have, so the sender stayed empty and every attempt - sending, replying, saving
+  a draft or a template, and every mailto: link handed to the app - ended at
+  "Choose an account". The alias addresses announced in 0.8.14 were therefore
+  never offered either. The sender list is read correctly now.
+- All outgoing mail goes through one queue. With mail waiting in two accounts
+  the second transmission was refused outright and never tried again; accounts
+  are now sent one after the other, S/MIME mail included, each with its own
+  retry schedule. A transmission that shows no sign of life for five minutes is
+  given up and retried; one that is still moving is not cut off. When a message
+  has to go out as several copies, one per blind recipient, it goes out as all
+  of them or none: if one copy cannot be queued, the others are taken back.
+- A refused sign-in is no longer retried behind your back. Every automatic
+  attempt flagged the account in the system as needing attention again. The
+  account page now says what happened, and tapping it tries once more after you
+  have checked the account. A send that ran out of automatic attempts says so,
+  instead of blaming the server.
+- Two false alarms after a successful send are gone: messages reported as
+  removed from the server, and "not sent" for mail that had been delivered.
+- The key agents end with the app. They used to be able to outlive it and keep
+  its sandbox alive, after which the icon no longer started the app until they
+  were killed. The app now starts them itself, and the system ends them together
+  with it however it ends. A shutdown that hangs is completed after three
+  seconds, and decrypted copies are removed first. If the app does not start
+  from its icon right after this update, restart the device once.
+- S/MIME signatures are judged one by one. The verdict for a message carrying
+  several signatures could combine the signer of one with the trust of another,
+  and so show a valid signature under the wrong name. Each signature is now
+  judged on its own, the weakest decides, and a message signed by several
+  different certificates is never shown as validly signed. The signer's
+  certificate is compared with the sender's address, as for OpenPGP; a key or
+  certificate without any address no longer counts as a match.
+- Checking an S/MIME signature no longer risks the store. Certificates that a
+  verification adds as a side effect are removed afterwards; if the store could
+  not be listed beforehand, that clean-up could also remove your own identity
+  and your trust anchors. It now removes nothing unless both listings succeed,
+  and never a certificate with a private key.
+- S/MIME signatures sent as a separate part - the form most other clients use -
+  cannot be checked on the device: the system's mail store keeps such messages
+  taken apart and rewritten, so the signed bytes are gone. The app now says
+  exactly that. A message that is only encrypted no longer carries a line
+  claiming its signature could not be checked.
+- Signed-only OpenPGP mail no longer shows the system's verdict as if it were
+  the app's own. That verdict came from the platform's older GnuPG and keyring;
+  the app now states that the message is signed and does not judge it. Messages
+  it decrypts and inline-signed text are judged as before.
+- Importing a sender's key from an attachment works; the tap did nothing. A key
+  block that carries a private key anywhere in it is refused.
+- Certificates: an expired, revoked or invalid certificate is no longer offered
+  as a recipient, and a stored certificate that shares the address is named in
+  the import dialog even when it is marked as an authority. Missing issuer
+  certificates are actually fetched when asked for; only a certificate authority
+  named exactly as the issuer is taken from the answer.
+- The sender check takes the connecting address from the part of the header
+  the receiving server wrote, not from the name the sender introduced itself
+  with, which could be set to pass the check.
+- Passphrases for the S/MIME helper travel through a pipe instead of the process
+  environment. An S/MIME signing failure reports its cause. Backups of keys and
+  certificates are written completely or not at all.
+- The debug-log switch also governs what the app writes to the system journal.
+  With it off, only crash and forced-exit markers and the mail-service failures
+  shown under "When mail stops arriving" are kept.
+- Sharing to e-mail works while the app holds the notification hand-off: files
+  and text shared from other apps open in the composer. Files from the app's own
+  data are never attached on another program's request.
+- Saving a draft that has attachments says first that a draft does not keep
+  them.
+- Restarting the mail service from "When mail stops arriving" waits a moment in
+  which it can be called off, and no longer freezes the page.
+- The About page names the licence and where the source is, and the package
+  carries the licence texts.
+
 * Fri Sep 18 2026 harbour-sfmail contributors 0.8.18-1
 - A stop-gap, and meant to be one. Collecting mail on this platform is the work
   of a system service that every mail application shares. That service miscounts

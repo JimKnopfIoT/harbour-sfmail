@@ -99,7 +99,14 @@ Page {
                     ? qsTr("Failed — trying again in a minute (%1/%2)").arg(attempt).arg(total)
                     : qsTr("Failed — trying again in %1 minutes (%2/%3)").arg(minutes).arg(attempt).arg(total)
         }
-        onRetryStopped: page._retryNotice = qsTr("Not sent. The server refused it — use Send again after fixing the cause.")
+        // An empty reason means the schedule ended because everything went out;
+        // "cancelled" that the user stopped it.
+        onRetryStopped: page._retryNotice = (reason === "" || reason === "cancelled") ? ""
+            : reason === "credentials"
+              ? qsTr("Not sent. The system refused the account's sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.")
+            : reason === "exhausted"
+              ? qsTr("Not sent. The last automatic attempt failed as well — use Send again when the connection is back.")
+              : qsTr("Not sent. The server refused it — use Send again after fixing the cause.")
     }
 
     // Leaving the foreground aborts a running countdown at once, instead of only

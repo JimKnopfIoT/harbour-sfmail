@@ -19,7 +19,7 @@ void sfmailClearSyncIssues();
 // Exposed to QML as the context property "DebugLog" so the About page can offer a
 // switch (by request): turn the debug.log file on/off at runtime. The choice
 // is persisted in signed.ini (same store as the other app settings) and restored at
-// startup. stderr/journal output is unaffected — only the on-device logfile.
+// startup. It gates the on-device logfile and the journal copy alike.
 class LogControl : public QObject
 {
     Q_OBJECT

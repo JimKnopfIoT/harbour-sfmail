@@ -103,6 +103,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>لماذا تصمت الحسابات أحيانًا رغم أنّ في صندوق البريد رسائل جديدة — خلل في خدمة البريد في النظام، وما أُبلِغ به هذا التطبيق عنه، وكيف يعود الاستلام.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>برنامج حر بموجب رخصة GNU GPL الإصدار 3 أو أحدث؛ والمكوّنات المرفقة بموجب رخصها الخاصة (GPL وLGPL وApache 2.0). الشيفرة المصدرية ونصوص الرخص: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>no key/certificate for this address</source>
         <translation>لا مفتاح ولا شهادة لهذا العنوان</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>لا تحتفظ المسودة بالمرفقات. احفظ المسودة مرة أخرى لتخزينها بدونها.</translation>
     </message>
 </context>
 <context>
@@ -1265,6 +1273,14 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Remembered addresses</source>
         <translation>العناوين المحفوظة</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>توقّف الإرسال: رفض النظام تسجيل دخول هذا الحساب للبريد الصادر. لم يعد SF-Mail يعيد المحاولة من تلقاء نفسه — فكل محاولة ستُعلِّم الحساب مجددًا. افحص الحساب في الإعدادات → الحسابات، ثم انقر هنا للإرسال.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>توقّف الإرسال: فشلت آخر محاولة تلقائية أيضًا. انقر هنا لإعادة المحاولة عند عودة الاتصال.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1375,6 +1391,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>الخلل معروف وقد صُحِّح فعلًا في الشيفرة المصدرية لنظام التشغيل نفسه (العلة JB#64979، سبتمبر 2026): تُرك العدّ كليًا، وصار الجهاز يستخدم ما يستطيع الحصول عليه من صناديق بريد مراقَبة بدلًا من رفضها جميعًا. وهذا التصحيح غير موجود في إصدار النظام العامل هنا، لذا يُفترض أن يصل إلى هذا الجهاز مع تحديث قادم لـ Sailfish OS — وعندئذٍ تفقد هذه الصفحة معناها.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>جارٍ إعادة تشغيل خدمة البريد</translation>
     </message>
 </context>
 <context>
@@ -1575,6 +1595,14 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Encrypted</source>
         <translation>مشفَّرة</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>لم تُرسل. رفض النظام تسجيل دخول الحساب للبريد الصادر — افحص الحساب في الإعدادات → الحسابات، ثم استخدم «إعادة الإرسال».</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>لم تُرسل. فشلت آخر محاولة تلقائية أيضًا — استخدم «إعادة الإرسال» عند عودة الاتصال.</translation>
     </message>
 </context>
 <context>
@@ -1926,6 +1954,18 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 محفوظ بالفعل</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>موقَّعة، لكن مخزن البريد في هذا الجهاز لم يعد يحتفظ بالرسالة كما أُرسلت تمامًا — لا يمكن التحقق من التوقيع هنا. ولا يدلّ هذا على شيء بشأن صحة الرسالة.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>موقَّعة (OpenPGP). لا يستطيع SF-Mail التحقق من هذا التوقيع هنا: مخزن البريد في الجهاز لا يحتفظ بالجزء الموقَّع كما أُرسل تمامًا.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>موقَّعة بعدة شهادات مختلفة. يعرض SF-Mail توقيعًا واحدًا فقط على أنه صالح — تحقّق من الرسالة بوسيلة أخرى.</translation>
     </message>
 </context>
 <context>

@@ -103,6 +103,10 @@ Ako vam smeta, uklonite drugi unos iz te pridruženosti iz root ljuske. To je č
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Zašto računi katkad zamuknu iako pretinac ima nove poruke — kvar u poštanskoj usluzi sustava, što je ova aplikacija o tome saznala i kako vratiti dostavu.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Slobodni softver pod licencom GNU GPL v3 ili novijom; priložene komponente pod vlastitim licencama (GPL, LGPL, Apache 2.0). Izvorni kod i tekstovi licenci: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Ako vam smeta, uklonite drugi unos iz te pridruženosti iz root ljuske. To je č
     <message>
         <source>no key/certificate for this address</source>
         <translation>nema ključa/certifikata za ovu adresu</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Skica ne čuva privitke. Ponovno spremite skicu kako bi se spremila bez njih.</translation>
     </message>
 </context>
 <context>
@@ -1259,6 +1267,14 @@ Uvozom se za ovu adresu dodaje DRUGI ključ — uvjerite se da je taj novi klju�
         <source>Remembered addresses</source>
         <translation>Zapamćene adrese</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Slanje zaustavljeno: sustav je odbio prijavu ovog računa za odlaznu poštu. SF-Mail više ne pokušava sam — svaki bi pokušaj ponovno označio račun kao neispravan. Provjerite račun u Postavke → Računi, a zatim dodirnite ovdje za slanje.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Slanje zaustavljeno: ni posljednji automatski pokušaj nije uspio. Dodirnite ovdje i pokušajte ponovno kad veza bude ponovno uspostavljena.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1369,6 +1385,10 @@ Ako gumb iznad ne prolazi, isto se može učiniti iz terminala:</translation>
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Kvar je poznat i već je ispravljen u izvornom kodu samoga operacijskog sustava (greška JB#64979, rujan 2026.): brojenje je posve napušteno, pa uređaj sada koristi onoliko nadziranih pretinaca koliko ih može dobiti, umjesto da odbije sve. Taj ispravak nije u inačici sustava koja radi ovdje, pa bi na ovaj uređaj trebao stići s budućom nadogradnjom sustava Sailfish OS — i ova stranica postat će suvišna.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Poštanska usluga ponovno se pokreće</translation>
     </message>
 </context>
 <context>
@@ -1563,6 +1583,14 @@ Ako gumb iznad ne prolazi, isto se može učiniti iz terminala:</translation>
     <message>
         <source>Encrypted</source>
         <translation>Šifrirano</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Nije poslano. Sustav je odbio prijavu računa za odlaznu poštu — provjerite račun u Postavke → Računi, a zatim upotrijebite Pošalji ponovno.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Nije poslano. Ni posljednji automatski pokušaj nije uspio — kad veza bude ponovno uspostavljena, upotrijebite Pošalji ponovno.</translation>
     </message>
 </context>
 <context>
@@ -1914,6 +1942,18 @@ Ako gumb iznad ne prolazi, isto se može učiniti iz terminala:</translation>
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 je već zapamćena</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Potpisano, ali spremište pošte ovog uređaja više ne čuva poruku točno onakvu kakva je poslana — potpis se ovdje ne može provjeriti. To ništa ne govori o tome je li poruka vjerodostojna.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Potpisano (OpenPGP). SF-Mail ovdje ne može provjeriti taj potpis: spremište pošte uređaja ne čuva potpisani dio točno onakav kakav je poslan.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Potpisano s nekoliko različitih certifikata. SF-Mail kao valjan prikazuje samo jedan potpis — provjerite poruku na drugi način.</translation>
     </message>
 </context>
 <context>

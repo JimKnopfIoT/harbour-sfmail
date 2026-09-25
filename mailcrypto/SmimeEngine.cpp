@@ -1,4 +1,13 @@
 #include "SmimeEngine.h"
+#include "GpgEngine.h"
+#include "agentconf.h"
+#include "qmfstorepath.h"
+#include "backupfile.h"
+#include "mimeheader.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/prctl.h>
 #include <qmailnamespace.h>
 
 #include <QProcess>
@@ -38,39 +47,9 @@
 // qmailstore.db). Does NOT construct a QMailMessage (that can freeze the app).
 static QString smimeMessageFilePath(int messageId)
 {
-    // Ask QMF where its store lives instead of assuming a fixed dot-directory:
-    // the location differs between installations (legacy ~/.qmf vs. the XDG data
-    // directory on newer systems), and a wrong guess makes every S/MIME message
-    // look like an empty plain one.
-    const QString dbPath = QDir::cleanPath(QMail::dataPath())
-                           + QStringLiteral("/database/qmailstore.db");
-    QString path;
-    {
-        QSqlDatabase db = QSqlDatabase::addDatabase(QStringLiteral("QSQLITE"),
-                                                    QStringLiteral("smime_msg"));
-        db.setDatabaseName(dbPath);
-        if (db.open()) {
-            QSqlQuery q(db);
-            q.prepare(QStringLiteral("SELECT mailfile FROM mailmessages WHERE id = ?"));
-            q.addBindValue(messageId);
-            if (q.exec() && q.next()) {
-                QString mf = q.value(0).toString();
-                const int c = mf.indexOf(QLatin1Char(':'));   // strip "qmfstoragemanager:"
-                if (c > 0 && mf.left(c).contains(QStringLiteral("storagemanager"), Qt::CaseInsensitive))
-                    mf = mf.mid(c + 1);
-                if (!mf.isEmpty()) {
-                    path = mf.startsWith(QLatin1Char('/')) ? mf
-                         : (QDir::cleanPath(QMail::dataPath()) + QStringLiteral("/mail/") + mf);
-                }
-            }
-            db.close();
-        }
-    }
-    QSqlDatabase::removeDatabase(QStringLiteral("smime_msg"));
-    return path;
+    return qmfMessageFile(messageId);
 }
 
-// Read the full raw bytes of a stored message (empty if unavailable).
 static QByteArray smimeRawMessage(int messageId)
 {
     const QString p = smimeMessageFilePath(messageId);
@@ -611,7 +590,8 @@ static QByteArray buildInnerMime(const QString &bodyText, const QVariantList &at
         QByteArray name = a.value(QStringLiteral("name")).toString().toUtf8();
         if (name.isEmpty()) name = QFileInfo(path).fileName().toUtf8();
         QByteArray mime = a.value(QStringLiteral("mimeType")).toString().toUtf8();
-        if (mime.isEmpty()) mime = "application/octet-stream";
+        name = mimeSafeName(name);           // see mimeheader.h
+        mime = mimeSafeType(mime);
         m += "--" + bnd + CRLF;
         m += "Content-Type: " + mime + "; name=\"" + name + "\"" + CRLF;
         m += "Content-Transfer-Encoding: base64" + CRLF;
@@ -669,11 +649,7 @@ SmimeEngine::SmimeEngine(QObject *parent) : QObject(parent)
     {
         // Only rewrite when the content actually differs — see writeIfChanged in
         // the OpenPGP engine for why an unconditional truncate is wrong here.
-        const QByteArray want = "allow-loopback-pinentry\n"
-                                "default-cache-ttl 0\n"
-                                "max-cache-ttl 0\n"
-                                "ignore-cache-for-signing\n"
-                                "disable-scdaemon\n";
+        const QByteArray want(kSmimeAgentConf);
         QFile f(agentConf);
         QByteArray have;
         if (f.open(QIODevice::ReadOnly)) { have = f.readAll(); f.close(); }
@@ -714,6 +690,29 @@ void SmimeEngine::log(const QString &s)
     emit logLine(s);
 }
 
+// Every gpgsm and openssl this engine starts. It ends with the app: a gpgsm
+// left running after the app died would find no agent any more and start one
+// of its own, which then keeps the launch sandbox alive (the app could not be
+// started again). Optionally it finds a pipe on file descriptor 3: the data is
+// written into the pipe before the start (a key is far below a pipe's
+// capacity), so the child reads it at its own pace and sees end-of-file after.
+class Fd3Process : public QProcess
+{
+public:
+    explicit Fd3Process(int fd = -1) : m_fd(fd) {}
+protected:
+    void setupChildProcess() override
+    {
+        ::prctl(PR_SET_PDEATHSIG, SIGTERM);
+        if (::getppid() == 1) ::_exit(0);        // the app is already gone
+        if (m_fd < 0) return;
+        if (m_fd != 3) ::dup2(m_fd, 3);           // dup2 clears close-on-exec
+        else ::fcntl(3, F_SETFD, 0);
+    }
+private:
+    int m_fd;
+};
+
 bool SmimeEngine::runGpgsm(const QStringList &args, const QByteArray &stdinData,
                            QByteArray *out, QByteArray *err, int timeoutMs)
 {
@@ -735,7 +734,7 @@ bool SmimeEngine::runGpgsm(const QStringList &args, const QByteArray &stdinData,
     env.insert(QStringLiteral("LD_LIBRARY_PATH"), ld);
     env.insert(QStringLiteral("GNUPGHOME"), m_home);
 
-    QProcess p;
+    Fd3Process p;
     p.setProcessEnvironment(env);
     p.start(m_gpgsm, full);
     if (!p.waitForStarted(8000)) { if (err) *err = "gpgsm did not start"; return false; }
@@ -749,21 +748,32 @@ bool SmimeEngine::runGpgsm(const QStringList &args, const QByteArray &stdinData,
 
 bool SmimeEngine::runOpenssl(const QStringList &args, const QByteArray &stdinData,
                              QByteArray *out, QByteArray *err, int timeoutMs,
-                             const QString &passEnv)
+                             const QByteArray &fd3Data)
 {
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     // Our bundled openssl finds its legacy provider here (still links the SYSTEM
     // libssl/libcrypto). Do NOT add our gpg lib dir — openssl must use system libs.
     env.insert(QStringLiteral("OPENSSL_MODULES"), m_stack + QStringLiteral("/lib/ossl-modules"));
-    // Passphrase via the child's environment (env:SFMAIL_PASS), never via argv:
-    // /proc/<pid>/cmdline is readable by EVERY process, /proc/<pid>/environ only
-    // by the same user and root.
-    if (!passEnv.isEmpty())
-        env.insert(QStringLiteral("SFMAIL_PASS"), passEnv);
-    QProcess p;
+    int pipeFds[2] = { -1, -1 };
+    if (!fd3Data.isEmpty()) {
+        if (fd3Data.size() > 60000 || ::pipe2(pipeFds, O_CLOEXEC) != 0) {
+            if (err) *err = "no pipe for the key";
+            return false;
+        }
+        const ssize_t n = ::write(pipeFds[1], fd3Data.constData(), size_t(fd3Data.size()));
+        ::close(pipeFds[1]);
+        if (n != fd3Data.size()) {
+            ::close(pipeFds[0]);
+            if (err) *err = "could not hand over the key";
+            return false;
+        }
+    }
+    Fd3Process p(pipeFds[0]);
     p.setProcessEnvironment(env);
     p.start(m_openssl, args);
-    if (!p.waitForStarted(8000)) { if (err) *err = "openssl did not start"; return false; }
+    const bool started = p.waitForStarted(8000);
+    if (pipeFds[0] >= 0) ::close(pipeFds[0]);
+    if (!started) { if (err) *err = "openssl did not start"; return false; }
     if (!stdinData.isEmpty()) p.write(stdinData);
     p.closeWriteChannel();
     if (!p.waitForFinished(timeoutMs)) { p.kill(); if (err) *err = "openssl timed out"; return false; }
@@ -846,32 +856,90 @@ QString SmimeEngine::aiaCaIssuers(const QString &fingerprint)
     return QString();
 }
 
+// From a downloaded reply (PEM, DER or a PKCS#7 bundle), the one CA
+// certificate whose subject is the issuer of the certificate `childFpr`.
+// Empty if there is none.
+QByteArray SmimeEngine::issuerCertFrom(const QByteArray &data, const QString &childFpr)
+{
+    QByteArray childPem, e;
+    runGpgsm(QStringList() << QStringLiteral("--armor") << QStringLiteral("--export") << childFpr,
+             QByteArray(), &childPem, &e, 30000);
+    if (childPem.isEmpty()) return QByteArray();
+    QByteArray io, ie;
+    runOpenssl(QStringList() << QStringLiteral("x509") << QStringLiteral("-noout")
+                             << QStringLiteral("-issuer") << QStringLiteral("-nameopt")
+                             << QStringLiteral("RFC2253"),
+               childPem, &io, &ie, 15000);
+    const QString wantIssuer = QString::fromUtf8(io).trimmed().section('=', 1, -1).trimmed();
+    if (wantIssuer.isEmpty()) return QByteArray();
+
+    QList<QByteArray> pems = pemBlocks(data, "CERTIFICATE");
+    if (pems.isEmpty()) {
+        QByteArray o, err;
+        runOpenssl(QStringList() << QStringLiteral("pkcs7") << QStringLiteral("-inform")
+                                 << QStringLiteral("DER") << QStringLiteral("-print_certs"),
+                   data, &o, &err, 20000);
+        pems = pemBlocks(o, "CERTIFICATE");
+    }
+    if (pems.isEmpty()) {
+        QByteArray o, err;
+        runOpenssl(QStringList() << QStringLiteral("x509") << QStringLiteral("-inform")
+                                 << QStringLiteral("DER"),
+                   data, &o, &err, 20000);
+        pems = pemBlocks(o, "CERTIFICATE");
+    }
+    for (const QByteArray &pem : pems) {
+        QByteArray o, err;
+        runOpenssl(QStringList() << QStringLiteral("x509") << QStringLiteral("-noout")
+                                 << QStringLiteral("-subject") << QStringLiteral("-nameopt")
+                                 << QStringLiteral("RFC2253") << QStringLiteral("-ext")
+                                 << QStringLiteral("basicConstraints"),
+                   pem, &o, &err, 15000);
+        const QString txt = QString::fromUtf8(o);
+        const QString subject = txt.section('\n', 0, 0).section('=', 1, -1).trimmed();
+        // Only the basic-constraints section counts: the subject line is the
+        // certificate owner's text and may say anything, "CA:TRUE" included.
+        const int bc = txt.indexOf(QStringLiteral("X509v3 Basic Constraints"));
+        const QString constraints = bc >= 0 ? txt.mid(bc).section('\n', 1, 1).trimmed() : QString();
+        if (subject == wantIssuer && constraints.startsWith(QStringLiteral("CA:TRUE")))
+            return pem;
+    }
+    return QByteArray();
+}
+
 void SmimeEngine::completeChainViaAia()
 {
     if (m_aiaRunning) return;              // httpGet spins an event loop: no re-entry
     m_aiaRunning = true;
     int fetched = 0;
+    QSet<QString> tried;                   // each certificate's pointer once
     for (int guard = 0; guard < 12; ++guard) {
         const QVariantList certs = listCerts();
-        QSet<QString> have;
-        for (const QVariant &v : certs) have.insert(v.toMap().value(QStringLiteral("fpr")).toString());
 
-        QString url;
+        QString url, childFpr;
         for (const QVariant &v : certs) {
             const QVariantMap m = v.toMap();
             if (m.value(QStringLiteral("isRoot")).toBool()) continue;
-            const QString issuer = m.value(QStringLiteral("chainId")).toString();
-            if (issuer.isEmpty() || have.contains(issuer)) continue;   // issuer already present
+            if (!m.value(QStringLiteral("issuerMissing")).toBool()) continue;   // issuer present
+            if (tried.contains(m.value(QStringLiteral("fpr")).toString())) continue;
             const QString u = aiaCaIssuers(m.value(QStringLiteral("fpr")).toString());
-            if (!u.isEmpty()) { url = u; break; }
+            if (!u.isEmpty()) { url = u; childFpr = m.value(QStringLiteral("fpr")).toString(); break; }
         }
         if (url.isEmpty()) break;   // chain complete (or no AIA pointer to follow)
+        tried.insert(childFpr);
 
         log(QStringLiteral("AIA: fetching issuer certificate…"));
         const QByteArray certData = httpGet(url, 20000, 256 * 1024);
         if (certData.isEmpty()) { log(QStringLiteral("AIA: download failed")); break; }
+        // The URL comes from a stranger's certificate, and so does the answer:
+        // only a CA certificate named exactly as the issuer that pointed here
+        // is taken. Anything else in the reply — above all an end-entity
+        // certificate for some address — would otherwise become a silent
+        // encryption candidate for that address.
+        const QByteArray issuerPem = issuerCertFrom(certData, childFpr);
+        if (issuerPem.isEmpty()) { log(QStringLiteral("AIA: reply holds no matching issuer - ignored")); break; }
         QByteArray io, ie;
-        const bool ok = runGpgsm(QStringList() << QStringLiteral("--import"), certData, &io, &ie);
+        const bool ok = runGpgsm(QStringList() << QStringLiteral("--import"), issuerPem, &io, &ie);
         invalidateCerts();
         if (!ok) { log(QStringLiteral("AIA: import of fetched issuer failed")); break; }
         ++fetched;
@@ -995,15 +1063,18 @@ void SmimeEngine::generateCert(const QString &name, const QString &email,
 
     // Pack key+cert into a p12 protected by the user's passphrase, then reuse the
     // proven importP12() path (repack → gpgsm import → trust the self-signed root).
-    // Key via stdin, passphrase via the environment — neither on disk nor on argv.
+    // Key through a pipe on fd 3, passphrase on stdin — neither on disk, nor on
+    // argv, nor in the environment.
     QStringList exp;
     exp << QStringLiteral("pkcs12") << QStringLiteral("-export")
-        << QStringLiteral("-inkey") << QStringLiteral("/proc/self/fd/0")
+        << QStringLiteral("-inkey") << QStringLiteral("/proc/self/fd/3")
         << QStringLiteral("-in")    << certFile
-        << QStringLiteral("-passout") << QStringLiteral("env:SFMAIL_PASS")
+        << QStringLiteral("-passout") << QStringLiteral("fd:0")
         << QStringLiteral("-out")   << p12File;
     QByteArray eo, ee;
-    const bool packed = runOpenssl(exp, keyPem, &eo, &ee, 60000, passphrase);
+    QByteArray passOut = passphrase.toUtf8() + "\n";
+    const bool packed = runOpenssl(exp, passOut, &eo, &ee, 60000, keyPem);
+    passOut.fill(0);
     keyPem.fill(0);
     if (!packed) {
         emit importFinished(false, 0, QStringLiteral("openssl could not package the certificate: %1")
@@ -1030,12 +1101,12 @@ void SmimeEngine::importP12(const QString &p12Path, const QString &passphrase,
 
     // 1) Dump EVERYTHING (all certs + all private keys, unencrypted) from the .p12
     //    — to STDOUT, captured in memory. The unencrypted keys never touch the
-    //    filesystem, and the passphrase travels via the environment, not argv
+    //    filesystem, and the passphrase goes in on stdin, not argv
     //    (/proc/<pid>/cmdline is world-readable). Real-world .p12 files often
     //    use legacy algorithms → -legacy on OpenSSL 3.x; without it on 1.1.x.
     // Nothing else needs this child's stdin, so the passphrase goes there rather
-    // than into its environment: /proc/<pid>/environ is readable by every process
-    // of the same user, a pipe is not.
+    // than into its environment: /proc/<pid>/environ holds it for the child's
+    // whole run, a pipe only until the child has read it.
     QByteArray passIn = passphrase.toUtf8() + "\n";
     QStringList dump;
     dump << QStringLiteral("pkcs12") << QStringLiteral("-in") << path
@@ -1043,6 +1114,13 @@ void SmimeEngine::importP12(const QString &p12Path, const QString &passphrase,
          << QStringLiteral("-passin") << QStringLiteral("fd:0");
     if (legacy) dump << QStringLiteral("-legacy");
     QByteArray all, oerr;
+    QList<QByteArray> keys;
+    // The dump holds every private key of the bundle unencrypted: wiped on
+    // every way out of this function, the early ones included.
+    struct DumpWipe {
+        QByteArray &all; QList<QByteArray> &keys;
+        ~DumpWipe() { all.fill(0); for (QByteArray &k : keys) k.fill(0); }
+    } dumpWipe{all, keys};
     if (!runOpenssl(dump, passIn, &all, &oerr, 60000)) {
         // Retry once with the opposite -legacy choice (covers version surprises).
         QStringList dump2 = dump;
@@ -1057,7 +1135,7 @@ void SmimeEngine::importP12(const QString &p12Path, const QString &passphrase,
     passIn.fill(0);
 
     const QList<QByteArray> certs = pemBlocks(all, "CERTIFICATE");
-    const QList<QByteArray> keys  = allPrivateKeys(all);
+    keys = allPrivateKeys(all);
     log(QStringLiteral("p12 dump: %1 certificate(s), %2 private key(s)").arg(certs.size()).arg(keys.size()));
     if (keys.isEmpty() || certs.isEmpty()) {
         emit importFinished(false, 0, QStringLiteral("no keys/certs found in the .p12"));
@@ -1114,17 +1192,21 @@ void SmimeEngine::importP12(const QString &p12Path, const QString &passphrase,
         const QString p12File  = wd + QStringLiteral("/key%1.p12").arg(ki);
         { QFile f(certFile); if (f.open(QIODevice::WriteOnly)) { f.write(certs[ci]); f.close(); } }
 
-        // The unencrypted key goes to openssl via stdin (-inkey /proc/self/fd/0),
-        // never as a file; the new p12's passphrase via the environment, not argv.
+        // The unencrypted key goes to openssl through a pipe on fd 3
+        // (-inkey /proc/self/fd/3), never as a file; the new p12's passphrase
+        // on stdin, not argv and not the environment.
         QStringList exp;
         exp << QStringLiteral("pkcs12") << QStringLiteral("-export")
-            << QStringLiteral("-inkey") << QStringLiteral("/proc/self/fd/0")
+            << QStringLiteral("-inkey") << QStringLiteral("/proc/self/fd/3")
             << QStringLiteral("-in") << certFile;
         if (!chainPem.isEmpty()) exp << QStringLiteral("-certfile") << chainFile;
-        exp << QStringLiteral("-passout") << QStringLiteral("env:SFMAIL_PASS")
+        exp << QStringLiteral("-passout") << QStringLiteral("fd:0")
             << QStringLiteral("-out") << p12File;
         QByteArray eo, ee;
-        if (!runOpenssl(exp, keys[ki], &eo, &ee, 60000, passphrase)) {
+        QByteArray passOut = passphrase.toUtf8() + "\n";
+        const bool repacked = runOpenssl(exp, passOut, &eo, &ee, 60000, keys[ki]);
+        passOut.fill(0);
+        if (!repacked) {
             log(QStringLiteral("key %1: repack failed: %2").arg(ki).arg(QString::fromUtf8(ee).trimmed()));
             continue;
         }
@@ -1232,14 +1314,29 @@ QVariantMap SmimeEngine::verifyRaw(const QByteArray &raw, QByteArray *contentOut
     if (!m_available) { r[QStringLiteral("status")] = QStringLiteral("error"); r[QStringLiteral("error")] = QStringLiteral("gpgsm not available"); return r; }
 
     const SmimeStructure st = smimeInspect(raw);
-    if (!st.kind.startsWith(QLatin1String("signed")) || st.cms.isEmpty()) return r;
+    if (!st.kind.startsWith(QLatin1String("signed"))) return r;
+    if (st.cms.isEmpty()) {
+        // Signed, but the signature part is empty in the stored copy. The
+        // platform's mail store keeps multipart messages taken apart, with the
+        // part headers rewritten and the bodies decoded into separate files —
+        // the bytes the sender signed are no longer on the device, and no
+        // reassembly gets them back. Say that, rather than "could not be checked".
+        r[QStringLiteral("status")] = QStringLiteral("unverifiable");
+        r[QStringLiteral("note")] = QStringLiteral("Signed, but the stored copy no longer holds the signed bytes");
+        log(QStringLiteral("verify: unverifiable (signature part not kept by the mail store)"));
+        return r;
+    }
 
     // gpgsm stores every certificate it finds in a signed message in the keybox
     // as a side effect of verifying. That would turn any sender's certificate
     // into an encryption candidate without the user ever seeing it — so
     // snapshot the store first and remove what the verification added.
-    QSet<QString> before;
-    for (const QVariant &v : listCerts()) before.insert(v.toMap().value(QStringLiteral("fpr")).toString().toUpper());
+    // The snapshot comes straight from gpgsm, never from the cache — and if
+    // either listing fails, nothing is removed afterwards: an empty "before"
+    // would make every stored certificate look new, the user's own identity
+    // and the trust anchors included.
+    QSet<QString> before, beforeSecret;
+    const bool haveBefore = keyboxFprs(&before, &beforeSecret);
 
     QStringList args;
     args << QStringLiteral("--status-fd") << QStringLiteral("2");
@@ -1275,27 +1372,77 @@ QVariantMap SmimeEngine::verifyRaw(const QByteArray &raw, QByteArray *contentOut
     }
     Q_UNUSED(okRun);
 
-    const QString good = smimeStatusValue(err, "GOODSIG");
-    const QString bad  = smimeStatusValue(err, "BADSIG");
-    QString fpr = (!good.isEmpty() ? good : bad).section(' ', 0, 0).toUpper();
+    // One verdict per signature. gpgsm starts every signature's status lines
+    // with NEWSIG; the trust lines belong to the signature above them. Reading
+    // the whole output at once paired the signer of the first good signature
+    // with the trust of ANY signature — a message signed with a forged
+    // certificate plus a trusted one showed green under the forged name.
+    QList<QByteArray> blocks;
+    {
+        QByteArray cur;
+        for (const QByteArray &lr : err.split('\n')) {
+            if (lr.trimmed().startsWith("[GNUPG:] NEWSIG")) {
+                if (!cur.trimmed().isEmpty()) blocks << cur;
+                cur.clear();
+            }
+            cur += lr + '\n';
+        }
+        if (!cur.trimmed().isEmpty()) blocks << cur;
+    }
+    struct SigVerdict { QString status, fpr, trust; };
+    QList<SigVerdict> verdicts;
+    for (const QByteArray &b : blocks) {
+        const QString good = smimeStatusValue(b, "GOODSIG");
+        const QString bad  = smimeStatusValue(b, "BADSIG");
+        SigVerdict v;
+        v.fpr = (!good.isEmpty() ? good : bad).section(' ', 0, 0).toUpper();
+        if (!good.isEmpty()) {
+            const bool trusted = smimeHasStatus(b, "TRUST_FULLY") || smimeHasStatus(b, "TRUST_ULTIMATE");
+            v.trust = trusted ? QStringLiteral("full")
+                    : smimeHasStatus(b, "TRUST_NEVER") ? QStringLiteral("never")
+                    : smimeHasStatus(b, "TRUST_MARGINAL") ? QStringLiteral("marginal")
+                                                          : QStringLiteral("undefined");
+            v.status = trusted ? QStringLiteral("good") : QStringLiteral("good-untrusted");
+        } else if (!bad.isEmpty()) {
+            v.status = QStringLiteral("bad");
+        } else if (smimeHasStatus(b, "ERRSIG") || b.contains("verify.findkey")
+                   || b.contains("No public key") || b.contains("certificate not found")) {
+            v.status = QStringLiteral("nocert");
+        } else if (b.contains("[GNUPG:]")) {
+            v.status = QStringLiteral("error");
+        } else {
+            continue;                            // plain text before the first NEWSIG
+        }
+        verdicts << v;
+    }
+    // The message as a whole: the worst signature decides, and several
+    // different signers are never shown as one valid signature.
+    const QStringList rank = { QStringLiteral("bad"), QStringLiteral("error"),
+                               QStringLiteral("nocert"), QStringLiteral("good-untrusted"),
+                               QStringLiteral("good") };
+    QString stt = QStringLiteral("error");
+    QString fpr, trust;
+    QSet<QString> signers;
+    for (const SigVerdict &v : verdicts) if (!v.fpr.isEmpty()) signers.insert(v.fpr);
+    if (!verdicts.isEmpty()) {
+        int pick = 0;
+        for (int i = 1; i < verdicts.size(); ++i)
+            if (rank.indexOf(verdicts.at(i).status) < rank.indexOf(verdicts.at(pick).status))
+                pick = i;
+        stt = verdicts.at(pick).status;
+        fpr = verdicts.at(pick).fpr;
+        trust = verdicts.at(pick).trust;
+        if (signers.size() > 1 && (stt == QLatin1String("good") || stt == QLatin1String("good-untrusted")))
+            stt = QStringLiteral("multiple");
+    }
     r[QStringLiteral("fpr")] = fpr;
-    if (!good.isEmpty()) {
-        const bool trusted = smimeHasStatus(err, "TRUST_FULLY") || smimeHasStatus(err, "TRUST_ULTIMATE");
-        r[QStringLiteral("trust")] = trusted ? QStringLiteral("full")
-                                   : smimeHasStatus(err, "TRUST_NEVER") ? QStringLiteral("never")
-                                   : smimeHasStatus(err, "TRUST_MARGINAL") ? QStringLiteral("marginal")
-                                                                            : QStringLiteral("undefined");
-        r[QStringLiteral("status")] = trusted ? QStringLiteral("good") : QStringLiteral("good-untrusted");
-        if (contentOut) *contentOut = out;
-    } else if (!bad.isEmpty()) {
-        r[QStringLiteral("status")] = QStringLiteral("bad");
-        if (contentOut) *contentOut = out;    // the reader may still see it — flagged red
-    } else if (smimeHasStatus(err, "ERRSIG") || err.contains("verify.findkey")
-               || err.contains("No public key") || err.contains("certificate not found")) {
-        r[QStringLiteral("status")] = QStringLiteral("nocert");
-        r[QStringLiteral("error")] = smimeHumanErr(err);
+    r[QStringLiteral("trust")] = trust;
+    r[QStringLiteral("status")] = stt;
+    r[QStringLiteral("signers")] = signers.size();
+    if (stt == QLatin1String("good") || stt == QLatin1String("good-untrusted")
+        || stt == QLatin1String("bad") || stt == QLatin1String("multiple")) {
+        if (contentOut) *contentOut = out;       // "bad": shown, but flagged red
     } else {
-        r[QStringLiteral("status")] = QStringLiteral("error");
         r[QStringLiteral("error")] = smimeHumanErr(err);
     }
 
@@ -1321,17 +1468,22 @@ QVariantMap SmimeEngine::verifyRaw(const QByteArray &raw, QByteArray *contentOut
         r[QStringLiteral("certInStore")] = before.contains(fpr);
     }
 
-    // Undo gpgsm's silent storing of the message's certificates.
+    // Undo gpgsm's silent storing of the message's certificates — only what
+    // demonstrably came in with this verification, and never a certificate
+    // with a private key.
     invalidateCerts();
-    for (const QVariant &v : listCerts()) {
-        const QString f = v.toMap().value(QStringLiteral("fpr")).toString().toUpper();
-        if (before.contains(f)) continue;
-        QByteArray o, e;
-        runGpgsm(QStringList() << QStringLiteral("--yes") << QStringLiteral("--delete-keys") << f, QByteArray(), &o, &e, 30000);
+    QSet<QString> after, afterSecret;
+    if (haveBefore && keyboxFprs(&after, &afterSecret)) {
+        for (const QString &f : after) {
+            if (before.contains(f) || afterSecret.contains(f)) continue;
+            QByteArray o, e;
+            runGpgsm(QStringList() << QStringLiteral("--yes") << QStringLiteral("--delete-keys") << f, QByteArray(), &o, &e, 30000);
+        }
+    } else {
+        qWarning() << "[smime] verify: keybox listing failed - left the store as it is";
     }
     invalidateCerts();
 
-    const QString stt = r.value(QStringLiteral("status")).toString();
     const QString who = !r.value(QStringLiteral("emails")).toStringList().isEmpty()
                         ? r.value(QStringLiteral("emails")).toStringList().first()
                         : r.value(QStringLiteral("subject")).toString();
@@ -1343,6 +1495,8 @@ QVariantMap SmimeEngine::verifyRaw(const QByteArray &raw, QByteArray *contentOut
         r[QStringLiteral("note")] = QStringLiteral("⚠ INVALID S/MIME signature — the message was altered or the signature is forged");
     else if (stt == QLatin1String("nocert"))
         r[QStringLiteral("note")] = QStringLiteral("Signed, but the signer's certificate is not available — cannot verify");
+    else if (stt == QLatin1String("multiple"))
+        r[QStringLiteral("note")] = QStringLiteral("Signed by several different certificates — not shown as one valid signature");
     else if (stt == QLatin1String("error"))
         r[QStringLiteral("note")] = QStringLiteral("Signature could not be verified");
     log(QStringLiteral("verify: %1 (trust %2)").arg(stt, r.value(QStringLiteral("trust")).toString()));
@@ -1353,7 +1507,10 @@ QVariantMap SmimeEngine::verifyMessage(int messageId)
 {
     if (m_verifyCache.contains(messageId)) return m_verifyCache.value(messageId);
     QVariantMap r = verifyRaw(smimeRawMessage(messageId), nullptr);
-    if (r.value(QStringLiteral("status")).toString() != QLatin1String("error"))
+    // Not kept: an error may pass, and "unverifiable" is also what a message
+    // looks like whose parts are still being fetched (a fresh IMAP account).
+    const QString st = r.value(QStringLiteral("status")).toString();
+    if (st != QLatin1String("error") && st != QLatin1String("unverifiable"))
         m_verifyCache.insert(messageId, r);
     return r;
 }
@@ -1381,14 +1538,16 @@ QVariantMap SmimeEngine::describeCertsPem(const QByteArray &pem, const QString &
                    c, &o, &e, 15000);
         QVariantMap m;
         QStringList emails; QString subject, issuer, fpr, nb, na; bool ca = false;
+        bool inConstraints = false;       // the line after the section header
         for (const QByteArray &lr : o.split('\n')) {
             const QString l = QString::fromUtf8(lr).trimmed();
+            if (inConstraints) { ca = l.startsWith(QStringLiteral("CA:TRUE")); inConstraints = false; continue; }
+            if (l.startsWith(QStringLiteral("X509v3 Basic Constraints"))) { inConstraints = true; continue; }
             if (l.startsWith(QStringLiteral("subject="))) subject = l.mid(8).trimmed();
             else if (l.startsWith(QStringLiteral("issuer="))) issuer = l.mid(7).trimmed();
             else if (l.contains(QStringLiteral("Fingerprint="))) { fpr = l.section('=', 1).trimmed(); fpr.remove(':'); fpr = fpr.toUpper(); }
             else if (l.startsWith(QStringLiteral("notBefore="))) nb = l.mid(10).trimmed();
             else if (l.startsWith(QStringLiteral("notAfter="))) na = l.mid(9).trimmed();
-            else if (l.contains(QStringLiteral("CA:TRUE"))) ca = true;
             else if (l.contains('@') && !l.contains('=') && !l.contains(' ')) { const QString em = l.toLower(); if (!emails.contains(em)) emails << em; }
         }
         if (fpr.isEmpty()) continue;
@@ -1407,7 +1566,11 @@ QVariantMap SmimeEngine::describeCertsPem(const QByteArray &pem, const QString &
             const QVariantMap sm = v.toMap();
             const QString sf = sm.value(QStringLiteral("fpr")).toString().toUpper();
             if (sf == fpr) { inStore = true; continue; }
-            if (ca || sm.value(QStringLiteral("isCA")).toBool()) continue;
+            // Every certificate that names an address is a possible encryption
+            // target — a "CA" without the certificate-signing usage is one too
+            // (gpgsm encrypts to it). Only stored issuers that cannot encrypt at
+            // all are left out.
+            if (sm.value(QStringLiteral("isCA")).toBool()) continue;
             const QStringList se = sm.value(QStringLiteral("emails")).toStringList();
             bool shares = false;
             for (const QString &em : emails) if (se.contains(em)) { shares = true; break; }
@@ -1652,6 +1815,39 @@ void SmimeEngine::cleanupTempFiles()
         QDir(m_home + QStringLiteral("/") + sub).removeRecursively();
 }
 
+// Fingerprints in the keybox (and those with a private key), straight from
+// gpgsm. False if gpgsm could not be asked — the caller must then assume
+// nothing about what is stored.
+bool SmimeEngine::keyboxFprs(QSet<QString> *all, QSet<QString> *withSecret)
+{
+    QByteArray out, err;
+    // gpgsm exits with 2 after any warning (an unreachable agent, a chain it
+    // cannot complete) and still lists everything. Only a run that produced
+    // nothing and did not succeed counts as failed.
+    const bool ok = runGpgsm(QStringList() << QStringLiteral("--list-keys") << QStringLiteral("--with-colons")
+                                           << QStringLiteral("--with-keygrip"),
+                             QByteArray(), &out, &err);
+    if (!ok && out.trimmed().isEmpty())
+        return false;
+    const QString keyDir = m_home + QStringLiteral("/private-keys-v1.d/");
+    QString cur;
+    for (const QByteArray &lr : out.split('\n')) {
+        const QStringList f = QString::fromUtf8(lr).split(':');
+        if (f.isEmpty()) continue;
+        if (f[0] == QLatin1String("crt")) {
+            cur.clear();
+        } else if (f[0] == QLatin1String("fpr") && cur.isEmpty()) {
+            cur = f.value(9).toUpper();
+            all->insert(cur);
+        } else if (f[0] == QLatin1String("grp") && !cur.isEmpty()) {
+            const QString grp = f.value(9);
+            if (!grp.isEmpty() && QFileInfo::exists(keyDir + grp + QStringLiteral(".key")))
+                withSecret->insert(cur);
+        }
+    }
+    return true;
+}
+
 QVariantList SmimeEngine::listCerts()
 {
     if (m_certCacheValid) return m_certCache;
@@ -1662,9 +1858,15 @@ QVariantList SmimeEngine::listCerts()
     // though the private keys are present and usable (decrypt works). Instead match
     // each cert's keygrip against the .key files in private-keys-v1.d.
     QByteArray out, err;
-    runGpgsm(QStringList() << QStringLiteral("--list-keys") << QStringLiteral("--with-colons")
-                           << QStringLiteral("--with-keygrip"),
-             QByteArray(), &out, &err);
+    // A failed listing is not an empty store: it is neither returned as one
+    // for long nor cached.
+    const bool listed = runGpgsm(QStringList() << QStringLiteral("--list-keys") << QStringLiteral("--with-colons")
+                                               << QStringLiteral("--with-keygrip"),
+                                 QByteArray(), &out, &err);
+    if (!listed && out.trimmed().isEmpty()) {    // exit 2 after a mere warning still lists
+        qWarning() << "[smime] listing the certificate store failed";
+        return res;
+    }
     const QString keyDir = m_home + QStringLiteral("/private-keys-v1.d/");
     QVariantMap cur;
     for (const QByteArray &lr : out.split('\n')) {
@@ -1684,11 +1886,16 @@ QVariantList SmimeEngine::listCerts()
         } else if (f[0] == QLatin1String("fpr")) {
             if (!cur.contains(QStringLiteral("fpr"))) {
                 cur[QStringLiteral("fpr")] = f.value(9);
-                // The fpr record's chaining field (12) holds the ISSUER's fingerprint;
-                // equal to own fpr (or empty) ⇒ self-signed root.
+                // The fpr record's chaining field (12) holds the ISSUER's fingerprint.
                 const QString chain = f.value(12);
                 cur[QStringLiteral("chainId")] = chain;
-                cur[QStringLiteral("isRoot")] = chain.isEmpty() || chain == f.value(9);
+                // gpgsm writes the certificate's own fingerprint for a root and
+                // leaves the field EMPTY when the issuer is not in the store
+                // (sm/keylist.c, list_cert_colon). Empty is therefore "issuer
+                // missing", not "root" — reading it as root made the fetch of
+                // missing issuers skip exactly the certificates it is for.
+                cur[QStringLiteral("isRoot")] = chain == f.value(9);
+                cur[QStringLiteral("issuerMissing")] = chain.isEmpty();
             }
         } else if (f[0] == QLatin1String("grp")) {
             const QString grp = f.value(9);
@@ -1747,11 +1954,14 @@ QString SmimeEngine::saveP12ToDocuments(const QString &fingerprint, const QStrin
     if (dir.isEmpty()) dir = QDir::homePath() + QStringLiteral("/Documents");
     QDir().mkpath(dir);
     const QString path = dir + QStringLiteral("/sfmail-smime-") + fingerprint.right(16) + QStringLiteral(".p12");
-    QFile f(path);
-    if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate)) return QString();
-    f.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
-    f.write(p12);
-    f.close();
+    // A backup reported as written must be complete: the user may delete the
+    // identity afterwards, trusting it (a full disk truncates silently).
+    const bool written = writeBackupFile(path, p12);
+    p12.fill(0);
+    if (!written) {
+        log(QStringLiteral("p12 backup could not be written completely"));
+        return QString();
+    }
     log(QStringLiteral("p12 backup written to %1").arg(path));
     return path;
 }
@@ -1974,17 +2184,34 @@ QString SmimeEngine::preferredCert(const QString &email)
     return s.value(QStringLiteral("encrypt/") + email.toLower()).toString();
 }
 
-// gpgsm's colon output gives the creation date either as seconds since the epoch
-// or as an ISO timestamp; normalise so certificates can be ordered by age.
-static qint64 certCreated(const QVariantMap &m)
+// gpgsm's colon output gives dates either as seconds since the epoch or as an
+// ISO timestamp (yyyymmddThhmmss, UTC); 0 when absent or unreadable.
+static qint64 certTime(const QString &s)
 {
-    const QString s = m.value(QStringLiteral("created")).toString();
     if (s.isEmpty()) return 0;
     bool ok = false;
     const qint64 secs = s.toLongLong(&ok);
     if (ok) return secs;
-    const QDateTime dt = QDateTime::fromString(s.left(15), QStringLiteral("yyyyMMddTHHmmss"));
-    return dt.isValid() ? dt.toMSecsSinceEpoch() / 1000 : 0;   // Qt 5.6: kein toSecsSinceEpoch
+    QDateTime dt = QDateTime::fromString(s.left(15), QStringLiteral("yyyyMMddTHHmmss"));
+    if (!dt.isValid()) return 0;
+    dt.setTimeSpec(Qt::UTC);
+    return dt.toMSecsSinceEpoch() / 1000;   // Qt 5.6: no toSecsSinceEpoch
+}
+static qint64 certCreated(const QVariantMap &m)
+{
+    return certTime(m.value(QStringLiteral("created")).toString());
+}
+// Not to be used for anything new: expired, or gpgsm marks it expired (e),
+// revoked (r) or invalid (i). Reading the ISO date as a number used to fail
+// every time, so expired certificates counted as usable.
+static bool certUnusable(const QVariantMap &m)
+{
+    const QString validity = m.value(QStringLiteral("validity")).toString();
+    if (validity == QLatin1String("e") || validity == QLatin1String("r")
+        || validity == QLatin1String("i"))
+        return true;
+    const qint64 exp = certTime(m.value(QStringLiteral("expires")).toString());
+    return exp > 0 && exp < QDateTime::currentMSecsSinceEpoch() / 1000;
 }
 
 // Pick ONE certificate for an address instead of handing gpgsm the address and
@@ -1998,7 +2225,6 @@ static qint64 certCreated(const QVariantMap &m)
 QString SmimeEngine::pickCertFpr(const QString &email, char usage, bool needSecret)
 {
     const QString want = (usage == 'e') ? QStringLiteral("e") : QStringLiteral("s");
-    const qint64 now = QDateTime::currentMSecsSinceEpoch() / 1000;   // Qt 5.6
 
     // An explicit choice wins over any heuristic — but only while it still fits:
     // a certificate the user picked and then let expire must not silently break
@@ -2010,9 +2236,7 @@ QString SmimeEngine::pickCertFpr(const QString &email, char usage, bool needSecr
             if (m.value(QStringLiteral("fpr")).toString() != chosen) continue;
             if (!m.value(QStringLiteral("keyUsage")).toString().toLower().contains(want)) break;
             if (needSecret && !m.value(QStringLiteral("hasSecret")).toBool()) break;
-            bool okExp = false;
-            const qint64 exp = m.value(QStringLiteral("expires")).toString().toLongLong(&okExp);
-            if (okExp && exp > 0 && exp < now) break;
+            if (certUnusable(m)) break;
             return chosen;
         }
         qWarning() << "[smime] preferred certificate no longer usable, falling back";
@@ -2026,9 +2250,7 @@ QString SmimeEngine::pickCertFpr(const QString &email, char usage, bool needSecr
         if (needSecret && !m.value(QStringLiteral("hasSecret")).toBool()) continue;
         if (!m.value(QStringLiteral("keyUsage")).toString().toLower().contains(want)) continue;
         if (!certHasEmail(m, email)) continue;
-        bool ok = false;
-        const qint64 exp = m.value(QStringLiteral("expires")).toString().toLongLong(&ok);
-        if (ok && exp > 0 && exp < now) continue;          // expired
+        if (certUnusable(m)) continue;
         const qint64 age = certCreated(m);
         if (age >= bestAge) { bestAge = age; best = m.value(QStringLiteral("fpr")).toString(); }
     }
@@ -2055,6 +2277,7 @@ QString SmimeEngine::ownCertFpr(const QString &email, char usage)
             const QVariantMap m = v.toMap();
             if (!m.value(QStringLiteral("hasSecret")).toBool()) continue;
             if (!m.value(QStringLiteral("keyUsage")).toString().toLower().contains(want)) continue;
+            if (certUnusable(m)) continue;
             if (pass == 0 && !certHasEmail(m, email)) continue;
             const QString fpr = m.value(QStringLiteral("fpr")).toString();
             if (!needEmail) return fpr;
@@ -2094,7 +2317,10 @@ QByteArray SmimeEngine::signWithChain(const QByteArray &inner, const QString &si
     // 1) Export the signing key+cert out of gpgsm as a (binary) PKCS#12. gpgsm
     //    protects the export with the SAME passphrase it reads from fd 0 to unlock.
     QByteArray p12, e1;
-    if (!runGpgsm(QStringList() << QStringLiteral("--pinentry-mode") << QStringLiteral("loopback")
+    // Status lines on stderr: the export can fail without a single word
+    // otherwise, and then the log says "key export failed:" and nothing else.
+    if (!runGpgsm(QStringList() << QStringLiteral("--status-fd") << QStringLiteral("2")
+                                << QStringLiteral("--pinentry-mode") << QStringLiteral("loopback")
                                 << QStringLiteral("--passphrase-fd") << QStringLiteral("0")
                                 << QStringLiteral("--export-secret-key-p12") << signFpr,
                   passphrase.toUtf8() + "\n", &p12, &e1, 90000) || p12.isEmpty()) {
@@ -2107,23 +2333,27 @@ QByteArray SmimeEngine::signWithChain(const QByteArray &inner, const QString &si
     //    to stdout, and step 4 feeds it to cms via stdin. Only the (public)
     //    signer cert is written out. The p12 on disk stays passphrase-protected.
     //    gpgsm exports with legacy RC2, so OpenSSL 3.x needs -legacy to read it.
-    //    The passphrase travels via the environment, never on the command line.
+    //    The passphrase goes in on stdin, never on the command line.
     QStringList ok_; ok_ << QStringLiteral("pkcs12") << QStringLiteral("-in") << p12f
                          << QStringLiteral("-nocerts") << QStringLiteral("-nodes");
     if (opensslHasLegacy()) ok_ << QStringLiteral("-legacy");
-    ok_ << QStringLiteral("-passin") << QStringLiteral("env:SFMAIL_PASS");
+    ok_ << QStringLiteral("-passin") << QStringLiteral("fd:0");
+    QByteArray passIn = passphrase.toUtf8() + "\n";
     QByteArray keyPem, oe;
-    if (!runOpenssl(ok_, QByteArray(), &keyPem, &oe, 30000, passphrase)
+    if (!runOpenssl(ok_, passIn, &keyPem, &oe, 30000)
             || !keyPem.contains("PRIVATE KEY")) {
+        passIn.fill(0);
         err = (QStringLiteral("p12→key failed: ") + QString::fromUtf8(oe).trimmed()).toUtf8(); return QByteArray();
     }
     QStringList oc; oc << QStringLiteral("pkcs12") << QStringLiteral("-in") << p12f
                        << QStringLiteral("-nokeys");
     if (opensslHasLegacy()) oc << QStringLiteral("-legacy");
-    oc << QStringLiteral("-passin") << QStringLiteral("env:SFMAIL_PASS")
+    oc << QStringLiteral("-passin") << QStringLiteral("fd:0")
        << QStringLiteral("-out") << signerf;
     QByteArray oo;
-    if (!runOpenssl(oc, QByteArray(), &oo, &oe, 30000, passphrase) || !QFileInfo::exists(signerf)) {
+    const bool certOut = runOpenssl(oc, passIn, &oo, &oe, 30000);
+    passIn.fill(0);
+    if (!certOut || !QFileInfo::exists(signerf)) {
         keyPem.fill(0);
         err = (QStringLiteral("p12→cert failed: ") + QString::fromUtf8(oe).trimmed()).toUtf8(); return QByteArray();
     }
@@ -2333,11 +2563,17 @@ void SmimeEngine::sendSmime(int accountId, const QString &subject,
     }
 
     QTimer::singleShot(0, this, [this, accId, messages, hasAtt]() {
-        for (const QByteArray &rfc : messages)
-            if (!smimeStoreInOutbox(accId, rfc, hasAtt)) {
+        // All copies or none: see GpgEngine::withdrawFromOutbox.
+        QList<quint64> stored;
+        for (const QByteArray &rfc : messages) {
+            quint64 id = 0;
+            if (!smimeStoreInOutbox(accId, rfc, hasAtt, &id)) {
+                if (GpgEngine *g = GpgEngine::instance()) g->withdrawFromOutbox(stored);
                 emit sendFinished(false, QStringLiteral("Could not store the message in the outbox."));
                 return;
             }
+            stored << id;
+        }
         emit sendFinished(true, QString());
         smimeTransmit(accId);
     });
@@ -2346,7 +2582,8 @@ void SmimeEngine::sendSmime(int accountId, const QString &subject,
 // Store one built message in the outbox. Split from the transmit half so a
 // send with blind copies can queue several messages (one per audience) and
 // then push them with a single transmit — QMF has no per-message send.
-bool SmimeEngine::smimeStoreInOutbox(const QMailAccountId &accId, const QByteArray &rfc, bool hasAttachments)
+bool SmimeEngine::smimeStoreInOutbox(const QMailAccountId &accId, const QByteArray &rfc, bool hasAttachments,
+                                     quint64 *storedId)
 {
     QMailAccount account(accId);
     // Heap-allocate and INTENTIONALLY never delete — same QMF ABI-shim destructor
@@ -2367,13 +2604,22 @@ bool SmimeEngine::smimeStoreInOutbox(const QMailAccountId &accId, const QByteArr
         qWarning() << "[smime] send: addMessage FAILED";
         return false;
     }
+    if (GpgEngine *g = GpgEngine::instance()) g->noteOutboxMessage(msg->id().toULongLong());
+    if (storedId) *storedId = msg->id().toULongLong();
     qWarning() << "[smime] send: stored msg" << msg->id().toULongLong() << "in outbox — queued";
     return true;
 }
 
-// Push the account's whole outbox (messageserver does the actual SMTP).
+// Push the account's whole outbox (messageserver does the actual SMTP) —
+// through the OpenPGP engine's transmit action, so there is one queue, one
+// retry schedule and one place that reports the outcome. A second action of
+// our own ran in parallel to that one against the same service.
 void SmimeEngine::smimeTransmit(const QMailAccountId &accId)
 {
+    if (GpgEngine *g = GpgEngine::instance()) {
+        g->transmitOutbox(accId);
+        return;
+    }
     if (!m_tx) {
         m_tx = new QMailTransmitAction(this);
         connect(m_tx, &QMailTransmitAction::activityChanged, this,

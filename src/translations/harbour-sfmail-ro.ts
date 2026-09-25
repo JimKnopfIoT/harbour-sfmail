@@ -103,6 +103,10 @@ Dacă vă deranjează, scoateți cealaltă intrare din acea asociere dintr-un sh
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>De ce conturile amuțesc uneori deși căsuța poștală are mesaje noi — o defecțiune în serviciul de poștă al sistemului, ce a aflat această aplicație despre ea și cum se reia livrarea.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Software liber sub GNU GPL v3 sau ulterioară; componentele incluse, sub propriile licențe (GPL, LGPL, Apache 2.0). Codul sursă și textele licențelor: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Dacă vă deranjează, scoateți cealaltă intrare din acea asociere dintr-un sh
     <message>
         <source>no key/certificate for this address</source>
         <translation>nicio cheie/niciun certificat pentru această adresă</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>O ciornă nu păstrează atașamentele. Salvați din nou ciorna pentru a o stoca fără ele.</translation>
     </message>
 </context>
 <context>
@@ -1259,6 +1267,14 @@ Importul adaugă o A DOUA cheie pentru această adresă — asigurați-vă că n
         <source>Remembered addresses</source>
         <translation>Adrese reținute</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Trimiterea s-a oprit: sistemul a refuzat autentificarea acestui cont pentru poșta de ieșire. SF-Mail nu mai reîncearcă singur — fiecare încercare ar marca din nou contul ca defect. Verificați contul în Setări → Conturi, apoi atingeți aici pentru a trimite.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Trimiterea s-a oprit: și ultima încercare automată a eșuat. Atingeți aici pentru a încerca din nou când conexiunea revine.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1369,6 +1385,10 @@ Dacă butonul de mai sus nu răzbate, același lucru se poate face dintr-un term
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Defecțiunea este cunoscută și a fost deja corectată în codul sursă al sistemului de operare însuși (eroarea JB#64979, septembrie 2026): numărătoarea a fost abandonată cu totul, iar un dispozitiv folosește acum atâtea căsuțe supravegheate câte poate obține, în loc să le refuze pe toate. Acea corectură nu se află în versiunea de sistem care rulează aici, așa că ar trebui să ajungă pe acest dispozitiv cu o actualizare viitoare a Sailfish OS — iar această pagină devine inutilă.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Serviciul de poștă se repornește</translation>
     </message>
 </context>
 <context>
@@ -1563,6 +1583,14 @@ Dacă butonul de mai sus nu răzbate, același lucru se poate face dintr-un term
     <message>
         <source>Encrypted</source>
         <translation>Criptat</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Netrimis. Sistemul a refuzat autentificarea contului pentru poșta de ieșire — verificați contul în Setări → Conturi, apoi folosiți „Trimite din nou”.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Netrimis. Și ultima încercare automată a eșuat — folosiți „Trimite din nou” când conexiunea revine.</translation>
     </message>
 </context>
 <context>
@@ -1914,6 +1942,18 @@ Dacă butonul de mai sus nu răzbate, același lucru se poate face dintr-un term
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 este deja memorată</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Semnat, dar stocarea de e-mail a acestui dispozitiv nu mai păstrează mesajul exact așa cum a fost trimis — semnătura nu poate fi verificată aici. Asta nu spune nimic despre autenticitatea mesajului.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Semnat (OpenPGP). SF-Mail nu poate verifica aici această semnătură: stocarea de e-mail a dispozitivului nu păstrează partea semnată exact așa cum a fost trimisă.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Semnat cu mai multe certificate diferite. SF-Mail afișează ca validă doar o singură semnătură — verificați mesajul pe altă cale.</translation>
     </message>
 </context>
 <context>

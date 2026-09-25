@@ -1,4 +1,8 @@
 #include "GpgEngine.h"
+#include "agentconf.h"
+#include "qmfstorepath.h"
+#include "backupfile.h"
+#include "mimeheader.h"
 #include <qmailnamespace.h>
 
 #include <QtConcurrent>
@@ -27,10 +31,17 @@
 #include <QProcess>
 #include <QTextCodec>
 #include <QLocalSocket>
+#include <QThread>
 #include <Accounts/Manager>
 #include <Accounts/Account>
 #include <Accounts/Service>
-#include <dlfcn.h>
+#include <sys/prctl.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <unistd.h>
 #include <QCoreApplication>
 #include <QDebug>
 
@@ -105,18 +116,17 @@
 #include <string>
 #include <vector>
 
-// Modern bundled GnuPG 2.2 stack, shipped under OUR OWN app prefix so the
+// The bundled modern GnuPG stack, shipped under OUR OWN app prefix so the
 // sandbox (which hides other apps' /usr/share/<app>) can see it.
-// The host application may offer a place to record the GnuPG daemon pids, so
-// its crash handler can take them down (a surviving agent blocks the next start
-// from the app grid). Looked up at runtime: the plugin must load and work even
-// where that function does not exist.
-typedef void (*SfmailNoteAgentPid)(int, int);
-static SfmailNoteAgentPid noteAgentPid()
+// The GnuPG daemon pids, published for the host application's crash handler
+// (a surviving agent blocks the next start from the app grid). Handed over as
+// a property of the application object: the launcher loads the program with
+// RTLD_LOCAL, so a symbol of the executable is not reachable from here, and
+// the plugin must not depend on one anyway.
+static void publishAgentPids(const QVariantList &pids)
 {
-    static SfmailNoteAgentPid fn =
-        reinterpret_cast<SfmailNoteAgentPid>(dlsym(RTLD_DEFAULT, "sfmail_note_agent_pid"));
-    return fn;
+    if (QCoreApplication *app = QCoreApplication::instance())
+        app->setProperty("sfmailAgentPids", pids);
 }
 
 static const char *kStackBin = "/usr/share/harbour-sfmail/gpg/bin";
@@ -181,6 +191,101 @@ static int agentTalk(const QString &sock, bool kill, const QString &home)
     }
     s.disconnectFromServer();
     return pid;
+}
+
+// The agents are started by the app itself, as its own child processes, and
+// the kernel sends each one SIGTERM the moment the app's process ends —
+// however it ends: a normal quit, a crash, or the system killing a hung app.
+// None of the app's own shutdown code has to run for that, and none of it
+// could run in the last two cases; an agent that survived there kept the
+// launch sandbox alive and the app could not be started again.
+//
+// That only works while the agent stays our child. "--daemon" always forks
+// and lets the parent exit ("--no-detach" merely skips setsid()), and a forked
+// child loses the parent-death signal. So the agent runs in its supervised
+// mode instead: it does not fork, and it serves a listening socket handed to
+// it as file descriptor 3 — the socket is created here, at the very path gpg
+// and gpgsm look for. In that mode the agent leaves the socket file behind
+// when it ends; it is removed on quit, and a stale one before the next bind.
+// (If gpg should get there first, it starts an agent of its own as before,
+// and the shutdown over the socket still covers that one.)
+class OwnAgentProcess : public QProcess
+{
+public:
+    OwnAgentProcess(int listenFd, QObject *parent) : QProcess(parent), m_fd(listenFd) {}
+protected:
+    void setupChildProcess() override
+    {
+        // Runs in the child between fork and exec; only plain system calls.
+        ::prctl(PR_SET_PDEATHSIG, SIGTERM);
+        if (::getppid() == 1) ::_exit(0);        // the app is already gone
+        if (m_fd != 3) ::dup2(m_fd, 3);           // dup2 clears close-on-exec
+        else ::fcntl(3, F_SETFD, 0);
+    }
+private:
+    int m_fd;
+};
+
+// A listening socket at `path`, or -1. The directories on the way are made
+// private; a leftover socket file of an agent that is gone is replaced.
+static int listenAt(const QString &path)
+{
+    const QFileInfo fi(path);
+    const QString dir = fi.absolutePath();
+    if (!QDir(dir).exists()) {
+        QDir().mkpath(dir);
+        QFile::setPermissions(dir, QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner);
+    }
+    const QByteArray p = QFile::encodeName(path);
+    struct sockaddr_un addr;
+    memset(&addr, 0, sizeof(addr));
+    addr.sun_family = AF_UNIX;
+    if (p.size() >= int(sizeof(addr.sun_path))) return -1;
+    memcpy(addr.sun_path, p.constData(), size_t(p.size()));
+    ::unlink(p.constData());
+    const int fd = ::socket(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0);
+    if (fd < 0) return -1;
+    if (::bind(fd, reinterpret_cast<struct sockaddr *>(&addr), sizeof(addr)) != 0
+        || ::listen(fd, 64) != 0) {
+        ::close(fd);
+        return -1;
+    }
+    ::chmod(p.constData(), 0600);
+    return fd;
+}
+
+// Start the agent for one homedir on its socket. Returns the process, or
+// nullptr if it did not come up (gpg then starts one itself, as before).
+static QProcess *startOwnAgent(const QString &home, const QString &sock, QObject *parent)
+{
+    if (sock.isEmpty()) return nullptr;
+    const int fd = listenAt(sock);
+    if (fd < 0) {
+        qWarning() << "[gpg] no agent socket for" << home << "at" << sock;
+        return nullptr;
+    }
+    OwnAgentProcess *p = new OwnAgentProcess(fd, parent);
+    p->setStandardOutputFile(QProcess::nullDevice());
+    p->setStandardErrorFile(QProcess::nullDevice());
+    p->start(QString::fromUtf8(kAgent),
+             QStringList() << QStringLiteral("--homedir") << home
+                           << QStringLiteral("--deprecated-supervised"));
+    const bool started = p->waitForStarted(3000);
+    ::close(fd);                        // the agent holds its own copy now
+    if (started) {
+        for (int i = 0; i < 40; ++i) {                   // up to 2 s
+            if (agentTalk(sock, false, QString()) > 0) {
+                qWarning() << "[gpg] agent started for" << home << "pid" << p->processId();
+                return p;
+            }
+            if (p->waitForFinished(50)) break;
+        }
+    }
+    qWarning() << "[gpg] agent for" << home << "did not come up, exit" << p->exitCode();
+    if (p->state() != QProcess::NotRunning) { p->kill(); p->waitForFinished(1000); }
+    delete p;
+    QFile::remove(sock);
+    return nullptr;
 }
 
 // Write a file only when its content differs. These are OUR managed settings,
@@ -272,6 +377,7 @@ QString GpgEngine::appVersion() const { return QStringLiteral(SFMAIL_VERSION); }
 
 GpgEngine::GpgEngine(QObject *parent) : QObject(parent)
 {
+    s_instance = this;
     const QString home = keyringHome();
     QDir().mkpath(home);
     QFile::setPermissions(home, QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner);
@@ -314,29 +420,64 @@ GpgEngine::GpgEngine(QObject *parent) : QObject(parent)
     const QString smimeHome =
         QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
         + QStringLiteral("/smime");
+    // The S/MIME engine prepares its home only when first used — later than
+    // the agents start. An agent started without its gpg-agent.conf would run
+    // the whole session without loopback pinentry, so the home is prepared
+    // here as well, with the very same file.
+    QDir().mkpath(smimeHome);
+    QFile::setPermissions(smimeHome, QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner);
+    writeIfChanged(smimeHome + QStringLiteral("/gpg-agent.conf"), QByteArray(kSmimeAgentConf));
     m_agentSockets << agentSocketPath(home) << agentSocketPath(smimeHome);
     m_agentHomes   << home << smimeHome;
-    for (int i = 0; i < m_agentSockets.size(); ++i)
-        agentTalk(m_agentSockets.at(i), true, m_agentHomes.at(i));
+    for (int i = 0; i < m_agentSockets.size(); ++i) {
+        if (agentTalk(m_agentSockets.at(i), true, m_agentHomes.at(i)) <= 0) continue;
+        // Give the old agent a moment to let go of its socket.
+        for (int w = 0; w < 20 && agentTalk(m_agentSockets.at(i), false, QString()) > 0; ++w)
+            QThread::msleep(50);
+    }
+    // Then this session's agents, tied to this process (see OwnAgentProcess).
+    QVariantList agentPids;
+    for (int i = 0; i < m_agentSockets.size(); ++i) {
+        QProcess *p = startOwnAgent(m_agentHomes.at(i), m_agentSockets.at(i), this);
+        m_agentProcs << p;
+        agentPids << (p ? int(p->processId()) : 0);
+    }
+    publishAgentPids(agentPids);
     // Plaintext left over from a previous run (a crash, a kill) goes now, and
     // whatever this session decrypts goes when it ends.
     purgePlaintextCaches();
     connect(QCoreApplication::instance(), &QCoreApplication::aboutToQuit, this,
             [this]() {
-        for (int i = 0; i < m_agentSockets.size(); ++i)
-            agentTalk(m_agentSockets.at(i), true, m_agentHomes.value(i));
+        // Plaintext first: should the rest of the shutdown be cut short, the
+        // decrypted copies are gone already.
         purgePlaintextCaches();
+        for (int i = 0; i < m_agentSockets.size(); ++i) {
+            if (agentTalk(m_agentSockets.at(i), true, m_agentHomes.value(i)) <= 0)
+                qWarning() << "[gpg] no agent listening for" << m_agentHomes.value(i);
+            // A supervised agent leaves its socket file behind.
+            if (QProcess *p = m_agentProcs.value(i)) {
+                if (!p->waitForFinished(1000)) p->kill();
+                QFile::remove(m_agentSockets.at(i));
+            }
+        }
+        // Gone now: the crash handler must not signal these pids any more.
+        publishAgentPids(QVariantList());
     });
     // A crash never reaches aboutToQuit, and a surviving agent then blocks the
     // next start from the icon. Keep the current agent pids where the signal
-    // handler can reach them (see sfmail_note_agent_pid in main.cpp).
+    // handler can reach them (property "sfmailAgentPids", read by main.cpp).
     QTimer *agentWatch = new QTimer(this);
     agentWatch->setInterval(15000);
     connect(agentWatch, &QTimer::timeout, this, [this]() {
-        SfmailNoteAgentPid note = noteAgentPid();
-        if (!note) return;
-        for (int i = 0; i < m_agentSockets.size() && i < 4; ++i)
-            note(i, agentTalk(m_agentSockets.at(i), false, QString()));
+        // Our own agents are known; only where gpg had to start one itself is
+        // the socket asked (a blocking round trip, so not more than needed).
+        QVariantList pids;
+        for (int i = 0; i < m_agentSockets.size(); ++i) {
+            QProcess *p = m_agentProcs.value(i);
+            if (p && p->state() == QProcess::Running) pids << int(p->processId());
+            else pids << agentTalk(m_agentSockets.at(i), false, QString());
+        }
+        publishAgentPids(pids);
     });
     agentWatch->start();
 
@@ -383,6 +524,18 @@ GpgEngine::GpgEngine(QObject *parent) : QObject(parent)
     // the app deletes itself is announced beforehand (noteOwnDelete), so what
     // reaches the user here came from the server side.
     if (QMailStore *st = QMailStore::instance()) {
+        // What sits in an outbox leaves it once it is sent — for IMAP accounts
+        // as a removal, the copy in the sent folder being a new message. Those
+        // ids are known beforehand, so they are not taken for vanished mail.
+        connect(&m_retryTimer, &QTimer::timeout, this, [this]() { retryOutboxesAutomatically(); });
+        m_outboxSeenRefresh.setSingleShot(true);
+        m_outboxSeenRefresh.setInterval(300);
+        connect(&m_outboxSeenRefresh, &QTimer::timeout, this, [this]() { refreshOutboxSeen(); });
+        connect(st, &QMailStore::messagesAdded, this,
+                [this](const QMailMessageIdList &) { m_outboxSeenRefresh.start(); });
+        connect(st, &QMailStore::messagesUpdated, this,
+                [this](const QMailMessageIdList &) { m_outboxSeenRefresh.start(); });
+        refreshOutboxSeen();
         connect(st, &QMailStore::messagesRemoved, this,
                 [this](const QMailMessageIdList &ids) {
             const qint64 now = QDateTime::currentMSecsSinceEpoch();
@@ -391,9 +544,15 @@ GpgEngine::GpgEngine(QObject *parent) : QObject(parent)
                 else ++it;
             }
             int unexpected = 0;
+            int sent = 0;
             for (const QMailMessageId &id : ids) {
                 if (m_ownDeletes.remove(id.toULongLong()) > 0) continue;
+                if (m_outboxSeen.remove(id.toULongLong())) { ++sent; continue; }
                 ++unexpected;
+            }
+            if (sent > 0) {
+                qWarning() << "[send]" << sent << "message(s) left the outbox";
+                emit outboxChanged();
             }
             if (unexpected <= 0) return;
             if (now < m_ownDeleteWindow) {
@@ -811,14 +970,10 @@ QString GpgEngine::saveKeyToDocuments(const QString &fingerprint, bool secret,
     // Report the path only if every byte reached the disk. A backup that was
     // silently truncated (storage full) and reported as done is how a user
     // deletes the only copy of a key.
-    const QByteArray payload = armored.toUtf8();
-    QFile f(path);
-    if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate)) return QString();
-    f.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
-    const bool written = (f.write(payload) == payload.size()) && f.flush();
-    f.close();
-    if (!written) { QFile::remove(path); return QString(); }
-    return path;
+    QByteArray payload = armored.toUtf8();
+    const bool written = writeBackupFile(path, payload);
+    payload.fill(0);
+    return written ? path : QString();
 }
 
 // Best-effort secure delete of a file the user picked for import (its real path,
@@ -1230,13 +1385,7 @@ QString GpgEngine::saveRevocationCert(const QString &fingerprint)
     QDir().mkpath(dir);
     const QString path = dir + QStringLiteral("/sfmail-") + fingerprint.right(16)
                        + QStringLiteral("-revocation.asc");
-    QFile out(path);
-    if (!out.open(QIODevice::WriteOnly | QIODevice::Truncate)) return QString();
-    out.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
-    const bool written = (out.write(data) == data.size()) && out.flush();
-    out.close();
-    if (!written) { QFile::remove(path); return QString(); }
-    return path;
+    return writeBackupFile(path, data) ? path : QString();
 }
 
 void GpgEngine::revokeKey(const QString &fingerprint)
@@ -1600,9 +1749,93 @@ static QVariantMap inspectArmoredKey(const QByteArray &armored)
     return m;
 }
 
+// Does this block carry a PRIVATE key? The import from a message is for the
+// sender's public key; a secret key slipped in with it would become an
+// identity of the user's own, one the app then encrypts the user's mail to.
+// Every packet is looked at, not just the label or the first one: an armour
+// header can say "PUBLIC" over anything, and a public key can be followed by
+// a secret one (RFC 4880 section 4.2 for the packet framing).
+static QByteArray dearmorAll(const QByteArray &raw)
+{
+    QByteArray out;
+    int pos = 0;
+    while ((pos = raw.indexOf("-----BEGIN PGP ", pos)) >= 0) {
+        int body = raw.indexOf("\n\n", pos);
+        const int bodyCrlf = raw.indexOf("\r\n\r\n", pos);
+        if (bodyCrlf >= 0 && (body < 0 || bodyCrlf < body)) body = bodyCrlf + 2;
+        const int endMark = raw.indexOf("-----END PGP ", pos);
+        if (body < 0 || endMark < 0 || body > endMark) break;
+        QByteArray b64;
+        for (const QByteArray &line : raw.mid(body, endMark - body).split('\n')) {
+            const QByteArray l = line.trimmed();
+            if (l.startsWith('=')) break;                     // CRC24 line
+            b64 += l;
+        }
+        out += QByteArray::fromBase64(b64);
+        pos = endMark + 13;
+    }
+    return out;
+}
+
+static bool packetsContainSecret(const QByteArray &d)
+{
+    int i = 0;
+    for (int guard = 0; guard < 4096 && i < d.size(); ++guard) {
+        const unsigned char h = static_cast<unsigned char>(d.at(i));
+        if (!(h & 0x80)) return false;                      // not OpenPGP framing
+        int tag;
+        qint64 len = -1;
+        int hdr = 1;
+        bool partial = false;
+        if (h & 0x40) {                                     // new format
+            tag = h & 0x3f;
+            if (i + 1 >= d.size()) return tag == 5 || tag == 7;
+            const unsigned char l0 = static_cast<unsigned char>(d.at(i + 1));
+            if (l0 < 192) { len = l0; hdr = 2; }
+            else if (l0 < 224) {
+                if (i + 2 >= d.size()) return tag == 5 || tag == 7;
+                len = ((l0 - 192) << 8) + static_cast<unsigned char>(d.at(i + 2)) + 192; hdr = 3;
+            } else if (l0 == 255) {
+                if (i + 5 >= d.size()) return tag == 5 || tag == 7;
+                len = (qint64(static_cast<unsigned char>(d.at(i + 2))) << 24)
+                    | (static_cast<unsigned char>(d.at(i + 3)) << 16)
+                    | (static_cast<unsigned char>(d.at(i + 4)) << 8)
+                    |  static_cast<unsigned char>(d.at(i + 5));
+                hdr = 6;
+            } else { len = qint64(1) << (l0 & 0x1f); hdr = 2; partial = true; }
+        } else {                                            // old format
+            tag = (h >> 2) & 0x0f;
+            const int lt = h & 0x03;
+            if (lt == 3) return tag == 5 || tag == 7;       // runs to the end
+            const int n = lt == 0 ? 1 : lt == 1 ? 2 : 4;
+            if (i + n >= d.size()) return tag == 5 || tag == 7;
+            len = 0;
+            for (int k = 1; k <= n; ++k) len = (len << 8) | static_cast<unsigned char>(d.at(i + k));
+            hdr = 1 + n;
+        }
+        if (tag == 5 || tag == 7) return true;              // secret key / subkey
+        if (partial) return false;       // key material is never partial-length
+        i += hdr + int(qMin<qint64>(len, d.size()));
+    }
+    return false;
+}
+
+static bool carriesSecretKey(const QByteArray &raw)
+{
+    if (raw.contains("PRIVATE KEY BLOCK")) return true;
+    if (raw.contains("-----BEGIN PGP ")) return packetsContainSecret(dearmorAll(raw));
+    return packetsContainSecret(raw);                         // binary
+}
+
 void GpgEngine::inspectKeyForImport(const QString &armored, const QString &senderEmail)
 {
     const QByteArray raw = armored.toUtf8();
+    if (carriesSecretKey(raw)) {
+        emit importFinished(false, 0, QStringLiteral("This block contains a private key. "
+                            "Keys from messages are imported as public keys only — "
+                            "a private key never belongs in a mail."));
+        return;
+    }
     QVariantMap info = inspectArmoredKey(raw);
     if (info.isEmpty() || info.value(QStringLiteral("fpr")).toString().isEmpty()) {
         emit importFinished(false, 0, QStringLiteral("No readable PGP public key in this message."));
@@ -1670,7 +1903,15 @@ void GpgEngine::inspectKeyFileForImport(const QString &path, const QString &send
         emit importFinished(false, 0, QStringLiteral("Cannot open key file"));
         return;
     }
-    inspectKeyForImport(QString::fromUtf8(f.readAll()), senderEmail);
+    const QByteArray data = f.readAll();
+    // Binary files must be checked as bytes: the UTF-8 round trip below would
+    // change them.
+    if (carriesSecretKey(data)) {
+        emit importFinished(false, 0, QStringLiteral("This file contains a private key. "
+                            "Keys from messages are imported as public keys only."));
+        return;
+    }
+    inspectKeyForImport(QString::fromUtf8(data), senderEmail);
 }
 
 void GpgEngine::deleteKey(const QString &fingerprint, bool deleteSecret)
@@ -2394,7 +2635,8 @@ static QByteArray buildInnerMime(const QString &bodyText, const QVariantList &at
         QByteArray name = a.value(QStringLiteral("name")).toString().toUtf8();
         if (name.isEmpty()) name = QFileInfo(path).fileName().toUtf8();
         QByteArray mime = a.value(QStringLiteral("mimeType")).toString().toUtf8();
-        if (mime.isEmpty()) mime = "application/octet-stream";
+        name = mimeSafeName(name);           // see mimeheader.h
+        mime = mimeSafeType(mime);
 
         m += "--" + bnd + CRLF;
         m += "Content-Type: " + mime + "; name=\"" + name + "\"" + CRLF;
@@ -2529,6 +2771,7 @@ void GpgEngine::finishPgpMimeSend(int accountId, const QString &subject,
 
     // One message per audience (see sendPgpMime). Each is stored on its own;
     // the transmit at the end pushes the whole outbox in one go.
+    QList<quint64> storedCopies;           // this send's copies, for a rollback
     for (int ci = 0; ci < copies.size(); ++ci) {
         const QVariantMap copy = copies.at(ci).toMap();
         const QStringList to    = copy.value(QStringLiteral("to")).toStringList();
@@ -2615,10 +2858,13 @@ void GpgEngine::finishPgpMimeSend(int accountId, const QString &subject,
         rfc += "--" + boundary + "--\r\n";
 
 
-        if (!storeInOutbox(accId, rfc, hasAttachments)) {
+        quint64 stored = 0;
+        if (!storeInOutbox(accId, rfc, hasAttachments, &stored)) {
+            withdrawFromOutbox(storedCopies);
             emit sendFinished(false, QStringLiteral("Could not store the message in the outbox."));
             return;
         }
+        storedCopies << stored;
     }
 
     // Safely queued. Report success now, do NOT wait for the transmit callback
@@ -2672,6 +2918,7 @@ void GpgEngine::storeAndTransmit(const QMailAccountId &accId, const QByteArray &
         emit sendFinished(false, QStringLiteral("Could not store the message in the outbox."));
         return;
     }
+    m_outboxSeen.insert(msg->id().toULongLong());
     qWarning() << "[send] stored msg" << msg->id().toULongLong() << "in outbox — queued";
 
     // The message is now safely in the outbox. Report success IMMEDIATELY so the
@@ -2687,8 +2934,25 @@ void GpgEngine::storeAndTransmit(const QMailAccountId &accId, const QByteArray &
 // The store half on its own, so a send with blind copies can queue several
 // messages before transmitting (one message per audience — see sendPgpMime).
 // Returns false if the store rejected it; the caller reports the failure.
+// A send with blind copies stores one message per audience. When a later copy
+// cannot be stored, the earlier ones must not stay behind: the user is told the
+// send failed and sends again, while the next transmit would push the leftovers
+// out — a double delivery, or a blind copy nobody meant to send any more.
+void GpgEngine::withdrawFromOutbox(const QList<quint64> &ids)
+{
+    if (ids.isEmpty()) return;
+    QMailMessageIdList list;
+    for (quint64 id : ids) {
+        list << QMailMessageId(id);
+        noteOwnDelete(int(id));
+    }
+    QMailStore::instance()->removeMessages(QMailMessageKey::id(list), QMailStore::NoRemovalRecord);
+    qWarning() << "[send] took back" << ids.size() << "stored cop(y/ies) of a failed send";
+    emit outboxChanged();
+}
+
 bool GpgEngine::storeInOutbox(const QMailAccountId &accId, const QByteArray &rfc,
-                              bool hasAttachments)
+                              bool hasAttachments, quint64 *storedId)
 {
     QMailAccount account(accId);
     // Heap-allocated and never deleted, exactly as in storeAndTransmit above —
@@ -2707,49 +2971,104 @@ bool GpgEngine::storeInOutbox(const QMailAccountId &accId, const QByteArray &rfc
         qWarning() << "[send] addMessage FAILED";
         return false;
     }
+    m_outboxSeen.insert(msg->id().toULongLong());
+    if (storedId) *storedId = msg->id().toULongLong();
     qWarning() << "[send] stored msg" << msg->id().toULongLong() << "in outbox — queued";
     return true;
 }
 
 // The transmit half. QMF has no per-message send: this pushes the account's
 // whole outbox, which is why several stored copies need only ONE call.
-// One transmit action for the whole engine, created once. It used to be built
-// in two places with two slightly different lambdas, which is how a success
-// could fail to stop the retry schedule depending on who created it first.
+// One transmit action for the whole app — the S/MIME engine hands its outboxes
+// over too (see instance()). A QMF action runs one request at a time: a second
+// transmitMessages() while the first is still out is refused ("Unable to
+// allocate new action"), and that account was then never actually retried. So
+// accounts queue here and go out one after the other.
 QMailTransmitAction *GpgEngine::transmitAction()
 {
     if (!m_tx) {
         m_tx = new QMailTransmitAction(this);
+        // A request that never reports back must not hold the queue for good.
+        m_txTimeout.setSingleShot(true);
+        m_txTimeout.setInterval(5 * 60 * 1000);
+        connect(&m_txTimeout, &QTimer::timeout, this, [this]() {
+            qWarning() << "[send] no sign of life for account" << m_txCurrent
+                       << "in 5 minutes - giving up on this attempt";
+            const quint64 acc = m_txCurrent;
+            m_tx->cancelOperation();
+            m_txCurrent = 0;
+            scheduleRetry(acc);
+            // Let the cancelled request's own answer arrive (and be ignored,
+            // see below) before the next one starts.
+            QTimer::singleShot(2000, this, [this]() { pumpTransmit(); });
+        });
+        // The limit counts from the last sign of life, not from the start: a
+        // large message over a slow link reports progress and must not be
+        // cut off half-way (cancelling aborts the SMTP transfer).
+        connect(m_tx, &QMailServiceAction::progressChanged, this, [this](uint, uint) {
+            if (m_txCurrent) m_txTimeout.start();
+        });
         connect(m_tx, &QMailTransmitAction::activityChanged, this,
                 [this](QMailServiceAction::Activity a) {
-            if (a == QMailServiceAction::Successful) {
-                qWarning() << "[send] transmit Successful";
-                // Delivered — but only stop the schedule when nothing is left.
-                if (outboxTotal() == 0) {
-                    m_retryTimer.stop();
-                    m_retryStep = -1;
-                    emit outboxChanged();
-                    emit retryStopped(QString());
-                } else {
-                    emit outboxChanged();
-                }
-            } else if (a == QMailServiceAction::Failed) {
-                qWarning() << "[send] transmit Failed:" << m_tx->status().text;
-                onTransmitFailed(m_tx->status().text, m_tx->status().errorCode);
+            if (a != QMailServiceAction::Successful && a != QMailServiceAction::Failed) {
+                if (m_txCurrent) m_txTimeout.start();
+                return;
             }
+            if (!m_txCurrent) return;          // answer to an attempt given up on
+            m_txTimeout.stop();
+            const quint64 acc = m_txCurrent;
+            m_txCurrent = 0;
+            if (a == QMailServiceAction::Successful) {
+                qWarning() << "[send] transmit Successful, account" << acc;
+                m_credBlocked.remove(acc);
+                m_retryStepOf.remove(acc);
+                m_retryDueAt.remove(acc);
+                m_retryGivenUp.remove(acc);
+                armRetryTimer();
+                emit outboxChanged();
+                // "" = nothing waits any more: the UI clears its notice.
+                if (outboxTotal() == 0) emit retryStopped(QString());
+            } else {
+                qWarning() << "[send] transmit Failed, account" << acc << ":" << m_tx->status().text;
+                onTransmitFailed(acc, m_tx->status().text, m_tx->status().errorCode);
+            }
+            QTimer::singleShot(0, this, [this]() { pumpTransmit(); });
         });
     }
     return m_tx;
 }
 
+GpgEngine *GpgEngine::s_instance = nullptr;
+
+GpgEngine *GpgEngine::instance()
+{
+    return s_instance;
+}
+
 void GpgEngine::transmitOutbox(const QMailAccountId &accId)
 {
-    // Trigger transmission of the account's outbox (messageserver does the actual
-    // SMTP). activityChanged is kept for logging only.
-    rememberOutboxAccount(accId.toULongLong());
-    transmitAction()->transmitMessages(accId);
+    // Queue the account's outbox for transmission (messageserver does the
+    // actual SMTP).
+    const quint64 acc = accId.toULongLong();
+    if (!acc) return;
+    rememberOutboxAccount(acc);
+    // Also when this account is being sent right now: that request took its
+    // outbox as it was, and a message stored meanwhile needs one more.
+    if (!m_txQueue.contains(acc)) m_txQueue << acc;
+    pumpTransmit();
     emit outboxChanged();
-    qWarning() << "[send] transmit call returned";
+}
+
+void GpgEngine::pumpTransmit()
+{
+    if (m_txCurrent || m_txQueue.isEmpty()) return;
+    m_txCurrent = m_txQueue.takeFirst();
+    const QMailAccountId accId(m_txCurrent);
+    qWarning() << "[send] transmitting outbox of account" << m_txCurrent
+               << "holding" << outboxCount(int(m_txCurrent));
+    QMailTransmitAction *tx = transmitAction();
+    m_txTimeout.start();
+    tx->transmitMessages(accId);
 }
 
 // Accounts whose outbox we are trying to flush. Kept as a set: with two accounts
@@ -2801,6 +3120,17 @@ static bool isPermanentFailure(const QString &err, int code)
     return re.match(err).hasMatch();
 }
 
+// The system refused the account's sign-in for outgoing mail. QMF reports some
+// of these as a login failure and others — the single sign-on service's
+// refusals — only through their text.
+static bool isCredentialFailure(const QString &err, int code)
+{
+    if (code == QMailServiceAction::Status::ErrLoginFailed) return true;
+    return err.contains(QLatin1String("SSO error"), Qt::CaseInsensitive)
+        || err.contains(QLatin1String("Unable to use account"), Qt::CaseInsensitive)
+        || err.contains(QLatin1String("credential"), Qt::CaseInsensitive);
+}
+
 int GpgEngine::outboxCount(int accountId)
 {
     QMailAccountId accId(static_cast<quint64>(accountId));
@@ -2808,6 +3138,18 @@ int GpgEngine::outboxCount(int accountId)
     QMailMessageKey key(QMailMessageKey::parentAccountId(accId));
     key &= QMailMessageKey::status(QMailMessage::Outbox, QMailDataComparator::Includes);
     return QMailStore::instance()->countMessages(key);
+}
+
+// Remember every message currently in an outbox. Only ever adds: a message
+// may lose its outbox flag a moment before it is removed.
+void GpgEngine::refreshOutboxSeen()
+{
+    QMailStore *st = QMailStore::instance();
+    if (!st) return;
+    const QMailMessageKey key(QMailMessageKey::status(QMailMessage::Outbox,
+                                                      QMailDataComparator::Includes));
+    for (const QMailMessageId &id : st->queryMessages(key))
+        m_outboxSeen.insert(id.toULongLong());
 }
 
 // How many messages are waiting in ANY account's outbox, and for which accounts.
@@ -2841,9 +3183,18 @@ QVariantList GpgEngine::outboxAccounts()
     return res;
 }
 
-// Try every account that still has something in its outbox.
+// Try every account that still has something in its outbox. This is the
+// user's tap: accounts whose sign-in was refused get another chance, since
+// the user may just have fixed it.
 void GpgEngine::retryAllOutboxes()
 {
+    // The user's tap: every account gets a fresh start, including those whose
+    // sign-in was refused or whose schedule ran out — the cause may be fixed.
+    m_credBlocked.clear();
+    m_retryGivenUp.clear();
+    m_retryStepOf.clear();
+    m_retryDueAt.clear();
+    armRetryTimer();
     for (const QVariant &v : outboxAccounts()) {
         const int acc = v.toMap().value(QStringLiteral("accountId")).toInt();
         rememberOutboxAccount(quint64(acc));
@@ -2851,70 +3202,130 @@ void GpgEngine::retryAllOutboxes()
     }
 }
 
+// The schedule is kept PER ACCOUNT: one step counter and one due time each,
+// and one timer that wakes for whichever account is due first. A single
+// counter for all accounts counted twice with two failing accounts, and one
+// account's permanent refusal stopped another account's retries.
+//
+// Accounts are left out while their sign-in is refused (each attempt only
+// flags the account "needs update" in the system again — right after the user
+// entered the password, and on every start of the app) and once their
+// schedule is used up or the server refused the message for good.
+void GpgEngine::retryOutboxesAutomatically()
+{
+    const qint64 now = QDateTime::currentMSecsSinceEpoch();
+    const QList<quint64> accs = m_retryDueAt.keys();
+    for (quint64 acc : accs) {
+        if (m_retryDueAt.value(acc) > now) continue;
+        m_retryDueAt.remove(acc);
+        if (m_credBlocked.contains(acc) || m_retryGivenUp.contains(acc)) continue;
+        if (outboxCount(int(acc)) == 0) { m_retryStepOf.remove(acc); continue; }
+        qWarning() << "[send] automatic retry" << m_retryStepOf.value(acc)
+                   << "of" << kRetryCount << "for account" << acc;
+        retryOutbox(int(acc));
+    }
+    armRetryTimer();
+}
+
+void GpgEngine::armRetryTimer()
+{
+    qint64 next = 0;
+    for (auto it = m_retryDueAt.constBegin(); it != m_retryDueAt.constEnd(); ++it)
+        if (!next || it.value() < next) next = it.value();
+    if (!next) { m_retryTimer.stop(); return; }
+    const qint64 wait = qMax<qint64>(1000, next - QDateTime::currentMSecsSinceEpoch());
+    m_retryTimer.setSingleShot(true);
+    m_retryTimer.start(int(qMin<qint64>(wait, 24LL * 3600 * 1000)));
+}
+
+int GpgEngine::retryableOutboxCount()
+{
+    int n = 0;
+    for (const QVariant &v : outboxAccounts()) {
+        const quint64 acc = quint64(v.toMap().value(QStringLiteral("accountId")).toInt());
+        if (!m_credBlocked.contains(acc) && !m_retryGivenUp.contains(acc))
+            n += outboxCount(int(acc));
+    }
+    return n;
+}
+
 bool GpgEngine::retryOutbox(int accountId)
 {
     QMailAccountId accId(static_cast<quint64>(accountId));
     if (!accId.isValid()) return false;
 
-    rememberOutboxAccount(accId.toULongLong());
-    qWarning() << "[send] manual retry for account" << accountId
+    qWarning() << "[send] retry for account" << accountId
                << "outbox holds" << outboxCount(accountId);
-    transmitAction()->transmitMessages(accId);
+    transmitOutbox(accId);
     return true;
 }
 
 void GpgEngine::cancelRetries()
 {
-    if (m_retryStep >= 0) {
-        m_retryTimer.stop();
-        m_retryStep = -1;
-        emit retryStopped(QStringLiteral("cancelled"));
-    }
+    if (m_retryDueAt.isEmpty()) return;
+    m_retryDueAt.clear();
+    m_retryStepOf.clear();
+    m_retryTimer.stop();
+    emit retryStopped(QStringLiteral("cancelled"));
 }
 
 int GpgEngine::minutesToNextRetry()
 {
-    if (m_retryStep < 0 || !m_retryTimer.isActive()) return -1;
+    if (!m_retryTimer.isActive()) return -1;
     return (m_retryTimer.remainingTime() + 59999) / 60000;
 }
 
-void GpgEngine::onTransmitFailed(const QString &error, int code)
+// Reasons retryStopped() carries, for the UI to put into words:
+//   ""            nothing waits any more (sent)
+//   "cancelled"   the user stopped the retries
+//   "credentials" the system refused the account's sign-in
+//   "exhausted"   the last scheduled attempt failed too
+//   anything else the server's own words for a permanent refusal
+void GpgEngine::onTransmitFailed(quint64 acc, const QString &error, int code)
 {
     emit outboxChanged();
+    if (isCredentialFailure(error, code)) {
+        m_credBlocked.insert(acc);
+        m_retryDueAt.remove(acc);
+        armRetryTimer();
+        qWarning() << "[send] sign-in for outgoing mail refused, account" << acc
+                   << "- no automatic retry for it";
+        emit retryStopped(QStringLiteral("credentials"));
+        return;
+    }
     if (isPermanentFailure(error, code)) {
         // The server said no, for good. Retrying cannot help and would only keep
-        // re-offering a message it already judged.
-        m_retryTimer.stop();
-        m_retryStep = -1;
+        // re-offering a message it already judged — for THIS account.
+        m_retryGivenUp.insert(acc);
+        m_retryDueAt.remove(acc);
+        armRetryTimer();
         emit retryStopped(error);
-        qWarning() << "[send] permanent refusal — no automatic retry:" << error;
+        qWarning() << "[send] permanent refusal, account" << acc << "- no automatic retry:" << error;
         return;
     }
-    scheduleRetry(QMailAccountId());
+    scheduleRetry(acc);
 }
 
-void GpgEngine::scheduleRetry(const QMailAccountId &accId)
+void GpgEngine::scheduleRetry(quint64 acc)
 {
-    rememberOutboxAccount(accId.toULongLong());
-    if (outboxTotal() == 0) { m_retryTimer.stop(); m_retryStep = -1; return; }
-
-    if (++m_retryStep >= kRetryCount) {
-        m_retryStep = -1;
-        emit retryStopped(QStringLiteral("giving up after the last attempt"));
-        qWarning() << "[send] retry schedule exhausted";
+    if (!acc) return;
+    rememberOutboxAccount(acc);
+    const int step = m_retryStepOf.value(acc) + 1;       // 1-based attempt number
+    if (step > kRetryCount) {
+        m_retryGivenUp.insert(acc);
+        m_retryDueAt.remove(acc);
+        m_retryStepOf.remove(acc);
+        armRetryTimer();
+        emit retryStopped(QStringLiteral("exhausted"));
+        qWarning() << "[send] retry schedule exhausted for account" << acc;
         return;
     }
-
-    const int minutes = kRetryMinutes[m_retryStep];
-    m_retryTimer.setSingleShot(true);
-    m_retryTimer.disconnect();
-    connect(&m_retryTimer, &QTimer::timeout, this, [this]() {
-        qWarning() << "[send] automatic retry" << (m_retryStep + 1) << "of" << kRetryCount;
-        retryAllOutboxes();
-    });
-    m_retryTimer.start(minutes * 60 * 1000);
-    emit retryScheduled(m_retryStep + 1, kRetryCount, minutes);
-    qWarning() << "[send] next automatic retry in" << minutes << "minutes";
+    m_retryStepOf.insert(acc, step);
+    const int minutes = kRetryMinutes[step - 1];
+    m_retryDueAt.insert(acc, QDateTime::currentMSecsSinceEpoch() + qint64(minutes) * 60 * 1000);
+    armRetryTimer();
+    emit retryScheduled(step, kRetryCount, minutes);
+    qWarning() << "[send] next automatic retry for account" << acc << "in" << minutes << "minutes";
 }
 
 // --- PGP/MIME signing (multipart/signed, RFC 3156) -------------------------
@@ -3406,32 +3817,7 @@ void GpgEngine::setSmimeEnabled(bool on)
 // the app, see memory note).
 static QString messageFilePath(int messageId)
 {
-    // QMF knows where its store lives (legacy ~/.qmf vs. the XDG data directory
-    // on newer systems) — never guess the dot-directory.
-    const QString dbPath = QDir::cleanPath(QMail::dataPath())
-                           + QStringLiteral("/database/qmailstore.db");
-    if (!QFileInfo::exists(dbPath)) return QString();
-    const QString conn = QStringLiteral("sfmail_ro_%1").arg(messageId);
-    QString path;
-    {
-        if (QSqlDatabase::contains(conn)) QSqlDatabase::removeDatabase(conn);
-        QSqlDatabase db = QSqlDatabase::addDatabase(QStringLiteral("QSQLITE"), conn);
-        db.setDatabaseName(dbPath);
-        db.setConnectOptions(QStringLiteral("QSQLITE_OPEN_READONLY"));
-        if (db.open()) {
-            QSqlQuery q(db);
-            q.prepare(QStringLiteral("SELECT mailfile FROM mailmessages WHERE id = ?"));
-            q.addBindValue(messageId);
-            if (q.exec() && q.next()) {
-                const QString mf = q.value(0).toString();
-                const int c = mf.indexOf(QLatin1Char(':'));   // strip "qmfstoragemanager:"
-                path = (c >= 0) ? mf.mid(c + 1) : mf;
-            }
-            db.close();
-        }
-    }
-    QSqlDatabase::removeDatabase(conn);
-    return path;
+    return qmfMessageFile(messageId);
 }
 
 static QByteArray readHeaderBlock(int messageId)
@@ -3542,8 +3928,17 @@ QVariantMap GpgEngine::analyzeSender(int messageId)
 
     const QString recv = headerValue(h, QStringLiteral("received"));   // topmost = sender hop
     QString originIp, originHost;
-    QRegExp ipRe(QStringLiteral("(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})"));
-    if (ipRe.indexIn(recv) >= 0) originIp = ipRe.cap(1);
+    // Only the address in square brackets: the receiving server writes it from
+    // the connection itself ("from <HELO> (<rDNS> [<IP>])"). The HELO name in
+    // front of it is whatever the sender chose to say — an address from a
+    // domain's SPF range put there made a forged mail show "SPF: pass".
+    // Inside the parentheses: the HELO may itself be an address literal
+    // ("EHLO [1.2.3.4]", RFC 5321) and so come in brackets too.
+    QRegExp ipRe(QStringLiteral("\\([^()]*\\[(?:IPv6:)?([0-9a-fA-F:.]+)\\]"));
+    if (ipRe.indexIn(recv) >= 0) {
+        const QHostAddress a(ipRe.cap(1));
+        if (a.protocol() == QAbstractSocket::IPv4Protocol) originIp = a.toString();
+    }
     QRegExp fromRe(QStringLiteral("from\\s+([A-Za-z0-9.\\-]+)"));
     if (fromRe.indexIn(recv) >= 0) originHost = fromRe.cap(1);
 

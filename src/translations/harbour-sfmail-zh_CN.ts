@@ -103,6 +103,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>为什么邮箱里明明有新邮件，账户却有时毫无动静 —— 系统邮件服务中的一个故障、本应用为此得知的情况，以及如何让收信恢复正常。</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>自由软件，采用 GNU GPL v3 或更高版本授权；随附组件采用各自的许可证（GPL、LGPL、Apache 2.0）。源代码和许可证文本：%1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>no key/certificate for this address</source>
         <translation>没有此地址的密钥／证书</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>草稿不会保留附件。请再保存一次草稿，以便在不含附件的情况下存储它。</translation>
     </message>
 </context>
 <context>
@@ -1255,6 +1263,14 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Remembered addresses</source>
         <translation>已记住的地址</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>发送已中止：系统拒绝了此账户用于发件的登录。SF-Mail 不再自动重试——每次尝试都会让该账户再次被标记。请在“设置 → 账户”中检查该账户，然后点按此处发送。</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>发送已中止：最后一次自动尝试也失败了。连接恢复后，点按此处再试一次。</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1365,6 +1381,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>该故障已为人所知，并且在操作系统自身的源代码中已经得到修正（缺陷 JB#64979，2026 年 9 月）：计数被彻底取消，设备如今会尽可能多地使用受监视的邮箱，而不是把它们全部拒绝。这项修正并不在此处运行的系统版本中，因此它应当随今后的一次 Sailfish OS 更新到达本设备 —— 届时本页也就多余了。</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>正在重新启动邮件服务</translation>
     </message>
 </context>
 <context>
@@ -1555,6 +1575,14 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Encrypted</source>
         <translation>已加密</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>未发送。系统拒绝了该账户用于发件的登录——请在“设置 → 账户”中检查该账户，然后使用“再次发送”。</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>未发送。最后一次自动尝试也失败了——连接恢复后请使用“再次发送”。</translation>
     </message>
 </context>
 <context>
@@ -1906,6 +1934,18 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 已在记忆列表中</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>已签名，但本设备的邮件存储已不再按发送时的原样保存这封邮件——无法在此检验签名。这并不说明邮件是否真实。</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>已签名（OpenPGP）。SF-Mail 无法在此检验该签名：设备的邮件存储没有按发送时的原样保存已签名的部分。</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>用多个不同的证书签名。SF-Mail 只会将单个签名显示为有效——请通过其他方式核实这封邮件。</translation>
     </message>
 </context>
 <context>

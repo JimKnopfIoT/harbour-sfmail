@@ -103,6 +103,10 @@ Ha zavarja, vegye ki a másik bejegyzést ebből a hozzárendelésből egy root 
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Miért hallgatnak el néha a fiókok, noha a postafiókban új üzenetek vannak — hiba a rendszer levelezőszolgáltatásában, mit tudott meg erről ez az alkalmazás, és hogyan tér vissza a kézbesítés.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Szabad szoftver a GNU GPL v3 vagy újabb változata alatt; a mellékelt összetevők a saját licencük alatt (GPL, LGPL, Apache 2.0). Forráskód és licencszövegek: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Ha zavarja, vegye ki a másik bejegyzést ebből a hozzárendelésből egy root 
     <message>
         <source>no key/certificate for this address</source>
         <translation>nincs kulcs/tanúsítvány ehhez a címhez</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>A piszkozat nem őrzi meg a mellékleteket. Mentse újra a piszkozatot, hogy nélkülük tárolódjon.</translation>
     </message>
 </context>
 <context>
@@ -1255,6 +1263,14 @@ Az importálás MÁSODIK kulcsot ad ehhez a címhez — győződjön meg róla, 
         <source>Remembered addresses</source>
         <translation>Megjegyzett címek</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>A küldés leállt: a rendszer elutasította ennek a fióknak a bejelentkezését a kimenő levelekhez. Az SF-Mail már nem próbálkozik magától — minden kísérlet újra hibásnak jelölné meg a fiókot. Ellenőrizze a fiókot a Beállítások → Fiókok alatt, majd koppintson ide a küldéshez.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>A küldés leállt: az utolsó automatikus kísérlet is sikertelen volt. Koppintson ide az újrapróbáláshoz, amint helyreáll a kapcsolat.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1365,6 +1381,10 @@ Ha a fenti gomb nem ér célba, ugyanez megtehető parancssorból is:</translati
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>A hiba ismert, és az operációs rendszer saját forráskódjában már ki is javították (JB#64979 hibajegy, 2026. szeptember): a számolást teljesen elhagyták, és az eszköz mostantól annyi figyelt postafiókot használ, amennyit csak kap, ahelyett hogy mindet elutasítaná. Ez a javítás nincs benne az itt futó rendszerváltozatban, ezért egy későbbi Sailfish OS-frissítéssel kell megérkeznie erre az eszközre — és akkor ez az oldal feleslegessé válik.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>A levelezőszolgáltatás újraindul</translation>
     </message>
 </context>
 <context>
@@ -1555,6 +1575,14 @@ Ha a fenti gomb nem ér célba, ugyanez megtehető parancssorból is:</translati
     <message>
         <source>Encrypted</source>
         <translation>Titkosítva</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Nincs elküldve. A rendszer elutasította a fiók bejelentkezését a kimenő levelekhez — ellenőrizze a fiókot a Beállítások → Fiókok alatt, majd használja a Küldés újra parancsot.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Nincs elküldve. Az utolsó automatikus kísérlet is sikertelen volt — amint helyreáll a kapcsolat, használja a Küldés újra parancsot.</translation>
     </message>
 </context>
 <context>
@@ -1906,6 +1934,18 @@ Ha a fenti gomb nem ér célba, ugyanez megtehető parancssorból is:</translati
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 már meg van jegyezve</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Aláírva, de az eszköz levéltárolója már nem pontosan úgy őrzi az üzenetet, ahogyan elküldték — az aláírás itt nem ellenőrizhető. Ez semmit sem mond arról, hogy az üzenet valódi-e.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Aláírva (OpenPGP). Az SF-Mail itt nem tudja ellenőrizni ezt az aláírást: az eszköz levéltárolója nem pontosan úgy őrzi az aláírt részt, ahogyan elküldték.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Több különböző tanúsítvánnyal aláírva. Az SF-Mail csak egyetlen aláírást jelenít meg érvényesként — ellenőrizze az üzenetet más módon.</translation>
     </message>
 </context>
 <context>
