@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QVariantList>
 #include <QSet>
+#include <QHash>
 #include <QVariantMap>
 #include <QStringList>
 #include <QByteArray>
@@ -13,10 +14,11 @@
 
 class QMailTransmitAction;
 class QMailAccountId;
+class QProcess;
 class QNetworkAccessManager;
 
 // OpenPGP engine on top of the GPGME library, driving the modern bundled
-// GnuPG 2.2 stack (under /usr/share/harbour-sfmail/gpg) against the app's own
+// GnuPG stack (under /usr/share/harbour-sfmail/gpg) against the app's own
 // keyring. The system gpg (2.0.4) is far too old to read modern keyrings, so
 // we deliberately do NOT use the native path. Passphrases for sign/decrypt are
 // handed to GPGME via the loopback callback (no pinentry needed).
@@ -32,6 +34,17 @@ class GpgEngine : public QObject
 
 public:
     explicit GpgEngine(QObject *parent = nullptr);
+    ~GpgEngine() override { if (s_instance == this) s_instance = nullptr; }
+    // The engine the QML singleton created (there is exactly one). The S/MIME
+    // engine uses it to send through the same, queued transmit action.
+    static GpgEngine *instance();
+    // Queue an account's outbox for sending; see transmitAction() in the .cpp.
+    void transmitOutbox(const QMailAccountId &accId);
+    // A message another engine put into an outbox (so its leaving after the
+    // send is not reported as vanished).
+    void noteOutboxMessage(quint64 id) { m_outboxSeen.insert(id); }
+    // Take back the copies of a send that failed half-way (see the .cpp).
+    void withdrawFromOutbox(const QList<quint64> &ids);
     QString appVersion() const;
 
     bool available() const { return m_available; }
@@ -439,6 +452,7 @@ private:
     // Socket paths of the GnuPG agents (OpenPGP home, S/MIME home).
     QStringList m_agentSockets;
     QStringList m_agentHomes;             // same order, for readable log lines
+    QList<QProcess *> m_agentProcs;       // same order; nullptr if not started
 
     QVariantList listKeys(bool secret, const QString &pattern);
     // Fetch the first URL that returns a public-key block; cb gets the armored
@@ -476,23 +490,40 @@ private:
     // The two halves of storeAndTransmit, so several messages can be queued and
     // then sent with ONE transmit (blind copies).
     bool storeInOutbox(const QMailAccountId &accId, const QByteArray &rfc,
-                       bool hasAttachments);
-    void transmitOutbox(const QMailAccountId &accId);
+                       bool hasAttachments, quint64 *storedId = nullptr);
     bool m_available;
     QMailTransmitAction *m_tx = nullptr;
+    static GpgEngine *s_instance;
+    void pumpTransmit();
+    QList<quint64> m_txQueue;             // accounts waiting for the action
+    quint64 m_txCurrent = 0;              // account the action is busy with
+    QTimer m_txTimeout;                   // gives up on a request without answer
+    // Accounts whose sign-in for outgoing mail the system refused: left out of
+    // automatic retries until the user retries by hand.
+    QSet<quint64> m_credBlocked;
+    // Messages seen in an outbox. Sending removes them from there; that is not
+    // a message vanishing from the server (see the messagesRemoved handler).
+    QSet<quint64> m_outboxSeen;
+    QTimer m_outboxSeenRefresh;
+    void refreshOutboxSeen();
 
     // Automatic re-send for a stuck outbox. The steps are minutes; the schedule
     // stops after the last one so a permanently refused message is not delivered
     // over and over — repeated attempts at a mail the server rejects for good only
     // harm the sender's reputation.
     QTimer m_retryTimer;
-    int m_retryStep = -1;                 // index into kRetryMinutes, -1 = idle
+    QHash<quint64, int> m_retryStepOf;    // account -> attempts scheduled so far
+    QHash<quint64, qint64> m_retryDueAt;  // account -> when its next attempt is due
+    QSet<quint64> m_retryGivenUp;         // refused for good / schedule used up
+    void armRetryTimer();
     QSet<quint64> m_retryAccounts;        // accounts whose outbox we keep trying
     QSet<quint64> m_contentComplete;      // messages known to be here in full
     QHash<quint64, qint64> m_ownDeletes;  // id -> when the app asked for it
     qint64 m_ownDeleteWindow = 0;         // batch deletes: quiet until this time
-    void scheduleRetry(const QMailAccountId &accId);
-    void onTransmitFailed(const QString &error, int code);
+    void scheduleRetry(quint64 acc);
+    void onTransmitFailed(quint64 acc, const QString &error, int code);
+    void retryOutboxesAutomatically();
+    int retryableOutboxCount();
 
     // Remembered-address store (see the Q_INVOKABLEs above).
     QString addressStorePath() const;

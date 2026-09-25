@@ -64,6 +64,10 @@ public slots:
                  const QString &bcc, const QString &body);
     void mailto(const QStringList &content);
     void activateWindow(const QStringList &dummy);
+    // org.sailfishos.share on /share: the system's "share via e-mail". The
+    // stock client serves it under the same bus name, so while we hold the
+    // name it is ours to answer — or sharing would end in nothing.
+    void share(const QVariantMap &config);
 
 signals:
     void takeoverChanged();
@@ -72,6 +76,8 @@ signals:
     void openInboxRequested(int accountId);
     void composeRequested(const QString &subject, const QString &to, const QString &cc,
                           const QString &bcc, const QString &body);
+    // files: list of {path, name, mimeType}
+    void shareRequested(const QVariantList &files, const QString &subject, const QString &body);
 
 private:
     void request(const QString &kind, const QVariantList &args);
@@ -82,6 +88,7 @@ private:
     bool m_ready;
     bool m_owned;               // do we currently hold com.jolla.email.ui?
     QVector<QPair<QString, QVariantList> > m_pending;
+    QObject *m_shareObject;     // exported at /share
 };
 
 // Thin translation layer: it exists only so the exported interface NAME is
@@ -109,6 +116,22 @@ public slots:
 
 private:
     EmailUi *ui() const;
+};
+
+// The /share object. A separate object because D-Bus paths and interfaces are
+// fixed by the caller: org.sailfishos.share.share(a{sv}) on /share.
+class EmailShareAdaptor : public QDBusAbstractAdaptor
+{
+    Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "org.sailfishos.share")
+public:
+    EmailShareAdaptor(QObject *exported, EmailUi *ui);
+
+public slots:
+    void share(const QVariantMap &shareActionConfiguration);
+
+private:
+    EmailUi *m_ui;
 };
 
 #endif // EMAILUI_H

@@ -51,13 +51,29 @@ Page {
     property var _smimeSig: ({})
     readonly property string _smimeSigStatus: (page._smimeSig && page._smimeSig.status)
                                               ? page._smimeSig.status : ""
+    // The S/MIME check is a chain of gpgsm and openssl runs on the GUI thread.
+    // The store reports this message changed many times (flags, a sync after a
+    // send) — also while the page lies under the composer — so the chain runs
+    // until there is a verdict, and after an error at most a few times.
+    property int _smimeChecks: 0
     function _refreshSmime() {
         if (!Gpg.smimeEnabled) { page._smimeKind = ""; page._smimeImportNeeded = false; page._smimeSig = ({}); return }
+        // "unverifiable" is checked again (without gpgsm, so for free) until the
+        // message is complete: a part still being fetched looks the same.
+        if (page._smimeSigStatus === "unverifiable" && !page._isComplete()) page._smimeSig = ({})
+        if (page._smimeChecks >= 3
+            || (page._smimeSigStatus !== "" && page._smimeSigStatus !== "error")) return
+        // Recognising the kind only reads the stored file; it stays free until
+        // the message is actually there (a fresh IMAP account fetches later).
         page._smimeKind = Smime.messageKind(page.messageId)
         // For signed mails we can verify and check the store right away; for
         // encrypted ones the signature is inside, so both happen after Decrypt.
         if (page._smimeKind === "signed") {
             page._smimeSig = Smime.verifyMessage(page.messageId)
+            // Nothing to count and nothing to import yet while the signature
+            // part is missing (it may still be on its way).
+            if (page._smimeSigStatus === "unverifiable") { page._smimeImportNeeded = false; return }
+            page._smimeChecks++
             page._smimeImportNeeded = Smime.senderCertMissing(page.messageId)
         } else {
             page._smimeImportNeeded = false
@@ -71,11 +87,25 @@ Page {
         if (g.emails && g.emails.length > 0) return "" + g.emails[0]
         return g.subject ? ("" + g.subject) : "?"
     }
+    // The certificate's addresses against the address the mail claims to come
+    // from — the same cross-check as for OpenPGP. A certificate without any
+    // address cannot confirm the sender.
+    readonly property bool _smimeFromMatches: {
+        var g = page._smimeSig
+        if (!g || !g.emails || g.emails.length === 0) return false
+        var from = ("" + message.fromAddress).toLowerCase()
+        var lt = from.indexOf("<")
+        if (lt >= 0) { var gt = from.indexOf(">", lt + 1); if (gt > lt) from = from.substring(lt + 1, gt) }
+        from = from.trim()
+        for (var i = 0; i < g.emails.length; ++i) if (("" + g.emails[i]).toLowerCase() === from) return true
+        return false
+    }
     // Colour and wording of the S/MIME signature line follow the VERIFIED state.
     function _smimeSigColor() {
         switch (page._smimeSigStatus) {
-        case "good":           return "#4caf50"
+        case "good":           return page._smimeFromMatches ? "#4caf50" : "#ffa030"
         case "good-untrusted": return "#ffa030"
+        case "multiple":       return "#ffa030"
         case "bad":            return "#ff5050"
         default:               return Theme.secondaryColor
         }
@@ -162,15 +192,18 @@ Page {
         if (message.encryptionStatus === EmailMessage.Encrypted) {
             page._body = ""; page._html = ""; return
         }
-        var complete = page._isComplete()
-        if (!page._bodyRead && (complete || page._bodyReadTries < 3)) {
+        // Bounded even for complete messages: for some the getter stays empty
+        // for good (an S/MIME envelope has no text body), and every store
+        // change would otherwise read — and possibly request — it once more.
+        page._isComplete()
+        if (!page._bodyRead && page._bodyReadTries < 3) {
             page._bodyReadTries++
             page._body = message.body
             if (page._body !== "") page._bodyRead = true
         }
         // A few more tries for the HTML part: the first read only triggers its
         // download, the value arrives with one of the later store changes.
-        if (!page._htmlRead && (complete || page._htmlReadTries < 6)) {
+        if (!page._htmlRead && page._htmlReadTries < 6) {
             page._htmlReadTries++
             page._html = message.htmlBody
             if (page._html !== "") page._htmlRead = true
@@ -195,7 +228,8 @@ Page {
     readonly property bool _sigFromMatches: {
         if (page._sigStatus === "" || page._sigStatus === "nokey") return true
         var em = page._sigInfo.emails
-        if (!em || em.length === 0) return true
+        // A key without any address cannot confirm the sender (as for S/MIME).
+        if (!em || em.length === 0) return false
         var from = ("" + message.fromAddress).toLowerCase()
         var lt = from.indexOf("<")
         if (lt >= 0) { var gt = from.indexOf(">", lt + 1); if (gt > lt) from = from.substring(lt + 1, gt) }
@@ -631,7 +665,9 @@ Page {
             page._awaitingCertImport = false
             if (ok) {
                 page._smimeImportNeeded = false      // now in the store → hide button
-                page._refreshSmime()                 // trust may have changed the result
+                page._smimeChecks = 0                // trust may have changed the result
+                page._smimeSig = ({})
+                page._refreshSmime()
             }
             page._smimeInfo = ok ? qsTr("Sender certificate imported")
                                  : qsTr("Import: %1").arg(error)
@@ -784,6 +820,7 @@ Page {
             var mt = ("" + att.mimeType).toLowerCase()
             if (mt.indexOf("pgp-keys") >= 0 || nm.indexOf(".asc") >= 0 || nm.indexOf(".gpg") >= 0
                 || nm.indexOf("pubkey") >= 0 || nm.indexOf("public") >= 0 || nm.indexOf("0x") >= 0) {
+                page._awaitingKeyFlow = true
                 Gpg.inspectKeyFileForImport("" + att.path, fromAddr); return ""
             }
         }
@@ -792,6 +829,7 @@ Page {
         if (i >= 0) {
             var url = ("" + message.attachmentModel.url(i))
             if (url !== "") {
+                page._awaitingKeyFlow = true
                 Gpg.inspectKeyFileForImport(url.indexOf("file://") === 0 ? url.substring(7) : url, fromAddr); return ""
             }
             page._pendingKeyIndex = i
@@ -807,6 +845,7 @@ Page {
         if (url === "") return
         var idx = page._pendingKeyIndex
         page._pendingKeyIndex = -1
+        page._awaitingKeyFlow = true
         Gpg.inspectKeyFileForImport(url.indexOf("file://") === 0 ? url.substring(7) : url,
                                     "" + message.fromAddress)
     }
@@ -994,13 +1033,17 @@ Page {
         }
         // Encrypted but not yet decrypted: the signature is inside the ciphertext.
         if (page._isEncrypted) return qsTr("Signature: decrypt first")
-        // Native signature — only the meaningful states (ignore QMF's bogus
-        // Failure/Unchecked on plain unsigned mails).
+        // A signature the platform checked itself. Its verdict comes from the
+        // system's own old GnuPG and keyring, over a copy of the message its
+        // store did not keep as it was sent — not a verdict SF-Mail can stand
+        // behind, so it is never shown as one. (QMF's Failure/Unchecked on
+        // plain unsigned mails are ignored as before.)
         switch (message.signatureStatus) {
-        case EmailMessage.SignedValid:   return qsTr("Valid signature")
-        case EmailMessage.SignedInvalid: return qsTr("INVALID signature")
-        case EmailMessage.SignedExpired: return qsTr("Signature from expired key")
-        case EmailMessage.SignedMissing: return qsTr("Public key missing — cannot verify")
+        case EmailMessage.SignedValid:
+        case EmailMessage.SignedInvalid:
+        case EmailMessage.SignedExpired:
+        case EmailMessage.SignedMissing:
+            return qsTr("Signed (OpenPGP). SF-Mail cannot check this signature here: the device's mail storage does not keep the signed part exactly as it was sent.")
         default: return ""
         }
     }
@@ -1015,11 +1058,7 @@ Page {
             default:        return Theme.secondaryColor
             }
         }
-        switch (message.signatureStatus) {
-        case EmailMessage.SignedValid:   return "#4caf50"
-        case EmailMessage.SignedInvalid: return "#ff6b6b"
-        default: return Theme.secondaryColor
-        }
+        return Theme.secondaryColor
     }
 
     SilicaFlickable {
@@ -1302,8 +1341,6 @@ Page {
                         wrapMode: Text.WordWrap
                         font.pixelSize: Theme.fontSizeSmall
                         text: page.signatureText()
-                              + (message.signingKeys && message.signingKeys.length > 0
-                                 ? "  (" + message.signingKeys[0].slice(-8) + ")" : "")
                         color: page.signatureColor()
                     }
                     Button {
@@ -1385,20 +1422,28 @@ Page {
                     // The verification result — never a claim derived from the
                     // message's own headers.
                     Label {
-                        visible: page._smimeSigStatus !== ""
+                        // "none": nothing signed (e.g. encrypted only) — no line.
+                        visible: page._smimeSigStatus !== "" && page._smimeSigStatus !== "none"
                         width: parent.width; wrapMode: Text.WordWrap
                         font.pixelSize: Theme.fontSizeSmall
                         color: page._smimeSigColor()
                         text: {
                             switch (page._smimeSigStatus) {
                             case "good":
-                                return qsTr("✓ Valid signature from %1").arg(page._smimeSigWho())
+                                return page._smimeFromMatches
+                                       ? qsTr("✓ Valid signature from %1").arg(page._smimeSigWho())
+                                       : qsTr("⚠ Good signature, but from %1 — NOT the sender's address (%2)")
+                                         .arg(page._smimeSigWho()).arg("" + message.fromAddress)
+                            case "multiple":
+                                return qsTr("Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.")
                             case "good-untrusted":
                                 return qsTr("Signature is mathematically valid (%1), but you have not trusted the authority that issued the certificate.").arg(page._smimeSigWho())
                             case "bad":
                                 return qsTr("⚠ INVALID signature — this message was altered after signing, or the signature is forged.")
                             case "nocert":
                                 return qsTr("Signed, but the signer's certificate is missing — the signature cannot be checked.")
+                            case "unverifiable":
+                                return qsTr("Signed, but this device's mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.")
                             default:
                                 return qsTr("The signature could not be checked.")
                             }

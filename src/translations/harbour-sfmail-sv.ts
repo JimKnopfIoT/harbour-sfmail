@@ -103,6 +103,10 @@ Om det stör kan du ta bort den andra posten ur den kopplingen från ett root-sk
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Varför konton ibland tystnar trots att brevlådan har nya meddelanden — ett fel i systemets posttjänst, vad den här appen har fått veta om det, och hur leveransen kommer tillbaka.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Fri programvara under GNU GPL v3 eller senare; medföljande komponenter under sina egna licenser (GPL, LGPL, Apache 2.0). Källkod och licenstexter: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Om det stör kan du ta bort den andra posten ur den kopplingen från ett root-sk
     <message>
         <source>no key/certificate for this address</source>
         <translation>ingen nyckel/inget certifikat för den här adressen</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Ett utkast behåller inga bilagor. Spara utkastet igen för att lagra det utan dem.</translation>
     </message>
 </context>
 <context>
@@ -1257,6 +1265,14 @@ En import lägger till en ANDRA nyckel för den här adressen — försäkra dig
         <source>Remembered addresses</source>
         <translation>Sparade adresser</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Sändningen stoppad: systemet avvisade det här kontots inloggning för utgående post. SF-Mail försöker inte längre på egen hand — varje försök skulle flagga kontot igen. Kontrollera kontot under Inställningar → Konton och tryck sedan här för att skicka.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Sändningen stoppad: även det sista automatiska försöket misslyckades. Tryck här för att försöka igen när anslutningen är tillbaka.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1367,6 +1383,10 @@ Om knappen ovan inte skulle gå fram kan samma sak göras från en terminal:</tr
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Felet är känt och har redan rättats i operativsystemets egen källkod (fel JB#64979, september 2026): räknandet övergavs helt, och en enhet använder nu så många bevakade brevlådor som den kan få i stället för att vägra alla. Den rättelsen finns inte i den systemversion som körs här, så den bör nå den här enheten med en framtida Sailfish OS-uppdatering — och då blir den här sidan överflödig.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Startar om posttjänsten</translation>
     </message>
 </context>
 <context>
@@ -1559,6 +1579,14 @@ Om knappen ovan inte skulle gå fram kan samma sak göras från en terminal:</tr
     <message>
         <source>Encrypted</source>
         <translation>Krypterat</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Inte skickat. Systemet avvisade kontots inloggning för utgående post — kontrollera kontot under Inställningar → Konton och använd sedan Skicka igen.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Inte skickat. Även det sista automatiska försöket misslyckades — använd Skicka igen när anslutningen är tillbaka.</translation>
     </message>
 </context>
 <context>
@@ -1910,6 +1938,18 @@ Om knappen ovan inte skulle gå fram kan samma sak göras från en terminal:</tr
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 är redan sparad</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Signerat, men enhetens e-postlagring har inte längre kvar meddelandet exakt så som det skickades — signaturen kan inte kontrolleras här. Det säger ingenting om huruvida meddelandet är äkta.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Signerat (OpenPGP). SF-Mail kan inte kontrollera signaturen här: enhetens e-postlagring behåller inte den signerade delen exakt så som den skickades.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Signerat med flera olika certifikat. SF-Mail visar bara en enda signatur som giltig — kontrollera meddelandet på annat sätt.</translation>
     </message>
 </context>
 <context>

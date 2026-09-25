@@ -103,6 +103,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Γιατί οι λογαριασμοί σιωπούν κάποιες φορές, ενώ το γραμματοκιβώτιο έχει νέα μηνύματα — μια βλάβη στην υπηρεσία αλληλογραφίας του συστήματος, τι έμαθε γι' αυτήν η εφαρμογή και πώς επιστρέφει η παράδοση.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Ελεύθερο λογισμικό υπό την GNU GPL v3 ή νεότερη· τα συνοδευτικά στοιχεία υπό τις δικές τους άδειες (GPL, LGPL, Apache 2.0). Πηγαίος κώδικας και κείμενα αδειών: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>no key/certificate for this address</source>
         <translation>δεν υπάρχει κλειδί/πιστοποιητικό για αυτή τη διεύθυνση</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Ένα πρόχειρο δεν κρατά συνημμένα. Αποθηκεύστε ξανά το πρόχειρο για να φυλαχτεί χωρίς αυτά.</translation>
     </message>
 </context>
 <context>
@@ -1257,6 +1265,14 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Remembered addresses</source>
         <translation>Αποθηκευμένες διευθύνσεις</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Η αποστολή σταμάτησε: το σύστημα απέρριψε τη σύνδεση αυτού του λογαριασμού για εξερχόμενη αλληλογραφία. Το SF-Mail δεν ξαναδοκιμάζει πλέον από μόνο του — κάθε απόπειρα θα επισήμαινε ξανά τον λογαριασμό. Ελέγξτε τον λογαριασμό στις Ρυθμίσεις → Λογαριασμοί και μετά πατήστε εδώ για αποστολή.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Η αποστολή σταμάτησε: απέτυχε και η τελευταία αυτόματη απόπειρα. Πατήστε εδώ για νέα προσπάθεια μόλις επανέλθει η σύνδεση.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1367,6 +1383,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Η βλάβη είναι γνωστή και έχει ήδη διορθωθεί στον ίδιο τον πηγαίο κώδικα του λειτουργικού συστήματος (σφάλμα JB#64979, Σεπτέμβριος 2026): η μέτρηση εγκαταλείφθηκε εντελώς και μια συσκευή χρησιμοποιεί πλέον όσα παρακολουθούμενα γραμματοκιβώτια μπορεί να εξασφαλίσει, αντί να τα αρνείται όλα. Η διόρθωση αυτή δεν υπάρχει στην έκδοση του συστήματος που τρέχει εδώ, οπότε αναμένεται να φτάσει σε αυτή τη συσκευή με μια μελλοντική ενημέρωση του Sailfish OS — και τότε αυτή η σελίδα θα είναι περιττή.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Γίνεται επανεκκίνηση της υπηρεσίας αλληλογραφίας</translation>
     </message>
 </context>
 <context>
@@ -1559,6 +1579,14 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Encrypted</source>
         <translation>Κρυπτογραφημένο</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Δεν στάλθηκε. Το σύστημα απέρριψε τη σύνδεση του λογαριασμού για εξερχόμενη αλληλογραφία — ελέγξτε τον λογαριασμό στις Ρυθμίσεις → Λογαριασμοί και μετά χρησιμοποιήστε την Επανάληψη αποστολής.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Δεν στάλθηκε. Απέτυχε και η τελευταία αυτόματη απόπειρα — χρησιμοποιήστε την Επανάληψη αποστολής μόλις επανέλθει η σύνδεση.</translation>
     </message>
 </context>
 <context>
@@ -1910,6 +1938,18 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>%1 is already remembered</source>
         <translation>Η %1 έχει ήδη απομνημονευτεί</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Υπογεγραμμένο, αλλά ο χώρος αποθήκευσης αλληλογραφίας αυτής της συσκευής δεν διατηρεί πια το μήνυμα ακριβώς όπως στάλθηκε — η υπογραφή δεν μπορεί να ελεγχθεί εδώ. Αυτό δεν λέει τίποτα για το αν το μήνυμα είναι γνήσιο.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Υπογεγραμμένο (OpenPGP). Το SF-Mail δεν μπορεί να ελέγξει αυτή την υπογραφή εδώ: ο χώρος αποθήκευσης αλληλογραφίας της συσκευής δεν διατηρεί το υπογεγραμμένο τμήμα ακριβώς όπως στάλθηκε.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Υπογεγραμμένο με πολλά διαφορετικά πιστοποιητικά. Το SF-Mail εμφανίζει ως έγκυρη μόνο μία υπογραφή — ελέγξτε το μήνυμα με άλλον τρόπο.</translation>
     </message>
 </context>
 <context>

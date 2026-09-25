@@ -38,7 +38,12 @@ Page {
         }
         onRetryStopped: {
             page._refreshOutbox()
-            page._retryNote = reason === "" ? "" : qsTr("Sending stopped: %1").arg(reason)
+            page._retryNote = (reason === "" || reason === "cancelled") ? ""
+                : reason === "exhausted"
+                  ? qsTr("Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.")
+                : reason === "credentials"
+                  ? qsTr("Sending stopped: the system refused this account's sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.")
+                  : qsTr("Sending stopped: %1").arg(reason)
         }
     }
 
@@ -96,6 +101,11 @@ Page {
             pageStack.push(Qt.resolvedUrl("ComposerPage.qml"),
                            { replyTo: to, subjectPrefill: subject, ccPrefill: cc,
                              bccPrefill: bcc, bodyPrefill: body })
+        }
+        onShareRequested: {
+            pageStack.push(Qt.resolvedUrl("ComposerPage.qml"),
+                           { attachmentsPrefill: files, subjectPrefill: subject,
+                             bodyPrefill: body })
         }
     }
 

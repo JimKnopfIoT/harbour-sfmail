@@ -22,6 +22,8 @@ Page {
     property string bodyPrefill: ""
     property string ccPrefill: ""
     property string bccPrefill: ""
+    // Files handed over by "share via e-mail": [{path, name, mimeType}].
+    property var attachmentsPrefill: []
     // Reply context: pre-arm encryption and match the incoming format.
     property bool encryptReply: false
     property string replyFormat: "mime"     // "mime" | "inline"
@@ -136,7 +138,9 @@ Page {
         var keepAcct = page._acctId()
         var keepAddr = page._fromAddr()
         identities.clear()
-        for (var i = 0; i < accountsModel.count; ++i) {
+        // This model has no `count` (undefined → the loop never ran and the
+        // sender list stayed empty); its row count is numberOfAccounts.
+        for (var i = 0; i < accountsModel.numberOfAccounts; ++i) {
             var addr = "" + accountsModel.emailAddress(i)
             var id = accountsModel.accountId(i)
             identities.append({ "accountId": id, "address": addr, "alias": "" })
@@ -287,6 +291,10 @@ Page {
             formatCombo.currentIndex = (replyFormat === "inline") ? 1 : 0
             // S/MIME reply: also sign, matching how the received mail was protected.
             if (page.cryptoKind === "smime") signSwitch.checked = true
+        }
+        for (var ai = 0; ai < attachmentsPrefill.length; ++ai) {
+            var a = attachmentsPrefill[ai]
+            page._addAttachment(a.path, a.name, a.mimeType)
         }
         if (fromTemplateId > 0) page._loadTemplate(fromTemplateId)
         // A draft prefills the same way (templateInfo reads any stored message).
@@ -464,8 +472,17 @@ Page {
     // Save the current (plaintext) message to Drafts — so nothing is lost when you
     // leave the composer (text could otherwise be lost). Encryption happens at send;
     // the draft keeps the editable plaintext.
+    // A draft keeps no attachments (see below). Losing them must not be silent:
+    // the first save with attachments only says so, the second one saves.
+    property bool _draftAttachmentsWarned: false
     function _saveDraft() {
         if (page._acctId() <= 0) { status.text = qsTr("Choose an account"); status.error = true; return }
+        if (attModel.count > 0 && !page._draftAttachmentsWarned) {
+            page._draftAttachmentsWarned = true
+            status.text = qsTr("A draft does not keep attachments. Save the draft again to store it without them.")
+            status.error = true
+            return
+        }
         var acct = page._acctId()
         // Save via the plugin (self-built RFC2822 + heap), NOT the native
         // EmailMessage.saveDraft(): the native incremental-QMF path intermittently

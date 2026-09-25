@@ -13,6 +13,9 @@ import SFMail.Gpg 1.0
 // crypto plugin for where the two halves of the evidence come from.
 Page {
     id: page
+    // A restart affects every mail app on the device, so it runs only after a
+    // moment in which it can still be called off.
+    RemorsePopup { id: restartRemorse }
     allowedOrientations: defaultAllowedOrientations
 
     property var _push: ({})
@@ -25,7 +28,12 @@ Page {
     }
 
     Component.onCompleted: _reload()
-    onStatusChanged: if (status === PageStatus.Active) _reload()
+    // Leaving the page would let the countdown fire at once (that is what a
+    // remorse does when its page goes away) — here leaving means "not now".
+    onStatusChanged: {
+        if (status === PageStatus.Active) _reload()
+        else if (status === PageStatus.Deactivating) restartRemorse.cancel()
+    }
 
     SilicaFlickable {
         anchors.fill: parent
@@ -173,15 +181,17 @@ Page {
                            + "moment is picked up again afterwards.")
             }
 
+            Connections {
+                target: MailService
+                onFinished: page._note = ok
+                            ? qsTr("Restarted. Give it a moment, then fetch mail again.")
+                            : qsTr("Could not restart it: %1").arg(MailService.lastError())
+            }
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Restart the mail service")
-                onClicked: {
-                    if (MailService.restart())
-                        page._note = qsTr("Restarted. Give it a moment, then fetch mail again.")
-                    else
-                        page._note = qsTr("Could not restart it: %1").arg(MailService.lastError())
-                }
+                onClicked: restartRemorse.execute(qsTr("Restarting the mail service"),
+                                                  function() { MailService.restart() })
             }
             Label {
                 x: Theme.horizontalPageMargin

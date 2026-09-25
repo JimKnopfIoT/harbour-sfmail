@@ -5,6 +5,9 @@
 #include <QString>
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QDBusPendingCall>
+#include <QDBusPendingCallWatcher>
+#include <QDBusPendingReply>
 #include <QDebug>
 
 // Restarting the shared mail-retrieval service (About → "When mail stops
@@ -28,17 +31,20 @@ class MailService : public QObject
 public:
     explicit MailService(QObject *parent = nullptr) : QObject(parent) {}
 
-    // Empty unless the last restart() failed.
+    // Empty unless the last restart failed.
     Q_INVOKABLE QString lastError() const { return m_error; }
 
-    Q_INVOKABLE bool restart()
+    // Asks for the restart and returns at once; finished() reports the
+    // outcome. (A blocking call froze the page for up to ten seconds.)
+    Q_INVOKABLE void restart()
     {
         m_error.clear();
 
         QDBusConnection bus = QDBusConnection::sessionBus();
         if (!bus.isConnected()) {
             m_error = tr("no connection to the session bus");
-            return false;
+            emit finished(false);
+            return;
         }
 
         // Built by hand rather than through QDBusInterface: that would
@@ -52,16 +58,25 @@ public:
         call << QStringLiteral("messageserver5.service")
              << QStringLiteral("replace");
 
-        const QDBusMessage reply = bus.call(call, QDBus::Block, 10000);
-        if (reply.type() == QDBusMessage::ErrorMessage) {
-            m_error = reply.errorMessage();
-            if (m_error.isEmpty()) m_error = tr("refused, without a reason given");
-            qWarning() << "[sync] restarting the mail service failed:" << m_error;
-            return false;
-        }
-        qWarning() << "[sync] mail service restart requested";
-        return true;
+        QDBusPendingCallWatcher *w =
+                new QDBusPendingCallWatcher(bus.asyncCall(call, 10000), this);
+        connect(w, &QDBusPendingCallWatcher::finished, this,
+                [this](QDBusPendingCallWatcher *self) {
+            self->deleteLater();
+            if (self->isError()) {
+                m_error = self->error().message();
+                if (m_error.isEmpty()) m_error = tr("refused, without a reason given");
+                qWarning() << "[sync] restarting the mail service failed:" << m_error;
+                emit finished(false);
+                return;
+            }
+            qWarning() << "[sync] mail service restart requested";
+            emit finished(true);
+        });
     }
+
+signals:
+    void finished(bool ok);
 
 private:
     QString m_error;

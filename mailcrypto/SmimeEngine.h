@@ -6,6 +6,7 @@
 #include <QStringList>
 #include <QByteArray>
 #include <QHash>
+#include <QSet>
 #include <QVariantMap>
 
 class QNetworkAccessManager;
@@ -184,12 +185,16 @@ private:
     // disable-crl-checks, batch). Returns true on exit 0; out/err filled.
     bool runGpgsm(const QStringList &args, const QByteArray &stdinData,
                   QByteArray *out, QByteArray *err, int timeoutMs = 60000);
-    // Run the system openssl. ok = exit 0. A non-empty passEnv is exported as
-    // SFMAIL_PASS for -passin/-passout env:SFMAIL_PASS — NEVER pass a passphrase
-    // as "pass:<x>" on the command line, /proc/<pid>/cmdline is world-readable.
+    // Run the system openssl. ok = exit 0. A passphrase goes in on stdin
+    // (-passin/-passout fd:0) — never "pass:<x>" on the command line
+    // (/proc/<pid>/cmdline is world-readable) and never in the environment:
+    // /proc/<pid>/environ keeps it for the child's whole run, while what goes
+    // in on stdin or the fd-3 pipe is gone once the child has read it.
+    // When stdin is taken by the passphrase, a key goes in as fd3Data, which
+    // the child reads from /proc/self/fd/3 (a pipe; never a file).
     bool runOpenssl(const QStringList &args, const QByteArray &stdinData,
                     QByteArray *out, QByteArray *err, int timeoutMs = 60000,
-                    const QString &passEnv = QString());
+                    const QByteArray &fd3Data = QByteArray());
     // Does this openssl understand the -legacy flag (OpenSSL 3.x)?
     bool opensslHasLegacy();
 
@@ -215,6 +220,8 @@ private:
     QVariantMap describeCertsPem(const QByteArray &pem, const QString &senderEmail);
     // Forget cached listCerts()/verify results after the store changed.
     void invalidateCerts();
+    bool keyboxFprs(QSet<QString> *all, QSet<QString> *withSecret);
+    QByteArray issuerCertFrom(const QByteArray &data, const QString &childFpr);
     // Remove leftovers of interrupted operations (temp dirs, scratch files).
     void cleanupTempFiles();
     // True if EVERY certificate in `pem` is already present in the store (by SHA-1
@@ -247,7 +254,8 @@ private:
                              const QString &fromAddr, const QString &passphrase,
                              QByteArray *errOut);
     // Shared QMF tail: parse RFC2822 → outbox → transmit (S/MIME copy of GpgEngine).
-    bool smimeStoreInOutbox(const QMailAccountId &accId, const QByteArray &rfc, bool hasAttachments);
+    bool smimeStoreInOutbox(const QMailAccountId &accId, const QByteArray &rfc, bool hasAttachments,
+                            quint64 *storedId = nullptr);
     void smimeTransmit(const QMailAccountId &accId);
 
     void log(const QString &s);

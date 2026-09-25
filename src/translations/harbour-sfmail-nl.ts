@@ -103,6 +103,10 @@ Als het stoort, haalt u het andere item in een root-shell uit die toewijzing. Di
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Waarom accounts soms zwijgen hoewel het postvak nieuwe berichten heeft — een fout in de e-maildienst van het systeem, wat deze app daarover te horen heeft gekregen, en hoe de bezorging terugkomt.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Vrije software onder de GNU GPL v3 of later; meegeleverde componenten onder hun eigen licenties (GPL, LGPL, Apache 2.0). Broncode en licentieteksten: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Als het stoort, haalt u het andere item in een root-shell uit die toewijzing. Di
     <message>
         <source>no key/certificate for this address</source>
         <translation>geen sleutel/certificaat voor dit adres</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Een concept bewaart geen bijlagen. Sla het concept opnieuw op om het zonder bijlagen te bewaren.</translation>
     </message>
 </context>
 <context>
@@ -1257,6 +1265,14 @@ Importeren voegt een TWEEDE sleutel voor dit adres toe — vergewis je ervan dat
         <source>Remembered addresses</source>
         <translation>Onthouden adressen</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Verzenden gestopt: het systeem heeft de aanmelding van dit account voor uitgaande e-mail geweigerd. SF-Mail probeert het niet meer vanzelf — elke poging zou het account opnieuw als foutief markeren. Controleer het account onder Instellingen → Accounts en tik dan hier om te verzenden.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Verzenden gestopt: ook de laatste automatische poging is mislukt. Tik hier om het opnieuw te proberen zodra de verbinding terug is.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1367,6 +1383,10 @@ Mocht de knop hierboven niet doorkomen, dan kan hetzelfde vanuit een terminal:</
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>De fout is bekend en is in de broncode van het besturingssysteem zelf al gecorrigeerd (fout JB#64979, september 2026): het tellen is helemaal losgelaten, en een apparaat gebruikt nu zoveel bewaakte postvakken als het krijgen kan, in plaats van ze allemaal te weigeren. Die correctie zit niet in de systeemversie die hier draait — ze zou met een toekomstige Sailfish OS-update op dit apparaat moeten aankomen, en daarmee wordt deze pagina overbodig.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>E-maildienst wordt opnieuw gestart</translation>
     </message>
 </context>
 <context>
@@ -1559,6 +1579,14 @@ Mocht de knop hierboven niet doorkomen, dan kan hetzelfde vanuit een terminal:</
     <message>
         <source>Encrypted</source>
         <translation>Versleuteld</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Niet verzonden. Het systeem heeft de aanmelding van het account voor uitgaande e-mail geweigerd — controleer het account onder Instellingen → Accounts en gebruik dan Opnieuw verzenden.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Niet verzonden. Ook de laatste automatische poging is mislukt — gebruik Opnieuw verzenden zodra de verbinding terug is.</translation>
     </message>
 </context>
 <context>
@@ -1910,6 +1938,18 @@ Mocht de knop hierboven niet doorkomen, dan kan hetzelfde vanuit een terminal:</
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 is al onthouden</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Ondertekend, maar de e-mailopslag van dit toestel bewaart het bericht niet meer precies zoals het is verzonden — de handtekening kan hier niet worden gecontroleerd. Dit zegt niets over de echtheid van het bericht.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Ondertekend (OpenPGP). SF-Mail kan deze handtekening hier niet controleren: de e-mailopslag van het toestel bewaart het ondertekende deel niet precies zoals het is verzonden.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Ondertekend met meerdere verschillende certificaten. SF-Mail toont maar één handtekening als geldig — controleer het bericht op een andere manier.</translation>
     </message>
 </context>
 <context>

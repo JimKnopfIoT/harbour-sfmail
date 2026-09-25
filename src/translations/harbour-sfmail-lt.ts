@@ -103,6 +103,10 @@ Jei tai trukdo, pašalinkite kitą įrašą iš to susiejimo root aplinkoje. Tai
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Kodėl paskyros kartais nutyla, nors pašto dėžutėje yra naujų laiškų — sistemos pašto tarnybos klaida, ką ši programa apie tai sužinojo ir kaip susigrąžinti laiškų pristatymą.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Laisva programinė įranga pagal GNU GPL v3 ar naujesnę licenciją; pridėti komponentai – pagal savo licencijas (GPL, LGPL, Apache 2.0). Pirminis kodas ir licencijų tekstai: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Jei tai trukdo, pašalinkite kitą įrašą iš to susiejimo root aplinkoje. Tai
     <message>
         <source>no key/certificate for this address</source>
         <translation>šiam adresui nėra nei rakto, nei sertifikato</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Juodraštis nesaugo priedų. Įrašyk juodraštį dar kartą, kad jis būtų išsaugotas be jų.</translation>
     </message>
 </context>
 <context>
@@ -1259,6 +1267,14 @@ Importavus šiam adresui atsiras ANTRAS raktas — įsitikink, kad naujasis rakt
         <source>Remembered addresses</source>
         <translation>Įsiminti adresai</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Siuntimas sustabdytas: sistema atmetė šios paskyros prisijungimą siunčiamam paštui. SF-Mail nebebando pats — kiekvienas bandymas vėl pažymėtų paskyrą kaip klaidingą. Patikrink paskyrą skiltyje Nustatymai → Paskyros, tada bakstelėk čia, kad išsiųstum.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Siuntimas sustabdytas: nepavyko ir paskutinis automatinis bandymas. Bakstelėk čia, kad bandytum dar kartą, kai ryšys atsiras.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1369,6 +1385,10 @@ Jei viršuje esantis mygtukas nepraeina, tą patį galima padaryti iš terminalo
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Klaida yra žinoma ir jau ištaisyta pačios operacinės sistemos pirminiame kode (klaida JB#64979, 2026 m. rugsėjis): skaičiavimo apskritai atsisakyta, ir įrenginys dabar naudoja tiek stebimų pašto dėžučių, kiek gali gauti, užuot atsisakęs jų visų. To pataisymo nėra čia veikiančioje sistemos versijoje, tad jis turėtų pasiekti šį įrenginį su būsimu Sailfish OS atnaujinimu — ir šis puslapis taps nebereikalingas.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Pašto tarnyba paleidžiama iš naujo</translation>
     </message>
 </context>
 <context>
@@ -1563,6 +1583,14 @@ Jei viršuje esantis mygtukas nepraeina, tą patį galima padaryti iš terminalo
     <message>
         <source>Encrypted</source>
         <translation>Užšifruota</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Neišsiųsta. Sistema atmetė paskyros prisijungimą siunčiamam paštui — patikrink paskyrą skiltyje Nustatymai → Paskyros, tada naudok Siųsti dar kartą.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Neišsiųsta. Nepavyko ir paskutinis automatinis bandymas — kai ryšys atsiras, naudok Siųsti dar kartą.</translation>
     </message>
 </context>
 <context>
@@ -1914,6 +1942,18 @@ Jei viršuje esantis mygtukas nepraeina, tą patį galima padaryti iš terminalo
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 jau įsimintas</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Pasirašyta, bet šio įrenginio pašto saugykla nebelaiko laiško tiksliai tokio, koks jis buvo išsiųstas — parašo čia patikrinti negalima. Tai nieko nesako apie tai, ar laiškas tikras.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Pasirašyta (OpenPGP). SF-Mail čia negali patikrinti šio parašo: įrenginio pašto saugykla nelaiko pasirašytos dalies tiksliai tokios, kokia ji buvo išsiųsta.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Pasirašyta keliais skirtingais sertifikatais. SF-Mail kaip galiojantį rodo tik vieną parašą — patikrink laišką kitu būdu.</translation>
     </message>
 </context>
 <context>

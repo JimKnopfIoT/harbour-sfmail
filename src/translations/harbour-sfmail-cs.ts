@@ -103,6 +103,10 @@ Pokud vám to vadí, odeberte druhou položku z tohoto přiřazení z rootovské
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Proč účty někdy zmlknou, přestože ve schránce jsou nové zprávy — chyba v poštovní službě systému, co se o ní tato aplikace dozvěděla a jak obnovit doručování.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Svobodný software pod licencí GNU GPL v3 nebo novější; přibalené komponenty pod vlastními licencemi (GPL, LGPL, Apache 2.0). Zdrojový kód a texty licencí: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Pokud vám to vadí, odeberte druhou položku z tohoto přiřazení z rootovské
     <message>
         <source>no key/certificate for this address</source>
         <translation>pro tuto adresu není klíč ani certifikát</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Koncept si přílohy neuchovává. Uložte koncept znovu, aby se uložil bez nich.</translation>
     </message>
 </context>
 <context>
@@ -1259,6 +1267,14 @@ Import přidá pro tuto adresu DRUHÝ klíč — než mu budete důvěřovat, uj
         <source>Remembered addresses</source>
         <translation>Zapamatované adresy</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Odesílání přerušeno: systém odmítl přihlášení tohoto účtu pro odchozí poštu. SF-Mail už to sám znovu nezkouší — každý pokus by účet znovu označil jako chybný. Zkontrolujte účet v Nastavení → Účty a pak sem klepněte pro odeslání.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Odesílání přerušeno: selhal i poslední automatický pokus. Klepněte sem a zkuste to znovu, až bude spojení zpět.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1369,6 +1385,10 @@ Kdyby tlačítko výše neprošlo, totéž lze udělat z terminálu:</translatio
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Závada je známá a ve zdrojovém kódu samotného operačního systému už byla opravena (chyba JB#64979, září 2026): počítání bylo zcela opuštěno a zařízení teď využívá tolik sledovaných schránek, kolik jich může získat, místo aby všechny odmítlo. Tato oprava není v systémové verzi, která zde běží — na toto zařízení by měla dorazit s některou příští aktualizací Sailfish OS, a tato stránka se tím stane zbytečnou.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Poštovní služba se znovu spouští</translation>
     </message>
 </context>
 <context>
@@ -1563,6 +1583,14 @@ Kdyby tlačítko výše neprošlo, totéž lze udělat z terminálu:</translatio
     <message>
         <source>Encrypted</source>
         <translation>Zašifrováno</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Neodesláno. Systém odmítl přihlášení účtu pro odchozí poštu — zkontrolujte účet v Nastavení → Účty a pak použijte „Odeslat znovu“.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Neodesláno. Selhal i poslední automatický pokus — až bude spojení zpět, použijte „Odeslat znovu“.</translation>
     </message>
 </context>
 <context>
@@ -1914,6 +1942,18 @@ Kdyby tlačítko výše neprošlo, totéž lze udělat z terminálu:</translatio
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 je již zapamatována</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Podepsáno, ale poštovní úložiště tohoto zařízení už zprávu neuchovává přesně tak, jak byla odeslána — podpis zde nelze ověřit. O pravosti zprávy to nic neříká.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Podepsáno (OpenPGP). SF-Mail zde tento podpis nemůže ověřit: poštovní úložiště zařízení neuchovává podepsanou část přesně tak, jak byla odeslána.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Podepsáno několika různými certifikáty. SF-Mail zobrazí jako platný jen jediný podpis — ověřte zprávu jiným způsobem.</translation>
     </message>
 </context>
 <context>

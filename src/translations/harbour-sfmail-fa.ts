@@ -103,6 +103,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>چرا حساب‌ها گاهی خاموش می‌مانند با آنکه صندوق پستی پیام‌های تازه دارد — خطایی در سرویس نامهٔ سیستم، آنچه به این برنامه دربارهٔ آن گفته شده، و راه بازگرداندن دریافت.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>نرم‌افزار آزاد تحت GNU GPL نسخهٔ ۳ یا بالاتر؛ اجزای همراه تحت پروانه‌های خودشان (GPL، LGPL، Apache 2.0). کد منبع و متن پروانه‌ها: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
     <message>
         <source>no key/certificate for this address</source>
         <translation>برای این نشانی کلید/گواهی نیست</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>پیش‌نویس پیوست‌ها را نگه نمی‌دارد. پیش‌نویس را دوباره ذخیره کنید تا بدون آن‌ها نگه داشته شود.</translation>
     </message>
 </context>
 <context>
@@ -1255,6 +1263,14 @@ Importing adds a SECOND key for this address — make sure this new key is genui
         <source>Remembered addresses</source>
         <translation>نشانی‌های ذخیره‌شده</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>ارسال متوقف شد: سیستم ورود این حساب برای نامهٔ خروجی را نپذیرفت. SF-Mail دیگر خودبه‌خود دوباره تلاش نمی‌کند — هر تلاش حساب را دوباره علامت‌گذاری می‌کند. حساب را در تنظیمات → حساب‌ها بررسی کنید، سپس برای ارسال اینجا ضربه بزنید.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>ارسال متوقف شد: آخرین تلاش خودکار هم ناموفق بود. وقتی اتصال برقرار شد، برای تلاش دوباره اینجا ضربه بزنید.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1365,6 +1381,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>این خطا شناخته شده و در خودِ کد منبع سیستم‌عامل پیش‌تر اصلاح شده است (اشکال JB#64979، سپتامبر 2026): شمارش یکسره کنار گذاشته شد و دستگاه اکنون به جای رد کردن همهٔ آن‌ها، از هر تعداد صندوق پستیِ زیر نظر که به دست آورد استفاده می‌کند. آن اصلاح در نسخهٔ سیستمی که اینجا اجرا می‌شود نیست، پس باید با یک به‌روزرسانی آیندهٔ Sailfish OS به این دستگاه برسد — و آنگاه این صفحه بی‌معنا می‌شود.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>در حال راه‌اندازی دوبارهٔ سرویس نامه</translation>
     </message>
 </context>
 <context>
@@ -1555,6 +1575,14 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Encrypted</source>
         <translation>رمزگذاری‌شده</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>ارسال نشد. سیستم ورود حساب برای نامهٔ خروجی را نپذیرفت — حساب را در تنظیمات → حساب‌ها بررسی کنید، سپس «ارسال دوباره» را به کار ببرید.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>ارسال نشد. آخرین تلاش خودکار هم ناموفق بود — وقتی اتصال برقرار شد، «ارسال دوباره» را به کار ببرید.</translation>
     </message>
 </context>
 <context>
@@ -1906,6 +1934,18 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 از پیش ذخیره شده است</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>امضا شده، اما حافظهٔ نامهٔ این دستگاه دیگر پیام را دقیقاً همان‌گونه که فرستاده شده نگه نمی‌دارد — امضا اینجا بررسی‌شدنی نیست. این دربارهٔ اصالت پیام چیزی نمی‌گوید.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>امضا شده (OpenPGP). SF-Mail نمی‌تواند این امضا را اینجا بررسی کند: حافظهٔ نامهٔ دستگاه بخش امضاشده را دقیقاً همان‌گونه که فرستاده شده نگه نمی‌دارد.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>با چند گواهی متفاوت امضا شده. SF-Mail فقط یک امضای واحد را معتبر نشان می‌دهد — پیام را از راه دیگری بررسی کنید.</translation>
     </message>
 </context>
 <context>

@@ -62,7 +62,11 @@ HAVE_QMF_PIMPL = $$system(grep -sl QPrivatelyImplemented /usr/include/qt5/QmfCli
 
 HEADERS += \
     GpgEngine.h \
-    SmimeEngine.h
+    SmimeEngine.h \
+    agentconf.h \
+    qmfstorepath.h \
+    backupfile.h \
+    mimeheader.h
 
 # install as a QML extension plugin under the import path
 installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)

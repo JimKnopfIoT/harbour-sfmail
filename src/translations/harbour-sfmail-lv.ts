@@ -103,6 +103,10 @@ Ja tas traucē, izņemiet otru ierakstu no šīs sasaistes root čaulā. Tas ir 
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Kāpēc konti reizēm apklust, lai gan pastkastē ir jaunas vēstules — kļūda sistēmas pasta pakalpojumā, ko šī lietotne par to uzzināja un kā atgūt vēstuļu saņemšanu.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Brīvā programmatūra saskaņā ar GNU GPL v3 vai jaunāku; pievienotie komponenti — saskaņā ar savām licencēm (GPL, LGPL, Apache 2.0). Pirmkods un licenču teksti: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Ja tas traucē, izņemiet otru ierakstu no šīs sasaistes root čaulā. Tas ir 
     <message>
         <source>no key/certificate for this address</source>
         <translation>šai adresei nav ne atslēgas, ne sertifikāta</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Melnraksts nesaglabā pielikumus. Saglabā melnrakstu vēlreiz, lai to saglabātu bez tiem.</translation>
     </message>
 </context>
 <context>
@@ -1259,6 +1267,14 @@ Imports pievieno šai adresei OTRU atslēgu — pārliecinies, ka jaunā atslēg
         <source>Remembered addresses</source>
         <translation>Iegaumētās adreses</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Sūtīšana apturēta: sistēma noraidīja šī konta pieteikšanos izejošajam pastam. SF-Mail vairs nemēģina pats — katrs mēģinājums atkal atzīmētu kontu kā kļūdainu. Pārbaudi kontu sadaļā Iestatījumi → Konti un tad pieskaries šeit, lai nosūtītu.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Sūtīšana apturēta: neizdevās arī pēdējais automātiskais mēģinājums. Pieskaries šeit, lai mēģinātu vēlreiz, kad savienojums būs atjaunots.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1369,6 +1385,10 @@ Ja iepriekš redzamā poga netiek cauri, to pašu var izdarīt no termināļa:</
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Kļūda ir zināma un operētājsistēmas pašas pirmkodā jau izlabota (kļūda JB#64979, 2026. gada septembris): skaitīšana tika atmesta pavisam, un ierīce tagad izmanto tik daudz novēroto pastkastu, cik var dabūt, tā vietā lai atteiktu tās visas. Šā labojuma nav šeit strādājošajā sistēmas versijā, tāpēc tam vajadzētu nonākt šajā ierīcē ar kādu nākamo Sailfish OS atjauninājumu — un šī lapa kļūs lieka.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Pasta pakalpojums tiek pārstartēts</translation>
     </message>
 </context>
 <context>
@@ -1563,6 +1583,14 @@ Ja iepriekš redzamā poga netiek cauri, to pašu var izdarīt no termināļa:</
     <message>
         <source>Encrypted</source>
         <translation>Šifrēta</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Nav nosūtīta. Sistēma noraidīja konta pieteikšanos izejošajam pastam — pārbaudi kontu sadaļā Iestatījumi → Konti un tad lieto Sūtīt vēlreiz.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Nav nosūtīta. Neizdevās arī pēdējais automātiskais mēģinājums — kad savienojums būs atjaunots, lieto Sūtīt vēlreiz.</translation>
     </message>
 </context>
 <context>
@@ -1914,6 +1942,18 @@ Ja iepriekš redzamā poga netiek cauri, to pašu var izdarīt no termināļa:</
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 jau ir iegaumēta</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Parakstīta, taču šīs ierīces pasta krātuve vairs neglabā vēstuli tieši tādu, kāda tā tika nosūtīta — parakstu šeit nevar pārbaudīt. Tas neko neliecina par to, vai vēstule ir īsta.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Parakstīta (OpenPGP). SF-Mail šeit nevar pārbaudīt šo parakstu: ierīces pasta krātuve neglabā parakstīto daļu tieši tādu, kāda tā tika nosūtīta.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Parakstīta ar vairākiem dažādiem sertifikātiem. SF-Mail kā derīgu rāda tikai vienu parakstu — pārbaudi vēstuli citā veidā.</translation>
     </message>
 </context>
 <context>

@@ -103,6 +103,10 @@ Má chuireann sé isteach ort, bain an iontráil eile as an nasc sin ó bhlaosc 
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Cén fáth a dtiteann cuntais ina dtost uaireanta cé go bhfuil teachtaireachtaí nua sa bhosca poist — fabht i seirbhís phoist an chórais, ar insíodh don fheidhmchlár seo faoi, agus conas an seachadadh a thabhairt ar ais.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Bogearraí saora faoin GNU GPL v3 nó níos déanaí; comhpháirteanna a thagann leis faoina gceadúnais féin (GPL, LGPL, Apache 2.0). Cód foinseach agus téacsanna ceadúnais: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Má chuireann sé isteach ort, bain an iontráil eile as an nasc sin ó bhlaosc 
     <message>
         <source>no key/certificate for this address</source>
         <translation>níl eochair/teastas ann don seoladh seo</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Ní choinníonn dréacht ceangaltáin. Sábháil an dréacht arís chun é a stóráil gan iad.</translation>
     </message>
 </context>
 <context>
@@ -1259,6 +1267,14 @@ Cuireann an iompórtáil an DARA heochair leis an seoladh seo — déan cinnte g
         <source>Remembered addresses</source>
         <translation>Seoltaí coinnithe</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Stopadh an seoladh: dhiúltaigh an córas do shíniú isteach an chuntais seo don phost amach. Ní dhéanann SF-Mail iarracht arís as a stuaim féin a thuilleadh — chuirfeadh gach iarracht bratach ar an gcuntas arís. Seiceáil an cuntas faoi Socruithe → Cuntais, agus ansin tapáil anseo chun é a sheoladh.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Stopadh an seoladh: theip ar an iarracht uathoibríoch dheireanach freisin. Tapáil anseo chun iarracht eile a dhéanamh nuair a bheidh an nasc ar ais.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1369,6 +1385,10 @@ Mura n-éiríonn leis an gcnaipe thuas, is féidir an rud céanna a dhéanamh ó
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Tá an fabht ar eolas agus ceartaíodh cheana é i gcód foinseach an chórais oibriúcháin féin (fabht JB#64979, Meán Fómhair 2026): tréigeadh an comhaireamh ar fad, agus úsáideann gléas anois an oiread boscaí poist faire agus is féidir leis a fháil in ionad diúltú dóibh go léir. Níl an ceartúchán sin sa leagan den chóras atá ag rith anseo, mar sin ba cheart go sroichfeadh sé an gléas seo le nuashonrú Sailfish OS amach anseo — agus beidh an leathanach seo gan tairbhe.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>An tseirbhís phoist á hatosú</translation>
     </message>
 </context>
 <context>
@@ -1563,6 +1583,14 @@ Mura n-éiríonn leis an gcnaipe thuas, is féidir an rud céanna a dhéanamh ó
     <message>
         <source>Encrypted</source>
         <translation>Criptithe</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Níor seoladh í. Dhiúltaigh an córas do shíniú isteach an chuntais don phost amach — seiceáil an cuntas faoi Socruithe → Cuntais, agus ansin úsáid Seol arís.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Níor seoladh í. Theip ar an iarracht uathoibríoch dheireanach freisin — úsáid Seol arís nuair a bheidh an nasc ar ais.</translation>
     </message>
 </context>
 <context>
@@ -1914,6 +1942,18 @@ Mura n-éiríonn leis an gcnaipe thuas, is féidir an rud céanna a dhéanamh ó
     <message>
         <source>%1 is already remembered</source>
         <translation>Tá %1 sábháilte cheana</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Sínithe, ach ní choinníonn stóras poist an ghléis seo an teachtaireacht díreach mar a seoladh í a thuilleadh — ní féidir an síniú a sheiceáil anseo. Ní léiríonn sé seo tada faoi cé acu an bhfuil an teachtaireacht barántúil nó nach bhfuil.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Sínithe (OpenPGP). Ní féidir le SF-Mail an síniú seo a sheiceáil anseo: ní choinníonn stóras poist an ghléis an chuid shínithe díreach mar a seoladh í.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Sínithe le roinnt teastas éagsúil. Ní thaispeánann SF-Mail ach síniú aonair amháin mar shíniú bailí — seiceáil an teachtaireacht ar bhealach eile.</translation>
     </message>
 </context>
 <context>

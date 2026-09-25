@@ -103,6 +103,10 @@ Jos se häiritsee, poista toinen merkintä tuosta kytkennästä root-kuoresta. T
         <source>Why accounts sometimes go quiet although the mailbox has new messages — a fault in the system&apos;s mail service, what this app was told about it, and how to get delivery back.</source>
         <translation>Miksi tilit toisinaan hiljenevät, vaikka postilaatikossa on uusia viestejä — vika järjestelmän postipalvelussa, mitä tämä sovellus sai siitä tietää ja miten posti saadaan taas kulkemaan.</translation>
     </message>
+    <message>
+        <source>Free software under the GNU GPL v3 or later; bundled components under their own licences (GPL, LGPL, Apache 2.0). Source code and licence texts: %1</source>
+        <translation>Vapaa ohjelmisto GNU GPL v3:n tai myöhemmän version ehdoin; mukana toimitetut komponentit omien lisenssiensä ehdoin (GPL, LGPL, Apache 2.0). Lähdekoodi ja lisenssitekstit: %1</translation>
+    </message>
 </context>
 <context>
     <name>AddressKnowledge</name>
@@ -344,6 +348,10 @@ Jos se häiritsee, poista toinen merkintä tuosta kytkennästä root-kuoresta. T
     <message>
         <source>no key/certificate for this address</source>
         <translation>ei avainta eikä varmennetta tälle osoitteelle</translation>
+    </message>
+    <message>
+        <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
+        <translation>Luonnos ei säilytä liitteitä. Tallenna luonnos uudelleen, niin se tallennetaan ilman niitä.</translation>
     </message>
 </context>
 <context>
@@ -1257,6 +1265,14 @@ Tuonti lisää TOISEN avaimen tälle osoitteelle — varmista, että uusi avain 
         <source>Remembered addresses</source>
         <translation>Muistetut osoitteet</translation>
     </message>
+    <message>
+        <source>Sending stopped: the system refused this account&apos;s sign-in for outgoing mail. SF-Mail no longer retries on its own — each attempt would flag the account again. Check the account under Settings → Accounts, then tap here to send.</source>
+        <translation>Lähetys keskeytetty: järjestelmä hylkäsi tämän tilin kirjautumisen lähtevää postia varten. SF-Mail ei enää yritä uudelleen itsestään — jokainen yritys merkitsisi tilin taas virheelliseksi. Tarkista tili kohdassa Asetukset → Tilit ja napauta sitten tästä lähettääksesi.</translation>
+    </message>
+    <message>
+        <source>Sending stopped: the last automatic attempt failed as well. Tap here to try again when the connection is back.</source>
+        <translation>Lähetys keskeytetty: myös viimeinen automaattinen yritys epäonnistui. Napauta tästä yrittääksesi uudelleen, kun yhteys on palannut.</translation>
+    </message>
 </context>
 <context>
     <name>MailRetrievalPage</name>
@@ -1367,6 +1383,10 @@ Jos yllä oleva painike ei mene läpi, saman voi tehdä päätteestä:</translat
     <message>
         <source>The fault is known and has already been corrected in the operating system&apos;s own source code (bug JB#64979, September 2026): the counting was dropped altogether, and a device now uses as many watched mailboxes as it can get instead of refusing all of them. That correction is not in the system version running here, so it should reach this device with a future Sailfish OS update — and this page becomes pointless.</source>
         <translation>Vika on tunnettu, ja se on jo korjattu käyttöjärjestelmän omassa lähdekoodissa (virhe JB#64979, syyskuu 2026): laskennasta luovuttiin kokonaan, ja laite käyttää nyt niin montaa tarkkailtavaa postilaatikkoa kuin se saa, sen sijaan että kieltäytyisi niistä kaikista. Tuota korjausta ei ole tässä käytössä olevassa järjestelmäversiossa, joten sen pitäisi tulla tälle laitteelle tulevan Sailfish OS -päivityksen mukana — ja tämä sivu käy tarpeettomaksi.</translation>
+    </message>
+    <message>
+        <source>Restarting the mail service</source>
+        <translation>Käynnistetään postipalvelu uudelleen</translation>
     </message>
 </context>
 <context>
@@ -1559,6 +1579,14 @@ Jos yllä oleva painike ei mene läpi, saman voi tehdä päätteestä:</translat
     <message>
         <source>Encrypted</source>
         <translation>Salattu</translation>
+    </message>
+    <message>
+        <source>Not sent. The system refused the account&apos;s sign-in for outgoing mail — check the account under Settings → Accounts, then use Send again.</source>
+        <translation>Ei lähetetty. Järjestelmä hylkäsi tilin kirjautumisen lähtevää postia varten — tarkista tili kohdassa Asetukset → Tilit ja käytä sitten Lähetä uudelleen.</translation>
+    </message>
+    <message>
+        <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
+        <translation>Ei lähetetty. Myös viimeinen automaattinen yritys epäonnistui — käytä Lähetä uudelleen, kun yhteys on palannut.</translation>
     </message>
 </context>
 <context>
@@ -1910,6 +1938,18 @@ Jos yllä oleva painike ei mene läpi, saman voi tehdä päätteestä:</translat
     <message>
         <source>%1 is already remembered</source>
         <translation>%1 on jo muistissa</translation>
+    </message>
+    <message>
+        <source>Signed, but this device&apos;s mail storage no longer holds the message exactly as it was sent — the signature cannot be checked here. This says nothing about whether the message is genuine.</source>
+        <translation>Allekirjoitettu, mutta tämän laitteen postivarasto ei enää säilytä viestiä täsmälleen sellaisena kuin se lähetettiin — allekirjoitusta ei voi tarkistaa täällä. Tämä ei kerro mitään siitä, onko viesti aito.</translation>
+    </message>
+    <message>
+        <source>Signed (OpenPGP). SF-Mail cannot check this signature here: the device&apos;s mail storage does not keep the signed part exactly as it was sent.</source>
+        <translation>Allekirjoitettu (OpenPGP). SF-Mail ei voi tarkistaa tätä allekirjoitusta täällä: laitteen postivarasto ei säilytä allekirjoitettua osaa täsmälleen sellaisena kuin se lähetettiin.</translation>
+    </message>
+    <message>
+        <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
+        <translation>Allekirjoitettu useilla eri varmenteilla. SF-Mail näyttää kelvollisena vain yhden allekirjoituksen — tarkista viesti muulla tavoin.</translation>
     </message>
 </context>
 <context>

@@ -12,7 +12,12 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QQmlContext>
+#include <QTimer>
 #include <atomic>
+#include <chrono>
+#include <thread>
+#include <ctime>
+#include <cstdio>
 #include <sailfishapp.h>
 #include "logcontrol.h"
 #include "mailservice.h"
@@ -24,6 +29,7 @@
 #include <fcntl.h>
 #include <sys/prctl.h>
 #include <cstring>
+#include <dirent.h>
 #include <cstdint>
 
 // Crash marker. The post-send "app closes/crashes" report leaves NO trace: it
@@ -46,15 +52,19 @@ static int g_crashFd = -1;
 // shut down at all). Read only inside the signal handler — hence plain atomics
 // and kill(), both of which are safe there.
 //
-// The plugin reports them through the C function below, looked up at runtime.
-// Sharing the variable itself would tie the plugin's load to a symbol of the
-// executable, and a plugin that fails to load takes the whole UI with it.
+// The plugin publishes them as the application property "sfmailAgentPids";
+// the watchdog's heartbeat copies them here. (A C function of this executable,
+// looked up from the plugin, was never found: the launcher loads the program
+// with RTLD_LOCAL.) The agents are the app's own children and die with it
+// anyway — this covers an agent gpg started by itself.
 static std::atomic<int> g_agentPids[4];
 
-extern "C" void sfmail_note_agent_pid(int slot, int pid)
+static void syncAgentPids()
 {
-    if (slot >= 0 && slot < int(sizeof(g_agentPids) / sizeof(g_agentPids[0])))
-        g_agentPids[slot].store(pid);
+    const QVariantList pids = qApp->property("sfmailAgentPids").toList();
+    const int n = int(sizeof(g_agentPids) / sizeof(g_agentPids[0]));
+    for (int i = 0; i < n; ++i)
+        g_agentPids[i].store(i < pids.size() ? pids.at(i).toInt() : 0);
 }
 
 static void writeAll(int fd, const char *s)
@@ -120,8 +130,89 @@ static void crashHandler(int sig, siginfo_t *info, void *)
 // shutdown runs, which asks each agent to stop over its own protocol.
 static int g_termPipe[2] = {-1, -1};
 
+// When the request to end arrived (steady-clock ms, 0 = none). Should the main
+// loop be blocked, the pipe is never read and the process would never end: the
+// watchdog thread then ends it after a grace period, and a second signal ends
+// it at once. Our agents are our children and go with it (PR_SET_PDEATHSIG).
+static std::atomic<long long> g_termRequestedMs{0};
+static long long steadyMs();
+
+// The plaintext caches (decrypted attachments, the copies staged for "open
+// with"). A forced end skips the app's own clean-up, so it empties them itself
+// — with plain system calls, the main thread may be stuck holding a lock.
+// Filled once at startup; the indexer markers (dot files) stay.
+static char g_plainDirs[3][512];
+// The S/MIME engine's working folders: while a message is signed or encrypted
+// they hold its plaintext (gen-, import-, sign-, send-, verify- under this).
+static char g_smimeHome[512];
+
+static void removeFlatDir(const char *dir)
+{
+    DIR *d = opendir(dir);
+    if (!d) return;
+    while (struct dirent *e = readdir(d)) {
+        if (!strcmp(e->d_name, ".") || !strcmp(e->d_name, "..")) continue;
+        char path[1024];
+        snprintf(path, sizeof(path), "%s/%s", dir, e->d_name);
+        unlink(path);
+    }
+    closedir(d);
+    rmdir(dir);
+}
+
+static void purgeSmimeWork()
+{
+    if (!g_smimeHome[0]) return;
+    static const char *const prefixes[] = { "gen-", "import-", "sign-", "send-", "verify-" };
+    DIR *d = opendir(g_smimeHome);
+    if (!d) return;
+    while (struct dirent *e = readdir(d)) {
+        for (const char *pre : prefixes) {
+            if (strncmp(e->d_name, pre, strlen(pre)) != 0) continue;
+            char path[1024];
+            snprintf(path, sizeof(path), "%s/%s", g_smimeHome, e->d_name);
+            removeFlatDir(path);
+            break;
+        }
+    }
+    closedir(d);
+}
+
+static void purgePlainDirs()
+{
+    for (auto &dir : g_plainDirs) {
+        if (!dir[0]) continue;
+        DIR *d = opendir(dir);
+        if (!d) continue;
+        while (struct dirent *e = readdir(d)) {
+            if (e->d_name[0] == '.') continue;
+            char path[1024];
+            snprintf(path, sizeof(path), "%s/%s", dir, e->d_name);
+            unlink(path);
+        }
+        closedir(d);
+    }
+    purgeSmimeWork();
+}
+
+static void notePlainDirs(const QStringList &dirs, const QString &smimeHome)
+{
+    for (int i = 0; i < 3 && i < dirs.size(); ++i) {
+        const QByteArray p = QFile::encodeName(dirs.at(i));
+        if (p.size() < int(sizeof(g_plainDirs[i])))
+            memcpy(g_plainDirs[i], p.constData(), size_t(p.size()) + 1);
+    }
+    const QByteArray h = QFile::encodeName(smimeHome);
+    if (h.size() < int(sizeof(g_smimeHome)))
+        memcpy(g_smimeHome, h.constData(), size_t(h.size()) + 1);
+}
+
 static void termHandler(int sig)
 {
+    // Asked twice: end now — by way of the watchdog, which clears the plaintext
+    // caches first (within a second).
+    if (g_termRequestedMs.load() != 0) { g_termRequestedMs.store(1); (void)sig; return; }
+    g_termRequestedMs.store(steadyMs());
     const char b = char(sig);
     if (g_termPipe[1] >= 0) {
         ssize_t r = write(g_termPipe[1], &b, 1);
@@ -146,10 +237,127 @@ static void installTermHandler(QObject *owner)
     signal(SIGHUP,  termHandler);
 }
 
+// The debug-log switch (defined further down). The exit and stall markers are
+// diagnostics like any other line and follow it; only the crash marker is
+// written regardless, because a crash is exactly when nobody had it on.
+extern std::atomic<bool> g_fileLog;
+
+// Local time as "YYYY-MM-DDTHH:MM:SS", matching the log lines. Not for signal
+// handlers (localtime_r may take a lock); fine at exit and in the watchdog.
+static void stampNow(char *buf, size_t len)
+{
+    const time_t t = time(nullptr);
+    struct tm tmv;
+    localtime_r(&t, &tmv);
+    strftime(buf, len, "%Y-%m-%dT%H:%M:%S", &tmv);
+}
+
+// The last line a process writes. If a session ends without "quitting" before
+// it, the app never reached its normal shutdown; if this line is missing too,
+// the process was killed from outside.
+static void exitMarker()
+{
+    if (!g_fileLog.load()) return;
+    char ts[32];
+    stampNow(ts, sizeof(ts));
+    writeAll(g_crashFd, ts);
+    writeAll(g_crashFd, " === [EXIT] process exit ===\n");
+}
+
+// --- Main-loop watchdog ------------------------------------------------------
+//
+// A session that hangs never reaches aboutToQuit: the window is gone, the
+// system eventually kills the process, and nothing in the log says why. A timer
+// in the main thread leaves a heartbeat; a small thread of its own notices when
+// the heartbeat stops and writes down for how long, and in which kernel
+// function the main thread waits (/proc/.../wchan — a futex means a lock, a
+// poll means it waits on a process or a socket). Steady clock: time the device
+// spends suspended does not count as a stall.
+static std::atomic<long long> g_heartbeatMs{0};
+
+static long long steadyMs()
+{
+    return std::chrono::duration_cast<std::chrono::milliseconds>(
+               std::chrono::steady_clock::now().time_since_epoch()).count();
+}
+
+static void watchdogLoop()
+{
+    const long long kStallMs = 6000;
+    bool stalled = false;
+    char path[64];
+    snprintf(path, sizeof(path), "/proc/self/task/%d/wchan", int(getpid()));
+    bool purgedOnTerm = false;
+    for (;;) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        const long long termAt = g_termRequestedMs.load();
+        // The system may follow its request to end with SIGKILL a second later,
+        // and after that nothing runs any more: the plaintext goes right away.
+        if (termAt != 0 && !purgedOnTerm) { purgePlainDirs(); purgedOnTerm = true; }
+        if (termAt != 0 && steadyMs() - termAt > 3000) {
+            // Asked to end, and the main loop has not got round to it.
+            char ts[32];
+            stampNow(ts, sizeof(ts));
+            char line[160];
+            snprintf(line, sizeof(line),
+                     "%s === [EXIT] termination not handled within 3 s - ending now ===\n", ts);
+            writeAll(g_crashFd, line);
+            purgePlainDirs();
+            killAgents();
+            _exit(143);
+        }
+        const long long beat = g_heartbeatMs.load();
+        if (beat == 0) continue;
+        const long long age = steadyMs() - beat;
+        char ts[32];
+        stampNow(ts, sizeof(ts));
+        if (!stalled && age > kStallMs) {
+            stalled = true;
+            char wchan[64] = "?";
+            const int fd = ::open(path, O_RDONLY);
+            if (fd >= 0) {
+                const ssize_t n = ::read(fd, wchan, sizeof(wchan) - 1);
+                wchan[n > 0 ? n : 0] = '\0';
+                ::close(fd);
+            }
+            char line[192];
+            snprintf(line, sizeof(line),
+                     "%s === [STALL] main loop blocked for %lld s, waiting in %s ===\n",
+                     ts, age / 1000, wchan);
+            if (g_fileLog.load()) {
+                writeAll(g_crashFd, line);
+                writeAll(STDERR_FILENO, line);
+            }
+        } else if (stalled && age <= kStallMs) {
+            stalled = false;
+            char line[128];
+            snprintf(line, sizeof(line), "%s === [STALL] main loop running again ===\n", ts);
+            if (g_fileLog.load()) {
+                writeAll(g_crashFd, line);
+                writeAll(STDERR_FILENO, line);
+            }
+        }
+    }
+}
+
+static void installWatchdog(QObject *owner)
+{
+    QTimer *beat = new QTimer(owner);
+    beat->setTimerType(Qt::VeryCoarseTimer);
+    beat->setInterval(2000);
+    QObject::connect(beat, &QTimer::timeout, []() {
+        g_heartbeatMs.store(steadyMs());
+        syncAgentPids();
+    });
+    g_heartbeatMs.store(steadyMs());
+    beat->start();
+    std::thread(watchdogLoop).detach();
+}
+
 static void installCrashHandler(const QString &logPath)
 {
     g_crashFd = ::open(logPath.toLocal8Bit().constData(),
-                       O_WRONLY | O_APPEND | O_CREAT, 0600);
+                       O_WRONLY | O_APPEND | O_CREAT | O_CLOEXEC, 0600);
     struct sigaction sa;
     memset(&sa, 0, sizeof(sa));
     sa.sa_sigaction = crashHandler;
@@ -164,7 +372,7 @@ static void installCrashHandler(const QString &logPath)
 
 // Runtime switch for the debug.log file (About → "Debug logging"). Default OFF
 // (see logcontrol.h for why); the persisted choice is loaded at startup below.
-// Only gates the on-device logfile — stderr/journal output stays on.
+// Gates the on-device logfile and the copy in the system journal alike.
 std::atomic<bool> g_fileLog{false};
 
 // --- Stalled-delivery recorder ----------------------------------------------
@@ -326,9 +534,15 @@ static void fileMessageHandler(QtMsgType type, const QMessageLogContext &ctx,
             QTextStream(&f) << line << '\n';
         }
     }
-    // Keep the default stderr/journal output as well.
-    QByteArray local = line.toLocal8Bit();
-    fprintf(stderr, "%s\n", local.constData());
+    // The journal only while logging is on. These lines carry addresses,
+    // subjects and attachment names, and the switch says "no log" — a copy in
+    // the system journal would break that promise. Critical and fatal messages
+    // still go there; the crash, stall and exit markers are written directly
+    // and carry no mail data.
+    if (g_fileLog.load() || type == QtCriticalMsg || type == QtFatalMsg) {
+        QByteArray local = line.toLocal8Bit();
+        fprintf(stderr, "%s\n", local.constData());
+    }
 }
 
 int main(int argc, char *argv[])
@@ -366,7 +580,25 @@ int main(int argc, char *argv[])
         QDir().mkpath(logDir);
         installCrashHandler(logDir + QStringLiteral("/debug.log"));
         installTermHandler(app.data());
+        atexit(exitMarker);
+        QString downloads = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+        if (downloads.isEmpty()) downloads = QDir::homePath() + QStringLiteral("/Downloads");
+        notePlainDirs(QStringList()                  // as in the crypto plugin
+                      << logDir + QStringLiteral("/decrypted")
+                      << logDir + QStringLiteral("/smime-decrypted")
+                      << downloads + QStringLiteral("/sfmail"),
+                      logDir + QStringLiteral("/smime"));
+        installWatchdog(app.data());
     }
+    // Each step of the end of a session gets a line, so a log that stops early
+    // says where: window gone → quitting (the agents are stopped here) → loop
+    // left → [EXIT].
+    QObject::connect(app.data(), &QGuiApplication::lastWindowClosed, []() {
+        qWarning() << "[sfmail] window closed";
+    });
+    QObject::connect(app.data(), &QCoreApplication::aboutToQuit, []() {
+        qWarning() << "[sfmail] quitting";
+    });
 
     // Load the translation for the device's language. QTranslator's locale-aware
     // load() does the narrowing itself (pt_BR → pt, de_AT → de) and simply finds
@@ -402,5 +634,13 @@ int main(int argc, char *argv[])
     view->setSource(SailfishApp::pathTo(QStringLiteral("qml/harbour-sfmail.qml")));
     emailUi->registerService();
     view->showFullScreen();
-    return app->exec();
+    const int rc = app->exec();
+    // From here the process only tears down. Should that hang (a destructor
+    // waiting on a child, a lock), the watchdog ends it like an unanswered
+    // termination request — otherwise it would sit there with the launch lock.
+    if (g_termRequestedMs.load() == 0) g_termRequestedMs.store(steadyMs());
+    // The agents were stopped on the way out; their pids may be reused by now.
+    for (auto &pid : g_agentPids) pid.store(0);
+    qWarning() << "[sfmail] event loop left, rc" << rc;
+    return rc;
 }
