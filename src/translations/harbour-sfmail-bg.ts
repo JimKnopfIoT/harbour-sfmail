@@ -1951,6 +1951,14 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Подписано с няколко различни сертификата. SF-Mail показва като валиден само един подпис — проверете съобщението по друг начин.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Избраният текст се копира в клипборда.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Готово</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1977,6 +1985,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Само ако имате друго резервно копие. Това не може да бъде върнато.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Оставете празно, ако ключът няма парола.</translation>
     </message>
 </context>
 <context>

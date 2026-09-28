@@ -1959,6 +1959,14 @@ Jekk il-buttuna ta' hawn fuq ma tgħaddix, l-istess jista' jsir minn terminal:</
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Iffirmat b&apos;diversi ċertifikati differenti. SF-Mail turi biss firma waħda bħala valida — iċċekkja l-messaġġ b&apos;mod ieħor.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>It-test magħżul jiġi kkupjat fil-clipboard.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Lest</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1985,6 +1993,10 @@ Jekk il-buttuna ta' hawn fuq ma tgħaddix, l-istess jista' jsir minn terminal:</
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Biss jekk għandek backup ieħor. Dan ma jistax jitreġġa&apos; lura.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Ħallih vojt jekk iċ-ċavetta m’għandhiex passphrase.</translation>
     </message>
 </context>
 <context>

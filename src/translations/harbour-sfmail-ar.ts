@@ -1967,6 +1967,14 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>موقَّعة بعدة شهادات مختلفة. يعرض SF-Mail توقيعًا واحدًا فقط على أنه صالح — تحقّق من الرسالة بوسيلة أخرى.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>يُنسخ النص المحدد إلى الحافظة.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>تم</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1993,6 +2001,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>فقط إن كانت لديك نسخة احتياطية أخرى. ولا يمكن التراجع عن ذلك.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>اتركه فارغًا إذا لم يكن للمفتاح عبارة مرور.</translation>
     </message>
 </context>
 <context>

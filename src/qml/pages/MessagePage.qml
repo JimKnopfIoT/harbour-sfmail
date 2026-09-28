@@ -33,6 +33,8 @@ Page {
         if (status !== PageStatus.Active && remorsePopup.pending) {
             remorsePopup.cancel()
         }
+        if (status === PageStatus.Active) page._pushPassphraseAsk()
+        else page._selecting = false
     }
 
     // Inline-PGP (nicht PGP/MIME) wird vom nativen Pfad nicht erkannt — wir
@@ -320,6 +322,13 @@ Page {
         onDecryptFinished: {
             if (!page._awaitingCrypto) return
             page._awaitingCrypto = false
+            if (!ok && error === page._needPassphrase) {
+                page._askPassphraseThen(qsTr("To decrypt this message"), function(p) {
+                    page._awaitingCrypto = true
+                    Gpg.decryptText(page._body, p)
+                })
+                return
+            }
             if (ok) {
                 page._inlinePlain = text
                 page._sigResult = signedBy
@@ -336,6 +345,13 @@ Page {
         onDecryptMimeFinished: {
             if (!page._awaitingCrypto) return
             page._awaitingCrypto = false
+            if (!ok && error === page._needPassphrase) {
+                page._inlineInfo = ""
+                page._askPassphraseThen(qsTr("To decrypt this message"), function(p) {
+                    page._ensureEncPart("decrypt", p)
+                })
+                return
+            }
             if (ok) {
                 page._inlinePlain = text !== "" ? text : qsTr("(no text — see attachments below)")
                 page._mimeAttachments = attachments
@@ -509,6 +525,52 @@ Page {
         return s.trim()
     }
 
+    // What the body shows. The plain chain is shared by the label and the
+    // selectable copy, so both hold the same text.
+    readonly property bool _htmlShown: page._showHtml && page._hasHtml
+    function _plainShown() {
+        return page._smimePlain !== "" ? page._smimePlain
+             : page._inlinePlain !== "" ? page._inlinePlain
+             : page._body !== "" ? page._body
+             : page._hasHtml ? page._htmlToText(page._html)
+             : ""
+    }
+
+    // Text form of the HTML body for selecting: a link keeps its address
+    // behind its text, otherwise it could not be copied.
+    function _htmlToSelectableText(html) {
+        var s = ("" + html).replace(/<a\b[^>]*?\bhref\s*=\s*(?:"([^"]*)"|'([^']*)')[^>]*>([\s\S]*?)<\/a>/gi,
+            function(m, dq, sq, inner) {
+                var url = (dq || sq || "").trim()
+                var shown = url.replace(/^mailto:/i, "")
+                var t = inner.replace(/<[^>]+>/g, "").trim()
+                if (!/^(https?:|mailto:)/i.test(url) || t === url || t === shown) return inner
+                return inner + " (" + shown + ")"
+            })
+        return page._htmlToText(s)
+    }
+
+    // Selecting: the label gives way to a read-only TextArea with the same
+    // text. In the plain view both lay out alike, so the word under the finger
+    // is selected right away; the HTML view becomes text, and a second press
+    // picks the word.
+    property bool _selecting: false
+    property string _selectText: ""
+    function _startSelect(x, y) {
+        var plain = !page._htmlShown
+        var t = plain ? page._plainShown() : page._htmlToSelectableText(page._html)
+        if (t === "") return
+        page._selectText = t
+        page._selecting = true
+        var ta = selectLoader.item
+        if (!ta) return
+        ta.forceActiveFocus()
+        if (!plain) return
+        var p = bodyBox.mapToItem(ta._editor, x, y)
+        ta._editor.cursorPosition = ta._editor.positionAt(p.x, p.y)
+        ta._editor.selectWord()
+        if (ta._editor.selectedText !== "") ta._editor.copy()
+    }
     // "Save as…": let the user pick a destination folder, then copy the attachment.
     function _saveAs(src, name) {
         console.log("[diag] saveAs mid=" + page.messageId + " name=" + name + " src=" + src)
@@ -530,12 +592,42 @@ Page {
         }
     }
 
-    // Push the passphrase dialog and decrypt (shared by the Decrypt button and the
-    // "load without limit" banner).
+    // Decrypt (shared by the Decrypt button and the "load without limit"
+    // banner). Tried without a passphrase first: a key that has none decrypts
+    // right away, and only a protected one brings up the dialog (see
+    // _askPassphraseThen and the decrypt result handlers).
     function _decryptPrompt() {
-        var dlg = pageStack.push(Qt.resolvedUrl("PassphraseDialog.qml"),
-                                 { info: qsTr("To decrypt this message") })
-        dlg.accepted.connect(function() { page._ensureEncPart("decrypt", dlg.passphrase) })
+        page._ensureEncPart("decrypt", "")
+    }
+
+    // Error text the engines give a decrypt that was tried without a passphrase
+    // and found the key protected (kNeedPassphrase in both engines).
+    readonly property string _needPassphrase: "need-passphrase"
+
+    // Ask for the passphrase, then run(passphrase). The request comes out of a
+    // decrypt result, which can arrive during a page transition or while
+    // another page lies on top — the dialog waits until this page is in front.
+    property var _passRetry: null
+    property string _passInfo: ""
+    function _askPassphraseThen(info, run) {
+        page._passInfo = info
+        page._passRetry = run
+        page._pushPassphraseAsk()
+    }
+    function _pushPassphraseAsk() {
+        if (page._passRetry && page.status === PageStatus.Active) passAskTimer.restart()
+    }
+    Timer {
+        id: passAskTimer
+        interval: 100
+        onTriggered: {
+            if (!page._passRetry || page.status !== PageStatus.Active) return
+            if (pageStack.busy) { restart(); return }
+            var run = page._passRetry
+            page._passRetry = null
+            var dlg = pageStack.push(Qt.resolvedUrl("PassphraseDialog.qml"), { info: page._passInfo })
+            dlg.accepted.connect(function() { run(dlg.passphrase) })
+        }
     }
 
     EmailMessage {
@@ -646,6 +738,13 @@ Page {
             // Singleton signal: a second reader page must ignore a result that
             // belongs to another message (the engine echoes the id back).
             if (messageId !== page.messageId) return
+            if (!ok && error === page._needPassphrase) {
+                page._smimeInfo = ""
+                page._askPassphraseThen(qsTr("To decrypt this S/MIME message"), function(p) {
+                    Smime.decryptMessage(page.messageId, p)
+                })
+                return
+            }
             if (ok) { page._smimePlain = text
                       page._mimeAttachments = Smime.takeLastAttachments()  // show/save like PGP
                       page._smimeImportNeeded = (signer === "cert-new")
@@ -1384,15 +1483,11 @@ Page {
                     Button {
                         visible: page._inlinePlain === ""
                         text: page._bodyHasPgp ? qsTr("Decrypt") : qsTr("Verify")
+                        // Decrypt is tried without a passphrase first (a protected
+                        // key asks for it); a signature needs none at all.
                         onClicked: {
-                            if (page._bodyHasPgp) {
-                                var dlg = pageStack.push(Qt.resolvedUrl("PassphraseDialog.qml"),
-                                                         { info: qsTr("To decrypt this message") })
-                                dlg.accepted.connect(function() { page._awaitingCrypto = true; Gpg.decryptText(page._body, dlg.passphrase) })
-                            } else {
-                                page._awaitingCrypto = true
-                                Gpg.decryptText(page._body, "")  // signature only — no passphrase
-                            }
+                            page._awaitingCrypto = true
+                            Gpg.decryptText(page._body, "")
                         }
                     }
                 }
@@ -1465,11 +1560,8 @@ Page {
                     Button {
                         visible: page._smimeKind === "encrypted" && page._smimePlain === ""
                         text: qsTr("Decrypt")
-                        onClicked: {
-                            var dlg = pageStack.push(Qt.resolvedUrl("PassphraseDialog.qml"),
-                                                     { info: qsTr("To decrypt this S/MIME message") })
-                            dlg.accepted.connect(function() { Smime.decryptMessage(page.messageId, dlg.passphrase) })
-                        }
+                        // Without a passphrase first; a protected key asks.
+                        onClicked: Smime.decryptMessage(page.messageId, "")
                     }
                     // Only shown when the sender's cert is NOT yet in the store
                     // (checked on open for signed mails, after Decrypt for encrypted).
@@ -1492,7 +1584,7 @@ Page {
                 visible: page._hasHtml
                 width: parent.width
                 height: Theme.itemSizeExtraSmall
-                onClicked: page._showHtml = !page._showHtml
+                onClicked: { page._selecting = false; page._showHtml = !page._showHtml }
                 Label {
                     x: Theme.horizontalPageMargin
                     width: parent.width - 2 * Theme.horizontalPageMargin
@@ -1506,26 +1598,103 @@ Page {
             }
 
             // --- Body ------------------------------------------------------
-            Label {
+            // Press and hold switches the text into a selectable copy (see
+            // _startSelect); what gets selected goes to the clipboard.
+            Item {
+                visible: page._selecting
                 x: Theme.horizontalPageMargin
                 width: parent.width - 2 * Theme.horizontalPageMargin
-                wrapMode: Text.Wrap
-                textFormat: (page._showHtml && page._hasHtml) ? Text.RichText : Text.PlainText
-                text: (page._showHtml && page._hasHtml)
-                      ? page._simpleHtml(page._html)
-                      : page._smimePlain !== "" ? page._smimePlain
-                        : page._inlinePlain !== "" ? page._inlinePlain
-                        : page._body !== "" ? page._body
-                        : page._hasHtml ? page._htmlToText(page._html)
+                height: visible ? Math.max(selectHint.height, selectDone.height) : 0
+                Label {
+                    id: selectHint
+                    anchors { left: parent.left; right: selectDone.left; rightMargin: Theme.paddingMedium
+                              verticalCenter: parent.verticalCenter }
+                    wrapMode: Text.Wrap
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    color: Theme.secondaryHighlightColor
+                    text: qsTr("Selected text is copied to the clipboard.")
+                }
+                Button {
+                    id: selectDone
+                    anchors { right: parent.right; verticalCenter: parent.verticalCenter }
+                    preferredWidth: Theme.buttonWidthExtraSmall
+                    text: qsTr("Done")
+                    onClicked: page._selecting = false
+                }
+            }
+            Item {
+                id: bodyBox
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                height: page._selecting && selectLoader.item ? selectLoader.item.height : bodyLabel.height
+
+                Label {
+                    id: bodyLabel
+                    visible: !page._selecting
+                    width: parent.width
+                    wrapMode: Text.Wrap
+                    textFormat: page._htmlShown ? Text.RichText : Text.PlainText
+                    text: page._htmlShown ? page._simpleHtml(page._html)
+                        : page._plainShown() !== "" ? page._plainShown()
                         : qsTr("(empty — pull down to download)")
-                color: Theme.primaryColor
-                // The mail's own colours are stripped, so the links need ours.
-                linkColor: Theme.highlightColor
-                // HTML uses our readable base size (the mail's own tiny sizes were
-                // stripped); plain text keeps the compact size.
-                font.pixelSize: (page._showHtml && page._hasHtml) ? Theme.fontSizeMedium
-                                                                  : Theme.fontSizeSmall
-                onLinkActivated: Qt.openUrlExternally(link)
+                    color: Theme.primaryColor
+                    // The mail's own colours are stripped, so the links need ours.
+                    linkColor: Theme.highlightColor
+                    // HTML uses our readable base size (the mail's own tiny sizes were
+                    // stripped); plain text keeps the compact size.
+                    font.pixelSize: page._htmlShown ? Theme.fontSizeMedium : Theme.fontSizeSmall
+                }
+                // Lies over the label, so links are resolved here rather than by
+                // the label itself.
+                MouseArea {
+                    anchors.fill: bodyLabel
+                    enabled: !page._selecting
+                    onClicked: {
+                        var link = bodyLabel.linkAt(mouse.x, mouse.y)
+                        if (link) Qt.openUrlExternally(link)
+                    }
+                    onPressAndHold: page._startSelect(mouse.x, mouse.y)
+                }
+                Loader {
+                    id: selectLoader
+                    active: page._selecting
+                    width: parent.width
+                    sourceComponent: selectComponent
+                }
+            }
+            Component {
+                id: selectComponent
+                // A read-only TextArea: Silica's own selection — press and hold
+                // picks a word, the handles widen it, and every selection is
+                // copied. Margins cleared so the text sits exactly where the
+                // label had it (the editor is paddingSmall narrower than the area).
+                TextArea {
+                    width: bodyBox.width + Theme.paddingSmall
+                    textLeftMargin: 0
+                    textRightMargin: 0
+                    textTopMargin: 0
+                    labelVisible: false
+                    readOnly: true
+                    focusOnClick: true
+                    autoScrollEnabled: false
+                    color: Theme.primaryColor
+                    font.pixelSize: Theme.fontSizeSmall
+                    text: page._selectText
+                    // No blinking cursor in read-only text. cursorColor must stay:
+                    // Silica paints the selection handles in it.
+                    Component.onCompleted: _editor.cursorDelegate = noCursor
+                    // Tapping anywhere outside the text ends the selection.
+                    onActiveFocusChanged: if (!activeFocus) selectEndTimer.restart()
+                }
+            }
+            Component {
+                id: noCursor
+                Item {}
+            }
+            Timer {
+                id: selectEndTimer
+                interval: 300
+                onTriggered: if (selectLoader.item && !selectLoader.item.activeFocus) page._selecting = false
             }
 
             // --- Großer-Anhang-Banner: interaktiv statt starrer Fehlermeldung ---

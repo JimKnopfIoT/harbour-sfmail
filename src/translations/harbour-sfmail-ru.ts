@@ -1955,6 +1955,14 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Подписано несколькими разными сертификатами. SF-Mail показывает действительной только одну подпись — проверьте письмо другим способом.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Выделенный текст копируется в буфер обмена.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Готово</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1981,6 +1989,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Только если у вас есть другая резервная копия. Это действие необратимо.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Оставьте пустым, если у ключа нет парольной фразы.</translation>
     </message>
 </context>
 <context>

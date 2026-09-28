@@ -27,7 +27,7 @@ Page {
     // Back up the SECRET key to Documents (asks the passphrase first).
     function _backupSecret() {
         var dlg = pageStack.push(Qt.resolvedUrl("PassphraseDialog.qml"),
-                                 { info: qsTr("Passphrase of this key (to back it up)") })
+                                 { info: qsTr("Passphrase of this key (to back it up)"), allowEmpty: true })
         dlg.accepted.connect(function() {
             var p = Gpg.saveKeyToDocuments(page.fingerprint, true, dlg.passphrase)
             if (p.length > 0) page._setNotice(qsTr("Secret key backed up to %1.").arg(p) + " " + page._offDeviceHint, true)
@@ -38,7 +38,7 @@ Page {
     // Extend the key's (and subkeys') expiry by 2 years (asks the passphrase).
     function _extend() {
         var dlg = pageStack.push(Qt.resolvedUrl("PassphraseDialog.qml"),
-                                 { info: qsTr("Passphrase of this key (to extend it)") })
+                                 { info: qsTr("Passphrase of this key (to extend it)"), allowEmpty: true })
         dlg.accepted.connect(function() { Gpg.extendKey(page.fingerprint, "2y", dlg.passphrase) })
     }
 

@@ -1951,6 +1951,14 @@ Se il pulsante qui sopra non dovesse funzionare, lo stesso si può fare da un te
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Firmato con più certificati diversi. SF-Mail mostra come valida una sola firma — verifica il messaggio in altro modo.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Il testo selezionato viene copiato negli appunti.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Fatto</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1977,6 +1985,10 @@ Se il pulsante qui sopra non dovesse funzionare, lo stesso si può fare da un te
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Solo se hai un altro backup. L&apos;operazione non può essere annullata.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Lascia vuoto se la chiave non ha una passphrase.</translation>
     </message>
 </context>
 <context>

@@ -39,6 +39,11 @@
 #include <qmailtimestamp.h>
 #include <qmailaddress.h>
 
+// Error text of a decrypt that was tried without a passphrase and found the
+// key protected. Not shown to anyone: the reader page asks for the passphrase
+// and tries again. Same marker in GpgEngine.cpp and MessagePage.qml.
+static const char kNeedPassphrase[] = "need-passphrase";
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -733,6 +738,16 @@ bool SmimeEngine::runGpgsm(const QStringList &args, const QByteArray &stdinData,
         ld += QStringLiteral(":") + env.value(QStringLiteral("LD_LIBRARY_PATH"));
     env.insert(QStringLiteral("LD_LIBRARY_PATH"), ld);
     env.insert(QStringLiteral("GNUPGHOME"), m_home);
+    // Messages in English whatever the device language: decryptMessage() tells
+    // "no passphrase given" apart from other failures by gpgsm's text. Only the
+    // message category — LC_ALL would override it, so its value moves to LANG
+    // and the character handling stays as it was.
+    if (env.contains(QStringLiteral("LC_ALL"))) {
+        env.insert(QStringLiteral("LANG"), env.value(QStringLiteral("LC_ALL")));
+        env.remove(QStringLiteral("LC_ALL"));
+    }
+    env.insert(QStringLiteral("LC_MESSAGES"), QStringLiteral("C"));
+    env.remove(QStringLiteral("LANGUAGE"));
 
     Fd3Process p;
     p.setProcessEnvironment(env);
@@ -1707,6 +1722,12 @@ void SmimeEngine::decryptMessage(int messageId, const QString &passphrase)
     // recipient's key is missing — e.g. the encrypt-to-self copy is also
     // encrypted to the other party — although OUR key decrypted it fine.
     if (!smimeHasStatus(err, "DECRYPTION_OKAY") || inner.isEmpty()) {
+        // Tried without a passphrase (a key without one decrypts right away) and
+        // the key wants one: let the reader ask for it.
+        if (passphrase.isEmpty() && err.contains("No passphrase given")) {
+            emit decryptFinished(false, QString(), QString(), QString::fromLatin1(kNeedPassphrase), noSig, messageId);
+            return;
+        }
         emit decryptFinished(false, QString(), QString(), smimeHumanErr(err), noSig, messageId); return;
     }
 

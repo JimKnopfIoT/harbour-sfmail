@@ -1947,6 +1947,14 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>複数の異なる証明書で署名されています。SF-Mail が有効として表示できる署名は 1 つだけです — 別の方法でメッセージを確認してください。</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>選択したテキストはクリップボードにコピーされます。</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>完了</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1973,6 +1981,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>別のバックアップがある場合のみ。取り消せません。</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>鍵にパスフレーズがない場合は空欄のままにしてください。</translation>
     </message>
 </context>
 <context>

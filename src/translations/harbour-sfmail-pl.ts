@@ -1955,6 +1955,14 @@ Gdyby przycisk powyżej nie zadziałał, to samo można zrobić z terminala:</tr
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Podpisane kilkoma różnymi certyfikatami. SF-Mail pokazuje jako ważny tylko jeden podpis — sprawdź wiadomość w inny sposób.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Zaznaczony tekst jest kopiowany do schowka.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Gotowe</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1981,6 +1989,10 @@ Gdyby przycisk powyżej nie zadziałał, to samo można zrobić z terminala:</tr
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Tylko jeśli masz inną kopię zapasową. Tego nie można cofnąć.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Pozostaw puste, jeśli klucz nie ma hasła.</translation>
     </message>
 </context>
 <context>

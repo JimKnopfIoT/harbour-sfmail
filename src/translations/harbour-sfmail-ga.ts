@@ -1955,6 +1955,14 @@ Mura n-éiríonn leis an gcnaipe thuas, is féidir an rud céanna a dhéanamh ó
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Sínithe le roinnt teastas éagsúil. Ní thaispeánann SF-Mail ach síniú aonair amháin mar shíniú bailí — seiceáil an teachtaireacht ar bhealach eile.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Cóipeáiltear an téacs roghnaithe chuig an ghearrthaisce.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Déanta</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1981,6 +1989,10 @@ Mura n-éiríonn leis an gcnaipe thuas, is féidir an rud céanna a dhéanamh ó
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Ná déan é seo ach má tá cúltaca eile agat. Ní féidir é a chur ar ceal.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Fág folamh mura bhfuil pasfhrása ag an eochair.</translation>
     </message>
 </context>
 <context>
