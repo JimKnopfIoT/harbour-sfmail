@@ -1951,6 +1951,14 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>कई अलग-अलग प्रमाणपत्रों से हस्ताक्षरित। SF-Mail केवल एक ही हस्ताक्षर को मान्य दिखाता है — संदेश को किसी और तरीके से जाँचें।</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>चयनित टेक्स्ट क्लिपबोर्ड पर कॉपी हो जाता है।</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>हो गया</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1977,6 +1985,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>केवल तभी, जब आपके पास कोई दूसरा बैकअप हो। इसे पलटा नहीं जा सकता।</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>यदि कुंजी का कोई पासफ़्रेज़ नहीं है तो खाली छोड़ें।</translation>
     </message>
 </context>
 <context>

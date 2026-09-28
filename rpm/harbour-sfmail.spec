@@ -10,7 +10,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.20
+Version:    0.8.21
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -221,6 +221,20 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Mon Sep 28 2026 harbour-sfmail contributors 0.8.21-1
+- Message text can be selected and copied. Press and hold the text: the word
+  under the finger is selected, the handles widen the selection, and whatever
+  is selected goes to the clipboard. In the simple HTML view the text turns into
+  its plain form for this, with each link's address written after it, so links
+  can be copied too. "Done", a tap beside the text or leaving the message ends
+  it. Links in the HTML view still open with a tap.
+- Decrypting no longer insists on a passphrase. A secret key does not have to
+  have one, and the dialog could not be confirmed empty, so such a key could not
+  read anything. Decryption is now tried without a passphrase first, and the
+  dialog only appears when the key asks for one. Signing with a PGP key and
+  backing up or extending one accept an empty passphrase as well. Exporting an
+  S/MIME certificate still needs one: there it protects the exported file.
+
 * Mon Sep 28 2026 harbour-sfmail contributors 0.8.20-1
 - The app no longer disappears after a few switches to the background and back.
   On devices with a newer graphics layer it ended silently - no message, no

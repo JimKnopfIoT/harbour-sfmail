@@ -1951,6 +1951,14 @@ Falls der Knopf oben nicht durchkommt, geht dasselbe aus einer Konsole:</transla
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Mit mehreren verschiedenen Zertifikaten signiert. SF-Mail zeigt nur eine einzelne Signatur als gültig an – prüfe die Nachricht auf anderem Weg.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Markierter Text wird in die Zwischenablage kopiert.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Fertig</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1977,6 +1985,10 @@ Falls der Knopf oben nicht durchkommt, geht dasselbe aus einer Konsole:</transla
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Nur wenn du ein anderes Backup hast. Dies kann nicht rückgängig gemacht werden.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Leer lassen, wenn der Schlüssel keine Passphrase hat.</translation>
     </message>
 </context>
 <context>

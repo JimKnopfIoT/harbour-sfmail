@@ -1951,6 +1951,14 @@ Skulle knappen over ikke nå fram, kan det samme gjøres fra en terminal:</trans
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Signert med flere forskjellige sertifikater. SF-Mail viser bare én enkelt signatur som gyldig — kontroller meldingen på annen måte.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Markert tekst kopieres til utklippstavlen.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Ferdig</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1977,6 +1985,10 @@ Skulle knappen over ikke nå fram, kan det samme gjøres fra en terminal:</trans
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Bare hvis du har en annen sikkerhetskopi. Dette kan ikke angres.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>La feltet stå tomt hvis nøkkelen ikke har passordfrase.</translation>
     </message>
 </context>
 <context>

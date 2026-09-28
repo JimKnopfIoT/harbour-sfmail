@@ -129,6 +129,10 @@ static void publishAgentPids(const QVariantList &pids)
         app->setProperty("sfmailAgentPids", pids);
 }
 
+// Error text of a decrypt that was tried without a passphrase and found the
+// key protected. Not shown to anyone: the reader page asks for the passphrase
+// and tries again. Same marker in SmimeEngine.cpp and MessagePage.qml.
+static const char kNeedPassphrase[] = "need-passphrase";
 static const char *kStackBin = "/usr/share/harbour-sfmail/gpg/bin";
 static const char *kGpg = "/usr/share/harbour-sfmail/gpg/bin/gpg";
 static const char *kGpgsm = "/usr/share/harbour-sfmail/gpg/bin/gpgsm";
@@ -629,9 +633,12 @@ static QByteArray mimeBoundary()
 // ---------------------------------------------------------------------------
 
 // Passphrase for one operation, handed to GPGME's loopback machinery through
-// the GpgME++ PassphraseProvider interface. The QML flow collects it in a
-// dialog BEFORE the call, so the provider just hands it over (a retry after a
-// wrong one → cancel instead of looping forever).
+// the GpgME++ PassphraseProvider interface. The provider just hands over what
+// it was given (a retry after a wrong one → cancel instead of looping forever).
+// Given nothing, it cancels and remembers that it was asked: a key without a
+// passphrase never asks, so a decrypt can be tried first and the dialog shown
+// only when the key really needs one. The agent caches no passphrase
+// (cache-ttl 0), so "was asked" always means "this key is protected".
 class OnePassphraseProvider : public GpgME::PassphraseProvider
 {
 public:
@@ -641,11 +648,15 @@ public:
     char *getPassphrase(const char * /*uidHint*/, const char * /*description*/,
                         bool previousWasBad, bool &canceled) override
     {
+        if (m_pass.isEmpty()) { m_asked = true; canceled = true; return nullptr; }
         if (previousWasBad) { canceled = true; return nullptr; }
         return strdup(m_pass.constData());   // wiped + freed by GpgME++
     }
+    // Tried without a passphrase and the key wanted one.
+    bool needsPassphrase() const { return m_asked; }
 private:
     QByteArray m_pass;
+    bool m_asked = false;
 };
 
 // Context configured for the bundled engine and our keyring; armored output;
@@ -2437,6 +2448,14 @@ void GpgEngine::decryptMimeFile(const QString &pathOrUrl, const QString &passphr
     QByteArray out;
     const std::pair<GpgME::DecryptionResult, GpgME::VerificationResult> res =
         job->exec(block, out);
+    // Asked counts, whatever the result says: the bundled gpgme does not put
+    // the provider's cancel into the decryption result — the "decrypt" then
+    // comes back clean with nothing in it.
+    if (pp.needsPassphrase()) {
+        emit decryptMimeFinished(false, QString(), QString(), QVariantList(), QVariantMap(),
+                                 QString::fromLatin1(kNeedPassphrase));
+        return;
+    }
     if (res.first.error()) {
         qWarning() << "[gpg] decryptMime FAILED:" << gpgErrString(res.first.error());
         emit decryptMimeFinished(false, QString(), QString(), QVariantList(), QVariantMap(),
@@ -2559,7 +2578,10 @@ void GpgEngine::decryptText(const QString &armored, const QString &passphrase)
         vr = res.second;
     }
 
-    if (!gerr) {
+    // Asked counts before the error code (see decryptMimeFile).
+    if (pp.needsPassphrase()) {
+        emit decryptFinished(false, QString(), QString(), QString::fromLatin1(kNeedPassphrase), QVariantMap());
+    } else if (!gerr) {
         const QVariantMap sig = signatureInfo(vr);
         emit decryptFinished(true, QString::fromUtf8(out), signatureNote(sig), QString(), sig);
     } else {

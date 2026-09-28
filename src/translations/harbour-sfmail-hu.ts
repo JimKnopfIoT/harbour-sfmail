@@ -1947,6 +1947,14 @@ Ha a fenti gomb nem ér célba, ugyanez megtehető parancssorból is:</translati
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Több különböző tanúsítvánnyal aláírva. Az SF-Mail csak egyetlen aláírást jelenít meg érvényesként — ellenőrizze az üzenetet más módon.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>A kijelölt szöveg a vágólapra kerül.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Kész</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1973,6 +1981,10 @@ Ha a fenti gomb nem ér célba, ugyanez megtehető parancssorból is:</translati
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Csak akkor, ha van másik mentése. Ez nem vonható vissza.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Hagyja üresen, ha a kulcsnak nincs jelmondata.</translation>
     </message>
 </context>
 <context>

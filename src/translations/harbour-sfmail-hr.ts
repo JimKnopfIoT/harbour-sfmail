@@ -1955,6 +1955,14 @@ Ako gumb iznad ne prolazi, isto se može učiniti iz terminala:</translation>
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Potpisano s nekoliko različitih certifikata. SF-Mail kao valjan prikazuje samo jedan potpis — provjerite poruku na drugi način.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Označeni tekst kopira se u međuspremnik.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Gotovo</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1981,6 +1989,10 @@ Ako gumb iznad ne prolazi, isto se može učiniti iz terminala:</translation>
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Samo ako imate drugu sigurnosnu kopiju. Ovo se ne može poništiti.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Ostavite prazno ako ključ nema lozinku.</translation>
     </message>
 </context>
 <context>

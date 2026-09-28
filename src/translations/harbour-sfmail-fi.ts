@@ -1951,6 +1951,14 @@ Jos yllä oleva painike ei mene läpi, saman voi tehdä päätteestä:</translat
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Allekirjoitettu useilla eri varmenteilla. SF-Mail näyttää kelvollisena vain yhden allekirjoituksen — tarkista viesti muulla tavoin.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Valittu teksti kopioidaan leikepöydälle.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Valmis</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1977,6 +1985,10 @@ Jos yllä oleva painike ei mene läpi, saman voi tehdä päätteestä:</translat
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Vain jos sinulla on toinen varmuuskopio. Tätä ei voi perua.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Jätä tyhjäksi, jos avaimella ei ole tunnuslausetta.</translation>
     </message>
 </context>
 <context>

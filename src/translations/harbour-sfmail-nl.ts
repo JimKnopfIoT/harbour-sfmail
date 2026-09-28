@@ -1951,6 +1951,14 @@ Mocht de knop hierboven niet doorkomen, dan kan hetzelfde vanuit een terminal:</
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Ondertekend met meerdere verschillende certificaten. SF-Mail toont maar één handtekening als geldig — controleer het bericht op een andere manier.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Geselecteerde tekst wordt naar het klembord gekopieerd.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Klaar</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1977,6 +1985,10 @@ Mocht de knop hierboven niet doorkomen, dan kan hetzelfde vanuit een terminal:</
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Alleen als je een andere back-up hebt. Dit kan niet ongedaan worden gemaakt.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Laat leeg als de sleutel geen wachtwoordzin heeft.</translation>
     </message>
 </context>
 <context>

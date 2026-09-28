@@ -1951,6 +1951,14 @@ Kui ülalolev nupp kohale ei jõua, saab sedasama teha terminalist:</translation
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Allkirjastatud mitme erineva sertifikaadiga. SF-Mail näitab kehtivana ainult ühte allkirja — kontrolli kirja muul viisil.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Valitud tekst kopeeritakse lõikelauale.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Valmis</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1977,6 +1985,10 @@ Kui ülalolev nupp kohale ei jõua, saab sedasama teha terminalist:</translation
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Ainult siis, kui sul on teine varukoopia. Seda ei saa tagasi võtta.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Jäta tühjaks, kui võtmel pole paroolifraasi.</translation>
     </message>
 </context>
 <context>

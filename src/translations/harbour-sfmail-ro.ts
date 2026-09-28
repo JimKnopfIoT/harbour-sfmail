@@ -1955,6 +1955,14 @@ Dacă butonul de mai sus nu răzbate, același lucru se poate face dintr-un term
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Semnat cu mai multe certificate diferite. SF-Mail afișează ca validă doar o singură semnătură — verificați mesajul pe altă cale.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Textul selectat este copiat în clipboard.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Gata</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1981,6 +1989,10 @@ Dacă butonul de mai sus nu răzbate, același lucru se poate face dintr-un term
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Doar dacă aveți altă copie de siguranță. Acest lucru nu poate fi anulat.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Lăsați gol dacă cheia nu are frază de acces.</translation>
     </message>
 </context>
 <context>

@@ -129,12 +129,14 @@ the body anyway.
 - HTML mail is drawn in the device theme: the colours a message brings are
   dropped, so text written for white paper stays readable on a dark screen, and
   remote images are never loaded (loading one would tell the sender you read it)
+- **Select and copy** message text — press and hold the text; the selection goes
+  to the clipboard, links included
 - Attachments (plain, PGP and S/MIME) with their size — **open with…** or
   **save as…** to a folder you pick; large attachments download on demand
 - **Blind copies stay blind** — one message per audience, so no recipient can read
   the others off the encryption; encrypted subjects via protected headers (see above)
-- **OpenPGP** — encrypt (+ optional sign), decrypt by tap (PGP/MIME with a
-  passphrase dialog, and inline PGP), PGP/MIME sending (RFC 3156,
+- **OpenPGP** — encrypt (+ optional sign), decrypt by tap (PGP/MIME and inline
+  PGP; the passphrase is asked for only when the key has one), PGP/MIME sending (RFC 3156,
   `multipart/encrypted`) with attachments. Mail it decrypts and inline-signed
   text get a signature verdict: good, bad, key missing, revoked or expired, and a
   warning when the signing key does not carry the sender's address. Signed-only

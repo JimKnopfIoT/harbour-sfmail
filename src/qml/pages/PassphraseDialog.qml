@@ -15,7 +15,12 @@ Dialog {
     property bool offerDeleteSource: false
     property bool deleteSource: deleteSwitch.checked
 
-    canAccept: field.text.length > 0
+    // A PGP key may have no passphrase at all. Where that can be the case the
+    // caller lets the field stay empty; where the passphrase protects something
+    // new (an exported .p12) it never may.
+    property bool allowEmpty: false
+
+    canAccept: allowEmpty || field.text.length > 0
 
     // Hygiene: whatever pushes THIS dialog aside — accept/cancel (the pop), a
     // page on top, the task switcher — must not leave the passphrase armed in
@@ -56,6 +61,7 @@ Dialog {
             id: field
             width: parent.width
             label: qsTr("Secret key passphrase")
+            description: dialog.allowEmpty ? qsTr("Leave empty if the key has no passphrase.") : ""
             // PasswordField's own default lacks ImhSensitiveData — that flag is
             // what keeps the input out of the keyboard's learning database.
             inputMethodHints: Qt.ImhSensitiveData | Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase

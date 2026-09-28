@@ -1951,6 +1951,14 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Υπογεγραμμένο με πολλά διαφορετικά πιστοποιητικά. Το SF-Mail εμφανίζει ως έγκυρη μόνο μία υπογραφή — ελέγξτε το μήνυμα με άλλον τρόπο.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Το επιλεγμένο κείμενο αντιγράφεται στο πρόχειρο.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Τέλος</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1977,6 +1985,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Μόνο αν έχετε άλλο αντίγραφο ασφαλείας. Αυτό δεν αναιρείται.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Αφήστε το κενό αν το κλειδί δεν έχει φράση πρόσβασης.</translation>
     </message>
 </context>
 <context>

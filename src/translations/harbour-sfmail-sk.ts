@@ -1955,6 +1955,14 @@ Ak by tlačidlo vyššie neprešlo, to isté sa dá urobiť z terminálu:</trans
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Podpísané niekoľkými rôznymi certifikátmi. SF-Mail zobrazí ako platný len jediný podpis — overte správu iným spôsobom.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Označený text sa skopíruje do schránky.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Hotovo</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1981,6 +1989,10 @@ Ak by tlačidlo vyššie neprešlo, to isté sa dá urobiť z terminálu:</trans
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Iba ak máte inú zálohu. Túto akciu nemožno vrátiť späť.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Nechajte prázdne, ak kľúč nemá heslo.</translation>
     </message>
 </context>
 <context>

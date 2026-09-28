@@ -1955,6 +1955,14 @@ Jei viršuje esantis mygtukas nepraeina, tą patį galima padaryti iš terminalo
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Pasirašyta keliais skirtingais sertifikatais. SF-Mail kaip galiojantį rodo tik vieną parašą — patikrink laišką kitu būdu.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Pažymėtas tekstas nukopijuojamas į iškarpinę.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Atlikta</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1981,6 +1989,10 @@ Jei viršuje esantis mygtukas nepraeina, tą patį galima padaryti iš terminalo
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Tik jei turi kitą atsarginę kopiją. To atšaukti nepavyks.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Palikite tuščią, jei raktas neturi slaptafrazės.</translation>
     </message>
 </context>
 <context>

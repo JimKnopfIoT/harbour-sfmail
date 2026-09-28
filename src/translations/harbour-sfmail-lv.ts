@@ -1955,6 +1955,14 @@ Ja iepriekš redzamā poga netiek cauri, to pašu var izdarīt no termināļa:</
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Parakstīta ar vairākiem dažādiem sertifikātiem. SF-Mail kā derīgu rāda tikai vienu parakstu — pārbaudi vēstuli citā veidā.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Atlasītais teksts tiek kopēts starpliktuvē.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Gatavs</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1981,6 +1989,10 @@ Ja iepriekš redzamā poga netiek cauri, to pašu var izdarīt no termināļa:</
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Tikai tad, ja tev ir cits dublējums. To nevar atsaukt.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Atstājiet tukšu, ja atslēgai nav paroles frāzes.</translation>
     </message>
 </context>
 <context>

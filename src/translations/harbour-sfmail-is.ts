@@ -1951,6 +1951,14 @@ Komist hnappurinn hér að ofan ekki í gegn má gera hið sama úr skipanalínu
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Undirritað með nokkrum mismunandi skilríkjum. SF-Mail sýnir aðeins eina undirskrift sem gilda — sannreyndu skeytið eftir öðrum leiðum.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Valinn texti er afritaður á klippispjaldið.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Lokið</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1977,6 +1985,10 @@ Komist hnappurinn hér að ofan ekki í gegn má gera hið sama úr skipanalínu
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Aðeins ef þú átt annað afrit. Þessu verður ekki snúið við.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Skildu eftir autt ef lykillinn hefur ekkert lykilorð.</translation>
     </message>
 </context>
 <context>

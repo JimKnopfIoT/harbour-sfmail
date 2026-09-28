@@ -573,7 +573,7 @@ Page {
         var signFpr = _resolveSignKey()
         if (signFpr === "") return
         var dlg = pageStack.push(Qt.resolvedUrl("PassphraseDialog.qml"),
-                                 { info: qsTr("To sign the message") })
+                                 { info: qsTr("To sign the message"), allowEmpty: true })
         dlg.accepted.connect(function() { page._dispatchSign(to, cc, signFpr, dlg.passphrase) })
     }
 
@@ -617,7 +617,7 @@ Page {
         }
         if (signFpr !== "") {
             var dlg = pageStack.push(Qt.resolvedUrl("PassphraseDialog.qml"),
-                                     { info: qsTr("To sign the message") })
+                                     { info: qsTr("To sign the message"), allowEmpty: true })
             dlg.accepted.connect(function() { page._dispatch(to, cc, fprs, blind, signFpr, dlg.passphrase) })
         } else {
             page._dispatch(to, cc, fprs, blind, "", "")

@@ -1951,6 +1951,14 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>Selected text is copied to the clipboard.</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Done</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1977,6 +1985,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>Only if you have another backup. This cannot be undone.</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>Leave empty if the key has no passphrase.</translation>
     </message>
 </context>
 <context>

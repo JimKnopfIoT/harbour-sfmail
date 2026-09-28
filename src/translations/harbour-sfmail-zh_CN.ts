@@ -1947,6 +1947,14 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Signed with several different certificates. SF-Mail shows only a single signature as valid — check the message by other means.</source>
         <translation>用多个不同的证书签名。SF-Mail 只会将单个签名显示为有效——请通过其他方式核实这封邮件。</translation>
     </message>
+    <message>
+        <source>Selected text is copied to the clipboard.</source>
+        <translation>所选文本会复制到剪贴板。</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>完成</translation>
+    </message>
 </context>
 <context>
     <name>PassphraseDialog</name>
@@ -1973,6 +1981,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Only if you have another backup. This cannot be undone.</source>
         <translation>仅当你另有备份时才这样做。此操作无法撤销。</translation>
+    </message>
+    <message>
+        <source>Leave empty if the key has no passphrase.</source>
+        <translation>如果密钥没有密码短语，请留空。</translation>
     </message>
 </context>
 <context>
