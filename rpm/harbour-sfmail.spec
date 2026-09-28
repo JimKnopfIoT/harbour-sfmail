@@ -10,7 +10,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.19
+Version:    0.8.20
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -221,6 +221,16 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Mon Sep 28 2026 harbour-sfmail contributors 0.8.20-1
+- The app no longer disappears after a few switches to the background and back.
+  On devices with a newer graphics layer it ended silently - no message, no
+  trace in its log - usually on the second to fourth return from the app
+  switcher, with or without a decrypted message on screen. The program carried
+  a single byte of thread-local storage, and that byte sat in the area the
+  platform's graphics layer keeps for itself; a render thread started on the
+  stack of a finished one then found a stale pointer there. The program now
+  carries no thread-local storage at all.
+
 * Fri Sep 25 2026 harbour-sfmail contributors 0.8.19-1
 - Mail can be sent again. Releases 0.8.14 to 0.8.18 could not send at all: the
   composer looked up the accounts through a property the account list does not

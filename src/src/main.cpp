@@ -7,6 +7,7 @@
 #include <QTextStream>
 #include <QDateTime>
 #include <QMutex>
+#include <QThreadStorage>
 #include <QFileInfo>
 #include <QSocketNotifier>
 #include <QTranslator>
@@ -425,8 +426,14 @@ static bool looksLikeStalledDelivery(const QString &msg)
 static void recordSyncIssue(const QString &line)
 {
     // Writing may itself produce a Qt warning, which would come straight back
-    // through the message handler.
-    static thread_local bool busy = false;
+    // through the message handler. The guard is per thread, but deliberately
+    // not a thread_local: the executable must carry no thread-local storage of
+    // its own. Its block would sit at the start of every thread's TLS area,
+    // which the platform's graphics stack uses for itself on some devices; a
+    // render thread reusing a finished thread's stack then inherits a stale
+    // pointer there and crashes.
+    static QThreadStorage<bool> busyFlag;
+    bool &busy = busyFlag.localData();
     if (busy) return;
     busy = true;
 
