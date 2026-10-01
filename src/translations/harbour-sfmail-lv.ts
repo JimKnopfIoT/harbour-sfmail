@@ -353,6 +353,14 @@ Ja tas traucē, izņemiet otru ierakstu no šīs sasaistes root čaulā. Tas ir 
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Melnraksts nesaglabā pielikumus. Saglabā melnrakstu vēlreiz, lai to saglabātu bez tiem.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Pārsūtāmā vēstule bija šifrēta. Šādi nosūtīts, tās saturs aiziet nešifrēts. Pieskarieties “Sūtīt” vēlreiz, lai tomēr nosūtītu.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Sūta…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1962,6 +1970,46 @@ Ja iepriekš redzamā poga netiek cauri, to pašu var izdarīt no termināļa:</
     <message>
         <source>Done</source>
         <translation>Gatavs</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Vispirms atšifrējiet vēstuli, tad pārsūtiet to.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Ielādē pielikumus pārsūtīšanai…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Pārsūtīta vēstule</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>No:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Datums:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Temats:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Kam:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Kopija:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Pārsūtīt</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Vēstule nav pilnībā ierīcē, tāpēc to nevar pārsūtīt nemainītu.</translation>
     </message>
 </context>
 <context>

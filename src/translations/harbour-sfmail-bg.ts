@@ -353,6 +353,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Черновата не запазва прикачените файлове. Запазете черновата още веднъж, за да я съхраните без тях.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Препращаното съобщение беше шифровано. Изпратено така, съдържанието му излиза нешифровано. Докоснете „Изпращане“ отново, за да го изпратите все пак.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Изпращане…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Done</source>
         <translation>Готово</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Първо дешифрирайте съобщението, после го препратете.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Зареждане на прикачените файлове за препращане…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Препратено съобщение</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>От:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Дата:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Тема:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>До:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Копие:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Препрати</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Съобщението не е изцяло на устройството, затова не може да бъде препратено непроменено.</translation>
     </message>
 </context>
 <context>

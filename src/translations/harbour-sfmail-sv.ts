@@ -353,6 +353,14 @@ Om det stör kan du ta bort den andra posten ur den kopplingen från ett root-sk
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Ett utkast behåller inga bilagor. Spara utkastet igen för att lagra det utan dem.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Det vidarebefordrade meddelandet var krypterat. Skickat så här går innehållet ut okrypterat. Tryck på ”Skicka” igen för att skicka det ändå.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Skickar…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Om knappen ovan inte skulle gå fram kan samma sak göras från en terminal:</tr
     <message>
         <source>Done</source>
         <translation>Klar</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Dekryptera meddelandet först och vidarebefordra det sedan.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Läser in bilagor för vidarebefordran…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Vidarebefordrat meddelande</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Från:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Datum:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Ämne:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Till:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Kopia:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Vidarebefordra</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Meddelandet finns inte helt på enheten och kan därför inte vidarebefordras oförändrat.</translation>
     </message>
 </context>
 <context>

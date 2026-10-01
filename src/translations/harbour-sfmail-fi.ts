@@ -353,6 +353,14 @@ Jos se häiritsee, poista toinen merkintä tuosta kytkennästä root-kuoresta. T
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Luonnos ei säilytä liitteitä. Tallenna luonnos uudelleen, niin se tallennetaan ilman niitä.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Edelleen lähetettävä viesti oli salattu. Näin lähetettynä sen sisältö lähtee salaamattomana. Napauta ”Lähetä” uudelleen lähettääksesi sen silti.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Lähetetään…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Jos yllä oleva painike ei mene läpi, saman voi tehdä päätteestä:</translat
     <message>
         <source>Done</source>
         <translation>Valmis</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Pura viestin salaus ensin ja lähetä se sitten edelleen.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Ladataan liitteitä edelleenlähetystä varten…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Edelleen lähetetty viesti</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Lähettäjä:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Päiväys:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Aihe:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Vastaanottaja:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Kopio:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Lähetä edelleen</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Viesti ei ole kokonaan laitteella, joten sitä ei voi lähettää edelleen muuttamattomana.</translation>
     </message>
 </context>
 <context>

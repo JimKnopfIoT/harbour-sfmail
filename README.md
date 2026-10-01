@@ -128,7 +128,12 @@ the body anyway.
   and domain and the domains of links in the message. Nothing about you is sent
 - HTML mail is drawn in the device theme: the colours a message brings are
   dropped, so text written for white paper stays readable on a dark screen, and
-  remote images are never loaded (loading one would tell the sender you read it)
+  remote images are never loaded (loading one would tell the sender you read it).
+  Decrypted PGP and S/MIME mail gets the same HTML view
+- **Forward** — the original goes along unchanged as a part of its own (HTML,
+  embedded pictures and attachments as they were), after your own note; an
+  encrypted message is forwarded decrypted and encrypted anew for the new
+  recipients, and sending it unencrypted asks twice
 - **Select and copy** message text — press and hold the text; the selection goes
   to the clipboard, links included
 - Attachments (plain, PGP and S/MIME) with their size — **open with…** or

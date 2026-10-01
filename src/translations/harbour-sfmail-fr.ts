@@ -353,6 +353,14 @@ Si cela vous gêne, retirez l&apos;autre entrée de cette correspondance depuis 
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Un brouillon ne conserve pas les pièces jointes. Enregistrez à nouveau le brouillon pour le conserver sans elles.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Le message transféré était chiffré. Envoyé ainsi, son contenu part non chiffré. Touchez à nouveau « Envoyer » pour l’envoyer quand même.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Envoi…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Si le bouton ci-dessus ne passe pas, la même chose est possible depuis un termi
     <message>
         <source>Done</source>
         <translation>Terminé</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Déchiffrez d’abord le message, puis transférez-le.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Chargement des pièces jointes pour le transfert…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Message transféré</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>De :</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Date :</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Objet :</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>À :</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Cc :</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Transférer</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Le message n’est pas entièrement sur l’appareil ; il ne peut donc pas être transféré tel quel.</translation>
     </message>
 </context>
 <context>

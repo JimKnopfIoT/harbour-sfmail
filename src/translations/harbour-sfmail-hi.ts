@@ -353,6 +353,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>ड्राफ़्ट अटैचमेंट नहीं रखता। उसे अटैचमेंट के बिना सहेजने के लिए ड्राफ़्ट को फिर से सहेजें।</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>अग्रेषित किया जा रहा संदेश एन्क्रिप्टेड था। ऐसे भेजने पर उसकी सामग्री बिना एन्क्रिप्शन के जाएगी। फिर भी भेजने के लिए “भेजें” दोबारा टैप करें।</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>भेजा जा रहा है…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Done</source>
         <translation>हो गया</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>पहले संदेश को डिक्रिप्ट करें, फिर उसे अग्रेषित करें।</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>अग्रेषण के लिए अनुलग्नक लोड हो रहे हैं…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>अग्रेषित संदेश</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>प्रेषक:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>दिनांक:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>विषय:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>प्रति:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Cc:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>अग्रेषित करें</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>संदेश पूरी तरह डिवाइस पर नहीं है, इसलिए उसे बिना बदले अग्रेषित नहीं किया जा सकता।</translation>
     </message>
 </context>
 <context>

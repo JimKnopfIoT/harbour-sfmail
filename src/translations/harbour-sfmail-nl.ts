@@ -353,6 +353,14 @@ Als het stoort, haalt u het andere item in een root-shell uit die toewijzing. Di
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Een concept bewaart geen bijlagen. Sla het concept opnieuw op om het zonder bijlagen te bewaren.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Het doorgestuurde bericht was versleuteld. Zo verzonden gaat de inhoud onversleuteld weg. Tik nogmaals op ‘Verzenden’ om het toch te verzenden.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Verzenden…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Mocht de knop hierboven niet doorkomen, dan kan hetzelfde vanuit een terminal:</
     <message>
         <source>Done</source>
         <translation>Klaar</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Ontsleutel het bericht eerst en stuur het dan door.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Bijlagen voor doorsturen worden geladen…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Doorgestuurd bericht</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Van:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Datum:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Onderwerp:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Aan:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Cc:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Doorsturen</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Het bericht staat niet volledig op het apparaat en kan daarom niet ongewijzigd worden doorgestuurd.</translation>
     </message>
 </context>
 <context>

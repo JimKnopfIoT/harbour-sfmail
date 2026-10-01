@@ -353,6 +353,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>A draft does not keep attachments. Save the draft again to store it without them.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Sending…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Done</source>
         <translation>Done</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Decrypt the message first, then forward it.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Loading the attachments for forwarding…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Forwarded message</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>From:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Date:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Subject:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>To:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Cc:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Forward</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>The message is not completely on the device, so it cannot be forwarded unchanged.</translation>
     </message>
 </context>
 <context>

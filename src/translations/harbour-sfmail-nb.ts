@@ -353,6 +353,14 @@ Hvis det plager deg, kan du ta den andre oppføringen ut av den tilordningen fra
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Et utkast beholder ikke vedlegg. Lagre utkastet på nytt for å lagre det uten dem.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Den videresendte meldingen var kryptert. Sendt slik går innholdet ut ukryptert. Trykk på «Send» igjen for å sende den likevel.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Sender…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Skulle knappen over ikke nå fram, kan det samme gjøres fra en terminal:</trans
     <message>
         <source>Done</source>
         <translation>Ferdig</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Dekrypter meldingen først, og videresend den deretter.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Laster inn vedlegg for videresending…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Videresendt melding</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Fra:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Dato:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Emne:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Til:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Kopi:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Videresend</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Meldingen er ikke fullstendig på enheten og kan derfor ikke videresendes uendret.</translation>
     </message>
 </context>
 <context>

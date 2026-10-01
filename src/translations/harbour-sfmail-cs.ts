@@ -353,6 +353,14 @@ Pokud vám to vadí, odeberte druhou položku z tohoto přiřazení z rootovské
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Koncept si přílohy neuchovává. Uložte koncept znovu, aby se uložil bez nich.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Přeposílaná zpráva byla šifrovaná. Takto odeslaná odejde její obsah nešifrovaně. Klepněte znovu na „Odeslat“, chcete-li ji přesto odeslat.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Odesílání…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1962,6 +1970,46 @@ Kdyby tlačítko výše neprošlo, totéž lze udělat z terminálu:</translatio
     <message>
         <source>Done</source>
         <translation>Hotovo</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Nejprve zprávu dešifrujte, pak ji přepošlete.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Načítání příloh k přeposlání…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Přeposlaná zpráva</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Od:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Datum:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Předmět:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Komu:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Kopie:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Přeposlat</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Zpráva není v zařízení celá, a proto ji nelze přeposlat beze změny.</translation>
     </message>
 </context>
 <context>

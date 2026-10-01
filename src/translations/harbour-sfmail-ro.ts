@@ -353,6 +353,14 @@ Dacă vă deranjează, scoateți cealaltă intrare din acea asociere dintr-un sh
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>O ciornă nu păstrează atașamentele. Salvați din nou ciorna pentru a o stoca fără ele.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Mesajul redirecționat era criptat. Trimis așa, conținutul lui pleacă necriptat. Atingeți din nou „Trimite” pentru a-l trimite oricum.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Se trimite…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1962,6 +1970,46 @@ Dacă butonul de mai sus nu răzbate, același lucru se poate face dintr-un term
     <message>
         <source>Done</source>
         <translation>Gata</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Decriptați mai întâi mesajul, apoi redirecționați-l.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Se încarcă atașamentele pentru redirecționare…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Mesaj redirecționat</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>De la:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Data:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Subiect:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Către:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Cc:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Redirecționează</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Mesajul nu este complet pe dispozitiv, așa că nu poate fi redirecționat nemodificat.</translation>
     </message>
 </context>
 <context>

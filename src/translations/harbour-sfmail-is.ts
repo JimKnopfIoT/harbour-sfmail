@@ -353,6 +353,14 @@ Ef það truflar má taka hina færsluna út úr þessari tengingu úr root-skel
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Drög halda ekki viðhengjum. Vistaðu drögin aftur til að geyma þau án þeirra.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Áframsenda skeytið var dulritað. Sent svona fer innihald þess ódulritað. Ýttu aftur á „Senda“ til að senda það samt.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Sendi…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Komist hnappurinn hér að ofan ekki í gegn má gera hið sama úr skipanalínu
     <message>
         <source>Done</source>
         <translation>Lokið</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Afkóðaðu skeytið fyrst og áframsendu það svo.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Hleð viðhengjum til áframsendingar…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Áframsent skeyti</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Frá:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Dagsetning:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Efni:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Til:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Afrit:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Áframsenda</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Skeytið er ekki allt á tækinu og því er ekki hægt að áframsenda það óbreytt.</translation>
     </message>
 </context>
 <context>

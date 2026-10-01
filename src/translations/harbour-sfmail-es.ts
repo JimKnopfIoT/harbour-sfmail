@@ -353,6 +353,14 @@ Si le molesta, saque la otra entrada de esa correspondencia desde un shell de ro
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Un borrador no conserva los adjuntos. Guarda el borrador de nuevo para almacenarlo sin ellos.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>El mensaje reenviado estaba cifrado. Si se envía así, su contenido sale sin cifrar. Toca «Enviar» de nuevo para enviarlo de todos modos.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Enviando…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Si el botón de arriba no llega a funcionar, lo mismo puede hacerse desde un ter
     <message>
         <source>Done</source>
         <translation>Listo</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Descifra primero el mensaje y luego reenvíalo.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Cargando los adjuntos para reenviar…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Mensaje reenviado</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>De:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Fecha:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Asunto:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Para:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>CC:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Reenviar</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>El mensaje no está completo en el dispositivo, así que no se puede reenviar sin cambios.</translation>
     </message>
 </context>
 <context>

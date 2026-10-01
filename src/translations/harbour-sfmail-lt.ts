@@ -353,6 +353,14 @@ Jei tai trukdo, pašalinkite kitą įrašą iš to susiejimo root aplinkoje. Tai
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Juodraštis nesaugo priedų. Įrašyk juodraštį dar kartą, kad jis būtų išsaugotas be jų.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Persiunčiamas laiškas buvo užšifruotas. Taip išsiųsto laiško turinys keliauja neužšifruotas. Dar kartą bakstelėkite „Siųsti“, kad vis tiek išsiųstumėte.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Siunčiama…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1962,6 +1970,46 @@ Jei viršuje esantis mygtukas nepraeina, tą patį galima padaryti iš terminalo
     <message>
         <source>Done</source>
         <translation>Atlikta</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Pirmiausia iššifruokite laišką, tada jį persiųskite.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Įkeliami priedai persiuntimui…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Persiųstas laiškas</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Nuo:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Data:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Tema:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Kam:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Kopija:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Persiųsti</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Laiškas ne visas yra įrenginyje, todėl jo negalima persiųsti nepakeisto.</translation>
     </message>
 </context>
 <context>
