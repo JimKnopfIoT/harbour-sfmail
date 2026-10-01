@@ -1596,6 +1596,10 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Δεν στάλθηκε. Απέτυχε και η τελευταία αυτόματη απόπειρα — χρησιμοποιήστε την Επανάληψη αποστολής μόλις επανέλθει η σύνδεση.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Αναζήτηση</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Αποθηκεύστε ένα μήνυμα ως πρότυπο από τον συντάκτη</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Εισερχόμενα</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Εξερχόμενα</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Απεσταλμένα</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Πρόχειρα</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Απορρίμματα</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Ανεπιθύμητα</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Κρυπτογραφημένο</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Αναζήτηση</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Αποστολέας, θέμα ή κείμενο</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Αναζήτηση στον διακομιστή</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(χωρίς θέμα)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Δεν βρέθηκαν αποτελέσματα.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Αναζήτηση στον διακομιστή…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Χωρίς σύνδεση — δεν είναι δυνατή η αναζήτηση στον διακομιστή αυτή τη στιγμή.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Η αναζήτηση στον διακομιστή δεν ολοκληρώθηκε. Δεν υποστηρίζουν όλοι οι τύποι λογαριασμού αναζήτηση στον διακομιστή.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Έγινε αναζήτηση στον διακομιστή. Επιπλέον αποτελέσματα στον διακομιστή που δεν φορτώθηκαν: %n</numerusform>
+            <numerusform>Έγινε αναζήτηση στον διακομιστή. Επιπλέον αποτελέσματα στον διακομιστή που δεν φορτώθηκαν: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Έγινε αναζήτηση στον διακομιστή.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Το κείμενο των κρυπτογραφημένων μηνυμάτων δεν μπορεί να αναζητηθεί· βρίσκονται μέσω αποστολέα και θέματος.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Αναζήτηση σε αυτόν τον λογαριασμό</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Αποστολέας, θέμα και κείμενο μηνύματος, σε όλους τους φακέλους</translation>
     </message>
 </context>
 </TS>

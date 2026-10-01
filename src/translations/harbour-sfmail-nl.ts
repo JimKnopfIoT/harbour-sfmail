@@ -1596,6 +1596,10 @@ Mocht de knop hierboven niet doorkomen, dan kan hetzelfde vanuit een terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Niet verzonden. Ook de laatste automatische poging is mislukt — gebruik Opnieuw verzenden zodra de verbinding terug is.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Zoeken</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Mocht de knop hierboven niet doorkomen, dan kan hetzelfde vanuit een terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Sla een bericht vanuit de opsteller als sjabloon op</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Postvak IN</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Postvak UIT</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Verzonden</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Concepten</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Prullenbak</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Ongewenst</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Versleuteld</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Zoeken</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Afzender, onderwerp of tekst</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Zoeken op de server</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(geen onderwerp)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Geen resultaten.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Zoeken op de server…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Geen verbinding — de server kan nu niet worden doorzocht.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Het zoeken op de server is niet voltooid. Niet elk accounttype kan op de server zoeken.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Server doorzocht. Extra resultaten op de server, niet geladen: %n</numerusform>
+            <numerusform>Server doorzocht. Extra resultaten op de server, niet geladen: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Server doorzocht.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>De tekst van versleutelde berichten is niet doorzoekbaar; ze worden gevonden op afzender en onderwerp.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Dit account doorzoeken</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Afzender, onderwerp en berichttekst, in alle mappen</translation>
     </message>
 </context>
 </TS>

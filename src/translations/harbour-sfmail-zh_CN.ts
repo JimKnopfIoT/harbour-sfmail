@@ -1592,6 +1592,10 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>未发送。最后一次自动尝试也失败了——连接恢复后请使用“再次发送”。</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>搜索</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2499,6 +2503,91 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>可在写信界面把一封邮件存为模板</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>收件箱</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>发件箱</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>已发送</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>草稿</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>废纸篓</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>垃圾邮件</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>已加密</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>搜索</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>发件人、主题或正文</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>在服务器上搜索</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>（无主题）</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>没有匹配项。</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>正在服务器上搜索…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>没有网络连接 — 目前无法搜索服务器。</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>服务器搜索未完成。并非所有账户类型都支持在服务器上搜索。</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>已搜索服务器。服务器上还有未加载的匹配项:%n 个</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>已搜索服务器。</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>无法搜索加密邮件的正文;可通过发件人和主题找到它们。</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>搜索此账户</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>发件人、主题和邮件正文,所有文件夹</translation>
     </message>
 </context>
 </TS>

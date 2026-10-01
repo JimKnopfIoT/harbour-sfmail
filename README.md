@@ -134,6 +134,10 @@ the body anyway.
   embedded pictures and attachments as they were), after your own note; an
   encrypted message is forwarded decrypted and encrypted anew for the new
   recipients, and sending it unencrypted asks twice
+- **Search** (pull down in a mailbox) — the whole account, every folder, by
+  sender, subject and message text; stored mail is searched as you type, the
+  server only when you ask. The text of encrypted mail is not searchable, and a
+  subject hidden by protected headers is only the placeholder to a search
 - **Select and copy** message text — press and hold the text; the selection goes
   to the clipboard, links included
 - Attachments (plain, PGP and S/MIME) with their size — **open with…** or

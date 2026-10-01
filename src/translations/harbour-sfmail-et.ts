@@ -1596,6 +1596,10 @@ Kui ülalolev nupp kohale ei jõua, saab sedasama teha terminalist:</translation
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Saatmata. Ka viimane automaatne katse ebaõnnestus — kasuta Saada uuesti, kui ühendus on taas olemas.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Otsi</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Kui ülalolev nupp kohale ei jõua, saab sedasama teha terminalist:</translation
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Salvesta kiri kirjutamisvaates mallina</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Sisendkast</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Väljundkast</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Saadetud</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Mustandid</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Prügikast</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Rämpspost</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Krüptitud</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Otsi</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Saatja, teema või tekst</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Otsi serverist</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(teemata)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Vasteid pole.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Otsitakse serverist…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Ühendus puudub — serverist ei saa praegu otsida.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Serveriotsing ei lõppenud. Kõik kontotüübid ei toeta serveris otsimist.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Server läbi otsitud. Laadimata lisavasteid serveris: %n</numerusform>
+            <numerusform>Server läbi otsitud. Laadimata lisavasteid serveris: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Server läbi otsitud.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Krüptitud sõnumite teksti ei saa otsida; need leitakse saatja ja teema järgi.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Otsi sellest kontost</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Saatja, teema ja sõnumi tekst, kõigis kaustades</translation>
     </message>
 </context>
 </TS>

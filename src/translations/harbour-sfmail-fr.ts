@@ -1596,6 +1596,10 @@ Si le bouton ci-dessus ne passe pas, la même chose est possible depuis un termi
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Non envoyé. La dernière tentative automatique a elle aussi échoué — utilisez « Renvoyer » une fois la connexion rétablie.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Rechercher</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Si le bouton ci-dessus ne passe pas, la même chose est possible depuis un termi
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Enregistrez un message comme modèle depuis l&apos;éditeur</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Boîte de réception</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Boîte d&apos;envoi</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Envoyés</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Brouillons</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Corbeille</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Indésirables</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Chiffré</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Rechercher</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Expéditeur, objet ou texte</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Rechercher sur le serveur</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(sans objet)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Aucun résultat.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Recherche sur le serveur…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Pas de connexion — impossible de rechercher sur le serveur pour l’instant.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>La recherche sur le serveur n’a pas abouti. Tous les types de compte ne permettent pas de rechercher sur le serveur.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Serveur interrogé. Résultats supplémentaires sur le serveur non chargés : %n</numerusform>
+            <numerusform>Serveur interrogé. Résultats supplémentaires sur le serveur non chargés : %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Serveur interrogé.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Le texte des messages chiffrés ne peut pas être recherché ; ils sont trouvés par expéditeur et objet.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Rechercher dans ce compte</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Expéditeur, objet et texte du message, dans tous les dossiers</translation>
     </message>
 </context>
 </TS>

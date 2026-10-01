@@ -1600,6 +1600,10 @@ Mura n-éiríonn leis an gcnaipe thuas, is féidir an rud céanna a dhéanamh ó
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Níor seoladh í. Theip ar an iarracht uathoibríoch dheireanach freisin — úsáid Seol arís nuair a bheidh an nasc ar ais.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Cuardaigh</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2507,6 +2511,93 @@ Mura n-éiríonn leis an gcnaipe thuas, is féidir an rud céanna a dhéanamh ó
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Sábháil teachtaireacht mar theimpléad ón gcumadóir</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Bosca isteach</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Bosca amach</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Seolta</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Dréachtaí</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Bruscar</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Dramhphost</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Criptithe</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Cuardaigh</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Seoltóir, ábhar nó téacs</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Cuardaigh ar an bhfreastalaí</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(gan ábhar)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Níor aimsíodh aon rud.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Ag cuardach ar an bhfreastalaí…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Níl aon nasc ann — ní féidir an freastalaí a chuardach faoi láthair.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Níor críochnaíodh an cuardach ar an bhfreastalaí. Ní féidir le gach cineál cuntais cuardach ar an bhfreastalaí.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Cuardaíodh an freastalaí. Torthaí breise ar an bhfreastalaí nár lódáladh: %n</numerusform>
+            <numerusform>Cuardaíodh an freastalaí. Torthaí breise ar an bhfreastalaí nár lódáladh: %n</numerusform>
+            <numerusform>Cuardaíodh an freastalaí. Torthaí breise ar an bhfreastalaí nár lódáladh: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Cuardaíodh an freastalaí.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Ní féidir téacs teachtaireachtaí criptithe a chuardach; aimsítear iad de réir seoltóra agus ábhair.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Cuardaigh an cuntas seo</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Seoltóir, ábhar agus téacs na teachtaireachta, i ngach fillteán</translation>
     </message>
 </context>
 </TS>

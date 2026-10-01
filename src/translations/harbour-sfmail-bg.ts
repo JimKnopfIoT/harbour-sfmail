@@ -1596,6 +1596,10 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Не е изпратено. Последният автоматичен опит също беше неуспешен — използвайте „Изпращане отново“, когато връзката се възстанови.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Търсене</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Запазете съобщение като шаблон от редактора</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Входящи</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Изходящи</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Изпратени</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Чернови</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Кошче</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Спам</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Шифрирано</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Търсене</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Подател, тема или текст</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Търсене на сървъра</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(без тема)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Няма резултати.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Търсене на сървъра…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Няма връзка — сървърът не може да бъде претърсен в момента.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Търсенето на сървъра не завърши. Не всеки тип акаунт може да търси на сървъра.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Сървърът е претърсен. Незаредени допълнителни резултати на сървъра: %n</numerusform>
+            <numerusform>Сървърът е претърсен. Незаредени допълнителни резултати на сървъра: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Сървърът е претърсен.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Текстът на шифрованите съобщения не може да се търси; те се намират по подател и тема.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Търсене в този акаунт</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Подател, тема и текст на съобщението, във всички папки</translation>
     </message>
 </context>
 </TS>

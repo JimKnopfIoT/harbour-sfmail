@@ -1600,6 +1600,10 @@ Jei viršuje esantis mygtukas nepraeina, tą patį galima padaryti iš terminalo
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Neišsiųsta. Nepavyko ir paskutinis automatinis bandymas — kai ryšys atsiras, naudok Siųsti dar kartą.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Ieškoti</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2507,6 +2511,93 @@ Jei viršuje esantis mygtukas nepraeina, tą patį galima padaryti iš terminalo
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Įrašyk laišką kaip šabloną iš laiško rašymo rodinio</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Gautieji</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Siunčiamieji</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Išsiųstieji</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Juodraščiai</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Šiukšlinė</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Šlamštas</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Užšifruota</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Ieškoti</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Siuntėjas, tema arba tekstas</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Ieškoti serveryje</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(be temos)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Atitikmenų nėra.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Ieškoma serveryje…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Nėra ryšio — serveryje dabar ieškoti negalima.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Paieška serveryje nebaigta. Ne visi paskyrų tipai gali ieškoti serveryje.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Serveryje ieškota. Neįkeltų papildomų atitikmenų serveryje: %n</numerusform>
+            <numerusform>Serveryje ieškota. Neįkeltų papildomų atitikmenų serveryje: %n</numerusform>
+            <numerusform>Serveryje ieškota. Neįkeltų papildomų atitikmenų serveryje: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Serveryje ieškota.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Šifruotų laiškų teksto ieškoti negalima; jie randami pagal siuntėją ir temą.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Ieškoti šioje paskyroje</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Siuntėjas, tema ir laiško tekstas, visuose aplankuose</translation>
     </message>
 </context>
 </TS>

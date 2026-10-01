@@ -1600,6 +1600,10 @@ Kdyby tlačítko výše neprošlo, totéž lze udělat z terminálu:</translatio
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Neodesláno. Selhal i poslední automatický pokus — až bude spojení zpět, použijte „Odeslat znovu“.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Hledat</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2507,6 +2511,93 @@ Kdyby tlačítko výše neprošlo, totéž lze udělat z terminálu:</translatio
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Zprávu uložíte jako šablonu v editoru</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Doručená pošta</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>K odeslání</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Odeslaná pošta</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Koncepty</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Koš</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Spam</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Zašifrováno</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Hledat</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Odesílatel, předmět nebo text</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Hledat na serveru</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(bez předmětu)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Žádné výsledky.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Hledá se na serveru…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Bez připojení — server teď nelze prohledat.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Hledání na serveru nebylo dokončeno. Ne každý typ účtu umí hledat na serveru.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Server prohledán. Další nenačtené výsledky na serveru: %n</numerusform>
+            <numerusform>Server prohledán. Další nenačtené výsledky na serveru: %n</numerusform>
+            <numerusform>Server prohledán. Další nenačtené výsledky na serveru: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Server prohledán.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Text šifrovaných zpráv nelze prohledávat; najdou se podle odesílatele a předmětu.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Prohledat tento účet</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Odesílatel, předmět a text zprávy, ve všech složkách</translation>
     </message>
 </context>
 </TS>

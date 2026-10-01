@@ -1596,6 +1596,10 @@ Komist hnappurinn hér að ofan ekki í gegn má gera hið sama úr skipanalínu
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Ekki sent. Síðasta sjálfvirka tilraunin mistókst líka — notaðu Senda aftur þegar tengingin er komin aftur.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Leita</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Komist hnappurinn hér að ofan ekki í gegn má gera hið sama úr skipanalínu
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Vistaðu skeyti sem sniðmát í ritlinum</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Innhólf</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Úthólf</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Sent</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Drög</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Rusl</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Ruslpóstur</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Dulkóðað</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Leita</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Sendandi, efni eða texti</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Leita á þjóninum</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(ekkert efni)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Engar niðurstöður.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Leitar á þjóninum…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Engin tenging — ekki er hægt að leita á þjóninum núna.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Leitinni á þjóninum lauk ekki. Ekki geta allar gerðir reikninga leitað á þjóninum.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Leitað á þjóninum. Fleiri niðurstöður á þjóninum sem ekki voru sóttar: %n</numerusform>
+            <numerusform>Leitað á þjóninum. Fleiri niðurstöður á þjóninum sem ekki voru sóttar: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Leitað á þjóninum.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Ekki er hægt að leita í texta dulritaðra skilaboða; þau finnast eftir sendanda og efni.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Leita í þessum reikningi</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Sendandi, efni og texti skilaboða, í öllum möppum</translation>
     </message>
 </context>
 </TS>

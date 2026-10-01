@@ -1596,6 +1596,10 @@ Si el botón de arriba no llega a funcionar, lo mismo puede hacerse desde un ter
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>No enviado. También ha fallado el último intento automático — usa «Enviar de nuevo» cuando vuelva la conexión.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Buscar</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Si el botón de arriba no llega a funcionar, lo mismo puede hacerse desde un ter
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Guarda un mensaje como plantilla desde el editor</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Bandeja de entrada</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Bandeja de salida</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Enviados</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Borradores</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Papelera</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>No deseado</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Cifrado</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Buscar</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Remitente, asunto o texto</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Buscar en el servidor</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(sin asunto)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Sin resultados.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Buscando en el servidor…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Sin conexión: ahora no se puede buscar en el servidor.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>La búsqueda en el servidor no terminó. No todos los tipos de cuenta pueden buscar en el servidor.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Servidor consultado. Resultados adicionales en el servidor sin cargar: %n</numerusform>
+            <numerusform>Servidor consultado. Resultados adicionales en el servidor sin cargar: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Servidor consultado.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>El texto de los mensajes cifrados no se puede buscar; se encuentran por remitente y asunto.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Buscar en esta cuenta</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Remitente, asunto y texto del mensaje, en todas las carpetas</translation>
     </message>
 </context>
 </TS>

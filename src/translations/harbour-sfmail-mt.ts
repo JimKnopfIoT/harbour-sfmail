@@ -1604,6 +1604,10 @@ Jekk il-buttuna ta' hawn fuq ma tgħaddix, l-istess jista' jsir minn terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Ma ntbagħatx. Anki l-aħħar tentattiv awtomatiku falla — uża “Ibgħat mill-ġdid” meta l-konnessjoni terġa&apos; lura.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Fittex</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2511,6 +2515,94 @@ Jekk il-buttuna ta' hawn fuq ma tgħaddix, l-istess jista' jsir minn terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Issejvja messaġġ bħala mudell mill-editur tal-messaġġi</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Kaxxa Dieħla</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Kaxxa Ħierġa</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Mibgħuta</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Abbozzi</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Skart</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Junk</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Ikkriptat</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Fittex</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Mittent, suġġett jew test</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Fittex fuq is-server</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(bla suġġett)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>L-ebda riżultat.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Qed ifittex fuq is-server…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>M&apos;hemmx konnessjoni — is-server ma jistax jitfittex bħalissa.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>It-tfittxija fuq is-server ma ntemmitx. Mhux kull tip ta&apos; kont jista&apos; jfittex fuq is-server.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Is-server ġie mfittex. Riżultati oħra fuq is-server li ma tniżżlux: %n</numerusform>
+            <numerusform>Is-server ġie mfittex. Riżultati oħra fuq is-server li ma tniżżlux: %n</numerusform>
+            <numerusform>Is-server ġie mfittex. Riżultati oħra fuq is-server li ma tniżżlux: %n</numerusform>
+            <numerusform>Is-server ġie mfittex. Riżultati oħra fuq is-server li ma tniżżlux: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Is-server ġie mfittex.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>It-test ta&apos; messaġġi kriptati ma jistax jitfittex; jinstabu permezz tal-mittent u s-suġġett.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Fittex f&apos;dan il-kont</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Mittent, suġġett u test tal-messaġġ, fil-folders kollha</translation>
     </message>
 </context>
 </TS>

@@ -10,7 +10,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.22
+Version:    0.8.23
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -221,6 +221,19 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Thu Oct 01 2026 harbour-sfmail contributors 0.8.23-1
+- Mail can be searched. "Search" in the pull-down menu of a mailbox looks
+  through the whole account, every folder, by sender, subject and message
+  text; each hit says which folder it is in. What is stored on the device is
+  searched as you type. The server is asked only when you tap "Search on the
+  server": its matches are added to the list, and the page says when it is
+  done, when there is no connection, and how many further matches were left on
+  the server. Searching never syncs a folder, so it cannot remove anything
+  stored. The text of encrypted messages cannot be searched; they are found by
+  sender, and by subject where the subject travels in the clear - a subject
+  hidden by protected headers is only "..." to a search. Not every account
+  type can search on the server.
+
 * Thu Oct 01 2026 harbour-sfmail contributors 0.8.22-1
 - Messages can be forwarded. "Forward" sits above "Reply" in the pull-down
   menu. The original goes out unchanged, as a part of its own after the note
