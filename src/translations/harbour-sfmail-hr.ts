@@ -353,6 +353,14 @@ Ako vam smeta, uklonite drugi unos iz te pridruženosti iz root ljuske. To je č
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Skica ne čuva privitke. Ponovno spremite skicu kako bi se spremila bez njih.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Proslijeđena poruka bila je šifrirana. Ovako poslana, njezin sadržaj odlazi nešifriran. Ponovno dodirnite „Pošalji” da biste je ipak poslali.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Slanje…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1962,6 +1970,46 @@ Ako gumb iznad ne prolazi, isto se može učiniti iz terminala:</translation>
     <message>
         <source>Done</source>
         <translation>Gotovo</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Najprije dešifrirajte poruku, a zatim je proslijedite.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Učitavanje privitaka za prosljeđivanje…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Proslijeđena poruka</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Od:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Datum:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Predmet:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Za:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Kopija:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Proslijedi</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Poruka nije u cijelosti na uređaju pa se ne može proslijediti nepromijenjena.</translation>
     </message>
 </context>
 <context>

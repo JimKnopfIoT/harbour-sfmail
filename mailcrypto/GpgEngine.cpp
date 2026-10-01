@@ -2400,6 +2400,58 @@ static void walkMime(const QByteArray &mime, QString *textOut,
     }
 }
 
+// The HTML body of a decrypted MIME entity: the first text/html leaf that is
+// not an attachment, decoded per its transfer encoding and charset. walkMime
+// keeps the plain alternative for reading; this is what the "simple HTML" view
+// shows, so a decrypted mail gets the same choice as an unencrypted one.
+static QString firstHtmlPart(const QByteArray &mime, int depth, bool unlimited)
+{
+    if (depth > 12) return QString();
+    int sep = mime.indexOf("\r\n\r\n"); int seplen = 4;
+    if (sep < 0) { sep = mime.indexOf("\n\n"); seplen = 2; }
+    const QByteArray header = sep >= 0 ? mime.left(sep) : mime;
+    const QByteArray body   = sep >= 0 ? mime.mid(sep + seplen) : QByteArray();
+    const QString h = unfoldHeaders(header);
+    const QString ctype = headerValue(h, QStringLiteral("content-type")).section(';', 0, 0).trimmed().toLower();
+
+    if (ctype.startsWith(QStringLiteral("multipart/"))) {
+        const QString bnd = headerParam(h, QStringLiteral("content-type"), QStringLiteral("boundary"));
+        if (bnd.isEmpty()) return QString();
+        const QByteArray delim = "--" + bnd.toUtf8();
+        QByteArray cur;
+        bool started = false;
+        for (const QByteArray &lineRaw : body.split('\n')) {
+            QByteArray line = lineRaw;
+            if (line.endsWith('\r')) line.chop(1);
+            if (line.startsWith(delim)) {
+                if (started && !cur.isEmpty()) {
+                    const QString found = firstHtmlPart(cur, depth + 1, unlimited);
+                    if (!found.isEmpty()) return found;
+                }
+                cur.clear();
+                started = true;
+                if (line == delim + "--") break;
+                continue;
+            }
+            if (started) { cur.append(lineRaw); cur.append('\n'); }
+        }
+        return QString();
+    }
+
+    if (ctype != QStringLiteral("text/html")) return QString();
+    const QString cdisp = headerValue(h, QStringLiteral("content-disposition")).toLower();
+    if (cdisp.contains(QStringLiteral("attachment"))) return QString();
+    if (!unlimited && body.size() > kMaxTextBytes) return QString();
+    const QString cte = headerValue(h, QStringLiteral("content-transfer-encoding")).toLower();
+    QByteArray decoded = body;
+    if (cte.contains(QStringLiteral("quoted-printable"))) decoded = decodeQuotedPrintable(body);
+    else if (cte.contains(QStringLiteral("base64")))      decoded = QByteArray::fromBase64(body);
+    const QByteArray charset = headerParam(h, QStringLiteral("content-type"), QStringLiteral("charset"))
+                                   .trimmed().toLatin1();
+    QTextCodec *codec = charset.isEmpty() ? nullptr : QTextCodec::codecForName(charset);
+    return codec ? codec->toUnicode(decoded) : QString::fromUtf8(decoded);
+}
+
 // Sanitize a proposed attachment filename to a safe basename.
 static QString safeName(const QString &name, int idx, const QString &mimeType)
 {
@@ -2416,6 +2468,8 @@ static QString safeName(const QString &name, int idx, const QString &mimeType)
 
 void GpgEngine::decryptMimeFile(const QString &pathOrUrl, const QString &passphrase)
 {
+    m_lastDecryptedHtml.clear();
+    m_lastDecryptedOriginal.clear();
     QString path = pathOrUrl;
     if (path.startsWith(QStringLiteral("file://")))
         path = path.mid(7);
@@ -2493,6 +2547,7 @@ void GpgEngine::decryptMimeFile(const QString &pathOrUrl, const QString &passphr
     }
 
     walkMime(out, &text, &atts, 0, &budget);
+    m_lastDecryptedHtml = firstHtmlPart(out, 0, budget.unlimited);
     if (budget.truncated) {
         text.append(QStringLiteral("\n\n[Some content was skipped because it exceeded the size limit.]"));
         emit oversizedContent();   // let the UI offer a one-time "load without limit"
@@ -2543,10 +2598,19 @@ void GpgEngine::decryptMimeFile(const QString &pathOrUrl, const QString &passphr
         qWarning() << "[mime] decrypted attachment" << name << a.mimeType << a.data.size() << "bytes";
     }
 
+    // The decrypted entity itself, for "forward": it goes out unchanged.
+    m_lastDecryptedOriginal = writeForwardFile(cacheDir, out);
     qWarning() << "[gpg] decrypted PGP/MIME:" << attList.size() << "attachment(s), signature"
                << (sig.value(QStringLiteral("status")).toString().isEmpty()
                    ? QStringLiteral("none") : sig.value(QStringLiteral("status")).toString());
     emit decryptMimeFinished(true, text.trimmed(), signedBy, attList, sig, QString());
+}
+
+QString GpgEngine::takeLastHtml()
+{
+    const QString h = m_lastDecryptedHtml;
+    m_lastDecryptedHtml.clear();
+    return h;
 }
 
 void GpgEngine::decryptText(const QString &armored, const QString &passphrase)
@@ -2647,6 +2711,12 @@ static QByteArray buildInnerMime(const QString &bodyText, const QVariantList &at
         QString path = a.value(QStringLiteral("path")).toString();
         if (path.isEmpty()) path = a.value(QStringLiteral("url")).toString();
         if (path.startsWith(QStringLiteral("file://"))) path = path.mid(7);
+        if (a.value(QStringLiteral("entity")).toBool()) {
+            // A forwarded original: carried as it is, not as a file attachment.
+            if (!appendVerbatimEntity(&m, bnd, path))
+                qWarning() << "[mime] send: cannot read forwarded message" << path;
+            continue;
+        }
         QFile af(path);
         if (!af.open(QIODevice::ReadOnly)) {
             qWarning() << "[mime] send: cannot read attachment" << path;
@@ -2670,6 +2740,205 @@ static QByteArray buildInnerMime(const QString &bodyText, const QVariantList &at
     }
     m += "--" + bnd + "--" + CRLF;
     return m;
+}
+
+// --- Forwarding a message unchanged ----------------------------------------
+
+// Quoted-printable for a part body the store keeps decoded (RFC 2045 6.7):
+// lines stay lines, anything outside printable ASCII and a space or tab at
+// the end of a line become =XX, long lines get soft breaks.
+static QByteArray encodeQuotedPrintable(const QByteArray &in)
+{
+    QByteArray out;
+    QByteArray text = in;
+    text.replace("\r\n", "\n");
+    const QList<QByteArray> lines = text.split('\n');
+    static const char hex[] = "0123456789ABCDEF";
+    for (int li = 0; li < lines.size(); ++li) {
+        const QByteArray &line = lines.at(li);
+        if (li == lines.size() - 1 && line.isEmpty()) break;   // trailing newline
+        int col = 0;
+        for (int i = 0; i < line.size(); ++i) {
+            const unsigned char c = static_cast<unsigned char>(line.at(i));
+            const bool last = (i == line.size() - 1);
+            QByteArray piece;
+            if ((c >= 33 && c <= 126 && c != '=') || ((c == ' ' || c == '\t') && !last))
+                piece = QByteArray(1, char(c));
+            else
+                piece = QByteArray("=") + hex[c >> 4] + hex[c & 15];
+            if (col + piece.size() > 75) { out += "=\r\n"; col = 0; }
+            out += piece;
+            col += piece.size();
+        }
+        out += "\r\n";
+    }
+    return out;
+}
+
+// Put a stored message back together as one MIME entity. The store keeps the
+// header skeleton in one file and the bodies it fetched next to it, decoded,
+// one file per part (see mimeLeavesPresent); a body found inline in the
+// skeleton is still in its transfer encoding. Bodies from the side files are
+// encoded again as their own header says, so the content is the sender's,
+// byte for byte once decoded. The framework's internal marker fields are left
+// out; at the top only the Content-* fields are kept — the envelope fields
+// (From, Received, …) belong to the old delivery, not to the entity.
+// Returns false while any part is missing or only partly here.
+static bool rebuildStoredEntity(const QByteArray &mime, const QString &loc, const QString &partsDir,
+                                int depth, QByteArray *out)
+{
+    if (depth > 12) return false;
+    int sep = mime.indexOf("\r\n\r\n"); int seplen = 4;
+    if (sep < 0) { sep = mime.indexOf("\n\n"); seplen = 2; }
+    const QByteArray header = sep >= 0 ? mime.left(sep) : mime;
+    const QByteArray body   = sep >= 0 ? mime.mid(sep + seplen) : QByteArray();
+
+    const QString h = unfoldHeaders(header);
+    if (!headerValue(h, QStringLiteral("x-qmf-internal-partial-content")).isEmpty()) return false;
+    const QString ctype = headerValue(h, QStringLiteral("content-type"))
+                          .section(';', 0, 0).trimmed().toLower();
+    const QString cte = headerValue(h, QStringLiteral("content-transfer-encoding")).trimmed().toLower();
+
+    // Header fields, each with its continuation lines.
+    QByteArray hdrOut;
+    QByteArray field;
+    auto flush = [&]() {
+        if (field.isEmpty()) return;
+        const QByteArray name = field.left(field.indexOf(':')).trimmed().toLower();
+        const bool keep = !name.startsWith("x-qmf-internal") && (depth > 0 || name.startsWith("content-"));
+        if (keep) hdrOut += field + "\r\n";
+        field.clear();
+    };
+    for (QByteArray line : header.split('\n')) {
+        if (line.endsWith('\r')) line.chop(1);
+        if (!line.isEmpty() && (line.at(0) == ' ' || line.at(0) == '\t')) {
+            if (!field.isEmpty()) field += "\r\n" + line;
+            continue;
+        }
+        flush();
+        field = line;
+    }
+    flush();
+    if (hdrOut.isEmpty()) hdrOut = "Content-Type: text/plain\r\n";
+
+    if (ctype.startsWith(QStringLiteral("multipart/"))) {
+        const QString bnd = headerParam(h, QStringLiteral("content-type"), QStringLiteral("boundary"));
+        if (bnd.isEmpty()) return false;
+        const QByteArray delim = "--" + bnd.toUtf8();
+        QList<QByteArray> chunks;
+        QByteArray cur;
+        bool started = false;
+        for (const QByteArray &lineRaw : body.split('\n')) {
+            QByteArray line = lineRaw;
+            if (line.endsWith('\r')) line.chop(1);
+            if (line.startsWith(delim)) {
+                if (started && !cur.isEmpty()) chunks.append(cur);
+                cur.clear();
+                started = true;
+                if (line == delim + "--") break;
+                continue;
+            }
+            if (started) { cur.append(lineRaw); cur.append('\n'); }
+        }
+        if (chunks.isEmpty()) return false;
+        QByteArray m = hdrOut + "\r\n";
+        for (int i = 0; i < chunks.size(); ++i) {
+            const QString child = (loc.isEmpty() ? QString() : loc + QLatin1Char('.'))
+                                  + QString::number(i + 1);
+            QByteArray part;
+            if (!rebuildStoredEntity(chunks.at(i), child, partsDir, depth + 1, &part)) return false;
+            m += delim + "\r\n" + part;
+        }
+        m += delim + "--\r\n";
+        *out = m;
+        return true;
+    }
+
+    QByteArray encoded;
+    QByteArray inl = body;
+    while (inl.endsWith('\n') || inl.endsWith('\r')) inl.chop(1);
+    if (!inl.trimmed().isEmpty()) {
+        encoded = toCrlf(inl) + "\r\n";            // still in its transfer encoding
+    } else {
+        if (loc.isEmpty() || partsDir.isEmpty()) return false;
+        QFile pf(partsDir + QLatin1Char('/') + loc);
+        if (!pf.open(QIODevice::ReadOnly)) return false;
+        const QByteArray data = pf.readAll();
+        pf.close();
+        if (data.isEmpty()) return false;
+        if (cte.contains(QStringLiteral("base64"))) {
+            const QByteArray b64 = data.toBase64();
+            for (int i = 0; i < b64.size(); i += 76) encoded += b64.mid(i, 76) + "\r\n";
+        } else if (cte.contains(QStringLiteral("quoted-printable"))) {
+            encoded = encodeQuotedPrintable(data);
+        } else {
+            // The line break before the next boundary belongs to the boundary,
+            // so the content's own last line break needs one more after it.
+            encoded = toCrlf(data) + "\r\n";
+        }
+    }
+    *out = hdrOut + "\r\n" + encoded;
+    return true;
+}
+
+QString GpgEngine::stageOriginalForForward(int messageId)
+{
+    const QString path = messageFilePath(messageId);
+    if (path.isEmpty()) return QString();
+    QFile f(path);
+    if (!f.open(QIODevice::ReadOnly)) return QString();
+    const QByteArray raw = f.readAll();
+    f.close();
+    QByteArray entity;
+    if (!rebuildStoredEntity(raw, QString(), path + QStringLiteral("-parts"), 0, &entity)) {
+        qWarning() << "[fwd] message" << messageId << "is not complete on the device";
+        return QString();
+    }
+    const QString out = writeForwardFile(decryptedCacheDir(), entity);
+    qWarning() << "[fwd] staged message" << messageId << entity.size() << "bytes"
+               << (out.isEmpty() ? "FAILED" : "");
+    return out;
+}
+
+QString GpgEngine::takeLastOriginal()
+{
+    const QString p = m_lastDecryptedOriginal;
+    m_lastDecryptedOriginal.clear();
+    return p;
+}
+
+// Unencrypted, unsigned send built here instead of by the system's composer
+// path, for a message that carries a forwarded original: that one must go out
+// as a part of its own, which the system path cannot express.
+void GpgEngine::sendPlainMime(int accountId, const QString &subject,
+                              const QStringList &to, const QStringList &cc,
+                              const QStringList &bcc, const QString &bodyText,
+                              const QVariantList &attachments, const QString &fromAlias)
+{
+    const qint64 stamp = QDateTime::currentMSecsSinceEpoch();
+    const QByteArray inner = buildInnerMime(bodyText, attachments, stamp);
+    const bool hasAtt = !attachments.isEmpty();
+    QTimer::singleShot(0, this, [this, accountId, subject, to, cc, bcc, inner, hasAtt, fromAlias]() {
+        const QMailAccountId accId(static_cast<quint64>(accountId));
+        QMailAccount account(accId);
+        const QString fromAddr = fromAlias.isEmpty() ? account.fromAddress().toString() : fromAlias;
+        QByteArray rfc;
+        rfc += "From: " + fromAddr.toUtf8() + "\r\n";
+        rfc += "To: " + to.join(QStringLiteral(", ")).toUtf8() + "\r\n";
+        if (!cc.isEmpty())  rfc += "Cc: " + cc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
+        if (!bcc.isEmpty()) rfc += "Bcc: " + bcc.join(QStringLiteral(", ")).toUtf8() + "\r\n";
+        rfc += "Subject: " + subject.toUtf8() + "\r\n";
+        rfc += "Date: " + QMailTimeStamp::currentDateTime().toString().toUtf8() + "\r\n";
+        QString fromDomain = fromAddr.section('@', 1).trimmed();
+        if (fromDomain.isEmpty()) fromDomain = QStringLiteral("localhost");
+        rfc += "Message-ID: <" + QByteArray::number(QDateTime::currentMSecsSinceEpoch())
+             + "." + QByteArray::number(inner.size()) + "p@" + fromDomain.toUtf8() + ">\r\n";
+        // The multipart entity names its own MIME-Version; a single text part does not.
+        if (!inner.contains("MIME-Version:")) rfc += "MIME-Version: 1.0\r\n";
+        rfc += inner;
+        qWarning() << "[fwd] plain send, account" << accountId << rfc.size() << "bytes";
+        storeAndTransmit(accId, rfc, hasAtt);
+    });
 }
 
 void GpgEngine::sendPgpMime(int accountId, const QString &subject,

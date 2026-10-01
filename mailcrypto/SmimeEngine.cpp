@@ -493,7 +493,65 @@ static void smimeWalkAtts(const QByteArray &mime, int depth, const QString &cach
     out->append(m);
 }
 
+// The HTML body of a decrypted inner entity: the first text/html leaf that is
+// not an attachment, decoded per its charset and transfer encoding. The reader
+// shows it in its "simple HTML" view, as it does for unencrypted mail.
+static QString smimeReadableHtml(const QByteArray &mime, int depth)
+{
+    if (depth > 12) return QString();
+    int sep = mime.indexOf("\r\n\r\n"); int sl = 4;
+    if (sep < 0) { sep = mime.indexOf("\n\n"); sl = 2; }
+    const QByteArray header = sep >= 0 ? mime.left(sep) : mime;
+    const QByteArray body   = sep >= 0 ? mime.mid(sep + sl) : QByteArray();
+    const QString ctypeFull = smimeHeaderField(header, "content-type");
+    const QString ctype = ctypeFull.section(';', 0, 0).trimmed().toLower();
+
+    if (ctype.startsWith(QStringLiteral("multipart/"))) {
+        const QString bnd = smimeParam(ctypeFull, QStringLiteral("boundary"));
+        if (bnd.isEmpty()) return QString();
+        const QByteArray delim = "--" + bnd.toUtf8();
+        QByteArray cur; bool started = false;
+        for (const QByteArray &lineRaw : body.split('\n')) {
+            QByteArray line = lineRaw; if (line.endsWith('\r')) line.chop(1);
+            if (line.startsWith(delim)) {
+                if (started && !cur.isEmpty()) {
+                    const QString found = smimeReadableHtml(cur, depth + 1);
+                    if (!found.isEmpty()) return found;
+                }
+                cur.clear(); started = true;
+                if (line == delim + "--") break;
+                continue;
+            }
+            if (started) { cur.append(lineRaw); cur.append('\n'); }
+        }
+        return QString();
+    }
+
+    if (ctype != QStringLiteral("text/html")) return QString();
+    if (smimeHeaderField(header, "content-disposition").toLower().contains(QStringLiteral("attachment")))
+        return QString();
+    if (body.size() > 16 * 1024 * 1024) return QString();   // same cap as the plain text
+    const QByteArray charset = smimeParam(ctypeFull, QStringLiteral("charset")).toLatin1();
+    const QByteArray cte = smimeHeaderField(header, "content-transfer-encoding").toLatin1();
+    return decodeTextBody(body, charset, cte);
+}
+
 static QVariantList smimeExtractAttachments(const QByteArray &content, const QString &partsDir);  // fwd
+
+QString SmimeEngine::takeLastHtml()
+{
+    const QString h = m_lastDecHtml;
+    m_lastDecHtml.clear();
+    m_lastDecOriginal.clear();
+    return h;
+}
+
+QString SmimeEngine::takeLastOriginal()
+{
+    const QString p = m_lastDecOriginal;
+    m_lastDecOriginal.clear();
+    return p;
+}
 
 QVariantList SmimeEngine::takeLastAttachments()
 {
@@ -589,6 +647,12 @@ static QByteArray buildInnerMime(const QString &bodyText, const QVariantList &at
         QString path = a.value(QStringLiteral("path")).toString();
         if (path.isEmpty()) path = a.value(QStringLiteral("url")).toString();
         if (path.startsWith(QStringLiteral("file://"))) path = path.mid(7);
+        if (a.value(QStringLiteral("entity")).toBool()) {
+            // A forwarded original: carried as it is, not as a file attachment.
+            if (!appendVerbatimEntity(&m, bnd, path))
+                qWarning() << "[mime] send: cannot read forwarded message" << path;
+            continue;
+        }
         QFile af(path);
         if (!af.open(QIODevice::ReadOnly)) continue;
         const QByteArray data = af.readAll(); af.close();
@@ -1701,6 +1765,7 @@ void SmimeEngine::importInspected(bool trustRoots, bool fetchAia)
 
 void SmimeEngine::decryptMessage(int messageId, const QString &passphrase)
 {
+    m_lastDecHtml.clear();
     const QVariantMap noSig;
     if (!m_available) { emit decryptFinished(false, QString(), QString(), QStringLiteral("gpgsm not available"), noSig, messageId); return; }
     const QByteArray raw = smimeRawMessage(messageId);
@@ -1774,6 +1839,10 @@ void SmimeEngine::decryptMessage(int messageId, const QString &passphrase)
     m_lastDecMsgId = messageId;
     m_lastDecSignerPem = m_pendingSenderCertPem;
     m_lastDecAttachments = smimeExtractAttachments(content, QString());   // in-memory, no part files
+    m_lastDecHtml = smimeReadableHtml(content, 0);
+    // The decrypted entity itself, for "forward": it goes out unchanged.
+    m_lastDecOriginal = writeForwardFile(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+                                         + QStringLiteral("/smime-decrypted"), content);
     emit decryptFinished(true, smimeReadableText(content), signer, QString(), sig, messageId);
 }
 

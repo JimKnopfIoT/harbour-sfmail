@@ -439,6 +439,16 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>Select attachment</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qml/pages/ComposerPage.qml" line="423"/>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ComposerPage.qml" line="473"/>
+        <source>Sending…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -2376,6 +2386,57 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <location filename="../qml/pages/MessagePage.qml" line="1056"/>
         <source>Move to folder…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessagePage.qml" line="604"/>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessagePage.qml" line="616"/>
+        <source>Loading the attachments for forwarding…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessagePage.qml" line="644"/>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessagePage.qml" line="652"/>
+        <location filename="../qml/pages/MessagePage.qml" line="669"/>
+        <source>Forwarded message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessagePage.qml" line="653"/>
+        <source>From:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessagePage.qml" line="655"/>
+        <source>Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessagePage.qml" line="656"/>
+        <source>Subject:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessagePage.qml" line="657"/>
+        <source>To:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessagePage.qml" line="659"/>
+        <source>Cc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MessagePage.qml" line="1385"/>
+        <source>Forward</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

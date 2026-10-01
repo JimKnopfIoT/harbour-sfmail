@@ -353,6 +353,14 @@ Kui see häirib, eemaldage teine kirje sellest seosest root-kestast. See on puht
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Mustand ei säilita manuseid. Salvesta mustand uuesti, et see ilma nendeta talletada.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Edastatav kiri oli krüpteeritud. Nii saadetuna läheb selle sisu välja krüpteerimata. Puuduta uuesti „Saada“, et see siiski saata.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Saatmine…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Kui ülalolev nupp kohale ei jõua, saab sedasama teha terminalist:</translation
     <message>
         <source>Done</source>
         <translation>Valmis</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Dekrüpteeri kiri esmalt ja edasta see siis.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Edastamiseks laaditakse manuseid…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Edastatud kiri</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Saatja:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Kuupäev:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Teema:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Saaja:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Koopia:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Edasta</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Kiri pole täielikult seadmes, seega ei saa seda muutmata kujul edastada.</translation>
     </message>
 </context>
 <context>

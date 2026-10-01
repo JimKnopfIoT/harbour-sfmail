@@ -353,6 +353,14 @@ Wenn es stört, nehmen Sie den anderen Eintrag in einer Root-Shell aus dieser Zu
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Ein Entwurf behält keine Anhänge. Speichere den Entwurf noch einmal, um ihn ohne sie abzulegen.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Die weitergeleitete Nachricht war verschlüsselt. So gesendet, geht ihr Inhalt unverschlüsselt hinaus. Tippe noch einmal auf „Senden“, um sie trotzdem zu senden.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Wird gesendet…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Falls der Knopf oben nicht durchkommt, geht dasselbe aus einer Konsole:</transla
     <message>
         <source>Done</source>
         <translation>Fertig</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Entschlüssele die Nachricht zuerst, dann leite sie weiter.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Anhänge zum Weiterleiten werden geladen…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Weitergeleitete Nachricht</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Von:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Datum:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Betreff:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>An:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Cc:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Weiterleiten</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Die Nachricht ist nicht vollständig auf dem Gerät und kann daher nicht unverändert weitergeleitet werden.</translation>
     </message>
 </context>
 <context>

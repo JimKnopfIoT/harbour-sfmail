@@ -31,6 +31,10 @@ Page {
     property int composeAccountId: 0        // mailbox we're composing from (new mail)
     property int fromTemplateId: 0          // >0 → prefill from a saved template
     property int fromDraftId: 0             // >0 → editing a saved draft (replace on send/save)
+    // Forward of an encrypted mail: its decrypted content is in here, so sending
+    // it without encryption needs a second, deliberate tap.
+    property bool fromEncrypted: false
+    property bool _plainSendWarned: false
     // Which crypto the Encrypt/Sign buttons use: "pgp" or "smime". A REPLY fixes it
     // to match the received mail (cryptoKindFixed=true); a NEW mail lets the user
     // pick (only when S/MIME is enabled — the rare both-available case).
@@ -294,7 +298,7 @@ Page {
         }
         for (var ai = 0; ai < attachmentsPrefill.length; ++ai) {
             var a = attachmentsPrefill[ai]
-            page._addAttachment(a.path, a.name, a.mimeType)
+            page._addAttachment(a.path, a.name, a.mimeType, !!a.entity)
         }
         if (fromTemplateId > 0) page._loadTemplate(fromTemplateId)
         // A draft prefills the same way (templateInfo reads any stored message).
@@ -400,7 +404,7 @@ Page {
         var a = []
         for (var i = 0; i < attModel.count; ++i) {
             var it = attModel.get(i)
-            a.push({ name: it.name, path: it.path, mimeType: it.mimeType })
+            a.push({ name: it.name, path: it.path, mimeType: it.mimeType, entity: it.entity })
         }
         return a
     }
@@ -413,6 +417,12 @@ Page {
         // At least one real recipient somewhere (To/Cc/Bcc or the self-Bcc).
         if (to.length + cc.length + _bccList().length === 0) {
             status.text = qsTr("Enter recipients first"); status.error = true; return
+        }
+        if (page.fromEncrypted && !encryptSwitch.checked && !page._plainSendWarned) {
+            page._plainSendWarned = true
+            status.text = qsTr("The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.")
+            status.error = true
+            return
         }
 
         // S/MIME path (when this is an S/MIME reply or the user picked S/MIME).
@@ -456,6 +466,15 @@ Page {
     }
 
     function _sendPlain(to, cc) {
+        if (page._hasForwardedOriginal()) {
+            // The system send path knows only files as attachments; a forwarded
+            // original has to go out as a part of its own, so the engine builds it.
+            busy.running = true; page._sending = true
+            status.error = false; status.text = qsTr("Sending…")
+            Gpg.sendPlainMime(page._acctId(), subjectField.text, to, cc, _bccList(),
+                              bodyField.text, _attachmentArray(), page._fromAlias())  // → onSendFinished
+            return
+        }
         outgoing.from = page._fromAddr()
         outgoing.to = to
         outgoing.cc = cc
@@ -1059,12 +1078,19 @@ Page {
     }
 
     // Anhang über den System-Content-Picker hinzufügen.
-    function _addAttachment(filePath, fileName, mimeType) {
+    // entity = a forwarded original, carried unchanged as a part of its own
+    // rather than as a file attachment (see Gpg/Smime buildInnerMime).
+    function _addAttachment(filePath, fileName, mimeType, entity) {
         var p = ("" + filePath)
         if (p.indexOf("file://") === 0) p = p.substring(7)
         var n = fileName ? ("" + fileName) : p.split('/').pop()
         attModel.append({ name: n, path: p,
-                          mimeType: mimeType ? ("" + mimeType) : "application/octet-stream" })
+                          mimeType: mimeType ? ("" + mimeType) : "application/octet-stream",
+                          entity: !!entity })
+    }
+    function _hasForwardedOriginal() {
+        for (var i = 0; i < attModel.count; ++i) if (attModel.get(i).entity) return true
+        return false
     }
 
     Component {

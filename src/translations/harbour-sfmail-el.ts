@@ -353,6 +353,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Ένα πρόχειρο δεν κρατά συνημμένα. Αποθηκεύστε ξανά το πρόχειρο για να φυλαχτεί χωρίς αυτά.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Το προωθούμενο μήνυμα ήταν κρυπτογραφημένο. Αν σταλεί έτσι, το περιεχόμενό του φεύγει χωρίς κρυπτογράφηση. Πατήστε ξανά «Αποστολή» για να σταλεί παρ’ όλα αυτά.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Αποστολή…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Done</source>
         <translation>Τέλος</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Αποκρυπτογραφήστε πρώτα το μήνυμα και μετά προωθήστε το.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Φόρτωση συνημμένων για προώθηση…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Προωθημένο μήνυμα</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Από:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Ημερομηνία:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Θέμα:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Προς:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Κοιν.:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Προώθηση</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Το μήνυμα δεν βρίσκεται ολόκληρο στη συσκευή, οπότε δεν μπορεί να προωθηθεί αμετάβλητο.</translation>
     </message>
 </context>
 <context>

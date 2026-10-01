@@ -169,6 +169,17 @@ public:
     // the only place the other recipients appear — the outer headers cannot name
     // them without delivering the copy to them.
     Q_INVOKABLE QVariantMap protectedHeaders() const { return m_lastProtectedHeaders; }
+    // HTML body of the PGP/MIME message decrypted last ("" when it has none).
+    // Read right after decryptMimeFinished(); returns and clears it, so the
+    // plaintext does not stay in the engine.
+    Q_INVOKABLE QString takeLastHtml();
+    // The decrypted PGP/MIME entity of the last decrypt, written to the plaintext
+    // cache for forwarding it unchanged; returns the path ("" if none) and clears it.
+    Q_INVOKABLE QString takeLastOriginal();
+    // A stored (unencrypted) message put back together as one MIME entity and
+    // written to the plaintext cache, for forwarding it unchanged. "" while any
+    // of its parts is not on the device.
+    Q_INVOKABLE QString stageOriginalForForward(int messageId);
 
     // MIME size-limit override: when a decrypt hits the anti-DoS size cap, the UI can
     // offer "load this once without limit". liftSizeLimit() ignores the caps for the
@@ -277,6 +288,13 @@ public:
                                  const QVariantList &attachments,
                                  const QString &signFingerprint, const QString &passphrase,
                                  const QString &fromAlias = QString());
+    // Unencrypted, unsigned send of a message built here (needed when it carries
+    // a forwarded original as a part of its own). Result via sendFinished().
+    Q_INVOKABLE void sendPlainMime(int accountId, const QString &subject,
+                                   const QStringList &to, const QStringList &cc,
+                                   const QStringList &bcc, const QString &bodyText,
+                                   const QVariantList &attachments,
+                                   const QString &fromAlias = QString());
 
     // --- diagnostics (synchronous, read-only) ------------------------------
     // Without decrypting, inspect an encrypted block: which recipient key IDs it
@@ -538,6 +556,8 @@ private:
     QString m_pendingKeyId;
     QDateTime m_sizeLimitUntil;       // MIME size caps ignored until this time
     QVariantMap m_lastProtectedHeaders;   // protected headers of the last decrypt
+    QString m_lastDecryptedHtml;          // HTML body of the last decrypt (see takeLastHtml)
+    QString m_lastDecryptedOriginal;      // cache path of the last decrypted entity
 
     // SPF evaluator state (one check in flight at a time).
     void spfFetchRecord(const QString &domain, bool topLevel);

@@ -353,6 +353,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>پیش‌نویس پیوست‌ها را نگه نمی‌دارد. پیش‌نویس را دوباره ذخیره کنید تا بدون آن‌ها نگه داشته شود.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>پیامی که بازارسال می‌شود رمزگذاری‌شده بود. اگر این‌طور ارسال شود، محتوای آن بدون رمزگذاری می‌رود. برای ارسال با این حال، دوباره روی «ارسال» بزنید.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>در حال ارسال…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1954,6 +1962,46 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Done</source>
         <translation>تمام</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>ابتدا پیام را رمزگشایی کنید، سپس آن را بازارسال کنید.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>در حال بارگیری پیوست‌ها برای بازارسال…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>پیام بازارسال‌شده</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>از:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>تاریخ:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>موضوع:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>به:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>رونوشت:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>بازارسال</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>پیام به‌طور کامل روی دستگاه نیست، بنابراین نمی‌توان آن را بدون تغییر بازارسال کرد.</translation>
     </message>
 </context>
 <context>

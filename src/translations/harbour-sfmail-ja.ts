@@ -353,6 +353,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>下書きには添付ファイルは保持されません。添付ファイルなしで保存するには、下書きをもう一度保存してください。</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>転送するメッセージは暗号化されていました。このまま送信すると、内容は暗号化されずに送られます。それでも送信するには、もう一度「送信」をタップしてください。</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>送信中…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1954,6 +1962,46 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Done</source>
         <translation>完了</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>先にメッセージを復号してから転送してください。</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>転送用の添付ファイルを読み込んでいます…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>転送メッセージ</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>差出人:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>日付:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>件名:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>宛先:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Cc:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>転送</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>メッセージ全体が端末にないため、変更せずに転送できません。</translation>
     </message>
 </context>
 <context>

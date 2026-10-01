@@ -353,6 +353,14 @@ Má chuireann sé isteach ort, bain an iontráil eile as an nasc sin ó bhlaosc 
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Ní choinníonn dréacht ceangaltáin. Sábháil an dréacht arís chun é a stóráil gan iad.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Bhí an teachtaireacht atá á cur ar aghaidh criptithe. Má sheoltar mar seo í, imeoidh a hábhar gan chriptiú. Tapáil „Seol“ arís chun í a sheoladh mar sin féin.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Á sheoladh…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1962,6 +1970,46 @@ Mura n-éiríonn leis an gcnaipe thuas, is féidir an rud céanna a dhéanamh ó
     <message>
         <source>Done</source>
         <translation>Déanta</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Díchriptigh an teachtaireacht ar dtús, ansin cuir ar aghaidh í.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Ceangaltáin á lódáil le cur ar aghaidh…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Teachtaireacht curtha ar aghaidh</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Ó:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Dáta:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Ábhar:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Chuig:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Cc:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Cuir ar aghaidh</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Níl an teachtaireacht ar fad ar an ngléas, mar sin ní féidir í a chur ar aghaidh gan athrú.</translation>
     </message>
 </context>
 <context>

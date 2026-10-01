@@ -353,6 +353,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>لا تحتفظ المسودة بالمرفقات. احفظ المسودة مرة أخرى لتخزينها بدونها.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>كانت الرسالة المُعاد توجيهها مشفّرة. إذا أُرسلت هكذا فسيخرج محتواها دون تشفير. اضغط «إرسال» مرة أخرى لإرسالها رغم ذلك.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>جارٍ الإرسال…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1974,6 +1982,46 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Done</source>
         <translation>تم</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>فكّ تشفير الرسالة أولًا، ثم أعد توجيهها.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>جارٍ تحميل المرفقات لإعادة التوجيه…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>رسالة مُعاد توجيهها</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>من:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>التاريخ:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>الموضوع:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>إلى:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>نسخة:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>إعادة توجيه</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>الرسالة ليست كاملة على الجهاز، لذا لا يمكن إعادة توجيهها دون تغيير.</translation>
     </message>
 </context>
 <context>

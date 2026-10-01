@@ -353,6 +353,14 @@ Se la cosa disturba, togliete l&apos;altra voce da quella corrispondenza da una 
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Una bozza non conserva gli allegati. Salva di nuovo la bozza per archiviarla senza di essi.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Il messaggio inoltrato era cifrato. Inviato così, il suo contenuto parte non cifrato. Tocca di nuovo «Invia» per inviarlo comunque.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Invio…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Se il pulsante qui sopra non dovesse funzionare, lo stesso si può fare da un te
     <message>
         <source>Done</source>
         <translation>Fatto</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Prima decifra il messaggio, poi inoltralo.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Caricamento degli allegati per l’inoltro…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Messaggio inoltrato</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Da:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Data:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Oggetto:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>A:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Cc:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Inoltra</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Il messaggio non è completo sul dispositivo, quindi non può essere inoltrato invariato.</translation>
     </message>
 </context>
 <context>

@@ -10,7 +10,7 @@
 
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.21
+Version:    0.8.22
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -221,6 +221,20 @@ fi
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Thu Oct 01 2026 harbour-sfmail contributors 0.8.22-1
+- Messages can be forwarded. "Forward" sits above "Reply" in the pull-down
+  menu. The original goes out unchanged, as a part of its own after the note
+  you write: its HTML, its embedded pictures and its attachments stay as they
+  were. Nothing of it is filtered or rewritten. For an encrypted message that
+  is the decrypted content - forwarding it needs decrypting first - and it is
+  encrypted anew for the new recipients. Sending it unencrypted takes a second
+  tap on Send after a warning. If parts of a message are still on the server,
+  they are fetched first; if they cannot be fetched, the message is not
+  forwarded rather than forwarded incomplete.
+- Decrypted messages offer the simple HTML view too. Until now the HTML part
+  was dropped while decrypting, so a message that arrived encrypted could only
+  be read as plain text.
+
 * Mon Sep 28 2026 harbour-sfmail contributors 0.8.21-1
 - Message text can be selected and copied. Press and hold the text: the word
   under the finger is selected, the handles widen the selection, and whatever

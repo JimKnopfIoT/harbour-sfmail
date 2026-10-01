@@ -353,6 +353,14 @@ Jekk idejqek, neħħi l-entrata l-oħra minn dik ir-rabta minn shell ta&apos; ro
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Abbozz ma jżommx l-annessi. Erġa&apos; ssejvja l-abbozz biex taħżnu mingħajrhom.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Il-messaġġ mgħoddi kien ikkriptat. Jekk jintbagħat hekk, il-kontenut tiegħu joħroġ mhux ikkriptat. Agħfas „Ibgħat“ għal darb’oħra biex tibagħtu xorta waħda.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Qed jintbagħat…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1966,6 +1974,46 @@ Jekk il-buttuna ta' hawn fuq ma tgħaddix, l-istess jista' jsir minn terminal:</
     <message>
         <source>Done</source>
         <translation>Lest</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>L-ewwel iddekripta l-messaġġ, imbagħad għaddih.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Qed jitgħabbew l-annessi biex jgħaddu…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Messaġġ mgħoddi</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Minn:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Data:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Suġġett:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Lil:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Cc:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Għaddi</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Il-messaġġ mhuwiex kollu fuq l-apparat, għalhekk ma jistax jgħaddi mingħajr bidla.</translation>
     </message>
 </context>
 <context>

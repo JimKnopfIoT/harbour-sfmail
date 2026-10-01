@@ -353,6 +353,14 @@ Se o incomodar, retire a outra entrada dessa correspondência a partir de uma sh
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Um rascunho não guarda anexos. Guarda o rascunho novamente para o armazenar sem eles.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>A mensagem encaminhada estava cifrada. Enviada assim, o seu conteúdo segue sem cifra. Toque novamente em «Enviar» para a enviar mesmo assim.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>A enviar…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1958,6 +1966,46 @@ Caso o botão acima não chegue a resultar, o mesmo pode ser feito a partir de u
     <message>
         <source>Done</source>
         <translation>Concluído</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Decifre primeiro a mensagem e depois encaminhe-a.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>A carregar os anexos para encaminhar…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Mensagem encaminhada</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>De:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Data:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Assunto:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Para:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Cc:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Encaminhar</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>A mensagem não está completa no dispositivo, por isso não pode ser encaminhada sem alterações.</translation>
     </message>
 </context>
 <context>

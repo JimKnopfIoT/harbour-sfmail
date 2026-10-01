@@ -353,6 +353,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>草稿不会保留附件。请再保存一次草稿，以便在不含附件的情况下存储它。</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>要转发的邮件原本是加密的。这样发送，其内容将以未加密方式发出。如仍要发送，请再次点按“发送”。</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>正在发送…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1954,6 +1962,46 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Done</source>
         <translation>完成</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>请先解密邮件，然后再转发。</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>正在加载要转发的附件…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>转发的邮件</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>发件人：</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>日期：</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>主题：</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>收件人：</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>抄送：</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>转发</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>邮件未完整保存在设备上，因此无法原样转发。</translation>
     </message>
 </context>
 <context>

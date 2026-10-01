@@ -34,7 +34,16 @@ Page {
             remorsePopup.cancel()
         }
         if (status === PageStatus.Active) page._pushPassphraseAsk()
-        else page._selecting = false
+        else {
+            page._selecting = false
+            // A forward waiting for its attachments belongs to this page; it
+            // must not open a composer on top of whatever the user went to.
+            if (page._forwardWaiting) {
+                forwardTimer.stop()
+                page._forwardWaiting = false
+                page._topNotice = ""
+            }
+        }
     }
 
     // Inline-PGP (nicht PGP/MIME) wird vom nativen Pfad nicht erkannt — wir
@@ -213,11 +222,16 @@ Page {
     }
 
     // "Simple HTML" view (by request): render the HTML body WITHOUT loading any
-    // external content (remote images/scripts are tracking vectors). Off by default;
-    // only offered for plain (unencrypted) HTML mails.
+    // external content (remote images/scripts are tracking vectors). Off by default.
     property bool _showHtml: false
-    readonly property bool _hasHtml: !_isEncrypted && page._html !== ""
-                                     && ("" + page._html).indexOf("<") >= 0
+    // HTML body of a decrypted message (PGP/MIME or S/MIME), taken from the
+    // engine right after decryption. The store's own HTML getter cannot see
+    // inside the encryption, so for encrypted mail this is the only source.
+    property string _decHtml: ""
+    readonly property string _htmlSrc: page._decHtml !== "" ? page._decHtml
+                                     : (page._isEncrypted || page._smimeKind === "encrypted") ? ""
+                                     : page._html
+    readonly property bool _hasHtml: page._htmlSrc !== "" && page._htmlSrc.indexOf("<") >= 0
     // Signature result from OUR decryption ("Good signature from…", "Signed, but…").
     property string _sigResult: ""
     // Typed PGP verification result (see Gpg.decryptFinished): status, fpr, uid,
@@ -299,6 +313,7 @@ Page {
             // model listens to, so it arrives even though the model reset just
             // threw the delegate away.
             page._finishPlainAttachment("" + attachmentLocation, "" + filepath)
+            page._retryForward()
         }
         // Without this a failed download leaves "Downloading attachment…" on
         // screen for ever and the next tap looks like it does nothing.
@@ -355,6 +370,8 @@ Page {
             if (ok) {
                 page._inlinePlain = text !== "" ? text : qsTr("(no text — see attachments below)")
                 page._mimeAttachments = attachments
+                page._decHtml = Gpg.takeLastHtml()
+                page._decOriginal = Gpg.takeLastOriginal()
                 page._sigResult = signedBy
                 page._sigInfo = sig ? sig : ({})
                 page._inlineInfo = signedBy.length > 0 ? signedBy
@@ -532,7 +549,7 @@ Page {
         return page._smimePlain !== "" ? page._smimePlain
              : page._inlinePlain !== "" ? page._inlinePlain
              : page._body !== "" ? page._body
-             : page._hasHtml ? page._htmlToText(page._html)
+             : page._hasHtml ? page._htmlToText(page._htmlSrc)
              : ""
     }
 
@@ -558,7 +575,7 @@ Page {
     property string _selectText: ""
     function _startSelect(x, y) {
         var plain = !page._htmlShown
-        var t = plain ? page._plainShown() : page._htmlToSelectableText(page._html)
+        var t = plain ? page._plainShown() : page._htmlToSelectableText(page._htmlSrc)
         if (t === "") return
         page._selectText = t
         page._selecting = true
@@ -571,6 +588,101 @@ Page {
         ta._editor.selectWord()
         if (ta._editor.selectedText !== "") ta._editor.copy()
     }
+    // --- Forwarding ------------------------------------------------------
+    // The original goes out unchanged, as a part of its own after the note the
+    // user writes: for an encrypted mail the decrypted entity (never the
+    // ciphertext), for any other mail the stored message put back together.
+    // That needs every part on the device, so missing ones are fetched first
+    // and the composer opens once they are here.
+    readonly property bool _wasEncrypted: page._isEncrypted || page._smimeKind === "encrypted"
+    // Cache path of the decrypted entity, taken from the engine after decrypting.
+    property string _decOriginal: ""
+    property bool _forwardWaiting: false
+    function _forward() {
+        if ((page._isEncrypted && page._inlinePlain === "")
+                || (page._smimeKind === "encrypted" && page._smimePlain === "")) {
+            page._topNotice = qsTr("Decrypt the message first, then forward it.")
+            return
+        }
+        if (page._wasEncrypted) {
+            // Inline PGP has no MIME entity to carry; its text goes into the body.
+            page._openForward(page._decOriginal)
+            return
+        }
+        var path = Gpg.stageOriginalForForward(page.messageId)
+        if (path !== "") { page._openForward(path); return }
+        if (page._forwardWaiting) return
+        page._forwardWaiting = true
+        page._topNotice = qsTr("Loading the attachments for forwarding…")
+        forwardTimer.restart()
+        var am = message.attachmentModel
+        var asked = false
+        if (am) {
+            for (var i = 0; i < am.count; ++i) {
+                if (("" + am.url(i)) !== "" && Gpg.fileExists("" + am.url(i))) continue
+                message.downloadAttachment(am.location(i))
+                asked = true
+            }
+        }
+        if (!asked) message.downloadMessage()
+    }
+    function _retryForward() {
+        if (!page._forwardWaiting) return
+        var path = Gpg.stageOriginalForForward(page.messageId)
+        if (path === "") return
+        forwardTimer.stop()
+        page._forwardWaiting = false
+        page._topNotice = ""
+        page._openForward(path)
+    }
+    Timer {
+        id: forwardTimer
+        interval: 60000
+        onTriggered: {
+            if (!page._forwardWaiting) return
+            page._forwardWaiting = false
+            page._topNotice = qsTr("The message is not completely on the device, so it cannot be forwarded unchanged.")
+        }
+    }
+    function _forwardSubject() {
+        var subj = page._shownSubject
+        return /^\s*(fwd?|wg)\s*:/i.test(subj) ? subj : "Fwd: " + subj
+    }
+    function _forwardBody(withText) {
+        var L = ["", "", "-------- " + qsTr("Forwarded message") + " --------"]
+        L.push(qsTr("From:") + " " + (message.fromDisplayName !== "" ? message.fromDisplayName + " " : "")
+               + "<" + message.fromAddress + ">")
+        L.push(qsTr("Date:") + " " + Format.formatDate(message.date, Formatter.Timepoint))
+        L.push(qsTr("Subject:") + " " + page._shownSubject)
+        if (page._shownTo !== "") L.push(qsTr("To:") + " " + page._shownTo)
+        if (page._protectedTo === "" && message.cc && message.cc.length > 0)
+            L.push(qsTr("Cc:") + " " + message.cc.join(", "))
+        if (withText) { L.push(""); L.push(page._plainShown()) }
+        return L.join("\n")
+    }
+    // original = path of the entity to carry unchanged; "" → the text goes
+    // into the body (inline PGP, which has no entity).
+    function _openForward(original) {
+        if (page.status !== PageStatus.Active) return
+        var enc = page._wasEncrypted
+        var files = original !== ""
+                ? [{ path: original, name: qsTr("Forwarded message") + ".eml",
+                     mimeType: "message/rfc822", entity: true }]
+                : page._mimeAttachments.map(function(m) {
+                      return { path: "" + m.path, name: "" + m.name, mimeType: "" + m.mimeType } })
+        pageStack.push(Qt.resolvedUrl("ComposerPage.qml"),
+                       { subjectPrefill: page._forwardSubject(),
+                         bodyPrefill: page._forwardBody(original === ""),
+                         attachmentsPrefill: files,
+                         replyAccountId: message.accountId,
+                         // Encryption starts switched on for an encrypted original,
+                         // but the kind follows the NEW recipients, not the old mail.
+                         encryptReply: enc, replyFormat: "mime",
+                         cryptoKind: page._smimeKind !== "" ? "smime" : "pgp",
+                         cryptoKindFixed: false,
+                         fromEncrypted: enc })
+    }
+
     // "Save as…": let the user pick a destination folder, then copy the attachment.
     function _saveAs(src, name) {
         console.log("[diag] saveAs mid=" + page.messageId + " name=" + name + " src=" + src)
@@ -634,9 +746,9 @@ Page {
         id: message
         messageId: page.messageId
         autoVerifySignature: true
-        onMessageDownloaded: { message.read = true; page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments(); page._retryPlainAttachment() }
-        onStoredMessageChanged: { page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments(); page._retryPlainAttachment() }
-        onInlinePartsDownloaded: { page._syncBody(); page._noteLoaded(); page._retryPending(); page._retryPendingKey(); page._loadPlainAttachments(); page._retryPlainAttachment() }
+        onMessageDownloaded: { message.read = true; page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments(); page._retryPlainAttachment(); page._retryForward() }
+        onStoredMessageChanged: { page._syncBody(); page._noteLoaded(); page._prefetchEncPart(); page._retryPending(); page._retryPendingKey(); page._refreshSmime(); page._loadPlainAttachments(); page._retryPlainAttachment(); page._retryForward() }
+        onInlinePartsDownloaded: { page._syncBody(); page._noteLoaded(); page._retryPending(); page._retryPendingKey(); page._loadPlainAttachments(); page._retryPlainAttachment(); page._retryForward() }
         // Without this the page waits for ever when the connection drops: the
         // "Downloading…" notice stays, a parked passphrase stays in memory, and
         // the 8-second timer then claims the message was already complete.
@@ -747,6 +859,8 @@ Page {
             }
             if (ok) { page._smimePlain = text
                       page._mimeAttachments = Smime.takeLastAttachments()  // show/save like PGP
+                      page._decHtml = Smime.takeLastHtml()
+                      page._decOriginal = Smime.takeLastOriginal()
                       page._smimeImportNeeded = (signer === "cert-new")
                       page._smimeSig = sig ? sig : ({})
                       page._smimeInfo = qsTr("Decrypted") }
@@ -1268,6 +1382,10 @@ Page {
                 }
             }
             MenuItem {
+                text: qsTr("Forward")
+                onClicked: page._forward()
+            }
+            MenuItem {
                 text: qsTr("Reply")
                 onClicked: {
                     // Match the reply's crypto to the RECEIVED mail: S/MIME mail →
@@ -1579,7 +1697,7 @@ Page {
                 }
             }
 
-            // --- "Simple HTML" toggle (only for plain HTML mails) ----------
+            // --- "Simple HTML" toggle (HTML mails, decrypted ones included) --
             BackgroundItem {
                 visible: page._hasHtml
                 width: parent.width
@@ -1634,7 +1752,7 @@ Page {
                     width: parent.width
                     wrapMode: Text.Wrap
                     textFormat: page._htmlShown ? Text.RichText : Text.PlainText
-                    text: page._htmlShown ? page._simpleHtml(page._html)
+                    text: page._htmlShown ? page._simpleHtml(page._htmlSrc)
                         : page._plainShown() !== "" ? page._plainShown()
                         : qsTr("(empty — pull down to download)")
                     color: Theme.primaryColor

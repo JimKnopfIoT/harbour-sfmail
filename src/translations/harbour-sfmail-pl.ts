@@ -353,6 +353,14 @@ Jeśli to przeszkadza, usuń drugi wpis z tego przypisania z powłoki roota. To 
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Wersja robocza nie zachowuje załączników. Zapisz wersję roboczą ponownie, aby zachować ją bez nich.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Przekazywana wiadomość była zaszyfrowana. Wysłana w ten sposób, jej treść zostanie wysłana bez szyfrowania. Stuknij ponownie „Wyślij”, aby mimo to ją wysłać.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Wysyłanie…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1962,6 +1970,46 @@ Gdyby przycisk powyżej nie zadziałał, to samo można zrobić z terminala:</tr
     <message>
         <source>Done</source>
         <translation>Gotowe</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Najpierw odszyfruj wiadomość, a potem ją przekaż.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Wczytywanie załączników do przekazania…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Przekazana wiadomość</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Od:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Data:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Temat:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Do:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>DW:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Przekaż dalej</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Wiadomość nie jest w całości na urządzeniu, więc nie można jej przekazać bez zmian.</translation>
     </message>
 </context>
 <context>

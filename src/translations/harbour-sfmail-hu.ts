@@ -353,6 +353,14 @@ Ha zavarja, vegye ki a másik bejegyzést ebből a hozzárendelésből egy root 
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>A piszkozat nem őrzi meg a mellékleteket. Mentse újra a piszkozatot, hogy nélkülük tárolódjon.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>A továbbított üzenet titkosított volt. Így elküldve a tartalma titkosítatlanul megy ki. Koppintson újra a „Küldés” gombra, ha mégis el akarja küldeni.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Küldés…</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1954,6 +1962,46 @@ Ha a fenti gomb nem ér célba, ugyanez megtehető parancssorból is:</translati
     <message>
         <source>Done</source>
         <translation>Kész</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Előbb fejtse vissza az üzenetet, aztán továbbítsa.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Mellékletek betöltése a továbbításhoz…</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Továbbított üzenet</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Feladó:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Dátum:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Tárgy:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Címzett:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Másolat:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Továbbítás</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Az üzenet nincs teljesen az eszközön, ezért nem továbbítható változatlanul.</translation>
     </message>
 </context>
 <context>

@@ -353,6 +353,14 @@ If it bothers you, take the other entry out of that lookup from a root shell. Th
         <source>A draft does not keep attachments. Save the draft again to store it without them.</source>
         <translation>Osnutek ne ohrani priponk. Osnutek shranite znova, da se shrani brez njih.</translation>
     </message>
+    <message>
+        <source>The forwarded message was encrypted. Sent like this, its content goes out unencrypted. Tap Send again to send it anyway.</source>
+        <translation>Posredovano sporočilo je bilo šifrirano. Tako poslano gre njegova vsebina ven nešifrirana. Znova se dotaknite »Pošlji«, da ga vseeno pošljete.</translation>
+    </message>
+    <message>
+        <source>Sending…</source>
+        <translation>Pošiljanje …</translation>
+    </message>
 </context>
 <context>
     <name>ConfirmDialog</name>
@@ -1966,6 +1974,46 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Done</source>
         <translation>Končano</translation>
+    </message>
+    <message>
+        <source>Decrypt the message first, then forward it.</source>
+        <translation>Najprej dešifrirajte sporočilo, nato ga posredujte.</translation>
+    </message>
+    <message>
+        <source>Loading the attachments for forwarding…</source>
+        <translation>Nalaganje prilog za posredovanje …</translation>
+    </message>
+    <message>
+        <source>Forwarded message</source>
+        <translation>Posredovano sporočilo</translation>
+    </message>
+    <message>
+        <source>From:</source>
+        <translation>Od:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Datum:</translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation>Zadeva:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Za:</translation>
+    </message>
+    <message>
+        <source>Cc:</source>
+        <translation>Kp:</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Posreduj</translation>
+    </message>
+    <message>
+        <source>The message is not completely on the device, so it cannot be forwarded unchanged.</source>
+        <translation>Sporočilo ni v celoti v napravi, zato ga ni mogoče posredovati nespremenjenega.</translation>
     </message>
 </context>
 <context>

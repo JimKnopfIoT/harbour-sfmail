@@ -156,6 +156,12 @@ public:
     // right after decryptFinished() and renders them with the same open/save UI as
     // the PGP path. Returns + clears the list.
     Q_INVOKABLE QVariantList takeLastAttachments();
+    // HTML body of the LAST decryptMessage() ("" when it has none), for the
+    // reader's "simple HTML" view. Returns + clears it.
+    Q_INVOKABLE QString takeLastHtml();
+    // The decrypted entity of the LAST decryptMessage(), written to the plaintext
+    // cache for forwarding it unchanged. Returns the path ("" if none) + clears it.
+    Q_INVOKABLE QString takeLastOriginal();
 
     // Forget everything (wipe our gpgsm home) — handy while iterating on import.
     Q_INVOKABLE void wipeStore();
@@ -278,6 +284,8 @@ private:
     QVariantMap m_inspectInfo;
     QByteArray m_pendingSenderCertPem;   // sender certs from the last decrypt
     QVariantList m_lastDecAttachments;   // attachments from the last decryptMessage()
+    QString m_lastDecHtml;               // HTML body from the last decryptMessage()
+    QString m_lastDecOriginal;           // cache path of the last decrypted entity
     // Cache the embedded signer certs of the most recently decrypted message, so
     // "Encryption info" can list the signature certs WITHOUT asking the passphrase
     // again (the user already decrypted the mail).
