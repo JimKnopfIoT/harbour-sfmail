@@ -1612,6 +1612,10 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>لم تُرسل. فشلت آخر محاولة تلقائية أيضًا — استخدم «إعادة الإرسال» عند عودة الاتصال.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>بحث</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2519,6 +2523,96 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>احفظ رسالة كقالب من محرّر الرسائل</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>البريد الوارد</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>البريد الصادر</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>المُرسَل</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>المسودات</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>المهملات</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>البريد المزعج</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>مشفَّرة</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>بحث</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>المرسل أو الموضوع أو النص</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>البحث على الخادم</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(بلا موضوع)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>لا توجد نتائج.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>جارٍ البحث على الخادم…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>لا يوجد اتصال — لا يمكن البحث في الخادم الآن.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>لم يكتمل البحث على الخادم. لا تدعم كل أنواع الحسابات البحث على الخادم.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>تم البحث في الخادم. نتائج إضافية على الخادم لم تُحمَّل: %n</numerusform>
+            <numerusform>تم البحث في الخادم. نتائج إضافية على الخادم لم تُحمَّل: %n</numerusform>
+            <numerusform>تم البحث في الخادم. نتائج إضافية على الخادم لم تُحمَّل: %n</numerusform>
+            <numerusform>تم البحث في الخادم. نتائج إضافية على الخادم لم تُحمَّل: %n</numerusform>
+            <numerusform>تم البحث في الخادم. نتائج إضافية على الخادم لم تُحمَّل: %n</numerusform>
+            <numerusform>تم البحث في الخادم. نتائج إضافية على الخادم لم تُحمَّل: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>تم البحث في الخادم.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>لا يمكن البحث في نص الرسائل المشفّرة؛ يُعثر عليها بالمرسل والموضوع.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>البحث في هذا الحساب</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>المرسل والموضوع ونص الرسالة، في كل المجلدات</translation>
     </message>
 </context>
 </TS>

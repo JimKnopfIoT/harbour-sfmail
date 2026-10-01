@@ -1600,6 +1600,10 @@ Gdyby przycisk powyżej nie zadziałał, to samo można zrobić z terminala:</tr
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Nie wysłano. Ostatnia automatyczna próba również się nie powiodła — użyj „Wyślij ponownie”, gdy połączenie wróci.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Szukaj</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2507,6 +2511,93 @@ Gdyby przycisk powyżej nie zadziałał, to samo można zrobić z terminala:</tr
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Zapisz wiadomość jako szablon w edytorze</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Odebrane</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Do wysłania</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Wysłane</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Robocze</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Kosz</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Spam</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Zaszyfrowana</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Szukaj</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Nadawca, temat lub tekst</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Szukaj na serwerze</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(bez tematu)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Brak wyników.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Wyszukiwanie na serwerze…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Brak połączenia — nie można teraz przeszukać serwera.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Wyszukiwanie na serwerze nie zostało ukończone. Nie każdy typ konta obsługuje wyszukiwanie na serwerze.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Serwer przeszukany. Dodatkowe niewczytane wyniki na serwerze: %n</numerusform>
+            <numerusform>Serwer przeszukany. Dodatkowe niewczytane wyniki na serwerze: %n</numerusform>
+            <numerusform>Serwer przeszukany. Dodatkowe niewczytane wyniki na serwerze: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Serwer przeszukany.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Tekstu zaszyfrowanych wiadomości nie można przeszukiwać; są znajdowane po nadawcy i temacie.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Przeszukaj to konto</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Nadawca, temat i treść wiadomości, we wszystkich folderach</translation>
     </message>
 </context>
 </TS>

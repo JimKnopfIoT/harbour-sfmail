@@ -1600,6 +1600,10 @@ Ja iepriekš redzamā poga netiek cauri, to pašu var izdarīt no termināļa:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Nav nosūtīta. Neizdevās arī pēdējais automātiskais mēģinājums — kad savienojums būs atjaunots, lieto Sūtīt vēlreiz.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Meklēt</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2507,6 +2511,93 @@ Ja iepriekš redzamā poga netiek cauri, to pašu var izdarīt no termināļa:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Saglabā vēstuli kā veidni no vēstules rakstīšanas skata</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Iesūtne</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Izsūtne</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Nosūtītās</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Melnraksti</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Miskaste</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Mēstules</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Šifrēta</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Meklēt</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Sūtītājs, temats vai teksts</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Meklēt serverī</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(bez temata)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Nav atbilstību.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Meklē serverī…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Nav savienojuma — serverī pašlaik nevar meklēt.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Meklēšana serverī netika pabeigta. Ne visi kontu veidi var meklēt serverī.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Serverī meklēts. Neielādētas papildu atbilstības serverī: %n</numerusform>
+            <numerusform>Serverī meklēts. Neielādētas papildu atbilstības serverī: %n</numerusform>
+            <numerusform>Serverī meklēts. Neielādētas papildu atbilstības serverī: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Serverī meklēts.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Šifrētu ziņojumu tekstā nevar meklēt; tos atrod pēc sūtītāja un temata.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Meklēt šajā kontā</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Sūtītājs, temats un ziņojuma teksts, visās mapēs</translation>
     </message>
 </context>
 </TS>

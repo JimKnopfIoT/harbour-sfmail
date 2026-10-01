@@ -1600,6 +1600,10 @@ Dacă butonul de mai sus nu răzbate, același lucru se poate face dintr-un term
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Netrimis. Și ultima încercare automată a eșuat — folosiți „Trimite din nou” când conexiunea revine.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Căutare</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2507,6 +2511,93 @@ Dacă butonul de mai sus nu răzbate, același lucru se poate face dintr-un term
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Salvați un mesaj ca șablon din editor</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Primite</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>De trimis</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Trimise</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Ciorne</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Coș de gunoi</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Spam</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Criptat</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Căutare</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Expeditor, subiect sau text</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Caută pe server</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(fără subiect)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Niciun rezultat.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Se caută pe server…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Fără conexiune — serverul nu poate fi căutat acum.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Căutarea pe server nu s-a încheiat. Nu toate tipurile de cont pot căuta pe server.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Server căutat. Rezultate suplimentare pe server neîncărcate: %n</numerusform>
+            <numerusform>Server căutat. Rezultate suplimentare pe server neîncărcate: %n</numerusform>
+            <numerusform>Server căutat. Rezultate suplimentare pe server neîncărcate: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Server căutat.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Textul mesajelor criptate nu poate fi căutat; acestea sunt găsite după expeditor și subiect.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Caută în acest cont</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Expeditor, subiect și textul mesajului, în toate dosarele</translation>
     </message>
 </context>
 </TS>

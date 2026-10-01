@@ -157,6 +157,10 @@ public:
     // What the server last announced for this folder. Zero means either "empty
     // on the server" or "never asked"; the store does not distinguish them.
     Q_INVOKABLE int folderServerCount(int folderId);
+    // Where a search hit lives: { name, type }, type numbered like
+    // EmailFolder.FolderType (2 inbox … 7 junk, 1 any other folder) so the UI
+    // can use its own translated names for the standard folders.
+    Q_INVOKABLE QVariantMap folderLabel(int folderId);
     // Announce a deletion the app itself is about to make, so that it is not
     // reported to the user as a disappearance. noteOwnDeletes() covers a batch
     // whose ids the caller does not have.

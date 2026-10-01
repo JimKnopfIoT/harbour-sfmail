@@ -1596,6 +1596,10 @@ Jos yllä oleva painike ei mene läpi, saman voi tehdä päätteestä:</translat
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Ei lähetetty. Myös viimeinen automaattinen yritys epäonnistui — käytä Lähetä uudelleen, kun yhteys on palannut.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Hae</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Jos yllä oleva painike ei mene läpi, saman voi tehdä päätteestä:</translat
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Tallenna viesti pohjaksi kirjoitusnäkymässä</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Saapuneet</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Lähtevät</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Lähetetyt</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Luonnokset</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Roskakori</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Roskaposti</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Salattu</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Hae</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Lähettäjä, aihe tai teksti</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Hae palvelimelta</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(ei aihetta)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Ei osumia.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Haetaan palvelimelta…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Ei yhteyttä — palvelimelta ei voi hakea juuri nyt.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Palvelinhaku ei valmistunut. Kaikki tilityypit eivät voi hakea palvelimelta.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Palvelimelta haettu. Lataamattomia lisäosumia palvelimella: %n</numerusform>
+            <numerusform>Palvelimelta haettu. Lataamattomia lisäosumia palvelimella: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Palvelimelta haettu.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Salattujen viestien tekstiä ei voi hakea; ne löytyvät lähettäjän ja aiheen perusteella.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Hae tältä tililtä</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Lähettäjä, aihe ja viestin teksti, kaikissa kansioissa</translation>
     </message>
 </context>
 </TS>

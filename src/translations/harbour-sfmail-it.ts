@@ -1596,6 +1596,10 @@ Se il pulsante qui sopra non dovesse funzionare, lo stesso si può fare da un te
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Non inviato. Anche l&apos;ultimo tentativo automatico è fallito — usa «Invia di nuovo» quando la connessione sarà tornata.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Cerca</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Se il pulsante qui sopra non dovesse funzionare, lo stesso si può fare da un te
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Salva un messaggio come modello dall&apos;editor</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Posta in arrivo</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Posta in uscita</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Inviati</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Bozze</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Cestino</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Indesiderata</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Cifrato</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Cerca</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Mittente, oggetto o testo</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Cerca sul server</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(senza oggetto)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Nessun risultato.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Ricerca sul server…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Nessuna connessione — al momento non è possibile cercare sul server.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>La ricerca sul server non è terminata. Non tutti i tipi di account possono cercare sul server.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Server consultato. Risultati aggiuntivi sul server non caricati: %n</numerusform>
+            <numerusform>Server consultato. Risultati aggiuntivi sul server non caricati: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Server consultato.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Il testo dei messaggi cifrati non può essere cercato; vengono trovati per mittente e oggetto.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Cerca in questo account</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Mittente, oggetto e testo del messaggio, in tutte le cartelle</translation>
     </message>
 </context>
 </TS>

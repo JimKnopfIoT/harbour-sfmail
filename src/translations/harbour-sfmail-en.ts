@@ -1596,6 +1596,10 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Search</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Save a message as a template from the composer</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Inbox</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Outbox</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Sent</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Drafts</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Trash</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Junk</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Encrypted</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Search</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Sender, subject or text</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Search on the server</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(no subject)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>No matches.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Searching on the server…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>No connection — the server cannot be searched right now.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>The server search did not finish. Not every account type can search on the server.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Server searched. %n more match on the server was not loaded.</numerusform>
+            <numerusform>Server searched. %n more matches on the server were not loaded.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Server searched.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>The text of encrypted messages cannot be searched; they are found by sender and subject.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Search this account</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Sender, subject and message text, in all folders</translation>
     </message>
 </context>
 </TS>

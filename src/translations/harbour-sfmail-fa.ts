@@ -1592,6 +1592,10 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>ارسال نشد. آخرین تلاش خودکار هم ناموفق بود — وقتی اتصال برقرار شد، «ارسال دوباره» را به کار ببرید.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>جستجو</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2499,6 +2503,91 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>پیامی را از صفحهٔ نگارش به‌عنوان الگو ذخیره کنید</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>صندوق ورودی</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>صندوق خروجی</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>ارسال‌شده</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>پیش‌نویس‌ها</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>زباله‌دان</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>هرزنامه</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>رمزگذاری‌شده</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>جستجو</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>فرستنده، موضوع یا متن</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>جستجو در سرور</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(بدون موضوع)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>نتیجه‌ای یافت نشد.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>در حال جستجو در سرور…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>اتصال برقرار نیست — اکنون نمی‌توان در سرور جستجو کرد.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>جستجو در سرور به پایان نرسید. همهٔ انواع حساب امکان جستجو در سرور را ندارند.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>سرور جستجو شد. نتایج بیشتر در سرور که بارگیری نشدند: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>سرور جستجو شد.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>متن پیام‌های رمزگذاری‌شده قابل جستجو نیست؛ این پیام‌ها با فرستنده و موضوع پیدا می‌شوند.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>جستجو در این حساب</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>فرستنده، موضوع و متن پیام، در همهٔ پوشه‌ها</translation>
     </message>
 </context>
 </TS>

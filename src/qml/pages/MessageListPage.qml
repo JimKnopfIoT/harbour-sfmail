@@ -483,6 +483,17 @@ Page {
                     })
                 }
             }
+            // Searches the whole account, not only this folder. Needs a real
+            // account: the combined inbox spans several.
+            MenuItem {
+                text: qsTr("Search")
+                visible: !page._selectMode && (page.accountId > 0 || page.pendingAccountId > 0)
+                // In a folder view the title is the folder's name, not the account's.
+                onClicked: pageStack.push(Qt.resolvedUrl("SearchPage.qml"),
+                                          { accountId: page.accountId > 0 ? page.accountId
+                                                                          : page.pendingAccountId,
+                                            accountName: page.folderId > 0 ? "" : page.title })
+            }
             // LAST → very bottom of the pulley (primary action, smallest pull).
             MenuItem {
                 text: qsTr("New message")

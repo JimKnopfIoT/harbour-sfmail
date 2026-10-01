@@ -1592,6 +1592,10 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>送信されていません。最後の自動試行も失敗しました — 接続が戻ったら「再送信」を使ってください。</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>検索</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2499,6 +2503,91 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>メッセージは作成画面からテンプレートとして保存できます</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>受信トレイ</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>送信トレイ</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>送信済み</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>下書き</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>ゴミ箱</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>迷惑メール</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>暗号化</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>検索</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>差出人、件名、本文</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>サーバーで検索</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>（件名なし）</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>一致するものはありません。</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>サーバーで検索中…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>接続がありません — 現在サーバーを検索できません。</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>サーバー検索が完了しませんでした。すべてのアカウント種類がサーバー検索に対応しているわけではありません。</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>サーバーを検索しました。読み込まれていないサーバー上の一致: %n 件</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>サーバーを検索しました。</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>暗号化されたメッセージの本文は検索できません。差出人と件名で見つかります。</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>このアカウントを検索</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>差出人、件名、本文(すべてのフォルダー)</translation>
     </message>
 </context>
 </TS>

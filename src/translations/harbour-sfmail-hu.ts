@@ -1592,6 +1592,10 @@ Ha a fenti gomb nem ér célba, ugyanez megtehető parancssorból is:</translati
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Nincs elküldve. Az utolsó automatikus kísérlet is sikertelen volt — amint helyreáll a kapcsolat, használja a Küldés újra parancsot.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Keresés</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2499,6 +2503,91 @@ Ha a fenti gomb nem ér célba, ugyanez megtehető parancssorból is:</translati
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Mentsen üzenetet sablonként a szerkesztőből</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Beérkezett üzenetek</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Kimenő üzenetek</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Elküldött</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Piszkozatok</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Kuka</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Levélszemét</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Titkosítva</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Keresés</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Feladó, tárgy vagy szöveg</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Keresés a szerveren</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(nincs tárgy)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Nincs találat.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Keresés a szerveren…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Nincs kapcsolat — a szerveren most nem lehet keresni.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>A szerveres keresés nem fejeződött be. Nem minden fióktípus tud a szerveren keresni.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Szerver átkeresve. Be nem töltött további találatok a szerveren: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Szerver átkeresve.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>A titkosított üzenetek szövegében nem lehet keresni; ezek feladó és tárgy alapján találhatók meg.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Keresés ebben a fiókban</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Feladó, tárgy és üzenetszöveg, minden mappában</translation>
     </message>
 </context>
 </TS>

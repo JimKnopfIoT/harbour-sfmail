@@ -1596,6 +1596,10 @@ Om knappen ovan inte skulle gå fram kan samma sak göras från en terminal:</tr
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Inte skickat. Även det sista automatiska försöket misslyckades — använd Skicka igen när anslutningen är tillbaka.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Sök</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Om knappen ovan inte skulle gå fram kan samma sak göras från en terminal:</tr
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Spara ett meddelande som mall från skrivvyn</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Inkorg</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Utkorg</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Skickat</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Utkast</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Papperskorg</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Skräppost</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Krypterat</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Sök</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Avsändare, ämne eller text</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Sök på servern</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(inget ämne)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Inga träffar.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Söker på servern…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Ingen anslutning — servern kan inte genomsökas just nu.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Sökningen på servern slutfördes inte. Alla kontotyper kan inte söka på servern.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Servern genomsökt. Fler träffar på servern som inte hämtades: %n</numerusform>
+            <numerusform>Servern genomsökt. Fler träffar på servern som inte hämtades: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Servern genomsökt.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Texten i krypterade meddelanden går inte att söka i; de hittas via avsändare och ämne.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Sök i det här kontot</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Avsändare, ämne och meddelandetext, i alla mappar</translation>
     </message>
 </context>
 </TS>

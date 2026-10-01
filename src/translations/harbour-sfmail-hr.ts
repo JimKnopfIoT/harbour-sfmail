@@ -1600,6 +1600,10 @@ Ako gumb iznad ne prolazi, isto se može učiniti iz terminala:</translation>
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Nije poslano. Ni posljednji automatski pokušaj nije uspio — kad veza bude ponovno uspostavljena, upotrijebite Pošalji ponovno.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Pretraži</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2507,6 +2511,93 @@ Ako gumb iznad ne prolazi, isto se može učiniti iz terminala:</translation>
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Spremite poruku kao predložak u uređivaču poruka</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Ulazna pošta</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Izlazna pošta</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Poslano</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Skice</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Smeće</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Neželjena pošta</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Šifrirano</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Pretraži</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Pošiljatelj, predmet ili tekst</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Pretraži na poslužitelju</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(bez predmeta)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Nema rezultata.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Pretraživanje na poslužitelju…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Nema veze — poslužitelj se trenutačno ne može pretražiti.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Pretraživanje na poslužitelju nije dovršeno. Ne može svaka vrsta računa pretraživati na poslužitelju.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Poslužitelj je pretražen. Dodatni neučitani rezultati na poslužitelju: %n</numerusform>
+            <numerusform>Poslužitelj je pretražen. Dodatni neučitani rezultati na poslužitelju: %n</numerusform>
+            <numerusform>Poslužitelj je pretražen. Dodatni neučitani rezultati na poslužitelju: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Poslužitelj je pretražen.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Tekst šifriranih poruka ne može se pretraživati; pronalaze se po pošiljatelju i predmetu.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Pretraži ovaj račun</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Pošiljatelj, predmet i tekst poruke, u svim mapama</translation>
     </message>
 </context>
 </TS>

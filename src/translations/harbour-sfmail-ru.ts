@@ -1600,6 +1600,10 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Не отправлено. Последняя автоматическая попытка тоже не удалась — нажмите «Отправить снова», когда соединение восстановится.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Поиск</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2507,6 +2511,93 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Сохранить письмо как шаблон можно в редакторе</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Входящие</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Исходящие</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Отправленные</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Черновики</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Корзина</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Спам</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Зашифровано</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Поиск</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Отправитель, тема или текст</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Искать на сервере</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(без темы)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Ничего не найдено.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Поиск на сервере…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Нет соединения — сейчас искать на сервере невозможно.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Поиск на сервере не завершился. Не все типы учётных записей поддерживают поиск на сервере.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Поиск на сервере выполнен. Не загружено дополнительных совпадений на сервере: %n</numerusform>
+            <numerusform>Поиск на сервере выполнен. Не загружено дополнительных совпадений на сервере: %n</numerusform>
+            <numerusform>Поиск на сервере выполнен. Не загружено дополнительных совпадений на сервере: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Поиск на сервере выполнен.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Текст зашифрованных сообщений недоступен для поиска; они находятся по отправителю и теме.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Искать в этой учётной записи</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Отправитель, тема и текст сообщения, во всех папках</translation>
     </message>
 </context>
 </TS>

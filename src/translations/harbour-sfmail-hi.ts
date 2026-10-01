@@ -1596,6 +1596,10 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>भेजा नहीं गया। पिछली स्वचालित कोशिश भी विफल रही — कनेक्शन वापस आने पर “फिर भेजें” इस्तेमाल करें।</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>खोजें</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>संदेश को लिखने के पन्ने से टेम्पलेट के रूप में सहेजें</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>इनबॉक्स</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>आउटबॉक्स</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>भेजे गए</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>ड्राफ़्ट</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>ट्रैश</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>जंक</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>एन्क्रिप्टेड</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>खोजें</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>प्रेषक, विषय या पाठ</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>सर्वर पर खोजें</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(कोई विषय नहीं)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>कोई परिणाम नहीं।</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>सर्वर पर खोजा जा रहा है…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>कोई कनेक्शन नहीं — अभी सर्वर पर खोज नहीं की जा सकती।</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>सर्वर पर खोज पूरी नहीं हुई। हर प्रकार का खाता सर्वर पर खोज नहीं कर सकता।</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>सर्वर पर खोजा गया। सर्वर पर और परिणाम जो लोड नहीं हुए: %n</numerusform>
+            <numerusform>सर्वर पर खोजा गया। सर्वर पर और परिणाम जो लोड नहीं हुए: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>सर्वर पर खोजा गया।</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>एन्क्रिप्टेड संदेशों का पाठ खोजा नहीं जा सकता; वे प्रेषक और विषय से मिलते हैं।</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>इस खाते में खोजें</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>प्रेषक, विषय और संदेश का पाठ, सभी फ़ोल्डरों में</translation>
     </message>
 </context>
 </TS>

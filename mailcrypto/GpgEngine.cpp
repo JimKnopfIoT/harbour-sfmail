@@ -1321,6 +1321,28 @@ int GpgEngine::folderServerCount(int folderId)
     return QMailFolder(fid).serverCount();
 }
 
+QVariantMap GpgEngine::folderLabel(int folderId)
+{
+    QVariantMap m;
+    QMailFolderId fid(static_cast<quint64>(folderId));
+    if (!fid.isValid()) return m;
+    const QMailFolder f(fid);
+    QString name = f.displayName();
+    if (name.isEmpty()) name = f.path();
+    // Same numbering as EmailFolder.FolderType on the QML side.
+    int type = 1;
+    const QMailAccount acc(f.parentAccountId());
+    if (acc.standardFolder(QMailFolder::InboxFolder) == fid) type = 2;
+    else if (acc.standardFolder(QMailFolder::OutboxFolder) == fid) type = 3;
+    else if (acc.standardFolder(QMailFolder::SentFolder) == fid) type = 4;
+    else if (acc.standardFolder(QMailFolder::DraftsFolder) == fid) type = 5;
+    else if (acc.standardFolder(QMailFolder::TrashFolder) == fid) type = 6;
+    else if (acc.standardFolder(QMailFolder::JunkFolder) == fid) type = 7;
+    m.insert(QStringLiteral("name"), name);
+    m.insert(QStringLiteral("type"), type);
+    return m;
+}
+
 // The app's own deletions, announced before they happen. Everything else that
 // disappears from the store came from the server side, and the user is told
 // about it — see the listener in the constructor.

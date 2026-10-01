@@ -1596,6 +1596,10 @@ Skulle knappen ovenfor ikke trænge igennem, kan det samme gøres fra en termina
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Ikke sendt. Også det sidste automatiske forsøg mislykkedes — brug Send igen, når forbindelsen er tilbage.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Søg</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2503,6 +2507,92 @@ Skulle knappen ovenfor ikke trænge igennem, kan det samme gøres fra en termina
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Gem en besked som skabelon fra skrivevinduet</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Indbakke</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Udbakke</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Sendt</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Kladder</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Papirkurv</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Spam</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Krypteret</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Søg</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Afsender, emne eller tekst</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Søg på serveren</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(intet emne)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Ingen resultater.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Søger på serveren…</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Ingen forbindelse — serveren kan ikke gennemsøges lige nu.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Søgningen på serveren blev ikke fuldført. Ikke alle kontotyper kan søge på serveren.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Serveren er gennemsøgt. Yderligere resultater på serveren, ikke hentet: %n</numerusform>
+            <numerusform>Serveren er gennemsøgt. Yderligere resultater på serveren, ikke hentet: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Serveren er gennemsøgt.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Teksten i krypterede beskeder kan ikke gennemsøges; de findes via afsender og emne.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Søg i denne konto</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Afsender, emne og beskedtekst, i alle mapper</translation>
     </message>
 </context>
 </TS>

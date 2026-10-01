@@ -1604,6 +1604,10 @@ Should the button above not get through, the same can be done from a terminal:</
         <source>Not sent. The last automatic attempt failed as well — use Send again when the connection is back.</source>
         <translation>Ni poslano. Tudi zadnji samodejni poskus ni uspel — ko bo povezava spet vzpostavljena, uporabite Pošlji znova.</translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation>Iskanje</translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -2511,6 +2515,94 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Save a message as a template from the composer</source>
         <translation>Sporočilo shranite kot predlogo v urejevalniku sporočil</translation>
+    </message>
+</context>
+<context>
+    <name>SearchPage</name>
+    <message>
+        <source>Inbox</source>
+        <translation>Prejeto</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Odhodna pošta</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Poslano</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Osnutki</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Smeti</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Neželena pošta</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Šifrirano</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Iskanje</translation>
+    </message>
+    <message>
+        <source>Sender, subject or text</source>
+        <translation>Pošiljatelj, zadeva ali besedilo</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Išči na strežniku</translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(brez zadeve)</translation>
+    </message>
+    <message>
+        <source>No matches.</source>
+        <translation>Ni zadetkov.</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Iskanje na strežniku …</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Ni povezave — strežnika trenutno ni mogoče preiskati.</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Iskanje na strežniku se ni končalo. Vse vrste računov ne podpirajo iskanja na strežniku.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Server searched. %n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Strežnik preiskan. Dodatni nenaloženi zadetki na strežniku: %n</numerusform>
+            <numerusform>Strežnik preiskan. Dodatni nenaloženi zadetki na strežniku: %n</numerusform>
+            <numerusform>Strežnik preiskan. Dodatni nenaloženi zadetki na strežniku: %n</numerusform>
+            <numerusform>Strežnik preiskan. Dodatni nenaloženi zadetki na strežniku: %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Server searched.</source>
+        <translation>Strežnik preiskan.</translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Besedila šifriranih sporočil ni mogoče preiskati; najdemo jih po pošiljatelju in zadevi.</translation>
+    </message>
+    <message>
+        <source>Search this account</source>
+        <translation>Preišči ta račun</translation>
+    </message>
+    <message>
+        <source>Sender, subject and message text, in all folders</source>
+        <translation>Pošiljatelj, zadeva in besedilo sporočila, v vseh mapah</translation>
     </message>
 </context>
 </TS>
