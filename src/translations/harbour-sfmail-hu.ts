@@ -547,6 +547,213 @@ Ez jelenthet régi, téves vagy hamisított kulcsot. Csak akkor importálja, ha 
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Feladó</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Címzett</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Tárgy</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Szöveg</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>A szöveg nem tagadható — a levelezőrendszer csak a tartalmazott szövegre keres.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Csak egy szöveges feltétel lehetséges.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Adj hozzá egy feltételt, dátumot vagy mellékletszűrőt.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>A szervernek legalább egy feltétel kell, különben az összes üzenetét átadná.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Beérkezett üzenetek</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Kimenő üzenetek</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Elküldött</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Piszkozatok</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Kuka</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Levélszemét</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Titkosítva</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Keresés a szerveren</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Keresés</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Bővített keresés</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Fiókok</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Nincs fiók kiválasztva: minden fiókban keres.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Feltételek</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Egyezés</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>minden feltétel</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>bármely feltétel</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Mező</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>tartalmazza …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Feltétel hozzáadása</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Szűkítés</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Kezdő dátum</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>bármely</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Záró dátum</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Mellékletek</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>mindegy</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>melléklettel</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>melléklet nélkül</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Dátum törléséhez tartsd lenyomva. A mellékletek csak azoknál az üzeneteknél ismertek, amelyek szerkezete már le van töltve.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Nincs kapcsolat — a szerveren most nem lehet keresni.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n találat</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(nincs tárgy)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Keresés…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Keresés a szerveren…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>A szerveres keresés nem fejeződött be. Nem minden fióktípus tud a szerveren keresni.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Csak a legújabb találatok látszanak — szűkítsd a keresést a többi megtekintéséhez.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n további találat a szerveren nem lett betöltve.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n fiók nem tud a szerveren keresni.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>A szerveres keresés %n fióknál sikertelen volt.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>A titkosított üzenetek szövegében nem lehet keresni; ezek feladó és tárgy alapján találhatók meg.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Nem tartalmazza</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>nem tartalmazza …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2588,6 +2795,10 @@ Ha a fenti gomb nem ér célba, ugyanez megtehető parancssorból is:</translati
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Feladó, tárgy és üzenetszöveg, minden mappában</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Bővített keresés</translation>
     </message>
 </context>
 </TS>

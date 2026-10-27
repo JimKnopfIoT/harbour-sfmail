@@ -547,6 +547,217 @@ Tämä voi tarkoittaa vanhaa, väärää tai väärennettyä avainta. Tuo se vai
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Lähettäjä</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Vastaanottaja</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Aihe</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Teksti</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Tekstiä ei voi kieltää — sähköpostijärjestelmä etsii vain sisältyvää tekstiä.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Vain yksi tekstiehto on mahdollinen.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Lisää ehto, päivämäärä tai liitesuodatin.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Palvelin tarvitsee vähintään yhden ehdon; muuten se antaisi kaikki viestinsä.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Saapuneet</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Lähtevät</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Lähetetyt</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Luonnokset</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Roskakori</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Roskaposti</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Salattu</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Hae palvelimelta</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Hae</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Laajennettu haku</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Tilit</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Tiliä ei valittu: haku kohdistuu kaikkiin tileihin.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Ehdot</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Täsmää</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>kaikki ehdot</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>mikä tahansa ehto</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Kenttä</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>sisältää …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Lisää ehto</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Rajaa</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Alkupäivä</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>mikä tahansa</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Loppupäivä</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Liitteet</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>yhdentekevää</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>liitteiden kanssa</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>ilman liitteitä</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Tyhjennä päivämäärä painamalla sitä pitkään. Liitteet tunnetaan vain viesteistä, joiden rakenne on ladattu.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Ei yhteyttä — palvelimelta ei voi hakea juuri nyt.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n osuma</numerusform>
+            <numerusform>%n osumaa</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(ei aihetta)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Haetaan…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Haetaan palvelimelta…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Palvelinhaku ei valmistunut. Kaikki tilityypit eivät voi hakea palvelimelta.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Vain uusimmat osumat näytetään — rajaa hakua nähdäksesi loput.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n osumaa lisää palvelimella jäi lataamatta.</numerusform>
+            <numerusform>%n osumaa lisää palvelimella jäi lataamatta.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n tili ei voi hakea palvelimelta.</numerusform>
+            <numerusform>%n tiliä ei voi hakea palvelimelta.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Palvelinhaku epäonnistui %n tilillä.</numerusform>
+            <numerusform>Palvelinhaku epäonnistui %n tilillä.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Salattujen viestien tekstiä ei voi hakea; ne löytyvät lähettäjän ja aiheen perusteella.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Ei sisällä</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>ei sisällä …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Jos yllä oleva painike ei mene läpi, saman voi tehdä päätteestä:</translat
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Lähettäjä, aihe ja viestin teksti, kaikissa kansioissa</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Laajennettu haku</translation>
     </message>
 </context>
 </TS>

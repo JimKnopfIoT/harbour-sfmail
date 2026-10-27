@@ -547,6 +547,217 @@ This can mean an old/wrong/forged key. Only import if you trust this.</translati
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Sender</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Recipient</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Subject</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>The text cannot be negated — the mail framework only searches for text that is contained.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Only one text condition is possible.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Add a condition, a date or an attachment filter.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>The server needs at least one condition; otherwise it would hand over every message it has.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Inbox</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Outbox</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Sent</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Drafts</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Trash</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Junk</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Encrypted</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Search on the server</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Search</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Extended search</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Accounts</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>No account chosen: all accounts are searched.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Conditions</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Match</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>all conditions</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>any condition</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Field</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>contains …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Add condition</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Narrow down</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>From date</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>any</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>To date</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Attachments</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>either</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>with attachments</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>without attachments</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>No connection — the server cannot be searched right now.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n match</numerusform>
+            <numerusform>%n matches</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(no subject)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Searching…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Searching on the server…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>The server search did not finish. Not every account type can search on the server.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Only the newest matches are shown — narrow the search to see the rest.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n more match on the server was not loaded.</numerusform>
+            <numerusform>%n more matches on the server were not loaded.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n account cannot search on the server.</numerusform>
+            <numerusform>%n accounts cannot search on the server.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>The server search failed for %n account.</numerusform>
+            <numerusform>The server search failed for %n accounts.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>The text of encrypted messages cannot be searched; they are found by sender and subject.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Does not contain</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>does not contain …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Sender, subject and message text, in all folders</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Extended search</translation>
     </message>
 </context>
 </TS>

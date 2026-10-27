@@ -547,6 +547,225 @@ Dan jista&apos; jfisser ċavetta qadima, żbaljata jew iffalsifikata. Importa bi
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Mittent</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Destinatarju</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Suġġett</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Test</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>It-test ma jistax jiġi nnegat — is-sistema tal-posta tfittex biss test li jkun preżenti.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Kundizzjoni waħda biss tat-test hija possibbli.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Żid kundizzjoni, data jew filtru tal-annessi.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Is-server jeħtieġ mill-inqas kundizzjoni waħda; inkella jagħti kull messaġġ li għandu.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Kaxxa Dieħla</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Kaxxa Ħierġa</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Mibgħuta</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Abbozzi</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Skart</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Junk</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Ikkriptat</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Fittex fuq is-server</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Fittex</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Tfittxija avvanzata</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Kontijiet</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>L-ebda kont magħżul: jitfittxew il-kontijiet kollha.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Kundizzjonijiet</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Qbil ma'</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>il-kundizzjonijiet kollha</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>kwalunkwe kundizzjoni</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Qasam</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>fih …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Żid kundizzjoni</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Illimita</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Mid-data</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>kwalunkwe</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Sad-data</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Annessi</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>xorta waħda</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>b'annessi</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>mingħajr annessi</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Żomm data magħfusa biex tħassarha. L-annessi huma magħrufa biss għal messaġġi li l-istruttura tagħhom tniżżlet.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>M&amp;apos;hemmx konnessjoni — is-server ma jistax jitfittex bħalissa.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n riżultat</numerusform>
+            <numerusform>%n riżultati</numerusform>
+            <numerusform>%n-il riżultat</numerusform>
+            <numerusform>%n riżultat</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(bla suġġett)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Qed ifittex…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Qed ifittex fuq is-server…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>It-tfittxija fuq is-server ma ntemmitx. Mhux kull tip ta&amp;apos; kont jista&amp;apos; jfittex fuq is-server.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Jintwerew biss l-iktar riżultati ġodda — illimita t-tfittxija biex tara l-bqija.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n riżultat ieħor fuq is-server ma tniżżilx.</numerusform>
+            <numerusform>%n riżultati oħra fuq is-server ma tniżżlux.</numerusform>
+            <numerusform>%n-il riżultat ieħor fuq is-server ma tniżżlux.</numerusform>
+            <numerusform>%n riżultat ieħor fuq is-server ma tniżżlux.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n kont ma jistax ifittex fuq is-server.</numerusform>
+            <numerusform>%n kontijiet ma jistgħux ifittxu fuq is-server.</numerusform>
+            <numerusform>%n-il kont ma jistgħux ifittxu fuq is-server.</numerusform>
+            <numerusform>%n kont ma jistgħux ifittxu fuq is-server.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>It-tfittxija fuq is-server falliet għal %n kont.</numerusform>
+            <numerusform>It-tfittxija fuq is-server falliet għal %n kontijiet.</numerusform>
+            <numerusform>It-tfittxija fuq is-server falliet għal %n-il kont.</numerusform>
+            <numerusform>It-tfittxija fuq is-server falliet għal %n kont.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>It-test ta&amp;apos; messaġġi kriptati ma jistax jitfittex; jinstabu permezz tal-mittent u s-suġġett.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Ma fihx</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>ma fihx …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2603,6 +2822,10 @@ Jekk il-buttuna ta' hawn fuq ma tgħaddix, l-istess jista' jsir minn terminal:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Mittent, suġġett u test tal-messaġġ, fil-folders kollha</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Tfittxija avvanzata</translation>
     </message>
 </context>
 </TS>

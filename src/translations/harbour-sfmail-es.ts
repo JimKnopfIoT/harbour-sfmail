@@ -547,6 +547,217 @@ Puede tratarse de una clave antigua, equivocada o falsificada. Impórtala solo s
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Remitente</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Destinatario</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Asunto</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Texto</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>El texto no se puede negar — el sistema de correo solo busca texto contenido.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Solo es posible una condición de texto.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Añade una condición, una fecha o un filtro de adjuntos.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>El servidor necesita al menos una condición; si no, entregaría todos los mensajes que tiene.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Bandeja de entrada</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Bandeja de salida</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Enviados</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Borradores</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Papelera</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>No deseado</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Cifrado</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Buscar en el servidor</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Buscar</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Búsqueda avanzada</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Cuentas</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Ninguna cuenta elegida: se buscará en todas las cuentas.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Condiciones</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Coincidir con</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>todas las condiciones</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>cualquier condición</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Campo</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>contiene …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Añadir condición</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Acotar</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Desde la fecha</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>cualquiera</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Hasta la fecha</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Adjuntos</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>da igual</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>con adjuntos</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>sin adjuntos</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Mantén pulsada una fecha para borrarla. Los adjuntos solo se conocen en mensajes cuya estructura se ha descargado.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Sin conexión: ahora no se puede buscar en el servidor.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n resultado</numerusform>
+            <numerusform>%n resultados</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(sin asunto)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Buscando…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Buscando en el servidor…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>La búsqueda en el servidor no terminó. No todos los tipos de cuenta pueden buscar en el servidor.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Solo se muestran los resultados más recientes — acota la búsqueda para ver el resto.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n resultado más en el servidor no se ha cargado.</numerusform>
+            <numerusform>%n resultados más en el servidor no se han cargado.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n cuenta no puede buscar en el servidor.</numerusform>
+            <numerusform>%n cuentas no pueden buscar en el servidor.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>La búsqueda en el servidor falló para %n cuenta.</numerusform>
+            <numerusform>La búsqueda en el servidor falló para %n cuentas.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>El texto de los mensajes cifrados no se puede buscar; se encuentran por remitente y asunto.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>No contiene</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>no contiene …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Si el botón de arriba no llega a funcionar, lo mismo puede hacerse desde un ter
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Remitente, asunto y texto del mensaje, en todas las carpetas</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Búsqueda avanzada</translation>
     </message>
 </context>
 </TS>

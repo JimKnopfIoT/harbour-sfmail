@@ -547,6 +547,221 @@ Aceasta poate însemna o cheie veche, greșită sau falsificată. Importați doa
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Expeditor</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Destinatar</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Subiect</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Textul nu poate fi negat – sistemul de e-mail caută doar textul care este conținut.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Este posibilă o singură condiție de text.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Adaugă o condiție, o dată sau un filtru pentru atașamente.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Serverul are nevoie de cel puțin o condiție; altfel ar livra toate mesajele pe care le are.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Primite</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>De trimis</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Trimise</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Ciorne</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Coș de gunoi</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Spam</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Criptat</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Caută pe server</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Căutare</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Căutare avansată</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Conturi</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Niciun cont ales: se caută în toate conturile.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Condiții</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Potrivire cu</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>toate condițiile</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>oricare condiție</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Câmp</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>conține …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Adaugă condiție</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Restrânge</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>De la data</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>oricând</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Până la data</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Atașamente</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>oricum</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>cu atașamente</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>fără atașamente</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Ține apăsat pe o dată pentru a o șterge. Atașamentele sunt cunoscute doar pentru mesajele a căror structură a fost descărcată.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Fără conexiune — serverul nu poate fi căutat acum.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n rezultat</numerusform>
+            <numerusform>%n rezultate</numerusform>
+            <numerusform>%n de rezultate</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(fără subiect)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Se caută…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Se caută pe server…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Căutarea pe server nu s-a încheiat. Nu toate tipurile de cont pot căuta pe server.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Sunt afișate doar cele mai noi rezultate – restrânge căutarea pentru a vedea restul.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Încă %n rezultat de pe server nu a fost încărcat.</numerusform>
+            <numerusform>Încă %n rezultate de pe server nu au fost încărcate.</numerusform>
+            <numerusform>Încă %n de rezultate de pe server nu au fost încărcate.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n cont nu poate căuta pe server.</numerusform>
+            <numerusform>%n conturi nu pot căuta pe server.</numerusform>
+            <numerusform>%n de conturi nu pot căuta pe server.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Căutarea pe server a eșuat pentru %n cont.</numerusform>
+            <numerusform>Căutarea pe server a eșuat pentru %n conturi.</numerusform>
+            <numerusform>Căutarea pe server a eșuat pentru %n de conturi.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Textul mesajelor criptate nu poate fi căutat; acestea sunt găsite după expeditor și subiect.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Nu conține</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>nu conține …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2598,6 +2813,10 @@ Dacă butonul de mai sus nu răzbate, același lucru se poate face dintr-un term
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Expeditor, subiect și textul mesajului, în toate dosarele</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Căutare avansată</translation>
     </message>
 </context>
 </TS>

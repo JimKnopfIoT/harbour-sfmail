@@ -547,6 +547,217 @@ See võib tähendada vana, valet või võltsitud võtit. Impordi ainult siis, ku
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Saatja</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Saaja</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Teema</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Tekst</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Teksti ei saa eitada — e-posti süsteem otsib ainult sisalduvat teksti.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Võimalik on ainult üks tekstitingimus.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Lisa tingimus, kuupäev või manuste filter.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Server vajab vähemalt ühte tingimust; muidu annaks see välja kõik oma kirjad.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Sisendkast</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Väljundkast</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Saadetud</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Mustandid</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Prügikast</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Rämpspost</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Krüptitud</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Otsi serverist</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Otsi</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Laiendatud otsing</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Kontod</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Kontot pole valitud: otsitakse kõigist kontodest.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Tingimused</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Vasta</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>kõigile tingimustele</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>mõnele tingimusele</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Väli</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>sisaldab …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Lisa tingimus</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Kitsenda</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Alguskuupäev</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>mistahes</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Lõppkuupäev</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Manused</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>pole oluline</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>manustega</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>manusteta</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Kuupäeva tühjendamiseks hoia seda all. Manused on teada ainult kirjadel, mille struktuur on alla laaditud.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Ühendus puudub — serverist ei saa praegu otsida.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n vaste</numerusform>
+            <numerusform>%n vastet</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(teemata)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Otsimine…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Otsitakse serverist…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Serveriotsing ei lõppenud. Kõik kontotüübid ei toeta serveris otsimist.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Näidatakse ainult uusimaid vasteid — kitsenda otsingut, et näha ülejäänuid.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Veel %n vaste serveris jäi laadimata.</numerusform>
+            <numerusform>Veel %n vastet serveris jäi laadimata.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n konto ei saa serveris otsida.</numerusform>
+            <numerusform>%n kontot ei saa serveris otsida.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Serveriotsing ebaõnnestus %n konto puhul.</numerusform>
+            <numerusform>Serveriotsing ebaõnnestus %n konto puhul.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Krüptitud sõnumite teksti ei saa otsida; need leitakse saatja ja teema järgi.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Ei sisalda</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>ei sisalda …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Kui ülalolev nupp kohale ei jõua, saab sedasama teha terminalist:</translation
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Saatja, teema ja sõnumi tekst, kõigis kaustades</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Laiendatud otsing</translation>
     </message>
 </context>
 </TS>

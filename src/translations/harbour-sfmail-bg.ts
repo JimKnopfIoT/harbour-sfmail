@@ -547,6 +547,217 @@ This can mean an old/wrong/forged key. Only import if you trust this.</source>
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Подател</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Получател</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Тема</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Текст</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Текстът не може да бъде отрицаван — пощенската система търси само съдържащ се текст.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Възможно е само едно текстово условие.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Добавете условие, дата или филтър за прикачени файлове.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Сървърът се нуждае от поне едно условие; иначе би изпратил всички съобщения, които има.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Входящи</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Изходящи</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Изпратени</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Чернови</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Кошче</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Спам</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Шифрирано</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Търсене на сървъра</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Търсене</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Разширено търсене</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Акаунти</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Не е избран акаунт: търси се във всички акаунти.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Условия</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Съвпадение с</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>всички условия</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>поне едно условие</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Поле</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>съдържа …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Добавяне на условие</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Стесняване</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>От дата</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>без значение</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>До дата</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Прикачени файлове</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>без значение</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>с прикачени файлове</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>без прикачени файлове</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Задръжте дата, за да я изчистите. Прикачените файлове са известни само за съобщения, чиято структура е изтеглена.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Няма връзка — сървърът не може да бъде претърсен в момента.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n резултат</numerusform>
+            <numerusform>%n резултата</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(без тема)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Търсене…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Търсене на сървъра…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Търсенето на сървъра не завърши. Не всеки тип акаунт може да търси на сървъра.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Показват се само най-новите резултати — стеснете търсенето, за да видите останалите.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Още %n резултат на сървъра не беше зареден.</numerusform>
+            <numerusform>Още %n резултата на сървъра не бяха заредени.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n акаунт не може да търси на сървъра.</numerusform>
+            <numerusform>%n акаунта не могат да търсят на сървъра.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Търсенето на сървъра е неуспешно за %n акаунт.</numerusform>
+            <numerusform>Търсенето на сървъра е неуспешно за %n акаунта.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Текстът на шифрованите съобщения не може да се търси; те се намират по подател и тема.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Не съдържа</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>не съдържа …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Подател, тема и текст на съобщението, във всички папки</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Разширено търсене</translation>
     </message>
 </context>
 </TS>

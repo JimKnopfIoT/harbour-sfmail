@@ -30,6 +30,23 @@ Page {
 
     readonly property int _minLength: 2
 
+    // The extended search is an optional plugin. Probed once: if it is not
+    // installed the import fails, the probe returns false and this page stays
+    // exactly what it is without it.
+    readonly property bool _extendedAvailable: {
+        try {
+            var probe = Qt.createQmlObject("import SFMail.Search 1.0; MailSearch {}",
+                                           page, "extendedSearchProbe")
+            probe.destroy()
+            return true
+        } catch (e) {
+            // Not built in, or not loadable — say which, once.
+            console.log("[search] extended search not available:",
+                        e.qmlErrors && e.qmlErrors.length ? e.qmlErrors[0].message : e)
+            return false
+        }
+    }
+
     // Kept on the page: the accessor is created for this page and would be
     // collected otherwise.
     property var _accessor: page.accountId > 0
@@ -158,8 +175,15 @@ Page {
         }
 
         PullDownMenu {
-            visible: page._term !== ""
+            visible: page._term !== "" || page._extendedAvailable
             MenuItem {
+                visible: page._extendedAvailable
+                text: qsTr("Extended search")
+                onClicked: pageStack.push(Qt.resolvedUrl("ExtendedSearchPage.qml"),
+                                          { accountId: page.accountId })
+            }
+            MenuItem {
+                visible: page._term !== ""
                 text: qsTr("Search on the server")
                 enabled: page._remoteState !== "busy"
                 onClicked: page._runRemote()

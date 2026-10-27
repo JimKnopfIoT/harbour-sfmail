@@ -547,6 +547,221 @@ Tai gali reikšti seną, neteisingą arba suklastotą raktą. Importuok tik tada
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Siuntėjas</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Gavėjas</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Tema</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Tekstas</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Teksto negalima paneigti — pašto sistema ieško tik esamo teksto.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Galima tik viena teksto sąlyga.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Pridėkite sąlygą, datą arba priedų filtrą.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Serveriui reikia bent vienos sąlygos; kitaip jis pateiktų visus turimus laiškus.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Gautieji</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Siunčiamieji</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Išsiųstieji</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Juodraščiai</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Šiukšlinė</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Šlamštas</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Užšifruota</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Ieškoti serveryje</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Ieškoti</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Išplėstinė paieška</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Paskyros</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Nepasirinkta jokia paskyra: ieškoma visose paskyrose.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Sąlygos</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Atitikti</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>visas sąlygas</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>bet kurią sąlygą</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Laukas</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>turi …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Pridėti sąlygą</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Susiaurinti</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Nuo datos</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>bet kokia</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Iki datos</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Priedai</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>nesvarbu</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>su priedais</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>be priedų</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Palaikykite datą, kad ją išvalytumėte. Priedai žinomi tik laiškams, kurių struktūra atsisiųsta.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Nėra ryšio — serveryje dabar ieškoti negalima.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n rezultatas</numerusform>
+            <numerusform>%n rezultatai</numerusform>
+            <numerusform>%n rezultatų</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(be temos)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Ieškoma…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Ieškoma serveryje…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Paieška serveryje nebaigta. Ne visi paskyrų tipai gali ieškoti serveryje.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Rodomi tik naujausi rezultatai — susiaurinkite paiešką, kad pamatytumėte likusius.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Dar %n rezultatas serveryje neįkeltas.</numerusform>
+            <numerusform>Dar %n rezultatai serveryje neįkelti.</numerusform>
+            <numerusform>Dar %n rezultatų serveryje neįkelta.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n paskyra negali ieškoti serveryje.</numerusform>
+            <numerusform>%n paskyros negali ieškoti serveryje.</numerusform>
+            <numerusform>%n paskyrų negali ieškoti serveryje.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Paieška serveryje nepavyko %n paskyrai.</numerusform>
+            <numerusform>Paieška serveryje nepavyko %n paskyroms.</numerusform>
+            <numerusform>Paieška serveryje nepavyko %n paskyrų.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Šifruotų laiškų teksto ieškoti negalima; jie randami pagal siuntėją ir temą.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Neturi</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>neturi …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2598,6 +2813,10 @@ Jei viršuje esantis mygtukas nepraeina, tą patį galima padaryti iš terminalo
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Siuntėjas, tema ir laiško tekstas, visuose aplankuose</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Išplėstinė paieška</translation>
     </message>
 </context>
 </TS>

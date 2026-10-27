@@ -138,6 +138,11 @@ the body anyway.
   sender, subject and message text; stored mail is searched as you type, the
   server only when you ask. The text of encrypted mail is not searchable, and a
   subject hidden by protected headers is only the placeholder to a search
+- **Extended search** (pull down on the search page) — conditions on sender,
+  recipient, subject and text, joined with "all" or "any" and each one
+  negatable, narrowed by accounts, a date range and attachments. The server is
+  asked only for what it understands; every hit is checked against the full
+  filter on the device
 - **Select and copy** message text — press and hold the text; the selection goes
   to the clipboard, links included
 - Attachments (plain, PGP and S/MIME) with their size — **open with…** or
@@ -270,6 +275,13 @@ mb2 -t SailfishOS-4.6.0.13-armv7hl.default build
 ```
 
 RPMs are written to `RPMS/`. Install on the device with `pkcon install-local <rpm>`.
+
+The extended search is a plugin of its own (`mailsearch/`) and part of the
+standard build. To leave it out, add `--without search` to the build command;
+the app then offers only the plain search and otherwise works unchanged. It is
+also a template for an extension of your own: a separate QML plugin, a page
+that uses it, and a check in the existing page that offers it only when the
+plugin can be loaded.
 
 **Which release runs where.** The aarch64 package needs **Sailfish OS 5.1 or
 newer**: it bundles an OpenSSL build for the S/MIME plumbing, and that binary

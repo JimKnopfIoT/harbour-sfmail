@@ -547,6 +547,213 @@ This can mean an old/wrong/forged key. Only import if you trust this.</source>
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>发件人</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>收件人</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>主题</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>正文</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>正文条件无法取反——邮件框架只能搜索包含的文本。</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>只能有一个正文条件。</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>请添加条件、日期或附件筛选。</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>服务器至少需要一个条件，否则它会返回所有邮件。</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>收件箱</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>发件箱</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>已发送</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>草稿</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>废纸篓</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>垃圾邮件</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>已加密</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>在服务器上搜索</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>搜索</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>高级搜索</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>账户</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>未选择账户：将搜索所有账户。</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>条件</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>匹配</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>全部条件</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>任一条件</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>字段</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>包含…</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>添加条件</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>缩小范围</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>起始日期</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>不限</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>截止日期</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>附件</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>不限</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>有附件</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>无附件</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>长按日期可清除。只有已下载结构的邮件才能识别附件。</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>没有网络连接 — 目前无法搜索服务器。</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n 个结果</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>（无主题）</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>正在搜索…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>正在服务器上搜索…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>服务器搜索未完成。并非所有账户类型都支持在服务器上搜索。</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>仅显示最新的结果——缩小搜索范围以查看其余结果。</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>服务器上还有 %n 个结果未加载。</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n 个账户无法在服务器上搜索。</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>%n 个账户的服务器搜索失败。</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>无法搜索加密邮件的正文;可通过发件人和主题找到它们。</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>不包含</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>不包含…</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2588,6 +2795,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>发件人、主题和邮件正文,所有文件夹</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>高级搜索</translation>
     </message>
 </context>
 </TS>

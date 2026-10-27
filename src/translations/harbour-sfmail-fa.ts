@@ -547,6 +547,213 @@ This can mean an old/wrong/forged key. Only import if you trust this.</source>
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>فرستنده</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>گیرنده</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>موضوع</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>متن</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>متن را نمی‌توان منفی کرد — سامانهٔ ایمیل فقط متنی را که وجود دارد جستجو می‌کند.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>فقط یک شرط متنی ممکن است.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>یک شرط، یک تاریخ یا یک فیلتر پیوست اضافه کنید.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>سرور دست‌کم به یک شرط نیاز دارد؛ وگرنه همهٔ پیام‌هایش را تحویل می‌دهد.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>صندوق ورودی</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>صندوق خروجی</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>ارسال‌شده</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>پیش‌نویس‌ها</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>زباله‌دان</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>هرزنامه</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>رمزگذاری‌شده</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>جستجو در سرور</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>جستجو</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>جستجوی پیشرفته</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>حساب‌ها</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>حسابی انتخاب نشده: همهٔ حساب‌ها جستجو می‌شوند.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>شرط‌ها</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>تطابق با</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>همهٔ شرط‌ها</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>هر شرطی</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>فیلد</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>شامل …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>افزودن شرط</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>محدود کردن</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>از تاریخ</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>هر</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>تا تاریخ</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>پیوست‌ها</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>فرقی نمی‌کند</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>با پیوست</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>بدون پیوست</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>برای پاک کردن تاریخ، آن را نگه دارید. پیوست‌ها فقط برای پیام‌هایی شناخته‌اند که ساختارشان بارگیری شده است.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>اتصال برقرار نیست — اکنون نمی‌توان در سرور جستجو کرد.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n نتیجه</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(بدون موضوع)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>در حال جستجو…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>در حال جستجو در سرور…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>جستجو در سرور به پایان نرسید. همهٔ انواع حساب امکان جستجو در سرور را ندارند.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>فقط جدیدترین نتایج نشان داده می‌شوند — برای دیدن بقیه، جستجو را محدودتر کنید.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n نتیجهٔ دیگر روی سرور بارگیری نشد.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n حساب نمی‌تواند روی سرور جستجو کند.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>جستجوی سرور برای %n حساب ناموفق بود.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>متن پیام‌های رمزگذاری‌شده قابل جستجو نیست؛ این پیام‌ها با فرستنده و موضوع پیدا می‌شوند.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>شامل نیست</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>شامل نیست …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2588,6 +2795,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>فرستنده، موضوع و متن پیام، در همهٔ پوشه‌ها</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>جستجوی پیشرفته</translation>
     </message>
 </context>
 </TS>

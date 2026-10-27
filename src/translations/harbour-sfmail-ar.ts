@@ -547,6 +547,233 @@ This can mean an old/wrong/forged key. Only import if you trust this.</source>
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>المرسل</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>المستلم</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>الموضوع</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>النص</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>لا يمكن نفي النص — نظام البريد يبحث فقط عن النص الموجود.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>يمكن إضافة شرط نصي واحد فقط.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>أضف شرطًا أو تاريخًا أو مرشح مرفقات.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>يحتاج الخادم إلى شرط واحد على الأقل؛ وإلا فسيسلّم كل رسالة لديه.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>البريد الوارد</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>البريد الصادر</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>المُرسَل</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>المسودات</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>المهملات</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>البريد المزعج</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>مشفَّرة</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>البحث على الخادم</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>بحث</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>بحث متقدم</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>الحسابات</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>لم يُختر أي حساب: سيتم البحث في كل الحسابات.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>الشروط</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>مطابقة</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>كل الشروط</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>أي شرط</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>الحقل</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>يحتوي على …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>إضافة شرط</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>تضييق</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>من تاريخ</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>أي</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>إلى تاريخ</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>المرفقات</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>لا يهم</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>مع مرفقات</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>بدون مرفقات</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>اضغط مطولًا على تاريخ لمسحه. لا تُعرف المرفقات إلا للرسائل التي تم تنزيل بنيتها.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>لا يوجد اتصال — لا يمكن البحث في الخادم الآن.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n نتيجة</numerusform>
+            <numerusform>نتيجة واحدة (%n)</numerusform>
+            <numerusform>نتيجتان (%n)</numerusform>
+            <numerusform>%n نتائج</numerusform>
+            <numerusform>%n نتيجة</numerusform>
+            <numerusform>%n نتيجة</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(بلا موضوع)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>جارٍ البحث…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>جارٍ البحث على الخادم…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>لم يكتمل البحث على الخادم. لا تدعم كل أنواع الحسابات البحث على الخادم.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>تُعرض أحدث النتائج فقط — ضيّق البحث لرؤية الباقي.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>لم يتم تحميل %n نتيجة إضافية على الخادم.</numerusform>
+            <numerusform>لم يتم تحميل نتيجة إضافية واحدة (%n) على الخادم.</numerusform>
+            <numerusform>لم يتم تحميل نتيجتين إضافيتين (%n) على الخادم.</numerusform>
+            <numerusform>لم يتم تحميل %n نتائج إضافية على الخادم.</numerusform>
+            <numerusform>لم يتم تحميل %n نتيجة إضافية على الخادم.</numerusform>
+            <numerusform>لم يتم تحميل %n نتيجة إضافية على الخادم.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>لا يمكن لـ %n حساب البحث على الخادم.</numerusform>
+            <numerusform>لا يمكن لحساب واحد (%n) البحث على الخادم.</numerusform>
+            <numerusform>لا يمكن لحسابين (%n) البحث على الخادم.</numerusform>
+            <numerusform>لا يمكن لـ %n حسابات البحث على الخادم.</numerusform>
+            <numerusform>لا يمكن لـ %n حسابًا البحث على الخادم.</numerusform>
+            <numerusform>لا يمكن لـ %n حساب البحث على الخادم.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>فشل البحث على الخادم لـ %n حساب.</numerusform>
+            <numerusform>فشل البحث على الخادم لحساب واحد (%n).</numerusform>
+            <numerusform>فشل البحث على الخادم لحسابين (%n).</numerusform>
+            <numerusform>فشل البحث على الخادم لـ %n حسابات.</numerusform>
+            <numerusform>فشل البحث على الخادم لـ %n حسابًا.</numerusform>
+            <numerusform>فشل البحث على الخادم لـ %n حساب.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>لا يمكن البحث في نص الرسائل المشفّرة؛ يُعثر عليها بالمرسل والموضوع.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>لا يحتوي على</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>لا يحتوي على …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2613,6 +2840,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>المرسل والموضوع ونص الرسالة، في كل المجلدات</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>بحث متقدم</translation>
     </message>
 </context>
 </TS>

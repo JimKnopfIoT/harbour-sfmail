@@ -547,6 +547,221 @@ Může jít o starý, chybný nebo podvržený klíč. Importujte jen tehdy, pok
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Odesílatel</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Příjemce</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Předmět</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Text nelze negovat — poštovní systém hledá jen obsažený text.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Je možná jen jedna textová podmínka.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Přidejte podmínku, datum nebo filtr příloh.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Server potřebuje alespoň jednu podmínku; jinak by vydal všechny zprávy, které má.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Doručená pošta</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>K odeslání</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Odeslaná pošta</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Koncepty</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Koš</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Spam</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Zašifrováno</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Hledat na serveru</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Hledat</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Rozšířené hledání</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Účty</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Není vybrán žádný účet: prohledají se všechny účty.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Podmínky</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Shoda s</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>všemi podmínkami</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>libovolnou podmínkou</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Pole</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>obsahuje …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Přidat podmínku</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Zúžit</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Od data</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>libovolné</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Do data</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Přílohy</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>nezáleží</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>s přílohami</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>bez příloh</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Podržením data jej vymažete. Přílohy jsou známy jen u zpráv, jejichž struktura byla stažena.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Bez připojení — server teď nelze prohledat.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n výsledek</numerusform>
+            <numerusform>%n výsledky</numerusform>
+            <numerusform>%n výsledků</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(bez předmětu)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Hledání…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Hledá se na serveru…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Hledání na serveru nebylo dokončeno. Ne každý typ účtu umí hledat na serveru.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Zobrazují se jen nejnovější výsledky — zužte hledání, abyste viděli zbytek.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n další výsledek na serveru nebyl načten.</numerusform>
+            <numerusform>%n další výsledky na serveru nebyly načteny.</numerusform>
+            <numerusform>%n dalších výsledků na serveru nebylo načteno.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n účet nemůže hledat na serveru.</numerusform>
+            <numerusform>%n účty nemohou hledat na serveru.</numerusform>
+            <numerusform>%n účtů nemůže hledat na serveru.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Hledání na serveru selhalo u %n účtu.</numerusform>
+            <numerusform>Hledání na serveru selhalo u %n účtů.</numerusform>
+            <numerusform>Hledání na serveru selhalo u %n účtů.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Text šifrovaných zpráv nelze prohledávat; najdou se podle odesílatele a předmětu.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Neobsahuje</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>neobsahuje …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2598,6 +2813,10 @@ Kdyby tlačítko výše neprošlo, totéž lze udělat z terminálu:</translatio
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Odesílatel, předmět a text zprávy, ve všech složkách</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Rozšířené hledání</translation>
     </message>
 </context>
 </TS>

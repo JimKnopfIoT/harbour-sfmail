@@ -547,6 +547,217 @@ Può trattarsi di una chiave vecchia, sbagliata o falsificata. Importa solo se t
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Mittente</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Destinatario</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Oggetto</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Testo</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Il testo non può essere negato — il sistema di posta cerca solo il testo contenuto.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>È possibile una sola condizione sul testo.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Aggiungi una condizione, una data o un filtro allegati.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Il server richiede almeno una condizione, altrimenti consegnerebbe tutti i messaggi che ha.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Posta in arrivo</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Posta in uscita</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Inviati</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Bozze</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Cestino</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Indesiderata</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Cifrato</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Cerca sul server</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Cerca</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Ricerca avanzata</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Account</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Nessun account scelto: si cerca in tutti gli account.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Condizioni</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Corrispondenza</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>tutte le condizioni</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>almeno una condizione</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Campo</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>contiene …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Aggiungi condizione</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Restringi</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Dalla data</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>qualsiasi</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Alla data</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Allegati</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>indifferente</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>con allegati</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>senza allegati</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Tieni premuta una data per cancellarla. Gli allegati sono noti solo per i messaggi di cui è stata scaricata la struttura.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Nessuna connessione — al momento non è possibile cercare sul server.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n risultato</numerusform>
+            <numerusform>%n risultati</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(senza oggetto)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Ricerca…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Ricerca sul server…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>La ricerca sul server non è terminata. Non tutti i tipi di account possono cercare sul server.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Vengono mostrati solo i risultati più recenti — restringi la ricerca per vedere il resto.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n altro risultato sul server non è stato caricato.</numerusform>
+            <numerusform>Altri %n risultati sul server non sono stati caricati.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n account non può cercare sul server.</numerusform>
+            <numerusform>%n account non possono cercare sul server.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>La ricerca sul server non è riuscita per %n account.</numerusform>
+            <numerusform>La ricerca sul server non è riuscita per %n account.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Il testo dei messaggi cifrati non può essere cercato; vengono trovati per mittente e oggetto.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Non contiene</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>non contiene …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Se il pulsante qui sopra non dovesse funzionare, lo stesso si può fare da un te
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Mittente, oggetto e testo del messaggio, in tutte le cartelle</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Ricerca avanzata</translation>
     </message>
 </context>
 </TS>

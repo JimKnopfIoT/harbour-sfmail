@@ -547,6 +547,221 @@ D&apos;fhéadfadh sé sin eochair shean, mhícheart nó bhrionnaithe a chiallú.
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Seoltóir</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Faighteoir</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Ábhar</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Téacs</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Ní féidir an téacs a dhiúltú — ní chuardaíonn an córas ríomhphoist ach téacs atá ann.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Ní féidir ach coinníoll téacs amháin a bheith ann.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Cuir coinníoll, dáta nó scagaire ceangaltán leis.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Teastaíonn coinníoll amháin ar a laghad ón bhfreastalaí; murach sin thabharfadh sé gach teachtaireacht atá aige.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Bosca isteach</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Bosca amach</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Seolta</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Dréachtaí</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Bruscar</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Dramhphost</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Criptithe</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Cuardaigh ar an bhfreastalaí</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Cuardaigh</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Cuardach breisithe</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Cuntais</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Níor roghnaíodh cuntas: cuardaítear gach cuntas.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Coinníollacha</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Meaitseáil</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>gach coinníoll</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>coinníoll ar bith</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Réimse</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>ina bhfuil …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Cuir coinníoll leis</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Caolaigh</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Ón dáta</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>ar bith</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Go dtí an dáta</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Ceangaltáin</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>is cuma</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>le ceangaltáin</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>gan ceangaltáin</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Coinnigh dáta brúite chun é a ghlanadh. Ní fios ceangaltáin ach do theachtaireachtaí a bhfuil a struchtúr íoslódáilte.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Níl aon nasc ann — ní féidir an freastalaí a chuardach faoi láthair.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n toradh</numerusform>
+            <numerusform>%n thoradh</numerusform>
+            <numerusform>%n toradh</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(gan ábhar)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Ag cuardach…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Ag cuardach ar an bhfreastalaí…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Níor críochnaíodh an cuardach ar an bhfreastalaí. Ní féidir le gach cineál cuntais cuardach ar an bhfreastalaí.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Ní thaispeántar ach na torthaí is nuaí — caolaigh an cuardach chun an chuid eile a fheiceáil.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Níor lódáladh %n toradh eile ar an bhfreastalaí.</numerusform>
+            <numerusform>Níor lódáladh %n thoradh eile ar an bhfreastalaí.</numerusform>
+            <numerusform>Níor lódáladh %n toradh eile ar an bhfreastalaí.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>Ní féidir le %n chuntas cuardach ar an bhfreastalaí.</numerusform>
+            <numerusform>Ní féidir le %n chuntas cuardach ar an bhfreastalaí.</numerusform>
+            <numerusform>Ní féidir le %n cuntas cuardach ar an bhfreastalaí.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Theip ar an gcuardach freastalaí do %n chuntas.</numerusform>
+            <numerusform>Theip ar an gcuardach freastalaí do %n chuntas.</numerusform>
+            <numerusform>Theip ar an gcuardach freastalaí do %n cuntas.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Ní féidir téacs teachtaireachtaí criptithe a chuardach; aimsítear iad de réir seoltóra agus ábhair.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Níl ann</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>nach bhfuil ann …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2598,6 +2813,10 @@ Mura n-éiríonn leis an gcnaipe thuas, is féidir an rud céanna a dhéanamh ó
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Seoltóir, ábhar agus téacs na teachtaireachta, i ngach fillteán</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Cuardach breisithe</translation>
     </message>
 </context>
 </TS>

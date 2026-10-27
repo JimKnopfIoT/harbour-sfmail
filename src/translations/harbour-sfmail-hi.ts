@@ -547,6 +547,217 @@ This can mean an old/wrong/forged key. Only import if you trust this.</source>
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>प्रेषक</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>प्राप्तकर्ता</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>विषय</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>पाठ</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>पाठ को नकारा नहीं जा सकता — मेल सिस्टम केवल मौजूद पाठ खोजता है।</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>केवल एक पाठ शर्त संभव है।</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>कोई शर्त, तारीख या अटैचमेंट फ़िल्टर जोड़ें।</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>सर्वर को कम से कम एक शर्त चाहिए; वरना वह अपना हर संदेश सौंप देगा।</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>इनबॉक्स</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>आउटबॉक्स</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>भेजे गए</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>ड्राफ़्ट</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>ट्रैश</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>जंक</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>एन्क्रिप्टेड</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>सर्वर पर खोजें</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>खोजें</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>विस्तृत खोज</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>खाते</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>कोई खाता नहीं चुना: सभी खातों में खोजा जाएगा।</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>शर्तें</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>मिलान</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>सभी शर्तें</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>कोई भी शर्त</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>फ़ील्ड</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>शामिल है …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>शर्त जोड़ें</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>सीमित करें</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>आरंभ तिथि</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>कोई भी</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>अंतिम तिथि</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>अटैचमेंट</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>सभी</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>अटैचमेंट सहित</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>अटैचमेंट रहित</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>किसी तारीख को हटाने के लिए उसे दबाकर रखें। अटैचमेंट केवल उन संदेशों के लिए ज्ञात हैं जिनकी संरचना डाउनलोड हो चुकी है।</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>कोई कनेक्शन नहीं — अभी सर्वर पर खोज नहीं की जा सकती।</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n परिणाम</numerusform>
+            <numerusform>%n परिणाम</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(कोई विषय नहीं)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>खोज रहे हैं…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>सर्वर पर खोजा जा रहा है…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>सर्वर पर खोज पूरी नहीं हुई। हर प्रकार का खाता सर्वर पर खोज नहीं कर सकता।</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>केवल नवीनतम परिणाम दिखाए गए हैं — बाकी देखने के लिए खोज सीमित करें।</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>सर्वर पर %n और परिणाम लोड नहीं हुआ।</numerusform>
+            <numerusform>सर्वर पर %n और परिणाम लोड नहीं हुए।</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n खाता सर्वर पर नहीं खोज सकता।</numerusform>
+            <numerusform>%n खाते सर्वर पर नहीं खोज सकते।</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>%n खाते के लिए सर्वर खोज विफल रही।</numerusform>
+            <numerusform>%n खातों के लिए सर्वर खोज विफल रही।</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>एन्क्रिप्टेड संदेशों का पाठ खोजा नहीं जा सकता; वे प्रेषक और विषय से मिलते हैं।</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>शामिल नहीं है</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>शामिल नहीं है …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>प्रेषक, विषय और संदेश का पाठ, सभी फ़ोल्डरों में</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>विस्तृत खोज</translation>
     </message>
 </context>
 </TS>

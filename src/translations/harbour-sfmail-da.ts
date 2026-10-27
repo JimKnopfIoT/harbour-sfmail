@@ -547,6 +547,217 @@ Det kan betyde en gammel, forkert eller forfalsket nøgle. Importér kun, hvis d
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Afsender</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Modtager</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Emne</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Tekst</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Teksten kan ikke negeres — mailsystemet søger kun efter tekst, der er indeholdt.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Der er kun mulighed for én tekstbetingelse.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Tilføj en betingelse, en dato eller et filter for vedhæftninger.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Serveren skal have mindst én betingelse; ellers ville den sende alle de beskeder, den har.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Indbakke</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Udbakke</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Sendt</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Kladder</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Papirkurv</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Spam</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Krypteret</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Søg på serveren</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Søg</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Udvidet søgning</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Konti</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Ingen konto valgt: der søges i alle konti.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Betingelser</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Match</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>alle betingelser</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>en vilkårlig betingelse</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Felt</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>indeholder …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Tilføj betingelse</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Indsnævr</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Fra dato</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>vilkårlig</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Til dato</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Vedhæftninger</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>ligegyldigt</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>med vedhæftninger</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>uden vedhæftninger</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Hold en dato nede for at rydde den. Vedhæftninger kendes kun for beskeder, hvis struktur er hentet.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Ingen forbindelse — serveren kan ikke gennemsøges lige nu.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n resultat</numerusform>
+            <numerusform>%n resultater</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(intet emne)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Søger…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Søger på serveren…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Søgningen på serveren blev ikke fuldført. Ikke alle kontotyper kan søge på serveren.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Kun de nyeste resultater vises — indsnævr søgningen for at se resten.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n resultat mere på serveren blev ikke hentet.</numerusform>
+            <numerusform>%n resultater mere på serveren blev ikke hentet.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n konto kan ikke søge på serveren.</numerusform>
+            <numerusform>%n konti kan ikke søge på serveren.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Serversøgningen mislykkedes for %n konto.</numerusform>
+            <numerusform>Serversøgningen mislykkedes for %n konti.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Teksten i krypterede beskeder kan ikke gennemsøges; de findes via afsender og emne.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Indeholder ikke</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>indeholder ikke …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Skulle knappen ovenfor ikke trænge igennem, kan det samme gøres fra en termina
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Afsender, emne og beskedtekst, i alle mapper</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Udvidet søgning</translation>
     </message>
 </context>
 </TS>

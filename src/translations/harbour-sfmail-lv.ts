@@ -547,6 +547,221 @@ Tas var nozīmēt vecu, nepareizu vai viltotu atslēgu. Importē tikai tad, ja t
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Sūtītājs</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Saņēmējs</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Temats</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Teksts</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Tekstu nevar noliegt — pasta sistēma meklē tikai ietverto tekstu.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Iespējams tikai viens teksta nosacījums.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Pievienojiet nosacījumu, datumu vai pielikumu filtru.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Serverim vajag vismaz vienu nosacījumu; citādi tas atdotu visas savas ziņas.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Iesūtne</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Izsūtne</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Nosūtītās</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Melnraksti</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Miskaste</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Mēstules</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Šifrēta</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Meklēt serverī</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Meklēt</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Paplašinātā meklēšana</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Konti</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Nav izvēlēts konts: tiek meklēts visos kontos.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Nosacījumi</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Atbilst</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>visiem nosacījumiem</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>jebkuram nosacījumam</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Lauks</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>satur …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Pievienot nosacījumu</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Sašaurināt</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>No datuma</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>jebkurš</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Līdz datumam</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Pielikumi</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>vienalga</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>ar pielikumiem</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>bez pielikumiem</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Turiet datumu nospiestu, lai to notīrītu. Pielikumi zināmi tikai ziņām, kuru struktūra ir lejupielādēta.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Nav savienojuma — serverī pašlaik nevar meklēt.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n rezultāts</numerusform>
+            <numerusform>%n rezultāti</numerusform>
+            <numerusform>%n rezultātu</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(bez temata)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Meklē…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Meklē serverī…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Meklēšana serverī netika pabeigta. Ne visi kontu veidi var meklēt serverī.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Rādīti tikai jaunākie rezultāti — sašauriniet meklēšanu, lai redzētu pārējos.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Vēl %n rezultāts serverī netika ielādēts.</numerusform>
+            <numerusform>Vēl %n rezultāti serverī netika ielādēti.</numerusform>
+            <numerusform>Vēl %n rezultātu serverī netika ielādēts.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n konts nevar meklēt serverī.</numerusform>
+            <numerusform>%n konti nevar meklēt serverī.</numerusform>
+            <numerusform>%n kontu nevar meklēt serverī.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Meklēšana serverī neizdevās %n kontam.</numerusform>
+            <numerusform>Meklēšana serverī neizdevās %n kontiem.</numerusform>
+            <numerusform>Meklēšana serverī neizdevās %n kontiem.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Šifrētu ziņojumu tekstā nevar meklēt; tos atrod pēc sūtītāja un temata.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Nesatur</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>nesatur …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2598,6 +2813,10 @@ Ja iepriekš redzamā poga netiek cauri, to pašu var izdarīt no termināļa:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Sūtītājs, temats un ziņojuma teksts, visās mapēs</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Paplašinātā meklēšana</translation>
     </message>
 </context>
 </TS>

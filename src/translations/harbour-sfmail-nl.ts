@@ -547,6 +547,217 @@ Dat kan een oude, verkeerde of vervalste sleutel betekenen. Importeer alleen als
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Afzender</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Ontvanger</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Onderwerp</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Tekst</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>De tekst kan niet worden ontkend – het mailsysteem zoekt alleen naar tekst die voorkomt.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Er is maar één tekstvoorwaarde mogelijk.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Voeg een voorwaarde, een datum of een bijlagefilter toe.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>De server heeft minstens één voorwaarde nodig, anders levert hij elk bericht dat hij heeft.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Postvak IN</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Postvak UIT</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Verzonden</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Concepten</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Prullenbak</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Ongewenst</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Versleuteld</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Zoeken op de server</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Zoeken</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Uitgebreid zoeken</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Accounts</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Geen account gekozen: alle accounts worden doorzocht.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Voorwaarden</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Overeenkomst met</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>alle voorwaarden</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>een van de voorwaarden</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Veld</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>bevat …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Voorwaarde toevoegen</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Verfijnen</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Vanaf datum</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>willekeurig</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Tot datum</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Bijlagen</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>maakt niet uit</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>met bijlagen</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>zonder bijlagen</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Houd een datum ingedrukt om hem te wissen. Bijlagen zijn alleen bekend bij berichten waarvan de structuur is gedownload.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Geen verbinding — de server kan nu niet worden doorzocht.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n resultaat</numerusform>
+            <numerusform>%n resultaten</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(geen onderwerp)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Zoeken…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Zoeken op de server…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Het zoeken op de server is niet voltooid. Niet elk accounttype kan op de server zoeken.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Alleen de nieuwste resultaten worden getoond – verfijn de zoekopdracht om de rest te zien.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n extra resultaat op de server is niet geladen.</numerusform>
+            <numerusform>%n extra resultaten op de server zijn niet geladen.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n account kan niet op de server zoeken.</numerusform>
+            <numerusform>%n accounts kunnen niet op de server zoeken.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Het zoeken op de server is mislukt voor %n account.</numerusform>
+            <numerusform>Het zoeken op de server is mislukt voor %n accounts.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>De tekst van versleutelde berichten is niet doorzoekbaar; ze worden gevonden op afzender en onderwerp.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Bevat niet</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>bevat niet …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Mocht de knop hierboven niet doorkomen, dan kan hetzelfde vanuit een terminal:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Afzender, onderwerp en berichttekst, in alle mappen</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Uitgebreid zoeken</translation>
     </message>
 </context>
 </TS>

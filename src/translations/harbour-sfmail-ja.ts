@@ -547,6 +547,213 @@ This can mean an old/wrong/forged key. Only import if you trust this.</source>
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>差出人</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>宛先</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>件名</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>本文</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>本文は否定条件にできません — メールシステムは含まれるテキストのみを検索します。</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>本文の条件は1つだけ指定できます。</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>条件、日付、または添付ファイルのフィルターを追加してください。</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>サーバーには少なくとも1つの条件が必要です。条件がないと、すべてのメッセージが返されてしまいます。</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>受信トレイ</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>送信トレイ</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>送信済み</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>下書き</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>ゴミ箱</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>迷惑メール</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>暗号化</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>サーバーで検索</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>検索</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>詳細検索</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>アカウント</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>アカウントが選択されていません: すべてのアカウントを検索します。</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>条件</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>一致</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>すべての条件</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>いずれかの条件</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>フィールド</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>含む …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>条件を追加</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>絞り込み</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>開始日</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>指定なし</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>終了日</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>添付ファイル</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>どちらでも</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>添付ファイルあり</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>添付ファイルなし</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>日付を長押しするとクリアされます。添付ファイルは、構造がダウンロード済みのメッセージでのみ判別できます。</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>接続がありません — 現在サーバーを検索できません。</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n 件</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>（件名なし）</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>検索中…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>サーバーで検索中…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>サーバー検索が完了しませんでした。すべてのアカウント種類がサーバー検索に対応しているわけではありません。</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>最新の結果のみ表示しています — 残りを見るには検索を絞り込んでください。</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>サーバー上の残り %n 件の結果は読み込まれていません。</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n 個のアカウントはサーバー上で検索できません。</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>%n 個のアカウントでサーバー検索に失敗しました。</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>暗号化されたメッセージの本文は検索できません。差出人と件名で見つかります。</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>含まない</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>含まない …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2588,6 +2795,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>差出人、件名、本文(すべてのフォルダー)</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>詳細検索</translation>
     </message>
 </context>
 </TS>

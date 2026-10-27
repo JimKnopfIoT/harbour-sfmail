@@ -547,6 +547,225 @@ To lahko pomeni star, napačen ali ponarejen ključ. Uvozite ga le, če temu zau
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Pošiljatelj</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Prejemnik</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Zadeva</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Besedilo</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Besedila ni mogoče zanikati – poštni sistem išče le besedilo, ki je vsebovano.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Mogoč je le en pogoj za besedilo.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Dodajte pogoj, datum ali filter prilog.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Strežnik potrebuje vsaj en pogoj, sicer bi izročil vsa sporočila, ki jih ima.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Prejeto</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Odhodna pošta</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Poslano</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Osnutki</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Smeti</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Neželena pošta</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Šifrirano</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Išči na strežniku</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Iskanje</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Razširjeno iskanje</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Računi</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Noben račun ni izbran: preiščejo se vsi računi.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Pogoji</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Ujemanje z</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>vsemi pogoji</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>katerim koli pogojem</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Polje</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>vsebuje …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Dodaj pogoj</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Zoži</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Od datuma</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>katerikoli</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Do datuma</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Priloge</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>vseeno</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>s prilogami</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>brez prilog</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Pridržite datum, da ga počistite. Priloge so znane le pri sporočilih, katerih zgradba je bila prenesena.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Ni povezave — strežnika trenutno ni mogoče preiskati.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n zadetek</numerusform>
+            <numerusform>%n zadetka</numerusform>
+            <numerusform>%n zadetki</numerusform>
+            <numerusform>%n zadetkov</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(brez zadeve)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Iskanje …</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Iskanje na strežniku …</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Iskanje na strežniku se ni končalo. Vse vrste računov ne podpirajo iskanja na strežniku.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Prikazani so le najnovejši zadetki – zožite iskanje, da vidite ostale.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>Še %n zadetek na strežniku ni bil naložen.</numerusform>
+            <numerusform>Še %n zadetka na strežniku nista bila naložena.</numerusform>
+            <numerusform>Še %n zadetki na strežniku niso bili naloženi.</numerusform>
+            <numerusform>Še %n zadetkov na strežniku ni bilo naloženih.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n račun ne more iskati na strežniku.</numerusform>
+            <numerusform>%n računa ne moreta iskati na strežniku.</numerusform>
+            <numerusform>%n računi ne morejo iskati na strežniku.</numerusform>
+            <numerusform>%n računov ne more iskati na strežniku.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Iskanje na strežniku ni uspelo za %n račun.</numerusform>
+            <numerusform>Iskanje na strežniku ni uspelo za %n računa.</numerusform>
+            <numerusform>Iskanje na strežniku ni uspelo za %n račune.</numerusform>
+            <numerusform>Iskanje na strežniku ni uspelo za %n računov.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Besedila šifriranih sporočil ni mogoče preiskati; najdemo jih po pošiljatelju in zadevi.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Ne vsebuje</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>ne vsebuje …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2603,6 +2822,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Pošiljatelj, zadeva in besedilo sporočila, v vseh mapah</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Razširjeno iskanje</translation>
     </message>
 </context>
 </TS>

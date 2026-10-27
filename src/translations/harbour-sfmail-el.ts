@@ -547,6 +547,217 @@ This can mean an old/wrong/forged key. Only import if you trust this.</source>
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Αποστολέας</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Παραλήπτης</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Θέμα</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Κείμενο</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Το κείμενο δεν μπορεί να αντιστραφεί — το σύστημα αλληλογραφίας αναζητά μόνο κείμενο που περιέχεται.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Είναι δυνατή μόνο μία συνθήκη κειμένου.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Προσθέστε μια συνθήκη, μια ημερομηνία ή ένα φίλτρο συνημμένων.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Ο διακομιστής χρειάζεται τουλάχιστον μία συνθήκη· αλλιώς θα παρέδιδε κάθε μήνυμα που έχει.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Εισερχόμενα</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Εξερχόμενα</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Απεσταλμένα</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Πρόχειρα</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Απορρίμματα</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Ανεπιθύμητα</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Κρυπτογραφημένο</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Αναζήτηση στον διακομιστή</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Αναζήτηση</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Σύνθετη αναζήτηση</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Λογαριασμοί</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Δεν επιλέχθηκε λογαριασμός: αναζητούνται όλοι οι λογαριασμοί.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Συνθήκες</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Ταίριασμα</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>όλων των συνθηκών</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>οποιασδήποτε συνθήκης</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Πεδίο</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>περιέχει …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Προσθήκη συνθήκης</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Περιορισμός</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Από ημερομηνία</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>οποιαδήποτε</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Έως ημερομηνία</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Συνημμένα</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>αδιάφορο</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>με συνημμένα</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>χωρίς συνημμένα</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Κρατήστε πατημένη μια ημερομηνία για να την καταργήσετε. Τα συνημμένα είναι γνωστά μόνο για μηνύματα των οποίων η δομή έχει ληφθεί.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Χωρίς σύνδεση — δεν είναι δυνατή η αναζήτηση στον διακομιστή αυτή τη στιγμή.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n αποτέλεσμα</numerusform>
+            <numerusform>%n αποτελέσματα</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(χωρίς θέμα)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Αναζήτηση…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Αναζήτηση στον διακομιστή…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Η αναζήτηση στον διακομιστή δεν ολοκληρώθηκε. Δεν υποστηρίζουν όλοι οι τύποι λογαριασμού αναζήτηση στον διακομιστή.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Εμφανίζονται μόνο τα νεότερα αποτελέσματα — περιορίστε την αναζήτηση για να δείτε τα υπόλοιπα.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n ακόμη αποτέλεσμα στον διακομιστή δεν φορτώθηκε.</numerusform>
+            <numerusform>%n ακόμη αποτελέσματα στον διακομιστή δεν φορτώθηκαν.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n λογαριασμός δεν μπορεί να αναζητήσει στον διακομιστή.</numerusform>
+            <numerusform>%n λογαριασμοί δεν μπορούν να αναζητήσουν στον διακομιστή.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Η αναζήτηση στον διακομιστή απέτυχε για %n λογαριασμό.</numerusform>
+            <numerusform>Η αναζήτηση στον διακομιστή απέτυχε για %n λογαριασμούς.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Το κείμενο των κρυπτογραφημένων μηνυμάτων δεν μπορεί να αναζητηθεί· βρίσκονται μέσω αποστολέα και θέματος.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Δεν περιέχει</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>δεν περιέχει …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Should the button above not get through, the same can be done from a terminal:</
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Αποστολέας, θέμα και κείμενο μηνύματος, σε όλους τους φακέλους</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Σύνθετη αναζήτηση</translation>
     </message>
 </context>
 </TS>

@@ -547,6 +547,217 @@ Det kan betyda en gammal, felaktig eller förfalskad nyckel. Importera bara om d
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Avsändare</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Mottagare</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Ämne</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Texten kan inte negeras – e-postsystemet söker bara efter text som finns med.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Endast ett textvillkor är möjligt.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Lägg till ett villkor, ett datum eller ett bilagefilter.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Servern behöver minst ett villkor, annars skulle den lämna ut alla meddelanden den har.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Inkorg</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Utkorg</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Skickat</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Utkast</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Papperskorg</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Skräppost</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Krypterat</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Sök på servern</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Sök</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Utökad sökning</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Konton</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Inget konto valt: alla konton genomsöks.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Villkor</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Träff på</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>alla villkor</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>något villkor</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Fält</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>innehåller …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Lägg till villkor</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Avgränsa</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Från datum</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>valfritt</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Till datum</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Bilagor</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>oavsett</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>med bilagor</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>utan bilagor</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Håll in ett datum för att rensa det. Bilagor är bara kända för meddelanden vars struktur har hämtats.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Ingen anslutning — servern kan inte genomsökas just nu.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n träff</numerusform>
+            <numerusform>%n träffar</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(inget ämne)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Söker …</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Söker på servern…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Sökningen på servern slutfördes inte. Alla kontotyper kan inte söka på servern.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Endast de nyaste träffarna visas – avgränsa sökningen för att se resten.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n träff till på servern hämtades inte.</numerusform>
+            <numerusform>%n träffar till på servern hämtades inte.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n konto kan inte söka på servern.</numerusform>
+            <numerusform>%n konton kan inte söka på servern.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Serversökningen misslyckades för %n konto.</numerusform>
+            <numerusform>Serversökningen misslyckades för %n konton.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Texten i krypterade meddelanden går inte att söka i; de hittas via avsändare och ämne.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Innehåller inte</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>innehåller inte …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Om knappen ovan inte skulle gå fram kan samma sak göras från en terminal:</tr
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Avsändare, ämne och meddelandetext, i alla mappar</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Utökad sökning</translation>
     </message>
 </context>
 </TS>

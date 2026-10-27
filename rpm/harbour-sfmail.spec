@@ -8,9 +8,15 @@
 %global __provides_exclude_from ^%{_datadir}/%{name}/.*$
 %global __requires_exclude ^lib(gcrypt|gpg-error|assuan|ksba|npth|gpgme|gpgmepp|qgpgme)\\.so.*$
 
+# Extended search plugin (combinable filters, several accounts), built by
+# default. A build without it:
+#   mb2 -t <target> build --without search
+# The app then offers only the plain search and otherwise works unchanged.
+%bcond_without search
+
 Name:       harbour-sfmail
 Summary:    E-mail client with built-in OpenPGP and S/MIME for Sailfish OS
-Version:    0.8.23
+Version:    0.8.24
 Release:    1
 Group:      Applications/Productivity
 # The package bundles GnuPG (GPLv3+), the GPGME C++/Qt bindings (LGPLv2+),
@@ -58,7 +64,7 @@ echo '#define SFMAIL_VERSION "%{version}"' > mailcrypto/sfmail_version.h
 # Force the version TU to recompile so the new version is actually baked in
 # (incremental in-source builds otherwise keep a stale GpgEngine.o).
 touch mailcrypto/GpgEngine.cpp
-%qmake5
+%qmake5 %{?with_search:CONFIG+=sfmail_search}
 make %{?_smp_mflags}
 
 %install
@@ -136,6 +142,12 @@ rm -rf "$GPGDIR"/share/locale "$GPGDIR"/share/info "$GPGDIR"/share/man \
 # remain in the shipped app.
 strip %{buildroot}%{_bindir}/%{name} || true
 strip %{buildroot}%{_libdir}/qt5/qml/SFMail/Gpg/libsfmailgpg.so || true
+%if %{with search}
+strip %{buildroot}%{_libdir}/qt5/qml/SFMail/Search/libsfmailsearch.so || true
+%else
+# The page needs the plugin; without it, it is never offered — and does not ship.
+rm -f %{buildroot}%{_datadir}/%{name}/qml/pages/ExtendedSearchPage.qml
+%endif
 
 # The QML of the frozen OpenPGP-only helper app lives in the same source tree
 # but belongs to a different program. It is dead weight here — and dead code
@@ -216,11 +228,32 @@ fi
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_libdir}/qt5/qml/SFMail/Gpg
+%if %{with search}
+%{_libdir}/qt5/qml/SFMail/Search
+%endif
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_sysconfdir}/sailjail/permissions/EmailUi.permission
 
 %changelog
+* Tue Oct 27 2026 harbour-sfmail contributors 0.8.24-1
+- Extended search. On the search page, the pull-down menu now offers
+  "Extended search": conditions on sender, recipient, subject and message
+  text, joined with "all" or "any", each one can be negated; narrowed by
+  accounts (several at once, or all), a date range and attachments. The
+  device is searched on request, the server only when asked, one account at a
+  time. The server is only asked what it understands - sender, recipient,
+  subject and text - and every hit it returns is checked against the full
+  filter on the device, so a date range or attachment filter is never lost on
+  the way. Without a condition the server is not asked at all. Attachments
+  are only known for messages whose structure has been downloaded. As with the
+  plain search, the text of encrypted messages is not searched and nothing is
+  decrypted.
+- The extended search is a plugin of its own. A build without it
+  ("--without search") offers only the plain search and otherwise works
+  unchanged; the search page offers the extended search only when the plugin
+  can be loaded.
+
 * Thu Oct 01 2026 harbour-sfmail contributors 0.8.23-1
 - Mail can be searched. "Search" in the pull-down menu of a mailbox looks
   through the whole account, every folder, by sender, subject and message

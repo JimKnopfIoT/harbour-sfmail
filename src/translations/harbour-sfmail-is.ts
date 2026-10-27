@@ -547,6 +547,217 @@ This can mean an old/wrong/forged key. Only import if you trust this.</source>
     </message>
 </context>
 <context>
+    <name>ExtendedSearchPage</name>
+    <message>
+        <source>Sender</source>
+        <translation>Sendandi</translation>
+    </message>
+    <message>
+        <source>Recipient</source>
+        <translation>Viðtakandi</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Efni</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Texti</translation>
+    </message>
+    <message>
+        <source>The text cannot be negated — the mail framework only searches for text that is contained.</source>
+        <translation>Ekki er hægt að snúa textaskilyrði við — póstkerfið leitar aðeins að texta sem kemur fyrir.</translation>
+    </message>
+    <message>
+        <source>Only one text condition is possible.</source>
+        <translation>Aðeins eitt textaskilyrði er mögulegt.</translation>
+    </message>
+    <message>
+        <source>Add a condition, a date or an attachment filter.</source>
+        <translation>Bættu við skilyrði, dagsetningu eða viðhengissíu.</translation>
+    </message>
+    <message>
+        <source>The server needs at least one condition; otherwise it would hand over every message it has.</source>
+        <translation>Þjónninn þarf a.m.k. eitt skilyrði; annars myndi hann afhenda öll skilaboð sem hann hefur.</translation>
+    </message>
+    <message>
+        <source>Inbox</source>
+        <translation>Innhólf</translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation>Úthólf</translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation>Sent</translation>
+    </message>
+    <message>
+        <source>Drafts</source>
+        <translation>Drög</translation>
+    </message>
+    <message>
+        <source>Trash</source>
+        <translation>Rusl</translation>
+    </message>
+    <message>
+        <source>Junk</source>
+        <translation>Ruslpóstur</translation>
+    </message>
+    <message>
+        <source>Encrypted</source>
+        <translation>Dulkóðað</translation>
+    </message>
+    <message>
+        <source>Search on the server</source>
+        <translation>Leita á þjóninum</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Leita</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Ítarleg leit</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation>Reikningar</translation>
+    </message>
+    <message>
+        <source>No account chosen: all accounts are searched.</source>
+        <translation>Enginn reikningur valinn: leitað er í öllum reikningum.</translation>
+    </message>
+    <message>
+        <source>Conditions</source>
+        <translation>Skilyrði</translation>
+    </message>
+    <message>
+        <source>Match</source>
+        <translation>Uppfylla</translation>
+    </message>
+    <message>
+        <source>all conditions</source>
+        <translation>öll skilyrði</translation>
+    </message>
+    <message>
+        <source>any condition</source>
+        <translation>eitthvert skilyrði</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>Svið</translation>
+    </message>
+    <message>
+        <source>contains …</source>
+        <translation>inniheldur …</translation>
+    </message>
+    <message>
+        <source>Add condition</source>
+        <translation>Bæta við skilyrði</translation>
+    </message>
+    <message>
+        <source>Narrow down</source>
+        <translation>Þrengja</translation>
+    </message>
+    <message>
+        <source>From date</source>
+        <translation>Frá dagsetningu</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>hvaða sem er</translation>
+    </message>
+    <message>
+        <source>To date</source>
+        <translation>Til dagsetningar</translation>
+    </message>
+    <message>
+        <source>Attachments</source>
+        <translation>Viðhengi</translation>
+    </message>
+    <message>
+        <source>either</source>
+        <translation>skiptir ekki máli</translation>
+    </message>
+    <message>
+        <source>with attachments</source>
+        <translation>með viðhengjum</translation>
+    </message>
+    <message>
+        <source>without attachments</source>
+        <translation>án viðhengja</translation>
+    </message>
+    <message>
+        <source>Hold a date to clear it. Attachments are only known for messages whose structure has been downloaded.</source>
+        <translation>Haltu inni dagsetningu til að hreinsa hana. Viðhengi eru aðeins þekkt fyrir skilaboð sem búið er að sækja uppbyggingu á.</translation>
+    </message>
+    <message>
+        <source>No connection — the server cannot be searched right now.</source>
+        <translation>Engin tenging — ekki er hægt að leita á þjóninum núna.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n match(es)</source>
+        <translation>
+            <numerusform>%n niðurstaða</numerusform>
+            <numerusform>%n niðurstöður</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>(no subject)</source>
+        <translation>(ekkert efni)</translation>
+    </message>
+    <message>
+        <source>Searching…</source>
+        <translation>Leitar…</translation>
+    </message>
+    <message>
+        <source>Searching on the server…</source>
+        <translation>Leitar á þjóninum…</translation>
+    </message>
+    <message>
+        <source>The server search did not finish. Not every account type can search on the server.</source>
+        <translation>Leitinni á þjóninum lauk ekki. Ekki geta allar gerðir reikninga leitað á þjóninum.</translation>
+    </message>
+    <message>
+        <source>Only the newest matches are shown — narrow the search to see the rest.</source>
+        <translation>Aðeins nýjustu niðurstöðurnar eru sýndar — þrengdu leitina til að sjá restina.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more match(es) on the server were not loaded.</source>
+        <translation>
+            <numerusform>%n niðurstaða til viðbótar á þjóninum var ekki sótt.</numerusform>
+            <numerusform>%n niðurstöður til viðbótar á þjóninum voru ekki sóttar.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n account(s) cannot search on the server.</source>
+        <translation>
+            <numerusform>%n reikningur getur ekki leitað á þjóninum.</numerusform>
+            <numerusform>%n reikningar geta ekki leitað á þjóninum.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>The server search failed for %n account(s).</source>
+        <translation>
+            <numerusform>Leit á þjóni mistókst fyrir %n reikning.</numerusform>
+            <numerusform>Leit á þjóni mistókst fyrir %n reikninga.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>The text of encrypted messages cannot be searched; they are found by sender and subject.</source>
+        <translation>Ekki er hægt að leita í texta dulritaðra skilaboða; þau finnast eftir sendanda og efni.</translation>
+    </message>
+    <message>
+        <source>Does not contain</source>
+        <translation>Inniheldur ekki</translation>
+    </message>
+    <message>
+        <source>does not contain …</source>
+        <translation>inniheldur ekki …</translation>
+    </message>
+</context>
+<context>
     <name>FolderPickerPage</name>
     <message>
         <source>Inbox</source>
@@ -2593,6 +2804,10 @@ Komist hnappurinn hér að ofan ekki í gegn má gera hið sama úr skipanalínu
     <message>
         <source>Sender, subject and message text, in all folders</source>
         <translation>Sendandi, efni og texti skilaboða, í öllum möppum</translation>
+    </message>
+    <message>
+        <source>Extended search</source>
+        <translation>Ítarleg leit</translation>
     </message>
 </context>
 </TS>
