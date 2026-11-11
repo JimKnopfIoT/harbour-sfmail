@@ -305,7 +305,7 @@ The bundled GnuPG binaries are checked in under `stack/stage-modern-aarch64/` an
 `stack/stage-modern-armv7hl/` so the RPM builds out of the box. To rebuild the GnuPG
 stack from the upstream tarballs in `stack/src/`, see `stack/build-stack.sh`.
 
-AI assisted development
+LLM assisted development
 
 ## License
 
